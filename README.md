@@ -90,7 +90,7 @@ Currently supported preprocessors are:
 
 - stylus
 - less
-- scss
+- scss (via `node-sass`)
 - jade
 - coffee-script
 
