@@ -17,12 +17,26 @@ module.exports = function (content) {
     switch (node.nodeName) {
       case 'style':
         style = serializer.serialize(node)
+        var lang = checkLang(node)
+        if (lang === 'stylus') {
+          style = require('./compilers/stylus')(style)
+        } else if (lang === 'less') {
+          style = require('./compilers/less')(style)
+        } else if (lang === 'sass' || lang === 'scss') {
+          style = require('./compilers/sass')(style)
+        }
         break
       case 'template':
         template = serializer.serialize(node)
+        if (checkLang(node) === 'jade') {
+          template = require('./compilers/jade')(template)
+        }
         break
       case 'script':
         script = serializer.serialize(node)
+        if (checkLang(node) === 'coffee') {
+          script = require('./compilers/coffee')(script)
+        }
         break
     }
   })
@@ -50,4 +64,16 @@ module.exports = function (content) {
 
   output += 'module.exports.template = __vue_template__;'
   return output
+}
+
+function checkLang (node) {
+  if (node.attrs) {
+    var i = node.attrs.length
+    while (i--) {
+      var attr = node.attrs[i]
+      if (attr.name === 'lang') {
+        return attr.value
+      }
+    }
+  }
 }
