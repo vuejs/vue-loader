@@ -10,7 +10,7 @@ module.exports = function (content) {
   var script
   var style
   var template
-  var output
+  var output = ''
 
   var fragment = parser.parseFragment(content)
   fragment.childNodes.forEach(function (node) {
@@ -28,12 +28,26 @@ module.exports = function (content) {
   })
 
   // style
-  style = cssMinifier.minify(style).replace(/"/g, '\\"')
-  output = 'require("insert-css")("' + style + '");\n'
+  if (style) {
+    style = cssMinifier.minify(style)
+      .replace(/"/g, '\\"')
+      .replace(/\n/g, "\\n")
+    output += 'require("insert-css")("' + style + '");\n'
+  }
+
   // template
-  template = htmlMinifier.minify(template).replace(/"/g, '\\"')
-  output += 'var __template__ = "' + template + '";\n'
+  if (template) {
+    template = htmlMinifier.minify(template)
+      .replace(/"/g, '\\"')
+      .replace(/\n/g, "\\n")
+    output += 'var __vue_template__ = "' + template + '";\n'
+  }
+
   // js
-  output += script + '\n' + 'module.exports.template = __template__;'
+  if (script) {
+    output += script + '\n'
+  }
+
+  output += 'module.exports.template = __vue_template__;'
   return output
 }
