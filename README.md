@@ -7,9 +7,9 @@ This loader allows you to write your components in this format:
 ``` html
 // app.vue
 <style>
-.red {
-  color: #f00;
-}
+  .red {
+    color: #f00;
+  }
 </style>
 
 <template>
@@ -17,13 +17,13 @@ This loader allows you to write your components in this format:
 </template>
 
 <script>
-module.exports = {
-  data: function () {
-    return {
-      msg: 'Hello world!'
+  module.exports = {
+    data: function () {
+      return {
+        msg: 'Hello world!'
+      }
     }
   }
-}
 </script>
 ```
 
