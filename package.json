@@ -1,0 +1,21 @@
+{
+  "name": "vue-loader",
+  "version": "0.1.0",
+  "description": "Webpack loader for single-file Vue components",
+  "main": "index.js",
+  "keywords": [
+    "vue",
+    "webpack",
+    "loader"
+  ],
+  "author": "Evan You",
+  "license": "MIT",
+  "dependencies": {
+    "clean-css": "^2.2.16",
+    "html-minifier": "^0.6.8",
+    "parse5": "^1.1.4"
+  },
+  "peerDependencies": {
+    "insert-css": "^0.2.0"
+  }
+}
