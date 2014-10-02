@@ -96,6 +96,8 @@ Currently supported preprocessors are:
 - jade
 - coffee-script
 
+And here's a SublimeText syntax definition for enabling language hihglighting/support in these embbeded code blocks: https://gist.github.com/yyx990803/9194f92d96546cebd033
+
 ## Todos
 
 - Tests
