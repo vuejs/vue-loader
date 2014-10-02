@@ -100,7 +100,6 @@ And here's a SublimeText syntax definition for enabling language hihglighting/su
 
 For an example setup, see [vuejs/vue-loader-example](https://github.com/vuejs/vue-loader-example).
 
-## Todos
+---
 
-- Tests
-- Browserify transform (vueify?)
+If you use Browserify, there's also [vueify](https://github.com/vuejs/vueify) that does the same thing.
