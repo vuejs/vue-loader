@@ -63,3 +63,9 @@ var app = new Vue(appOptions).$mount('#app')
 ```
 
 For a complete setup, see [vuejs/vue-loader-example](https://github.com/vuejs/vue-loader-example).
+
+## Todos
+
+- Support preprocessors like `<style lang="stylus">`
+- Tests
+- Browserify transform (vueify?)
