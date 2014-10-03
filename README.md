@@ -52,7 +52,7 @@ Under the hood, the loader will:
 - extract the styles, compile them and insert them with the `insert-css` module.
 - extract the template, compile it and add it to your exported options.
 
-You can `require()` other stuff in the `<script>` as usual.
+You can `require()` other stuff in the `<script>` as usual. Note that for CSS-preprocessor @imports, the path should be relative to your project root directory.
 
 ## Usage
 
