@@ -47,6 +47,12 @@ module.exports =
 </script>
 ```
 
+And you can import using the `src` attribute (note you'll have to save the vue file to trigger a rebuild since the imported file is not tracked by Browserify as a dependency):
+
+``` html
+<style lang="stylus" src="style.styl"></style>
+```
+
 Under the hood, the loader will:
 
 - extract the styles, compile them and insert them with the `insert-css` module.
