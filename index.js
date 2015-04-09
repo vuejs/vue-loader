@@ -1,5 +1,7 @@
 var compiler = require('vue-component-compiler')
 
+compiler.loadConfig()
+
 module.exports = function(content) {
   this.cacheable && this.cacheable()
   var cb = this.async()
