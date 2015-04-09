@@ -92,7 +92,7 @@ var app = new Vue(appOptions).$mount('#app')
 
 You need to install the corresponding node modules to enable the compilation. e.g. to get stylus compiled in your Vue components, do `npm install stylus --save-dev`.
 
-Currently supported preprocessors are:
+These are the built-in preprocessors:
 
 - stylus
 - less
@@ -101,6 +101,28 @@ Currently supported preprocessors are:
 - coffee-script
 - myth
 - es6 (via `6to5` aka `babel`)
+
+## Registering Custom Pre-Processors
+
+Create a `vue.config.js` file at where your build command is run (usually y the root level of your project):
+
+``` js
+module.exports = function (compiler) {
+  
+  // register a compile function for <script lang="es">
+  compiler.register({
+    lang: 'es',
+    type: 'script',
+    compile: function (content, cb) {
+      // transform the content...
+      cb(null, content)
+    }
+  })
+
+}
+```
+
+## Syntax Highlighting
 
 And here's a [SublimeText package](https://github.com/vuejs/vue-syntax-highlight) for enabling language highlighting/support in these embbeded code blocks.
 
