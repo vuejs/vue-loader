@@ -47,7 +47,7 @@ module.exports =
 </script>
 ```
 
-And you can import using the `src` attribute (note you'll have to save the vue file to trigger a rebuild since the imported file is not tracked by Webpack as a dependency):
+And you can import using the `src` attribute:
 
 ``` html
 <style lang="stylus" src="style.styl"></style>
