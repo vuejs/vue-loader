@@ -1,6 +1,6 @@
 {
   "name": "vue-loader",
-  "version": "1.1.4",
+  "version": "1.1.5",
   "description": "Webpack loader for single-file Vue components",
   "main": "index.js",
   "keywords": [
