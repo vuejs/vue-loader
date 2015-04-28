@@ -17,8 +17,8 @@ module.exports = function(content) {
   }
 
   compiler.compile(content, ctx.resourcePath, function(err, result) {
-    if(err) return cb(err)
     compiler.removeListener('dependency', addDep)
+    if(err) return cb(err)
     cb(null, result)
   })
 }
