@@ -15,5 +15,9 @@
   },
   "dependencies": {
     "vue-component-compiler": "^1.1.7"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vuejs/vue-loader.git"
+  },
 }
