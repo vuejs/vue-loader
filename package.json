@@ -1,0 +1,24 @@
+{
+  "name": "vue-multi-loader",
+  "version": "0.0.1",
+  "description": "Vue.js component loader for Webpack, using Webpack loaders for the parts",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Q42/vue-multi-loader.git"
+  },
+  "keywords": [
+    "vue",
+    "webpack",
+    "loader"
+  ],
+  "author": "Sjoerd Visscher",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Q42/vue-multi-loader/issues"
+  },
+  "homepage": "https://github.com/Q42/vue-multi-loader",
+  "dependencies": {
+    "parse5": "^1.1.4"
+  }
+}
