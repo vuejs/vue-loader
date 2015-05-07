@@ -26,6 +26,9 @@ module.exports = function (content) {
     if (err) return cb(err);
 
     var parts = me.exec(source, url);
+    
+    for (var i = 0; i < parts.includes.length; i++)
+      output += 'require(' + JSON.stringify('./' + parts.includes[i]) + ')\n'
 
     for (var lang in parts.style)
       output += getRequire('style', lang) + '\n'
