@@ -1,19 +1,29 @@
 module.exports = function (content) {
   this.cacheable();
   var cb = this.async();
-  var languages = {}
-  var output = ''
+  var languages = {};
+  var output = '';
   var vueUrl = this.resource;
-  var loaders = {}
+  var loaders = {
+    html: 'html',
+    css: 'style!css',
+    js: ''
+  };
   var loaderPrefix = {
-    template: 'html!',
+    template: '',
     style: 'style!css!',
     script: ''
-  }
+  };
+  var defaultLang = {
+    template: 'html',
+    style: 'css',
+    script: 'js'
+  };
 
   function loader(part, lang) {
-    var loader = loaders[lang] || loaderPrefix[part] + lang;
-    return loader ? loader + '!' : ''
+    lang = lang || defaultLang[part];
+    var loader = loaders[lang] !== undefined ? loaders[lang] : loaderPrefix[part] + lang;
+    return loader ? loader + '!' : '';
   }
 
   function getRequire(part, lang) {
@@ -26,21 +36,22 @@ module.exports = function (content) {
     if (err) return cb(err);
 
     var parts = me.exec(source, url);
-    
+
     for (var i = 0; i < parts.includes.length; i++)
-      output += 'require(' + JSON.stringify('./' + parts.includes[i]) + ')\n'
+      output += 'require(' + JSON.stringify('./' + parts.includes[i]) + ')\n';
 
     for (var lang in parts.style)
-      output += getRequire('style', lang) + '\n'
+      output += getRequire('style', lang) + '\n';
 
     for (var lang in parts.script)
-      output += 'module.exports = ' + getRequire('script', lang) + '\n'
+      output += 'module.exports = ' + getRequire('script', lang) + '\n';
 
     var hasTemplate = false;
     for (var lang in parts.template) {
       if (hasTemplate)
-        return cb(new Error('Only one template element allowed per vue component!'))
+        return cb(new Error('Only one template element allowed per vue component!'));
       output += 'module.exports.template = ' + getRequire('template', lang);
+      output += '\nif (module.exports.template instanceof Function) module.exports.template = module.exports.template({})';
       hasTemplate = true;
     }
 
