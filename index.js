@@ -1,9 +1,11 @@
+var loaderUtils = require("loader-utils");
+
 module.exports = function (content) {
   this.cacheable();
   var cb = this.async();
   var languages = {};
   var output = '';
-  var vueUrl = this.resource;
+  var vueUrl = loaderUtils.getRemainingRequest(this);
   var loaders = {
     html: 'html',
     css: 'style!css',
@@ -27,7 +29,7 @@ module.exports = function (content) {
   }
 
   function getRequire(part, lang) {
-    return 'require(' + JSON.stringify('-!' + loader(part, lang) + require.resolve('./selector.js') + '?' + part + '/' + lang + '!' + vueUrl) + ')';
+    return 'require(' + loaderUtils.stringifyRequest(this, '-!' + loader(part, lang) + require.resolve('./selector.js') + '?' + part + '/' + lang + '!' + vueUrl) + ')';
   }
 
   var me = this;
@@ -38,7 +40,7 @@ module.exports = function (content) {
     var parts = me.exec(source, url);
 
     for (var i = 0; i < parts.includes.length; i++)
-      output += 'require(' + JSON.stringify('./' + parts.includes[i]) + ')\n';
+      output += 'require(' + loaderUtils.stringifyRequest(this, loaderUtils.urlToRequest(parts.includes[i])) + ')\n';
 
     for (var lang in parts.style)
       output += getRequire('style', lang) + '\n';
