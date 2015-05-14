@@ -28,8 +28,9 @@ module.exports = function (content) {
     return loader ? loader + '!' : '';
   }
 
+  var me = this;
   function getRequire(part, lang) {
-    return 'require(' + loaderUtils.stringifyRequest(this, '-!' + loader(part, lang) + require.resolve('./selector.js') + '?' + part + '/' + lang + '!' + vueUrl) + ')';
+    return 'require(' + loaderUtils.stringifyRequest(me, '-!' + loader(part, lang) + require.resolve('./selector.js') + '?' + part + '/' + lang + '!' + vueUrl) + ')';
   }
 
   var me = this;
