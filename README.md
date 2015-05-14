@@ -81,3 +81,37 @@ var Vue = require('vue')
 var appOptions = require('./app.vue')
 var app = new Vue(appOptions).$mount('#app')
 ```
+
+## Loader configuration
+
+By default, `vue-multi-loader` will try to use the loader with the same name as
+the `lang` attribute, but you can configure which loader should be used.
+
+For example, to extract out the generated css into a separate file,
+use this configuration:
+
+``` js
+// webpack.config.js
+var ExtractTextPlugin = require("extract-text-webpack-plugin");
+var vue = require("vue-multi-loader");
+
+module.exports = {
+  entry: "./main.js",
+  output: {
+    filename: "build.js"
+  },
+  module: {
+    loaders: [
+      {
+        test: /\.vue$/, loader: vue.withLoaders({
+          css: ExtractTextPlugin.extract("css"),
+          stylus: ExtractTextPlugin.extract("css!stylus")
+        })
+      },
+    ]
+  },
+  plugins: [
+    new ExtractTextPlugin("[name].css")
+  ]
+}
+```
