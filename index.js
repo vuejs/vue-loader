@@ -12,7 +12,7 @@ module.exports = function (content) {
     js: ''
   };
   var loaderPrefix = {
-    template: '',
+    template: 'html!template-html-loader?raw&engine=',
     style: 'style!css!',
     script: ''
   };
@@ -54,7 +54,6 @@ module.exports = function (content) {
       if (hasTemplate)
         return cb(new Error('Only one template element allowed per vue component!'));
       output += 'module.exports.template = ' + getRequire('template', lang);
-      output += '\nif (module.exports.template instanceof Function) module.exports.template = module.exports.template({})';
       hasTemplate = true;
     }
 
