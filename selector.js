@@ -8,6 +8,6 @@ module.exports = function () {
   this.loadModule(url, function(err, source) {
     if (err) return cb(err);
     var parts = me.exec(source, url);
-    cb(null, parts[path[0]][path[1]]);
+    cb(null, parts[path[0]][path[1]||'']);
   })
 }
