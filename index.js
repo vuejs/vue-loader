@@ -59,3 +59,7 @@ module.exports = function (content) {
     cb(null, output);
   })
 }
+
+module.exports.withLoaders = function (opts) {
+  return 'vue-multi-loader?' + JSON.stringify(opts).replace(/!/g, '\\u0021')
+}
