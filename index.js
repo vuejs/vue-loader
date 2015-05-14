@@ -6,11 +6,10 @@ module.exports = function (content) {
   var languages = {};
   var output = '';
   var vueUrl = loaderUtils.getRemainingRequest(this);
-  var loaders = {
-    html: 'html',
-    css: 'style!css',
-    js: ''
-  };
+  var loaders = loaderUtils.parseQuery(this.query);
+  loaders.html = loaders.html || 'html';
+  loaders.css  = loaders.css  || 'style!css';
+  loaders.js   = loaders.js   || '';
   var loaderPrefix = {
     template: 'html!template-html-loader?raw&engine=',
     style: 'style!css!',
