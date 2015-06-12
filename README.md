@@ -82,6 +82,12 @@ var appOptions = require('./app.vue')
 var app = new Vue(appOptions).$mount('#app')
 ```
 
+## Pre-Processors
+
+By default `vue-loader` needs `html-loader`, `css-loader` and `style-loader` as peer dependencies. In order to use pre-processors, you need to install the corresponding Webpack loader for that language.
+
+**Note** For template pre-processors, use `template-html-loader` plus the raw templating engine. For example to use `jade`, you will need to install both `template-html-loader` and `jade` instead of `jade-loader`.
+
 ## Loader configuration
 
 By default, `vue-loader` will try to use the loader with the same name as
