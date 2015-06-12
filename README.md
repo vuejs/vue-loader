@@ -1,4 +1,4 @@
-# vue-multi-loader
+# vue-loader
 
 > Vue.js component loader for [Webpack](http://webpack.github.io), using Webpack loaders for the parts.
 
@@ -67,7 +67,7 @@ module.exports = {
   },
   module: {
     loaders: [
-      { test: /\.vue$/, loader: "vue-multi-loader" },
+      { test: /\.vue$/, loader: "vue-loader" },
     ]
   }
 }
@@ -84,7 +84,7 @@ var app = new Vue(appOptions).$mount('#app')
 
 ## Loader configuration
 
-By default, `vue-multi-loader` will try to use the loader with the same name as
+By default, `vue-loader` will try to use the loader with the same name as
 the `lang` attribute, but you can configure which loader should be used.
 
 For example, to extract out the generated css into a separate file,
@@ -93,7 +93,7 @@ use this configuration:
 ``` js
 // webpack.config.js
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
-var vue = require("vue-multi-loader");
+var vue = require("vue-loader");
 
 module.exports = {
   entry: "./main.js",
