@@ -61,7 +61,7 @@ module.exports = function (content) {
 
   var self = this
   var url = "!!" + require.resolve("./parser.js") + "!" + vueUrl
-  this.loadModule(url, function(err, source, map, module) {
+  this.loadModule(url, function(err, source) {
     if (err) return cb(err)
 
     // up to this part, what we have done is basically executing

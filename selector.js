@@ -8,7 +8,8 @@ module.exports = function () {
   this.loadModule(url, function(err, source) {
     if (err) return cb(err)
     var parts = self.exec(source, url)
-    var part = parts[path[0]][path[1]||'']
-    cb(null, part.code, part.map)
+    var type = path[0]
+    var lang = path[1] || ''
+    cb(null, parts[type][lang])
   })
 }

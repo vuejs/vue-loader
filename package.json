@@ -20,8 +20,7 @@
   "homepage": "https://github.com/vuejs/vue-loader",
   "dependencies": {
     "loader-utils": "^0.2.7",
-    "parse5": "^1.1.4",
-    "source-map": "^0.4.2"
+    "parse5": "^1.1.4"
   },
   "peerDependencies": {
     "css-loader": "^0.14.4",
