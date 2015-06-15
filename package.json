@@ -13,7 +13,7 @@
     "loader"
   ],
   "author": "Sjoerd Visscher",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/vuejs/vue-loader/issues"
   },
