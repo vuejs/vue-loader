@@ -117,4 +117,17 @@ describe('vue-loader', function () {
     })
   })
 
+  it('local-scope', function(done) {
+    test({
+      entry: './test/fixtures/localcss.js',
+      vue: {
+        injectStyle: true
+      }
+    }, function (window) {
+      var module = window.testModule
+      expect(module.data().styles.red).to.equal('_3iZItEFWW8HWfKNmM95gGD')
+      done()
+    })
+  })
+
 })
