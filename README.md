@@ -121,3 +121,29 @@ module.exports = {
   ]
 }
 ```
+
+## Local CSS (aka CSS Modules)
+
+To achieve true [CSS Modules](https://github.com/css-modules/css-modules) for each component you can use `vue-loader` in combination with `css-loader` [local-scope](https://github.com/webpack/css-loader#local-scope) and inject a styles object into the `data` object of your components. To get this working you need to add the `inject-locals` attribute to the `<style>` tag of your vue component like:
+
+``` html
+<style inject-locals>
+:local(.red) {
+  color: red;
+}
+</style>
+
+<template>
+  <span class="{{ styles.red }}">{{msg}}</div>
+</template>
+
+<script>
+module.exports = {
+  data: function () {
+    return {
+      msg: 'Hello World'
+    }
+  }
+}
+</script>
+```

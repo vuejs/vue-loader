@@ -117,4 +117,18 @@ describe('vue-loader', function () {
     })
   })
 
+  it('local-scope', function(done) {
+    test({
+      entry: './test/fixtures/localcss.js'
+    }, function (window) {
+      var module = window.testModule
+      var data = module.data()
+      expect(data.msg).to.equal('Hello from Component A!')
+      expect(data.styles.red).to.equal('_3iZItEFWW8HWfKNmM95gGD')
+      var style = window.document.querySelector('style').textContent
+      expect(style).to.contain('._3iZItEFWW8HWfKNmM95gGD {\n  color: red;\n}');
+      done()
+    })
+  })
+
 })
