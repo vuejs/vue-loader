@@ -119,10 +119,7 @@ describe('vue-loader', function () {
 
   it('local-scope', function(done) {
     test({
-      entry: './test/fixtures/localcss.js',
-      vue: {
-        injectStyle: true
-      }
+      entry: './test/fixtures/localcss.js'
     }, function (window) {
       var module = window.testModule
       var data = module.data()
