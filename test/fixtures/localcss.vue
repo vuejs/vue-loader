@@ -1,4 +1,4 @@
-<style>
+<style inject-locals>
 :local(.red) {
   color: red;
 }
