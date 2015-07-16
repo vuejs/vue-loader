@@ -19,7 +19,8 @@
   },
   "homepage": "https://github.com/vuejs/vue-loader",
   "scripts": {
-    "test": "mocha test/test.js --slow 2000"
+    "lint": "eslint lib",
+    "test": "eslint lib && mocha test/test.js --slow 2000"
   },
   "dependencies": {
     "loader-utils": "^0.2.7",
@@ -35,6 +36,7 @@
     "babel-loader": "^5.1.4",
     "chai": "^3.0.0",
     "css-loader": "^0.14.4",
+    "eslint": "^1.0.0-rc-1",
     "html-loader": "^0.3.0",
     "jade": "^1.11.0",
     "jsdom": "^5.4.3",
