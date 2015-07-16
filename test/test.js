@@ -5,6 +5,7 @@ var jsdom = require('jsdom')
 var expect = require('chai').expect
 var assign = require('object-assign')
 var rimraf = require('rimraf')
+var hash = require('hash-sum')
 var SourceMapConsumer = require('source-map').SourceMapConsumer
 
 describe('vue-loader', function () {
@@ -98,9 +99,10 @@ describe('vue-loader', function () {
         '<p class="abc def v-5f0cf35a">hi</p>'
       )
       var style = window.document.querySelector('style').textContent
-      expect(style).to.match(/div\.v-5f0cf35a\.test {\s+color: blue;\n}/)
-      expect(style).to.match(/\.v-5f0cf35a {\s+color: red;\n}/)
-      expect(style).to.match(/\.v-5f0cf35a h1 {\s+color: green;\n}/)
+      var cls = '.v-' + hash(require.resolve('./fixtures/local-css.vue'))
+      expect(style).to.contain('div' + cls + '.test {\n    color: blue;\n}')
+      expect(style).to.contain(cls + ' {\n    color: red;\n}')
+      expect(style).to.contain(cls + ' h1 {\n    color: green;\n}')
       done()
     })
   })
@@ -110,9 +112,10 @@ describe('vue-loader', function () {
       entry: './test/fixtures/import.vue'
     }, function (window) {
       var styles = window.document.querySelectorAll('style')
-      expect(styles[0].textContent).to.match(/h1 { color: red; }/)
+      expect(styles[0].textContent).to.contain('h1 { color: red; }')
       // import with local
-      expect(styles[1].textContent).to.match(/\.v-5751b9b6 h1 {\s+color: green;\n}/)
+      var cls = '.v-' + hash(require.resolve('./fixtures/import.local.css'))
+      expect(styles[1].textContent).to.contain(cls + ' h1 {\n    color: green;\n}')
       done()
     })
   })
