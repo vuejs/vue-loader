@@ -1,4 +1,7 @@
 <style local>
+body {
+  color: yellow;
+}
 :root {
   color: red;
 }

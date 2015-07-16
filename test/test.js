@@ -100,9 +100,15 @@ describe('vue-loader', function () {
         '<p class="abc def ' + cls.slice(1) + '">hi</p>'
       )
       var style = window.document.querySelector('style').textContent
-      expect(style).to.contain('div' + cls + '.test {\n    color: blue;\n}')
-      expect(style).to.contain(cls + ' {\n    color: red;\n}')
-      expect(style).to.contain(cls + ' h1 {\n    color: green;\n}')
+      // lift selectors that start with body
+      expect(style).to.contain('body {\n    color: yellow;\n}')
+      expect(style).not.to.contain(cls + ' body')
+      // lift and replace :root inside compound selectors
+      expect(style).to.contain('\ndiv' + cls + '.test {\n    color: blue;\n}')
+      // lift :root
+      expect(style).to.contain('\n' + cls + ' {\n    color: red;\n}')
+      // nest normal selectors
+      expect(style).to.contain('\n' + cls + ' h1 {\n    color: green;\n}')
       done()
     })
   })
