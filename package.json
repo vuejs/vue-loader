@@ -26,7 +26,8 @@
     "hash-sum": "^1.0.2",
     "loader-utils": "^0.2.10",
     "parse5": "^1.5.0",
-    "postcss": "^4.1.16"
+    "postcss": "^4.1.16",
+    "postcss-nested": "^0.3.2"
   },
   "peerDependencies": {
     "css-loader": "^0.15.4",
