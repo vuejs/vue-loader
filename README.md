@@ -47,12 +47,13 @@ module.exports =
 </script>
 ```
 
-And you can import using the `src` attribute (note that there's no need for a `lang` attribute here, as Webpack will
-be used to determine which loader applies):
+And you can import using the `src` attribute:
 
 ``` html
-<style src="style.styl"></style>
+<style lang="stylus" src="./style.styl"></style>
 ```
+
+**NOTE**: Starting from version 2.1.0, `src` imports follow similar rules to `require()` calls, which means for relative paths you need to start with `./`, and you can import resources from node modules: `<style src="todomvc-app-css/index.css">`.
 
 ## Usage
 
