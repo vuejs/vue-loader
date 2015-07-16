@@ -88,17 +88,7 @@ describe('vue-loader', function () {
     })
   })
 
-  it('import', function (done) {
-    test({
-      entry: './test/fixtures/import.vue'
-    }, function (window) {
-      var style = window.document.querySelector('style').textContent
-      expect(style).to.contain('h1 { color: red; }')
-      done()
-    })
-  })
-
-  it('local-css', function (done) {
+  it('local style', function (done) {
     test({
       entry: './test/fixtures/local-css.js'
     }, function (window) {
@@ -115,7 +105,19 @@ describe('vue-loader', function () {
     })
   })
 
-  it('source-map', function (done) {
+  it('style import', function (done) {
+    test({
+      entry: './test/fixtures/import.vue'
+    }, function (window) {
+      var styles = window.document.querySelectorAll('style')
+      expect(styles[0].textContent).to.match(/h1 { color: red; }/)
+      // import with local
+      expect(styles[1].textContent).to.match(/\.v-5751b9b6 h1 {\s+color: green;\n}/)
+      done()
+    })
+  })
+
+  it('source map', function (done) {
     var config = assign({}, globalConfig, {
       entry: './test/fixtures/basic.js',
       devtool: 'source-map'
