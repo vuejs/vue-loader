@@ -23,8 +23,10 @@
     "test": "eslint lib && mocha test/test.js --slow 2000"
   },
   "dependencies": {
+    "hash-sum": "^1.0.2",
     "loader-utils": "^0.2.10",
-    "parse5": "^1.5.0"
+    "parse5": "^1.5.0",
+    "postcss": "^4.1.16"
   },
   "peerDependencies": {
     "css-loader": "^0.15.4",

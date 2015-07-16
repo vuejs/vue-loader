@@ -100,10 +100,17 @@ describe('vue-loader', function () {
 
   it('local-css', function (done) {
     test({
-      entry: './test/fixtures/local-css.vue'
+      entry: './test/fixtures/local-css.js'
     }, function (window) {
+      var module = window.testModule
+      expect(module.template).to.contain(
+        '<div class="v-5f0cf35a"><h1>hi</h1></div>\n' +
+        '<p class="abc def v-5f0cf35a">hi</p>'
+      )
       var style = window.document.querySelector('style').textContent
-      expect(style).to.contain('h1 { color: red; }')
+      expect(style).to.match(/div\.v-5f0cf35a\.test {\s+color: blue;\n}/)
+      expect(style).to.match(/\.v-5f0cf35a {\s+color: red;\n}/)
+      expect(style).to.match(/\.v-5f0cf35a h1 {\s+color: green;\n}/)
       done()
     })
   })
