@@ -94,12 +94,12 @@ describe('vue-loader', function () {
       entry: './test/fixtures/local-css.js'
     }, function (window) {
       var module = window.testModule
+      var cls = '.v-' + hash(require.resolve('./fixtures/local-css.vue'))
       expect(module.template).to.contain(
-        '<div class="v-5f0cf35a"><h1>hi</h1></div>\n' +
-        '<p class="abc def v-5f0cf35a">hi</p>'
+        '<div class="' + cls.slice(1) + '"><h1>hi</h1></div>\n' +
+        '<p class="abc def ' + cls.slice(1) + '">hi</p>'
       )
       var style = window.document.querySelector('style').textContent
-      var cls = '.v-' + hash(require.resolve('./fixtures/local-css.vue'))
       expect(style).to.contain('div' + cls + '.test {\n    color: blue;\n}')
       expect(style).to.contain(cls + ' {\n    color: red;\n}')
       expect(style).to.contain(cls + ' h1 {\n    color: green;\n}')
