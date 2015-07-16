@@ -1,2 +1,2 @@
 <style src="./import.css"></style>
-<style src="./import.local.css" local></style>
+<style src="./import-scoped.css" scoped></style>

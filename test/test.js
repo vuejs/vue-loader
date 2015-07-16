@@ -89,12 +89,12 @@ describe('vue-loader', function () {
     })
   })
 
-  it('local style', function (done) {
+  it('scoped style', function (done) {
     test({
-      entry: './test/fixtures/local-css.js'
+      entry: './test/fixtures/scoped-css.js'
     }, function (window) {
       var module = window.testModule
-      var cls = '.v-' + hash(require.resolve('./fixtures/local-css.vue'))
+      var cls = '.v-' + hash(require.resolve('./fixtures/scoped-css.vue'))
       expect(module.template).to.contain(
         '<div class="' + cls.slice(1) + '"><h1>hi</h1></div>\n' +
         '<p class="abc def ' + cls.slice(1) + '">hi</p>'
@@ -119,8 +119,8 @@ describe('vue-loader', function () {
     }, function (window) {
       var styles = window.document.querySelectorAll('style')
       expect(styles[0].textContent).to.contain('h1 { color: red; }')
-      // import with local
-      var cls = '.v-' + hash(require.resolve('./fixtures/import.local.css'))
+      // import with scoped
+      var cls = '.v-' + hash(require.resolve('./fixtures/import-scoped.css'))
       expect(styles[1].textContent).to.contain(cls + ' h1 {\n    color: green;\n}')
       done()
     })

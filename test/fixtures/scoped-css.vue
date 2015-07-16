@@ -1,4 +1,4 @@
-<style local>
+<style scoped>
 body {
   color: yellow;
 }
