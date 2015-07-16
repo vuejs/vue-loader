@@ -23,11 +23,11 @@
     "test": "eslint lib && mocha test/test.js --slow 2000"
   },
   "dependencies": {
-    "loader-utils": "^0.2.7",
-    "parse5": "^1.1.4"
+    "loader-utils": "^0.2.10",
+    "parse5": "^1.5.0"
   },
   "peerDependencies": {
-    "css-loader": "^0.14.4",
+    "css-loader": "^0.15.4",
     "html-loader": "^0.3.0",
     "style-loader": "^0.12.3"
   },
