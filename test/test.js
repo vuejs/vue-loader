@@ -90,7 +90,17 @@ describe('vue-loader', function () {
 
   it('import', function (done) {
     test({
-      entry: './test/fixtures/import.js'
+      entry: './test/fixtures/import.vue'
+    }, function (window) {
+      var style = window.document.querySelector('style').textContent
+      expect(style).to.contain('h1 { color: red; }')
+      done()
+    })
+  })
+
+  it('local-css', function (done) {
+    test({
+      entry: './test/fixtures/local-css.vue'
     }, function (window) {
       var style = window.document.querySelector('style').textContent
       expect(style).to.contain('h1 { color: red; }')
