@@ -9,9 +9,9 @@ var SourceMapConsumer = require('source-map').SourceMapConsumer
 
 describe('vue-loader', function () {
 
+  var testHTML = '<!DOCTYPE html><html><head></head><body></body></html>'
   var outputDir = path.resolve(__dirname, './output')
   var loaderPath = path.resolve(__dirname, '../')
-  var testHTML = '<!DOCTYPE html><html><head></head><body></body></html>'
   var globalConfig = {
     output: {
       path: outputDir,
@@ -84,6 +84,16 @@ describe('vue-loader', function () {
       expect(module.data().msg).to.contain('Hello from babel!')
       var style = window.document.querySelector('style').textContent
       expect(style).to.contain('body {\n  font: 100% Helvetica, sans-serif;\n  color: #999;\n}')
+      done()
+    })
+  })
+
+  it('import', function (done) {
+    test({
+      entry: './test/fixtures/import.js'
+    }, function (window) {
+      var style = window.document.querySelector('style').textContent
+      expect(style).to.contain('h1 { color: red; }')
       done()
     })
   })
