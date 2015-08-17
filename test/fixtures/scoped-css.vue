@@ -1,11 +1,11 @@
 <style scoped>
-body {
+body, h2 {
   color: yellow;
 }
-:root {
+:scope {
   color: red;
 }
-div:root.test {
+div:scope.test {
   color: blue;
 }
 h1 {
