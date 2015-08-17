@@ -27,7 +27,8 @@
     "loader-utils": "^0.2.10",
     "parse5": "^1.5.0",
     "postcss": "^4.1.16",
-    "postcss-nested": "^0.3.2"
+    "postcss-nested": "^0.3.2",
+    "postcss-selector-parser": "^1.1.2"
   },
   "peerDependencies": {
     "css-loader": "^0.15.4",
@@ -47,7 +48,6 @@
     "mocha": "^2.2.5",
     "node-libs-browser": "^0.5.2",
     "object-assign": "^3.0.0",
-    "postcss-selector-parser": "^1.1.2",
     "rimraf": "^2.4.0",
     "source-map": "^0.4.2",
     "style-loader": "^0.12.3",
