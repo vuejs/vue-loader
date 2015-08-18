@@ -1,6 +1,6 @@
 {
   "name": "vue-loader",
-  "version": "3.0.2",
+  "version": "3.0.3",
   "description": "Vue.js component loader for Webpack",
   "main": "index.js",
   "repository": {
@@ -31,9 +31,9 @@
     "postcss-selector-parser": "^1.1.2"
   },
   "peerDependencies": {
-    "css-loader": "^0.15.4",
-    "html-loader": "^0.3.0",
-    "style-loader": "^0.12.3"
+    "css-loader": "*",
+    "html-loader": "*",
+    "style-loader": "*"
   },
   "devDependencies": {
     "babel-core": "^5.5.8",
