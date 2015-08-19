@@ -27,6 +27,18 @@ It allows you to write your components in this format:
 </script>
 ```
 
+## Table of Contents
+
+
+- [Basic Usage](#basic-usage)
+- [Pre-Processors](#pre-processors)
+- [Style Imports](#style-imports)
+- [Asset URL Handling](#asset-url-handling)
+- [Advanced Loader Configuration](#advanced-loader-configuration)
+  - [ES6 with Babel Example](#example-using-es6-with-babel)
+  - [Extract CSS Example](#example-extracting-css-into-a-single-file)
+- [Example Project](https://github.com/vuejs/vue-loader-example)
+
 ## Basic Usage
 
 Config Webpack:
@@ -163,3 +175,7 @@ module.exports = {
   ]
 }
 ```
+
+## Example Project
+
+See [vue-loader-example](https://github.com/vuejs/vue-loader-example).
