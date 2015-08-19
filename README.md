@@ -27,48 +27,20 @@ It allows you to write your components in this format:
 </script>
 ```
 
-You can also mix preprocessor languages in the component file:
-
-``` html
-// app.vue
-<style lang="stylus">
-.red
-  color #f00
-</style>
-
-<template lang="jade">
-h1(class="red") {{msg}}
-</template>
-
-<script lang="coffee">
-module.exports =
-  data: ->
-    msg: 'Hello world!'
-</script>
-```
-
-And you can import using the `src` attribute:
-
-``` html
-<style lang="stylus" src="./style.styl"></style>
-```
-
-**NOTE**: Starting from version 2.1.0, `src` imports follow similar rules to `require()` calls, which means for relative paths you need to start with `./`, and you can import resources from node modules: `<style src="todomvc-app-css/index.css">`.
-
-## Usage
+## Basic Usage
 
 Config Webpack:
 
 ``` js
 // webpack.config.js
 module.exports = {
-  entry: "./main.js",
+  entry: './main.js',
   output: {
-    filename: "build.js"
+    filename: 'build.js'
   },
   module: {
     loaders: [
-      { test: /\.vue$/, loader: "vue-loader" },
+      { test: /\.vue$/, loader: 'vue' },
     ]
   }
 }
@@ -85,28 +57,97 @@ var app = new Vue(appOptions).$mount('#app')
 
 ## Pre-Processors
 
-By default `vue-loader` needs `html-loader`, `css-loader` and `style-loader` as peer dependencies. In order to use pre-processors, you need to install the corresponding Webpack loader for that language.
+`vue-loader` allows you to use per-file pre-processors inside `*.vue` components with the `lang` attribute:
 
-**Note** For template pre-processors, use `template-html-loader` plus the raw templating engine. For example to use `jade`, you will need to install both `template-html-loader` and `jade` instead of `jade-loader`.
+``` html
+<style lang="stylus">
+  /* use stylus here */
+</style>
+```
 
-## Loader configuration
+The `lang` attribute will be used to automatically locate the loader to use, and you can pass Webpack loader queries in it as well:
+
+``` html
+<style lang="sass?outputStyle=expanded">
+  /* use sass here with expanded output */
+</style>
+```
+
+#### A Note on Dependencies
+
+By default, `vue-loader` requires `html-loader`, `css-loader` and `style-loader` as peer dependencies. In order to use pre-processors, you also need to install the corresponding Webpack loader for that language.
+
+Also, for template pre-processors, you should install `template-html-loader` plus the raw templating engine. For example to use `jade`, you will need to install both `template-html-loader` and `jade` instead of `jade-loader`.
+
+## Style Imports
+
+If you want, you can separate your styles into a separate file and import it using the `src` attribute:
+
+``` html
+<style src="./style.css"></style>
+```
+
+Beware that `src` imports follow similar rules to `require()` calls, which means for relative paths you need to start with `./`, and you can import resources from node modules: `<style src="todomvc-app-css/index.css">`.
+
+## Asset URL Handling
+
+By default, `vue-loader` automatically processes your style and template files with `css-loader` and `html-loader` - this means that all asset URLs such as `<img src="...">`, `background: url(...)` and CSS `@import` are **resolved as module dependencies**.
+
+For example, `url(image.png)` will be translated into `require('./image.png')`. Because `.png` is not JavaScript, you will need to configure Webpack to use [file-loader](https://github.com/webpack/file-loader) or [url-loader](https://github.com/webpack/url-loader) to handle them. This may feel cumbersome, but it gives you some very powerful benefits in managing your static assets this way:
+
+1. `file-loader` allows you to customize where to copy and place the asset file (by specifying `publicPath` in your Webpack config), and how they should be named with version hashes.
+
+2. `url-loader` allows you to conditionally load a file as a inline Data URL if they are smaller than a given threshold.
+
+For more details, see the respective documentations for [html-loader](https://github.com/webpack/html-loader) and [css-loader](https://github.com/webpack/css-loader).
+
+## Advanced Loader configuration
 
 By default, `vue-loader` will try to use the loader with the same name as
 the `lang` attribute, but you can configure which loader should be used.
 
-For example, to extract out the generated css into a separate file,
-use this configuration:
+#### Example: Using ES6 with Babel
+
+To apply Babel transforms to all your JavaScript, use this Webpack config:
 
 ``` js
-// webpack.config.js
+var vue = require('vue-loader')
+
+module.exports = {
+  // entry, output...
+  module: {
+    loaders: [
+      {
+        test: /\.vue$/,
+        loader: vue.withLoaders({
+          // apply babel transform to all javascript
+          // inside *.vue files.
+          js: 'babel?optional[]=runtime'
+        })
+      }
+    ]
+  },
+  devtool: 'source-map'
+}
+```
+
+Some explanantions: 
+
+1. Here `js` is the default language for `<script>` blocks.
+
+2. The `?optional[]=runtime` query string passed to the loader. This instructs Babel to use helper functions from the `babel-runtime` NPM package instead of injecting the helpers into every single file. You'll want this most of the time.
+
+#### Example: Extracting CSS into a Single File
+
+To extract out the generated css into a separate file,
+use this Webpack config:
+
+``` js
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var vue = require("vue-loader");
 
 module.exports = {
-  entry: "./main.js",
-  output: {
-    filename: "build.js"
-  },
+  // entry, output...
   module: {
     loaders: [
       {
