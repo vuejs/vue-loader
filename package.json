@@ -20,7 +20,7 @@
   "homepage": "https://github.com/vuejs/vue-loader",
   "scripts": {
     "lint": "eslint lib",
-    "test": "eslint lib && mocha test/test.js --slow 2000"
+    "test": "eslint lib && mocha test/test.js --slow 5000"
   },
   "dependencies": {
     "hash-sum": "^1.0.2",
