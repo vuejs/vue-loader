@@ -31,8 +31,8 @@
     "postcss-selector-parser": "^1.1.2"
   },
   "peerDependencies": {
+    "vue-html-loader": "^1.0.0",
     "css-loader": "*",
-    "html-loader": "*",
     "style-loader": "*"
   },
   "devDependencies": {
@@ -41,7 +41,7 @@
     "chai": "^3.0.0",
     "css-loader": "^0.15.4",
     "eslint": "^1.0.0-rc-1",
-    "html-loader": "^0.3.0",
+    "vue-html-loader": "^1.0.0",
     "jade": "^1.11.0",
     "jsdom": "^5.4.3",
     "mkdirp": "^0.5.1",
