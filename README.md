@@ -85,11 +85,13 @@ The `lang` attribute will be used to automatically locate the loader to use, and
 </style>
 ```
 
-#### A Note on Dependencies
+#### A Note on Loader Dependencies
 
-By default, `vue-loader` requires `html-loader`, `css-loader` and `style-loader` as peer dependencies. In order to use pre-processors, you also need to install the corresponding Webpack loader for that language.
+By default, `vue-loader` requires `vue-html-loader`, `css-loader` and `style-loader` as peer dependencies. In order to use pre-processors, you also need to install the corresponding Webpack loader for that language.
 
-Also, for template pre-processors, you should install `template-html-loader` plus the raw templating engine. For example to use `jade`, you will need to install both `template-html-loader` and `jade` instead of `jade-loader`.
+#### Template Pre-Processors
+
+For template pre-processors, you should install `template-html-loader` plus the raw templating engine. For example to use `jade`, you will need to install both `template-html-loader` and `jade` instead of `jade-loader`.
 
 ## Style Imports
 
@@ -103,7 +105,7 @@ Beware that `src` imports follow similar rules to `require()` calls, which means
 
 ## Asset URL Handling
 
-By default, `vue-loader` automatically processes your style and template files with `css-loader` and `html-loader` - this means that all asset URLs such as `<img src="...">`, `background: url(...)` and CSS `@import` are **resolved as module dependencies**.
+By default, `vue-loader` automatically processes your style and template files with `css-loader` and `vue-html-loader` - this means that all asset URLs such as `<img src="...">`, `background: url(...)` and CSS `@import` are **resolved as module dependencies**.
 
 For example, `url(image.png)` will be translated into `require('./image.png')`. Because `.png` is not JavaScript, you will need to configure Webpack to use [file-loader](https://github.com/webpack/file-loader) or [url-loader](https://github.com/webpack/url-loader) to handle them. This may feel cumbersome, but it gives you some very powerful benefits in managing your static assets this way:
 
@@ -111,7 +113,7 @@ For example, `url(image.png)` will be translated into `require('./image.png')`. 
 
 2. `url-loader` allows you to conditionally load a file as a inline Data URL if they are smaller than a given threshold.
 
-For more details, see the respective documentations for [html-loader](https://github.com/webpack/html-loader) and [css-loader](https://github.com/webpack/css-loader).
+For more details, see the respective documentations for [vue-html-loader](https://github.com/vuejs/vue-html-loader) and [css-loader](https://github.com/webpack/css-loader).
 
 ## Advanced Loader configuration
 
