@@ -94,22 +94,13 @@ describe('vue-loader', function () {
       entry: './test/fixtures/scoped-css.js'
     }, function (window) {
       var module = window.testModule
-      var cls = '.v-' + hash(require.resolve('./fixtures/scoped-css.vue'))
       expect(module.template).to.contain(
-        '<div class="' + cls.slice(1) + '"><h1>hi</h1></div>\n' +
-        '<p class="abc def ' + cls.slice(1) + '">hi</p>'
+        '<div _v-1=""><h1 _v-1="">hi</h1></div>\n' +
+        '<p class="abc def" _v-1="">hi</p>'
       )
       var style = window.document.querySelector('style').textContent
-      // lift selectors that start with body
-      expect(style).to.contain('body {\n    color: yellow;\n}')
-      expect(style).not.to.contain(cls + ' body')
-      expect(style).to.contain(cls + ' h2 {\n    color: yellow;\n}')
-      // lift and replace :scope inside compound selectors
-      expect(style).to.contain('\ndiv' + cls + '.test {\n    color: blue;\n}')
-      // lift :scope
-      expect(style).to.contain('\n' + cls + ' {\n    color: red;\n}')
-      // nest normal selectors
-      expect(style).to.contain('\n' + cls + ' h1 {\n    color: green;\n}')
+      expect(style).to.contain('.test[_v-1] {\n  color: yellow;\n}')
+      expect(style).to.contain('h1[_v-1] {\n  color: green;\n}')
       done()
     })
   })
@@ -121,8 +112,7 @@ describe('vue-loader', function () {
       var styles = window.document.querySelectorAll('style')
       expect(styles[0].textContent).to.contain('h1 { color: red; }')
       // import with scoped
-      var cls = '.v-' + hash(require.resolve('./fixtures/import-scoped.css'))
-      expect(styles[1].textContent).to.contain(cls + ' h1 {\n    color: green;\n}')
+      expect(styles[1].textContent).to.contain('h1[_v-2] { color: green; }')
       done()
     })
   })

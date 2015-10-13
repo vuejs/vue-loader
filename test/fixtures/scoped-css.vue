@@ -1,12 +1,6 @@
 <style scoped>
-body, h2 {
+.test {
   color: yellow;
-}
-:scope {
-  color: red;
-}
-div:scope.test {
-  color: blue;
 }
 h1 {
   color: green;
