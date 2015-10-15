@@ -32,6 +32,9 @@ It allows you to write your components in this format:
 
 - [Basic Usage](#basic-usage)
 - [Pre-Processors](#pre-processors)
+- [Template Pre-Processors](#template-pre-processors)
+- [Scoped Styles](#scoped-styles)
+- [Hot Reload](#hot-reload)
 - [Style Imports](#style-imports)
 - [Asset URL Handling](#asset-url-handling)
 - [Advanced Loader Configuration](#advanced-loader-configuration)
@@ -69,7 +72,7 @@ var app = new Vue(appOptions).$mount('#app')
 
 ## Pre-Processors
 
-`vue-loader` allows you to use per-file pre-processors inside `*.vue` components with the `lang` attribute:
+`vue-loader` allows you to use other Webpack loaders to pre-process the different parts inside your `*.vue` components. Just specify the loader to use with the `lang` attribute (you also need to install the loader, obviously):
 
 ``` html
 <style lang="stylus">
@@ -77,7 +80,7 @@ var app = new Vue(appOptions).$mount('#app')
 </style>
 ```
 
-The `lang` attribute will be used to automatically locate the loader to use, and you can pass Webpack loader queries in it as well:
+You can also include Webpack loader queries in the `lang` attribute:
 
 ``` html
 <style lang="sass?outputStyle=expanded">
@@ -85,13 +88,81 @@ The `lang` attribute will be used to automatically locate the loader to use, and
 </style>
 ```
 
-#### A Note on Loader Dependencies
-
-By default, `vue-loader` requires `vue-html-loader`, `css-loader` and `style-loader` as peer dependencies. In order to use pre-processors, you also need to install the corresponding Webpack loader for that language.
-
-#### Template Pre-Processors
+## Template Pre-Processors
 
 For template pre-processors, you should install `template-html-loader` plus the raw templating engine. For example to use `jade`, you will need to install both `template-html-loader` and `jade` instead of `jade-loader`.
+
+## Scoped Styles
+
+When a `<style>` tag has the `scoped` attribute, its CSS will apply to elements of the current component only. This is similar to the style encapsulation found in Shadow DOM, but doesn't require any polyfills. It is achieved by transforming the following:
+
+``` html
+<style>
+.example {
+  color: red;
+}
+</style>
+<template>
+  <div class="example">hi</div>
+</template>
+```
+
+Into the following:
+
+``` html
+<style>
+.example[_v-1] {
+  color: red;
+}
+</style>
+<template>
+  <div class="example" _v-1>hi</div>
+</template>
+```
+
+#### Notes
+
+1. You can include both scoped and non-scoped styles in the same component.
+
+2. A child component's root node will be affected by both the parent's scoped CSS and the child's scoped CSS.
+
+3. Partials are not affected by scoped styles.
+
+## Hot Reload
+
+When using `webpack-dev-server` in hot mode, `vue-loader` enables hot component reloading for Vue.js 1.0.0+. An example config:
+
+``` js
+module.exports = {
+  entry: ['webpack/hot/dev-server', './src/main.js'],
+  output: {
+    publicPath: '/static/',
+    filename: 'build.js'
+  },
+  module: {
+    loaders: [
+      { test: /\.vue$/, loader: 'vue' },
+    ]
+  },
+  devtool: '#source-map'
+}
+```
+
+In `index.html`, include the bundle:
+
+``` html
+<script src="/static/build.js"></script>
+```
+
+Then, run the dev server with:
+
+``` bash
+webpack-dev-server --hot --config build/webpack.dev.config.js
+```
+
+Finally, visit `http://localhost:8080/webpack-dev-server/` to see the app with hot reloading.
+
+For a complete example with hot reloading in action, see [vue-hackernews](https://github.com/vuejs/vue-hackernews).
 
 ## Style Imports
 
@@ -180,4 +251,6 @@ module.exports = {
 
 ## Example Project
 
-See [vue-loader-example](https://github.com/vuejs/vue-loader-example).
+For a simple setup example, see [vue-loader-example](https://github.com/vuejs/vue-loader-example).
+
+For an actual project with dev setup with hot reloading and production setup with minification, see [vue-hackernews](https://github.com/vuejs/vue-hackernews).
