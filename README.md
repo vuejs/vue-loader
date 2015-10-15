@@ -33,10 +33,10 @@ It allows you to write your components in this format:
 - [Basic Usage](#basic-usage)
 - [Pre-Processors](#pre-processors)
 - [Template Pre-Processors](#template-pre-processors)
-- [Scoped Styles](#scoped-styles)
-- [Hot Reload](#hot-reload)
 - [Style Imports](#style-imports)
 - [Asset URL Handling](#asset-url-handling)
+- [Scoped Styles](#scoped-styles)
+- [Hot Reload](#hot-reload)
 - [Advanced Loader Configuration](#advanced-loader-configuration)
   - [ES6 with Babel Example](#example-using-es6-with-babel)
   - [Extract CSS Example](#example-extracting-css-into-a-single-file)
@@ -92,7 +92,31 @@ You can also include Webpack loader queries in the `lang` attribute:
 
 For template pre-processors, you should install `template-html-loader` plus the raw templating engine. For example to use `jade`, you will need to install both `template-html-loader` and `jade` instead of `jade-loader`.
 
+## Style Imports
+
+If you want, you can separate your styles into a separate file and import it using the `src` attribute:
+
+``` html
+<style src="./style.css"></style>
+```
+
+Beware that `src` imports follow similar rules to `require()` calls, which means for relative paths you need to start with `./`, and you can import resources from node modules: `<style src="todomvc-app-css/index.css">`.
+
+## Asset URL Handling
+
+By default, `vue-loader` automatically processes your style and template files with `css-loader` and `vue-html-loader` - this means that all asset URLs such as `<img src="...">`, `background: url(...)` and CSS `@import` are **resolved as module dependencies**.
+
+For example, `url(image.png)` will be translated into `require('./image.png')`. Because `.png` is not JavaScript, you will need to configure Webpack to use [file-loader](https://github.com/webpack/file-loader) or [url-loader](https://github.com/webpack/url-loader) to handle them. This may feel cumbersome, but it gives you some very powerful benefits in managing your static assets this way:
+
+1. `file-loader` allows you to customize where to copy and place the asset file (by specifying `publicPath` in your Webpack config), and how they should be named with version hashes.
+
+2. `url-loader` allows you to conditionally load a file as a inline Data URL if they are smaller than a given threshold.
+
+For more details, see the respective documentations for [vue-html-loader](https://github.com/vuejs/vue-html-loader) and [css-loader](https://github.com/webpack/css-loader).
+
 ## Scoped Styles
+
+> Experimental
 
 When a `<style>` tag has the `scoped` attribute, its CSS will apply to elements of the current component only. This is similar to the style encapsulation found in Shadow DOM, but doesn't require any polyfills. It is achieved by transforming the following:
 
@@ -130,6 +154,8 @@ Into the following:
 
 ## Hot Reload
 
+> Experimental
+
 When using `webpack-dev-server` in hot mode, `vue-loader` enables hot component reloading for Vue.js 1.0.0+. An example config:
 
 ``` js
@@ -163,28 +189,6 @@ webpack-dev-server --hot --config build/webpack.dev.config.js
 Finally, visit `http://localhost:8080/webpack-dev-server/` to see the app with hot reloading.
 
 For a complete example with hot reloading in action, see [vue-hackernews](https://github.com/vuejs/vue-hackernews).
-
-## Style Imports
-
-If you want, you can separate your styles into a separate file and import it using the `src` attribute:
-
-``` html
-<style src="./style.css"></style>
-```
-
-Beware that `src` imports follow similar rules to `require()` calls, which means for relative paths you need to start with `./`, and you can import resources from node modules: `<style src="todomvc-app-css/index.css">`.
-
-## Asset URL Handling
-
-By default, `vue-loader` automatically processes your style and template files with `css-loader` and `vue-html-loader` - this means that all asset URLs such as `<img src="...">`, `background: url(...)` and CSS `@import` are **resolved as module dependencies**.
-
-For example, `url(image.png)` will be translated into `require('./image.png')`. Because `.png` is not JavaScript, you will need to configure Webpack to use [file-loader](https://github.com/webpack/file-loader) or [url-loader](https://github.com/webpack/url-loader) to handle them. This may feel cumbersome, but it gives you some very powerful benefits in managing your static assets this way:
-
-1. `file-loader` allows you to customize where to copy and place the asset file (by specifying `publicPath` in your Webpack config), and how they should be named with version hashes.
-
-2. `url-loader` allows you to conditionally load a file as a inline Data URL if they are smaller than a given threshold.
-
-For more details, see the respective documentations for [vue-html-loader](https://github.com/vuejs/vue-html-loader) and [css-loader](https://github.com/webpack/css-loader).
 
 ## Advanced Loader configuration
 
