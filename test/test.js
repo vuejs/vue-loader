@@ -94,13 +94,14 @@ describe('vue-loader', function () {
       entry: './test/fixtures/scoped-css.js'
     }, function (window) {
       var module = window.testModule
+      var id = '_v-' + hash(require.resolve('./fixtures/scoped-css.vue'))
       expect(module.template).to.contain(
-        '<div _v-1=""><h1 _v-1="">hi</h1></div>\n' +
-        '<p class="abc def" _v-1="">hi</p>'
+        '<div ' + id + '=""><h1 ' + id + '="">hi</h1></div>\n' +
+        '<p class="abc def" ' + id + '="">hi</p>'
       )
       var style = window.document.querySelector('style').textContent
-      expect(style).to.contain('.test[_v-1] {\n  color: yellow;\n}')
-      expect(style).to.contain('h1[_v-1] {\n  color: green;\n}')
+      expect(style).to.contain('.test[' + id + '] {\n  color: yellow;\n}')
+      expect(style).to.contain('h1[' + id + '] {\n  color: green;\n}')
       done()
     })
   })
@@ -112,7 +113,8 @@ describe('vue-loader', function () {
       var styles = window.document.querySelectorAll('style')
       expect(styles[0].textContent).to.contain('h1 { color: red; }')
       // import with scoped
-      expect(styles[1].textContent).to.contain('h1[_v-2] { color: green; }')
+      var id = '_v-' + hash(require.resolve('./fixtures/import-scoped.css'))
+      expect(styles[1].textContent).to.contain('h1[' + id + '] { color: green; }')
       done()
     })
   })
