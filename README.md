@@ -1,4 +1,4 @@
-# vue-loader [![Build Status](https://img.shields.io/circleci/project/vuejs/vue-loader.svg)](https://circleci.com/gh/vuejs/vue-loader)
+# vue-loader [![Build Status](https://img.shields.io/circleci/project/vuejs/vue-loader.svg)](https://circleci.com/gh/vuejs/vue-loader) [![npm package](https://img.shields.io/npm/v/vue-loader.svg)](https://www.npmjs.com/package/vue-loader)
 
 > Vue.js component loader for [Webpack](http://webpack.github.io), using Webpack loaders for the parts.
 
