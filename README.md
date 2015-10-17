@@ -121,7 +121,7 @@ For more details, see the respective documentations for [vue-html-loader](https:
 When a `<style>` tag has the `scoped` attribute, its CSS will apply to elements of the current component only. This is similar to the style encapsulation found in Shadow DOM, but doesn't require any polyfills. It is achieved by transforming the following:
 
 ``` html
-<style>
+<style scoped>
 .example {
   color: red;
 }
