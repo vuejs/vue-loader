@@ -191,6 +191,14 @@ Finally, visit `http://localhost:8080/webpack-dev-server/` to see the app with h
 
 For a complete example with hot reloading in action, see [vue-hackernews](https://github.com/vuejs/vue-hackernews).
 
+### Hot Reload Notes
+
+- When a component is hot-reloaded, its current state is preserved. However, the component itself is destroyed and recreated, so all of its lifecycle hooks will be called accordingly. Make sure to properly teardown any side effects in your lifecycle hooks.
+
+- Private state for child components of a hot-reloaded component is not guaranteed to be preserved across reloads.
+
+- A root Vue instance or a manually mounted instance cannot be hot-reloaded. It will always force a full reload.
+
 ## Advanced Loader configuration
 
 By default, `vue-loader` will try to use the loader with the same name as
