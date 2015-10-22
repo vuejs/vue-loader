@@ -35,7 +35,7 @@ It allows you to write your components in this format:
 - [Template Pre-Processors](#template-pre-processors)
 - [Style Imports](#style-imports)
 - [Asset URL Handling](#asset-url-handling)
-- [Scoped Styles](#scoped-styles)
+- [Scoped CSS](#scoped-css)
 - [Hot Reload](#hot-reload)
 - [Advanced Loader Configuration](#advanced-loader-configuration)
   - [ES6 with Babel Example](#example-using-es6-with-babel)
@@ -114,7 +114,7 @@ For example, `url(image.png)` will be translated into `require('./image.png')`. 
 
 For more details, see the respective documentations for [vue-html-loader](https://github.com/vuejs/vue-html-loader) and [css-loader](https://github.com/webpack/css-loader).
 
-## Scoped Styles
+## Scoped CSS
 
 > Experimental
 
