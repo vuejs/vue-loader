@@ -31,9 +31,11 @@
     "vue-hot-reload-api": "^1.2.0"
   },
   "peerDependencies": {
-    "vue-html-loader": "*",
-    "css-loader": "*",
-    "style-loader": "*"
+    "vue-html-loader": "^1.0.0",
+    "css-loader": "^0.21.0",
+    "style-loader": "^0.13.0",
+    "babel-loader": "^5.3.2",
+    "babel-runtime": "^5.8.25"
   },
   "devDependencies": {
     "babel-core": "^5.8.25",

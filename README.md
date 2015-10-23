@@ -6,40 +6,39 @@ It allows you to write your components in this format:
 
 ``` html
 // app.vue
-<style>
-  .red {
-    color: #f00;
-  }
-</style>
-
 <template>
   <h1 class="red">{{msg}}</h1>
 </template>
 
 <script>
-  module.exports = {
-    data: function () {
-      return {
-        msg: 'Hello world!'
-      }
+export default {
+  data () {
+    return {
+      msg: 'Hello world!'
     }
   }
+}
 </script>
+
+<style>
+.red {
+  color: #f00;
+}
+</style>
 ```
 
 ## Table of Contents
 
 
 - [Basic Usage](#basic-usage)
-- [Pre-Processors](#pre-processors)
+- [ES2015 by Default](#es2015-by-default)
+- [CSS Pre-Processors](#css-pre-processors)
 - [Template Pre-Processors](#template-pre-processors)
 - [Style Imports](#style-imports)
 - [Asset URL Handling](#asset-url-handling)
 - [Scoped CSS](#scoped-css)
 - [Hot Reload](#hot-reload)
 - [Advanced Loader Configuration](#advanced-loader-configuration)
-  - [ES6 with Babel Example](#example-using-es6-with-babel)
-  - [Extract CSS Example](#example-extracting-css-into-a-single-file)
 - [Example Project](https://github.com/vuejs/vue-loader-example)
 
 ## Basic Usage
@@ -66,11 +65,56 @@ And this is all you need to do in your main entry file:
 ``` js
 // main.js
 var Vue = require('vue')
-var appOptions = require('./app.vue')
-var app = new Vue(appOptions).$mount('#app')
+var App = require('./app.vue')
+
+new Vue({
+  el: 'body',
+  components: {
+    app: App
+  }
+})
 ```
 
-## Pre-Processors
+In your HTML:
+
+``` html
+<body>
+  <app></app>
+  <script src="build.js"></script>
+</body>
+```
+
+## ES2015 by Default
+
+`vue-loader` automatically applies Babel transforms to the JavaScript inside `*.vue` components. Write ES2015 today!
+
+The default Babel options used for Vue.js components are:
+
+``` js
+{
+  // use babel-runtime library for common helpers
+  optional: ['runtime'],
+  // use loose mode for faster builds
+  loose: 'all',
+  // disable non-standard stuff (e.g. JSX)
+  nonStandard: false
+}
+```
+
+If you wish to mofidy this, you can add a `babel` field in your webpack config, which will be merged with the default options. For example:
+
+``` js
+// webpack.config.js
+module.exports = {
+  // other configs...
+  babel: {
+    // enable stage 0 transforms
+    stage: 0
+  }
+}
+```
+
+## CSS Pre-Processors
 
 `vue-loader` allows you to use other Webpack loaders to pre-process the different parts inside your `*.vue` components. Just specify the loader to use with the `lang` attribute (you also need to install the loader, obviously):
 
@@ -204,9 +248,7 @@ For a complete example with hot reloading in action, see [vue-hackernews](https:
 By default, `vue-loader` will try to use the loader with the same name as
 the `lang` attribute, but you can configure which loader should be used.
 
-#### Example: Using ES6 with Babel
-
-To apply Babel transforms to all your JavaScript, use this Webpack config:
+#### Example: Use CoffeeScript for all `<script>` tags
 
 ``` js
 var vue = require('vue-loader')
@@ -218,22 +260,14 @@ module.exports = {
       {
         test: /\.vue$/,
         loader: vue.withLoaders({
-          // apply babel transform to all javascript
-          // inside *.vue files.
-          js: 'babel?optional[]=runtime'
+          js: 'coffee'
         })
       }
     ]
   },
-  devtool: 'source-map'
+  devtool: '#source-map'
 }
 ```
-
-Some explanantions: 
-
-1. Here `js` is the default language for `<script>` blocks.
-
-2. The `?optional[]=runtime` query string passed to the loader. This instructs Babel to use helper functions from the `babel-runtime` NPM package instead of injecting the helpers into every single file. You'll want this most of the time.
 
 #### Example: Extracting CSS into a Single File
 
