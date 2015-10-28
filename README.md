@@ -221,7 +221,7 @@ Into the following:
 When using `webpack-dev-server` in hot mode, `vue-loader` enables hot component reloading for Vue.js 1.0.0+. An example config:
 
 ``` js
-// webpack.example.config.js
+// webpack.config.js
 module.exports = {
   entry: './src/main.js',
   output: {
@@ -240,16 +240,16 @@ module.exports = {
 In `index.html`, include the bundle:
 
 ``` html
-<script src="/static/build.js"></script>
+<script src="static/build.js"></script>
 ```
 
 Then, run the dev server with:
 
 ``` bash
-webpack-dev-server --inline --hot --config webpack.example.config.js
+webpack-dev-server --inline --hot
 ```
 
-Finally, visit `http://localhost:8080/webpack-dev-server/` to see the app with hot reloading.
+Finally, visit `http://localhost:8080/` to see the app with hot reloading.
 
 For a complete example with hot reloading in action, see [vue-hackernews](https://github.com/vuejs/vue-hackernews).
 
