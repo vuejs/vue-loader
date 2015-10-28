@@ -33,6 +33,7 @@ export default {
 - [Basic Usage](#basic-usage)
 - [ES2015 by Default](#es2015-by-default)
 - [CSS Pre-Processors](#css-pre-processors)
+- [Autoprefixing](#autoprefixing)
 - [Template Pre-Processors](#template-pre-processors)
 - [Style Imports](#style-imports)
 - [Asset URL Handling](#asset-url-handling)
@@ -130,6 +131,23 @@ You can also include Webpack loader queries in the `lang` attribute:
 <style lang="sass?outputStyle=expanded">
   /* use sass here with expanded output */
 </style>
+```
+
+## Autoprefixing
+
+Starting in 6.0.0, Any CSS output via `vue-loader` is piped through [autoprefixer](https://github.com/postcss/autoprefixer) by default. You can customize this behavior in the `vue` section of your webpack config:
+
+``` js
+// webpack.config.js
+module.exports = {
+  // other configs...
+  vue: {
+    // disable autoprefixing
+    autoprefixer: false,
+    // OR: custom options
+    autoprefixer: { browsers: ['last 2 versions'] }
+  }
+}
 ```
 
 ## Template Pre-Processors
@@ -251,19 +269,17 @@ the `lang` attribute, but you can configure which loader should be used.
 #### Example: Use CoffeeScript for all `<script>` tags
 
 ``` js
-var vue = require('vue-loader')
-
 module.exports = {
   // entry, output...
   module: {
-    loaders: [
-      {
-        test: /\.vue$/,
-        loader: vue.withLoaders({
-          js: 'coffee'
-        })
-      }
-    ]
+    loaders: [{
+      test: /\.vue$/, loader: 'vue'
+    }]
+  },
+  vue: {
+    loaders: {
+      js: 'coffee'
+    }
   },
   devtool: '#source-map'
 }
@@ -276,19 +292,21 @@ use this Webpack config:
 
 ``` js
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
-var vue = require("vue-loader");
 
 module.exports = {
   // entry, output...
   module: {
     loaders: [
       {
-        test: /\.vue$/, loader: vue.withLoaders({
-          css: ExtractTextPlugin.extract("css"),
-          stylus: ExtractTextPlugin.extract("css!stylus")
-        })
+        test: /\.vue$/, loader: 'vue'
       },
     ]
+  },
+  vue: {
+    loaders: {
+      css: ExtractTextPlugin.extract("css"),
+      stylus: ExtractTextPlugin.extract("css!stylus")
+    }
   },
   plugins: [
     new ExtractTextPlugin("[name].css")
