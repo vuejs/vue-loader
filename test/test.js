@@ -101,6 +101,7 @@ describe('vue-loader', function () {
       )
       var style = window.document.querySelector('style').textContent
       expect(style).to.contain('.test[' + id + '] {\n  color: yellow;\n}')
+      expect(style).to.contain('.test[' + id + ']:after {\n  content: \'bye!\';\n}')
       expect(style).to.contain('h1[' + id + '] {\n  color: green;\n}')
       done()
     })

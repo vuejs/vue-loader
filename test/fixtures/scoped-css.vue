@@ -2,6 +2,9 @@
 .test {
   color: yellow;
 }
+.test:after {
+  content: 'bye!';
+}
 h1 {
   color: green;
 }
