@@ -7,6 +7,7 @@ var assign = require('object-assign')
 var rimraf = require('rimraf')
 var hash = require('hash-sum')
 var SourceMapConsumer = require('source-map').SourceMapConsumer
+var ExtractTextPlugin = require("extract-text-webpack-plugin")
 
 describe('vue-loader', function () {
 
@@ -167,6 +168,27 @@ describe('vue-loader', function () {
       var id = '_v-' + hash(require.resolve('./fixtures/media-query.vue'))
       expect(style).to.contain('@media print {\n  .foo[' + id + '] {\n    color: #000;\n  }\n}')
       done()
+    })
+  })
+
+  it('extract CSS', function (done) {
+    webpack(Object.assign({}, globalConfig, {
+      entry: './test/fixtures/extract-css.js',
+      vue: {
+        loaders: {
+          css: ExtractTextPlugin.extract('css'),
+          stylus: ExtractTextPlugin.extract('css!stylus')
+        }
+      },
+      plugins: [
+        new ExtractTextPlugin('test.output.css')
+      ]
+    }), function (err) {
+      expect(err).to.be.null
+      getFile('test.output.css', function (data) {
+        expect(data).to.contain('h1 {\n  color: #f00;\n}\nh2 {\n  color: green;\n}')
+        done()
+      })
     })
   })
 

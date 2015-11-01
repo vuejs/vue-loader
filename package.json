@@ -45,7 +45,7 @@
     "chai": "^3.0.0",
     "css-loader": "^0.21.0",
     "eslint": "^1.6.0",
-    "vue-html-loader": "^1.0.0",
+    "extract-text-webpack-plugin": "^0.8.2",
     "jade": "^1.11.0",
     "jsdom": "^6.5.1",
     "mkdirp": "^0.5.1",
@@ -56,6 +56,7 @@
     "style-loader": "^0.13.0",
     "stylus-loader": "^1.4.0",
     "template-html-loader": "^0.0.3",
+    "vue-html-loader": "^1.0.0",
     "webpack": "^1.12.2"
   }
 }

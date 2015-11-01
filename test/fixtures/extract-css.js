@@ -1,0 +1,1 @@
+require('./extract-css.vue')
