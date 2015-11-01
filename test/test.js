@@ -159,4 +159,15 @@ describe('vue-loader', function () {
     })
   })
 
+  it('media-query', function (done) {
+    test({
+      entry: './test/fixtures/media-query.js'
+    }, function (window) {
+      var style = window.document.querySelector('style').textContent
+      var id = '_v-' + hash(require.resolve('./fixtures/media-query.vue'))
+      expect(style).to.contain('@media print {\n  .foo[' + id + '] {\n    color: #000;\n  }\n}')
+      done()
+    })
+  })
+
 })
