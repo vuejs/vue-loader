@@ -177,7 +177,7 @@ describe('vue-loader', function () {
       vue: {
         loaders: {
           css: ExtractTextPlugin.extract('css'),
-          stylus: ExtractTextPlugin.extract('css!stylus')
+          stylus: ExtractTextPlugin.extract('css?sourceMap!stylus')
         }
       },
       plugins: [
