@@ -33,7 +33,7 @@ export default {
 - [Basic Usage](#basic-usage)
 - [ES2015 by Default](#es2015-by-default)
 - [CSS Pre-Processors](#css-pre-processors)
-- [Autoprefixing](#autoprefixing)
+- [PostCSS](#postcss)
 - [Template Pre-Processors](#template-pre-processors)
 - [Style Imports](#style-imports)
 - [Asset URL Handling](#asset-url-handling)
@@ -133,19 +133,35 @@ You can also include Webpack loader queries in the `lang` attribute:
 </style>
 ```
 
-## Autoprefixing
+## PostCSS
 
-Starting in 6.0.0, Any CSS output via `vue-loader` is piped through [autoprefixer](https://github.com/postcss/autoprefixer) by default. You can customize this behavior in the `vue` section of your webpack config:
+Any CSS output via `vue-loader` 6.0+ is piped through [PostCSS](https://github.com/postcss/postcss) for [scoped CSS](#scoped-css) rewriting and aut-prefixed by default using [autoprefixer](https://github.com/postcss/autoprefixer). You can configure autoprefixer or provide your own PostCSS plugins in the `vue` section of your webpack config:
 
 ``` js
 // webpack.config.js
 module.exports = {
   // other configs...
   vue: {
-    // disable autoprefixing
-    autoprefixer: false,
-    // OR: custom options
-    autoprefixer: { browsers: ['last 2 versions'] }
+    // configure autoprefixer
+    autoprefixer: {
+      browsers: ['last 2 versions']
+    }
+  }
+}
+```
+
+Using other PostCSS plugins:
+
+``` js
+// webpack.config.js
+module.exports = {
+  // other configs...
+  vue: {
+    // use custom postcss plugins
+    postcss: [require('cssnext')()],
+    // disable vue-loader autoprefixing.
+    // this is a good idea since cssnext comes with it too.
+    autoprefixer: false
   }
 }
 ```
@@ -180,7 +196,7 @@ For more details, see the respective documentations for [vue-html-loader](https:
 
 > Experimental
 
-When a `<style>` tag has the `scoped` attribute, its CSS will apply to elements of the current component only. This is similar to the style encapsulation found in Shadow DOM, but doesn't require any polyfills. It is achieved by transforming the following:
+When a `<style>` tag has the `scoped` attribute, its CSS will apply to elements of the current component only. This is similar to the style encapsulation found in Shadow DOM, but doesn't require any polyfills. It is achieved by using PostCSS to transform the following:
 
 ``` html
 <style scoped>
@@ -197,12 +213,12 @@ Into the following:
 
 ``` html
 <style>
-.example[_v-1] {
+.example[_v-f3f3eg9] {
   color: red;
 }
 </style>
 <template>
-  <div class="example" _v-1>hi</div>
+  <div class="example" _v-f3f3eg9>hi</div>
 </template>
 ```
 
@@ -212,7 +228,9 @@ Into the following:
 
 2. A child component's root node will be affected by both the parent's scoped CSS and the child's scoped CSS.
 
-3. Partials are not affected by scoped styles.
+3. If you are nesting a component inside itself, the styles may still leak down since they are considered the same component.
+
+4. Partials are not affected by scoped styles.
 
 ## Hot Reload
 
