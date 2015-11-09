@@ -1,6 +1,6 @@
 {
   "name": "vue-loader",
-  "version": "7.0.0",
+  "version": "7.0.1",
   "description": "Vue.js component loader for Webpack",
   "main": "index.js",
   "repository": {
