@@ -9,8 +9,8 @@ comp-a h2 {
 </template>
 
 <script>
-module.exports = {
-  data: function () {
+export default {
+  data () {
     return {
       msg: 'Hello from Component A!'
     }

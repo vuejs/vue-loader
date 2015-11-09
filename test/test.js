@@ -43,7 +43,7 @@ describe('vue-loader', function () {
   function test (options, assert) {
     var config = assign({}, globalConfig, options)
     webpack(config, function (err) {
-      expect(err).to.be.null
+      if (err) throw err
       getFile('test.build.js', function (data) {
         jsdom.env({
           html: testHTML,
