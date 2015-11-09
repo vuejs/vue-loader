@@ -89,28 +89,28 @@ In your HTML:
 
 `vue-loader` automatically applies Babel transforms to the JavaScript inside `*.vue` components. Write ES2015 today!
 
+**Compatibility Note:** vue-loader 7.0+ uses Babel 6. If you need to use Babel 5 for transpiling your code, use vue-loader 6.x.
+
 The default Babel options used for Vue.js components are:
 
 ``` js
 {
-  // use babel-runtime library for common helpers
-  optional: ['runtime'],
-  // use loose mode for faster builds
-  loose: 'all',
-  // disable non-standard stuff (e.g. JSX)
-  nonStandard: false
+  presets: ['es2015'],
+  plugins: ['transform-runtime']
 }
 ```
 
-If you wish to mofidy this, you can add a `babel` field in your webpack config, which will be merged with the default options. For example:
+If you wish to override this, you can add a `babel` field in your webpack config, which will be applied to all JavaScript processed by `babel-loader`. For example:
 
 ``` js
 // webpack.config.js
 module.exports = {
   // other configs...
   babel: {
-    // enable stage 0 transforms
-    stage: 0
+    // enable stage 0 transforms.
+    // make sure to install babel-presets-stage-0
+    presets: ['es2015', 'stage-0'],
+    plugins: ['transform-runtime']
   }
 }
 ```
