@@ -115,7 +115,7 @@ describe('vue-loader', function () {
       var styles = window.document.querySelectorAll('style')
       expect(styles[0].textContent).to.contain('h1 { color: red; }')
       // import with scoped
-      var id = '_v-' + hash(require.resolve('./fixtures/import-scoped.css'))
+      var id = '_v-' + hash(require.resolve('./fixtures/import.vue'))
       expect(styles[1].textContent).to.contain('h1[' + id + '] { color: green; }')
       done()
     })
