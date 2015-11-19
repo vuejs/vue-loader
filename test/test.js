@@ -110,13 +110,23 @@ describe('vue-loader', function () {
 
   it('style import', function (done) {
     test({
-      entry: './test/fixtures/import.vue'
+      entry: './test/fixtures/style-import.vue'
     }, function (window) {
       var styles = window.document.querySelectorAll('style')
       expect(styles[0].textContent).to.contain('h1 { color: red; }')
       // import with scoped
-      var id = '_v-' + hash(require.resolve('./fixtures/import.vue'))
+      var id = '_v-' + hash(require.resolve('./fixtures/style-import.vue'))
       expect(styles[1].textContent).to.contain('h1[' + id + '] { color: green; }')
+      done()
+    })
+  })
+
+  it('template import', function (done) {
+    test({
+      entry: './test/fixtures/template-import.js'
+    }, function (window) {
+      var module = window.testModule
+      expect(module.template).to.contain('<div><h1>hello</h1></div>')
       done()
     })
   })
