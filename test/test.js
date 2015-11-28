@@ -141,6 +141,7 @@ describe('vue-loader', function () {
       getFile('test.build.js.map', function (map) {
         var smc = new SourceMapConsumer(JSON.parse(map))
         getFile('test.build.js', function (code) {
+          console.log(code)
           var line
           code.split('\n').some(function (l, i) {
             if (l.indexOf('Hello from Component A') > -1) {
@@ -153,7 +154,7 @@ describe('vue-loader', function () {
             column: 0
           })
           expect(pos.source.indexOf('webpack:///test/fixtures/basic.vue') > -1)
-          expect(pos.line).to.equal(4)
+          expect(pos.line).to.equal(15)
           done()
         })
       })
