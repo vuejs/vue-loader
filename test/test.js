@@ -141,7 +141,6 @@ describe('vue-loader', function () {
       getFile('test.build.js.map', function (map) {
         var smc = new SourceMapConsumer(JSON.parse(map))
         getFile('test.build.js', function (code) {
-          console.log(code)
           var line
           code.split('\n').some(function (l, i) {
             if (l.indexOf('Hello from Component A') > -1) {
