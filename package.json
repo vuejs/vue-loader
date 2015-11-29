@@ -26,7 +26,7 @@
     "autoprefixer": "^6.0.3",
     "hash-sum": "^1.0.2",
     "loader-utils": "^0.2.10",
-    "object-assign": "^3.0.0",
+    "object-assign": "^4.0.0",
     "parse5": "^1.5.0",
     "postcss": "^5.0.10",
     "postcss-selector-parser": "^1.1.2"

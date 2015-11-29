@@ -3,7 +3,6 @@ var path = require('path')
 var webpack = require('webpack')
 var jsdom = require('jsdom')
 var expect = require('chai').expect
-var assign = require('object-assign')
 var rimraf = require('rimraf')
 var hash = require('hash-sum')
 var SourceMapConsumer = require('source-map').SourceMapConsumer
@@ -41,7 +40,7 @@ describe('vue-loader', function () {
   }
 
   function test (options, assert) {
-    var config = assign({}, globalConfig, options)
+    var config = Object.assign({}, globalConfig, options)
     webpack(config, function (err) {
       if (err) throw err
       getFile('test.build.js', function (data) {
@@ -132,7 +131,7 @@ describe('vue-loader', function () {
   })
 
   it('source map', function (done) {
-    var config = assign({}, globalConfig, {
+    var config = Object.assign({}, globalConfig, {
       entry: './test/fixtures/basic.js',
       devtool: 'source-map'
     })
