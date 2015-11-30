@@ -35,7 +35,7 @@ export default {
 - [CSS Pre-Processors](#css-pre-processors)
 - [PostCSS](#postcss)
 - [Template Pre-Processors](#template-pre-processors)
-- [Style Imports](#style-imports)
+- [Src Imports](#src-imports)
 - [Asset URL Handling](#asset-url-handling)
 - [Scoped CSS](#scoped-css)
 - [Hot Reload](#hot-reload)
@@ -170,15 +170,16 @@ module.exports = {
 
 For template pre-processors, you should install `template-html-loader` plus the raw templating engine. For example to use `jade`, you will need to install both `template-html-loader` and `jade` instead of `jade-loader`.
 
-## Style Imports
+## Src Imports
 
-If you want, you can separate your styles into a separate file and import it using the `src` attribute:
+If you want, you can separate your template and styles into separate files and import them using the `src` attribute:
 
 ``` html
+<template src="./template.html"></template>
 <style src="./style.css"></style>
 ```
 
-Beware that `src` imports follow similar rules to `require()` calls, which means for relative paths you need to start with `./`, and you can import resources from node modules: `<style src="todomvc-app-css/index.css">`.
+Beware that `src` imports follow similar rules to `require()` calls, which means for relative paths you need to start with `./`, and you can import resources from installed NPM packages, e.g. `<style src="todomvc-app-css/index.css">`.
 
 ## Asset URL Handling
 
