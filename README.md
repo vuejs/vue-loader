@@ -5,7 +5,7 @@
 It allows you to write your components in this format:
 
 ``` html
-// app.vue
+<!-- app.vue -->
 <template>
   <h1 class="red">{{msg}}</h1>
 </template>
