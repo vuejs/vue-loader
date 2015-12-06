@@ -164,7 +164,7 @@ describe('vue-loader', function () {
       entry: './test/fixtures/autoprefix.js'
     }, function (window) {
       var style = window.document.querySelector('style').textContent
-      expect(style).to.contain('body {\n  -webkit-transform: scale(1);\n      -ms-transform: scale(1);\n          transform: scale(1);\n}')
+      expect(style).to.contain('body {\n  -webkit-transform: scale(1);\n          transform: scale(1);\n}')
       done()
     })
   })
