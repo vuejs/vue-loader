@@ -130,6 +130,16 @@ describe('vue-loader', function () {
     })
   })
 
+  it('script import', function (done) {
+    test({
+      entry: './test/fixtures/script-import-entry.js'
+    }, function (window) {
+      var module = window.testModule
+      expect(module.data().msg).to.contain('Hello from Component A!')
+      done()
+    })
+  })
+
   it('source map', function (done) {
     var config = Object.assign({}, globalConfig, {
       entry: './test/fixtures/basic.js',
