@@ -4,28 +4,7 @@
 
 It allows you to write your components in this format:
 
-``` html
-<!-- app.vue -->
-<template>
-  <h1 class="red">{{msg}}</h1>
-</template>
-
-<script>
-export default {
-  data () {
-    return {
-      msg: 'Hello world!'
-    }
-  }
-}
-</script>
-
-<style>
-.red {
-  color: #f00;
-}
-</style>
-```
+![screenshot](http://blog.evanyou.me/images/vue-component.png)
 
 ## Table of Contents
 
@@ -39,6 +18,9 @@ export default {
 - [Asset URL Handling](#asset-url-handling)
 - [Scoped CSS](#scoped-css)
 - [Hot Reload](#hot-reload)
+- [Syntax Highlighting](#syntax-highlighting)
+- [Linting](#linting)
+- [Testing](#testing)
 - [Advanced Loader Configuration](#advanced-loader-configuration)
 - [Example Project](https://github.com/vuejs/vue-loader-example)
 
@@ -172,11 +154,12 @@ For template pre-processors, you should install `template-html-loader` plus the 
 
 ## Src Imports
 
-If you want, you can separate your template and styles into separate files and import them using the `src` attribute:
+If you want, you can separate your templates, styles or scripts into separate files and import them using the `src` attribute:
 
 ``` html
 <template src="./template.html"></template>
 <style src="./style.css"></style>
+<script src="./script.js"></script>
 ```
 
 Beware that `src` imports follow similar rules to `require()` calls, which means for relative paths you need to start with `./`, and you can import resources from installed NPM packages, e.g. `<style src="todomvc-app-css/index.css">`.

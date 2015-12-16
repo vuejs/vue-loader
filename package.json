@@ -12,6 +12,10 @@
     "webpack",
     "loader"
   ],
+  "files": [
+    "index.js",
+    "lib"
+  ],
   "author": "Sjoerd Visscher",
   "license": "MIT",
   "bugs": {
@@ -20,7 +24,9 @@
   "homepage": "https://github.com/vuejs/vue-loader",
   "scripts": {
     "lint": "eslint lib",
-    "test": "eslint lib && mocha test/test.js --slow 5000 --timeout 10000"
+    "test": "eslint lib && mocha test/test.js --slow 5000 --timeout 10000",
+    "docs": "cd docs && gitbook serve",
+    "deploy-docs": "bash ./docs/deploy.sh"
   },
   "dependencies": {
     "autoprefixer": "^6.0.3",
