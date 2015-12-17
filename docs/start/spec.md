@@ -26,11 +26,19 @@ export default {
 
 `vue-loader` will parse the file, extract each language block, pipe them through other loaders if necessary, and finally assemble them back into a CommonJS module whose `module.exports` is a Vue.js component options object.
 
-`vue-loader` supports using non-default languages, such as CSS pre-processors and compile-to-HTML template languages, by specifying the `lang` attribute for a language block. The details are discussed in [Inline Loaders](../configurations/inline-loaders.md).
+`vue-loader` supports using non-default languages, such as CSS pre-processors and compile-to-HTML template languages, by specifying the `lang` attribute for a language block. For example, you can use SASS for the style of your component like this:
 
-Some more details on the language blocks:
+``` html
+<style lang="sass">
+  /* write SASS! */
+</style>
+```
 
-### `<template>`
+More details can be found in [Inline Loaders](../configurations/inline-loaders.md).
+
+### Language Blocks
+
+#### `<template>`
 
 - Default language: `html`.
 
@@ -38,7 +46,7 @@ Some more details on the language blocks:
 
 - Contents will be extracted as a string and used as the `template` option for the compiled Vue component. 
 
-### `<script>`
+#### `<script>`
 
 - Default language: `js` (ES2015 is supported by default via Babel).
 
@@ -48,7 +56,7 @@ Some more details on the language blocks:
 
 - The script must export a Vue.js component options object. Exporting an extended constructor created by `Vue.extend()` is also supported, but a plain object is preferred.
 
-### `<style>`
+#### `<style>`
 
 - Defalt Language: `css`.
 

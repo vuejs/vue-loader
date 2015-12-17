@@ -4,7 +4,7 @@
 - Configurations
   - [Inline Loaders](configurations/inline-loaders.md)
   - [Asset URL Handling](configurations/asset-url.md)
-  - [Babel and ES2015](configurations/es2015.md)
+  - [ES2015 and Babel](configurations/es2015.md)
   - [PostCSS and Autoprefixer](configurations/postcss.md)
   - [Advanced Loader Configuration](configurations/advanced.md)
   - [Extracting CSS File](configurations/extract-css.md)
@@ -14,3 +14,4 @@
 - Workflow
   - [Linting](workflow/linting.md)
   - [Testing](workflow/testing.md)
+  - [Production Build](workflow/production.md)
