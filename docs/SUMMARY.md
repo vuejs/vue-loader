@@ -12,6 +12,6 @@
   - [Scoped CSS](features/scoped-css.md)
   - [Hot Reload](features/hot-reload.md)
 - Workflow
+  - [Production Build](workflow/production.md)
   - [Linting](workflow/linting.md)
   - [Testing](workflow/testing.md)
-  - [Production Build](workflow/production.md)

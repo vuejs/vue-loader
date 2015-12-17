@@ -157,7 +157,8 @@ Finally, it's time to get it running! We will simply use [NPM scripts](https://d
 ``` json
 ...
 "scripts": {
-  "dev": "webpack-dev-server --inline --hot"
+  "dev": "webpack-dev-server --inline --hot",
+  "build": "webpack -p"
 }
 ...
 ```
@@ -168,7 +169,13 @@ Then run:
 npm run dev
 ```
 
-And you should see your app working at `http://localhost:8080`, with hot-reloading enabled!
+And you should see your app working at `http://localhost:8080`, with hot-reloading enabled! To build, minify and write your bundle to disk, run:
+
+``` bash
+npm run build
+```
+
+Note that Webpack uses the `webpack.config.js` if it finds one. If you named your Webpack config file with a different name, you need to specify it using the `--config /path/to/your/file` command line option.
 
 ---
 

@@ -10,9 +10,11 @@ The easiest setup for enabling hot reload is what we outlined in the [basic tuto
 
 ``` js
 // package.json
+...
 "scripts": {
   "dev": "webpack-dev-server --inline --hot"
 }
+...
 ```
 
 This is assuming that you are serving the same `index.html` from the root of your project. By default, Webpack dev server uses the current working directory as its content base and serves all static files in the directory.
