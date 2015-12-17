@@ -1,6 +1,6 @@
 # PostCSS and Autoprefixer
 
-Any CSS output processed by `vue-loader` is piped through [PostCSS](https://github.com/postcss/postcss) for [scoped CSS](../features/scoped-css.md) rewriting and aut-prefixed by default using [autoprefixer](https://github.com/postcss/autoprefixer).
+Any CSS output processed by `vue-loader` is piped through [PostCSS](https://github.com/postcss/postcss) for scoped CSS rewriting and auto-prefixed by default using [autoprefixer](https://github.com/postcss/autoprefixer).
 
 ### Configuring Autoprefixer
 

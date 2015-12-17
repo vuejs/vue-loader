@@ -1,16 +1,16 @@
 - Getting Started
   - [Vue Component Spec](start/spec.md)
   - [Basic Tutorial](start/tutorial.md)
+- Features
+  - [ES2015 and Babel](features/es2015.md)
+  - [Scoped CSS](features/scoped-css.md)
+  - [PostCSS and Autoprefixer](features/postcss.md)
+  - [Hot Reload](features/hot-reload.md)
 - Configurations
-  - [Inline Loaders](configurations/inline-loaders.md)
+  - [Pre-Processors](configurations/pre-processors.md)
   - [Asset URL Handling](configurations/asset-url.md)
-  - [ES2015 and Babel](configurations/es2015.md)
-  - [PostCSS and Autoprefixer](configurations/postcss.md)
   - [Advanced Loader Configuration](configurations/advanced.md)
   - [Extracting CSS File](configurations/extract-css.md)
-- Features
-  - [Scoped CSS](features/scoped-css.md)
-  - [Hot Reload](features/hot-reload.md)
 - Workflow
   - [Production Build](workflow/production.md)
   - [Linting](workflow/linting.md)
