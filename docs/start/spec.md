@@ -34,7 +34,7 @@ export default {
 </style>
 ```
 
-More details can be found in [Inline Loaders](../configurations/inline-loaders.md).
+More details can be found in [Using Pre-Processors](../configurations/pre-processors.md).
 
 ### Language Blocks
 
