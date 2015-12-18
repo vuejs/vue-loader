@@ -32,8 +32,8 @@ module.exports = {
 
 Obviously we don't want to use this config during development, so there are several ways to approach this:
 
-1. Dynamically build up the configuration object based on an environment variable, as shown in [vue-loader-example](https://github.com/vuejs/vue-loader-example/blob/master/webpack.config.js#L40-L56);
+1. Dynamically build up the configuration object based on an environment variable;
 
-2. Use two separate Webpack config files, one for development and one for production. And maybe share some common options between them in a third file.
+2. Or, use two separate Webpack config files, one for development and one for production. And maybe share some common options between them in a third file, as shown in [vue-loader-example](https://github.com/vuejs/vue-loader-example/tree/master/build).
 
 It's really up to you as long as it achieves the goal.
