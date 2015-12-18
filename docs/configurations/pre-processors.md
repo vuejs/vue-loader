@@ -32,8 +32,6 @@ npm install coffee-loader --save-dev
 </script>
 ```
 
-We will talk more about Babel/ES2015 configurations in another section.
-
 ### Templates
 
 Processing templates is a little different, because most Webpack template loaders such as `jade-loader` returns a template function instead of compiled HTML string. So instead of using `jade-loader`, we will use `template-html-loader` plus the raw `jade` compiler:
