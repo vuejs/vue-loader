@@ -13,6 +13,12 @@ npm install\
 ```
 
 ``` js
+// we can just use the exact same webpack config by requiring it
+// however, remember to delete the original entry since we don't
+// need it during tests
+var webpackConfig = require('./webpack.config.js')
+delete webpackConfig.entry
+
 // karma.conf.js
 module.exports = function (config) {
   config.set({
@@ -24,8 +30,8 @@ module.exports = function (config) {
     preprocessors: {
       'test/index.js': ['webpack']
     },
-    // we can just use the exact same webpack config by requiring it
-    webpack: require('./webpack.config.js'),
+    // use the webpack config
+    webpack: webpackConfig,
     // avoid walls of useless text
     webpackMiddleware: {
       noInfo: true
