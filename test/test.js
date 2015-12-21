@@ -211,4 +211,19 @@ describe('vue-loader', function () {
     })
   })
 
+  it('dependency injection', function () {
+    test({
+      entry: './test/fixtures/inject.js'
+    }, function (window) {
+      var module = window.injector({
+        '../service': {
+          msg: 'Hello from mocked service!'
+        }
+      })
+      expect(module.template).to.contain('<div class="msg">{{ msg }}</div>')
+      expect(module.data().msg).to.contain('Hello from mocked service!')
+      done()
+    })
+  })
+
 })

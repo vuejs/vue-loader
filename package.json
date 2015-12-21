@@ -58,6 +58,7 @@
     "css-loader": "^0.21.0",
     "eslint": "^1.6.0",
     "extract-text-webpack-plugin": "^0.8.2",
+    "inject-loader": "^2.0.1",
     "jade": "^1.11.0",
     "jsdom": "^6.5.1",
     "mkdirp": "^0.5.1",
