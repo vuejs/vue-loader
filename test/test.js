@@ -34,7 +34,7 @@ describe('vue-loader', function () {
 
   function getFile (file, cb) {
     fs.readFile(path.resolve(outputDir, file), 'utf-8', function (err, data) {
-      expect(err).to.be.null
+      expect(err).to.be.not.exist
       cb(data)
     })
   }
