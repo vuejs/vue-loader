@@ -32,6 +32,7 @@
     "autoprefixer": "^6.0.3",
     "hash-sum": "^1.0.2",
     "loader-utils": "^0.2.10",
+    "lru-cache": "^2.7.0",
     "object-assign": "^4.0.0",
     "parse5": "^1.5.0",
     "postcss": "^5.0.10",
