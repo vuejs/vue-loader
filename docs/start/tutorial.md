@@ -30,7 +30,7 @@ npm init
 # Install everything we need
 npm install\
   webpack webpack-dev-server\
-  vue-loader vue-html-loader css-loader style-loader vue-hot-reload-api\
+  vue vue-loader vue-html-loader css-loader style-loader vue-hot-reload-api\
   babel-loader babel-core babel-plugin-transform-runtime babel-preset-es2015\
   babel-runtime@5\
   --save-dev
@@ -52,6 +52,7 @@ After proper installation, your `package.json`'s `devDependencies` field should 
     "babel-runtime": "^5.8.34",
     "css-loader": "^0.23.0",
     "style-loader": "^0.13.0",
+    "vue": "^1.0.13",
     "vue-hot-reload-api": "^1.2.2",
     "vue-html-loader": "^1.0.0",
     "vue-loader": "^7.2.0",
