@@ -36,7 +36,8 @@
     "object-assign": "^4.0.0",
     "parse5": "^1.5.0",
     "postcss": "^5.0.10",
-    "postcss-selector-parser": "^1.1.2"
+    "postcss-selector-parser": "^1.1.2",
+    "source-map": "^0.5.3"
   },
   "peerDependencies": {
     "vue-html-loader": "^1.0.0",
