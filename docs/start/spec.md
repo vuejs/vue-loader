@@ -58,7 +58,7 @@ More details can be found in [Using Pre-Processors](../configurations/pre-proces
 
 #### `<style>`
 
-- Defalt Language: `css`.
+- Default Language: `css`.
 
 - Multiple `<style>` tags are supported in a single `*.vue` file.
 
