@@ -30,10 +30,11 @@ npm init
 # Install everything we need
 npm install\
   webpack webpack-dev-server\
-  vue vue-loader vue-html-loader css-loader style-loader vue-hot-reload-api\
+  vue-loader vue-html-loader css-loader style-loader vue-hot-reload-api\
   babel-loader babel-core babel-plugin-transform-runtime babel-preset-es2015\
   babel-runtime@5\
   --save-dev
+npm install vue --save
 ```
 
 That's a lot of dependencies, I know! This is mostly because `vue-loader` need to have other webpack loaders as **peer dependencies** rather than nested dependencies so that Webpack can find them.[^(1)]
@@ -52,12 +53,14 @@ After proper installation, your `package.json`'s `devDependencies` field should 
     "babel-runtime": "^5.8.34",
     "css-loader": "^0.23.0",
     "style-loader": "^0.13.0",
-    "vue": "^1.0.13",
     "vue-hot-reload-api": "^1.2.2",
     "vue-html-loader": "^1.0.0",
     "vue-loader": "^7.2.0",
     "webpack": "^1.12.9",
     "webpack-dev-server": "^1.14.0"
+  },
+  "dependencies": {
+    "vue": "^1.0.13"
   },
 ...
 ```
