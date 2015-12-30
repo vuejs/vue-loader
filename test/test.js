@@ -152,11 +152,10 @@ describe('vue-loader', function () {
         getFile('test.build.js', function (code) {
           var line
           var col
-          var lines = code.split('\n')
-          lines.some(function (l, i) {
+          code.split('\n').some(function (l, i) {
             if (l.indexOf('Hello from Component A') > -1) {
-              line = i
-              col = lines[i - 1].length
+              line = i + 1
+              col = l.length
               return true
             }
           })
@@ -208,7 +207,7 @@ describe('vue-loader', function () {
     }), function (err) {
       expect(err).to.be.null
       getFile('test.output.css', function (data) {
-        expect(data).to.contain('h1 {\n  color: #f00;\n}\n\nh2 {\n  color: green;\n}')
+        expect(data).to.contain('h1 {\n  color: #f00;\n}\nh2 {\n  color: green;\n}')
         done()
       })
     })
