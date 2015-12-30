@@ -153,8 +153,9 @@ describe('vue-loader', function () {
           var line
           var col
           var lines = code.split(/\r?\n/g)
+          var targetRE = /^\s+msg: 'Hello from Component A!'/
           lines.some(function (l, i) {
-            if (l.indexOf('Hello from Component A') > -1) {
+            if (targetRE.test(l)) {
               line = i
               col = lines[i - 1].length
               return true
