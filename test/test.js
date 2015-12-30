@@ -151,17 +151,20 @@ describe('vue-loader', function () {
         var smc = new SourceMapConsumer(JSON.parse(map))
         getFile('test.build.js', function (code) {
           var line
-          code.split('\n').some(function (l, i) {
+          var col
+          var lines = code.split('\n')
+          lines.some(function (l, i) {
             if (l.indexOf('Hello from Component A') > -1) {
-              line = i + 1
+              line = i
+              col = lines[i - 1].length
               return true
             }
           })
           var pos = smc.originalPositionFor({
             line: line,
-            column: 0
+            column: col
           })
-          expect(pos.source.indexOf('webpack:///test/fixtures/basic.vue') > -1)
+          expect(pos.source.indexOf('basic.vue') > -1)
           expect(pos.line).to.equal(15)
           done()
         })
@@ -205,7 +208,7 @@ describe('vue-loader', function () {
     }), function (err) {
       expect(err).to.be.null
       getFile('test.output.css', function (data) {
-        expect(data).to.contain('h1 {\n  color: #f00;\n}\nh2 {\n  color: green;\n}')
+        expect(data).to.contain('h1 {\n  color: #f00;\n}\n\nh2 {\n  color: green;\n}')
         done()
       })
     })

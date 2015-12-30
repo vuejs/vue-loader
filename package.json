@@ -67,7 +67,6 @@
     "mocha": "^2.2.5",
     "node-libs-browser": "^0.5.3",
     "rimraf": "^2.4.0",
-    "source-map": "^0.5.1",
     "style-loader": "^0.13.0",
     "stylus-loader": "^1.4.0",
     "template-html-loader": "^0.0.3",
