@@ -82,7 +82,7 @@ describe('vue-loader', function () {
         '<comp-a></comp-a>' +
         '<comp-b></comp-b>'
       )
-      expect(module.data().msg).to.contain('Hello from babel!')
+      expect(module.data().msg).to.contain('Hello from coffee!')
       var style = window.document.querySelector('style').textContent
       expect(style).to.contain('body {\n  font: 100% Helvetica, sans-serif;\n  color: #999;\n}')
       done()

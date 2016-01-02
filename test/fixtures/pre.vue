@@ -12,12 +12,8 @@ comp-a
 comp-b
 </template>
 
-<script>
-export default {
-  data () {
-    return {
-      msg: 'Hello from babel!'
-    }
-  }
-}
+<script lang="coffee">
+module.exports =
+  data: ->
+    msg: 'Hello from coffee!'
 </script>
