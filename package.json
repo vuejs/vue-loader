@@ -44,7 +44,7 @@
   "peerDependencies": {
     "vue-html-loader": "^1.0.0",
     "css-loader": "*",
-    "style-loader": "*",
+    "vue-style-loader": "^1.0.0",
     "babel-loader": "^6.1.0",
     "babel-core": "^6.1.2",
     "babel-plugin-transform-runtime": "^6.1.2",
@@ -71,7 +71,7 @@
     "mocha": "^2.2.5",
     "node-libs-browser": "^0.5.3",
     "rimraf": "^2.4.0",
-    "style-loader": "^0.13.0",
+    "vue-style-loader": "^1.0.0",
     "stylus-loader": "^1.4.0",
     "template-html-loader": "^0.0.3",
     "vue-hot-reload-api": "^1.2.0",
