@@ -35,7 +35,7 @@
     "loader-utils": "^0.2.10",
     "lru-cache": "^2.7.0",
     "object-assign": "^4.0.0",
-    "parse5": "^2.0.2",
+    "parse5": "^2.1.0",
     "postcss": "^5.0.10",
     "postcss-selector-parser": "^1.1.2",
     "source-map": "^0.5.3",
