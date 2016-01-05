@@ -152,12 +152,11 @@ describe('vue-loader', function () {
         getFile('test.build.js', function (code) {
           var line
           var col
-          var lines = code.split(/\r?\n/g)
           var targetRE = /^\s+msg: 'Hello from Component A!'/
-          lines.some(function (l, i) {
+          code.split(/\r?\n/g).some(function (l, i) {
             if (targetRE.test(l)) {
-              line = i
-              col = lines[i - 1].length
+              line = i + 1
+              col = l.length
               return true
             }
           })
