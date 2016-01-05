@@ -66,7 +66,7 @@
     "extract-text-webpack-plugin": "^0.8.2",
     "inject-loader": "^2.0.1",
     "jade": "^1.11.0",
-    "jsdom": "^6.5.1",
+    "jsdom": "^7.2.2",
     "mkdirp": "^0.5.1",
     "mocha": "^2.2.5",
     "node-libs-browser": "^0.5.3",
