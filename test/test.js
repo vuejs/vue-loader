@@ -165,7 +165,7 @@ describe('vue-loader', function () {
             column: col
           })
           expect(pos.source.indexOf('basic.vue') > -1)
-          expect(pos.line).to.equal(15)
+          expect(pos.line).to.equal(9)
           done()
         })
       })
