@@ -40,7 +40,7 @@ module.exports = {
   // other configs...
   vue: {
     // use custom postcss plugins
-    postcss: [require('cssnext')()],
+    postcss: [require('postcss-cssnext')()],
     // disable vue-loader autoprefixing.
     // this is a good idea since cssnext comes with it too.
     autoprefixer: false
