@@ -97,7 +97,8 @@ describe('vue-loader', function () {
       var id = '_v-' + hash(require.resolve('./fixtures/scoped-css.vue'))
       expect(module.template).to.contain(
         '<div ' + id + '=""><h1 ' + id + '="">hi</h1></div>\n' +
-        '<p class="abc def" ' + id + '="">hi</p>'
+        '<p class="abc def" ' + id + '="">hi</p>\n' +
+        '<template v-if="ok"><p class="test" ' + id + '="">yo</p></template>'
       )
       var style = window.document.querySelector('style').textContent
       expect(style).to.contain('.test[' + id + '] {\n  color: yellow;\n}')
