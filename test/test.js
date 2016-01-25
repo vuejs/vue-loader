@@ -98,7 +98,8 @@ describe('vue-loader', function () {
       expect(module.template).to.contain(
         '<div ' + id + '=""><h1 ' + id + '="">hi</h1></div>\n' +
         '<p class="abc def" ' + id + '="">hi</p>\n' +
-        '<template v-if="ok"><p class="test" ' + id + '="">yo</p></template>'
+        '<template v-if="ok"><p class="test" ' + id + '="">yo</p></template>\n' +
+        '<svg ' + id + '=""><template><p ' + id + '=""></p></template></svg>'
       )
       var style = window.document.querySelector('style').textContent
       expect(style).to.contain('.test[' + id + '] {\n  color: yellow;\n}')

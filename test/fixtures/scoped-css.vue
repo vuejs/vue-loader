@@ -14,4 +14,5 @@ h1 {
 <div><h1>hi</h1></div>
 <p class="abc def">hi</p>
 <template v-if="ok"><p class="test">yo</p></template>
+<svg><template><p></p></template></svg>
 </template>
