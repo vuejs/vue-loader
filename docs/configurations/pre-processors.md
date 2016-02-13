@@ -28,7 +28,7 @@ npm install coffee-loader --save-dev
 
 ``` html
 <script lang="coffee">
-  # Write coffeesciprt!
+  # Write coffeescript!
 </script>
 ```
 
