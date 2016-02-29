@@ -34,10 +34,10 @@ npm install coffee-loader --save-dev
 
 ### Templates
 
-Processing templates is a little different, because most Webpack template loaders such as `jade-loader` returns a template function instead of compiled HTML string. So instead of using `jade-loader`, we will use `template-html-loader` plus the raw `jade` compiler:
+Processing templates is a little different, because most Webpack template loaders such as `jade-loader` returns a template function instead of compiled HTML string. Instead of using `jade-loader`, we can just install the original `jade`:
 
 ``` bash
-npm install template-html-loader jade --save-dev
+npm install jade --save-dev
 ```
 
 ``` html
@@ -46,6 +46,8 @@ div
   h1 Hello world!
 </template>
 ```
+
+> **Important:** If you are using `vue-loader@<8.2.0`, you also need to install `template-html-loader`.
 
 ### Inline Loader Requests
 
