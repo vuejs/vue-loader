@@ -30,6 +30,7 @@
   },
   "dependencies": {
     "autoprefixer": "^6.0.3",
+    "consolidate": "^0.14.0",
     "de-indent": "^1.0.0",
     "hash-sum": "^1.0.2",
     "loader-utils": "^0.2.10",
@@ -73,7 +74,6 @@
     "rimraf": "^2.4.0",
     "vue-style-loader": "^1.0.0",
     "stylus-loader": "^1.4.0",
-    "template-html-loader": "^0.0.3",
     "vue-hot-reload-api": "^1.2.0",
     "vue-html-loader": "^1.0.0",
     "webpack": "^1.12.2"
