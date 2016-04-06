@@ -216,7 +216,7 @@ describe('vue-loader', function () {
     })
   })
 
-  it('dependency injection', function () {
+  it('dependency injection', function (done) {
     test({
       entry: './test/fixtures/inject.js'
     }, function (window) {
@@ -231,4 +231,27 @@ describe('vue-loader', function () {
     })
   })
 
+  it('translates relative URLs and respects resolve alias', function (done) {
+    test({
+      entry: './test/fixtures/resolve.js',
+      resolve: {
+        alias: {
+          fixtures: path.resolve(__dirname, 'fixtures')
+        }
+      },
+      module: {
+        loaders: [
+          { test: /\.vue$/, loader: loaderPath },
+          { test: /\.png$/, loader: 'file-loader?name=[name].[hash:6].[ext]' }
+        ]
+      }
+    }, function (window) {
+      var module = window.testModule
+      expect(module.template).to.contain('<img src="logo.c9e00e.png">\n<img src="logo.c9e00e.png">')
+      var style = window.document.querySelector('style').textContent
+      expect(style).to.contain('html { background-image: url(logo.c9e00e.png); }')
+      expect(style).to.contain('body { background-image: url(logo.c9e00e.png); }')
+      done()
+    })
+  })
 })

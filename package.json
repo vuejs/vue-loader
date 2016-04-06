@@ -64,6 +64,7 @@
     "css-loader": "^0.21.0",
     "eslint": "^1.6.0",
     "extract-text-webpack-plugin": "^0.8.2",
+    "file-loader": "^0.8.5",
     "inject-loader": "^2.0.1",
     "jade": "^1.11.0",
     "jsdom": "^7.2.2",
@@ -71,10 +72,10 @@
     "mocha": "^2.2.5",
     "node-libs-browser": "^0.5.3",
     "rimraf": "^2.4.0",
-    "vue-style-loader": "^1.0.0",
     "stylus-loader": "^1.4.0",
     "vue-hot-reload-api": "^1.2.0",
     "vue-html-loader": "^1.0.0",
+    "vue-style-loader": "^1.0.0",
     "webpack": "^1.12.2"
   }
 }
