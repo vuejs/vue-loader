@@ -41,8 +41,13 @@ describe('vue-loader', function () {
 
   function test (options, assert) {
     var config = Object.assign({}, globalConfig, options)
-    webpack(config, function (err) {
-      if (err) throw err
+    webpack(config, function (err, stats) {
+      if (stats.compilation.errors.length) {
+        stats.compilation.errors.forEach(function (err) {
+          console.error(err.message)
+        })
+      }
+      expect(stats.compilation.errors).to.be.empty
       getFile('test.build.js', function (data) {
         jsdom.env({
           html: testHTML,
@@ -221,7 +226,7 @@ describe('vue-loader', function () {
       entry: './test/fixtures/inject.js'
     }, function (window) {
       var module = window.injector({
-        '../service': {
+        './service': {
           msg: 'Hello from mocked service!'
         }
       })

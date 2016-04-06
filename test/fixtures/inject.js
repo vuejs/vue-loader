@@ -1,1 +1,1 @@
-window.injector = require('!!vue?inject!./inject.vue')
+window.injector = require('!!../../lib/loader?inject!./inject.vue')

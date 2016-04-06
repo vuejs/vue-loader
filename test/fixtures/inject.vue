@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import SomeService from '../service'
+import SomeService from './service'
 
 export default {
   data () {
