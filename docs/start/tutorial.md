@@ -1,6 +1,6 @@
 # Basic Tutorial
 
-We are going to walk through setting up a Webpack + `vue-loader` project from scratch. If you are interested in ready-to-run examples, check out [vue-loader-example](https://github.com/vuejs/vue-loader-example) and [vue-hackernews](https://github.com/vuejs/vue-hackernews). However, if you are not already a Webpack expert, I highly recommend going through the following tutorial to understand how the pieces fit together.
+We are going to walk through setting up a Webpack + `vue-loader` project from scratch. If you are interested in ready-to-run examples, check out [vue-cli](https://github.com/vuejs/vue-cli) to quickly scaffold new projects. However, if you are not already a Webpack expert, I highly recommend going through the following tutorial to understand how the pieces fit together.
 
 ### Project Structure
 
