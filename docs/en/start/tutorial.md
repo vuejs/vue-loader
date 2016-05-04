@@ -32,14 +32,14 @@ npm install\
   webpack webpack-dev-server\
   vue-loader vue-html-loader css-loader vue-style-loader vue-hot-reload-api\
   babel-loader babel-core babel-plugin-transform-runtime babel-preset-es2015\
-  babel-runtime@5\
+  babel-runtime\
   --save-dev
 npm install vue --save
 ```
 
 That's a lot of dependencies, I know! This is mostly because `vue-loader` need to have other webpack loaders as **peer dependencies** rather than nested dependencies so that Webpack can find them.[^(1)]
 
-You may also notice that we are using `babel-runtime` version 5 instead of the latest 6.x - this is [intentional](https://github.com/vuejs/vue-loader/issues/96#issuecomment-162910917).
+> Note: In previous versions of `vue-loader` we used to explicitly install `babel-runtime` 5.x to avoid duplicate dependencies - this is no longer necessary after recent babel upgrade.
 
 After proper installation, your `package.json`'s `devDependencies` field should look like this:
 
