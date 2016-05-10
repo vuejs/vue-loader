@@ -108,7 +108,7 @@ The app entry point, `main.js` typically looks like this (using ES2015 syntax):
 // main.js
 import Vue from 'vue'
 // require a *.vue component
-import App from './App'
+import App from './components/App'
 
 // mount a root Vue instance
 new Vue({
