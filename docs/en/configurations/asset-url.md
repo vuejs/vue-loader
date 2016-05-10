@@ -6,7 +6,7 @@ For example, `url(image.png)` will be translated into `require('./image.png')`. 
 
 1. `file-loader` allows you to designate where to copy and place the asset file, and how to name it using version hashes. The best part though, is that you can use relative URLs based on the folder structure of your source files, and Webpack will auto-rewrite them into different URLs in the bundled files based on the configuration.
 
-2. `url-loader` allows you to conditionally inline a file as base-64 data URL if they are smaller than a given threshold. This can reduce the amount of HTTP requests for trivial files. If the file is larger than the threshold, it automatically fallbacks to `file-loader`.
+2. `url-loader` allows you to conditionally inline a file as base-64 data URL if they are smaller than a given threshold. This can reduce the amount of HTTP requests for trivial files. If the file is larger than the threshold, it automatically falls back to `file-loader`.
 
 Here's an example Webpack config that handles `.png`, `jpg` and `.gif` files, and inlining any file smaller than 10kb as base64 data URL:
 
