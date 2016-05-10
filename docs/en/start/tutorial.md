@@ -102,13 +102,13 @@ Webpack knows it needs to pipe the contents of `./my-component.vue` through `vue
 
 ### Creating Other Files
 
-The app entry point, `main.js` typically looks like this:
+The app entry point, `main.js` typically looks like this (using ES2015 syntax):
 
 ``` js
 // main.js
-var Vue = require('vue')
+import Vue from 'vue'
 // require a *.vue component
-var App = require('./components/App.vue')
+import App from './components/App'
 
 // mount a root Vue instance
 new Vue({
@@ -121,7 +121,7 @@ new Vue({
 })
 ```
 
-Inside a `*.vue` component's `<script>` tag, you can also require other `*.vue` components. For example in `./components/App.vue` (we are using ES2015 syntax):
+Inside a `*.vue` component's `<script>` tag, you can also require other `*.vue` components. For example in `./components/App.vue`:
 
 ``` html
 <template>
