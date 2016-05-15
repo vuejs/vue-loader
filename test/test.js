@@ -12,7 +12,7 @@ describe('vue-loader', function () {
 
   var testHTML = '<!DOCTYPE html><html><head></head><body></body></html>'
   var outputDir = path.resolve(__dirname, './output')
-  var loaderPath = path.resolve(__dirname, '../')
+  var loaderPath = 'expose?vueModule!'+path.resolve(__dirname, '../')
   var globalConfig = {
     output: {
       path: outputDir,
@@ -66,9 +66,9 @@ describe('vue-loader', function () {
 
   it('basic', function (done) {
     test({
-      entry: './test/fixtures/basic.js'
+      entry: './test/fixtures/basic.vue'
     }, function (window) {
-      var module = window.testModule
+      var module = window.vueModule
       expect(module.template).to.contain('<h2 class="red">{{msg}}</h2>')
       expect(module.data().msg).to.contain('Hello from Component A!')
       var style = window.document.querySelector('style').textContent
@@ -79,9 +79,9 @@ describe('vue-loader', function () {
 
   it('pre-processors', function (done) {
     test({
-      entry: './test/fixtures/pre.js'
+      entry: './test/fixtures/pre.vue'
     }, function (window) {
-      var module = window.testModule
+      var module = window.vueModule
       expect(module.template).to.contain(
         '<h1>This is the app</h1>' +
         '<comp-a></comp-a>' +
@@ -96,9 +96,9 @@ describe('vue-loader', function () {
 
   it('scoped style', function (done) {
     test({
-      entry: './test/fixtures/scoped-css.js'
+      entry: './test/fixtures/scoped-css.vue'
     }, function (window) {
-      var module = window.testModule
+      var module = window.vueModule
       var id = '_v-' + hash(require.resolve('./fixtures/scoped-css.vue'))
       expect(module.template).to.contain(
         '<div ' + id + '=""><h1 ' + id + '="">hi</h1></div>\n' +
@@ -129,9 +129,9 @@ describe('vue-loader', function () {
 
   it('template import', function (done) {
     test({
-      entry: './test/fixtures/template-import.js'
+      entry: './test/fixtures/template-import.vue'
     }, function (window) {
-      var module = window.testModule
+      var module = window.vueModule
       expect(module.template).to.contain('<div><h1>hello</h1></div>')
       done()
     })
@@ -139,9 +139,9 @@ describe('vue-loader', function () {
 
   it('script import', function (done) {
     test({
-      entry: './test/fixtures/script-import-entry.js'
+      entry: './test/fixtures/script-import.vue'
     }, function (window) {
-      var module = window.testModule
+      var module = window.vueModule
       expect(module.data().msg).to.contain('Hello from Component A!')
       done()
     })
@@ -149,7 +149,7 @@ describe('vue-loader', function () {
 
   it('source map', function (done) {
     var config = Object.assign({}, globalConfig, {
-      entry: './test/fixtures/basic.js',
+      entry: './test/fixtures/basic.vue',
       devtool: 'source-map'
     })
     webpack(config, function (err) {
@@ -181,7 +181,7 @@ describe('vue-loader', function () {
 
   it('autoprefix', function (done) {
     test({
-      entry: './test/fixtures/autoprefix.js'
+      entry: './test/fixtures/autoprefix.vue'
     }, function (window) {
       var style = window.document.querySelector('style').textContent
       expect(style).to.contain('body {\n  -webkit-transform: scale(1);\n          transform: scale(1);\n}')
@@ -191,7 +191,7 @@ describe('vue-loader', function () {
 
   it('media-query', function (done) {
     test({
-      entry: './test/fixtures/media-query.js'
+      entry: './test/fixtures/media-query.vue'
     }, function (window) {
       var style = window.document.querySelector('style').textContent
       var id = '_v-' + hash(require.resolve('./fixtures/media-query.vue'))
@@ -202,7 +202,7 @@ describe('vue-loader', function () {
 
   it('extract CSS', function (done) {
     webpack(Object.assign({}, globalConfig, {
-      entry: './test/fixtures/extract-css.js',
+      entry: './test/fixtures/extract-css.vue',
       vue: {
         loaders: {
           css: ExtractTextPlugin.extract('css'),
@@ -238,7 +238,7 @@ describe('vue-loader', function () {
 
   it('translates relative URLs and respects resolve alias', function (done) {
     test({
-      entry: './test/fixtures/resolve.js',
+      entry: './test/fixtures/resolve.vue',
       resolve: {
         alias: {
           fixtures: path.resolve(__dirname, 'fixtures')
@@ -251,7 +251,7 @@ describe('vue-loader', function () {
         ]
       }
     }, function (window) {
-      var module = window.testModule
+      var module = window.vueModule
       expect(module.template).to.contain('<img src="logo.c9e00e.png">\n<img src="logo.c9e00e.png">')
       var style = window.document.querySelector('style').textContent
       expect(style).to.contain('html { background-image: url(logo.c9e00e.png); }')
