@@ -54,3 +54,10 @@
   Whether to enable source maps for CSS. Disabling this can avoid some relative path related bugs in `css-loader` and make the build a bit faster.
 
   Note this is automatically set to `false` if the `devtool` option is not present in the main Webpack config.
+
+### template
+
+- ^8.4.0
+- type: `Object`
+
+  Pass options to the template rendering engine (via [consolidate](https://github.com/tj/consolidate.js)) if you are using a non-html templating language.
