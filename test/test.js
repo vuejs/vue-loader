@@ -8,6 +8,40 @@ var hash = require('hash-sum')
 var SourceMapConsumer = require('source-map').SourceMapConsumer
 var ExtractTextPlugin = require("extract-text-webpack-plugin")
 
+describe('vue-loader lowlevel', function () {
+  var loader
+  before(function () {
+    loader = require('../lib/loader.js').bind({
+      cacheable: function () {},
+      options: {},
+      emitError: function (e) { throw e },
+      resourcePath: "./test.vue"
+    })
+  })
+
+  it('template', function () {
+    var result = loader('<template><div></div></template>')
+    expect(result).to.match(/__vue_template__ = require\("!!vue-html-loader.+selector\.js\?type=template&index=0!\.\/test\.vue"\)/g)
+  })
+  it('script', function () {
+    var result = loader('<script>var insideScript</script>')
+    expect(result).to.match(/__vue_script__ = require\("!!babel-loader.+selector\.js\?type=script&index=0!\.\/test\.vue"\)/g)
+  })
+  it('script test', function () {
+    var result = loader('<script test>var insideTest</script>')
+    expect(result).to.match(/\nrequire\("!!.+selector\.js\?type=script&index=0!\.\/test\.vue"\)/g)
+  })
+  it('script test karma', function () {
+    var result = loader('<script test="karma">var insideTest</script>')
+    expect(result).to.match(/\nif \(window\._karma__ !== "null"\) {/g)
+  })
+  it('style', function () {
+    var result = loader('<style>div{font-size:10px;}</style>')
+    expect(result).to.match(/\nrequire\("!!vue-style-loader.+selector\.js\?type=style&index=0!\.\/test\.vue"\)/g)
+  })
+})
+
+
 describe('vue-loader', function () {
 
   var testHTML = '<!DOCTYPE html><html><head></head><body></body></html>'
@@ -34,7 +68,7 @@ describe('vue-loader', function () {
 
   function getFile (file, cb) {
     fs.readFile(path.resolve(outputDir, file), 'utf-8', function (err, data) {
-      expect(err).to.be.not.exist
+      expect(err).to.not.exist
       cb(data)
     })
   }
@@ -63,36 +97,6 @@ describe('vue-loader', function () {
       })
     })
   }
-
-  it('basic', function (done) {
-    test({
-      entry: './test/fixtures/basic.vue'
-    }, function (window) {
-      var module = window.vueModule
-      expect(module.template).to.contain('<h2 class="red">{{msg}}</h2>')
-      expect(module.data().msg).to.contain('Hello from Component A!')
-      var style = window.document.querySelector('style').textContent
-      expect(style).to.contain('comp-a h2 {\n  color: #f00;\n}')
-      done()
-    })
-  })
-
-  it('pre-processors', function (done) {
-    test({
-      entry: './test/fixtures/pre.vue'
-    }, function (window) {
-      var module = window.vueModule
-      expect(module.template).to.contain(
-        '<h1>This is the app</h1>' +
-        '<comp-a></comp-a>' +
-        '<comp-b></comp-b>'
-      )
-      expect(module.data().msg).to.contain('Hello from coffee!')
-      var style = window.document.querySelector('style').textContent
-      expect(style).to.contain('body {\n  font: 100% Helvetica, sans-serif;\n  color: #999;\n}')
-      done()
-    })
-  })
 
   it('scoped style', function (done) {
     test({
@@ -127,29 +131,9 @@ describe('vue-loader', function () {
     })
   })
 
-  it('template import', function (done) {
-    test({
-      entry: './test/fixtures/template-import.vue'
-    }, function (window) {
-      var module = window.vueModule
-      expect(module.template).to.contain('<div><h1>hello</h1></div>')
-      done()
-    })
-  })
-
-  it('script import', function (done) {
-    test({
-      entry: './test/fixtures/script-import.vue'
-    }, function (window) {
-      var module = window.vueModule
-      expect(module.data().msg).to.contain('Hello from Component A!')
-      done()
-    })
-  })
-
   it('source map', function (done) {
     var config = Object.assign({}, globalConfig, {
-      entry: './test/fixtures/basic.vue',
+      entry: './test/preprocessors.vue',
       devtool: 'source-map'
     })
     webpack(config, function (err) {
@@ -157,9 +141,8 @@ describe('vue-loader', function () {
       getFile('test.build.js.map', function (map) {
         var smc = new SourceMapConsumer(JSON.parse(map))
         getFile('test.build.js', function (code) {
-          var line
-          var col
-          var targetRE = /^\s+msg: 'Hello from Component A!'/
+          var line, col
+          var targetRE = /^\s+msg: 'Hello from coffee!'/
           code.split(/\r?\n/g).some(function (l, i) {
             if (targetRE.test(l)) {
               line = i + 1
@@ -171,21 +154,11 @@ describe('vue-loader', function () {
             line: line,
             column: col
           })
-          expect(pos.source.indexOf('basic.vue') > -1)
-          expect(pos.line).to.equal(9)
+          expect(pos.source.indexOf('preprocessors.vue') > -1)
+          expect(pos.line).to.equal(18)
           done()
         })
       })
-    })
-  })
-
-  it('autoprefix', function (done) {
-    test({
-      entry: './test/fixtures/autoprefix.vue'
-    }, function (window) {
-      var style = window.document.querySelector('style').textContent
-      expect(style).to.contain('body {\n  -webkit-transform: scale(1);\n          transform: scale(1);\n}')
-      done()
     })
   })
 
@@ -202,6 +175,7 @@ describe('vue-loader', function () {
 
   it('extract CSS', function (done) {
     webpack(Object.assign({}, globalConfig, {
+      devtool: 'source-map',
       entry: './test/fixtures/extract-css.vue',
       vue: {
         loaders: {
@@ -215,8 +189,26 @@ describe('vue-loader', function () {
     }), function (err) {
       expect(err).to.be.null
       getFile('test.output.css', function (data) {
-        expect(data).to.contain('h1 {\n  color: #f00;\n}\n\nh2 {\n  color: green;\n}')
-        done()
+        expect(data).to.contain('h1 {\n  color: #f00;\n}\n\n\n\n\n\n\nh2 {\n  color: green;\n}')
+        getFile('test.output.css.map', function (map) {
+          var smc = new SourceMapConsumer(JSON.parse(map))
+          var line, col
+          var targetRE = /^\s+color: #f00;/
+          data.split(/\r?\n/g).some(function (l, i) {
+            if (targetRE.test(l)) {
+              line = i + 1
+              col = l.length
+              return true
+            }
+          })
+          var pos = smc.originalPositionFor({
+            line: line,
+            column: col
+          })
+          expect(pos.source.indexOf('extract-css.vue') > -1)
+          expect(pos.line).to.equal(3)
+          done()
+        })
       })
     })
   })
