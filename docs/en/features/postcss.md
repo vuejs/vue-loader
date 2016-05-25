@@ -47,3 +47,18 @@ module.exports = {
   }
 }
 ```
+
+In addition to providing an Array of plugins, the `postcss` option also accepts:
+
+- A function that returns an array of plugins;
+
+- An object that contains options to be passed to the PostCSS processor. This is useful when you are using PostCSS projects that relies on custom parser/stringifiers:
+
+  ``` js
+  postcss: {
+    plugins: [...], // list of plugins
+    options: {
+      parser: sugarss // use sugarss parser
+    }
+  }
+  ```
