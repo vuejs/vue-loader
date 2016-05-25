@@ -215,7 +215,7 @@ describe('vue-loader', function () {
     }), function (err) {
       expect(err).to.be.null
       getFile('test.output.css', function (data) {
-        expect(data).to.contain('h1 {\n  color: #f00;\n}\n\nh2 {\n  color: green;\n}')
+        expect(data).to.contain('h1 {\n  color: #f00;\n}\n\n\n\n\n\n\nh2 {\n  color: green;\n}')
         done()
       })
     })
