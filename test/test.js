@@ -259,4 +259,21 @@ describe('vue-loader', function () {
       done()
     })
   })
+
+  it('postcss options', function (done) {
+    test({
+      entry: './test/fixtures/postcss.vue',
+      vue: {
+        postcss: {
+          options: {
+            parser: require('sugarss')
+          }
+        }
+      }
+    }, function (window) {
+      var style = window.document.querySelector('style').textContent
+      expect(style).to.contain('h1 {\n  color: red;\n  font-size: 14px\n}')
+      done()
+    })
+  })
 })
