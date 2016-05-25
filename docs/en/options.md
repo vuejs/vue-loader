@@ -30,7 +30,8 @@
 
 ### postcss
 
-- type: `Array` or `Function`
+- type: `Array` or `Function` or `Object`
+- `Object` format only supported in ^8.5.0
 
   Specify custom PostCSS plugins to be applied to CSS inside `*.vue` files. If using a function, the function will called using the same loader context and should return an Array of plugins.
 
@@ -42,6 +43,17 @@
     autoprefixer: false,
     loaders: {
       // ...
+    }
+  }
+  ```
+
+  This option can also be an object that contains options to be passed to the PostCSS processor. This is useful when you are using PostCSS projects that relies on custom parser/stringifiers:
+
+  ``` js
+  postcss: {
+    plugins: [...], // list of plugins
+    options: {
+      parser: sugarss // use sugarss parser
     }
   }
   ```
