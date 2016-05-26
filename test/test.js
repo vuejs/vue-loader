@@ -99,36 +99,6 @@ describe('vue-loader', function () {
     })
   }
 
-  it('basic', function (done) {
-    test({
-      entry: './test/fixtures/basic.vue'
-    }, function (window) {
-      var module = window.vueModule
-      expect(module.template).to.contain('<h2 class="red">{{msg}}</h2>')
-      expect(module.data().msg).to.contain('Hello from Component A!')
-      var style = window.document.querySelector('style').textContent
-      expect(style).to.contain('comp-a h2 {\n  color: #f00;\n}')
-      done()
-    })
-  })
-
-  it('pre-processors', function (done) {
-    test({
-      entry: './test/fixtures/pre.vue'
-    }, function (window) {
-      var module = window.vueModule
-      expect(module.template).to.contain(
-        '<h1>This is the app</h1>' +
-        '<comp-a></comp-a>' +
-        '<comp-b></comp-b>'
-      )
-      expect(module.data().msg).to.contain('Hello from coffee!')
-      var style = window.document.querySelector('style').textContent
-      expect(style).to.contain('body {\n  font: 100% Helvetica, sans-serif;\n  color: #999;\n}')
-      done()
-    })
-  })
-
   it('scoped style', function (done) {
     test({
       entry: './test/fixtures/scoped-css.vue'
@@ -162,29 +132,9 @@ describe('vue-loader', function () {
     })
   })
 
-  it('template import', function (done) {
-    test({
-      entry: './test/fixtures/template-import.vue'
-    }, function (window) {
-      var module = window.vueModule
-      expect(module.template).to.contain('<div><h1>hello</h1></div>')
-      done()
-    })
-  })
-
-  it('script import', function (done) {
-    test({
-      entry: './test/fixtures/script-import.vue'
-    }, function (window) {
-      var module = window.vueModule
-      expect(module.data().msg).to.contain('Hello from Component A!')
-      done()
-    })
-  })
-
   it('source map', function (done) {
     var config = Object.assign({}, globalConfig, {
-      entry: './test/fixtures/basic.vue',
+      entry: './test/preprocessors.vue',
       devtool: 'source-map'
     })
     webpack(config, function (err) {
@@ -194,7 +144,7 @@ describe('vue-loader', function () {
         getFile('test.build.js', function (code) {
           var line
           var col
-          var targetRE = /^\s+msg: 'Hello from Component A!'/
+          var targetRE = /^\s+msg: 'Hello from coffee!'/
           code.split(/\r?\n/g).some(function (l, i) {
             if (targetRE.test(l)) {
               line = i + 1
@@ -207,20 +157,10 @@ describe('vue-loader', function () {
             column: col
           })
           expect(pos.source.indexOf('basic.vue') > -1)
-          expect(pos.line).to.equal(9)
+          expect(pos.line).to.equal(18)
           done()
         })
       })
-    })
-  })
-
-  it('autoprefix', function (done) {
-    test({
-      entry: './test/fixtures/autoprefix.vue'
-    }, function (window) {
-      var style = window.document.querySelector('style').textContent
-      expect(style).to.contain('body {\n  -webkit-transform: scale(1);\n          transform: scale(1);\n}')
-      done()
     })
   })
 
