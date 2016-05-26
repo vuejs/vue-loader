@@ -8,6 +8,41 @@ var hash = require('hash-sum')
 var SourceMapConsumer = require('source-map').SourceMapConsumer
 var ExtractTextPlugin = require("extract-text-webpack-plugin")
 
+// to get loader.js output without webpack
+describe('vue-loader webpack mock', function () {
+  var loader
+  before(function () {
+    // mock webpack
+    loader = require('../lib/loader.js').bind({
+      cacheable: function () {},
+      options: {},
+      emitError: function (e) { throw e },
+      resourcePath: "./test.vue"
+    })
+  })
+
+  it('template', function () {
+    var result = loader('<template><div></div></template>')
+    expect(result).to.match(/__vue_template__ = require.+selector\.js\?type=template&index=0!\.\/test\.vue"\)/g)
+  })
+  it('script', function () {
+    var result = loader('<script>var insideScript</script>')
+    expect(result).to.match(/__vue_script__ = require.+selector\.js\?type=script&index=0!\.\/test\.vue"\)/g)
+  })
+  it('script test', function () {
+    var result = loader('<script test>var insideTest</script>')
+    expect(result).to.match(/\nrequire\("!!.+selector\.js\?type=script&index=0!\.\/test\.vue"\)/g)
+  })
+  it('script test karma', function () {
+    var result = loader('<script test="karma">var insideTest</script>')
+    expect(result).to.match(/\nif \(window\._karma__ !== "null"\) {/g)
+  })
+  it('style', function () {
+    var result = loader('<style>div{font-size:10px;}</style>')
+    expect(result).to.match(/\nrequire.+selector\.js\?type=style&index=0!\.\/test\.vue"\)/g)
+  })
+})
+
 describe('vue-loader', function () {
 
   var testHTML = '<!DOCTYPE html><html><head></head><body></body></html>'
