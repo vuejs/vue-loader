@@ -12,3 +12,7 @@ There are also some example projects:
 
 - [vue-loader-example](https://github.com/vuejs/vue-loader-example/)
 - [vue-hackernews](https://github.com/vuejs/vue-hackernews)
+
+## License
+
+[MIT](http://opensource.org/licenses/MIT)
