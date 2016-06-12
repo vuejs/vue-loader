@@ -11,8 +11,10 @@ h1 {
 </style>
 
 <template>
-<div><h1>hi</h1></div>
-<p class="abc def">hi</p>
-<template v-if="ok"><p class="test">yo</p></template>
-<svg><template><p></p></template></svg>
+<div>
+  <div><h1>hi</h1></div>
+  <p class="abc def">hi</p>
+  <template v-if="ok"><p class="test">yo</p></template>
+  <svg><template><p></p></template></svg>
+</div>
 </template>

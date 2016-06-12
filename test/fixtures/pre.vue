@@ -7,9 +7,10 @@ body
 </style>
 
 <template lang="jade">
-h1 This is the app
-comp-a
-comp-b
+div
+  h1 This is the app
+  comp-a
+  comp-b
 </template>
 
 <script lang="coffee">
