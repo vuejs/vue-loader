@@ -9,9 +9,14 @@ var rimraf = require('rimraf')
 var hash = require('hash-sum')
 var SourceMapConsumer = require('source-map').SourceMapConsumer
 var ExtractTextPlugin = require("extract-text-webpack-plugin")
+var compiler = require('vue-template-compiler')
+
+function assertRenderFn (options, template) {
+  var compiled = compiler.compile(template)
+  expect(options.render.toString()).to.equal('function (){' + compiled.render + '}')
+}
 
 describe('vue-loader', function () {
-
   var testHTML = '<!DOCTYPE html><html><head></head><body></body></html>'
   var outputDir = path.resolve(__dirname, './output')
   var loaderPath = 'expose?vueModule!'+path.resolve(__dirname, '../')
@@ -71,7 +76,7 @@ describe('vue-loader', function () {
       entry: './test/fixtures/basic.vue'
     }, function (window) {
       var module = window.vueModule
-      // expect(module.template).to.contain('<h2 class="red">{{msg}}</h2>')
+      assertRenderFn(module, '<h2 class="red">{{msg}}</h2>')
       expect(module.data().msg).to.contain('Hello from Component A!')
       var style = window.document.querySelector('style').textContent
       expect(style).to.contain('comp-a h2 {\n  color: #f00;\n}')
@@ -84,11 +89,13 @@ describe('vue-loader', function () {
       entry: './test/fixtures/pre.vue'
     }, function (window) {
       var module = window.vueModule
-      // expect(module.template).to.contain(
-      //   '<h1>This is the app</h1>' +
-      //   '<comp-a></comp-a>' +
-      //   '<comp-b></comp-b>'
-      // )
+      assertRenderFn(module,
+        '<div>' +
+          '<h1>This is the app</h1>' +
+          '<comp-a></comp-a>' +
+          '<comp-b></comp-b>' +
+        '</div>'
+      )
       expect(module.data().msg).to.contain('Hello from coffee!')
       var style = window.document.querySelector('style').textContent
       expect(style).to.contain('body {\n  font: 100% Helvetica, sans-serif;\n  color: #999;\n}')
@@ -102,12 +109,15 @@ describe('vue-loader', function () {
     }, function (window) {
       var module = window.vueModule
       var id = '_v-' + hash(require.resolve('./fixtures/scoped-css.vue'))
-      // expect(module.template).to.contain(
-      //   '<div ' + id + '=""><h1 ' + id + '="">hi</h1></div>\n' +
-      //   '<p class="abc def" ' + id + '="">hi</p>\n' +
-      //   '<template v-if="ok"><p class="test" ' + id + '="">yo</p></template>\n' +
-      //   '<svg ' + id + '=""><template><p ' + id + '=""></p></template></svg>'
-      // )
+      expect(module._scopeId).to.equal(id)
+      assertRenderFn(module,
+        '<div>' +
+          '<div><h1>hi</h1></div>\n' +
+          '<p class="abc def">hi</p>\n' +
+          '<template v-if="ok"><p class="test">yo</p></template>\n' +
+          '<svg><template><p></p></template></svg>' +
+        '</div>'
+      )
       var style = window.document.querySelector('style').textContent
       expect(style).to.contain('.test[' + id + '] {\n  color: yellow;\n}')
       expect(style).to.contain('.test[' + id + ']:after {\n  content: \'bye!\';\n}')
@@ -134,7 +144,7 @@ describe('vue-loader', function () {
       entry: './test/fixtures/template-import.vue'
     }, function (window) {
       var module = window.vueModule
-      // expect(module.template).to.contain('<div><h1>hello</h1></div>')
+      assertRenderFn(module, '<div><h1>hello</h1></div>')
       done()
     })
   })
@@ -232,7 +242,7 @@ describe('vue-loader', function () {
           msg: 'Hello from mocked service!'
         }
       })
-      // expect(module.template).to.contain('<div class="msg">{{ msg }}</div>')
+      assertRenderFn(module, '<div class="msg">{{ msg }}</div>')
       expect(module.data().msg).to.contain('Hello from mocked service!')
       done()
     })
@@ -254,7 +264,7 @@ describe('vue-loader', function () {
       }
     }, function (window) {
       var module = window.vueModule
-      // expect(module.template).to.contain('<img src="logo.c9e00e.png">\n<img src="logo.c9e00e.png">')
+      assertRenderFn(module, '<img src="logo.c9e00e.png">\n<img src="logo.c9e00e.png">')
       var style = window.document.querySelector('style').textContent
       expect(style).to.contain('html { background-image: url(logo.c9e00e.png); }')
       expect(style).to.contain('body { background-image: url(logo.c9e00e.png); }')
