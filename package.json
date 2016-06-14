@@ -40,6 +40,10 @@
     "vue-style-loader": "^1.0.0",
     "vue-template-compiler": "^2.0.0-alpha.2"
   },
+  "peerDependencies": {
+    "css-loader": "^0.23.1",
+    "file-loader": "^0.8.5"
+  },
   "devDependencies": {
     "babel-core": "^6.8.0",
     "babel-loader": "^6.2.4",
