@@ -26,7 +26,8 @@
     "lint": "eslint lib",
     "test": "eslint lib && mocha test/test.js --slow 5000 --timeout 10000",
     "docs": "cd docs && gitbook serve",
-    "deploy-docs": "bash ./docs/deploy.sh"
+    "deploy-docs": "bash ./docs/deploy.sh",
+    "postinstall": "npm install vue"
   },
   "dependencies": {
     "autoprefixer": "^6.0.3",
