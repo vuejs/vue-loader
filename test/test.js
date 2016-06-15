@@ -6,7 +6,7 @@ var webpack = require('webpack')
 var jsdom = require('jsdom')
 var expect = require('chai').expect
 var rimraf = require('rimraf')
-var hash = require('hash-sum')
+var genId = require('../lib/gen-id')
 var SourceMapConsumer = require('source-map').SourceMapConsumer
 var ExtractTextPlugin = require("extract-text-webpack-plugin")
 var compiler = require('vue-template-compiler')
@@ -19,7 +19,7 @@ function assertRenderFn (options, template) {
 describe('vue-loader', function () {
   var testHTML = '<!DOCTYPE html><html><head></head><body></body></html>'
   var outputDir = path.resolve(__dirname, './output')
-  var loaderPath = 'expose?vueModule!'+path.resolve(__dirname, '../')
+  var loaderPath = 'expose?vueModule!' + path.resolve(__dirname, '../')
   var globalConfig = {
     output: {
       path: outputDir,
@@ -108,7 +108,7 @@ describe('vue-loader', function () {
       entry: './test/fixtures/scoped-css.vue'
     }, function (window) {
       var module = window.vueModule
-      var id = '_v-' + hash(require.resolve('./fixtures/scoped-css.vue'))
+      var id = 'data-v-' + genId(require.resolve('./fixtures/scoped-css.vue'))
       expect(module._scopeId).to.equal(id)
       assertRenderFn(module,
         '<div>' +
@@ -133,7 +133,7 @@ describe('vue-loader', function () {
       var styles = window.document.querySelectorAll('style')
       expect(styles[0].textContent).to.contain('h1 { color: red; }')
       // import with scoped
-      var id = '_v-' + hash(require.resolve('./fixtures/style-import.vue'))
+      var id = 'data-v-' + genId(require.resolve('./fixtures/style-import.vue'))
       expect(styles[1].textContent).to.contain('h1[' + id + '] { color: green; }')
       done()
     })
@@ -196,7 +196,7 @@ describe('vue-loader', function () {
       entry: './test/fixtures/media-query.vue'
     }, function (window) {
       var style = window.document.querySelector('style').textContent
-      var id = '_v-' + hash(require.resolve('./fixtures/media-query.vue'))
+      var id = 'data-v-' + genId(require.resolve('./fixtures/media-query.vue'))
       expect(style).to.contain('@media print {\n  .foo[' + id + '] {\n    color: #000;\n  }\n}')
       done()
     })
