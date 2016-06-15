@@ -1,8 +1,8 @@
 process.env.VUE_LOADER_TEST = true
 
-var fs = require('fs')
 var path = require('path')
 var webpack = require('webpack')
+var MemoryFS = require('memory-fs')
 var jsdom = require('jsdom')
 var expect = require('chai').expect
 var rimraf = require('rimraf')
@@ -11,66 +11,61 @@ var SourceMapConsumer = require('source-map').SourceMapConsumer
 var ExtractTextPlugin = require("extract-text-webpack-plugin")
 var compiler = require('vue-template-compiler')
 
+var loaderPath = 'expose?vueModule!' + path.resolve(__dirname, '../')
+var mfs = new MemoryFS()
+var globalConfig = {
+  output: {
+    path: '/',
+    filename: 'test.build.js'
+  },
+  module: {
+    loaders: [
+      {
+        test: /\.vue$/,
+        loader: loaderPath
+      }
+    ]
+  }
+}
+
+function bundle (options, cb) {
+  var config = Object.assign({}, globalConfig, options)
+  var webpackCompiler = webpack(config)
+  webpackCompiler.outputFileSystem = mfs
+  webpackCompiler.run(function (err, stats) {
+    expect(err).to.be.null
+    if (stats.compilation.errors.length) {
+      stats.compilation.errors.forEach(function (err) {
+        console.error(err.message)
+      })
+    }
+    expect(stats.compilation.errors).to.be.empty
+    cb(mfs.readFileSync('/test.build.js').toString())
+  })
+}
+
+function test (options, assert) {
+  bundle(options, function (code) {
+    jsdom.env({
+      html: '<!DOCTYPE html><html><head></head><body></body></html>',
+      src: [code],
+      done: function (err, window) {
+        if (err) {
+          console.log(err[0].data.error.stack)
+          expect(err).to.be.null
+        }
+        assert(window)
+      }
+    })
+  })
+}
+
 function assertRenderFn (options, template) {
   var compiled = compiler.compile(template)
   expect(options.render.toString()).to.equal('function (){' + compiled.render + '}')
 }
 
 describe('vue-loader', function () {
-  var testHTML = '<!DOCTYPE html><html><head></head><body></body></html>'
-  var outputDir = path.resolve(__dirname, './output')
-  var loaderPath = 'expose?vueModule!' + path.resolve(__dirname, '../')
-  var globalConfig = {
-    output: {
-      path: outputDir,
-      filename: 'test.build.js'
-    },
-    module: {
-      loaders: [
-        {
-          test: /\.vue$/,
-          loader: loaderPath
-        }
-      ]
-    }
-  }
-
-  beforeEach(function (done) {
-    rimraf(outputDir, done)
-  })
-
-  function getFile (file, cb) {
-    fs.readFile(path.resolve(outputDir, file), 'utf-8', function (err, data) {
-      expect(err).to.be.not.exist
-      cb(data)
-    })
-  }
-
-  function test (options, assert) {
-    var config = Object.assign({}, globalConfig, options)
-    webpack(config, function (err, stats) {
-      if (stats.compilation.errors.length) {
-        stats.compilation.errors.forEach(function (err) {
-          console.error(err.message)
-        })
-      }
-      expect(stats.compilation.errors).to.be.empty
-      getFile('test.build.js', function (data) {
-        jsdom.env({
-          html: testHTML,
-          src: [data],
-          done: function (err, window) {
-            if (err) {
-              console.log(err[0].data.error.stack)
-              expect(err).to.be.null
-            }
-            assert(window)
-          }
-        })
-      })
-    })
-  }
-
   it('basic', function (done) {
     test({
       entry: './test/fixtures/basic.vue'
@@ -164,30 +159,26 @@ describe('vue-loader', function () {
       entry: './test/fixtures/basic.vue',
       devtool: 'source-map'
     })
-    webpack(config, function (err) {
-      expect(err).to.be.null
-      getFile('test.build.js.map', function (map) {
-        var smc = new SourceMapConsumer(JSON.parse(map))
-        getFile('test.build.js', function (code) {
-          var line
-          var col
-          var targetRE = /^\s+msg: 'Hello from Component A!'/
-          code.split(/\r?\n/g).some(function (l, i) {
-            if (targetRE.test(l)) {
-              line = i + 1
-              col = l.length
-              return true
-            }
-          })
-          var pos = smc.originalPositionFor({
-            line: line,
-            column: col
-          })
-          expect(pos.source.indexOf('basic.vue') > -1)
-          expect(pos.line).to.equal(9)
-          done()
-        })
+    bundle(config, function (code) {
+      var map = mfs.readFileSync('/test.build.js.map').toString()
+      var smc = new SourceMapConsumer(JSON.parse(map))
+      var line
+      var col
+      var targetRE = /^\s+msg: 'Hello from Component A!'/
+      code.split(/\r?\n/g).some(function (l, i) {
+        if (targetRE.test(l)) {
+          line = i + 1
+          col = l.length
+          return true
+        }
       })
+      var pos = smc.originalPositionFor({
+        line: line,
+        column: col
+      })
+      expect(pos.source.indexOf('basic.vue') > -1)
+      expect(pos.line).to.equal(9)
+      done()
     })
   })
 
@@ -203,7 +194,7 @@ describe('vue-loader', function () {
   })
 
   it('extract CSS', function (done) {
-    webpack(Object.assign({}, globalConfig, {
+    bundle(Object.assign({}, globalConfig, {
       entry: './test/fixtures/extract-css.vue',
       vue: {
         loaders: {
@@ -214,12 +205,10 @@ describe('vue-loader', function () {
       plugins: [
         new ExtractTextPlugin('test.output.css')
       ]
-    }), function (err) {
-      expect(err).to.be.null
-      getFile('test.output.css', function (data) {
-        expect(data).to.contain('h1 {\n  color: #f00;\n}\n\n\n\n\n\n\nh2 {\n  color: green;\n}')
-        done()
-      })
+    }), function () {
+      var css = mfs.readFileSync('/test.output.css').toString()
+      expect(css).to.contain('h1 {\n  color: #f00;\n}\n\n\n\n\n\n\nh2 {\n  color: green;\n}')
+      done()
     })
   })
 

@@ -60,6 +60,7 @@
     "inject-loader": "^2.0.1",
     "jade": "^1.11.0",
     "jsdom": "^9.2.1",
+    "memory-fs": "^0.3.0",
     "mkdirp": "^0.5.1",
     "mocha": "^2.2.5",
     "node-libs-browser": "^1.0.0",
