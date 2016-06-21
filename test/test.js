@@ -157,7 +157,7 @@ describe('vue-loader', function () {
   it('source map', function (done) {
     var config = Object.assign({}, globalConfig, {
       entry: './test/fixtures/basic.vue',
-      devtool: 'source-map'
+      devtool: '#source-map'
     })
     bundle(config, function (code) {
       var map = mfs.readFileSync('/test.build.js.map').toString()
