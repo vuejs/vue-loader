@@ -79,6 +79,63 @@ describe('vue-loader', function () {
     })
   })
 
+  it('babel loader', function (done) {
+    var counter = 0
+    var n = 2
+
+    bundle(Object.assign({}, globalConfig, {
+      entry: './test/fixtures/babel.vue',
+      module: {
+        loaders: [
+          {
+            test: /\.vue$/,
+            loader: loaderPath
+          },
+          {
+            test: /\.js?/,
+            loader: 'babel',
+            exclude: /node_modules/,
+            query: {
+              plugins: ['transform-exponentiation-operator']
+            }
+          }
+        ]
+      }
+    }), function (code) {
+      expect(code).to.not.contain('2 ** 2')
+      expect(code).to.contain('Math.pow(2, 2)')
+      if (++counter === n) {
+        done()
+      }
+    })
+
+    bundle(Object.assign({}, globalConfig, {
+      entry: './test/fixtures/babel.vue',
+      module: {
+        loaders: [
+          {
+            test: /\.vue$/,
+            loader: loaderPath
+          },
+          {
+            test: /\.js?/,
+            loader: 'babel',
+            exclude: /node_modules/
+          }
+        ]
+      },
+      babel: {
+        plugins: ['transform-exponentiation-operator']
+      }
+    }), function (code) {
+      expect(code).to.not.contain('2 ** 2')
+      expect(code).to.contain('Math.pow(2, 2)')
+      if (++counter === n) {
+        done()
+      }
+    })
+  })
+
   it('pre-processors', function (done) {
     test({
       entry: './test/fixtures/pre.vue'
