@@ -276,4 +276,16 @@ describe('vue-loader', function () {
       done()
     })
   })
+
+  it('partials', function (done) {
+    test({
+      entry: './test/fixtures/partials.vue'
+    }, function (window) {
+      var module = window.vueModule
+      expect(module.partials).to.have.property('hello-partial').that.contain('<div>Hello</div>')
+      expect(module.partials).to.have.property('bye-partial').that.contain('<div>Bye</div>')
+      expect(module.partials).to.have.property('jade-partial').that.contain('<div><h1>hello</h1></div>')
+      done()
+    })
+  })
 })
