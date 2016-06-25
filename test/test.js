@@ -126,10 +126,10 @@ describe('vue-loader', function () {
       entry: './test/fixtures/style-import.vue'
     }, function (window) {
       var styles = window.document.querySelectorAll('style')
-      expect(styles[0].textContent).to.contain('h1 { color: red; }')
+      expect(styles[0].textContent).to.contain('h1 { color: red;\n}')
       // import with scoped
       var id = 'data-v-' + genId(require.resolve('./fixtures/style-import.vue'))
-      expect(styles[1].textContent).to.contain('h1[' + id + '] { color: green; }')
+      expect(styles[1].textContent).to.contain('h1[' + id + '] { color: green;\n}')
       done()
     })
   })
@@ -188,7 +188,7 @@ describe('vue-loader', function () {
     }, function (window) {
       var style = window.document.querySelector('style').textContent
       var id = 'data-v-' + genId(require.resolve('./fixtures/media-query.vue'))
-      expect(style).to.contain('@media print {\n  .foo[' + id + '] {\n    color: #000;\n  }\n}')
+      expect(style).to.contain('@media print {\n.foo[' + id + '] {\n    color: #000;\n}\n}')
       done()
     })
   })
@@ -207,7 +207,7 @@ describe('vue-loader', function () {
       ]
     }), function () {
       var css = mfs.readFileSync('/test.output.css').toString()
-      expect(css).to.contain('h1 {\n  color: #f00;\n}\n\n\n\n\n\n\nh2 {\n  color: green;\n}')
+      expect(css).to.contain('h1 {\n  color: #f00;\n}\n\nh2 {\n  color: green;\n}')
       done()
     })
   })
@@ -245,8 +245,8 @@ describe('vue-loader', function () {
       var module = window.vueModule
       assertRenderFn(module, '<img src="logo.c9e00e.png">\n<img src="logo.c9e00e.png">')
       var style = window.document.querySelector('style').textContent
-      expect(style).to.contain('html { background-image: url(logo.c9e00e.png); }')
-      expect(style).to.contain('body { background-image: url(logo.c9e00e.png); }')
+      expect(style).to.contain('html { background-image: url(logo.c9e00e.png);\n}')
+      expect(style).to.contain('body { background-image: url(logo.c9e00e.png);\n}')
       done()
     })
   })
