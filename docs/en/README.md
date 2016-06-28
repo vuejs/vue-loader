@@ -32,6 +32,6 @@ But Webpack can do more than that. With "loaders", we can teach Webpack to trans
 - Optionally you can pipe the source code through a linter before doing the compilation;
 - Transpile Jade templates into plain HTML and inline it as a JavaScript string;
 - Transpile SASS files into plain CSS, then convert it into a JavaScript snippet that insert the resulting CSS as a `<style>` tag;
-- Process an image file referenced in HTML or CSS, moved it to the desired destination based on the path configurations, and naming it using its md5 hash.
+- Process an image file referenced in HTML or CSS, move it to the desired destination based on the path configurations, and name it using its md5 hash.
 
 Webpack is so powerful that when you understand how it works, it can dramatically improve your front-end workflow. Its primary drawback is verbose and complex configuration; but with this guide you should be able to find solutions for most common issues when using Webpack with Vue.js and `vue-loader`.
