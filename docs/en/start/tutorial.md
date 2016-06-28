@@ -37,7 +37,7 @@ npm install\
 npm install vue --save
 ```
 
-That's a lot of dependencies, I know! This is mostly because `vue-loader` need to have other webpack loaders as **peer dependencies** rather than nested dependencies so that Webpack can find them.[^(1)]
+That's a lot of dependencies, I know! This is mostly because `vue-loader` needs to have other webpack loaders as **peer dependencies** rather than nested dependencies so that Webpack can find them.[^(1)]
 
 > Note: In previous versions of `vue-loader` we used to explicitly install `babel-runtime` 5.x to avoid duplicate dependencies - this is no longer necessary after recent babel upgrade.
 
