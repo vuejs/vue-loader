@@ -54,7 +54,7 @@ function test (options, assert) {
           console.log(err[0].data.error.stack)
           expect(err).to.be.null
         }
-        assert(window)
+        assert(window, interopDefault(window.vueModule), window.vueModule)
       }
     })
   })
@@ -65,12 +65,19 @@ function assertRenderFn (options, template) {
   expect(options.render.toString()).to.equal('function (){' + compiled.render + '}')
 }
 
+function interopDefault (module) {
+  return module
+    ? module.__esModule ? module.default : module
+    : module
+}
+
 describe('vue-loader', function () {
   it('basic', function (done) {
     test({
       entry: './test/fixtures/basic.vue'
-    }, function (window) {
-      var module = window.vueModule
+    }, function (window, module, rawModule) {
+      // test named export
+      expect(rawModule.test()).to.equal('hi')
       assertRenderFn(module, '<h2 class="red">{{msg}}</h2>')
       expect(module.data().msg).to.contain('Hello from Component A!')
       var style = window.document.querySelector('style').textContent
@@ -82,8 +89,7 @@ describe('vue-loader', function () {
   it('pre-processors', function (done) {
     test({
       entry: './test/fixtures/pre.vue'
-    }, function (window) {
-      var module = window.vueModule
+    }, function (window, module) {
       assertRenderFn(module,
         '<div>' +
           '<h1>This is the app</h1>' +
@@ -101,8 +107,7 @@ describe('vue-loader', function () {
   it('scoped style', function (done) {
     test({
       entry: './test/fixtures/scoped-css.vue'
-    }, function (window) {
-      var module = window.vueModule
+    }, function (window, module) {
       var id = 'data-v-' + genId(require.resolve('./fixtures/scoped-css.vue'))
       expect(module._scopeId).to.equal(id)
       assertRenderFn(module,
@@ -137,8 +142,7 @@ describe('vue-loader', function () {
   it('template import', function (done) {
     test({
       entry: './test/fixtures/template-import.vue'
-    }, function (window) {
-      var module = window.vueModule
+    }, function (window, module) {
       assertRenderFn(module, '<div><h1>hello</h1></div>')
       done()
     })
@@ -147,8 +151,7 @@ describe('vue-loader', function () {
   it('script import', function (done) {
     test({
       entry: './test/fixtures/script-import.vue'
-    }, function (window) {
-      var module = window.vueModule
+    }, function (window, module) {
       expect(module.data().msg).to.contain('Hello from Component A!')
       done()
     })
@@ -168,7 +171,7 @@ describe('vue-loader', function () {
       code.split(/\r?\n/g).some(function (l, i) {
         if (targetRE.test(l)) {
           line = i + 1
-          col = l.length
+          col = 0
           return true
         }
       })
@@ -177,7 +180,7 @@ describe('vue-loader', function () {
         column: col
       })
       expect(pos.source.indexOf('basic.vue') > -1)
-      expect(pos.line).to.equal(9)
+      expect(pos.line).to.equal(13)
       done()
     })
   })
@@ -216,11 +219,11 @@ describe('vue-loader', function () {
     test({
       entry: './test/fixtures/inject.js'
     }, function (window) {
-      var module = window.injector({
+      var module = interopDefault(window.injector({
         './service': {
           msg: 'Hello from mocked service!'
         }
-      })
+      }))
       assertRenderFn(module, '<div class="msg">{{ msg }}</div>')
       expect(module.data().msg).to.contain('Hello from mocked service!')
       done()
@@ -241,8 +244,7 @@ describe('vue-loader', function () {
           { test: /\.png$/, loader: 'file-loader?name=[name].[hash:6].[ext]' }
         ]
       }
-    }, function (window) {
-      var module = window.vueModule
+    }, function (window, module) {
       assertRenderFn(module, '<img src="logo.c9e00e.png">\n<img src="logo.c9e00e.png">')
       var style = window.document.querySelector('style').textContent
       expect(style).to.contain('html { background-image: url(logo.c9e00e.png);\n}')
