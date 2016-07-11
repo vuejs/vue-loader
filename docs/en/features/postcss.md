@@ -32,7 +32,7 @@ module.exports = {
 
 ### Using Custom PostCSS Plugins
 
-To use custom PostCSS pugins, pass an array to the `postcss` option under the `vue` section. Example using [CSSNext](http://cssnext.io/):
+To use custom PostCSS plugins, pass an array to the `postcss` option under the `vue` section. Example using [CSSNext](http://cssnext.io/):
 
 ``` js
 // webpack.config.js
