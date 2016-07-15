@@ -10,6 +10,7 @@ var genId = require('../lib/gen-id')
 var SourceMapConsumer = require('source-map').SourceMapConsumer
 var ExtractTextPlugin = require("extract-text-webpack-plugin")
 var compiler = require('vue-template-compiler')
+var beautify = require('js-beautify').js_beautify
 
 var loaderPath = 'expose?vueModule!' + path.resolve(__dirname, '../')
 var mfs = new MemoryFS()
@@ -62,7 +63,9 @@ function test (options, assert) {
 
 function assertRenderFn (options, template) {
   var compiled = compiler.compile(template)
-  expect(options.render.toString()).to.equal('function (){' + compiled.render + '}')
+  expect(options.render.toString().replace(/\t/g, '')).to.equal('function (){' +
+    beautify(compiled.render, { indent_size: 2 }) +
+  '}')
 }
 
 function interopDefault (module) {
