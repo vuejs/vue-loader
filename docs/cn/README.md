@@ -1,37 +1,37 @@
-# Introduction
+# 介绍
 
-### What is `vue-loader`?
+### `vue-loader` 是什么？
 
-`vue-loader` is a loader for Webpack that can transform Vue components written in the following format into a plain JavaScript module:
+`vue-loader` 是 webpack 的一个 loader，能把按下图格式写的 Vue 组件转化成纯 JavaScript 模块：
 
 ![screenshot](http://blog.evanyou.me/images/vue-component.png)
 
-There are many cool features provided by `vue-loader`:
+`vue-loader` 提供了很多不错的功能:
 
-- ES2015 enabled by default;
-- Allows using other Webpack loaders for each part of a Vue component, for example SASS for `<style>` and Jade for `<template>`;
-- Treat static assets referenced in `<style>` and `<template>` as module dependencies and handle them with Webpack loaders;
-- Can simulate scoped CSS for each component;
-- Supports component hot-reloading during development.
+- 默认支持 ES2015；
+- 支持对 Vue 组件的各部分使用其他 Webpack loader，例如 针对 `<style>` 使用Sass，针对 `<template>` 使用 Jade
+- 把 `<style>` 和 `<template>` 中引用的静态资源当做一个模块依赖，并使用 Webpack loader 处理。
+- 可以给每个组件“模拟”出 CSS 作用域
+- 在开发阶段，支持组件热加载
 
-In a nutshell, the combination of Webpack and `vue-loader` gives you a modern, flexible and extremely powerful front-end workflow for authoring Vue.js applications.
+简而言之，Webpack 结合 `vue-loader` 提供一个现代的、灵活的和极其给力的前端工作流，帮助你开发 Vue.js 应用。
 
-### What is Webpack?
+### Webpack 是什么？
 
-If you are already familiar with Webpack, feel free to skip the following explanation. But for those of you who are new to Webpack, here's a quick intro:
+如果你很熟悉 Webpack 大可跳过下面的解释，对于 Webpack 新手，以下是简要说明：
 
-[Webpack](http://webpack.github.io/) is a module bundler. It takes a bunch of files, treating each as a module, figuring out the dependencies between them, and bundle them into static assets that are ready for deployment.
+[Webpack](http://webpack.github.io/) 是一个模块化管理打包工具，它找到一堆文件，然后把每个文件当做一个模块，找出它们之间的依赖，打包生成用于开发的静态资源。
 
 ![webpack](http://webpack.github.io/assets/what-is-webpack.png)
 
-For a basic example, imagine we have a bunch of CommonJS modules. They cannot run directly inside the browser, so we need to "bundle" them into a single file that can be included via a `<script>` tag. Webpack can follow the dependencies of the `require()` calls and do that for us.
+举个简单例子，想象一下我们有很多 CommonJS 风格的模块，这些模块是没法在浏览器里直接跑的，所以我们要把它们“打包”到一个文件里，这个文件可以通过 `<script>` 标签来引用。Webpack 能够借着 `require()` 的调用找到所有的依赖，然后打包出一个我们要的 JavaScript 文件。
 
-But Webpack can do more than that. With "loaders", we can teach Webpack to transform all types of files in anyway we want before outputting the final bundle. Some examples include:
+Webpack 还能做更多别的事情，借助 "loader"，我们可以告诉 Webpack 如何处理各种类型的文件，让它按照我们要的转换方式输出到最终的打包文件里。举些例子：
 
-- Transpile ES2015, CoffeeScript or TypeScript modules into plain ES5 CommonJS modules;
-- Optionally you can pipe the source code through a linter before doing the compilation;
-- Transpile Jade templates into plain HTML and inline it as a JavaScript string;
-- Transpile SASS files into plain CSS, then convert it into a JavaScript snippet that inserts the resulting CSS as a `<style>` tag;
-- Process an image file referenced in HTML or CSS, moved it to the desired destination based on the path configurations, and naming it using its md5 hash.
+- 转换 ES2015、CoffeeScript 或 TypeScript 代码为原生 ES5 CommonJS 模块；
+- 可选地在编译处理前，把源代码连接（pipe）到一个代码检测器；
+- 转换 Jade 模板为原生 HTML 然后把它当作 JavaScript 字符串在代码中使用；
+- 转换 SASS 文件为原生 CSS, 然后生成一段 JavaScript 代码，这段代码会把转换得到的 CSS 结果用 `<style>` 标签插入到页面；
+- 处理 HTML 或 CSS 引用的图片，根据路径配置把它移动到想要的位置，并使用 md5 命名；
 
-Webpack is so powerful that when you understand how it works, it can dramatically improve your front-end workflow. Its primary drawback is verbose and complex configuration; but with this guide you should be able to find solutions for most common issues when using Webpack with Vue.js and `vue-loader`.
+如果你理解 Webpack 是如何工作的，你会感叹它如此给力，它极大地促进前端工作流。它的主要缺点就是配置繁琐复杂，不过有了这份文档之后，当你结合 webpack 使用 Vue.js 和 `vue-loader` 时，它能帮你解决大多数常见问题。
