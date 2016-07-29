@@ -1,6 +1,6 @@
-# Extracting CSS into a Single File
+# 提取 CSS 为单独文件
 
-Example config to extract all the processed CSS in all Vue components into a single CSS file:
+下面的例子配置，用来提取所有组件中处理后的 CSS 到一个单独的 CSS 文件：
 
 ``` bash
 npm install extract-text-webpack-plugin --save-dev
@@ -23,7 +23,7 @@ module.exports = {
   vue: {
     loaders: {
       css: ExtractTextPlugin.extract("css"),
-      // you can also include <style lang="less"> or other langauges
+      // 你还可以用 <style lang="less"> 或其他语言
       less: ExtractTextPlugin.extract("css!less")
     }
   },
