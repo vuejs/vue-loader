@@ -1,10 +1,10 @@
-# Basic Tutorial
+# 基础指南
 
-We are going to walk through setting up a Webpack + `vue-loader` project from scratch. If you are interested in ready-to-run examples, check out [vue-cli](https://github.com/vuejs/vue-cli) to quickly scaffold new projects. However, if you are not already a Webpack expert, I highly recommend going through the following tutorial to understand how the pieces fit together.
+接下来，我们会从零开始，逐步搭建一个 Webpack + `vue-loader` 的项目。如果你对准备好的运行例子感兴趣，查看 [vue-cli](https://github.com/vuejs/vue-cli)，借助脚手架快速搭建新项目。不过，如果你不是 Webpack 老司机，我还是非常建议您接着看下面教程，然后理解各部分是怎么配合工作的。
 
-### Project Structure
+### 项目结构
 
-A simple `vue-loader` based project structure looks like this:
+一个基于 `vue-loader` 的简单项目大概长这样：
 
 ``` bash
 .
@@ -18,16 +18,16 @@ A simple `vue-loader` based project structure looks like this:
 └── webpack.config.js
 ```
 
-### Installing Dependencies
+### 安装依赖
 
-Before we write any code, we need to install the proper NPM dependencies. Let's run:
+在我们敲代码之前，需要安装相应的 NPM 依赖包。我们可以运行：
 
 ``` bash
-# Create a package.json file.
-# fill in the questions as you desire.
+# 创建一个 package.json 文件。
+# 根据你的需求对问题填写回答就行
 npm init
 
-# Install everything we need
+# 安装所需的一切
 npm install\
   webpack webpack-dev-server\
   vue-loader vue-html-loader css-loader vue-style-loader vue-hot-reload-api\
@@ -37,11 +37,11 @@ npm install\
 npm install vue --save
 ```
 
-That's a lot of dependencies, I know! This is mostly because `vue-loader` needs to have other webpack loaders as **peer dependencies** rather than nested dependencies so that Webpack can find them.[^(1)]
+我知道这里确实不少依赖！主要原因是 `vue-loader` 需要把其他 webpack loader 作为 **同级依赖**，而不是深层依赖，这样 Webpack 才能能够找到它们。[^(1)]
 
-> Note: In previous versions of `vue-loader` we used to explicitly install `babel-runtime` 5.x to avoid duplicate dependencies - this is no longer necessary after recent babel upgrade.
+> 注意: `vue-loader` 的上个版本，我们通过明确安装 `babel-runtime` 5.x 版本来避免重复依赖 —— 在最近 babel 升级之后，这将不是必须的。
 
-After proper installation, your `package.json`'s `devDependencies` field should look like this:
+在正确安装依赖后，你的 `package.json` 的 `devDependencies` 字段应该长这样：
 
 ``` json
 ...
@@ -65,63 +65,65 @@ After proper installation, your `package.json`'s `devDependencies` field should 
 ...
 ```
 
-### Configuring Webpack
+### 配置 Webpack
 
-Here's the most basic Webpack configuration for `vue-loader`:
+下面是 `vue-loader` 最基本的 Webpack 配置：
 
 ``` js
 // webpack.config.js
 module.exports = {
-  // entry point of our application
+  // 应用的入口
   entry: './main.js',
-  // where to place the compiled bundle
+  // 编译打包后的输出
   output: {
     path: __dirname,
     filename: 'build.js'
   },
   module: {
-    // `loaders` is an array of loaders to use.
-    // here we are only configuring vue-loader
+    // `loaders` 是需要用到的 loader 组成的数组
+    // 这里只配置 vue-loader
     loaders: [
       {
-        test: /\.vue$/, // a regex for matching all files that end in `.vue`
-        loader: 'vue'   // loader to use for matched files
+        test: /\.vue$/, // 正则匹配所有以 `.vue` 结尾的文件
+        loader: 'vue'   // 对匹配到的文件使用何种 loader
       }
     ]
   }
 }
 ```
 
-With the above configuration, when you write the following in your JavaScript code:
+有了上面的配置，当你像下面这样写 JavaScript 代码的时候：
 
 ``` js
 var MyComponent = require('./my-component.vue')
 ```
 
 Webpack knows it needs to pipe the contents of `./my-component.vue` through `vue-loader`, because the filename matches the regex we provided in the config.
+Webpack 知道它需要把 `./my-component.vue` 的内容连接（pipe）到 `vue-loader`，因为文件名符合配置中的正则表达式。
 
-### Creating Other Files
+### 创建其他文件
 
 The app entry point, `main.js` typically looks like this (using ES2015 syntax):
+应用的入口 `main.js` 通常长这样（使用 ES2015 语法）：
 
 ``` js
 // main.js
 import Vue from 'vue'
-// require a *.vue component
+// 依赖一个 *.vue 组件
 import App from './components/App'
 
-// mount a root Vue instance
+// 挂载 Vue 根实例
 new Vue({
   el: 'body',
   components: {
-    // include the required component
-    // in the options
+    // 在配置中包含依赖的组件
     app: App
   }
 })
 ```
 
 Inside a `*.vue` component's `<script>` tag, you can also require other `*.vue` components. For example in `./components/App.vue`:
+你可以在一个 `*.vue` 组件的 `<script>` 标签里依赖其它多个 `*.vue` 组件。例如在 `./components/App.vue` 中：
 
 ``` html
 <template>
@@ -144,7 +146,7 @@ export default {
 </script>
 ```
 
-Next, let's create an `index.html` that simply uses the bundled file:
+接下来，我们新建一个 `index.html` 文件，简单的使用打包生成的文件：
 
 ``` html
 <!-- index.html -->
@@ -154,9 +156,10 @@ Next, let's create an `index.html` that simply uses the bundled file:
 </body>
 ```
 
-### Running It
+### 运行
 
-Finally, it's time to get it running! We will simply use [NPM scripts](https://docs.npmjs.com/misc/scripts) as our task runner, which is sufficient in most cases. Add the following to your `package.json`:
+最后来运行它！我们简单用 [NPM scripts](https://docs.npmjs.com/misc/scripts) 作任务运行，大多数情况也够用了。把下面代码添加到 `package.json` 中：
+
 
 ``` json
 ...
@@ -167,20 +170,21 @@ Finally, it's time to get it running! We will simply use [NPM scripts](https://d
 ...
 ```
 
-Then run:
+然后运行：
 
 ``` bash
 npm run dev
 ```
 
 And you should see your app working at `http://localhost:8080`, with hot-reloading enabled! To build, minify and write your bundle to disk, run:
+接着打开 `http://localhost:8080`，能看到你的应用跑起来了，还带热加载呢！想要构建、压缩，并将打包文件写入磁盘，则运行：
 
 ``` bash
 npm run build
 ```
 
-Note that Webpack uses the `webpack.config.js` if it finds one. If you named your Webpack config file with a different name, you need to specify it using the `--config /path/to/your/file` command line option.
+要注意的是，Webpack 默认找到 `webpack.config.js` ，把它当作配置文件。如果你的 Webpack 配置文件用别的命名，则需要通过命令行参数 `--config /你的/文件/路径` 来指定配置文件。
 
 ---
 
-[^(1)] If you are using NPM version 2.x, when you do `npm install vue-loader --save-dev` it will install and save all the peer dependencies for you. However, if you are using NPM 3.x, these peer dependencies will no longer be automatically installed. You will have to install them explicitly like we did above. Another way to deal with it is to simply copy `vue-loader`'s peer dependencies into your `package.json`'s `devDependencies` field and then run `npm install`.
+[^(1)] 如果你是用 NPM 2.x 版本的话，当你运行 `npm install vue-loader --save-dev` 时，它会给你安装保存所有的同级依赖。但是，如果你用的 NPM 是 3.x 版本的话，这些同级依赖将不再自动安装了，你必须得像上面那样明确安装它们。另一种简单的处理方式就是，复制 `vue-loader` 的同级依赖到你的 `package.json` 文件的 `devDependencies` 字段，然后运行 `npm install`。
