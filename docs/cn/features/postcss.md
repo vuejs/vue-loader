@@ -1,17 +1,17 @@
-# PostCSS and Autoprefixer
+# PostCSS 和 Autoprefixer
 
-Any CSS output processed by `vue-loader` is piped through [PostCSS](https://github.com/postcss/postcss) for scoped CSS rewriting and auto-prefixed by default using [autoprefixer](https://github.com/postcss/autoprefixer).
+所有经过 `vue-loader` 处理输出的 CSS 都会连接（pipe）到 [PostCSS](https://github.com/postcss/postcss) 进行作用域 CSS 重写，然后使用 [autoprefixer](https://github.com/postcss/autoprefixer) 自动添加前缀。
 
-### Configuring Autoprefixer
+### 配置 Autoprefixer
 
-You can configure autoprefixer using the `autoprefixer` option under the `vue` section of your webpack config. See possible [autoprefixer options](https://github.com/postcss/autoprefixer#options). Also, you can pass in `false` to disable autoprefixing.
+你可以使用 webpack 配置中 `vue` 下的 `autoprefixer` 配置项来配置 autoprefixer。参考 [autoprefixer 的可配置项](https://github.com/postcss/autoprefixer#options)。当然，你可以设置 `false` 来禁用 autoprefixing。
 
-Example:
+例子：
 
 ``` js
 // webpack.config.js
 module.exports = {
-  // other options...
+  // 其他配置项...
   module: {
     loaders: [
       {
@@ -20,9 +20,9 @@ module.exports = {
       }
     ]
   },
-  // vue-loader configurations
+  // vue-loader 配置
   vue: {
-    // configure autoprefixer
+    // 配置 autoprefixer
     autoprefixer: {
       browsers: ['last 2 versions']
     }
@@ -30,35 +30,35 @@ module.exports = {
 }
 ```
 
-### Using Custom PostCSS Plugins
+### 自定义 PostCSS 插件
 
-To use custom PostCSS plugins, pass an array to the `postcss` option under the `vue` section. Example using [CSSNext](http://cssnext.io/):
+要自定义使用 PostCSS 的插件，可以在 `vue` 下的 `postcss` 配置项传入一个数组。下面是使用 [CSSNext](http://cssnext.io/) 插件的例子：
 
 ``` js
 // webpack.config.js
 module.exports = {
   // other configs...
   vue: {
-    // use custom postcss plugins
+    // 自定义使用 postcss 插件
     postcss: [require('postcss-cssnext')()],
-    // disable vue-loader autoprefixing.
-    // this is a good idea since cssnext comes with it too.
+    // 禁用 vue-loader 的 autoprefixing.
+    // 因为 cssnext 包含这个功能，所以禁用它准没错
     autoprefixer: false
   }
 }
 ```
 
-In addition to providing an Array of plugins, the `postcss` option also accepts:
+`postcss` 配置项除了可以配置数组以外，还支持：
 
-- A function that returns an array of plugins;
+- 一个方法，其中返回插件数组
 
-- An object that contains options to be passed to the PostCSS processor. This is useful when you are using PostCSS projects that relies on custom parser/stringifiers:
+- 一个对象，包含传递给 PostCSS 处理器的配置项。如果你使用 PostCSS 时依赖了自定义的 解析器/生成器，这种配置就很好用。
 
   ``` js
   postcss: {
-    plugins: [...], // list of plugins
+    plugins: [...], // 插件列表
     options: {
-      parser: sugarss // use sugarss parser
+      parser: sugarss // 使用 sugarss 解析器
     }
   }
   ```
