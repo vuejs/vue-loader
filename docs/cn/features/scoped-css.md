@@ -1,6 +1,6 @@
-# Scoped CSS
+# 带作用域的 CSS
 
-When a `<style>` tag has the `scoped` attribute, its CSS will apply to elements of the current component only. This is similar to the style encapsulation found in Shadow DOM. It comes with some caveats, but doesn't require any polyfills. It is achieved by using PostCSS to transform the following:
+当一个 `<style>` 标签有了 `作用域` 属性，它的 CSS 将仅仅作用于当前组件的元素，这跟 Shadow Dom 的样式封装很像。它会引起一些警告，但不需要任何 polyfill。这个功能借助 PostCSS 实现，它会将下面代码：
 
 ``` html
 <style scoped>
@@ -14,7 +14,7 @@ When a `<style>` tag has the `scoped` attribute, its CSS will apply to elements 
 </template>
 ```
 
-Into the following:
+转化为这样的代码：
 
 ``` html
 <style>
@@ -28,9 +28,9 @@ Into the following:
 </template>
 ```
 
-#### Notes
+#### 注意
 
-1. You can include both scoped and non-scoped styles in the same component:
+1. 在同一个组件中，你可以同时使用带作用域和不带的：
 
   ``` html
   <style>
@@ -42,10 +42,10 @@ Into the following:
   </style>
   ```
 
-2. A child component's root node will be affected by both the parent's scoped CSS and the child's scoped CSS.
+2. 一个子组件的根节点会同时受到父组件的 CSS 作用域，以及子组件自身 CSS 作用域的影响。
 
-3. Partials are not affected by scoped styles.
+3. Partials 不受样式作用域影响。
 
-4. **Scoped styles do not eliminate the need for classes**. Due to the way browsers render various CSS selectors, `p { color: red }` will be many times slower when scoped (i.e. when combined with an attribute selector). If you use classes or ids instead, such as in `.example { color: red }`, then you virtually eliminate that performance hit. [Here's a playground](http://stevesouders.com/efws/css-selectors/csscreate.php) where you can test the differences yourself.
+4. **作用域样式不排除使用类选择器**. 根据浏览器渲染不同选择器样式的方式， `p { color: red }` 加上作用域（如，与属性选择器结合）后会慢了几倍。如果你用类或者 ID 选择器代替，如 `.example { color: red }`，也就差不多解决了性能问题。[这里有一个测试环境](http://stevesouders.com/efws/css-selectors/csscreate.php)，你可以自己测试不同选择器的差异。
 
-5. **Be careful with descendant selectors in recursive components!** For a CSS rule with the selector `.a .b`, if the element that matches `.a` contains a recursive child component, then all `.b` in that child component will be matched by the rule.
+5. **“多代”组件，慎用后代选择器！** 有一个样式规则使用 `.a .b` 选择器，此时，若匹配 `.a` 的元素包含“多代”子组件的话，则匹配 `.b` 的各代子组件都会应用该样式。
