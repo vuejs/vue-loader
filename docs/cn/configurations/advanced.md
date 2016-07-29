@@ -1,8 +1,8 @@
-# Advanced Loader Configuration
+# 高级 Loader 配置
 
-Sometimes you may want to apply a custom loader string to a language instead of letting `vue-loader` infer it. Or you may simply want to overwrite the built-in loader configuration for the default languages. To do that, add a `vue` block in your Webpack config file, and specify the `loaders` option.
+有时候，你想要给某种语言指定一个 loader 字符串，而不是让 `vue-loader` 去探测得到，或者只是想覆盖默认语言内置的 loader 配置。想要实现这些，只要在 Webpack 配置中增加一块 `vue` 配置，然后设置 `loaders` 选项。
 
-Example:
+例子：
 
 ``` js
 // webpack.config.js
@@ -20,14 +20,14 @@ module.exports = {
   vue: {
     // ... other vue options
     loaders: {
-      // load all <script> without "lang" attribute with coffee-loader
+      // 使用 coffee-loader 处理所有 <script>，无须指定 "lang" 属性
       js: 'coffee',
-      // load <template> directly as HTML string, without piping it
-      // through vue-html-loader first
+      // 直接加载 <template> 作为 HTML字符串
+      // 无须先连接（pipe）到 vue-html-loader
       html: 'raw'
     }
   }
 }
 ```
 
-A more practical usage of the advanced loader configuration is [extracting CSS inside components into a single file](./extract-css.md).
+一个更实用的高级 loader 配置就是 [把组件内的 CSS 抽取成单独的文件](./extract-css.md)。
