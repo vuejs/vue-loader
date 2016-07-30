@@ -1,4 +1,4 @@
-# 测试
+﻿# 测试
 
 当测试 `*.vue` 文件时，我们不能使用基于原生 CommonJS 的测试执行器，因为它不知道怎么处理 `*.vue` 文件。取而代之的是，依然使用 Webpack + vue-loader 去打包我们的测试文件，建议安装使用 [Karma](http://karma-runner.github.io/0.13/index.html) 和 [karma-webpack](https://github.com/webpack/karma-webpack)。
 
@@ -95,5 +95,4 @@ describe('a.vue', function () {
 npm test
 ```
 
-Again, [vue-loader-example](https://github.com/vuejs/vue-loader-example) contains a fully working example with tests.
 再次安利，[vue-loader-example](https://github.com/vuejs/vue-loader-example) 包含完全可跑的测试例子。

@@ -1,4 +1,4 @@
-# 基础指南
+﻿# 基础指南
 
 接下来，我们会从零开始，逐步搭建一个 Webpack + `vue-loader` 的项目。如果你对准备好的运行例子感兴趣，查看 [vue-cli](https://github.com/vuejs/vue-cli)，借助脚手架快速搭建新项目。不过，如果你不是 Webpack 老司机，我还是非常建议您接着看下面教程，然后理解各部分是怎么配合工作的。
 
@@ -173,7 +173,6 @@ export default {
 npm run dev
 ```
 
-And you should see your app working at `http://localhost:8080`, with hot-reloading enabled! To build, minify and write your bundle to disk, run:
 接着打开 `http://localhost:8080`，能看到你的应用跑起来了，还带热加载呢！想要构建、压缩，并将打包文件写入磁盘，则运行：
 
 ``` bash
