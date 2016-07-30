@@ -1,4 +1,4 @@
-# 热加载
+﻿# 热加载
 
 "热加载" 不只是简单的重新加载修改后的文件。有了热加载之后，当你修改一个 `*.vue` 文件后，这个组件对应的所有实例都会换成新的，而且 **无须重新加载页面**，甚至还保持整个应用以及这些刷新组件的当前状态。
 
@@ -39,5 +39,4 @@
 
 - 查看 [Webpack dev server 文档](https://webpack.github.io/docs/webpack-dev-server.html) 了解其他高级用法，例如结合其他后台服务器使用 webpack dev server。
 
-- Finally, if you have an existing [Express](http://expressjs.com/en/index.html) based Node.js backend, you can just add the [Webpack dev middleware](https://webpack.github.io/docs/webpack-dev-middleware.html) to serve your webpack bundle.
 - 最后，如果你有一个基于 Node.js 后台的 [Express](http://expressjs.com/en/index.html) 项目，你只需增加 [Webpack dev 中间件](https://webpack.github.io/docs/webpack-dev-middleware.html) 来返回 webpack 相关访问。

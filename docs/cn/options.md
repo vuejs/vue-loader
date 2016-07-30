@@ -1,4 +1,4 @@
-# 配置项说明
+﻿# 配置项说明
 
 ### loaders
 
@@ -72,5 +72,4 @@
 - ^8.4.0
 - 类型: `Object`
 
-  Pass options to the template rendering engine (via [consolidate](https://github.com/tj/consolidate.js)) if you are using a non-html templating language.
   如果你使用非 HTML 的模板引擎，这个配置可以用来给模板渲染引擎传递配置项 （借助 [consolidate](https://github.com/tj/consolidate.js)）。
