@@ -23,8 +23,8 @@
 在我们敲代码之前，需要安装相应的 NPM 依赖包。我们可以运行：
 
 ``` bash
-# 创建一个 package.json 文件。
-# 根据你的需求对问题填写回答就行
+# 该命令会创建一个 package.json 文件。
+# 根据你的需求对提示的问题填写回答就行
 npm init
 
 # 安装所需的一切
@@ -98,12 +98,10 @@ module.exports = {
 var MyComponent = require('./my-component.vue')
 ```
 
-Webpack knows it needs to pipe the contents of `./my-component.vue` through `vue-loader`, because the filename matches the regex we provided in the config.
 Webpack 知道它需要把 `./my-component.vue` 的内容连接（pipe）到 `vue-loader`，因为文件名符合配置中的正则表达式。
 
 ### 创建其他文件
 
-The app entry point, `main.js` typically looks like this (using ES2015 syntax):
 应用的入口 `main.js` 通常长这样（使用 ES2015 语法）：
 
 ``` js
@@ -122,8 +120,7 @@ new Vue({
 })
 ```
 
-Inside a `*.vue` component's `<script>` tag, you can also require other `*.vue` components. For example in `./components/App.vue`:
-你可以在一个 `*.vue` 组件的 `<script>` 标签里依赖其它多个 `*.vue` 组件。例如在 `./components/App.vue` 中：
+你可以在 `*.vue` 组件的 `<script>` 标签里，依赖多个其它 `*.vue` 组件。例如在 `./components/App.vue` 中：
 
 ``` html
 <template>
@@ -158,7 +155,7 @@ export default {
 
 ### 运行
 
-最后来运行它！我们简单用 [NPM scripts](https://docs.npmjs.com/misc/scripts) 作任务运行，大多数情况也够用了。把下面代码添加到 `package.json` 中：
+最后来运行它！我们用简单的 [NPM scripts](https://docs.npmjs.com/misc/scripts) 作任务运行，大多数情况也够用了。把下面代码添加到 `package.json` 中：
 
 
 ``` json
@@ -187,4 +184,4 @@ npm run build
 
 ---
 
-[^(1)] 如果你是用 NPM 2.x 版本的话，当你运行 `npm install vue-loader --save-dev` 时，它会给你安装保存所有的同级依赖。但是，如果你用的 NPM 是 3.x 版本的话，这些同级依赖将不再自动安装了，你必须得像上面那样明确安装它们。另一种简单的处理方式就是，复制 `vue-loader` 的同级依赖到你的 `package.json` 文件的 `devDependencies` 字段，然后运行 `npm install`。
+[^(1)] 如果你用 NPM 2.x 版本，当运行 `npm install vue-loader --save-dev` 时，它会安装保存所有的同级依赖。但是，如果你用的 NPM 是 3.x 版本的，那么这些同级依赖将不再自动安装了，你必须得像上面那样明确安装它们。另一种简单的处理方式就是，复制 `vue-loader` 的同级依赖到你的 `package.json` 文件的 `devDependencies` 字段，然后运行 `npm install`。

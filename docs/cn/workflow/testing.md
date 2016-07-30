@@ -50,7 +50,7 @@ var testsContext = require.context('.', true, /\.spec$/)
 testsContext.keys().forEach(testsContext)
 ```
 
-入口文件只是简单的 require 同目录的其他所有以 `.spec.js` 结尾的文件。现在我们可以真的写点测试：
+入口文件只是简单的 require 同目录下，其他所有以 `.spec.js` 结尾的文件。现在我们可以真的来写点测试：
 
 ``` js
 // test/component-a.spec.js

@@ -3,7 +3,7 @@
 当构建打包文件用于生产环境时，有两件事情要做：
 
 1. 压缩我们的应用代码；
-2. 按照 [Vue.js 教程中描述的](http://vuejs.org/guide/application.html#Deploying_for_Production)，移除 Vue.js 源码中的所有警告代码。
+2. 按照 [Vue.js 教程中描述的步骤](http://vuejs.org/guide/application.html#Deploying_for_Production)，移除 Vue.js 源码中的所有警告代码。
 
 下面是配置例子：
 

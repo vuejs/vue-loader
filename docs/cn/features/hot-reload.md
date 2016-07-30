@@ -25,9 +25,9 @@
 
 - 当一个组件可以热加载时，它当前的状态是会保持的，不过组件本身是会销毁并重新创建的，所以，它的生命周期钩子方法都会相应被调用。要确保恰当地解除生命周期方法中产生的副作用。
 
-- 对于热加载组件的子组件，无法保证它的私有的状态，在热加载后与之前是一致的。
+- 对于热加载组件的子组件，无法保证在热加载后，它的私有状态与之前是一致的。
 
-- Vue 根实例，或手动挂载的实例，无法进行热加载，而是强制整个重新加载。
+- Vue 根实例，或手动挂载的实例，无法进行热加载，而是要强制整个重新加载。
 
 ### 配置提示
 
@@ -40,4 +40,4 @@
 - 查看 [Webpack dev server 文档](https://webpack.github.io/docs/webpack-dev-server.html) 了解其他高级用法，例如结合其他后台服务器使用 webpack dev server。
 
 - Finally, if you have an existing [Express](http://expressjs.com/en/index.html) based Node.js backend, you can just add the [Webpack dev middleware](https://webpack.github.io/docs/webpack-dev-middleware.html) to serve your webpack bundle.
-- 最后，如果你一个基于 Node.js 后台的 [Express](http://expressjs.com/en/index.html) 项目，你只需增加 [Webpack dev 中间件](https://webpack.github.io/docs/webpack-dev-middleware.html) 来返回 webpack 相关访问。
+- 最后，如果你有一个基于 Node.js 后台的 [Express](http://expressjs.com/en/index.html) 项目，你只需增加 [Webpack dev 中间件](https://webpack.github.io/docs/webpack-dev-middleware.html) 来返回 webpack 相关访问。

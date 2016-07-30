@@ -1,6 +1,6 @@
 # 提取 CSS 为单独文件
 
-下面的例子配置，用来提取所有组件中处理后的 CSS 到一个单独的 CSS 文件：
+配置例子，展示如何提取所有组件处理后的 CSS，然后放到一个单独的 CSS 文件里：
 
 ``` bash
 npm install extract-text-webpack-plugin --save-dev

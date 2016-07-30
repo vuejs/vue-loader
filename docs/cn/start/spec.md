@@ -26,8 +26,7 @@ export default {
 
 `vue-loader` 会解析这个文件，分别取出每个语言块，如果需要，则连接到其他 loader，最后把每一块结果放回去，拼装成一个 CommonJS 模块，它的 `module.exports` 就是 Vue.js 组件的选项对象（options）。
 
-`vue-loader` supports using non-default languages, such as CSS pre-processors and compile-to-HTML template languages, by specifying the `lang` attribute for a language block. For example, you can use SASS for the style of your component like this:
-`vue-loader` 支持使用非默认的语言，例如 CSS 预处理器 和 生成 HTML 的模板语言，只需给语言块指定 `lang` 属性就可以了。举个例子，你可以像下面这样给组件的 style 块使用 SASS：
+`vue-loader` 支持使用非默认的语言，例如 CSS 预处理器 和 生成 HTML 的模板语言，只需给语言块指定 `lang` 属性。举个例子，你可以像下面这样给组件的 style 块使用 SASS：
 
 ``` html
 <style lang="sass">
@@ -65,7 +64,7 @@ export default {
 
 - 默认情况下，取出内容，使用 `style-loader` 处理，最终动态地插入到 document 的 `<head>` 中，变成一个真正 `<style>` 标签。
 
-### Src Imports
+### Src 引用
 
 如果你更喜欢把 `*.vue` 的各部分放在不同的文件，你可以使用 `src` 属性在语言块中引入外部文件。
 
@@ -84,7 +83,7 @@ export default {
 
 ### 语法高亮
 
-目前支持语法高亮的工具有：[Sublime Text](https://github.com/vuejs/vue-syntax-highlight), [Atom](https://atom.io/packages/language-vue), [Vim](https://github.com/posva/vim-vue), [Visual Studio Code](https://marketplace.visualstudio.com/items/liuji-jim.vue), [Brackets](https://github.com/pandao/brackets-vue), 和 [JetBrains products](https://plugins.jetbrains.com/plugin/8057) (WebStorm, PhpStorm 等等)。 非常欢迎和感谢大家贡献其他编辑器或 IDE 的支持！如果你没用到预处理器，可以在编辑器中把 `*.vue` 文件当作 HTML 文件凑合使用。
+目前支持语法高亮的工具有：[Sublime Text](https://github.com/vuejs/vue-syntax-highlight), [Atom](https://atom.io/packages/language-vue), [Vim](https://github.com/posva/vim-vue), [Visual Studio Code](https://marketplace.visualstudio.com/items/liuji-jim.vue), [Brackets](https://github.com/pandao/brackets-vue), 和 [JetBrains products](https://plugins.jetbrains.com/plugin/8057) (WebStorm, PhpStorm 等等)。 非常欢迎和感谢大家贡献其他编辑器或 IDE 的支持！如果你没用到预处理器，可以在编辑器中把 `*.vue` 文件当作 HTML 文件凑合着用。
 
 ### 注释
 
