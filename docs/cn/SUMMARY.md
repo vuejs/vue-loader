@@ -1,19 +1,19 @@
-- Getting Started
-  - [Vue Component Spec](start/spec.md)
-  - [Basic Tutorial](start/tutorial.md)
-- Features
-  - [ES2015 and Babel](features/es2015.md)
-  - [Scoped CSS](features/scoped-css.md)
-  - [PostCSS and Autoprefixer](features/postcss.md)
-  - [Hot Reload](features/hot-reload.md)
-- Configurations
-  - [Pre-Processors](configurations/pre-processors.md)
-  - [Asset URL Handling](configurations/asset-url.md)
-  - [Advanced Loader Configuration](configurations/advanced.md)
-  - [Extracting CSS File](configurations/extract-css.md)
-- Workflow
-  - [Production Build](workflow/production.md)
-  - [Linting](workflow/linting.md)
-  - [Testing](workflow/testing.md)
-  - [Testing with Mocks](workflow/testing-with-mocks.md)
-- [Options Reference](options.md)
+- 入门
+  - [Vue 组件说明](start/spec.md)
+  - [基础指南](start/tutorial.md)
+- 功能
+  - [ES2015 和 Babel](features/es2015.md)
+  - [CSS 作用域](features/scoped-css.md)
+  - [PostCSS 和 Autoprefixer](features/postcss.md)
+  - [热加载](features/hot-reload.md)
+- 配置
+  - [预处理器](configurations/pre-processors.md)
+  - [处理资源 URL](configurations/asset-url.md)
+  - [高级 Loader 配置](configurations/advanced.md)
+  - [提取 CSS 文件](configurations/extract-css.md)
+- 工作流
+  - [构建用于生产环境](workflow/production.md)
+  - [检查代码](workflow/linting.md)
+  - [测试](workflow/testing.md)
+  - [用 Mocks 测试](workflow/testing-with-mocks.md)
+- [配置项说明](options.md)
