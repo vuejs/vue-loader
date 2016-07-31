@@ -3,10 +3,6 @@
 </template>
 
 <script>
-export function test () {
-  return 'hi'
-}
-
 export default {
   data () {
     return {

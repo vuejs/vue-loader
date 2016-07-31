@@ -79,8 +79,6 @@ describe('vue-loader', function () {
     test({
       entry: './test/fixtures/basic.vue'
     }, function (window, module, rawModule) {
-      // test named export
-      expect(rawModule.test()).to.equal('hi')
       assertRenderFn(module, '<h2 class="red">{{msg}}</h2>')
       expect(module.data().msg).to.contain('Hello from Component A!')
       var style = window.document.querySelector('style').textContent
@@ -183,7 +181,7 @@ describe('vue-loader', function () {
         column: col
       })
       expect(pos.source.indexOf('basic.vue') > -1)
-      expect(pos.line).to.equal(13)
+      expect(pos.line).to.equal(9)
       done()
     })
   })
