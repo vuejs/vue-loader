@@ -9,8 +9,7 @@ var rimraf = require('rimraf')
 var genId = require('../lib/gen-id')
 var SourceMapConsumer = require('source-map').SourceMapConsumer
 var ExtractTextPlugin = require("extract-text-webpack-plugin")
-var compiler = require('vue-template-compiler')
-var beautify = require('js-beautify').js_beautify
+var compiler = require('../lib/template-compiler')
 
 var loaderPath = 'expose?vueModule!' + path.resolve(__dirname, '../')
 var mfs = new MemoryFS()
@@ -61,11 +60,26 @@ function test (options, assert) {
   })
 }
 
-function assertRenderFn (options, template) {
-  var compiled = compiler.compile(template)
-  expect(options.render.toString().replace(/\t/g, '')).to.equal('function (){' +
-    beautify(compiled.render, { indent_size: 2 }) +
-  '}')
+function mockRender (options, data) {
+  return options.render.call(Object.assign({
+    _h (tag, data, children) {
+      if (Array.isArray(data)) {
+        children = data
+        data = null
+      }
+      return {
+        tag: tag,
+        data: data,
+        children: children
+      }
+    },
+    _m (index) {
+      return options.staticRenderFns[index].call(this)
+    },
+    _s (str) {
+      return String(str)
+    }
+  }, data))
 }
 
 function interopDefault (module) {
@@ -79,7 +93,14 @@ describe('vue-loader', function () {
     test({
       entry: './test/fixtures/basic.vue'
     }, function (window, module, rawModule) {
-      assertRenderFn(module, '<h2 class="red">{{msg}}</h2>')
+      var vnode = mockRender(module, {
+        msg: 'hi'
+      })
+      // <h2 class="red">{{msg}}</h2>
+      expect(vnode.tag).to.equal('h2')
+      expect(vnode.data.staticClass).to.equal('red')
+      expect(vnode.children[0]).to.equal('hi')
+
       expect(module.data().msg).to.contain('Hello from Component A!')
       var style = window.document.querySelector('style').textContent
       expect(style).to.contain('comp-a h2 {\n  color: #f00;\n}')
@@ -91,13 +112,15 @@ describe('vue-loader', function () {
     test({
       entry: './test/fixtures/pre.vue'
     }, function (window, module) {
-      assertRenderFn(module,
-        '<div>' +
-          '<h1>This is the app</h1>' +
-          '<comp-a></comp-a>' +
-          '<comp-b></comp-b>' +
-        '</div>'
-      )
+      var vnode = mockRender(module)
+      // div
+      //   h1 This is the app
+      //   comp-a
+      //   comp-b
+      expect(vnode.children[0].tag).to.equal('h1')
+      expect(vnode.children[1].tag).to.equal('comp-a')
+      expect(vnode.children[2].tag).to.equal('comp-b')
+
       expect(module.data().msg).to.contain('Hello from coffee!')
       var style = window.document.querySelector('style').textContent
       expect(style).to.contain('body {\n  font: 100% Helvetica, sans-serif;\n  color: #999;\n}')
@@ -111,14 +134,23 @@ describe('vue-loader', function () {
     }, function (window, module) {
       var id = 'data-v-' + genId(require.resolve('./fixtures/scoped-css.vue'))
       expect(module._scopeId).to.equal(id)
-      assertRenderFn(module,
-        '<div>' +
-          '<div><h1>hi</h1></div>\n' +
-          '<p class="abc def">hi</p>\n' +
-          '<template v-if="ok"><p class="test">yo</p></template>\n' +
-          '<svg><template><p></p></template></svg>' +
-        '</div>'
-      )
+
+      var vnode = mockRender(module, {
+        ok: true
+      })
+      // <div>
+      //   <div><h1>hi</h1></div>
+      //   <p class="abc def">hi</p>
+      //   <template v-if="ok"><p class="test">yo</p></template>
+      //   <svg><template><p></p></template></svg>
+      // </div>
+      expect(vnode.children[0].tag).to.equal('div')
+      expect(vnode.children[1]).to.equal(' ')
+      expect(vnode.children[2].tag).to.equal('p')
+      expect(vnode.children[2].data.staticClass).to.equal('abc def')
+      expect(vnode.children[4][0].tag).to.equal('p')
+      expect(vnode.children[4][0].data.staticClass).to.equal('test')
+
       var style = window.document.querySelector('style').textContent
       expect(style).to.contain('.test[' + id + '] {\n  color: yellow;\n}')
       expect(style).to.contain('.test[' + id + ']:after {\n  content: \'bye!\';\n}')
@@ -144,7 +176,10 @@ describe('vue-loader', function () {
     test({
       entry: './test/fixtures/template-import.vue'
     }, function (window, module) {
-      assertRenderFn(module, '<div><h1>hello</h1></div>')
+      var vnode = mockRender(module)
+      // '<div><h1>hello</h1></div>'
+      expect(vnode.children[0].tag).to.equal('h1')
+      expect(vnode.children[0].children[0]).to.equal('hello')
       done()
     })
   })
@@ -225,8 +260,11 @@ describe('vue-loader', function () {
           msg: 'Hello from mocked service!'
         }
       }))
-      assertRenderFn(module, '<div class="msg">{{ msg }}</div>')
-      expect(module.data().msg).to.contain('Hello from mocked service!')
+      var vnode = mockRender(module, module.data())
+      // <div class="msg">{{ msg }}</div>
+      expect(vnode.tag).to.equal('div')
+      expect(vnode.data.staticClass).to.equal('msg')
+      expect(vnode.children[0]).to.equal('Hello from mocked service!')
       done()
     })
   })
@@ -246,7 +284,16 @@ describe('vue-loader', function () {
         ]
       }
     }, function (window, module) {
-      assertRenderFn(module, '<img src="logo.c9e00e.png">\n<img src="logo.c9e00e.png">')
+      var vnode = mockRender(module)
+      // <div>
+      //   <img src="logo.c9e00e.png">
+      //   <img src="logo.c9e00e.png">
+      // </div>
+      expect(vnode.children[0].tag).to.equal('img')
+      expect(vnode.children[0].data.attrs.src).to.equal('logo.c9e00e.png')
+      expect(vnode.children[2].tag).to.equal('img')
+      expect(vnode.children[2].data.attrs.src).to.equal('logo.c9e00e.png')
+
       var style = window.document.querySelector('style').textContent
       expect(style).to.contain('html { background-image: url(logo.c9e00e.png);\n}')
       expect(style).to.contain('body { background-image: url(logo.c9e00e.png);\n}')
@@ -267,6 +314,20 @@ describe('vue-loader', function () {
     }, function (window) {
       var style = window.document.querySelector('style').textContent
       expect(style).to.contain('h1 {\n  color: red;\n  font-size: 14px\n}')
+      done()
+    })
+  })
+
+  it('transpile template with babel', function (done) {
+    test({
+      entry: './test/fixtures/babel.vue'
+    }, function (window, module) {
+      var vnode = mockRender(module, {
+        a: 'hello'
+      })
+      // <div :class="{[a]:true}"></div>
+      expect(vnode.tag).to.equal('div')
+      expect(vnode.data.class.hello).to.equal(true)
       done()
     })
   })
