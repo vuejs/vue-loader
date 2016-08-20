@@ -318,16 +318,18 @@ describe('vue-loader', function () {
     })
   })
 
-  it('transpile template with babel', function (done) {
+  it('transpile ES2015 features in template', function (done) {
     test({
-      entry: './test/fixtures/babel.vue'
+      entry: './test/fixtures/es2015.vue'
     }, function (window, module) {
       var vnode = mockRender(module, {
-        a: 'hello'
+        a: 'hello',
+        b: true
       })
       // <div :class="{[a]:true}"></div>
       expect(vnode.tag).to.equal('div')
-      expect(vnode.data.class.hello).to.equal(true)
+      expect(vnode.data.class['test-hello']).to.equal(true)
+      expect(vnode.data.class['b']).to.equal(true)
       done()
     })
   })
