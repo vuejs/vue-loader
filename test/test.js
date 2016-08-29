@@ -276,4 +276,20 @@ describe('vue-loader', function () {
       done()
     })
   })
+
+  it.only('css-modules', function (done) {
+    test({
+      entry: './test/fixtures/css-modules.vue'
+    }, function (window) {
+      var module = window.vueModule
+      var match = module.template.match(/\s*<h2 class="(.*?)"><\/h2>/)
+      expect(match).to.have.length(2)
+      var className = match[1]
+      expect(className).to.not.equal('red')
+      expect(className).to.match(/^_/)
+      var style = window.document.querySelector('style').textContent
+      expect(style).to.contain('.' + className + ' {\n  color: red;\n}')
+      done()
+    })
+  })
 })

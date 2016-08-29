@@ -1,3 +1,43 @@
+＃ Add CSS modules support
+
+Covert
+
+```html
+<style module="style">
+.red {
+  color: red;
+}
+</style>
+
+<template>
+  <h2 class="style.red"></h2>
+</template>
+
+<script>
+module.exports = {}
+</script>
+```
+
+to:
+
+```html
+<style module="style">
+.red {
+  color: red;
+}
+</style>
+
+<template>
+  <h2 class="style.red"></h2>
+</template>
+
+<script>
+module.exports = {}
+</script>
+```
+
+＃ 下面是原来的 README
+
 # vue-loader [![Build Status](https://circleci.com/gh/vuejs/vue-loader/tree/master.svg?style=shield)](https://circleci.com/gh/vuejs/vue-loader/tree/master) [![npm package](https://img.shields.io/npm/v/vue-loader.svg?maxAge=2592000)](https://www.npmjs.com/package/vue-loader)
 
 > Vue.js component loader for [Webpack](http://webpack.github.io).
