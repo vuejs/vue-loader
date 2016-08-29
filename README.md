@@ -1,6 +1,8 @@
-＃ Add CSS modules support
+# Add CSS modules support
 
-Covert
+## Basic
+
+Convert
 
 ```html
 <style module="style">
@@ -22,13 +24,13 @@ to:
 
 ```html
 <style module="style">
-.red {
+._8x_KsHmyrocTNd7akA_LL {
   color: red;
 }
 </style>
 
 <template>
-  <h2 class="style.red"></h2>
+  <h2 class="_8x_KsHmyrocTNd7akA_LL"></h2>
 </template>
 
 <script>
@@ -36,7 +38,39 @@ module.exports = {}
 </script>
 ```
 
-＃ 下面是原来的 README
+## Scoped animation name
+
+```html
+<style module="style">
+@keyframes fade {
+  from { opacity: 1; } to { opacity: 0; }
+}
+.animate {
+  animation: fade 1s;
+}
+</style>
+```
+
+becomes:
+
+```html
+<style module="style">
+@keyframes n5Q3vnbE7aL9uu6uOUOLo {
+  from { opacity: 1; } to { opacity: 0; }
+}
+.animate {
+  animation: n5Q3vnbE7aL9uu6uOUOLo 1s;
+}
+</style>
+```
+
+# TODO
+1. convert static class name in binding class.
+2. provide style entry in `script`
+
+Note: properties in `animation` shorthand should be in correct order.
+
+# Original README below:
 
 # vue-loader [![Build Status](https://circleci.com/gh/vuejs/vue-loader/tree/master.svg?style=shield)](https://circleci.com/gh/vuejs/vue-loader/tree/master) [![npm package](https://img.shields.io/npm/v/vue-loader.svg?maxAge=2592000)](https://www.npmjs.com/package/vue-loader)
 
