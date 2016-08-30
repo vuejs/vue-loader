@@ -55,7 +55,8 @@
 
 # TODO
 - [x] convert static class name in binding class.
-- [ ] provide style entry in `script`
+- [x] provide style entry in `script`
+- [ ] write document
 
 # Original README below:
 
