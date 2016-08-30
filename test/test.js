@@ -282,12 +282,35 @@ describe('vue-loader', function () {
       entry: './test/fixtures/css-modules.vue'
     }, function (window) {
       var module = window.vueModule
+      console.log(module.template)
+
+      // get local class name
       var match = module.template.match(/\s*<h2 class="(.*?)"><\/h2>/)
       expect(match).to.have.length(2)
       var className = match[1]
+      expect(className).to.not.equal('style.red')
       expect(className).to.match(/^_/)
+
+      // class name in style
       var style = window.document.querySelector('style').textContent
       expect(style).to.contain('.' + className + ' {\n  color: red;\n}')
+
+      // animation name
+      match = style.match(/@-webkit-keyframes\s+(\S+)\s+{/)
+      expect(match).to.have.length(2)
+      var animationName = match[1]
+      expect(animationName).to.not.equal('fade')
+      expect(style).to.contain('animation: ' + animationName + ' 1s;')
+
+      // static class name replacement
+      var expected = (
+          '<h2 class="style.red"></h2>\n' +
+          '<h3 class="{{ [\'style.red\'] }}"></h3>\n' +
+          '<h4 v-bind:class="[\'style.red\']"></h4>\n' +
+          '<h5 :class="[\'style.red\', { \'style.red\': isRed }, blue]"></h5>'
+      ).replace(/style\.red/g, className)
+      expect(module.template).to.contain(expected)
+
       done()
     })
   })

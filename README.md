@@ -1,74 +1,47 @@
 # Add CSS modules support
 
-## Basic
-
-Convert
+## Overview
 
 ```html
+<!-- use module="xxx" to turn on css modules -->
 <style module="style">
-.red {
-  color: red;
-}
+  /* local class name */
+  .red { color: red; }
+  /* is converted to: */
+  ._8x_KsHmyrocTNd7akA_LL { color: red; }
+
+  /* global class name */
+  :global(.red) { color: red; }
+  /* is converted to: */
+  .red { color: red; }
+
+  /* animation name */
+  @keyframes fade { from { opacity: 1; } to { opacity: 0; } }
+  .animate { animation: fade 1s; }
+  /* is converted to */
+  @keyframes n5Q3vnbE7aL9uu6uOUOLo { from { opacity: 1; } to { opacity: 0; } }
+  ._2hSs7mCBtiABMJoqSnwHAD { animation: n5Q3vnbE7aL9uu6uOUOLo 1s; }
+  /* Note: properties in `animation` shorthand should be in correct order. */
 </style>
 
 <template>
+  <!-- static class name replacement -->
+  <!-- Note: static class names in binding expression are also converted -->
   <h2 class="style.red"></h2>
-</template>
-
-<script>
-module.exports = {}
-</script>
-```
-
-to:
-
-```html
-<style module="style">
-._8x_KsHmyrocTNd7akA_LL {
-  color: red;
-}
-</style>
-
-<template>
+  <h3 class="{{ ['style.red'] }}"></h3>
+  <h4 v-bind:class="['style.red']"></h4>
+  <h5 :class="['style.red', { 'style.red': isRed }, blue]"></h5>
+  <!-- is converted to -->
   <h2 class="_8x_KsHmyrocTNd7akA_LL"></h2>
+  <h3 class="{{ ['_8x_KsHmyrocTNd7akA_LL'] }}"></h3>
+  <h4 v-bind:class="['_8x_KsHmyrocTNd7akA_LL']"></h4>
+  <h5 :class="['_8x_KsHmyrocTNd7akA_LL', { '_8x_KsHmyrocTNd7akA_LL': isRed }, blue]"></h5>
 </template>
-
-<script>
-module.exports = {}
-</script>
-```
-
-## Scoped animation name
-
-```html
-<style module="style">
-@keyframes fade {
-  from { opacity: 1; } to { opacity: 0; }
-}
-.animate {
-  animation: fade 1s;
-}
-</style>
-```
-
-becomes:
-
-```html
-<style module="style">
-@keyframes n5Q3vnbE7aL9uu6uOUOLo {
-  from { opacity: 1; } to { opacity: 0; }
-}
-.animate {
-  animation: n5Q3vnbE7aL9uu6uOUOLo 1s;
-}
-</style>
 ```
 
 # TODO
-1. convert static class name in binding class.
-2. provide style entry in `script`
-
-Note: properties in `animation` shorthand should be in correct order.
+- [x] convert static class name in binding class.
+- [ ] provide style entry in `script`
 
 # Original README below:
 
