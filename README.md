@@ -7,12 +7,12 @@
 <style module="style">
   /* local class name */
   .red { color: red; }
-  /* is converted to: */
+  /* is converted to */
   ._8x_KsHmyrocTNd7akA_LL { color: red; }
 
   /* global class name */
   :global(.red) { color: red; }
-  /* is converted to: */
+  /* is converted to */
   .red { color: red; }
 
   /* animation name */
@@ -37,6 +37,20 @@
   <h4 v-bind:class="['_8x_KsHmyrocTNd7akA_LL']"></h4>
   <h5 :class="['_8x_KsHmyrocTNd7akA_LL', { '_8x_KsHmyrocTNd7akA_LL': isRed }, blue]"></h5>
 </template>
+
+<!-- get local class name in script -->
+<script>
+  export default {
+    loader: {
+      // tell loader to inject `$styles` getter
+      styles: '$styles'
+    },
+    ready() {
+      console.log(this.$styles.style.red)
+      // => _8x_KsHmyrocTNd7akA_LL
+    }
+  }
+</script>
 ```
 
 # TODO

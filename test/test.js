@@ -277,12 +277,11 @@ describe('vue-loader', function () {
     })
   })
 
-  it.only('css-modules', function (done) {
+  it('css-modules', function (done) {
     test({
       entry: './test/fixtures/css-modules.vue'
     }, function (window) {
       var module = window.vueModule
-      console.log(module.template)
 
       // get local class name
       var match = module.template.match(/\s*<h2 class="(.*?)"><\/h2>/)
@@ -310,6 +309,9 @@ describe('vue-loader', function () {
           '<h5 :class="[\'style.red\', { \'style.red\': isRed }, blue]"></h5>'
       ).replace(/style\.red/g, className)
       expect(module.template).to.contain(expected)
+
+      // get local class name in script
+      expect(module.computed.$styles().style.red).to.equal(className)
 
       done()
     })
