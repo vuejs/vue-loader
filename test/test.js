@@ -306,7 +306,8 @@ describe('vue-loader', function () {
           '<h2 class="style.red"></h2>\n' +
           '<h3 class="{{ [\'style.red\'] }}"></h3>\n' +
           '<h4 v-bind:class="[\'style.red\']"></h4>\n' +
-          '<h5 :class="[\'style.red\', { \'style.red\': isRed }, blue]"></h5>'
+          '<h5 :class="condition ? \'style.red\' : \'global\'"></h5>\n' +
+          '<h6 :class="[\'style.red\', { \'style.red\': isRed }, blue]"></h6>'
       ).replace(/style\.red/g, className)
       expect(module.template).to.contain(expected)
 
