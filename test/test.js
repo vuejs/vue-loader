@@ -284,10 +284,7 @@ describe('vue-loader', function () {
       var module = window.vueModule
 
       // get local class name
-      var match = module.template.match(/\s*<h2 class="(.*?)"><\/h2>/)
-      expect(match).to.have.length(2)
-      var className = match[1]
-      expect(className).to.not.equal('style.red')
+      var className = module.computed.style().red
       expect(className).to.match(/^_/)
 
       // class name in style
@@ -295,24 +292,11 @@ describe('vue-loader', function () {
       expect(style).to.contain('.' + className + ' {\n  color: red;\n}')
 
       // animation name
-      match = style.match(/@-webkit-keyframes\s+(\S+)\s+{/)
+      var match = style.match(/@-webkit-keyframes\s+(\S+)\s+{/)
       expect(match).to.have.length(2)
       var animationName = match[1]
       expect(animationName).to.not.equal('fade')
       expect(style).to.contain('animation: ' + animationName + ' 1s;')
-
-      // static class name replacement
-      var expected = (
-          '<h2 class="style.red"></h2>\n' +
-          '<h3 class="{{ [\'style.red\'] }}"></h3>\n' +
-          '<h4 v-bind:class="[\'style.red\']"></h4>\n' +
-          '<h5 :class="condition ? \'style.red\' : \'global\'"></h5>\n' +
-          '<h6 :class="[\'style.red\', { \'style.red\': isRed }, blue]"></h6>'
-      ).replace(/style\.red/g, className)
-      expect(module.template).to.contain(expected)
-
-      // get local class name in script
-      expect(module.computed.$styles().style.red).to.equal(className)
 
       done()
     })
