@@ -288,7 +288,9 @@ describe('vue-loader', function () {
       expect(className).to.match(/^_/)
 
       // class name in style
-      var style = window.document.querySelector('style').textContent
+      var style = [].slice.call(window.document.querySelectorAll('style')).map(function (style) {
+        return style.textContent
+      }).join('\n')
       expect(style).to.contain('.' + className + ' {\n  color: red;\n}')
 
       // animation name
@@ -297,6 +299,11 @@ describe('vue-loader', function () {
       var animationName = match[1]
       expect(animationName).to.not.equal('fade')
       expect(style).to.contain('animation: ' + animationName + ' 1s;')
+
+      // module + pre-processor + scoped
+      var anotherClassName = module.computed.combined().red
+      expect(anotherClassName).to.match(/^_/).and.not.equal(className)
+      expect(style).to.contain('.' + anotherClassName + '[') // scoped
 
       done()
     })
