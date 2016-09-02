@@ -294,7 +294,7 @@ describe('vue-loader', function () {
       expect(style).to.contain('.' + className + ' {\n  color: red;\n}')
 
       // animation name
-      var match = style.match(/@-webkit-keyframes\s+(\S+)\s+{/)
+      var match = style.match(/@keyframes\s+(\S+)\s+{/)
       expect(match).to.have.length(2)
       var animationName = match[1]
       expect(animationName).to.not.equal('fade')
@@ -303,7 +303,8 @@ describe('vue-loader', function () {
       // module + pre-processor + scoped
       var anotherClassName = module.computed.combined().red
       expect(anotherClassName).to.match(/^_/).and.not.equal(className)
-      expect(style).to.contain('.' + anotherClassName + '[') // scoped
+      var id = '_v-' + hash(require.resolve('./fixtures/css-modules.vue'))
+      expect(style).to.contain('.' + anotherClassName + '[' + id + ']')
 
       done()
     })
