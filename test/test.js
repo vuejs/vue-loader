@@ -300,8 +300,8 @@ describe('vue-loader', function () {
       expect(animationName).to.not.equal('fade')
       expect(style).to.contain('animation: ' + animationName + ' 1s;')
 
-      // module + pre-processor + scoped
-      var anotherClassName = module.computed.combined().red
+      // default module + pre-processor + scoped
+      var anotherClassName = module.computed.$style().red
       expect(anotherClassName).to.match(/^_/).and.not.equal(className)
       var id = '_v-' + hash(require.resolve('./fixtures/css-modules.vue'))
       expect(style).to.contain('.' + anotherClassName + '[' + id + ']')

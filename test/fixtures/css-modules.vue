@@ -10,7 +10,7 @@
 }
 </style>
 
-<style scoped lang="stylus" module="combined">
+<style scoped lang="stylus" module>
 .red
   color: red
 </style>
