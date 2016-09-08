@@ -333,4 +333,19 @@ describe('vue-loader', function () {
       done()
     })
   })
+
+  it('allows to export extended constructor', function (done) {
+    test({
+      entry: './test/fixtures/extend.vue'
+    }, function (window, Module) {
+      // extend.vue should export Vue constructor
+      var vnode = mockRender(Module.options, {
+        msg: 'success'
+      })
+      expect(vnode.tag).to.equal('div')
+      expect(vnode.children[0]).to.equal('success')
+      expect(new Module().msg === 'success')
+      done()
+    })
+  })
 })
