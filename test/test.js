@@ -276,4 +276,24 @@ describe('vue-loader', function () {
       done()
     })
   })
+
+  it('template opt prop - json file', function (done) {
+    test({
+      entry: './test/fixtures/options.vue'
+    }, function (window) {
+      var module = window.vueModule
+      expect(module.template).to.contain('\n<div>\n  <div>true</div>\n</div>')
+      done()
+    })
+  })
+
+  it('template opt prop - inline json', function (done) {
+    test({
+      entry: './test/fixtures/options2.vue'
+    }, function (window) {
+      var module = window.vueModule
+      expect(module.template).to.contain('\n<div>\n  <div>true</div>\n</div>')
+      done()
+    })
+  })
 })
