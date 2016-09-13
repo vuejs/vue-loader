@@ -73,3 +73,11 @@
 - type: `Object`
 
   Pass options to the template rendering engine (via [consolidate](https://github.com/tj/consolidate.js)) if you are using a non-html templating language.
+
+### esModule
+
+- ^9.4.3
+- type: `Boolean`
+- default: `undefined`
+
+  Whether to emit esModule compatible code. By default vue-loader will emit default export in commonjs format like `module.exports = ....`. When `esModule` is set to true, default export will be transpiled into `exports.__esModule = true; exports = ...`. Useful for interoperating with transpiler other than Bable, like TypeScript.

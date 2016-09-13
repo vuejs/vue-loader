@@ -348,4 +348,24 @@ describe('vue-loader', function () {
       done()
     })
   })
+
+  it('support es compatible modules', function (done) {
+    test({
+      entry: './test/fixtures/basic.vue',
+      vue: {
+        esModule: true
+      }
+    }, function (window, module, rawModule) {
+      expect(rawModule.__esModule).to.equal(true)
+      var vnode = mockRender(rawModule.default, {
+        msg: 'hi'
+      })
+      expect(vnode.tag).to.equal('h2')
+      expect(vnode.data.staticClass).to.equal('red')
+      expect(vnode.children[0]).to.equal('hi')
+
+      expect(rawModule.default.data().msg).to.contain('Hello from Component A!')
+      done()
+    })
+  })
 })
