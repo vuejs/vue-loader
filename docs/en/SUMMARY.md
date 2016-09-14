@@ -4,6 +4,7 @@
 - Features
   - [ES2015 and Babel](features/es2015.md)
   - [Scoped CSS](features/scoped-css.md)
+  - [CSS Modules](features/css-modules.md)
   - [PostCSS and Autoprefixer](features/postcss.md)
   - [Hot Reload](features/hot-reload.md)
 - Configurations
