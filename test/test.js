@@ -202,6 +202,7 @@ describe('vue-loader', function () {
 
   it('extract CSS', function (done) {
     webpack(Object.assign({}, globalConfig, {
+      devtool: 'source-map',
       entry: './test/fixtures/extract-css.vue',
       vue: {
         loaders: {
@@ -216,7 +217,25 @@ describe('vue-loader', function () {
       expect(err).to.be.null
       getFile('test.output.css', function (data) {
         expect(data).to.contain('h1 {\n  color: #f00;\n}\n\n\n\n\n\n\nh2 {\n  color: green;\n}')
-        done()
+        getFile('test.output.css.map', function (map) {
+          var smc = new SourceMapConsumer(JSON.parse(map))
+          var line, col
+          var targetRE = /^\s+color: #f00;/
+          data.split(/\r?\n/g).some(function (l, i) {
+            if (targetRE.test(l)) {
+              line = i + 1
+              col = l.length
+              return true
+            }
+          })
+          var pos = smc.originalPositionFor({
+            line: line,
+            column: col
+          })
+          expect(pos.source.indexOf('extract-css.vue') > -1)
+          expect(pos.line).to.equal(3)
+          done()
+        })
       })
     })
   })
