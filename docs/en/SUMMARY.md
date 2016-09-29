@@ -1,10 +1,10 @@
 - Getting Started
   - [Vue Component Spec](start/spec.md)
-  - [Basic Tutorial](start/tutorial.md)
+  - [Setting Up a Project](start/setup.md)
 - Features
-  - [ES2015 and Babel](features/es2015.md)
+  - [ES2015](features/es2015.md)
   - [Scoped CSS](features/scoped-css.md)
-  - [PostCSS and Autoprefixer](features/postcss.md)
+  - [PostCSS](features/postcss.md)
   - [Hot Reload](features/hot-reload.md)
 - Configurations
   - [Pre-Processors](configurations/pre-processors.md)
