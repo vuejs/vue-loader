@@ -3,7 +3,7 @@
 </template>
 
 <script>
-module.exports = {
+export default {
   data () {
     return {
       msg: 'Hello from Component A!'
