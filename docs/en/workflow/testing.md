@@ -98,4 +98,4 @@ Finally, run:
 npm test
 ```
 
-Again, [vue-loader-example](https://github.com/vuejs/vue-loader-example) contains a fully working example with tests.
+Again, [webpack vue-cli template](https://github.com/vuejs-templates/webpack) contains a fully working example with tests.
