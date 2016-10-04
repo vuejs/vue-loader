@@ -6,6 +6,7 @@
   - [Scoped CSS](features/scoped-css.md)
   - [PostCSS](features/postcss.md)
   - [Hot Reload](features/hot-reload.md)
+  - [Inline Templates](features/inline-templates.md)
 - Configurations
   - [Pre-Processors](configurations/pre-processors.md)
   - [Asset URL Handling](configurations/asset-url.md)
