@@ -66,3 +66,28 @@ module.exports = {
   }
 }
 ```
+
+For Webpack 2.x:
+
+``` js
+// webpack.config.js
+module.exports = {
+  // ... other options
+  module: {
+    rules: [
+      // only lint local *.vue files
+      {
+        enforce: 'pre',
+        test: /.vue$/,
+        loader: 'eslint',
+        exclude: /node_modules/
+      },
+      // but use vue-loader for all *.vue files
+      {
+        test: /.vue$/,
+        loader: 'vue'
+      }
+    ]
+  }
+}
+```
