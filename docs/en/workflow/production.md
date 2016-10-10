@@ -3,7 +3,7 @@
 There are two things to do when building our bundle for production:
 
 1. Minify our application code;
-2. Use the [setup described in the Vue.js guide](http://vuejs.org/guide/application.html#Deploying_for_Production) to strip all the warnings from Vue.js source code.
+2. Use the [setup described in the Vue.js guide](http://vuejs.org/guide/single-file-components.html#Deploying-for-Production) to strip all the warnings from Vue.js source code.
 
 Here's an example config:
 
