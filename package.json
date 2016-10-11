@@ -26,7 +26,7 @@
     "lint": "eslint lib",
     "test": "eslint lib && mocha --slow 5000 --timeout 10000",
     "docs": "cd docs && gitbook serve",
-    "deploy-docs": "bash ./docs/deploy.sh"
+    "docs:deploy": "bash ./docs/deploy.sh"
   },
   "dependencies": {
     "consolidate": "^0.14.0",
