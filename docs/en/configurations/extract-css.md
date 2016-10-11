@@ -35,7 +35,7 @@ module.exports = {
 }
 ```
 
-### Webpack 2.x
+### Webpack 2.x (^2.1.0-beta.25)
 
 ``` bash
 npm install extract-text-webpack-plugin@2.x --save-dev
@@ -43,22 +43,27 @@ npm install extract-text-webpack-plugin@2.x --save-dev
 
 ``` js
 // webpack.config.js
-var webpack = require('webpack')
 var ExtractTextPlugin = require("extract-text-webpack-plugin")
 
 module.exports = {
   // other options...
-  plugins: [
-    new webpack.LoaderOptionsPlugin({
-      vue: {
-        loaders: {
-          css: ExtractTextPlugin.extract({
-            loader: 'css-loader',
-            fallbackLoader: 'vue-style-loader' // <- this is a dep of vue-loader, so no need to explicitly install if using npm3
-          })
+  module: {
+    rules: [
+      {
+        test: /\.vue$/,
+        loader: 'vue',
+        options: {
+          loaders: {
+            css: ExtractTextPlugin.extract({
+              loader: 'css-loader',
+              fallbackLoader: 'vue-style-loader' // <- this is a dep of vue-loader, so no need to explicitly install if using npm3
+            })
+          }
         }
       }
-    }),
+    ]
+  },
+  plugins: [
     new ExtractTextPlugin("style.css")
   ]
 }

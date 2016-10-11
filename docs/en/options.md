@@ -13,18 +13,22 @@ module.exports = {
 }
 ```
 
-For Webpack 2: use `webpack.LoaderOptionsPlugin`:
+For Webpack 2 (^2.1.0-beta.25):
 
 ``` js
 module.exports = {
   // ...
-  plugins: [
-    new webpack.LoaderOptionsPlugin({
-      vue: {
-        // vue-loader options
+  module: {
+    rules: [
+      {
+        test: /\.vue$/,
+        loader: 'vue',
+        options: {
+          // vue-loader options
+        }
       }
-    })
-  ]
+    ]
+  }
 }
 ```
 

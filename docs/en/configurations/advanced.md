@@ -30,22 +30,26 @@ module.exports = {
 }
 ```
 
-Webpack 2.x:
+Webpack 2.x (^2.1.0-beta.25):
 
 ``` js
-var webpack = require('webpack')
-
 module.exports = {
-  // ...
-  plugins: [
-    new webpack.LoaderOptionsPlugin({
-      vue: {
-        loaders: {
-          // ...
+  // other options...
+  module: {
+    // module.rules is the same as module.loaders in 1.x
+    rules: [
+      {
+        test: /\.vue$/,
+        loader: 'vue',
+        // vue-loader options goes here
+        options: {
+          loaders: {
+            // ...
+          }
         }
       }
-    })
-  ]
+    ]
+  }
 }
 ```
 
