@@ -377,4 +377,37 @@ describe('vue-loader', function () {
       done()
     })
   })
+
+  it('css-modules', function (done) {
+    test({
+      entry: './test/fixtures/css-modules.vue'
+    }, function (window) {
+      var module = window.vueModule
+
+      // get local class name
+      var className = module.computed.style().red
+      expect(className).to.match(/^_/)
+
+      // class name in style
+      var style = [].slice.call(window.document.querySelectorAll('style')).map(function (style) {
+        return style.textContent
+      }).join('\n')
+      expect(style).to.contain('.' + className + ' {\n  color: red;\n}')
+
+      // animation name
+      var match = style.match(/@keyframes\s+(\S+)\s+{/)
+      expect(match).to.have.length(2)
+      var animationName = match[1]
+      expect(animationName).to.not.equal('fade')
+      expect(style).to.contain('animation: ' + animationName + ' 1s;')
+
+      // default module + pre-processor + scoped
+      var anotherClassName = module.computed.$style().red
+      expect(anotherClassName).to.match(/^_/).and.not.equal(className)
+      var id = '_v-' + hash(require.resolve('./fixtures/css-modules.vue'))
+      expect(style).to.contain('.' + anotherClassName + '[' + id + ']')
+
+      done()
+    })
+  })
 })
