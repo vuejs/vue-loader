@@ -111,3 +111,18 @@ module.exports = {
 - default: `{ img: 'src' }`
 
   During template compilation, the compiler can transform certain attributes, such as `src` URLs, into `require` calls, so that the target asset can be handled by Webpack. The default config transforms the `src` attribute on `<img>` tags.
+
+### buble
+
+- type: `Object`
+- default: `{}`
+
+  Configure options for `buble-loader` (if present). For example, to enable Object spread operator:
+
+  ``` js
+  vue: {
+    buble: {
+      objectAssign: 'Object.assign'
+    }
+  }
+  ```
