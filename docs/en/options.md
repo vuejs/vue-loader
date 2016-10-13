@@ -97,3 +97,17 @@ module.exports = {
 - default: `undefined`
 
   Whether to emit esModule compatible code. By default vue-loader will emit default export in commonjs format like `module.exports = ....`. When `esModule` is set to true, default export will be transpiled into `exports.__esModule = true; exports = ...`. Useful for interoperating with transpiler other than Babel, like TypeScript.
+
+### preserveWhitespace
+
+- type: `Boolean`
+- default: `true`
+
+  If set to `false`, the whitespaces between HTML tags in templates will be ignored.
+
+### transformToRequire
+
+- type: `{ [tag: string]: string | Array<string> }`
+- default: `{ img: 'src' }`
+
+  During template compilation, the compiler can transform certain attributes, such as `src` URLs, into `require` calls, so that the target asset can be handled by Webpack. The default config transforms the `src` attribute on `<img>` tags.
