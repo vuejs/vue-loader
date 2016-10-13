@@ -34,14 +34,14 @@ npm install coffee-loader --save-dev
 
 ### Templates
 
-Processing templates is a little different, because most Webpack template loaders such as `jade-loader` return a template function instead of a compiled HTML string. Instead of using `jade-loader`, we can just install the original `jade`:
+Processing templates is a little different, because most Webpack template loaders such as `pug-loader` return a template function instead of a compiled HTML string. Instead of using `pug-loader`, we can just install the original `pug`:
 
 ``` bash
-npm install jade --save-dev
+npm install pug --save-dev
 ```
 
 ``` html
-<template lang="jade">
+<template lang="pug">
 div
   h1 Hello world!
 </template>

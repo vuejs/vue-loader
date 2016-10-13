@@ -1,1 +1,1 @@
-<template lang="jade" src="./template-import.jade"></template>
+<template lang="pug" src="./template-import.pug"></template>
