@@ -40,6 +40,7 @@ function bundle (options, cb) {
       })
     }
     expect(stats.compilation.errors).to.be.empty
+    require('fs').writeFileSync('./test.build.js', mfs.readFileSync('/test.build.js').toString())
     cb(mfs.readFileSync('/test.build.js').toString())
   })
 }
@@ -378,7 +379,7 @@ describe('vue-loader', function () {
     })
   })
 
-  it('css-modules', function (done) {
+  it.only('css-modules', function (done) {
     test({
       entry: './test/fixtures/css-modules.vue'
     }, function (window) {
@@ -404,7 +405,7 @@ describe('vue-loader', function () {
       // default module + pre-processor + scoped
       var anotherClassName = module.computed.$style().red
       expect(anotherClassName).to.match(/^_/).and.not.equal(className)
-      var id = '_v-' + hash(require.resolve('./fixtures/css-modules.vue'))
+      var id = 'data-v-' + genId(require.resolve('./fixtures/css-modules.vue'))
       expect(style).to.contain('.' + anotherClassName + '[' + id + ']')
 
       done()
