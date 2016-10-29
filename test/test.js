@@ -351,6 +351,7 @@ describe('vue-loader', function () {
       var vnode = mockRender(Module.options, {
         msg: 'success'
       })
+      expect(Module.extendOptions).to.haveOwnProperty('render')
       expect(vnode.tag).to.equal('div')
       expect(vnode.children[0]).to.equal('success')
       expect(new Module().msg === 'success')
