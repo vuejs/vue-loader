@@ -26,7 +26,7 @@ If you are already familiar with Webpack, feel free to skip the following explan
 
 For a basic example, imagine we have a bunch of CommonJS modules. They cannot run directly inside the browser, so we need to "bundle" them into a single file that can be included via a `<script>` tag. Webpack can follow the dependencies of the `require()` calls and do that for us.
 
-But Webpack can do more than that. With "loaders", we can teach Webpack to transform all types of files in anyway we want before outputting the final bundle. Some examples include:
+But Webpack can do more than that. With "loaders", we can teach Webpack to transform all types of files in any way we want before outputting the final bundle. Some examples include:
 
 - Transpile ES2015, CoffeeScript or TypeScript modules into plain ES5 CommonJS modules;
 - Optionally you can pipe the source code through a linter before doing the compilation;
