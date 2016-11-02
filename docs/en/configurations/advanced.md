@@ -2,7 +2,7 @@
 
 Sometimes you may want to apply a custom loader string to a language instead of letting `vue-loader` infer it. Or you may simply want to overwrite the built-in loader configuration for the default languages. To do that, add a `vue` block in your Webpack config file, and specify the `loaders` option.
 
-Webpack 1.x Example:
+### Webpack 1.x
 
 ``` js
 // webpack.config.js
@@ -30,7 +30,7 @@ module.exports = {
 }
 ```
 
-Webpack 2.x (^2.1.0-beta.25):
+### Webpack 2.x (^2.1.0-beta.25)
 
 ``` js
 module.exports = {
