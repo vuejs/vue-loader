@@ -379,34 +379,68 @@ describe('vue-loader', function () {
     })
   })
 
-  it.only('css-modules', function (done) {
+  it('css-modules', function (done) {
+    function testWithIdent (localIdentName, regexToMatch, cb) {
+      test({
+        entry: './test/fixtures/css-modules.vue',
+        vue: {
+          cssModules: {
+            localIdentName: localIdentName
+          }
+        }
+      }, function (window) {
+        var module = window.vueModule
+
+        // get local class name
+        var className = module.computed.style().red
+        expect(className).to.match(regexToMatch)
+
+        // class name in style
+        var style = [].slice.call(window.document.querySelectorAll('style')).map(function (style) {
+          return style.textContent
+        }).join('\n')
+        expect(style).to.contain('.' + className + ' {\n  color: red;\n}')
+
+        // animation name
+        var match = style.match(/@keyframes\s+(\S+)\s+{/)
+        expect(match).to.have.length(2)
+        var animationName = match[1]
+        expect(animationName).to.not.equal('fade')
+        expect(style).to.contain('animation: ' + animationName + ' 1s;')
+
+        // default module + pre-processor + scoped
+        var anotherClassName = module.computed.$style().red
+        expect(anotherClassName).to.match(regexToMatch).and.not.equal(className)
+        var id = 'data-v-' + genId(require.resolve('./fixtures/css-modules.vue'))
+        expect(style).to.contain('.' + anotherClassName + '[' + id + ']')
+
+        cb()
+      })
+    }
+    // default localIdentName
+    testWithIdent(undefined, /^_\w{22}/, function () {
+      // specified localIdentName
+      var ident = '[path][name]---[local]---[hash:base64:5]'
+      var regex = /^test-fixtures-css-modules---red---\w{5}/
+      testWithIdent(ident, regex, done)
+    })
+  })
+
+  it.only('css-modules in SSR', function (done) {
     test({
-      entry: './test/fixtures/css-modules.vue'
+      entry: './test/fixtures/css-modules.vue',
+      vue: {
+        target: 'node'
+      }
     }, function (window) {
       var module = window.vueModule
 
-      // get local class name
+      // class name
       var className = module.computed.style().red
       expect(className).to.match(/^_/)
 
-      // class name in style
-      var style = [].slice.call(window.document.querySelectorAll('style')).map(function (style) {
-        return style.textContent
-      }).join('\n')
-      expect(style).to.contain('.' + className + ' {\n  color: red;\n}')
-
-      // animation name
-      var match = style.match(/@keyframes\s+(\S+)\s+{/)
-      expect(match).to.have.length(2)
-      var animationName = match[1]
-      expect(animationName).to.not.equal('fade')
-      expect(style).to.contain('animation: ' + animationName + ' 1s;')
-
-      // default module + pre-processor + scoped
-      var anotherClassName = module.computed.$style().red
-      expect(anotherClassName).to.match(/^_/).and.not.equal(className)
-      var id = 'data-v-' + genId(require.resolve('./fixtures/css-modules.vue'))
-      expect(style).to.contain('.' + anotherClassName + '[' + id + ']')
+      // no css
+      expect(window.document.querySelector('style')).to.not.exist()
 
       done()
     })
