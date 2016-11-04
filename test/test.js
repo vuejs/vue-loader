@@ -40,7 +40,6 @@ function bundle (options, cb) {
       })
     }
     expect(stats.compilation.errors).to.be.empty
-    require('fs').writeFileSync('./test.build.js', mfs.readFileSync('/test.build.js').toString())
     cb(mfs.readFileSync('/test.build.js').toString())
   })
 }
@@ -426,7 +425,7 @@ describe('vue-loader', function () {
     })
   })
 
-  it.only('css-modules in SSR', function (done) {
+  it('css-modules in SSR', function (done) {
     bundle({
       entry: './test/fixtures/css-modules.vue',
       target: 'node',
@@ -443,7 +442,8 @@ describe('vue-loader', function () {
       }
 
       var output = requireFromString(code, './test.build.js')
-      expect(output.computed.style().red).to.match(/^_/)
+      expect(output.computed.style().red).to.exist
+
       done()
     })
   })
