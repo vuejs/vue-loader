@@ -427,21 +427,23 @@ describe('vue-loader', function () {
   })
 
   it.only('css-modules in SSR', function (done) {
-    test({
+    bundle({
       entry: './test/fixtures/css-modules.vue',
-      vue: {
-        target: 'node'
+      target: 'node',
+      output: Object.assign({}, globalConfig.output, {
+        libraryTarget: 'commonjs2'
+      })
+    }, function (code) {
+      // http://stackoverflow.com/questions/17581830/load-node-js-module-from-string-in-memory
+      function requireFromString(src, filename) {
+        var Module = module.constructor;
+        var m = new Module();
+        m._compile(src, filename);
+        return m.exports;
       }
-    }, function (window) {
-      var module = window.vueModule
 
-      // class name
-      var className = module.computed.style().red
-      expect(className).to.match(/^_/)
-
-      // no css
-      expect(window.document.querySelector('style')).to.not.exist()
-
+      var output = requireFromString(code, './test.build.js')
+      expect(output.computed.style().red).to.match(/^_/)
       done()
     })
   })
