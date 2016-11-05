@@ -377,4 +377,74 @@ describe('vue-loader', function () {
       done()
     })
   })
+
+  it('css-modules', function (done) {
+    function testWithIdent (localIdentName, regexToMatch, cb) {
+      test({
+        entry: './test/fixtures/css-modules.vue',
+        vue: {
+          cssModules: {
+            localIdentName: localIdentName
+          }
+        }
+      }, function (window) {
+        var module = window.vueModule
+
+        // get local class name
+        var className = module.computed.style().red
+        expect(className).to.match(regexToMatch)
+
+        // class name in style
+        var style = [].slice.call(window.document.querySelectorAll('style')).map(function (style) {
+          return style.textContent
+        }).join('\n')
+        expect(style).to.contain('.' + className + ' {\n  color: red;\n}')
+
+        // animation name
+        var match = style.match(/@keyframes\s+(\S+)\s+{/)
+        expect(match).to.have.length(2)
+        var animationName = match[1]
+        expect(animationName).to.not.equal('fade')
+        expect(style).to.contain('animation: ' + animationName + ' 1s;')
+
+        // default module + pre-processor + scoped
+        var anotherClassName = module.computed.$style().red
+        expect(anotherClassName).to.match(regexToMatch).and.not.equal(className)
+        var id = 'data-v-' + genId(require.resolve('./fixtures/css-modules.vue'))
+        expect(style).to.contain('.' + anotherClassName + '[' + id + ']')
+
+        cb()
+      })
+    }
+    // default localIdentName
+    testWithIdent(undefined, /^_\w{22}/, function () {
+      // specified localIdentName
+      var ident = '[path][name]---[local]---[hash:base64:5]'
+      var regex = /^test-fixtures-css-modules---red---\w{5}/
+      testWithIdent(ident, regex, done)
+    })
+  })
+
+  it('css-modules in SSR', function (done) {
+    bundle({
+      entry: './test/fixtures/css-modules.vue',
+      target: 'node',
+      output: Object.assign({}, globalConfig.output, {
+        libraryTarget: 'commonjs2'
+      })
+    }, function (code) {
+      // http://stackoverflow.com/questions/17581830/load-node-js-module-from-string-in-memory
+      function requireFromString(src, filename) {
+        var Module = module.constructor;
+        var m = new Module();
+        m._compile(src, filename);
+        return m.exports;
+      }
+
+      var output = requireFromString(code, './test.build.js')
+      expect(output.computed.style().red).to.exist
+
+      done()
+    })
+  })
 })
