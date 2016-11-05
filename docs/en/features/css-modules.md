@@ -13,10 +13,13 @@ Just add the `module` attribute to your `<style>`:
 .red {
   color: red;
 }
+.bold {
+  font-weight: bold;
+}
 </style>
 ```
 
-This will turn on CSS Modules mode for `css-loader`, and the resulting class identifier object will be injected into the component as a computed property with the name `$style`. To use it in your templates, you need to use a dynamic class binding:
+This will turn on CSS Modules mode for `css-loader`, and the resulting class identifier object will be injected into the component as a computed property with the name `$style`. You can use it in your templates with a dynamic class binding:
 
 ``` html
 <template>
@@ -26,13 +29,30 @@ This will turn on CSS Modules mode for `css-loader`, and the resulting class ide
 </template>
 ```
 
-Since it's a computed property, you can also access it from JavaScript:
+Since it's a computed property, it also works with the object/array syntax of `:class`:
 
-``` js
+``` html
+<template>
+  <div>
+    <p :class="{ [$style.red]: isRed }">
+      Am I red?
+    </p>
+    <p :class="[$style.red, $style.bold]">
+      Red and bold
+    </p>
+  </div>
+</template>
+```
+
+And you can also access it from JavaScript:
+
+``` html
 <script>
 export default {
   created () {
-    console.log(this.$style.red) // "_1VyoJ-uZOjlOxP7jWUy19_0"
+    console.log(this.$style.red)
+    // -> "_1VyoJ-uZOjlOxP7jWUy19_0"
+    // an identifier generated based on filename and className.
   }
 }
 </script>
