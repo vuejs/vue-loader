@@ -383,7 +383,7 @@ describe('vue-loader', function () {
       test({
         entry: './test/fixtures/css-modules.vue',
         vue: {
-          cssModules: {
+          cssModules: localIdentName && {
             localIdentName: localIdentName
           }
         }

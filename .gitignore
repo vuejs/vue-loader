@@ -3,3 +3,5 @@ npm-debug.log
 test/output
 docs/_book
 .DS_Store
+.idea
+*.iml
