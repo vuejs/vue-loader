@@ -74,15 +74,29 @@ You can have more than one `<style>` tags in a single `*.vue` component. To avoi
 </style>
 ```
 
-### Configuring Local Indentifier Name
+### Configuring `css-loader` Query
 
-By default, class names are transformed unique identifiers in the form of `[hash:base64]`, but you can configure it by providing the `cssModules.localIdentName` option to `vue-loader`:
+CSS Modules are processed via [css-loader](ttps://github.com/webpack/css-loader). With `<style module>`, the default query used for `css-loader` is:
+
+``` js
+{
+  modules: true,
+  importLoaders: true,
+  localIdentName: '[hash:base64]'
+}
+```
+
+You can use vue-loader
+s `cssModules` option to provide additional query options to `css-loader`:
 
 ``` js
 // wepback 1
 vue: {
   cssModules: {
-    localIdentName: '[path][name]---[local]---[hash:base64:5]'
+    // overwrite local ident name
+    localIdentName: '[path][name]---[local]---[hash:base64:5]',
+    // enable camelCase
+    camelCase: true
   }
 }
 
@@ -94,7 +108,8 @@ module: {
       loader: 'vue',
       options: {
         cssModules: {
-          localIdentName: '[path][name]---[local]---[hash:base64:5]'
+          localIdentName: '[path][name]---[local]---[hash:base64:5]',
+          camelCase: true
         }
       }
     }
