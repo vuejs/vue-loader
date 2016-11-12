@@ -126,3 +126,48 @@ module.exports = {
     }
   }
   ```
+
+### templateBuble
+
+- type: `Object`
+- default:
+  ``` js
+  {
+    target: { chrome: 52 },
+    transforms: {
+      stripWith: true, // vue only
+      computedProperty: true,
+      conciseMethodProperty: true,
+      templateString: true
+    }
+  }
+  ```
+
+  Configure options for a [Buble](https://buble.surge.sh/) transpile pass applied to raw render functions. The purpose of this additional pass is to:
+
+  1. add selective support to a few ES2015 features that are handy in template expressions (whitelisted in default transforms);
+
+  2. remove the `with` block inside render functions to make it strict-mode compliant and a bit more performant. This is enabled by the custom `stripWith` transform, and applied only at build time so that the base template compiler can be extremely small and lightweight.
+
+  With this option you can turn on additional [transforms](https://buble.surge.sh/guide/#supported-features) (e.g. arrow functions) or turn off `with` removal based on your specific needs. Example config with Webpack 2:
+
+  ``` js
+  module: {
+    rules: [
+      {
+        test: /\.vue$/,
+        loader: 'vue',
+        options: {
+          templateBuble: {
+            objectAssign: 'Object.assign',
+            // transforms object is merged with the defaults
+            transforms: {
+              stripWith: false,
+              arrow: true
+            }
+          }
+        }
+      }
+    ]
+  }
+  ```
