@@ -44,15 +44,15 @@ More details can be found in [Using Pre-Processors](../configurations/pre-proces
 
 - Each `*.vue` file can contain at most one `<template>` block at a time.
 
-- Contents will be extracted as a string and used as the `template` option for the compiled Vue component. 
+- Contents will be extracted as a string and used as the `template` option for the compiled Vue component.
 
 #### `<script>`
 
-- Default language: `js` (ES2015 is supported by default via Babel).
+- Default language: `js` (ES2015 is supported automatically if `babel-loader` or `buble-loader` is detected).
 
 - Each `*.vue` file can contain at most one `<script>` block at a time.
 
-- The script is executed in a CommonJS like environment (just like a normal `.js` module bundled via Webpack), which means you can `require()` other dependencies. And because ES2015 is supported by default, you can also use ES2015 `import` and `export` syntax.
+- The script is executed in a CommonJS like environment (just like a normal `.js` module bundled via Webpack), which means you can `require()` other dependencies. And with ES2015 support, you can also use the `import` and `export` syntax.
 
 - The script must export a Vue.js component options object. Exporting an extended constructor created by `Vue.extend()` is also supported, but a plain object is preferred.
 
@@ -61,6 +61,8 @@ More details can be found in [Using Pre-Processors](../configurations/pre-proces
 - Default Language: `css`.
 
 - Multiple `<style>` tags are supported in a single `*.vue` file.
+
+- A `<style>` tag can have `scoped` or `module` attributes (see [Scoped CSS](../features/scoped-css.md) and [CSS Modules](../features/css-modules.md)) to help encapsulating the styles to the current component. Multiple `<style>` tags with different encapsulation modes can be mixed in the same component.
 
 - By default, contents will be extracted and dynamically inserted into the document's `<head>` as an actual `<style>` tag using `style-loader`. It's also possible to [configure Webpack so that all styles in all components are extracted into a single CSS file](../configurations/extract-css.md).
 
