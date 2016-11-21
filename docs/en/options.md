@@ -119,6 +119,8 @@ module.exports = {
 
   Configure options for `buble-loader` (if present), AND the buble compilation pass for template render functions.
 
+  > version note: in version 9.x, the template expressions are configured separately via the now removed `templateBuble` option.
+
   The template render functions compilation supports a special transform `stripWith` (enabled by default), which removes the `with` usage in generated render functions to make them strict-mode compliant.
 
   Example configuration:
