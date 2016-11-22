@@ -20,15 +20,22 @@ For Webpack 2.x:
 ``` js
 // webpack.config.js
 module.exports = {
-  // other configs...
-  plugins: [
-    new webpack.LoaderOptionsPlugin({
-      vue: {
-        // use custom postcss plugins
-        postcss: [require('postcss-cssnext')()]
+  // other options...
+  module: {
+    // module.rules is the same as module.loaders in 1.x
+    rules: [
+      {
+        test: /\.vue$/,
+        loader: 'vue',
+        // vue-loader options goes here
+        options: {
+          // ...
+          postcss: [require('postcss-cssnext')()]
+          }
+        }
       }
-    })
-  ]
+    ]
+  }
 }
 ```
 
