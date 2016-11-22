@@ -66,11 +66,11 @@ You can have more than one `<style>` tags in a single `*.vue` component. To avoi
 
 ``` html
 <style module="a">
-  /* identifiers injected as $a */
+  /* identifiers injected as a */
 </style>
 
 <style module="b">
-  /* identifiers injected as $b */
+  /* identifiers injected as b */
 </style>
 ```
 
