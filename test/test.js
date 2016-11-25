@@ -10,6 +10,7 @@ var genId = require('../lib/gen-id')
 var SourceMapConsumer = require('source-map').SourceMapConsumer
 var ExtractTextPlugin = require("extract-text-webpack-plugin")
 var compiler = require('../lib/template-compiler')
+var normalizeNewline = require('normalize-newline')
 
 var loaderPath = 'expose?vueModule!' + path.resolve(__dirname, '../')
 var mfs = new MemoryFS()
@@ -103,6 +104,7 @@ describe('vue-loader', function () {
 
       expect(module.data().msg).to.contain('Hello from Component A!')
       var style = window.document.querySelector('style').textContent
+      style = normalizeNewline(style)
       expect(style).to.contain('comp-a h2 {\n  color: #f00;\n}')
       done()
     })
@@ -161,6 +163,7 @@ describe('vue-loader', function () {
       expect(vnode.children[4][0].data.staticClass).to.equal('test')
 
       var style = window.document.querySelector('style').textContent
+      style = normalizeNewline(style)
       expect(style).to.contain('.test[' + id + '] {\n  color: yellow;\n}')
       expect(style).to.contain('.test[' + id + ']:after {\n  content: \'bye!\';\n}')
       expect(style).to.contain('h1[' + id + '] {\n  color: green;\n}')
@@ -235,6 +238,7 @@ describe('vue-loader', function () {
       entry: './test/fixtures/media-query.vue'
     }, function (window) {
       var style = window.document.querySelector('style').textContent
+      style = normalizeNewline(style)
       var id = 'data-v-' + genId(require.resolve('./fixtures/media-query.vue'))
       expect(style).to.contain('@media print {\n.foo[' + id + '] {\n    color: #000;\n}\n}')
       done()
@@ -255,6 +259,7 @@ describe('vue-loader', function () {
       ]
     }), function () {
       var css = mfs.readFileSync('/test.output.css').toString()
+      css = normalizeNewline(css)
       expect(css).to.contain('h1 {\n  color: #f00;\n}\n\nh2 {\n  color: green;\n}')
       done()
     })
@@ -322,6 +327,7 @@ describe('vue-loader', function () {
       }
     }, function (window) {
       var style = window.document.querySelector('style').textContent
+      style = normalizeNewline(style)
       expect(style).to.contain('h1 {\n  color: red;\n  font-size: 14px\n}')
       done()
     })
@@ -398,6 +404,7 @@ describe('vue-loader', function () {
         var style = [].slice.call(window.document.querySelectorAll('style')).map(function (style) {
           return style.textContent
         }).join('\n')
+        style = normalizeNewline(style)
         expect(style).to.contain('.' + className + ' {\n  color: red;\n}')
 
         // animation name
