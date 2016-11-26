@@ -28,7 +28,7 @@ var globalConfig = {
   }
 }
 
-function bundle (options, cb) {
+function bundle(options, cb) {
   var config = Object.assign({}, globalConfig, options)
   var webpackCompiler = webpack(config)
   webpackCompiler.outputFileSystem = mfs
@@ -44,7 +44,7 @@ function bundle (options, cb) {
   })
 }
 
-function test (options, assert) {
+function test(options, assert) {
   bundle(options, function (code) {
     jsdom.env({
       html: '<!DOCTYPE html><html><head></head><body></body></html>',
@@ -60,7 +60,7 @@ function test (options, assert) {
   })
 }
 
-function mockRender (options, data) {
+function mockRender(options, data) {
   return options.render.call(Object.assign({
     _h (tag, data, children) {
       if (Array.isArray(data)) {
@@ -82,7 +82,7 @@ function mockRender (options, data) {
   }, data))
 }
 
-function interopDefault (module) {
+function interopDefault(module) {
   return module
     ? module.__esModule ? module.default : module
     : module
@@ -288,8 +288,8 @@ describe('vue-loader', function () {
       },
       module: {
         loaders: [
-          { test: /\.vue$/, loader: loaderPath },
-          { test: /\.png$/, loader: 'file-loader?name=[name].[hash:6].[ext]' }
+          {test: /\.vue$/, loader: loaderPath},
+          {test: /\.png$/, loader: 'file-loader?name=[name].[hash:6].[ext]'}
         ]
       }
     }, function (window, module) {
@@ -379,7 +379,7 @@ describe('vue-loader', function () {
   })
 
   it('css-modules', function (done) {
-    function testWithIdent (localIdentName, regexToMatch, cb) {
+    function testWithIdent(localIdentName, regexToMatch, cb) {
       test({
         entry: './test/fixtures/css-modules.vue',
         vue: {
@@ -416,6 +416,7 @@ describe('vue-loader', function () {
         cb()
       })
     }
+
     // default localIdentName
     testWithIdent(undefined, /^_\w{22}/, function () {
       // specified localIdentName
@@ -444,6 +445,20 @@ describe('vue-loader', function () {
       var output = requireFromString(code, './test.build.js')
       expect(output.computed.style().red).to.exist
 
+      done()
+    })
+  })
+
+  it('default lang', function (done) {
+    test({
+      entry: './test/fixtures/default-lang.vue',
+      vue: {
+        defaultLang: {
+          styles: 'stylus'
+        }
+      }
+    }, function (window) {
+      expect(window.document.querySelectorAll('style')[0].textContent).to.contain('msg {\n  color: #f00;\n}')
       done()
     })
   })
