@@ -457,7 +457,7 @@ describe('vue-loader', function () {
         }
       }
     }, function (window) {
-      expect(window.document.querySelectorAll('style')[0].textContent).to.contain('msg {\n  color: #f00;\n}')
+      expect(window.document.querySelectorAll('style')[0].textContent).to.contain('.msg {\n  color: #f00;\n}')
       done()
     })
   })
