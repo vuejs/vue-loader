@@ -2,7 +2,7 @@
 
 > Vue.js component loader for [Webpack](http://webpack.github.io).
 
-**NOTE: the master branch now hosts 9.x which only works with Vue 2.0. For version 8.x which works with Vue 1.x, see the [8.x branch](https://github.com/vuejs/vue-loader/tree/8.x).**
+**NOTE: the master branch (9.0+) only works with Vue 2.x. For usage with Vue 1.x, see the [8.x branch](https://github.com/vuejs/vue-loader/tree/8.x).**
 
 It allows you to write your components in this format:
 
