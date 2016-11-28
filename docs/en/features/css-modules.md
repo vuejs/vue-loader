@@ -76,7 +76,7 @@ You can have more than one `<style>` tags in a single `*.vue` component. To avoi
 
 ### Configuring `css-loader` Query
 
-CSS Modules are processed via [css-loader](ttps://github.com/webpack/css-loader). With `<style module>`, the default query used for `css-loader` is:
+CSS Modules are processed via [css-loader](https://github.com/webpack/css-loader). With `<style module>`, the default query used for `css-loader` is:
 
 ``` js
 {
