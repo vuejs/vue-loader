@@ -12,7 +12,7 @@ var ExtractTextPlugin = require("extract-text-webpack-plugin")
 var compiler = require('../lib/template-compiler')
 var normalizeNewline = require('normalize-newline')
 
-var loaderPath = 'expose?vueModule!' + path.resolve(__dirname, '../')
+var loaderPath = 'expose-loader?vueModule!' + path.resolve(__dirname, '../index.js')
 var mfs = new MemoryFS()
 var globalConfig = {
   output: {
@@ -20,7 +20,7 @@ var globalConfig = {
     filename: 'test.build.js'
   },
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.vue$/,
         loader: loaderPath
@@ -30,7 +30,17 @@ var globalConfig = {
 }
 
 function bundle (options, cb) {
+  var vueOptions = options.vue
+  delete options.vue
   var config = Object.assign({}, globalConfig, options)
+
+  // assign vue Options
+  if (vueOptions) {
+    config.plugins = (config.plugins || []).concat(new webpack.LoaderOptionsPlugin({
+      vue: vueOptions
+    }))
+  }
+
   var webpackCompiler = webpack(config)
   webpackCompiler.outputFileSystem = mfs
   webpackCompiler.run(function (err, stats) {
@@ -250,8 +260,8 @@ describe('vue-loader', function () {
       entry: './test/fixtures/extract-css.vue',
       vue: {
         loaders: {
-          css: ExtractTextPlugin.extract('css'),
-          stylus: ExtractTextPlugin.extract('css?sourceMap!stylus')
+          css: ExtractTextPlugin.extract('css-loader'),
+          stylus: ExtractTextPlugin.extract('css-loader?sourceMap!stylus-loader')
         }
       },
       plugins: [
@@ -269,6 +279,7 @@ describe('vue-loader', function () {
     test({
       entry: './test/fixtures/inject.js'
     }, function (window) {
+      // console.log(window.injector.toString())
       var module = interopDefault(window.injector({
         './service': {
           msg: 'Hello from mocked service!'
@@ -292,7 +303,7 @@ describe('vue-loader', function () {
         }
       },
       module: {
-        loaders: [
+        rules: [
           { test: /\.vue$/, loader: loaderPath },
           { test: /\.png$/, loader: 'file-loader?name=[name].[hash:6].[ext]' }
         ]
