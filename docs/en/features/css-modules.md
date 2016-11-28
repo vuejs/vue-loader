@@ -90,7 +90,7 @@ You can use vue-loader
 s `cssModules` option to provide additional query options to `css-loader`:
 
 ``` js
-// wepback 1
+// webpack 1
 vue: {
   cssModules: {
     // overwrite local ident name
