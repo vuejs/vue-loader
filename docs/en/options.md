@@ -1,5 +1,33 @@
 # Options Reference
 
+## Usage Difference Between Webpack 1 & 2
+
+For Webpack 1.x: add a root `vue` block in your Webpack config:
+
+``` js
+module.exports = {
+  // ...
+  vue: {
+    // vue-loader options
+  }
+}
+```
+
+For Webpack 2: use `webpack.LoaderOptionsPlugin`:
+
+``` js
+module.exports = {
+  // ...
+  plugins: [
+    new webpack.LoaderOptionsPlugin({
+      vue: {
+        // vue-loader options
+      }
+    })
+  ]
+}
+```
+
 ### loaders
 
 - type: `Object`
@@ -21,13 +49,6 @@
   }
   ```
 
-### autoprefixer
-
-- type: `Boolean`
-- default: `true`
-
-  Whether to enable autoprefixer for CSS inside `*.vue` files.
-
 ### postcss
 
 - type: `Array` or `Function` or `Object`
@@ -40,7 +61,6 @@
   vue: {
     // note: do not nest the `postcss` option under `loaders`
     postcss: [require('postcss-cssnext')()],
-    autoprefixer: false,
     loaders: {
       // ...
     }
@@ -67,17 +87,9 @@
 
   Note this is automatically set to `false` if the `devtool` option is not present in the main Webpack config.
 
-### template
-
-- ^8.4.0
-- type: `Object`
-
-  Pass options to the template rendering engine (via [consolidate](https://github.com/tj/consolidate.js)) if you are using a non-html templating language.
-
 ### esModule
 
-- ^9.4.3
 - type: `Boolean`
 - default: `undefined`
 
-  Whether to emit esModule compatible code. By default vue-loader will emit default export in commonjs format like `module.exports = ....`. When `esModule` is set to true, default export will be transpiled into `exports.__esModule = true; exports = ...`. Useful for interoperating with transpiler other than Bable, like TypeScript.
+  Whether to emit esModule compatible code. By default vue-loader will emit default export in commonjs format like `module.exports = ....`. When `esModule` is set to true, default export will be transpiled into `exports.__esModule = true; exports = ...`. Useful for interoperating with transpiler other than Babel, like TypeScript.

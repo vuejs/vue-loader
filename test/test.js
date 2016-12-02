@@ -108,6 +108,25 @@ describe('vue-loader', function () {
     })
   })
 
+  it('automatic name setting based on filename', function (done) {
+    test({
+      entry: './test/fixtures/unnamed.vue'
+    }, function (window, module, rawModule) {
+      expect(module.name).to.equal('unnamed')
+      test({
+        entry: './test/fixtures/named.vue'
+      }, function (window, module, rawModule) {
+        expect(module.name).to.equal('custom-name')
+        test({
+          entry: './test/fixtures/unnamed-5tr@ng3_f1l3n@me$.vue'
+        }, function (window, module, rawModule) {
+          expect(module.name).to.equal('unnamed-5trng3f1l3nme')
+          done()
+        })
+      })
+    })
+  })
+
   it('pre-processors', function (done) {
     test({
       entry: './test/fixtures/pre.vue'
