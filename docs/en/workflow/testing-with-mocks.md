@@ -28,8 +28,10 @@ export default {
 
 Here's how to import it with mocks:
 
+> Note: inject-loader@3.x is currently unstable.
+
 ``` bash
-npm install inject-loader --save-dev
+npm install inject-loader@^2.0.0 --save-dev
 ```
 
 ``` js

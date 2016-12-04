@@ -10,8 +10,9 @@ var genId = require('../lib/gen-id')
 var SourceMapConsumer = require('source-map').SourceMapConsumer
 var ExtractTextPlugin = require("extract-text-webpack-plugin")
 var compiler = require('../lib/template-compiler')
+var normalizeNewline = require('normalize-newline')
 
-var loaderPath = 'expose?vueModule!' + path.resolve(__dirname, '../')
+var loaderPath = 'expose-loader?vueModule!' + path.resolve(__dirname, '../index.js')
 var mfs = new MemoryFS()
 var globalConfig = {
   output: {
@@ -19,7 +20,7 @@ var globalConfig = {
     filename: 'test.build.js'
   },
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.vue$/,
         loader: loaderPath
@@ -29,7 +30,17 @@ var globalConfig = {
 }
 
 function bundle (options, cb) {
+  var vueOptions = options.vue
+  delete options.vue
   var config = Object.assign({}, globalConfig, options)
+
+  // assign vue Options
+  if (vueOptions) {
+    config.plugins = (config.plugins || []).concat(new webpack.LoaderOptionsPlugin({
+      vue: vueOptions
+    }))
+  }
+
   var webpackCompiler = webpack(config)
   webpackCompiler.outputFileSystem = mfs
   webpackCompiler.run(function (err, stats) {
@@ -103,6 +114,7 @@ describe('vue-loader', function () {
 
       expect(module.data().msg).to.contain('Hello from Component A!')
       var style = window.document.querySelector('style').textContent
+      style = normalizeNewline(style)
       expect(style).to.contain('comp-a h2 {\n  color: #f00;\n}')
       done()
     })
@@ -161,6 +173,7 @@ describe('vue-loader', function () {
       expect(vnode.children[4][0].data.staticClass).to.equal('test')
 
       var style = window.document.querySelector('style').textContent
+      style = normalizeNewline(style)
       expect(style).to.contain('.test[' + id + '] {\n  color: yellow;\n}')
       expect(style).to.contain('.test[' + id + ']:after {\n  content: \'bye!\';\n}')
       expect(style).to.contain('h1[' + id + '] {\n  color: green;\n}')
@@ -235,6 +248,7 @@ describe('vue-loader', function () {
       entry: './test/fixtures/media-query.vue'
     }, function (window) {
       var style = window.document.querySelector('style').textContent
+      style = normalizeNewline(style)
       var id = 'data-v-' + genId(require.resolve('./fixtures/media-query.vue'))
       expect(style).to.contain('@media print {\n.foo[' + id + '] {\n    color: #000;\n}\n}')
       done()
@@ -246,8 +260,8 @@ describe('vue-loader', function () {
       entry: './test/fixtures/extract-css.vue',
       vue: {
         loaders: {
-          css: ExtractTextPlugin.extract('css'),
-          stylus: ExtractTextPlugin.extract('css?sourceMap!stylus')
+          css: ExtractTextPlugin.extract('css-loader'),
+          stylus: ExtractTextPlugin.extract('css-loader?sourceMap!stylus-loader')
         }
       },
       plugins: [
@@ -255,6 +269,7 @@ describe('vue-loader', function () {
       ]
     }), function () {
       var css = mfs.readFileSync('/test.output.css').toString()
+      css = normalizeNewline(css)
       expect(css).to.contain('h1 {\n  color: #f00;\n}\n\nh2 {\n  color: green;\n}')
       done()
     })
@@ -264,6 +279,7 @@ describe('vue-loader', function () {
     test({
       entry: './test/fixtures/inject.js'
     }, function (window) {
+      // console.log(window.injector.toString())
       var module = interopDefault(window.injector({
         './service': {
           msg: 'Hello from mocked service!'
@@ -287,7 +303,7 @@ describe('vue-loader', function () {
         }
       },
       module: {
-        loaders: [
+        rules: [
           { test: /\.vue$/, loader: loaderPath },
           { test: /\.png$/, loader: 'file-loader?name=[name].[hash:6].[ext]' }
         ]
@@ -322,6 +338,7 @@ describe('vue-loader', function () {
       }
     }, function (window) {
       var style = window.document.querySelector('style').textContent
+      style = normalizeNewline(style)
       expect(style).to.contain('h1 {\n  color: red;\n  font-size: 14px\n}')
       done()
     })
@@ -398,6 +415,7 @@ describe('vue-loader', function () {
         var style = [].slice.call(window.document.querySelectorAll('style')).map(function (style) {
           return style.textContent
         }).join('\n')
+        style = normalizeNewline(style)
         expect(style).to.contain('.' + className + ' {\n  color: red;\n}')
 
         // animation name
@@ -417,7 +435,7 @@ describe('vue-loader', function () {
       })
     }
     // default localIdentName
-    testWithIdent(undefined, /^_\w{22}/, function () {
+    testWithIdent(undefined, /^\w{23}/, function () {
       // specified localIdentName
       var ident = '[path][name]---[local]---[hash:base64:5]'
       var regex = /^test-fixtures-css-modules---red---\w{5}/
