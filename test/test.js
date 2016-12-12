@@ -72,18 +72,20 @@ function test (options, assert) {
 }
 
 function mockRender (options, data) {
+  var createElement = function (tag, data, children) {
+    if (Array.isArray(data)) {
+      children = data
+      data = null
+    }
+    return {
+      tag: tag,
+      data: data,
+      children: children
+    }
+  }
   return options.render.call(Object.assign({
-    _h (tag, data, children) {
-      if (Array.isArray(data)) {
-        children = data
-        data = null
-      }
-      return {
-        tag: tag,
-        data: data,
-        children: children
-      }
-    },
+    _h: createElement,
+    $createElement: createElement,
     _m (index) {
       return options.staticRenderFns[index].call(this)
     },
