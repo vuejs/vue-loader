@@ -1,20 +1,21 @@
-- Getting Started
-  - [Vue Component Spec](start/spec.md)
-  - [Setting Up a Project](start/setup.md)
-- Features
+- [소개](README.md)
+- 시작하기
+  - [Vue 컴포넌트 스펙](start/spec.md)
+  - [프로젝트 세팅하기](start/setup.md)
+- 기능
   - [ES2015](features/es2015.md)
-  - [Scoped CSS](features/scoped-css.md)
-  - [CSS Modules](features/css-modules.md)
+  - [범위 CSS](features/scoped-css.md)
+  - [CSS 모듈](features/css-modules.md)
   - [PostCSS](features/postcss.md)
   - [Hot Reload](features/hot-reload.md)
-- Configurations
-  - [Pre-Processors](configurations/pre-processors.md)
-  - [Asset URL Handling](configurations/asset-url.md)
-  - [Advanced Loader Configuration](configurations/advanced.md)
-  - [Extracting CSS File](configurations/extract-css.md)
-- Workflow
-  - [Production Build](workflow/production.md)
+- 설정
+  - [전처리기](configurations/pre-processors.md)
+  - [Asset URL 핸들링](configurations/asset-url.md)
+  - [고급 로더 설정](configurations/advanced.md)
+  - [CSS 파일 추출하기](configurations/extract-css.md)
+- 개발 환경
+  - [실환경 빌드](workflow/production.md)
   - [Linting](workflow/linting.md)
   - [Testing](workflow/testing.md)
-  - [Testing with Mocks](workflow/testing-with-mocks.md)
-- [Options Reference](options.md)
+  - [목업을 이용한 Testing](workflow/testing-with-mocks.md)
+- [옵션 레퍼런스](options.md)
