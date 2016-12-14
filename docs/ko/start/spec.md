@@ -1,6 +1,6 @@
-# Vue Component Spec
+# Vue 컴포넌트 스펙
 
-A `*.vue` file is a custom file format that uses HTML-like syntax to describe a Vue component. Each `*.vue` file consists of three types of top-level language blocks: `<template>`, `<script>` and `<style>`:
+`*.vue` 파일은 HTML과 유사한 문법을 사용하여 Vue 컴포넌트를 작성하는 사용자 정의 파일입니다. 각 `*.vue` 파일은 `<template>`와 `<script>`, `<style>` 세 가지 유형의 최상위 language block으로 구성됩니다.
 
 ``` html
 <template>
@@ -24,51 +24,51 @@ export default {
 </style>
 ```
 
-`vue-loader` will parse the file, extract each language block, pipe them through other loaders if necessary, and finally assemble them back into a CommonJS module whose `module.exports` is a Vue.js component options object.
+`vue-loader`는 파일을 파싱하고 각 language block을 추출한 다음 필요한 경우 다른 로더를 통해 파이프를 구성하고 `module.exports`가 Vue.js 옵션 객체인 CommonJS 모듈로 다시 합쳐줍니다.
 
-`vue-loader` supports using non-default languages, such as CSS pre-processors and compile-to-HTML template languages, by specifying the `lang` attribute for a language block. For example, you can use SASS for the style of your component like this:
+`vue-loader`는 language block에 `lang` 속성을 지정하여 CSS 전처리기 혹은 HTML 컴파일 언어를 사용할 수 있습니다. 예를 들어, 다음과 같이 컴포넌트에 SASS를 사용할 수 있습니다.
 
 ``` html
 <style lang="sass">
-  /* write SASS! */
+  /* SASS를 사용하세요! */
 </style>
 ```
 
-More details can be found in [Using Pre-Processors](../configurations/pre-processors.md).
+자세한 내용은 [전처리기 사용하기](../configurations/pre-processors.md)에서 확인할 수 있습니다.
 
-### Language Blocks
+### Language Block
 
 #### `<template>`
 
-- Default language: `html`.
+- 기본 언어: `html`.
 
-- Each `*.vue` file can contain at most one `<template>` block at a time.
+- 각 `*.vue` 파일은 하나의 `<template>` 블럭을 포함 할 수 있습니다.
 
-- Contents will be extracted as a string and used as the `template` option for the compiled Vue component.
+- 내용은 문자열로 출력되어 컴파일된 Vue 컴포넌트의 `template` 옵션에 사용됩니다.
 
 #### `<script>`
 
-- Default language: `js` (ES2015 is supported automatically if `babel-loader` or `buble-loader` is detected).
+- 기본 언어: `js` (만약 `babel-loader` 또는 `buble-loader`를 사용한다면 ES2015를 자동으로 지원합니다).
 
-- Each `*.vue` file can contain at most one `<script>` block at a time.
+- 각 `*.vue` 파일은 하나의 `<script>` 블럭을 포함 할 수 있습니다.
 
-- The script is executed in a CommonJS like environment (just like a normal `.js` module bundled via Webpack), which means you can `require()` other dependencies. And with ES2015 support, you can also use the `import` and `export` syntax.
+- 이 스크립트는 CommonJS와 같은 환경(Webpack을 통해 번들로 제공되는 `.js` 모듈처럼)에서 실행되기 때문에 다른 파일을 `require()` 할 수 있습니다. 또한 ES2015을 지원하면 `import`와 `export`를 사용할 수 있습니다.
 
-- The script must export a Vue.js component options object. Exporting an extended constructor created by `Vue.extend()` is also supported, but a plain object is preferred.
+- 스크립트는 Vue.js 컴포넌트 옵션 객체를 내보내야 합니다. `Vue.extend()`에 의해 생선된 확장 생성자를 내보내는 것도 가능하지만, 평범한 객체를 선호합니다.
 
 #### `<style>`
 
-- Default Language: `css`.
+- 기본 언어: `css`.
 
-- Multiple `<style>` tags are supported in a single `*.vue` file.
+- 여러 개의 `<style>` 태그가 하나의 `*.vue` 파일에 포함될 수 있습니다.
 
-- A `<style>` tag can have `scoped` or `module` attributes (see [Scoped CSS](../features/scoped-css.md) and [CSS Modules](../features/css-modules.md)) to help encapsulating the styles to the current component. Multiple `<style>` tags with different encapsulation modes can be mixed in the same component.
+- `<style>` 태그는 컴포넌트에 스타일을 캡슐화 할 수 있도록 `scoped` 또는 `module` 속성을 사용할 수 있습니다. ([범위 CSS](../features/scoped-css.md)와 [CSS 모듈](../features/css-modules.md)를 참고하세요)  여러 개의 `<style>` 태그로 동일한 컴포넌트에 캡슐화 모드를 혼합하여 사용 할 수 있습니다.
 
-- By default, contents will be extracted and dynamically inserted into the document's `<head>` as an actual `<style>` tag using `style-loader`. It's also possible to [configure Webpack so that all styles in all components are extracted into a single CSS file](../configurations/extract-css.md).
+- 기본적으로 내용은 추출되고 `style-loader`를 사용하여 문서의 `<head>`에서 `<style>`태그로 동적으로 삽입됩니다. 또한 모든 [컴포넌트의 스타일이 단일 CSS 파일로 추출되도록](../configurations/extract-css.md) Webpack을 구성할 수 있습니다. 
 
-### Src Imports
+### Src로 가져오기
 
-If you prefer splitting up your `*.vue` components into multiple files, you can use the `src` attribute to import an external file for a language block:
+`*.vue` 컴포넌트를 여러 파일로 분할하려 할 경우 `src` 속성을 사용하여 language block에 대한 외부 파일을 가져올 수 있습니다.
 
 ``` html
 <template src="./template.html"></template>
@@ -76,17 +76,17 @@ If you prefer splitting up your `*.vue` components into multiple files, you can 
 <script src="./script.js"></script>
 ```
 
-Beware that `src` imports follow the same path resolution rules to CommonJS `require()` calls, which means for relative paths you need to start with `./`, and you can import resources directly from installed NPM packages, e.g:
+`src`로 가져오기가 CommonJS `require()` 호출과 동일한 경로 확인 규칙을 따르기 때문에 주의해야 합니다. 즉, `./`로 시작해야하는 상대 경로를 의미하며 설치된 NPM 패키지에서 직접 리소스를 가져올 수 있습니다.
 
 ``` html
-<!-- import a file from the installed "todomvc-app-css" npm package -->
+<!-- 설치된 NPM 패키지 "todomvc-app-css"에서 파일을 불러옵니다 -->
 <style src="todomvc-app-css/index.css">
 ```
 
 ### Syntax Highlighting
 
-Currently there is syntax highlighting support for [Sublime Text](https://github.com/vuejs/vue-syntax-highlight), [Atom](https://atom.io/packages/language-vue), [Vim](https://github.com/posva/vim-vue), [Visual Studio Code](https://marketplace.visualstudio.com/items/liuji-jim.vue), [Brackets](https://github.com/pandao/brackets-vue), and [JetBrains products](https://plugins.jetbrains.com/plugin/8057) (WebStorm, PhpStorm, etc). Contributions for other editors/IDEs are highly appreciated! If you are not using any pre-processors in Vue components, you can also get by by treating `*.vue` files as HTML in your editor.
+현재 [Sublime Text](https://github.com/vuejs/vue-syntax-highlight), [Atom](https://atom.io/packages/language-vue), [Vim](https://github.com/posva/vim-vue), [Visual Studio Code](https://marketplace.visualstudio.com/items/liuji-jim.vue), [Brackets](https://github.com/pandao/brackets-vue), [JetBrains 제품](https://plugins.jetbrains.com/plugin/8057) (WebStorm, PhpStorm 등)에 Syntax Highlighting 기능이 있습니다. 다른 에디터/IDE에 컨트리뷰션 해주신다면 경우 매우 고맙습니다! 만약 에디터/IDE에서 Syntax Highlighting을 지원하지 않고, Vue 컴포넌트에서 전처리기를 사용하지 않는 경우 에디터에서 `*.vue` 파일을 HTML 형태로 보는 것을 추천합니다.
 
-### Comments
+### 주석
 
-Inside each block you shall use the comment syntax of the language being used (HTML, CSS, JavaScript, Jade, etc). For top-level comments, use HTML comment syntax: `<!-- comment contents here -->`
+각 블럭 안에는 사용되는 언어의 주석 처리 방법을 사용해야 합니다. 최상위 수준의 주석은 HTML 주석 처리 방법을 사용해주세요. `<!-- 주석 내용을 여기에 적어주세요 -->`
