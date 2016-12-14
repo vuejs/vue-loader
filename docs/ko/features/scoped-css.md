@@ -1,6 +1,6 @@
-# Scoped CSS
+# 범위 CSS
 
-When a `<style>` tag has the `scoped` attribute, its CSS will apply to elements of the current component only. This is similar to the style encapsulation found in Shadow DOM. It comes with some caveats, but doesn't require any polyfills. It is achieved by using PostCSS to transform the following:
+`<style>` 태그가 `scoped` 속성을 가지고있을 때, CSS는 현재 컴포넌트의 요소에만 적용됩니다. 이는 Shadow DOM에 있는 스타일 캡슐화와 유사합니다. 여기에는 몇 가지 주의사항이 있지만 polyfills는 필요 없습니다. PostCSS를 사용한다면 다음과 같이 변환할 수 있습니다.
 
 ``` html
 <style scoped>
@@ -10,11 +10,11 @@ When a `<style>` tag has the `scoped` attribute, its CSS will apply to elements 
 </style>
 
 <template>
-  <div class="example">hi</div>
+  <div class="example">안녕</div>
 </template>
 ```
 
-Into the following:
+다음과 같이 변환됩니다.
 
 ``` html
 <style>
@@ -24,13 +24,13 @@ Into the following:
 </style>
 
 <template>
-  <div class="example" _v-f3f3eg9>hi</div>
+  <div class="example" _v-f3f3eg9>안녕</div>
 </template>
 ```
 
-#### Notes
+#### 메모
 
-1. You can include both scoped and non-scoped styles in the same component:
+1. 범위가 지정된 스타일과 범위가 지정되지 않은 스타일은 동일한 컴포넌트에 포함 할 수 있습니다.
 
   ``` html
   <style>
@@ -42,10 +42,10 @@ Into the following:
   </style>
   ```
 
-2. A child component's root node will be affected by both the parent's scoped CSS and the child's scoped CSS.
+2. 하위 컴포넌트의 루트 노드는 상위 범위 CSS와 하위 범위 CSS의 영향을 받습니다.
 
-3. Partials are not affected by scoped styles.
+3. Partial은 범위가 지정된 스타일의 영향을 받지 않습니다.
 
-4. **Scoped styles do not eliminate the need for classes**. Due to the way browsers render various CSS selectors, `p { color: red }` will be many times slower when scoped (i.e. when combined with an attribute selector). If you use classes or ids instead, such as in `.example { color: red }`, then you virtually eliminate that performance hit. [Here's a playground](http://stevesouders.com/efws/css-selectors/csscreate.php) where you can test the differences yourself.
+4. **범위가 지정된 스타일은 클래스의 필요성을 제거하는 것이 아닙니다**. 브라우저가 다양한 CSS 셀렉터를 렌더링하는 방식 때문에 `p { color: red }`는 범위(즉 속성 선택자와 결합될 때)가 지정될 때 몇 배는 더 느려집니다. `.example { color: red }`와 같이 클래스 또는 id를 대신 사용한다면 성능 이슈를 해결할 수 있습니다. [여기 플레이그라운드](http://stevesouders.com/efws/css-selectors/csscreate.php)에서 차이점을 테스트 할 수 있습니다.
 
-5. **Be careful with descendant selectors in recursive components!** For a CSS rule with the selector `.a .b`, if the element that matches `.a` contains a recursive child component, then all `.b` in that child component will be matched by the rule.
+5. **하위 컴포넌트의 선택자 사용을 조심하세요!** 선택자 `.a .b`가 있는 CSS 규칙의 경우 `.a`와 일치하는 요소에 하위 컴포넌트가 포함되어 있을 경우 해당 하위 컴포넌트의 모든 `.b`가 CSS 규칙에 적용됩니다.
