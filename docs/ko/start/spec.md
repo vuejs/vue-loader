@@ -85,7 +85,7 @@ export default {
 
 ### Syntax Highlighting
 
-현재 [Sublime Text](https://github.com/vuejs/vue-syntax-highlight), [Atom](https://atom.io/packages/language-vue), [Vim](https://github.com/posva/vim-vue), [Visual Studio Code](https://marketplace.visualstudio.com/items/liuji-jim.vue), [Brackets](https://github.com/pandao/brackets-vue), [JetBrains 제품](https://plugins.jetbrains.com/plugin/8057) (WebStorm, PhpStorm 등)에 Syntax Highlighting 기능이 있습니다. 다른 에디터/IDE에 컨트리뷰션 해주신다면 경우 매우 고맙습니다! 만약 에디터/IDE에서 Syntax Highlighting을 지원하지 않고, Vue 컴포넌트에서 전처리기를 사용하지 않는 경우 에디터에서 `*.vue` 파일을 HTML 형태로 보는 것을 추천합니다.
+현재 [Sublime Text](https://github.com/vuejs/vue-syntax-highlight), [Atom](https://atom.io/packages/language-vue), [Vim](https://github.com/posva/vim-vue), [Visual Studio Code](https://marketplace.visualstudio.com/items/liuji-jim.vue), [Brackets](https://github.com/pandao/brackets-vue), [JetBrains 제품](https://plugins.jetbrains.com/plugin/8057) (WebStorm, PhpStorm 등)에 Syntax Highlighting 기능이 있습니다. 다른 에디터/IDE에 대한 컨트리뷰션은 매우 환영합니다! 만약 에디터/IDE에서 Syntax Highlighting을 지원하지 않고, Vue 컴포넌트에서 전처리기를 사용하지 않는 경우 에디터에서 `*.vue` 파일을 HTML 형태로 보는 것을 추천합니다.
 
 ### 주석
 

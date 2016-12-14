@@ -1,12 +1,12 @@
-# Setting Up a Project
+# 프로젝트 세팅하기
 
 ### Syntax Highlighting
 
-First thing first, you will probably want proper syntax highlighting for `*.vue` components. Currently there are syntax highlighting support for [Sublime Text](https://github.com/vuejs/vue-syntax-highlight), [Atom](https://atom.io/packages/language-vue) and [Vim](https://github.com/posva/vim-vue). Contributions for other editors/IDEs are highly appreciated! If you are not using any pre-processors in Vue components, you can also get by by treating `*.vue` files as HTML in your editor.
+먼저 `*.vue` 컴포넌트에 대한 Syntax Highlighting 올바른 표시가 필요할 것입니다. 현재 [Sublime Text](https://github.com/vuejs/vue-syntax-highlight), [Atom](https://atom.io/packages/language-vue) and [Vim](https://github.com/posva/vim-vue) 등이 Syntax Highlighting이 지원됩니다. 다른 에디터/IDE에 대한 컨트리뷰션은 매우 환영합니다! 만약 에디터/IDE에서 Syntax Highlighting을 지원하지 않고, Vue 컴포넌트에서 전처리기를 사용하지 않는 경우 에디터에서 `*.vue` 파일을 HTML 형태로 보는 것을 추천합니다.
 
-### Using `vue-cli`
+### `vue-cli` 사용하기
 
-It's recommended to scaffold a project using `vue-loader` with `vue-cli`:
+`vue-loader`와 `vue-cli`를 사용하여 프로젝트를 진행하는 것을 추천합니다.
 
 ``` bash
 npm install -g vue-cli
