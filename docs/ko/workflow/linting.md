@@ -1,10 +1,10 @@
 # Linting
 
-You may have been wondering how do you lint your code inside `*.vue` files, since they are not JavaScript. We will assume you are using [ESLint](http://eslint.org/) (if you are not, you should!).
+`*.vue` 파일은 Javascript가 아니기 때문에 내부 코드를 어떻게 lint하는지 궁금했을 겁니다. 우리는 당신이 [ESLint](http://eslint.org/)를 사용하고 있다고 가정 할 것입니다. (그렇지 않다면 당신은 사용해야합니다!)
 
-You will also need the [eslint-html-plugin](https://github.com/BenoitZugmeyer/eslint-plugin-html) with supports extracting and linting the JavaScript inside `*.vue` files.
+당신은 `*.vue` 파일 내에서 Javascript를 추출하고 linting하는 것과 동시에 [eslint-html-plugin](https://github.com/BenoitZugmeyer/eslint-plugin-html)이 필요합니다.
 
-Make sure to include the plugin in your ESLint config:
+그리고 ESLint 설정에 플러그인을 포함해야 합니다.
 
 ``` json
 "plugins": [
@@ -12,13 +12,13 @@ Make sure to include the plugin in your ESLint config:
 ]
 ```
 
-Then from the command line:
+그 다음 커맨드 라인에서 다음과 같이 입력합니다.
 
 ``` bash
 eslint --ext js,vue MyComponent.vue
 ```
 
-Another option is using [eslint-loader](https://github.com/MoOx/eslint-loader) so that your `*.vue` files are automatically linted on save during development:
+또 다른 옵션은 [eslint-loader](https://github.com/MoOx/eslint-loader)를 사용하여 개발 중에 `*.vue` 파일이 저장될 때 자동으로 lint되도록 할 수 있습니다.
 
 ``` bash
 npm install eslint eslint-loader --save-dev
@@ -39,9 +39,9 @@ module.exports = {
 }
 ```
 
-Note that Webpack loader chains are applied **right-first**. Make sure to apply `eslint` before `vue` so we are linting the pre-compile source code.
+Webpack 로더 체인은 **가장 먼저** 적용됩니다. `vue` 전에 `eslint`를 적용하여 컴파일 전 소스코드를 lint하세요.
 
-One thing we need to consider is using third party `*.vue` components shipped in NPM packages. In such case, we want to use `vue-loader` to process the third party component, but do not want to lint it. We can separate the linting into Webpack's [preLoaders](https://webpack.github.io/docs/loaders.html#loader-order):
+우리가 고려해야할 한 가지는 NPM 패키지에 포함 된 써드파티 `*.vue` 컴포넌트를 사용하는 것 입니다. 이 경우에 우리는 써드파티 컴포넌트를 처리하기 위해 `vue-loader`를 사용하려고 하지만 그것을 lint하고 싶지는 않습니다. 우리는 lint를 Webpack의 [preLoaders](https://webpack.github.io/docs/loaders.html#loader-order)로 분리할 수 있습니다.
 
 ``` js
 // webpack.config.js
@@ -67,7 +67,7 @@ module.exports = {
 }
 ```
 
-For Webpack 2.x:
+Webpack 2.x에서는 다음과 같이 처리합니다.
 
 ``` js
 // webpack.config.js
