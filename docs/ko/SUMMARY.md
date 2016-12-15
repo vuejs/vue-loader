@@ -16,6 +16,6 @@
 - 개발 환경
   - [실환경 빌드](workflow/production.md)
   - [Linting](workflow/linting.md)
-  - [Testing](workflow/testing.md)
-  - [목업을 이용한 Testing](workflow/testing-with-mocks.md)
+  - [테스트](workflow/testing.md)
+  - [목업을 이용한 테스트](workflow/testing-with-mocks.md)
 - [옵션 레퍼런스](options.md)
