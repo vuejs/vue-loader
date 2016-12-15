@@ -1,11 +1,11 @@
-# Production Build
+# 실환경 빌드
 
-There are two things to do when building our bundle for production:
+실환경을 위해 번들을 제작할 때는 다음 두 가지 작업을 수행해야 합니다.
 
-1. Minify our application code;
-2. Use the [setup described in the Vue.js guide](https://vuejs.org/guide/deployment.html) to strip all the warnings from Vue.js source code.
+1. 어플리케이션 코드를 Minify합니다.
+2. Vue.js 소스 코드의 모든 경고를 제거하려면 [Vue.js 가이드에 설명된 설정](https://vuejs.org/guide/deployment.html)을 사용하세요.
 
-Here's an example config:
+여기 예제 설정이 있습니다.
 
 ``` js
 // webpack.config.js
@@ -30,10 +30,10 @@ module.exports = {
 }
 ```
 
-Obviously we don't want to use this config during development, so there are several ways to approach this:
+우리는 개발 중에 이 설정을 사용하고 싶지 않을 것이기 때문에 이것을 해결하는 몇 가지 방법이 있습니다.
 
-1. Dynamically build up the configuration object based on an environment variable;
+1. 환경변수 기반으로 설정 오브젝트를 동적으로 빌드할 수 있습니다.
 
-2. Or, use two separate Webpack config files, one for development and one for production. And maybe share some common options between them in a third file, as shown in [vue-hackernews-2.0](https://github.com/vuejs/vue-hackernews-2.0).
+2. 또는 개발용 Webpack 설정 파일과 실환경용 설정 파일을 분리하여 사용합니다. 그리고 [vue-hackernews-2.0](https://github.com/vuejs/vue-hackernews-2.0)에 표시 된 것처럼 세 번째 파일에서 공통 옵션을 공유할 수도 있습니다.
 
-It's really up to you as long as it achieves the goal.
+목표의 달성은 당신에게 달려있습니다.
