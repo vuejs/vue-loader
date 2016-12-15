@@ -2,11 +2,11 @@
 
 > requires ^9.8.0
 
-[CSS Modules](https://github.com/css-modules/css-modules) is a popular system for modularizing and composing CSS. `vue-loader` provides first-class integration with CSS Modules as an alternative for simulated scoped CSS.
+[CSS Modules](https://github.com/css-modules/css-modules)은 CSS을 모듈화하고 구성하는데 널리 사용되는 시스템입니다. `vue-loader`는 스뮬레이트된 범위 CSS의 대안으로 CSS Modules와 함께 first-class intergration을 제공합니다.
 
-### Usage
+### 사용법
 
-Just add the `module` attribute to your `<style>`:
+`<style>`에 `moudle` 속성을 삽입하니다.
 
 ``` html
 <style module>
@@ -19,7 +19,7 @@ Just add the `module` attribute to your `<style>`:
 </style>
 ```
 
-This will turn on CSS Modules mode for `css-loader`, and the resulting class identifier object will be injected into the component as a computed property with the name `$style`. You can use it in your templates with a dynamic class binding:
+이렇게하면 `css-loader`에 대한 CSS Modules 모드가 켜지고 결과적으로 클래스 식별자 오브젝트는 `$style` 이름의 계산된 속성으로 컴포넌트에 주입됩니다. 당신은 동적 클래스 바인딩을 사용하여 템플릿에서 이를 사용할 수 있습니다.
 
 ``` html
 <template>
@@ -29,7 +29,7 @@ This will turn on CSS Modules mode for `css-loader`, and the resulting class ide
 </template>
 ```
 
-Since it's a computed property, it also works with the object/array syntax of `:class`:
+그것은 계산된 속성이기 때문에 `:class`의 오브젝트/배열 문법에도 작동합니다.
 
 ``` html
 <template>
@@ -44,7 +44,7 @@ Since it's a computed property, it also works with the object/array syntax of `:
 </template>
 ```
 
-And you can also access it from JavaScript:
+또한 Javascript에서도 접근할 수 있습니다.
 
 ``` html
 <script>
@@ -58,11 +58,11 @@ export default {
 </script>
 ```
 
-Refer to the [CSS Modules spec](https://github.com/css-modules/css-modules) for mode details such as [global exceptions](https://github.com/css-modules/css-modules#exceptions) and [composition](https://github.com/css-modules/css-modules#composition).
+[global exceptions](https://github.com/css-modules/css-modules#exceptions)과 [composition](https://github.com/css-modules/css-modules#composition) 같은 자세한 정보는 [CSS Modules 스펙](https://github.com/css-modules/css-modules)을 참고하세요.
 
-### Custom Inject Name
+### 속성 이름 커스터마이징
 
-You can have more than one `<style>` tags in a single `*.vue` component. To avoid injected styles to overwrite each other, you can customize the name of the injected computed property by giving the `module` attribute a value:
+하나의 `*.vue` 컴포넌트 내에 하나 이상의 `<style>` 태그를 가질 수 있습니다. 삽입된 스타일이 서로 덮어 쓰지 않게하려면 `module` 속성에 값을 지정하여 계산된 속성의 이름을 커스터마이징할 수 있습니다.
 
 ``` html
 <style module="a">
@@ -74,9 +74,9 @@ You can have more than one `<style>` tags in a single `*.vue` component. To avoi
 </style>
 ```
 
-### Configuring `css-loader` Query
+### `css-loader` 쿼리 설정
 
-CSS Modules are processed via [css-loader](https://github.com/webpack/css-loader). With `<style module>`, the default query used for `css-loader` is:
+CSS Modules는 [css-loader](https://github.com/webpack/css-loader)를 통해 처리됩니다. `<style module>`을 사용하면 `css-loader`에 사용되는 기본적인 쿼리는 다음과 같습니다.
 
 ``` js
 {
@@ -86,8 +86,7 @@ CSS Modules are processed via [css-loader](https://github.com/webpack/css-loader
 }
 ```
 
-You can use vue-loader
-s `cssModules` option to provide additional query options to `css-loader`:
+당신은 vue-loader의 `cssModules` 옵션을 사용하여 `css-loader`에 추가적인 쿼리 옵션을 제공할 수 있습니다.
 
 ``` js
 // webpack 1

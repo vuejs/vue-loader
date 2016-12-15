@@ -5,7 +5,7 @@
 - 기능
   - [ES2015](features/es2015.md)
   - [범위 CSS](features/scoped-css.md)
-  - [CSS 모듈](features/css-modules.md)
+  - [CSS Modules](features/css-modules.md)
   - [PostCSS](features/postcss.md)
   - [Hot Reload](features/hot-reload.md)
 - 설정

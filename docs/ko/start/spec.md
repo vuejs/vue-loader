@@ -62,7 +62,7 @@ export default {
 
 - 여러 개의 `<style>` 태그가 하나의 `*.vue` 파일에 포함될 수 있습니다.
 
-- `<style>` 태그는 컴포넌트에 스타일을 캡슐화 할 수 있도록 `scoped` 또는 `module` 속성을 사용할 수 있습니다. ([범위 CSS](../features/scoped-css.md)와 [CSS 모듈](../features/css-modules.md)를 참고하세요)  여러 개의 `<style>` 태그로 동일한 컴포넌트에 캡슐화 모드를 혼합하여 사용 할 수 있습니다.
+- `<style>` 태그는 컴포넌트에 스타일을 캡슐화 할 수 있도록 `scoped` 또는 `module` 속성을 사용할 수 있습니다. ([범위 CSS](../features/scoped-css.md)와 [CSS Modules](../features/css-modules.md)를 참고하세요)  여러 개의 `<style>` 태그로 동일한 컴포넌트에 캡슐화 모드를 혼합하여 사용 할 수 있습니다.
 
 - 기본적으로 내용은 추출되고 `style-loader`를 사용하여 문서의 `<head>`에서 `<style>`태그로 동적으로 삽입됩니다. 또한 모든 [컴포넌트의 스타일이 단일 CSS 파일로 추출되도록](../configurations/extract-css.md) Webpack을 구성할 수 있습니다. 
 
