@@ -1,7 +1,7 @@
 # Hot Reload
 
-"Hot Reload" is not simply reloading the page when you edit a file. With hot reload enabled, when you edit a `*.vue` file, all instances of that component will be swapped in **without reloading the page**. It even preserves the current state of your app and these swapped components! This dramatically improves the development experience when you are tweaking the templates or styling of your components.
+"Hot Reload"는 파일을 편집 할 때 단순히 페이지를 다시 로드하는 것이 아닙니다. Hot Reload 기능을 사용하면 `*.vue` 파일을 편집 할 때 해당 컴포넌트의 모든 인스턴스가 **페이지를 리로딩하지 않고** 변경됩니다. 심지어 앱의 현재 상태와 변경된 컴포넌트를 보존합니다. 이것은 템플릿 또는 컴포넌트의 스타일을 조정할 때 개발 환경이 크게 개선됩니다.
 
 ![hot-reload](http://blog.evanyou.me/images/vue-hot.gif)
 
-When scaffolding the project with `vue-cli`, Hot Reload is enabled out-of-the-box.
+Hot Reload는 `vue-cli`로 프로젝트를 스캐폴딩했다면 바로 사용할 수 있습니다.
