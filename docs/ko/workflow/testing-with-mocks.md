@@ -1,10 +1,10 @@
-# Testing with Mocks
+# 목업을 위한 테스트
 
-In a real world application, our components most likely have external dependencies. When writing unit tests for components, it would be ideal if we can mock these external dependencies so that our tests only rely the behavior of the component being tested.
+리얼 월드 어플리케이션에서는 컴포넌트에 외부 의존성이 있을 가능성이 큽니다. 컴포넌트에 대한 유닛 테스트를 작성할 때 테스트가 테스트 중인 컴포넌트의 동작에만 의존하도록 mock을 만드는 것이 이상적 입니다.
 
-`vue-loader` provides a feature that allows you to inject arbitrary dependencies to a `*.vue` component, using [inject-loader](https://github.com/plasticine/inject-loader). The general idea is that instead of directly importing the component module, we use `inject-loader` to create a "module factory" function for that module. When this function gets called with an object of mocks, it returns an instance of the module with the mocks injected.
+`vue-loader`는 [inject-loader](https://github.com/plasticine/inject-loader)를 사용하여 임의의 의존성을 `*.vue` 컴포넌트에 주입 할 수 있는 기능을 제공합니다. 일반적인 아이디어로 컴포넌트 모듈을 직접 가져오는 대신 `inject-loader`를 사용하여 해당 모듈에 대한 "모듈 팩토리" 함수를 생성하는 것 입니다. 이 함수가 mock 객체와 함께 호출되면 mock 객체가 삽입된 모듈의 인스턴트를 반환합니다.
 
-Suppose we have a component like this:
+다음과 같은 컴포넌트가 이싿고 가정해봅시다.
 
 ``` html
 <!-- example.vue -->
@@ -26,9 +26,9 @@ export default {
 </script>
 ```
 
-Here's how to import it with mocks:
+mock을 가져오는 방법은 다음과 같습니다.
 
-> Note: inject-loader@3.x is currently unstable.
+> 주의: `inject-loader@3.x`는 현재 불안정합니다.
 
 ``` bash
 npm install inject-loader@^2.0.0 --save-dev
@@ -39,12 +39,12 @@ npm install inject-loader@^2.0.0 --save-dev
 const ExampleInjector = require('!!vue?inject!./example.vue')
 ```
 
-Notice that crazy require string - we are using some inline [webpack loader requests](https://webpack.github.io/docs/loaders.html) here. A quick explanation:
+Notice that crazy require string. 여기에는 인라인 [webpack loader requests](https://webpack.github.io/docs/loaders.html)이 사용됩니다. 간단한 설명을 하겠습니다.
 
-- `!!` at the start means "disable all loaders from the global config";
-- `vue?inject!` means "use the `vue` loader, and pass in the `?inject` query". This tells `vue-loader` to compile the component in dependency-injection mode.
+- `!!`는 "글로벌 설정에서 모든 로더를 사용하지 못하게 함"을 의미합니다.
+- `vue?inject!`는 `vue` 로더를 사용하고 `?inject` 쿼리를 전달한다는 것을 의미합니다. 이것은 `vue-loader`에게 의존성 주입 모드로 컴퍼넌트를 컴파일하도록 알려줍니다.
 
-The returned `ExampleInjector` is a factory function that can be called to create instances of the `example.vue` module:
+반환된 `ExampleInjector`는 `example.vue` 모듈의 인스턴스를 생성하기 위해 호출 될 수 있는 팩토리 함수입니다.
 
 ``` js
 const ExampleWithMocks = ExampleInjector({
@@ -55,7 +55,7 @@ const ExampleWithMocks = ExampleInjector({
 })
 ```
 
-Finally, we can test the component like usual:
+마지막으로 우리는 컴포넌트를 평상시에 테스트 할 수 있습니다.
 
 ``` js
 it('should render', () => {
