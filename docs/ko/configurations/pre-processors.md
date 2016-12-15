@@ -1,10 +1,10 @@
-# Using Pre-Processors
+# 전처리기 사용하기
 
-In Webpack, all pre-processors need to be applied with a corresponding loader. `vue-loader` allows you to use other Webpack loaders to process a part of a Vue component. It will automatically infer the proper loaders to use from the `lang` attribute of a language block.
+Webpack에서는 모든 전처리기가 해당 로더와 함께 적용되어야 합니다. `vue-loader`는 다른 Webpack 로더를 사용하여 Vue 컴포넌트의 일부를 처리 할 수 있게합니다. language block의 `lang` 속성에서 사용할 적절한 로더를 자동으로 유추합니다.
 
 ### CSS
 
-For example, let's compile our `<style>` tag with SASS:
+예를 들어, SASS로 `<style>`을 컴파일해봅시다.
 
 ``` bash
 npm install sass-loader node-sass --save-dev
@@ -16,11 +16,11 @@ npm install sass-loader node-sass --save-dev
 </style>
 ```
 
-Under the hood, the text content inside the `<style>` tag will be first compiled by `sass-loader` before being passed on for further processing.
+내부적으로, `<style>` 태그 안의 텍스트 내용은 후처리를 위해서 전달되기 전에 `sass-loader`에 의해 먼저 컴파일됩니다.
 
-### JavaScript
+### Javascript
 
-All JavaScript inside Vue components are processed by `babel-loader` by default. But you can of course change it:
+Vue 컴포넌트 내의 모든 Javascript는 기본적으로 `babel-loader`에 의해서 처리됩니다. 물론 당신은 그것을 변경할 수 있습니다.
 
 ``` bash
 npm install coffee-loader --save-dev
@@ -34,7 +34,7 @@ npm install coffee-loader --save-dev
 
 ### Templates
 
-Processing templates is a little different, because most Webpack template loaders such as `pug-loader` return a template function instead of a compiled HTML string. Instead of using `pug-loader`, we can just install the original `pug`:
+`pug-loader`와 같은 대부분의 Webpack 템플릿 로더는 컴파일된 HTML 문자열 대신 템플릿 함수를 반환하기 때문에 템플릿 처리 앞서 처리한 방법과는 약간 다릅니다. `pug-loader` 대신 원래의 `pug` 파일을 설치하여 사용할 수 있습니다.
 
 ``` bash
 npm install pug --save-dev
@@ -47,11 +47,11 @@ div
 </template>
 ```
 
-> **Important:** If you are using `vue-loader@<8.2.0`, you also need to install `template-html-loader`.
+> **중요:** 만약 당신이 `vue-loader@<8.2.0`을 사용한다면, 당신은 `template-html-loader`도 설치해야 합니다.
 
-### Inline Loader Requests
+### 인라인 로더 요청
 
-You can use [Webpack loader requests](https://webpack.github.io/docs/loaders.html#introduction) in the `lang` attribute:
+당신은 `lang` 속성에서 [Webpack 로더 요청](https://webpack.github.io/docs/loaders.html#introduction)을 할 수 있습니다.
 
 ``` html
 <style lang="sass?outputStyle=expanded">
@@ -59,4 +59,4 @@ You can use [Webpack loader requests](https://webpack.github.io/docs/loaders.htm
 </style>
 ```
 
-However, note this makes your Vue component Webpack-specific and not compatible with Browserify and [vueify](https://github.com/vuejs/vueify). **If you intend to ship your Vue component as a reusable 3rd-party component, avoid using this syntax.**
+그러나 이것은 Vue 컴포넌트가 Webpack에 한정되어 있고 Browserify 및 [vueify](https://github.com/vuejs/vueify)와 호환되지 않습니다. **Vue 컴포넌트를 재사용 가능한 써드파티로 제공하려면 이 구문을 사용하지 마십시오.**
