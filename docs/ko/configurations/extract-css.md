@@ -1,6 +1,6 @@
-# Extracting CSS into a Single File
+# CSS 단일 파일로 추출하기
 
-Example config to extract all the processed CSS in all Vue components into a single CSS file:
+다음 예제 설정을 사용하여 모든 Vue 컴포넌트의 처리된 CSS를 단일 CSS 파일로 추출할 수 있습니다.
 
 ### Webpack 1.x
 

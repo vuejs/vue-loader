@@ -12,7 +12,7 @@
   - [전처리기](configurations/pre-processors.md)
   - [Asset URL 핸들링](configurations/asset-url.md)
   - [고급 로더 설정](configurations/advanced.md)
-  - [CSS 파일 추출하기](configurations/extract-css.md)
+  - [CSS 단일 파일로 추출하기](configurations/extract-css.md)
 - 개발 환경
   - [실환경 빌드](workflow/production.md)
   - [Linting](workflow/linting.md)
