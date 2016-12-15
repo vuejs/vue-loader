@@ -1,6 +1,6 @@
-# Advanced Loader Configuration
+# 고급 로더 설정
 
-Sometimes you may want to apply a custom loader string to a language instead of letting `vue-loader` infer it. Or you may simply want to overwrite the built-in loader configuration for the default languages. To do that, add a `vue` block in your Webpack config file, and specify the `loaders` option.
+때로는 `vue-loader`가 그것을 추론하는 대신 언어에 커스텀 로더 스트링을 적용하기를 원할 수도 있습니다. 또는 디폴트 언어에서 기본적으로 제공되는 로더 설정을 덮어쓰고 싶을 수도 있습니다. 이를 위해서 Webpack 설정 파일에 `vue` 블럭을 추가하고 `loaders` 옵션을 지정하세요.
 
 ### Webpack 1.x
 
@@ -53,4 +53,4 @@ module.exports = {
 }
 ```
 
-A more practical usage of the advanced loader configuration is [extracting CSS inside components into a single file](./extract-css.md).
+고급 로더 설정을 보다 실용적으로 사용하면 [컴포넌트 내부의 CSS를 단일 파일로 추출할 수 있습니다](./extract-css.md).
