@@ -14,7 +14,7 @@
   - [고급 로더 설정](configurations/advanced.md)
   - [CSS 단일 파일로 추출하기](configurations/extract-css.md)
 - 개발 환경
-  - [실환경 빌드](workflow/production.md)
+  - [배포용 빌드](workflow/production.md)
   - [Linting](workflow/linting.md)
   - [테스트](workflow/testing.md)
   - [목업을 이용한 테스트](workflow/testing-with-mocks.md)

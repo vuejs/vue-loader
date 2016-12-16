@@ -117,7 +117,6 @@ module.exports = {
 - 타입: `Object`
 - 디폴트: `{}`
 
-  Configure options for `buble-loader` (if present), AND the buble compilation pass for template render functions.
   `buble-loader`가 존재한다면 `buble-loader`에 대한 옵션을 설정하고, 템플릿 렌더링 함수를 위한 buble 컴파일 패스를 설정하세요.
 
   > 버전 노트: 버전 9.x에서 템플릿 표현식은 이제 제거된 `templateBuble` 옵션을 통해 별도로 설정됩니다.
