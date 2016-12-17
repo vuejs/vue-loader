@@ -7,7 +7,7 @@
 ``` js
 // webpack.config.js
 module.exports = {
-  // other options...
+  // 이 부분엔 다른 옵션도 들어 갈 수 있습니다.
   module: {
     loaders: [
       {
@@ -16,14 +16,14 @@ module.exports = {
       }
     ]
   },
-  // vue-loader configurations
+  // vue-loader 설정
   vue: {
-    // ... other vue options
+    // 이 부분엔 다른 Vue 옵션도 들어 갈 수 있습니다.
     loaders: {
-      // load all <script> without "lang" attribute with coffee-loader
+      // coffee-loader에 "lang" 속성이 없는 모든 <script>를 로드하세요.
       js: 'coffee',
-      // load <template> directly as HTML string, without piping it
-      // through vue-html-loader first
+      // <template>을 HTML 문자열로 직접 로드하면
+      // vue-html-loader를 통해 파이핑하지 않아도 됩니다.
       html: 'raw'
     }
   }
@@ -34,14 +34,14 @@ module.exports = {
 
 ``` js
 module.exports = {
-  // other options...
+  // 이 부분엔 다른 옵션도 들어 갈 수 있습니다.
   module: {
-    // module.rules is the same as module.loaders in 1.x
+    // module.rules는 1.x의 module.loaders와 동일합니다.
     rules: [
       {
         test: /\.vue$/,
         loader: 'vue',
-        // vue-loader options goes here
+        // vue-loader 옵션은 이곳에 옵니다.
         options: {
           loaders: {
             // ...

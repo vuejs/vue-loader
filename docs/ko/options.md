@@ -8,7 +8,7 @@ Webpack 1.x의 경우 Webpack 설정에 루트 `vue` 블럭을 추가합니다.
 module.exports = {
   // ...
   vue: {
-    // vue-loader options
+    // vue-loader 옵션
   }
 }
 ```
@@ -24,7 +24,7 @@ module.exports = {
         test: /\.vue$/,
         loader: 'vue',
         options: {
-          // vue-loader options
+          // vue-loader 옵션
         }
       }
     ]
@@ -75,9 +75,9 @@ module.exports = {
 
   ``` js
   postcss: {
-    plugins: [...], // list of plugins
+    plugins: [...], // 플러그인 리스트
     options: {
-      parser: sugarss // use sugarss parser
+      parser: sugarss // sugarss parser를 사용합니다.
     }
   }
   ```
@@ -96,7 +96,7 @@ module.exports = {
 - 타입: `Boolean`
 - 디폴트: `undefined`
 
-  Whether to emit esModule compatible code. By default vue-loader will emit default export in commonjs format like `module.exports = ....`. When `esModule` is set to true, default export will be transpiled into `exports.__esModule = true; exports = ...`. Useful for interoperating with transpiler other than Babel, like TypeScript.
+  esModule 호환 코드를 사용할지 여부입니다. 기본적으로 vue-loader는 `module.exports = ....`와 같은 CommonJS 형식으로 내보냅니다. `esModule`이 true로 설정되면 내보내기는 `exports.__esModule = true; exports = ...`로 변환됩니다. TypeScript와 같은 Babel 이외의 변환툴과의 연동에 유용합니다.
 
 ### preserveWhitespace
 
@@ -129,11 +129,11 @@ module.exports = {
   // webpack 1
   vue: {
     buble: {
-      // enable object spread operator
-      // NOTE: you need to provide Object.assign polyfill yourself!
+      // Object spread 연산자를 허용합니다.
+      // 참고: 직접 Object.assign polyfill을 제공해야합니다!
       objectAssign: 'Object.assign',
 
-      // turn off the `with` removal
+      // `with` 제거 옵션을 끄십시오.
       transforms: {
         stripWith: false
       }
@@ -148,7 +148,7 @@ module.exports = {
         loader: 'vue',
         options: {
           buble: {
-            // same options
+            // 같은 옵션입니다.
           }
         }
       }

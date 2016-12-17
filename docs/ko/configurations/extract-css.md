@@ -13,7 +13,7 @@ npm install extract-text-webpack-plugin --save-dev
 var ExtractTextPlugin = require("extract-text-webpack-plugin")
 
 module.exports = {
-  // other options...
+  // 이 부분엔 다른 옵션도 들어 갈 수 있습니다.
   module: {
     loaders: [
       {
@@ -25,7 +25,7 @@ module.exports = {
   vue: {
     loaders: {
       css: ExtractTextPlugin.extract("css"),
-      // you can also include <style lang="less"> or other langauges
+      // 당신은 <style lang="less"> 또는 다른 언어도 포함할 수 있습니다.
       less: ExtractTextPlugin.extract("css!less")
     }
   },
@@ -46,7 +46,7 @@ npm install extract-text-webpack-plugin@2.x --save-dev
 var ExtractTextPlugin = require("extract-text-webpack-plugin")
 
 module.exports = {
-  // other options...
+  // 이 부분엔 다른 옵션도 들어 갈 수 있습니다.
   module: {
     rules: [
       {
@@ -56,7 +56,7 @@ module.exports = {
           loaders: {
             css: ExtractTextPlugin.extract({
               loader: 'css-loader',
-              fallbackLoader: 'vue-style-loader' // <- this is a dep of vue-loader, so no need to explicitly install if using npm3
+              fallbackLoader: 'vue-style-loader' // <- 이것은 vue-loader가 필요 없으므로 npm3를 사용하는 경우 명시적으로 설치할 필요가 없습니다.
             })
           }
         }

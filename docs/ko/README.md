@@ -16,7 +16,7 @@
 
 한 마디로 Webpack과 `vue-loader`의 결합은 Vue.js 어플리케이션을 제작하기위한 현대적이고 유연하며 매우 강력한 작업환경을 제공합니다.
 
-### Webpack이 뭔가요?
+### Webpack이 무엇인가요?
 
 이미 Webpack에 익숙하다면 이 설명을 건너뛰어도 됩니다. 하지만 Webpack을 처음 사용하는 사람들에게는 다음과 같은 간단한 소개를 읽어보세요.
 
@@ -28,10 +28,10 @@
 
 여기서 Webpack은 묶는일 외에도 더 많은 일을 할 수 있습니다. "로더들"을 사용하면 최종 Bundle(묶음)을 출력하기 전에 원하는 방식으로 모든 유형의 파일을 변환할 수 있도록 Webpack에 지시할 수 있습니다. 몇 가지 예를 봅시다.
 
-- ES2015 또는 CoffeeScript, TypeScript 모듈을 ES5 CommonJS 모듈로 변환
-- Optionally you can pipe the source code through a linter before doing the compilation;
-- Jade 템플릿을 일반 HTML로 변경하고 Javascript 문자열로 반환합니다.
-- SASS 파일을 일반 CSS로 변환한 다음 CSS를 `<style>` 태그로 삽입하는 Javascript 스니펫으로 변환합니다.
+- ES2015 또는 CoffeeScript, TypeScript 모듈을 ES5 CommonJS 모듈로 변환할 수 있습니다.
+- 선택 사항으로 컴파일 전에 linter를 이용하여 소스 코드를 연결 할 수 있습니다.
+- Jade 템플릿을 일반 HTML로 변경하고 JavaScript 문자열로 반환합니다.
+- SASS 파일을 일반 CSS로 변환한 다음 CSS를 `<style>` 태그로 삽입하는 JavaScript 스니펫으로 변환합니다.
 - HTML 또는 CSS에서 참조된 이미지 파일을 처리하고 경로 구성에 따라 이동한 후 md5 해시를 사용하여 이름을 지정합니다.
 
 Webpack은 매우 강력하며 작동 원리를 이해한다면 프론트엔드 작업환경을 획기적으로 향상시킬 수 있습니다. 단점은 장황하고 복잡한 구성입니다. 하지만 이 가이드를 사용하면 Vue.js 및 `vue-loader`에서 Webpack을 사용할 때 가장 일반적인 문제에 대한 솔루션을 찾을 수 있습니다.

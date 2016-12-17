@@ -55,7 +55,7 @@ div
 
 ``` html
 <style lang="sass?outputStyle=expanded">
-  /* use sass here with expanded output */
+  /* 여기에 SASS를 사용하세요! */
 </style>
 ```
 

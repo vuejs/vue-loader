@@ -10,21 +10,21 @@
 ``` js
 // webpack.config.js
 module.exports = {
-  // ... other options
+  // 여기에 다른 옵션이 올 수 있습니다.
   plugins: [
-    // short-circuits all Vue.js warning code
+    // 모든 Vue.js 경고 코드를 숨깁니다.
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: '"production"'
       }
     }),
-    // minify with dead-code elimination
+    // 불필요한 코드를 제거하여 minify합니다.
     new webpack.optimize.UglifyJsPlugin({
       compress: {
         warnings: false
       }
     }),
-    // optimize module ids by occurence count
+    // 발생 횟수에 따라 모듈 ID를 최적화합니다.
     new webpack.optimize.OccurenceOrderPlugin()
   ]
 }

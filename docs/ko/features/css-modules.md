@@ -24,7 +24,7 @@
 ``` html
 <template>
   <p :class="$style.red">
-    This should be red
+    이것은 빨간색이야
   </p>
 </template>
 ```
@@ -35,16 +35,16 @@
 <template>
   <div>
     <p :class="{ [$style.red]: isRed }">
-      Am I red?
+      나는 빨간색이야?
     </p>
     <p :class="[$style.red, $style.bold]">
-      Red and bold
+      나는 빨간색이면서 볼드야
     </p>
   </div>
 </template>
 ```
 
-또한 Javascript에서도 접근할 수 있습니다.
+또한 JavaScript에서도 접근할 수 있습니다.
 
 ``` html
 <script>
@@ -52,7 +52,7 @@ export default {
   created () {
     console.log(this.$style.red)
     // -> "_1VyoJ-uZOjlOxP7jWUy19_0"
-    // an identifier generated based on filename and className.
+    // 파일 이름과 className을 기반으로 생성된 식별자
   }
 }
 </script>
@@ -66,11 +66,11 @@ export default {
 
 ``` html
 <style module="a">
-  /* identifiers injected as a */
+  /* a로 주입된 식별자 */
 </style>
 
 <style module="b">
-  /* identifiers injected as b */
+  /* b로 주입된 식별자 */
 </style>
 ```
 
@@ -92,7 +92,7 @@ CSS Modules는 [css-loader](https://github.com/webpack/css-loader)를 통해 처
 // webpack 1
 vue: {
   cssModules: {
-    // overwrite local ident name
+    // 로컬 ID값을 덮어씌웁니다.
     localIdentName: '[path][name]---[local]---[hash:base64:5]',
     // enable camelCase
     camelCase: true

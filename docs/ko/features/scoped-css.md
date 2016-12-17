@@ -34,11 +34,11 @@
 
   ``` html
   <style>
-  /* global styles */
+  /* 전역 스타일 */
   </style>
 
   <style scoped>
-  /* local styles */
+  /* 로컬 스타일 */
   </style>
   ```
 

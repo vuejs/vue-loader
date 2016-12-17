@@ -27,7 +27,7 @@ npm install eslint eslint-loader --save-dev
 ``` js
 // webpack.config.js
 module.exports = {
-  // ... other options
+  // 여기에 다른 옵션이 올 수 있습니다.
   module: {
     loaders: [
       {
@@ -46,9 +46,9 @@ Webpack 로더 체인은 **가장 먼저** 적용됩니다. `vue` 전에 `eslint
 ``` js
 // webpack.config.js
 module.exports = {
-  // ... other options
+  // 여기에 다른 옵션이 올 수 있습니다.
   module: {
-    // only lint local *.vue files
+    // 오직 로컬 *.vue 파일만 lint합니다.
     preLoaders: [
       {
         test: /.vue$/,
@@ -56,7 +56,7 @@ module.exports = {
         exclude: /node_modules/
       }
     ],
-    // but use vue-loader for all *.vue files
+    // 하지만 모든 *.vue 파일에 대해 vue-loader를 사용하세요.
     loaders: [
       {
         test: /.vue$/,
@@ -72,17 +72,17 @@ Webpack 2.x에서는 다음과 같이 처리합니다.
 ``` js
 // webpack.config.js
 module.exports = {
-  // ... other options
+  // 여기에 다른 옵션이 올 수 있습니다.
   module: {
     rules: [
-      // only lint local *.vue files
+      // 오직 로컬 *.vue 파일만 lint합니다.
       {
         enforce: 'pre',
         test: /.vue$/,
         loader: 'eslint',
         exclude: /node_modules/
       },
-      // but use vue-loader for all *.vue files
+      // 하지만 모든 *.vue 파일에 대해 vue-loader를 사용하세요.
       {
         test: /.vue$/,
         loader: 'vue'

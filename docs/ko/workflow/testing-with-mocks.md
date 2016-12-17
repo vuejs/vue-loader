@@ -2,7 +2,7 @@
 
 리얼 월드 어플리케이션에서는 컴포넌트에 외부 의존성이 있을 가능성이 큽니다. 컴포넌트에 대한 유닛 테스트를 작성할 때 테스트가 테스트 중인 컴포넌트의 동작에만 의존하도록 mock을 만드는 것이 이상적 입니다.
 
-`vue-loader`는 [inject-loader](https://github.com/plasticine/inject-loader)를 사용하여 임의의 의존성을 `*.vue` 컴포넌트에 주입 할 수 있는 기능을 제공합니다. 일반적인 아이디어로 컴포넌트 모듈을 직접 가져오는 대신 `inject-loader`를 사용하여 해당 모듈에 대한 "모듈 팩토리" 함수를 생성하는 것 입니다. 이 함수가 mock 객체와 함께 호출되면 mock 객체가 삽입된 모듈의 인스턴트를 반환합니다.
+`vue-loader`는 [inject-loader](https://github.com/plasticine/inject-loader)를 사용하여 임의의 의존성을 `*.vue` 컴포넌트에 주입 할 수 있는 기능을 제공합니다. 일반적인 아이디어로 컴포넌트 모듈을 직접 가져오는 대신 `inject-loader`를 사용하여 해당 모듈에 대한 "모듈 팩토리" 함수를 생성하는 것 입니다. 이 함수가 목업 객체와 함께 호출되면 목업 객체가 삽입된 모듈의 인스턴트를 반환합니다.
 
 다음과 같은 컴포넌트가 있다고 가정해봅시다.
 
@@ -13,7 +13,7 @@
 </template>
 
 <script>
-// this dependency needs to be mocked
+// 이 의존성은 목업이 되야 합니다.
 import SomeService from '../service'
 
 export default {
@@ -26,7 +26,7 @@ export default {
 </script>
 ```
 
-mock을 가져오는 방법은 다음과 같습니다.
+목업을 가져오는 방법은 다음과 같습니다.
 
 > 주의: `inject-loader@3.x`는 현재 불안정합니다.
 
