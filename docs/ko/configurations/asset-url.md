@@ -1,6 +1,6 @@
 # Asset URL 핸들링
 
-기본적으로, `vue-loader`는 [css-loader](https://github.com/webpack/css-loader)와 Vue 템플릿 컴파일러로 스타일과 템플릿을 자동으로 처리합니다. 이 컴파일 과정에서 `<img src="...">`, `background: url(...)`, CSS `@import`와 같은 모든 Asset URL은 **모듈 종속성**으로 해결됩니다.
+기본적으로, `vue-loader`는 [css-loader](https://github.com/webpack/css-loader)와 Vue 템플릿 컴파일러로 스타일과 템플릿을 자동으로 처리합니다. 이 컴파일 과정에서 `<img src="...">`, `background: url(...)`, CSS `@import`와 같은 모든 Asset URL은 **모듈 종속성** 으로 해결됩니다.
 
 예를 들어, `url(./image.png)`는 `require('./image.png')`로 변환되어,
 

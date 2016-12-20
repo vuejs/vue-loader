@@ -32,11 +32,11 @@ module.exports = {
 }
 ```
 
-### loaders
+### 로더
 
 - 타입: `Object`
 
-  `*.vue` 파일의 language block에 사용할 Webpack 로더를 지정하는 객체입니다. 이 키는 특별히 지정된 경우 language block에 대한 `lang` 속성에 해당합니다. 각 타입에 대한 기본적인 `lang`은 다음과 같습니다.
+  `*.vue` 파일의 언어 블럭에 사용할 Webpack 로더를 지정하는 객체입니다. 이 키는 특별히 지정된 경우 language block에 대한 `lang` 속성에 해당합니다. 각 타입에 대한 기본적인 `lang`은 다음과 같습니다.
 
   - `<template>`: `html`
   - `<script>`: `js`
@@ -71,7 +71,7 @@ module.exports = {
   }
   ```
 
-  이 옵션은 PostCSS 프로세서에 전달할 옵션을 포함하는 객체일 수 있습니다. 이것은 사용자 정의 parser/stringifiers에 의존하는 PostCSS 프로젝트를 사용할 때 유용합니다.
+  이 옵션은 PostCSS 프로세서에 전달할 옵션을 포함하는 객체일 수 있습니다. 이것은 사용자 정의 파서/문자열 변환기에 의존하는 PostCSS 프로젝트를 사용할 때 유용합니다.
 
   ``` js
   postcss: {
