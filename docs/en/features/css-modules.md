@@ -86,8 +86,7 @@ CSS Modules are processed via [css-loader](https://github.com/webpack/css-loader
 }
 ```
 
-You can use vue-loader
-s `cssModules` option to provide additional query options to `css-loader`:
+You can use vue-loader's `cssModules` option to provide additional query options to `css-loader`:
 
 ``` js
 // webpack 1
