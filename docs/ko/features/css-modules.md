@@ -1,12 +1,12 @@
-# CSS Modules
+# CSS 모듈
 
-> requires ^9.8.0
+> 9.8.0 이상 버전을 요구합니다
 
-[CSS Modules](https://github.com/css-modules/css-modules)은 CSS을 모듈화하고 구성하는데 널리 사용되는 시스템입니다. `vue-loader`는 스뮬레이트된 범위 CSS의 대안으로 CSS Modules와 함께 first-class intergration을 제공합니다.
+[CSS 모듈](https://github.com/css-modules/css-modules)은 CSS을 모듈화하고 구성하는데 널리 사용되는 시스템입니다. `vue-loader`는 시뮬레이트된 범위 CSS의 대안으로 CSS 모듈과 함께 1급 클래스로의 통합을 제공합니다.
 
 ### 사용법
 
-`<style>`에 `moudle` 속성을 삽입하니다.
+`<style>`에 `moudle` 속성을 삽입합니다.
 
 ``` html
 <style module>
@@ -19,7 +19,7 @@
 </style>
 ```
 
-이렇게하면 `css-loader`에 대한 CSS Modules 모드가 켜지고 결과적으로 클래스 식별자 오브젝트는 `$style` 이름의 계산된 속성으로 컴포넌트에 주입됩니다. 당신은 동적 클래스 바인딩을 사용하여 템플릿에서 이를 사용할 수 있습니다.
+이렇게하면 `css-loader`에 대한 CSS 모듈 모드가 켜지고 결과적으로 클래스 식별자 오브젝트는 `$style` 이름의 계산된 속성으로 컴포넌트에 주입됩니다. 동적 클래스 바인딩을 사용하여 템플릿에서 이를 사용할 수 있습니다.
 
 ``` html
 <template>
@@ -29,7 +29,7 @@
 </template>
 ```
 
-그것은 계산된 속성이기 때문에 `:class`의 오브젝트/배열 문법에도 작동합니다.
+이는 계산된 속성이기 때문에 `:class`의 오브젝트/배열 문법에도 작동합니다.
 
 ``` html
 <template>
@@ -58,11 +58,11 @@ export default {
 </script>
 ```
 
-[global exceptions](https://github.com/css-modules/css-modules#exceptions)과 [composition](https://github.com/css-modules/css-modules#composition) 같은 자세한 정보는 [CSS Modules 스펙](https://github.com/css-modules/css-modules)을 참고하세요.
+[전역 예외사항](https://github.com/css-modules/css-modules#exceptions)과 [구성](https://github.com/css-modules/css-modules#composition) 같은 자세한 정보는 [CSS 모듈 스펙](https://github.com/css-modules/css-modules)을 참고하세요.
 
-### 속성 이름 커스터마이징
+### 사용자 정의 이름 주입
 
-하나의 `*.vue` 컴포넌트 내에 하나 이상의 `<style>` 태그를 가질 수 있습니다. 삽입된 스타일이 서로 덮어 쓰지 않게하려면 `module` 속성에 값을 지정하여 계산된 속성의 이름을 커스터마이징할 수 있습니다.
+하나의 `*.vue` 컴포넌트 내에 하나 이상의 `<style>` 태그를 가질 수 있습니다. 삽입된 스타일이 서로 덮어 쓰지 않게하려면 `module` 속성에 값을 지정하여 계산된 속성의 이름을 사용자 정의할 수 있습니다.
 
 ``` html
 <style module="a">
@@ -76,7 +76,7 @@ export default {
 
 ### `css-loader` 쿼리 설정
 
-CSS Modules는 [css-loader](https://github.com/webpack/css-loader)를 통해 처리됩니다. `<style module>`을 사용하면 `css-loader`에 사용되는 기본적인 쿼리는 다음과 같습니다.
+CSS 모듈은 [css-loader](https://github.com/webpack/css-loader)를 통해 처리됩니다. `<style module>`을 사용하면 `css-loader`에 사용되는 기본적인 쿼리는 다음과 같습니다.
 
 ``` js
 {
@@ -92,9 +92,9 @@ CSS Modules는 [css-loader](https://github.com/webpack/css-loader)를 통해 처
 // webpack 1
 vue: {
   cssModules: {
-    // 로컬 ID값을 덮어씌웁니다.
+    // 로컬 ID값을 덮어 씁니다.
     localIdentName: '[path][name]---[local]---[hash:base64:5]',
-    // enable camelCase
+    // camelCase를 사용합니다
     camelCase: true
   }
 }
