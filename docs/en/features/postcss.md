@@ -31,7 +31,6 @@ module.exports = {
         options: {
           // ...
           postcss: [require('postcss-cssnext')()]
-          }
         }
       }
     ]
