@@ -73,7 +73,11 @@ function test (options, assert) {
 
 function mockRender (options, data) {
   return options.render.call(Object.assign({
-    _h (tag, data, children) {
+    _v (val) {
+      return val
+    },
+    _self: {},
+    $createElement (tag, data, children) {
       if (Array.isArray(data)) {
         children = data
         data = null
