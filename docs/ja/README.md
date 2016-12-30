@@ -1,37 +1,37 @@
-# Introduction
+# はじめに
 
-### What is `vue-loader`?
+### `vue-loader` とは ?
 
-`vue-loader` is a loader for Webpack that can transform Vue components written in the following format into a plain JavaScript module:
+`vue-loader` とは以下の形式で記述された Vue コンポーネントをプレーンな JavaScript モジュールに変換する Webpack の loader です。
 
 ![screenshot](http://blog.evanyou.me/images/vue-component.png)
 
-There are many cool features provided by `vue-loader`:
+`vue-loader` によって多くのクールな機能が提供されます：
 
-- ES2015 enabled by default;
-- Allows using other Webpack loaders for each part of a Vue component, for example SASS for `<style>` and Jade for `<template>`;
-- Treat static assets referenced in `<style>` and `<template>` as module dependencies and handle them with Webpack loaders;
-- Can simulate scoped CSS for each component;
-- Supports component hot-reloading during development.
+- デフォルトで ES2015 が有効 ;
+- `<style>` には SASS、 `<template>` には Jade など、Vue コンポーネントの各パーツに他の Webpack の loader が使用可能 ;
+- `<style>と` <template> `で参照される静的なアセットをモジュールの依存として扱い、Webpack の loader で処理可能 ;
+- 各コンポーネントで scoped CSS をシミュレートすることが可能 ;
+- 開発時のコンポーネントのホットリロードをサポート
 
-In a nutshell, the combination of Webpack and `vue-loader` gives you a modern, flexible and extremely powerful front-end workflow for authoring Vue.js applications.
+要するに、Webpack と `vue-loader` の組み合わせは Vue.js アプリケーションを作成するための、モダンで柔軟かつとても強力なフロントエンドワークフローを実現することが出来ます。
 
-### What is Webpack?
+### Webpack とは?
 
-If you are already familiar with Webpack, feel free to skip the following explanation. But for those of you who are new to Webpack, here's a quick intro:
+すでにWebpackに精通している場合は、次の説明を省略してもかまいません。しかし、Webpackを初めて使う人のために、ここに簡単な紹介を行います。
 
-[Webpack](http://webpack.github.io/) is a module bundler. It takes a bunch of files, treating each as a module, figuring out the dependencies between them, and bundle them into static assets that are ready for deployment.
+[Webpack](http://webpack.github.io/) とはモジュールのバンドラーです。それぞれのファイルをモジュールとして扱い、それらの間の依存関係を解決し、デプロイの準備が整った静的アセットにバンドルします。
 
 ![webpack](http://webpack.github.io/assets/what-is-webpack.png)
 
-For a basic example, imagine we have a bunch of CommonJS modules. They cannot run directly inside the browser, so we need to "bundle" them into a single file that can be included via a `<script>` tag. Webpack can follow the dependencies of the `require()` calls and do that for us.
+基本的な例として、CommonJS モジュールが多数あるとします。これらはブラウザで直接実行できません。なのでそれらを `<script>`タグを介して読み込むことのできる単一のファイルに "バンドル"する必要があります。Webpackは `require()`での依存性解決と実行を行うことが出来ます。
 
-But Webpack can do more than that. With "loaders", we can teach Webpack to transform all types of files in any way we want before outputting the final bundle. Some examples include:
+しかし Webpack はそれ以上のことが出来ます。 "loader" を用いることで、 最終的なバンドルしたファイルを出力する前にWebpackに様々な方法で全てのタイプのファイルを変換できるように設定することが出来ます。幾つかの例をあげると：
 
-- Transpile ES2015, CoffeeScript or TypeScript modules into plain ES5 CommonJS modules;
-- Optionally you can pipe the source code through a linter before doing the compilation;
-- Transpile Jade templates into plain HTML and inline it as a JavaScript string;
-- Transpile SASS files into plain CSS, then convert it into a JavaScript snippet that insert the resulting CSS as a `<style>` tag;
-- Process an image file referenced in HTML or CSS, moved it to the desired destination based on the path configurations, and naming it using its md5 hash.
+- ES2015、CoffeeScript、TypeScriptのモジュールをプレーンなES5のCommonJS モジュールにトランスパイル；
+- オプションでコンパイルを行う前にソースコードを linter に通すことが可能；
+- Jade テンプレートをプレーンな HTML にトランスパイルし、JavaScriptの文字列としてに展開；
+- SASS ファイルをプレーンなCSSにトランスパイルし、`<style>`  タグとして挿入する JavaScript スニペットに変換；
+- HTML または CSS で参照されるイメージファイルを処理し、パスの設定に基づいた目的の場所に移動し、md5 ハッシュを使用して名前付け；
 
-Webpack is so powerful that when you understand how it works, it can dramatically improve your front-end workflow. Its primary drawback is verbose and complex configuration; but with this guide you should be able to find solutions for most common issues when using Webpack with Vue.js and `vue-loader`.
+Webpack は非常に強力です。どのように動作するか理解すれば、フロントエンド開発のワークフローを劇的に向上させることが出来ます。欠点としては冗長で複雑な構成です。しかし、このガイドでは Vue.js と `Vue-loader` での Webpack を使用する際に一般的な問題の解決策を見つけることができるはずです。
