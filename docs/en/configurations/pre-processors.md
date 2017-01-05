@@ -18,6 +18,25 @@ npm install sass-loader node-sass --save-dev
 
 Under the hood, the text content inside the `<style>` tag will be first compiled by `sass-loader` before being passed on for further processing.
 
+#### sass-loader caveat
+
+Contrary to what its name indicates, [*sass*-loader](https://github.com/jtangelder/sass-loader) parses *SCSS* syntax by default. If you actually want to use the indented *SASS* syntax, you have to configure vuel-loader's options for sass-loader accordingly. 
+
+```javascript
+{
+  test: /\.vue$/,
+  loader: 'vue-loader',
+  options: {
+    loaders: {
+      scss: 'vue-style-loader!css-loader!sass-loader' // <style lang="scss">
+      sass: 'vue-style-loader!css-loader!sass-loader?indentedSyntax' // <style lang="sass">
+    }
+  }
+}
+```
+
+See the [Advanced Loader Configuration](./advanced.md) Section for further information about how to configure vue-loader.
+
 ### JavaScript
 
 All JavaScript inside Vue components are processed by `babel-loader` by default. But you can of course change it:

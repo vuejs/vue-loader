@@ -117,54 +117,38 @@ module.exports = {
 - type: `Object`
 - default: `{}`
 
-  Configure options for `buble-loader` (if present). For example, to enable Object spread operator:
+  Configure options for `buble-loader` (if present), AND the buble compilation pass for template render functions.
+
+  > version note: in version 9.x, the template expressions are configured separately via the now removed `templateBuble` option.
+
+  The template render functions compilation supports a special transform `stripWith` (enabled by default), which removes the `with` usage in generated render functions to make them strict-mode compliant.
+
+  Example configuration:
 
   ``` js
+  // webpack 1
   vue: {
     buble: {
-      objectAssign: 'Object.assign'
+      // enable object spread operator
+      // NOTE: you need to provide Object.assign polyfill yourself!
+      objectAssign: 'Object.assign',
+
+      // turn off the `with` removal
+      transforms: {
+        stripWith: false
+      }
     }
   }
-  ```
 
-### templateBuble
-
-- type: `Object`
-- default:
-  ``` js
-  {
-    target: { chrome: 52 },
-    transforms: {
-      stripWith: true, // vue only
-      computedProperty: true,
-      conciseMethodProperty: true,
-      templateString: true
-    }
-  }
-  ```
-
-  Configure options for a [Buble](https://buble.surge.sh/) transpile pass applied to raw render functions. The purpose of this additional pass is to:
-
-  1. add selective support to a few ES2015 features that are handy in template expressions (whitelisted in default transforms);
-
-  2. remove the `with` block inside render functions to make it strict-mode compliant and a bit more performant. This is enabled by the custom `stripWith` transform, and applied only at build time so that the base template compiler can be extremely small and lightweight.
-
-  With this option you can turn on additional [transforms](https://buble.surge.sh/guide/#supported-features) (e.g. arrow functions) or turn off `with` removal based on your specific needs. Example config with Webpack 2:
-
-  ``` js
+  // webpack 2
   module: {
     rules: [
       {
         test: /\.vue$/,
         loader: 'vue',
         options: {
-          templateBuble: {
-            objectAssign: 'Object.assign',
-            // transforms object is merged with the defaults
-            transforms: {
-              stripWith: false,
-              arrow: true
-            }
+          buble: {
+            // same options
           }
         }
       }

@@ -66,17 +66,17 @@ You can have more than one `<style>` tags in a single `*.vue` component. To avoi
 
 ``` html
 <style module="a">
-  /* identifiers injected as $a */
+  /* identifiers injected as a */
 </style>
 
 <style module="b">
-  /* identifiers injected as $b */
+  /* identifiers injected as b */
 </style>
 ```
 
 ### Configuring `css-loader` Query
 
-CSS Modules are processed via [css-loader](ttps://github.com/webpack/css-loader). With `<style module>`, the default query used for `css-loader` is:
+CSS Modules are processed via [css-loader](https://github.com/webpack/css-loader). With `<style module>`, the default query used for `css-loader` is:
 
 ``` js
 {
@@ -86,11 +86,10 @@ CSS Modules are processed via [css-loader](ttps://github.com/webpack/css-loader)
 }
 ```
 
-You can use vue-loader
-s `cssModules` option to provide additional query options to `css-loader`:
+You can use vue-loader's `cssModules` option to provide additional query options to `css-loader`:
 
 ``` js
-// wepback 1
+// webpack 1
 vue: {
   cssModules: {
     // overwrite local ident name
