@@ -84,8 +84,21 @@ function mockRender (options, data) {
     }
   }
   return options.render.call(Object.assign({
-    _h: createElement,
-    $createElement: createElement,
+    _v (val) {
+      return val
+    },
+    _self: {},
+    $createElement (tag, data, children) {
+      if (Array.isArray(data)) {
+        children = data
+        data = null
+      }
+      return {
+        tag: tag,
+        data: data,
+        children: children
+      }
+    },
     _m (index) {
       return options.staticRenderFns[index].call(this)
     },
