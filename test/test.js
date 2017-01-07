@@ -5,7 +5,6 @@ var webpack = require('webpack')
 var MemoryFS = require('memory-fs')
 var jsdom = require('jsdom')
 var expect = require('chai').expect
-var rimraf = require('rimraf')
 var genId = require('../lib/gen-id')
 var SourceMapConsumer = require('source-map').SourceMapConsumer
 var ExtractTextPlugin = require("extract-text-webpack-plugin")

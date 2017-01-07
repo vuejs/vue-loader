@@ -69,7 +69,6 @@
     "normalize-newline": "^3.0.0",
     "postcss": "^5.0.21",
     "pug": "^2.0.0-beta6",
-    "rimraf": "^2.4.0",
     "stylus": "^0.54.5",
     "stylus-loader": "^2.0.0",
     "sugarss": "^0.2.0",
