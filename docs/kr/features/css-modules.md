@@ -6,7 +6,7 @@
 
 ### 사용법
 
-`<style>`에 `moudle` 속성을 삽입합니다.
+`<style>`에 `module` 속성을 삽입합니다.
 
 ``` html
 <style module>
