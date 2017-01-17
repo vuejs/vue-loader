@@ -330,6 +330,34 @@ describe('vue-loader', function () {
     })
   })
 
+  it('transformToRequire option', function (done) {
+    test({
+      entry: './test/fixtures/transform.vue',
+      module: {
+        rules: [
+          { test: /\.vue$/, loader: loaderPath },
+          {
+            test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
+            loader: 'url-loader'
+          }
+        ]
+      }
+    }, function (window, module) {
+      function includeDataURL (s) {
+        return !!s.match(/\s*data:([a-z]+\/[a-z]+(;[a-z\-]+\=[a-z\-]+)?)?(;base64)?,[a-z0-9\!\$\&\'\,\(\)\*\+\,\;\=\-\.\_\~\:\@\/\?\%\s]*\s*/i)
+      }
+      var vnode = mockRender(module)
+      // img tag
+      expect(includeDataURL(vnode.children[0].data.attrs.src)).to.equal(true)
+      // image tag (SVG)
+      expect(includeDataURL(vnode.children[2].children[0].data.attrs['xlink:href'])).to.equal(true)
+      var style = window.document.querySelector('style').textContent
+      // style
+      expect(includeDataURL(style)).to.equal(true)
+      done()
+    })
+  })
+
   it('postcss options', function (done) {
     test({
       entry: './test/fixtures/postcss.vue',
