@@ -108,9 +108,9 @@ module.exports = {
 ### transformToRequire
 
 - type: `{ [tag: string]: string | Array<string> }`
-- default: `{ img: 'src' }`
+- default: `{ img: 'src', image: 'xlink:href' }`
 
-  During template compilation, the compiler can transform certain attributes, such as `src` URLs, into `require` calls, so that the target asset can be handled by Webpack. The default config transforms the `src` attribute on `<img>` tags.
+  During template compilation, the compiler can transform certain attributes, such as `src` URLs, into `require` calls, so that the target asset can be handled by Webpack. The default config transforms the `src` attribute on `<img>` tags and `xlink:href` attribute on `<image>` tags of SVG.
 
 ### buble
 
