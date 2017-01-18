@@ -34,7 +34,6 @@
     "js-beautify": "^1.6.3",
     "loader-utils": "^0.2.10",
     "lru-cache": "^4.0.1",
-    "object-assign": "^4.0.0",
     "postcss": "^5.0.10",
     "postcss-selector-parser": "^2.0.0",
     "source-map": "^0.5.6",
