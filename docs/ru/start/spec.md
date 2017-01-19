@@ -1,6 +1,6 @@
-# Vue Component Spec
+# Из чего состоит компонент Vue
 
-A `*.vue` file is a custom file format that uses HTML-like syntax to describe a Vue component. Each `*.vue` file consists of three types of top-level language blocks: `<template>`, `<script>` and `<style>`:
+Файл `*.vue` это собственный формат Vue, использующий HTML-подобный синтаксис для описания компонента. Каждый `*.vue` файл состоит из трёх главных секций: `<template>`, `<script>` и `<style>`:
 
 ``` html
 <template>
@@ -24,51 +24,51 @@ export default {
 </style>
 ```
 
-`vue-loader` will parse the file, extract each language block, pipe them through other loaders if necessary, and finally assemble them back into a CommonJS module whose `module.exports` is a Vue.js component options object.
+`vue-loader` парсит файл, извлекает каждую из секций, обрабатывает их при необходимости другими loader'ами, и в итоге собирает всё обратно в модуль CommonJS где `module.exports` будет объектом настроек компонента Vue.js.
 
-`vue-loader` supports using non-default languages, such as CSS pre-processors and compile-to-HTML template languages, by specifying the `lang` attribute for a language block. For example, you can use SASS for the style of your component like this:
+`vue-loader` предоставляет возможность использовать нестандартные языки, например пре-процессоры CSS и языки шаблонов компилируемые в HTML, с помощью указания атрибута `lang` для секции файла. Например, вы можете использовать SASS для стилей вашего компонента:
 
 ``` html
 <style lang="sass">
-  /* write SASS! */
+  /* используем SASS! */
 </style>
 ```
 
-More details can be found in [Using Pre-Processors](../configurations/pre-processors.md).
+Подробнее на странице [использования пре-процессоров](../configurations/pre-processors.md).
 
-### Language Blocks
+### Секции файла
 
 #### `<template>`
 
-- Default language: `html`.
+- Язык по умолчанию: `html`.
 
-- Each `*.vue` file can contain at most one `<template>` block at a time.
+- Каждый `*.vue` файл может содержать максимум один блок `<template>`.
 
-- Contents will be extracted as a string and used as the `template` option for the compiled Vue component.
+- Содержимое будет извлечено как строка и использовано как опция `template` для скомпилированного компонента Vue.
 
 #### `<script>`
 
-- Default language: `js` (ES2015 is supported automatically if `babel-loader` or `buble-loader` is detected).
+- Язык по умолчанию: `js` (ES2015 поддерживается автоматически при обнаружении `babel-loader` или `buble-loader`).
 
-- Each `*.vue` file can contain at most one `<script>` block at a time.
+- Каждый `*.vue` файл может содержать максимум один блок `<script>`.
 
-- The script is executed in a CommonJS like environment (just like a normal `.js` module bundled via Webpack), which means you can `require()` other dependencies. And with ES2015 support, you can also use the `import` and `export` syntax.
+- Скрипт исполняется в окружении CommonJS (как обычный `.js` модуль, собранный с помощью Webpack), что позволяет вам использовать `require()` для подключения других зависимостей. А вместе с поддержкой ES2015, можно использовать также синтаксис `import` и `export`.
 
-- The script must export a Vue.js component options object. Exporting an extended constructor created by `Vue.extend()` is also supported, but a plain object is preferred.
+- Скрипт должен экспортировать объект с настройками компонента Vue.js. Экспортирование расширенного конструктора, созданного через `Vue.extend()`, также поддерживается, но просто объект предпочтительнее.
 
 #### `<style>`
 
-- Default Language: `css`.
+- Язык по умолчанию: `css`.
 
-- Multiple `<style>` tags are supported in a single `*.vue` file.
+- Может быть несколько тегов `<style>` в одном `*.vue` файле.
 
-- A `<style>` tag can have `scoped` or `module` attributes (see [Scoped CSS](../features/scoped-css.md) and [CSS Modules](../features/css-modules.md)) to help encapsulating the styles to the current component. Multiple `<style>` tags with different encapsulation modes can be mixed in the same component.
+- Тег `<style>` может иметь `scoped` или `module` атрибуты (подробнее — [Scoped CSS](../features/scoped-css.md) и [CSS модули](../features/css-modules.md)) для возможности инкапсулировать стили в текущий компонент. Несколько тегов `<style>` с разными режимами инкапсуляции могут быть использованы в одном компоненте.
 
-- By default, contents will be extracted and dynamically inserted into the document's `<head>` as an actual `<style>` tag using `style-loader`. It's also possible to [configure Webpack so that all styles in all components are extracted into a single CSS file](../configurations/extract-css.md).
+- По умолчанию, содержимое будет извлечено и динамически вставлено в тег `<head>` документа обычным тегом `<style>` с помощью `style-loader`. Также возможно [настроить Webpack чтобы извлекать стили всех компонентов в один CSS-файл](../configurations/extract-css.md).
 
-### Src Imports
+### Импорт содержимого из других файлов
 
-If you prefer splitting up your `*.vue` components into multiple files, you can use the `src` attribute to import an external file for a language block:
+Если вы предпочитаете разделять `*.vue` компоненты на несколько файлов, вы можете использовать атрибут `src` для импорта содержимого другого файла в секцию, например:
 
 ``` html
 <template src="./template.html"></template>
@@ -76,17 +76,17 @@ If you prefer splitting up your `*.vue` components into multiple files, you can 
 <script src="./script.js"></script>
 ```
 
-Beware that `src` imports follow the same path resolution rules to CommonJS `require()` calls, which means for relative paths you need to start with `./`, and you can import resources directly from installed NPM packages, e.g:
+Имейте ввиду, что импорт через `src` следует тем же правилам определения пути до файлу, как и вызовы `require()` в CommonJS, что означает необходимость начинать относительные пути с `./`, и также возможность подключать ресурсы непосредственно из установленных NPM-пакетов, например:
 
 ``` html
-<!-- import a file from the installed "todomvc-app-css" npm package -->
+<!-- импорт файла из установленного NPM пакета "todomvc-app-css" -->
 <style src="todomvc-app-css/index.css">
 ```
 
-### Syntax Highlighting
+### Подсветка синтаксиса
 
-Currently there is syntax highlighting support for [Sublime Text](https://github.com/vuejs/vue-syntax-highlight), [Atom](https://atom.io/packages/language-vue), [Vim](https://github.com/posva/vim-vue), [Visual Studio Code](https://marketplace.visualstudio.com/items/liuji-jim.vue), [Brackets](https://github.com/pandao/brackets-vue), and [JetBrains products](https://plugins.jetbrains.com/plugin/8057) (WebStorm, PhpStorm, etc). Contributions for other editors/IDEs are highly appreciated! If you are not using any pre-processors in Vue components, you can also get by by treating `*.vue` files as HTML in your editor.
+На данный момент есть поддержка подсвестки синтаксиса для [Sublime Text](https://github.com/vuejs/vue-syntax-highlight), [Atom](https://atom.io/packages/language-vue), [Vim](https://github.com/posva/vim-vue), [Visual Studio Code](https://marketplace.visualstudio.com/items/liuji-jim.vue), [Brackets](https://github.com/pandao/brackets-vue), и [продуктов JetBrains](https://plugins.jetbrains.com/plugin/8057) (WebStorm, PhpStorm, и т.п.). Будем рады видеть разработки и для других редакторов и IDE! Если вы не используете никаких пре-процессоров в компонентах Vue, вы также можете использовать синтаксис HTML в вашем редакторе для `*.vue` файлов.
 
-### Comments
+### Комментарии
 
-Inside each block you shall use the comment syntax of the language being used (HTML, CSS, JavaScript, Jade, etc). For top-level comments, use HTML comment syntax: `<!-- comment contents here -->`
+Внутри каждой секции вы можете использовать синтаксис комментарией, который соответствует используемому языку (HTML, CSS, JavaScript, Pug, и т.д.). Для комментариев на уровне секций, используйте синтаксис комментариев HTML: `<!-- ваш комментарий -->`
