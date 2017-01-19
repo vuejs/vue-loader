@@ -1,12 +1,12 @@
 # CSS Modules
 
-> requires ^9.8.0
+> требуется версия 9.8.0 или выше
 
-[CSS Modules](https://github.com/css-modules/css-modules) is a popular system for modularizing and composing CSS. `vue-loader` provides first-class integration with CSS Modules as an alternative for simulated scoped CSS.
+[CSS модули](https://github.com/css-modules/css-modules) — это популярная система для модульности и компоновки CSS. `vue-loader` предоставляет первоклассную интеграцию с CSS модулями как возможную альтернативу эмулируемого scoped CSS.
 
-### Usage
+### Использование
 
-Just add the `module` attribute to your `<style>`:
+Просто добавьте атрибут `module` к тегу `<style>`:
 
 ``` html
 <style module>
@@ -44,7 +44,7 @@ Since it's a computed property, it also works with the object/array syntax of `:
 </template>
 ```
 
-And you can also access it from JavaScript:
+Вы также можете получить доступ в JavaScript:
 
 ``` html
 <script>
@@ -52,7 +52,7 @@ export default {
   created () {
     console.log(this.$style.red)
     // -> "_1VyoJ-uZOjlOxP7jWUy19_0"
-    // an identifier generated based on filename and className.
+    // идентификатор генерируется на основе имени файла и className.
   }
 }
 </script>
@@ -86,7 +86,7 @@ CSS Modules are processed via [css-loader](https://github.com/webpack/css-loader
 }
 ```
 
-You can use vue-loader's `cssModules` option to provide additional query options to `css-loader`:
+Вы можете использовать в vue-loader опцию `cssModules` чтобы предоставить дополнительные параметры для `css-loader`:
 
 ``` js
 // webpack 1
@@ -94,7 +94,7 @@ vue: {
   cssModules: {
     // overwrite local ident name
     localIdentName: '[path][name]---[local]---[hash:base64:5]',
-    // enable camelCase
+    // использование camelCase
     camelCase: true
   }
 }
