@@ -1,6 +1,6 @@
 # Scoped CSS
 
-When a `<style>` tag has the `scoped` attribute, its CSS will apply to elements of the current component only. This is similar to the style encapsulation found in Shadow DOM. It comes with some caveats, but doesn't require any polyfills. It is achieved by using PostCSS to transform the following:
+Когда у тега `<style>` есть атрибут `scoped`, то его CSS будет применяться только к элементам текущего компонента. Это похоже на инкапсуляцию стилей в Shadow DOM. Ими можно пользоваться с некоторыми оговорками, но не требуется никаких полифиллов. Это достигается за счёт использования PostCSS для преобразования следующего:
 
 ``` html
 <style scoped>
@@ -14,7 +14,7 @@ When a `<style>` tag has the `scoped` attribute, its CSS will apply to elements 
 </template>
 ```
 
-Into the following:
+В что-то подобное:
 
 ``` html
 <style>
@@ -28,17 +28,17 @@ Into the following:
 </template>
 ```
 
-#### Notes
+#### Примечания
 
-1. You can include both scoped and non-scoped styles in the same component:
+1. Вы можете использовать в компоненте локальные и глобальные стили одновременно:
 
   ``` html
   <style>
-  /* global styles */
+  /* глобальные стили */
   </style>
 
   <style scoped>
-  /* local styles */
+  /* локальные стили */
   </style>
   ```
 
