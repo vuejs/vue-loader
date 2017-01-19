@@ -1,19 +1,19 @@
-# Options Reference
+# Перечень опций
 
-## Usage Difference Between Webpack 1 & 2
+## Отличия в использовании с Webpack 1 & 2
 
-For Webpack 1.x: add a root `vue` block in your Webpack config:
+Для Webpack 1.x: добавить блок `vue` в корень конфигурации Webpack:
 
 ``` js
 module.exports = {
   // ...
   vue: {
-    // vue-loader options
+    // настройки vue-loader
   }
 }
 ```
 
-For Webpack 2 (^2.1.0-beta.25):
+Для Webpack 2 (^2.1.0-beta.25):
 
 ``` js
 module.exports = {
@@ -24,7 +24,7 @@ module.exports = {
         test: /\.vue$/,
         loader: 'vue-loader',
         options: {
-          // vue-loader options
+          // настройки vue-loader
         }
       }
     ]
@@ -34,7 +34,7 @@ module.exports = {
 
 ### loaders
 
-- type: `Object`
+- Тип: `Object`
 
   An object specifying Webpack loaders to use for language blocks inside `*.vue` files. The key corresponds to the `lang` attribute for language blocks, if specified. The default `lang` for each type is:
 
@@ -55,15 +55,15 @@ module.exports = {
 
 ### postcss
 
-- type: `Array` or `Function` or `Object`
-- `Object` format only supported in ^8.5.0
+- Тип: `Array` или `Function` или `Object`
+- `Object` поддерживается в версиях 8.5.0 и выше
 
   Specify custom PostCSS plugins to be applied to CSS inside `*.vue` files. If using a function, the function will called using the same loader context and should return an Array of plugins.
 
   ``` js
   // ...
   vue: {
-    // note: do not nest the `postcss` option under `loaders`
+    // примечание: не добавляйте опцию `postcss` после `loaders`
     postcss: [require('postcss-cssnext')()],
     loaders: {
       // ...
@@ -75,17 +75,17 @@ module.exports = {
 
   ``` js
   postcss: {
-    plugins: [...], // list of plugins
+    plugins: [...], // список плагинов
     options: {
-      parser: sugarss // use sugarss parser
+      parser: sugarss // использование парсера sugarss
     }
   }
   ```
 
 ### cssSourceMap
 
-- type: `Boolean`
-- default: `true`
+- Тип: `Boolean`
+- По умолчанию: `true`
 
   Whether to enable source maps for CSS. Disabling this can avoid some relative path related bugs in `css-loader` and make the build a bit faster.
 
@@ -93,47 +93,47 @@ module.exports = {
 
 ### esModule
 
-- type: `Boolean`
-- default: `undefined`
+- Тип: `Boolean`
+- По умолчанию: `undefined`
 
   Whether to emit esModule compatible code. By default vue-loader will emit default export in commonjs format like `module.exports = ....`. When `esModule` is set to true, default export will be transpiled into `exports.__esModule = true; exports = ...`. Useful for interoperating with transpiler other than Babel, like TypeScript.
 
 ### preserveWhitespace
 
-- type: `Boolean`
-- default: `true`
+- Тип: `Boolean`
+- По умолчанию: `true`
 
-  If set to `false`, the whitespaces between HTML tags in templates will be ignored.
+  При установке в `false`, пробельные символы между HTML тегами в шаблонах будут проигнорированы.
 
 ### transformToRequire
 
-- type: `{ [tag: string]: string | Array<string> }`
-- default: `{ img: 'src' }`
+- Тип: `{ [tag: string]: string | Array<string> }`
+- По умолчанию: `{ img: 'src' }`
 
   During template compilation, the compiler can transform certain attributes, such as `src` URLs, into `require` calls, so that the target asset can be handled by Webpack. The default config transforms the `src` attribute on `<img>` tags.
 
 ### buble
 
-- type: `Object`
-- default: `{}`
+- Тип: `Object`
+- По умолчанию: `{}`
 
   Configure options for `buble-loader` (if present), AND the buble compilation pass for template render functions.
 
-  > version note: in version 9.x, the template expressions are configured separately via the now removed `templateBuble` option.
+  > Примечание: in version 9.x, the template expressions are configured separately via the now removed `templateBuble` option.
 
   The template render functions compilation supports a special transform `stripWith` (enabled by default), which removes the `with` usage in generated render functions to make them strict-mode compliant.
 
-  Example configuration:
+  Пример конфигурации:
 
   ``` js
   // webpack 1
   vue: {
     buble: {
       // enable object spread operator
-      // NOTE: you need to provide Object.assign polyfill yourself!
+      // ПРИМЕЧАНИЕ: вам нужно самостоятельно добавить полифилл для Object.assign!
       objectAssign: 'Object.assign',
 
-      // turn off the `with` removal
+      // отключение удаления `with`
       transforms: {
         stripWith: false
       }
@@ -148,7 +148,7 @@ module.exports = {
         loader: 'vue-loader',
         options: {
           buble: {
-            // same options
+            // теже настройки
           }
         }
       }
