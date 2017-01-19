@@ -1,7 +1,7 @@
-# Hot Reload
+# Горячая замена
 
-"Hot Reload" is not simply reloading the page when you edit a file. With hot reload enabled, when you edit a `*.vue` file, all instances of that component will be swapped in **without reloading the page**. It even preserves the current state of your app and these swapped components! This dramatically improves the development experience when you are tweaking the templates or styling of your components.
+"Горячая замена" это не просто обновление страницы, когда вы отредактируете файл. При использовании горячей замены, когда вы отредактируете `*.vue` файл, все экземпляры этого компонента будут заменены **без перезагрузки страницы**. При этом даже будет сохранено текущее состояние вашего приложения и заменяемых компонентов! Это значительно улучшает процесс разработки, особенно когда вы занимаетесь тонкой настройкой шаблонов или стилей ваших компонентов.
 
 ![hot-reload](http://blog.evanyou.me/images/vue-hot.gif)
 
-When scaffolding the project with `vue-cli`, Hot Reload is enabled out-of-the-box.
+При создании проекта с помощью `vue-cli`, горячая замена включена по умолчанию.
