@@ -1,4 +1,4 @@
-# Advanced Loader Configuration
+# Продвинутая конфигурация vue-loader
 
 Sometimes you may want to apply a custom loader string to a language instead of letting `vue-loader` infer it. Or you may simply want to overwrite the built-in loader configuration for the default languages. To do that, add a `vue` block in your Webpack config file, and specify the `loaders` option.
 
@@ -7,7 +7,7 @@ Sometimes you may want to apply a custom loader string to a language instead of 
 ``` js
 // webpack.config.js
 module.exports = {
-  // other options...
+  // другие настройки...
   module: {
     loaders: [
       {
@@ -16,14 +16,14 @@ module.exports = {
       }
     ]
   },
-  // vue-loader configurations
+  // настройки vue-loader
   vue: {
-    // ... other vue options
+    // ... другие настройки vue
     loaders: {
-      // load all <script> without "lang" attribute with coffee-loader
+      // обработать все <script> без атрибута "lang" с помощью coffee-loader
       js: 'coffee',
-      // load <template> directly as HTML string, without piping it
-      // through vue-html-loader first
+      // обработать <template> непосредственно как HTML-строку, без обработки
+      // содержимого с помощью vue-html-loader сначала
       html: 'raw'
     }
   }
@@ -34,14 +34,14 @@ module.exports = {
 
 ``` js
 module.exports = {
-  // other options...
+  // другие настройки...
   module: {
-    // module.rules is the same as module.loaders in 1.x
+    // module.rules тоже самое, что и module.loaders в 1.x
     rules: [
       {
         test: /\.vue$/,
         loader: 'vue-loader',
-        // vue-loader options goes here
+        // настройки vue-loader
         options: {
           loaders: {
             // ...
@@ -53,4 +53,4 @@ module.exports = {
 }
 ```
 
-A more practical usage of the advanced loader configuration is [extracting CSS inside components into a single file](./extract-css.md).
+Примером использования продвинутой конфигурации может быть например [извлечение CSS из компонентов в отдельный файл](./extract-css.md).
