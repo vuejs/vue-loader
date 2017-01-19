@@ -1,4 +1,4 @@
-# Using Pre-Processors
+# Использование пре-процессоров
 
 In Webpack, all pre-processors need to be applied with a corresponding loader. `vue-loader` allows you to use other Webpack loaders to process a part of a Vue component. It will automatically infer the proper loaders to use from the `lang` attribute of a language block.
 
@@ -18,9 +18,9 @@ npm install sass-loader node-sass --save-dev
 
 Under the hood, the text content inside the `<style>` tag will be first compiled by `sass-loader` before being passed on for further processing.
 
-#### sass-loader caveat
+#### Особенность sass-loader
 
-Contrary to what its name indicates, [*sass*-loader](https://github.com/jtangelder/sass-loader) parses *SCSS* syntax by default. If you actually want to use the indented *SASS* syntax, you have to configure vuel-loader's options for sass-loader accordingly. 
+Вопреки тому, что он называется [*sass*-loader](https://github.com/jtangelder/sass-loader), по умолчанию парсится синтаксис *SCSS*. Если вы на самом деле хотите использовать синтаксис *SASS* с отступами, вам требуется настроить vue-loader для sass-loader соответственно. 
 
 ```javascript
 {
@@ -39,7 +39,7 @@ See the [Advanced Loader Configuration](./advanced.md) Section for further infor
 
 ### JavaScript
 
-All JavaScript inside Vue components are processed by `babel-loader` by default. But you can of course change it:
+Весь JavaScript внутри Vue компонентов обрабатывается `babel-loader` по умолчанию. При необходимости это можно изменить:
 
 ``` bash
 npm install coffee-loader --save-dev
@@ -47,13 +47,13 @@ npm install coffee-loader --save-dev
 
 ``` html
 <script lang="coffee">
-  # Write coffeescript!
+  # Пишем на coffeescript!
 </script>
 ```
 
-### Templates
+### Шаблоны
 
-Processing templates is a little different, because most Webpack template loaders such as `pug-loader` return a template function instead of a compiled HTML string. Instead of using `pug-loader`, we can just install the original `pug`:
+Обработка шаблонов выполняется несколько иначе, потому что большинство loader'ов шаблонов Webpack, например `pug-loader`, возвращают функцию шаблона вместо скомпилированного в строку HTML. Поэтому вместо использования `pug-loader`, можно просто установить оригинальный `pug`:
 
 ``` bash
 npm install pug --save-dev
@@ -66,7 +66,7 @@ div
 </template>
 ```
 
-> **Important:** If you are using `vue-loader@<8.2.0`, you also need to install `template-html-loader`.
+> **Внимание:** При использовании `vue-loader@<8.2.0`, вам также необходимо установить `template-html-loader`.
 
 ### Inline Loader Requests
 
