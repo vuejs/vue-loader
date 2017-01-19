@@ -1,33 +1,33 @@
 # PostCSS
 
-Any CSS output processed by `vue-loader` is piped through [PostCSS](https://github.com/postcss/postcss) for scoped CSS rewriting. You can also add custom PostCSS plugins to the process, for example [autoprefixer](https://github.com/postcss/autoprefixer) or [CSSNext](http://cssnext.io/).
+Любой CSS проходящий через `vue-loader` обрабатывается [PostCSS](https://github.com/postcss/postcss) для реализации функциональности scoped CSS. Вы также можете добавить другие плагины PostCSS к процессу обработки. Например, [autoprefixer](https://github.com/postcss/autoprefixer) или [CSSNext](http://cssnext.io/).
 
-Example usage in Webpack 1.x:
+Пример использования с Webpack 1.x:
 
 ``` js
 // webpack.config.js
 module.exports = {
-  // other configs...
+  // другие настройки...
   vue: {
-    // use custom postcss plugins
+    // использование плагинов postcss
     postcss: [require('postcss-cssnext')()]
   }
 }
 ```
 
-For Webpack 2.x:
+Для Webpack 2.x:
 
 ``` js
 // webpack.config.js
 module.exports = {
-  // other options...
+  // другие настройки...
   module: {
-    // module.rules is the same as module.loaders in 1.x
+    // module.rules тоже самое, что и module.loaders в 1.x
     rules: [
       {
         test: /\.vue$/,
         loader: 'vue-loader',
-        // vue-loader options goes here
+        // настройки vue-loader
         options: {
           // ...
           postcss: [require('postcss-cssnext')()]
@@ -38,17 +38,17 @@ module.exports = {
 }
 ```
 
-In addition to providing an Array of plugins, the `postcss` option also accepts:
+В дополнение к возможности использовать массив плагинов, опция `postcss` также принимает:
 
-- A function that returns an array of plugins;
+- Функцию, возвращающую массив плагинов;
 
-- An object that contains options to be passed to the PostCSS processor. This is useful when you are using PostCSS projects that relies on custom parser/stringifiers:
+- Объект, который содержит настройки для передачи в PostCSS. Это пригодится если вы используете проекты с PostCSS которые опираются на пользовательские парсеры/сериализаторы:
 
   ``` js
   postcss: {
-    plugins: [...], // list of plugins
+    plugins: [...], // список плагинов
     options: {
-      parser: sugarss // use sugarss parser
+      parser: sugarss // использование парсера sugarss
     }
   }
   ```
