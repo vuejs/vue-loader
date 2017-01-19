@@ -1,4 +1,4 @@
-# Перечень опций
+# Перечень настроек
 
 ## Отличия в использовании с Webpack 1 & 2
 
@@ -36,13 +36,13 @@ module.exports = {
 
 - Тип: `Object`
 
-  An object specifying Webpack loaders to use for language blocks inside `*.vue` files. The key corresponds to the `lang` attribute for language blocks, if specified. The default `lang` for each type is:
+  Объект определяющий какие loader'ы должен использовать Webpack для каждой секции `*.vue` файлов. Ключ соответствует атрибуту `lang` у секции файла, если таковой был указан. Значения `lang` по умолчанию:
 
   - `<template>`: `html`
   - `<script>`: `js`
   - `<style>`: `css`
 
-  For example, to use `babel-loader` and `eslint-loader` to process all `<script>` blocks:
+  Например, чтобы использовать `babel-loader` и `eslint-loader` для обработки всех секций `<script>`:
 
   ``` js
   // ...
@@ -58,12 +58,12 @@ module.exports = {
 - Тип: `Array` или `Function` или `Object`
 - `Object` поддерживается в версиях 8.5.0 и выше
 
-  Specify custom PostCSS plugins to be applied to CSS inside `*.vue` files. If using a function, the function will called using the same loader context and should return an Array of plugins.
+  Определяет список плагинов PostCSS, которые будут применяться к CSS внутри `*.vue` файлов. Если используется функция, то она будет вызвана в контексте того же loader'а и должна возвращать массив плагинов.
 
   ``` js
   // ...
   vue: {
-    // примечание: не добавляйте опцию `postcss` после `loaders`
+    // примечание: добавляйте опцию `postcss` перед `loaders`
     postcss: [require('postcss-cssnext')()],
     loaders: {
       // ...
@@ -71,7 +71,7 @@ module.exports = {
   }
   ```
 
-  This option can also be an object that contains options to be passed to the PostCSS processor. This is useful when you are using PostCSS projects that relies on custom parser/stringifiers:
+  Эта опция также может быть объектом, который содержит настройки для PostCSS. Это пригодится в проектах с PostCSS, где используются собственные парсеры/сериализаторы:
 
   ``` js
   postcss: {
@@ -103,7 +103,7 @@ module.exports = {
 - Тип: `Boolean`
 - По умолчанию: `true`
 
-  При установке в `false`, пробельные символы между HTML тегами в шаблонах будут проигнорированы.
+  При установке в `false` пробельные символы между HTML тегами в шаблонах будут проигнорированы.
 
 ### transformToRequire
 
@@ -119,7 +119,7 @@ module.exports = {
 
   Configure options for `buble-loader` (if present), AND the buble compilation pass for template render functions.
 
-  > Примечание: in version 9.x, the template expressions are configured separately via the now removed `templateBuble` option.
+  > Примечание: в версиях 9.x, выражения шаблонов настраивались отдельно через опцию `templateBuble`, что удалена в новых версиях.
 
   The template render functions compilation supports a special transform `stripWith` (enabled by default), which removes the `with` usage in generated render functions to make them strict-mode compliant.
 
@@ -130,7 +130,7 @@ module.exports = {
   vue: {
     buble: {
       // enable object spread operator
-      // ПРИМЕЧАНИЕ: вам нужно самостоятельно добавить полифилл для Object.assign!
+      // ПРИМЕЧАНИЕ: вам нужно самостоятельно подключить полифилл для Object.assign!
       objectAssign: 'Object.assign',
 
       // отключение удаления `with`
