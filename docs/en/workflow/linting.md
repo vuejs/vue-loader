@@ -79,13 +79,13 @@ module.exports = {
       {
         enforce: 'pre',
         test: /.vue$/,
-        loader: 'eslint',
+        loader: 'eslint-loader',
         exclude: /node_modules/
       },
       // but use vue-loader for all *.vue files
       {
         test: /.vue$/,
-        loader: 'vue'
+        loader: 'vue-loader'
       }
     ]
   }

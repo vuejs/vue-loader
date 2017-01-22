@@ -5,7 +5,6 @@ var webpack = require('webpack')
 var MemoryFS = require('memory-fs')
 var jsdom = require('jsdom')
 var expect = require('chai').expect
-var rimraf = require('rimraf')
 var genId = require('../lib/gen-id')
 var SourceMapConsumer = require('source-map').SourceMapConsumer
 var ExtractTextPlugin = require("extract-text-webpack-plugin")
@@ -73,7 +72,11 @@ function test (options, assert) {
 
 function mockRender (options, data) {
   return options.render.call(Object.assign({
-    _h (tag, data, children) {
+    _v (val) {
+      return val
+    },
+    _self: {},
+    $createElement (tag, data, children) {
       if (Array.isArray(data)) {
         children = data
         data = null
@@ -104,6 +107,7 @@ describe('vue-loader', function () {
     test({
       entry: './test/fixtures/basic.vue'
     }, function (window, module, rawModule) {
+      expect(module.name).to.equal('basic')
       var vnode = mockRender(module, {
         msg: 'hi'
       })
@@ -322,6 +326,34 @@ describe('vue-loader', function () {
       var style = window.document.querySelector('style').textContent
       expect(style).to.contain('html { background-image: url(logo.c9e00e.png);\n}')
       expect(style).to.contain('body { background-image: url(logo.c9e00e.png);\n}')
+      done()
+    })
+  })
+
+  it('transformToRequire option', function (done) {
+    test({
+      entry: './test/fixtures/transform.vue',
+      module: {
+        rules: [
+          { test: /\.vue$/, loader: loaderPath },
+          {
+            test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
+            loader: 'url-loader'
+          }
+        ]
+      }
+    }, function (window, module) {
+      function includeDataURL (s) {
+        return !!s.match(/\s*data:([a-z]+\/[a-z]+(;[a-z\-]+\=[a-z\-]+)?)?(;base64)?,[a-z0-9\!\$\&\'\,\(\)\*\+\,\;\=\-\.\_\~\:\@\/\?\%\s]*\s*/i)
+      }
+      var vnode = mockRender(module)
+      // img tag
+      expect(includeDataURL(vnode.children[0].data.attrs.src)).to.equal(true)
+      // image tag (SVG)
+      expect(includeDataURL(vnode.children[2].children[0].data.attrs['xlink:href'])).to.equal(true)
+      var style = window.document.querySelector('style').textContent
+      // style
+      expect(includeDataURL(style)).to.equal(true)
       done()
     })
   })
