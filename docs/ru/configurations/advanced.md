@@ -1,6 +1,6 @@
 # Продвинутая конфигурация vue-loader
 
-Sometimes you may want to apply a custom loader string to a language instead of letting `vue-loader` infer it. Or you may simply want to overwrite the built-in loader configuration for the default languages. To do that, add a `vue` block in your Webpack config file, and specify the `loaders` option.
+Иногда может потребоваться применить пользовательский загрузчик (loader) к секции файла, вместо того чтобы обработкой занимался `vue-loader`. Или вы можете просто хотеть переопределить встроенные настройки загрузчиков для языков по умолчанию. Чтобы сделать это нужно добавить блок `vue` в файл конфигурации Webpack, и указать опцию `loaders`.
 
 ### Webpack 1.x
 
@@ -20,10 +20,10 @@ module.exports = {
   vue: {
     // ... другие настройки vue
     loaders: {
-      // обработать все <script> без атрибута "lang" с помощью coffee-loader
+      // обрабатывать все <script> без атрибута "lang" с помощью coffee-loader
       js: 'coffee',
-      // обработать <template> непосредственно как HTML-строку, без обработки
-      // содержимого с помощью vue-html-loader сначала
+      // обрабатывать <template> непосредственно как HTML-строку,
+      // без обработки содержимого с помощью vue-html-loader сначала
       html: 'raw'
     }
   }
