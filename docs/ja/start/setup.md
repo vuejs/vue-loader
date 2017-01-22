@@ -1,12 +1,8 @@
-# Setting Up a Project
+# プロジェクトのセットアップ
 
-### Syntax Highlighting
+### `vue-cli`の使用
 
-First thing first, you will probably want proper syntax highlighting for `*.vue` components. Currently there are syntax highlighting support for [Sublime Text](https://github.com/vuejs/vue-syntax-highlight), [Atom](https://atom.io/packages/language-vue) and [Vim](https://github.com/posva/vim-vue). Contributions for other editors/IDEs are highly appreciated! If you are not using any pre-processors in Vue components, you can also get by by treating `*.vue` files as HTML in your editor.
-
-### Using `vue-cli`
-
-It's recommended to scaffold a project using `vue-loader` with `vue-cli`:
+`vue-loader` を使用するプロジェクトの足場作りは`vue-cli` を使用することをオススメします：
 
 ``` bash
 npm install -g vue-cli
