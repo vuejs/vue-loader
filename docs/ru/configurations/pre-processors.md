@@ -1,10 +1,10 @@
 # Использование пре-процессоров
 
-In Webpack, all pre-processors need to be applied with a corresponding loader. `vue-loader` allows you to use other Webpack loaders to process a part of a Vue component. It will automatically infer the proper loaders to use from the `lang` attribute of a language block.
+В Webpack все пре-процессоры должны быть применены с соответствующим загрузчиком. `vue-loader` позволяет вам использовать другие загрузчики Webpack для обработки секций компонентов Vue. Они будут автоматически вызваны для обработки секций на основе указанного атрибута `lang` у секции файла.
 
 ### CSS
 
-For example, let's compile our `<style>` tag with SASS:
+Например, пусть в теге `<style>` будет использоваться SASS:
 
 ``` bash
 npm install sass-loader node-sass --save-dev
@@ -12,15 +12,15 @@ npm install sass-loader node-sass --save-dev
 
 ``` html
 <style lang="sass">
-  /* write sass here */
+  /* используем SASS здесь */
 </style>
 ```
 
-Under the hood, the text content inside the `<style>` tag will be first compiled by `sass-loader` before being passed on for further processing.
+В недрах, текстовое содержимое тега `<style>` будет сперва скомпилировано с помощью `sass-loader` перед передачей для дальнейшей обработки.
 
 #### Особенность sass-loader
 
-Вопреки тому, что он называется [*sass*-loader](https://github.com/jtangelder/sass-loader), по умолчанию парсится синтаксис *SCSS*. Если вы на самом деле хотите использовать синтаксис *SASS* с отступами, вам требуется настроить vue-loader для sass-loader соответственно. 
+Вопреки тому, что он называется [*sass*-loader](https://github.com/jtangelder/sass-loader), по умолчанию парсится синтаксис *SCSS*. Если вы на самом деле хотите использовать синтаксис *SASS* с отступами, вам требуется настроить vue-loader для sass-loader соответственно.
 
 ```javascript
 {
@@ -35,7 +35,7 @@ Under the hood, the text content inside the `<style>` tag will be first compiled
 }
 ```
 
-See the [Advanced Loader Configuration](./advanced.md) Section for further information about how to configure vue-loader.
+Обратитесь к разделу [продвинутой конфигурации загрузчиков](./advanced.md) для получения дополнительной информации о том, как настраивать vue-loader.
 
 ### JavaScript
 
@@ -74,7 +74,7 @@ You can use [Webpack loader requests](https://webpack.github.io/docs/loaders.htm
 
 ``` html
 <style lang="sass?outputStyle=expanded">
-  /* use sass here with expanded output */
+  /* используем SASS с расширенным выводом */
 </style>
 ```
 
