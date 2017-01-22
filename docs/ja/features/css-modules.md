@@ -1,12 +1,12 @@
-# CSS Modules
+# CSS モジュール
 
-> requires ^9.8.0
+> バージョン ^9.8.0 が必要
 
-[CSS Modules](https://github.com/css-modules/css-modules) is a popular system for modularizing and composing CSS. `vue-loader` provides first-class integration with CSS Modules as an alternative for simulated scoped CSS.
+[CSS モジュール](https://github.com/css-modules/css-modules) はCSSをモジュール化して構成するための一般的なシステムです。`vue-loader`はシミュレートされたスコープ付きCSSの代わりにCSSモジュールの一流の統合を提供します。
 
-### Usage
+### 使い方
 
-Just add the `module` attribute to your `<style>`:
+`module` 属性を `<style>` タグに追加します：
 
 ``` html
 <style module>
@@ -19,7 +19,7 @@ Just add the `module` attribute to your `<style>`:
 </style>
 ```
 
-This will turn on CSS Modules mode for `css-loader`, and the resulting class identifier object will be injected into the component as a computed property with the name `$style`. You can use it in your templates with a dynamic class binding:
+`css-loader`のCSS モジュールモードを有効にし、その結果クラス識別子オブジェクトは` $ style`という名前の計算されたプロパティとしてコンポーネントに注入されます。ダイナミッククラスバインディングを利用してテンプレートで使用可能になります。
 
 ``` html
 <template>
@@ -29,7 +29,7 @@ This will turn on CSS Modules mode for `css-loader`, and the resulting class ide
 </template>
 ```
 
-Since it's a computed property, it also works with the object/array syntax of `:class`:
+これは計算されたプロパティなので、`：class`の object/array 構文でも動作します：
 
 ``` html
 <template>
@@ -44,7 +44,7 @@ Since it's a computed property, it also works with the object/array syntax of `:
 </template>
 ```
 
-And you can also access it from JavaScript:
+そしてJavaScriptからもアクセス可能です：
 
 ``` html
 <script>
@@ -58,11 +58,11 @@ export default {
 </script>
 ```
 
-Refer to the [CSS Modules spec](https://github.com/css-modules/css-modules) for mode details such as [global exceptions](https://github.com/css-modules/css-modules#exceptions) and [composition](https://github.com/css-modules/css-modules#composition).
+[CSS Modules spec](https://github.com/css-modules/css-modules) を参照してください。モードの詳細については [global exceptions](https://github.com/css-modules/css-modules#exceptions) と [composition](https://github.com/css-modules/css-modules#composition)を参照してください。
 
 ### Custom Inject Name
 
-You can have more than one `<style>` tags in a single `*.vue` component. To avoid injected styles to overwrite each other, you can customize the name of the injected computed property by giving the `module` attribute a value:
+単一の `*.vue` コンポーネントは複数の `<style>` タグを持つことが出来ます。注入されたスタイルが互いに上書きするのを避けるために、 `module`属性に値を与えることによって、注入された計算されたプロパティの名前をカスタマイズすることができます：
 
 ``` html
 <style module="a">
@@ -74,9 +74,9 @@ You can have more than one `<style>` tags in a single `*.vue` component. To avoi
 </style>
 ```
 
-### Configuring `css-loader` Query
+### `css-loader` クエリの設定
 
-CSS Modules are processed via [css-loader](https://github.com/webpack/css-loader). With `<style module>`, the default query used for `css-loader` is:
+CSS モジュールは [css-loader](https://github.com/webpack/css-loader)によって処理されます。 `<style module>`では`css-loader`に使われるデフォルトのクエリは次のようになります。
 
 ``` js
 {
@@ -86,8 +86,7 @@ CSS Modules are processed via [css-loader](https://github.com/webpack/css-loader
 }
 ```
 
-You can use vue-loader
-s `cssModules` option to provide additional query options to `css-loader`:
+vue-loaderの `cssModules`オプションを使って` css-loader`に追加のクエリオプションを提供することができます：
 
 ``` js
 // webpack 1
@@ -105,7 +104,7 @@ module: {
   rules: [
     {
       test: '\.vue$',
-      loader: 'vue',
+      loader: 'vue-loader',
       options: {
         cssModules: {
           localIdentName: '[path][name]---[local]---[hash:base64:5]',
