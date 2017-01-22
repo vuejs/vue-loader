@@ -1,6 +1,6 @@
-# Scoped CSS
+# スコープで区切られた CSS
 
-When a `<style>` tag has the `scoped` attribute, its CSS will apply to elements of the current component only. This is similar to the style encapsulation found in Shadow DOM. It comes with some caveats, but doesn't require any polyfills. It is achieved by using PostCSS to transform the following:
+`scoped` 属性をもつ `<style>` タグを利用するとき、そのCSSは現在のコンポーネントの要素に飲み手起用されます。これはShadow DOMのスタイルのカプセル化に似ています。いくつか注意点がありますが、polyfillは必要ありません。PostCSSを使用して以下を変換することによって実現しています。
 
 ``` html
 <style scoped>
@@ -14,7 +14,7 @@ When a `<style>` tag has the `scoped` attribute, its CSS will apply to elements 
 </template>
 ```
 
-Into the following:
+以下の通りになります:
 
 ``` html
 <style>
@@ -30,7 +30,7 @@ Into the following:
 
 #### Notes
 
-1. You can include both scoped and non-scoped styles in the same component:
+1. 同じコンポーネント内にスコープで区切られてものとそうでないスタイルを含むことが出来ます：
 
   ``` html
   <style>
@@ -42,10 +42,10 @@ Into the following:
   </style>
   ```
 
-2. A child component's root node will be affected by both the parent's scoped CSS and the child's scoped CSS.
+2. 子コンポーネントのルートノードは親のスコープのCSSと子のスコープのCSSの両方の影響をうけます。
 
-3. Partials are not affected by scoped styles.
+3. パーシャルはスコープ付きスタイルの影響をうけません。
 
-4. **Scoped styles do not eliminate the need for classes**. Due to the way browsers render various CSS selectors, `p { color: red }` will be many times slower when scoped (i.e. when combined with an attribute selector). If you use classes or ids instead, such as in `.example { color: red }`, then you virtually eliminate that performance hit. [Here's a playground](http://stevesouders.com/efws/css-selectors/csscreate.php) where you can test the differences yourself.
+4. **スコープされたスタイルはclassの必要性を排除しません**。ブラウザが様々なCSSセレクタをレンダリングするため、`p { color: red }` はスコープされているとき何倍も遅くなります（すなわち属性セレクタと組み合わせた場合）。もし`.example { color: red }`のようにclassかidを使用するなら、パフォーマンスヒットは事実上なくなります。[この例]((http://stevesouders.com/efws/css-selectors/csscreate.php))で違いをテストすることが出来ます。
 
-5. **Be careful with descendant selectors in recursive components!** For a CSS rule with the selector `.a .b`, if the element that matches `.a` contains a recursive child component, then all `.b` in that child component will be matched by the rule.
+5. **再帰されたコンポーネントの子孫セレクタには気をつけてください！** セレクタ `.a .b`を持つCSSルールの場合、` .a`にマッチする要素に再帰的な子コンポーネントが含まれている場合、その子コンポーネントのすべての `.b`はルールにマッチします。
