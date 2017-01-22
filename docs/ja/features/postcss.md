@@ -1,8 +1,8 @@
 # PostCSS
 
-Any CSS output processed by `vue-loader` is piped through [PostCSS](https://github.com/postcss/postcss) for scoped CSS rewriting. You can also add custom PostCSS plugins to the process, for example [autoprefixer](https://github.com/postcss/autoprefixer) or [CSSNext](http://cssnext.io/).
+`vue-loader`により処理されたCSSのアウトプットはスコープされたCSSにに書き換えるために[PostCSS](https://github.com/postcss/postcss) を通します。カスタムされた PostCSSプラグインをプロセスに追加することが出来ます。例えば、[autoprefixer](https://github.com/postcss/autoprefixer) や [CSSNext](http://cssnext.io/)があります。
 
-Example usage in Webpack 1.x:
+Webpack 1.x の例：
 
 ``` js
 // webpack.config.js
@@ -15,7 +15,7 @@ module.exports = {
 }
 ```
 
-For Webpack 2.x:
+Webpack 2.x の例:
 
 ``` js
 // webpack.config.js
@@ -26,12 +26,11 @@ module.exports = {
     rules: [
       {
         test: /\.vue$/,
-        loader: 'vue',
-        // vue-loader options goes here
+        loader: 'vue-loader',
+        // vue-loader options goes heres
         options: {
           // ...
           postcss: [require('postcss-cssnext')()]
-          }
         }
       }
     ]
@@ -39,11 +38,11 @@ module.exports = {
 }
 ```
 
-In addition to providing an Array of plugins, the `postcss` option also accepts:
+加えてpluginの配列を提供し、`postcss` オプションは以下も受け入れます：
 
-- A function that returns an array of plugins;
+- プラグインの配列を返す関数；
 
-- An object that contains options to be passed to the PostCSS processor. This is useful when you are using PostCSS projects that relies on custom parser/stringifiers:
+- PostCSSプロセッサに渡すオプションを含むオブジェクト。これは、カスタム parser/stringifiers に依存するPostCSSプロジェクトを使用している場合に便利です。
 
   ``` js
   postcss: {
