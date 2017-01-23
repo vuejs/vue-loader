@@ -19,26 +19,26 @@
 </style>
 ```
 
-This will turn on CSS Modules mode for `css-loader`, and the resulting class identifier object will be injected into the component as a computed property with the name `$style`. You can use it in your templates with a dynamic class binding:
+Это включит режим CSS-модулей в `css-loader`, и полученный индентификатор объекта класса будет внедрен в компонент как вычисляемое свойство с именем `$style`. Вы можете использовать его в своих шаблонах для динамического добавления классов:
 
 ``` html
 <template>
   <p :class="$style.red">
-    This should be red
+    Этот текст будет красным
   </p>
 </template>
 ```
 
-Since it's a computed property, it also works with the object/array syntax of `:class`:
+Поскольку это вычисляемое свойство, оно также будет работает с объектом/массивом в `:class`:
 
 ``` html
 <template>
   <div>
     <p :class="{ [$style.red]: isRed }">
-      Am I red?
+      Буду ли я красным?
     </p>
     <p :class="[$style.red, $style.bold]">
-      Red and bold
+      Красный и жирный
     </p>
   </div>
 </template>
@@ -58,25 +58,25 @@ export default {
 </script>
 ```
 
-Refer to the [CSS Modules spec](https://github.com/css-modules/css-modules) for mode details such as [global exceptions](https://github.com/css-modules/css-modules#exceptions) and [composition](https://github.com/css-modules/css-modules#composition).
+Обратитесь к [спецификации CSS-модулей](https://github.com/css-modules/css-modules) для получения информации о [глобальных исключениях](https://github.com/css-modules/css-modules#exceptions) и [композиции](https://github.com/css-modules/css-modules#composition).
 
-### Custom Inject Name
+### Указание внедряемого имени модуля
 
-You can have more than one `<style>` tags in a single `*.vue` component. To avoid injected styles to overwrite each other, you can customize the name of the injected computed property by giving the `module` attribute a value:
+У вас может быть более одного `<style>` тега в одном `*.vue` компоненте. Во избежание перезаписи внедряемых стилей вы можете указать имя внедряемого вычисляемого свойства в значении атрибута `module`:
 
 ``` html
 <style module="a">
-  /* identifiers injected as a */
+  /* идентификатор будет внедрён как a */
 </style>
 
 <style module="b">
-  /* identifiers injected as b */
+  /* идентификатор будет внедрён как b */
 </style>
 ```
 
-### Configuring `css-loader` Query
+### Настройка параметров `css-loader`
 
-CSS Modules are processed via [css-loader](https://github.com/webpack/css-loader). With `<style module>`, the default query used for `css-loader` is:
+CSS-модули обрабатываются с помощью [css-loader](https://github.com/webpack/css-loader). При использовании `<style module>` настройки `css-loader` по умолчанию будут такими:
 
 ``` js
 {
@@ -86,13 +86,13 @@ CSS Modules are processed via [css-loader](https://github.com/webpack/css-loader
 }
 ```
 
-Вы можете использовать в vue-loader опцию `cssModules` чтобы предоставить дополнительные параметры для `css-loader`:
+Вы можете использовать в `vue-loader` опцию `cssModules` чтобы добавить дополнительные параметры для `css-loader`:
 
 ``` js
 // webpack 1
 vue: {
   cssModules: {
-    // overwrite local ident name
+    // другой шаблон для локального имени идентификатора
     localIdentName: '[path][name]---[local]---[hash:base64:5]',
     // использование camelCase
     camelCase: true

@@ -1,20 +1,20 @@
 # Asset URL Handling
 
-By default, `vue-loader` automatically processes your style and template files with [css-loader](https://github.com/webpack/css-loader) and the Vue template compiler. In this compilation process, all asset URLs such as `<img src="...">`, `background: url(...)` and CSS `@import` are **resolved as module dependencies**.
+По умолчанию `vue-loader` автоматически обрабатывает стили и файлы шаблонов с помощью [css-loader](https://github.com/webpack/css-loader) и компилятора шаблонов Vue. In this compilation process, all asset URLs such as `<img src="...">`, `background: url(...)` and CSS `@import` are **resolved as module dependencies**.
 
-For example, `url(./image.png)` will be translated into `require('./image.png')`, and
+Например, `url(./image.png)` будет преобразовано в `require('./image.png')`, а затем
 
 ``` html
 <img src="../image.png">
 ```
 
-will be compiled into:
+будет скомпилировано в:
 
 ``` js
 createElement('img', { attrs: { src: require('../image.png') }})
 ```
 
-Because `.png` is not a JavaScript file, you will need to configure Webpack to use [file-loader](https://github.com/webpack/file-loader) or [url-loader](https://github.com/webpack/url-loader) to handle them. The project scaffolded with `vue-cli` has also configured this for you.
+Так как `.png` это не JavaScript-файл, вам необходимо настроить Webpack использовать [file-loader](https://github.com/webpack/file-loader) или [url-loader](https://github.com/webpack/url-loader) для их обработки. Проект создаваемый с помощью `vue-cli` уже сделает это за вас.
 
 The benefits of all this are:
 
