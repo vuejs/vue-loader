@@ -497,4 +497,19 @@ describe('vue-loader', function () {
       done()
     })
   })
+
+  it('support chaining with other loaders', done => {
+    const mockLoaderPath = require.resolve('./mock-loader')
+    test({
+      entry: './test/fixtures/basic.vue',
+      module: {
+        rules: [
+          { test: /\.vue$/, loader: loaderPath + '!' + mockLoaderPath }
+        ]
+      }
+    }, function (window, module) {
+      expect(module.data().msg).to.equal('Changed!')
+      done()
+    })
+  })
 })
