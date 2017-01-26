@@ -58,7 +58,7 @@
     "eslint-config-vue": "^1.0.0",
     "eslint-plugin-html": "^1.5.2",
     "expose-loader": "^0.7.1",
-    "extract-text-webpack-plugin": "^2.0.0-beta.4",
+    "extract-text-webpack-plugin": "^2.0.0-rc.0",
     "file-loader": "^0.9.0",
     "inject-loader": "^2.0.0",
     "jsdom": "^9.2.1",
@@ -75,6 +75,6 @@
     "url-loader": "^0.5.7",
     "vue": "^2.1.0",
     "vue-template-compiler": "^2.1.0",
-    "webpack": "^2.1.0-beta.27"
+    "webpack": "^2.2.0"
   }
 }
