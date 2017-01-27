@@ -107,7 +107,6 @@ describe('vue-loader', function () {
     test({
       entry: './test/fixtures/basic.vue'
     }, function (window, module, rawModule) {
-      expect(module.name).to.equal('basic')
       var vnode = mockRender(module, {
         msg: 'hi'
       })
