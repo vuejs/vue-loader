@@ -71,6 +71,17 @@ function test (options, assert) {
 }
 
 function mockRender (options, data) {
+  var createElement = function (tag, data, children) {
+    if (Array.isArray(data)) {
+      children = data
+      data = null
+    }
+    return {
+      tag: tag,
+      data: data,
+      children: children
+    }
+  }
   return options.render.call(Object.assign({
     _v (val) {
       return val
@@ -266,6 +277,31 @@ describe('vue-loader', function () {
         loaders: {
           css: ExtractTextPlugin.extract('css-loader'),
           stylus: ExtractTextPlugin.extract('css-loader?sourceMap!stylus-loader')
+        }
+      },
+      plugins: [
+        new ExtractTextPlugin('test.output.css')
+      ]
+    }), function () {
+      var css = mfs.readFileSync('/test.output.css').toString()
+      css = normalizeNewline(css)
+      expect(css).to.contain('h1 {\n  color: #f00;\n}\n\nh2 {\n  color: green;\n}')
+      done()
+    })
+  })
+
+  it('extract CSS with function loader', function (done) {
+    bundle(Object.assign({}, globalConfig, {
+      entry: './test/fixtures/extract-css.vue',
+      vue: {
+        loaders: {
+          css: function (context) {
+            expect(context).include.keys(['moduleId'])
+            return ExtractTextPlugin.extract('css-loader')
+          },
+          stylus: function () {
+            return ExtractTextPlugin.extract('css-loader?sourceMap!stylus-loader')
+          }
         }
       },
       plugins: [
