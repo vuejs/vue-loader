@@ -1,15 +1,15 @@
 process.env.VUE_LOADER_TEST = true
 
 var path = require('path')
+var jsdom = require('jsdom')
 var webpack = require('webpack')
 var MemoryFS = require('memory-fs')
-var jsdom = require('jsdom')
 var expect = require('chai').expect
 var genId = require('../lib/gen-id')
-var SourceMapConsumer = require('source-map').SourceMapConsumer
-var ExtractTextPlugin = require("extract-text-webpack-plugin")
 var compiler = require('../lib/template-compiler')
 var normalizeNewline = require('normalize-newline')
+var ExtractTextPlugin = require("extract-text-webpack-plugin")
+var SourceMapConsumer = require('source-map').SourceMapConsumer
 
 var loaderPath = 'expose-loader?vueModule!' + path.resolve(__dirname, '../index.js')
 var mfs = new MemoryFS()
