@@ -68,9 +68,9 @@ div
 
 > **Внимание:** При использовании `vue-loader@<8.2.0`, вам также необходимо установить `template-html-loader`.
 
-### Inline Loader Requests
+### Непосредственное указание loader'ов
 
-You can use [Webpack loader requests](https://webpack.github.io/docs/loaders.html#introduction) in the `lang` attribute:
+Вы можете указывать [опции для loader'ов Webpack](https://webpack.github.io/docs/loaders.html#introduction) в атрибуте `lang`:
 
 ``` html
 <style lang="sass?outputStyle=expanded">
@@ -78,4 +78,4 @@ You can use [Webpack loader requests](https://webpack.github.io/docs/loaders.htm
 </style>
 ```
 
-However, note this makes your Vue component Webpack-specific and not compatible with Browserify and [vueify](https://github.com/vuejs/vueify). **If you intend to ship your Vue component as a reusable 3rd-party component, avoid using this syntax.**
+Обратите внимание, это сделает ваш компонент Vue зависимым от Webpack и несовместимым с Browserify и [vueify](https://github.com/vuejs/vueify). **Если вы планируете распространять ваш компонент Vue, избегайте использования этого синтаксиса.**
