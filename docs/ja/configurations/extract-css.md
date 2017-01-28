@@ -1,6 +1,6 @@
-# Extracting CSS into a Single File
+# CSSを単一のファイルに抽出する
 
-Example config to extract all the processed CSS in all Vue components into a single CSS file:
+すべてのVueコンポーネントで処理されたすべてのCSSを1つのCSSファイルに抽出する例：
 
 ### Webpack 1.x
 
@@ -13,7 +13,7 @@ npm install extract-text-webpack-plugin --save-dev
 var ExtractTextPlugin = require("extract-text-webpack-plugin")
 
 module.exports = {
-  // other options...
+  // ほかのオプション
   module: {
     loaders: [
       {
@@ -25,7 +25,7 @@ module.exports = {
   vue: {
     loaders: {
       css: ExtractTextPlugin.extract("css"),
-      // you can also include <style lang="less"> or other langauges
+      // <style lang = "less">または他の言語も含めることができます
       less: ExtractTextPlugin.extract("css!less")
     }
   },
@@ -46,17 +46,17 @@ npm install extract-text-webpack-plugin@2.x --save-dev
 var ExtractTextPlugin = require("extract-text-webpack-plugin")
 
 module.exports = {
-  // other options...
+  // 他の設定
   module: {
     rules: [
       {
         test: /\.vue$/,
-        loader: 'vue',
+        loader: 'vue-loader',
         options: {
           loaders: {
             css: ExtractTextPlugin.extract({
               loader: 'css-loader',
-              fallbackLoader: 'vue-style-loader' // <- this is a dep of vue-loader, so no need to explicitly install if using npm3
+              fallbackLoader: 'vue-style-loader' // <- これはvue-loaderの依存ですので、npm3を使用している場合は明示的にインストールする必要はありません
             })
           }
         }
