@@ -1,39 +1,39 @@
-# Production Build
+# プロダクションビルド
 
-There are two things to do when building our bundle for production:
+プロダクション用にバンドルを構築するときは二つのことをやります：
 
-1. Minify our application code;
-2. Use the [setup described in the Vue.js guide](https://vuejs.org/guide/deployment.html) to strip all the warnings from Vue.js source code.
+1. アプリケーションコードをミニファイルス
+2. [Vue.jsガイドに記載されているセットアップの説明](https://vuejs.org/guide/deployment.html) を使ってVue.jsのソースコードから全ての警告を削除する
 
-Here's an example config:
+設定例を以下に示します：
 
 ``` js
 // webpack.config.js
 module.exports = {
-  // ... other options
+  // ... 他のオプション
   plugins: [
-    // short-circuits all Vue.js warning code
+    // すべてのVue.js警告コードを短絡する
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: '"production"'
       }
     }),
-    // minify with dead-code elimination
+    // デッドコード除去で縮小する
     new webpack.optimize.UglifyJsPlugin({
       compress: {
         warnings: false
       }
     }),
-    // optimize module ids by occurence count
+    // 発生回数別にモジュールIDを最適化する
     new webpack.optimize.OccurenceOrderPlugin()
   ]
 }
 ```
 
-Obviously we don't want to use this config during development, so there are several ways to approach this:
+明らかに、開発中にこの設定を使いたくないので、これにはいくつかの方法をとります：
 
-1. Dynamically build up the configuration object based on an environment variable;
+1. 環境変数に基づいて構成オブジェクトを動的に構築する；
 
-2. Or, use two separate Webpack config files, one for development and one for production. And maybe share some common options between them in a third file, as shown in [vue-hackernews-2.0](https://github.com/vuejs/vue-hackernews-2.0).
+2. または、開発用と運用用の2つのWebpack設定ファイルを使用する。[vue-hackernews-2.0]（https://github.com/vuejs/vue-hackernews-2.0）に示すように、3つ目のファイルに共通のオプションをいくつか共有することもできる。
 
-It's really up to you as long as it achieves the goal.
+目標を達成している限り、それはあなた次第です。
