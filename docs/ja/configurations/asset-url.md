@@ -1,23 +1,22 @@
-# Asset URL Handling
+# アセット URL ハンドリング
 
-By default, `vue-loader` automatically processes your style and template files with [css-loader](https://github.com/webpack/css-loader) and the Vue template compiler. In this compilation process, all asset URLs such as `<img src="...">`, `background: url(...)` and CSS `@import` are **resolved as module dependencies**.
+デフォルトで `vu-loader` は [css-loader](https://github.com/webpack/css-loader) と Vueテンプレートコンパイラーでスタイルとテンプレートファイルは自動で処理されます。このコンパイル処理中で全ての  `<img src="...">`、`background: url(...)` やCSSの `@import` のようなアセットのURLは **モジュールの依存関係として処理されます**。
 
-For example, `url(./image.png)` will be translated into `require('./image.png')`, and
+例えば、`url(./image.png)` は `require('./image.png')` に変換され、そして
 
 ``` html
 <img src="../image.png">
 ```
 
-will be compiled into:
+このようにコンパイルされます：
 
 ``` js
 createElement('img', { attrs: { src: require('../image.png') }})
 ```
+もちろん `.png` ファイルは JavaScriot のファイルではありません。[file-loader](https://github.com/webpack/file-loader) または [url-loader](https://github.com/webpack/url-loader) を使用して Webpack を設定する必要があります。`vue-cli` でスキャフォールドされたプロジェクトでは同じような設定が成されています。
 
-Because `.png` is not a JavaScript file, you will need to configure Webpack to use [file-loader](https://github.com/webpack/file-loader) or [url-loader](https://github.com/webpack/url-loader) to handle them. The project scaffolded with `vue-cli` has also configured this for you.
+利点の全ては次の通りです：
 
-The benefits of all this are:
+1.  `file-loader` はアセットファイルのコピー先や配置先を制定したり、バージョンハッシュを利用してキャッシングを改善する方法を指定する事が出来ます。さらに、これは、単に**あなたの `* .vue`ファイルの隣にイメージを置くことができ、配備するURLを心配するのではなくフォルダ構造に基づいて相対パスを使用する**ことを意味します。
 
-1. `file-loader` allows you to designate where to copy and place the asset file, and how to name it using version hashes for better caching. Moreoever, this also means **you can just place images next to your `*.vue` files and use relative paths based on the folder structure instead of worrying about deployment URLs**. With proper config, Webpack will auto-rewrite the file paths into correct URLs in the bundled output.
-
-2. `url-loader` allows you to conditionally inline a file as base-64 data URL if they are smaller than a given threshold. This can reduce the amount of HTTP requests for trivial files. If the file is larger than the threshold, it automatically falls back to `file-loader`.
+2. `url-loader`は、指定されたしきい値よりも小さい場合、条件付きでファイルをbase-64データURLとしてインライン化することができます。これにより、単純なファイルに対するHTTPリクエストの量を減らすことができます。 ファイルがしきい値より大きい場合、自動的に `file-loader`にフォールバックします。
