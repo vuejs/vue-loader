@@ -1,13 +1,13 @@
-# Advanced Loader Configuration
+# 高度なloaderの設定
 
-Sometimes you may want to apply a custom loader string to a language instead of letting `vue-loader` infer it. Or you may simply want to overwrite the built-in loader configuration for the default languages. To do that, add a `vue` block in your Webpack config file, and specify the `loaders` option.
+時折`vue-loader`が推測するかわりに、言語にカスタム loader 文字列を適用することがあります。またデフォルトの言語のビルトイン loader の設定を上書きすることも出来ます。これを行うには、Webpack設定ファイルに `vue`ブロックを追加し、`loaders` オプションを指定します。
 
 ### Webpack 1.x
 
 ``` js
 // webpack.config.js
 module.exports = {
-  // other options...
+  // 他の設定
   module: {
     loaders: [
       {
@@ -16,14 +16,14 @@ module.exports = {
       }
     ]
   },
-  // vue-loader configurations
+  // vue-loader の設定
   vue: {
-    // ... other vue options
+    // ... 他の Vue のオプション
     loaders: {
-      // load all <script> without "lang" attribute with coffee-loader
+      // すべての<script>を lang属性なしでcoffee-loaerでロードする
       js: 'coffee',
-      // load <template> directly as HTML string, without piping it
-      // through vue-html-loader first
+      // <template>を直接HTML文字列としてロードする
+      // 最初にvue-html-loaderをパイプする必要はない
       html: 'raw'
     }
   }
@@ -34,14 +34,14 @@ module.exports = {
 
 ``` js
 module.exports = {
-  // other options...
+  // ほかのオプション
   module: {
-    // module.rules is the same as module.loaders in 1.x
+    // module.rules は  1.x の module.loaders と同じ意味
     rules: [
       {
         test: /\.vue$/,
         loader: 'vue',
-        // vue-loader options goes here
+        // vue-loader のオプションはここ
         options: {
           loaders: {
             // ...
@@ -53,4 +53,4 @@ module.exports = {
 }
 ```
 
-A more practical usage of the advanced loader configuration is [extracting CSS inside components into a single file](./extract-css.md).
+高度なローダー設定のより実用的な使用方法は、[コンポーネント内のCSSを1つのファイルに抽出する](./expression-css.md)にあります。
