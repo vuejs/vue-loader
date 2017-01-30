@@ -38,7 +38,7 @@
     "postcss-selector-parser": "^2.0.0",
     "source-map": "^0.5.6",
     "vue-hot-reload-api": "^2.0.1",
-    "vue-style-loader": "^1.0.0",
+    "vue-style-loader": "^2.0.0",
     "vue-template-es2015-compiler": "^1.2.2"
   },
   "peerDependencies": {
@@ -73,6 +73,7 @@
     "sugarss": "^0.2.0",
     "url-loader": "^0.5.7",
     "vue": "^2.1.0",
+    "vue-server-renderer": "^2.1.10",
     "vue-template-compiler": "^2.1.0",
     "webpack": "^2.2.0"
   }

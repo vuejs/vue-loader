@@ -6,12 +6,14 @@ var webpack = require('webpack')
 var MemoryFS = require('memory-fs')
 var expect = require('chai').expect
 var genId = require('../lib/gen-id')
+var SSR = require('vue-server-renderer')
 var compiler = require('../lib/template-compiler')
 var normalizeNewline = require('normalize-newline')
 var ExtractTextPlugin = require("extract-text-webpack-plugin")
 var SourceMapConsumer = require('source-map').SourceMapConsumer
 
-var loaderPath = 'expose-loader?vueModule!' + path.resolve(__dirname, '../index.js')
+var rawLoaderPath = path.resolve(__dirname, '../index.js')
+var loaderPath = 'expose-loader?vueModule!' + rawLoaderPath
 var mfs = new MemoryFS()
 var globalConfig = {
   output: {
@@ -46,6 +48,11 @@ function bundle (options, cb) {
     expect(err).to.be.null
     if (stats.compilation.errors.length) {
       stats.compilation.errors.forEach(function (err) {
+        console.error(err.message)
+      })
+    }
+    if (stats.compilation.errors) {
+      stats.compilation.errors.forEach(err => {
         console.error(err.message)
       })
     }
@@ -509,6 +516,38 @@ describe('vue-loader', function () {
     }, function (window, module) {
       expect(module.data().msg).to.equal('Changed!')
       done()
+    })
+  })
+
+  it('SSR style extraction', done => {
+    bundle({
+      target: 'node',
+      entry: './test/fixtures/ssr-style.js',
+      output: {
+        path: '/',
+        filename: 'test.build.js',
+        libraryTarget: 'commonjs2'
+      },
+      externals: ['vue'],
+      module: {
+        rules: [{ test: /\.vue$/, loader: rawLoaderPath }]
+      }
+    }, code => {
+      const renderer = SSR.createBundleRenderer(code)
+      const context = {}
+      renderer.renderToString(context, (err, res) => {
+        if (err) return done(err)
+        expect(res).to.contain('server-rendered')
+        expect(res).to.contain('<h1>Hello</h1>')
+        expect(res).to.contain('Hello from Component A!')
+        // from main component
+        expect(context.styles).to.contain('h1 { color: green;')
+        // from imported child component
+        expect(context.styles).to.contain('comp-a h2 {\n  color: #f00;')
+        // from imported css file
+        expect(context.styles).to.contain('h1 { color: red;')
+        done()
+      })
     })
   })
 })
