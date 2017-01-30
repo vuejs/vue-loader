@@ -1,10 +1,10 @@
-# Query parameters chaining
+# Chaining with Other Loaders
 
 > requires ^10.1.0 for Vue 2.x, ^8.6.0 for Vue 1.x
 
-Sometimes you may want to bypass a your custom loader, before pass to `vue-loader`. To do that, you can customize with the `loader` option.
+Sometimes you may want to pre-process the vue file before passing it to `vue-loader`. To do that, you can customize with the `loader` option.
 
-below example use the your custom loader:
+below example use your custom loader:
 
 ### Webpack 1.x
 

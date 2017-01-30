@@ -10,7 +10,7 @@
 - Configurations
   - [Pre-Processors](configurations/pre-processors.md)
   - [Asset URL Handling](configurations/asset-url.md)
-  - [Query parameters chaining](configurations/chaining.md)
+  - [Chaining with Other Loaders](configurations/chaining.md)
   - [Advanced Loader Configuration](configurations/advanced.md)
   - [Extracting CSS File](configurations/extract-css.md)
 - Workflow
