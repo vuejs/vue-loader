@@ -1,10 +1,12 @@
-# Testing with Mocks
+#Тестирование с моками (ээм)
 
-In a real world application, our components most likely have external dependencies. When writing unit tests for components, it would be ideal if we can mock these external dependencies so that our tests only rely the behavior of the component being tested.
+В настоящих приложениях, наши компоненты скорее всего будут иметь внешние зависимости. Было бы прекрасно, если бы мы могли "передразнивать" эти зависимости в наших тестах, чтобы они опирались только на поведение тестируемого компонента.
+
+`vue-loader` предоставляет возможность внедрять произвольные зависимости в `*.vue` компоненты, используя [inject-loader](https://github.com/plasticine/inject-loader). Основная идея состоит в том, что вместо прямой подгрузки модуля компонента, мы используем `inject-loader`, чтобы создать "фабричную функцию" для этого модуля (ШТА*!*!*). Когда мы вызовем эту функцию с мок-объектом, он вернет нам экземпляр модуля с внедренными мок-объектами. (!!!!!!!!!!!!!!!!!!!!!!!!!)
 
 `vue-loader` provides a feature that allows you to inject arbitrary dependencies to a `*.vue` component, using [inject-loader](https://github.com/plasticine/inject-loader). The general idea is that instead of directly importing the component module, we use `inject-loader` to create a "module factory" function for that module. When this function gets called with an object of mocks, it returns an instance of the module with the mocks injected.
 
-Suppose we have a component like this:
+Допустим, у нас есть следующий компонент:
 
 ``` html
 <!-- example.vue -->
@@ -13,7 +15,7 @@ Suppose we have a component like this:
 </template>
 
 <script>
-// this dependency needs to be mocked
+// эту зависимость нужно "передразнить"
 import SomeService from '../service'
 
 export default {
@@ -26,9 +28,9 @@ export default {
 </script>
 ```
 
-Here's how to import it with mocks:
+Вот как получить его с мок-объектами:
 
-> Note: inject-loader@3.x is currently unstable.
+> Заметка: inject-loader@3.x еще не в стабильной версии
 
 ``` bash
 npm install inject-loader@^2.0.0 --save-dev
@@ -39,23 +41,24 @@ npm install inject-loader@^2.0.0 --save-dev
 const ExampleInjector = require('!!vue?inject!./example.vue')
 ```
 
+Обратите внимание на эту безумную строку импорта. - мы используем [запросы к webpack загрузчику](https://webpack.github.io/docs/loaders.html). Краткое пояснение:
 Notice that crazy require string - we are using some inline [webpack loader requests](https://webpack.github.io/docs/loaders.html) here. A quick explanation:
 
-- `!!` at the start means "disable all loaders from the global config";
-- `vue?inject!` means "use the `vue` loader, and pass in the `?inject` query". This tells `vue-loader` to compile the component in dependency-injection mode.
+- `!!` в начале строки означает "отключи все загрузчики из глобальной конфигурации"
+- `vue?inject!` значит "используй `vue` загрузчик и передай запрос `?inject`". Это заставляет `vue-loader` скомпилировать компонент в режиме внедрения зависимостей.
 
-The returned `ExampleInjector` is a factory function that can be called to create instances of the `example.vue` module:
+Полученный `ExampleInjector` это фабричная функция, которую можно вызвать, чтобы создать экземпляр модуля `example.vue`:
 
 ``` js
 const ExampleWithMocks = ExampleInjector({
   // mock it
   '../service': {
-    msg: 'Hello from a mocked service!'
+    msg: 'Привет от мок-сервиса!'
   }
 })
 ```
 
-Finally, we can test the component like usual:
+Наконец, мы можем тестировать компонент как обычно:
 
 ``` js
 it('should render', () => {
@@ -65,6 +68,6 @@ it('should render', () => {
       'test': ExampleWithMocks
     }
   }).$mount()
-  expect(vm.$el.querySelector('.msg').textContent).toBe('Hello from a mocked service!')
+  expect(vm.$el.querySelector('.msg').textContent).toBe('Привет от мок-сервиса!')
 })
 ```
