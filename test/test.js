@@ -1,17 +1,19 @@
 process.env.VUE_LOADER_TEST = true
 
 var path = require('path')
+var jsdom = require('jsdom')
 var webpack = require('webpack')
 var MemoryFS = require('memory-fs')
-var jsdom = require('jsdom')
 var expect = require('chai').expect
 var genId = require('../lib/gen-id')
-var SourceMapConsumer = require('source-map').SourceMapConsumer
-var ExtractTextPlugin = require("extract-text-webpack-plugin")
+var SSR = require('vue-server-renderer')
 var compiler = require('../lib/template-compiler')
 var normalizeNewline = require('normalize-newline')
+var ExtractTextPlugin = require("extract-text-webpack-plugin")
+var SourceMapConsumer = require('source-map').SourceMapConsumer
 
-var loaderPath = 'expose-loader?vueModule!' + path.resolve(__dirname, '../index.js')
+var rawLoaderPath = path.resolve(__dirname, '../index.js')
+var loaderPath = 'expose-loader?vueModule!' + rawLoaderPath
 var mfs = new MemoryFS()
 var globalConfig = {
   output: {
@@ -46,6 +48,11 @@ function bundle (options, cb) {
     expect(err).to.be.null
     if (stats.compilation.errors.length) {
       stats.compilation.errors.forEach(function (err) {
+        console.error(err.message)
+      })
+    }
+    if (stats.compilation.errors) {
+      stats.compilation.errors.forEach(err => {
         console.error(err.message)
       })
     }
@@ -107,7 +114,6 @@ describe('vue-loader', function () {
     test({
       entry: './test/fixtures/basic.vue'
     }, function (window, module, rawModule) {
-      expect(module.name).to.equal('basic')
       var vnode = mockRender(module, {
         msg: 'hi'
       })
@@ -515,6 +521,53 @@ describe('vue-loader', function () {
       expect(vnode.data.attrs.id).to.equal('-msg-')
       expect(vnode.children[0]).to.equal('hi')
       done()
+    })
+  })
+
+  it('support chaining with other loaders', done => {
+    const mockLoaderPath = require.resolve('./mock-loader')
+    test({
+      entry: './test/fixtures/basic.vue',
+      module: {
+        rules: [
+          { test: /\.vue$/, loader: loaderPath + '!' + mockLoaderPath }
+        ]
+      }
+    }, function (window, module) {
+      expect(module.data().msg).to.equal('Changed!')
+      done()
+    })
+  })
+
+  it('SSR style extraction', done => {
+    bundle({
+      target: 'node',
+      entry: './test/fixtures/ssr-style.js',
+      output: {
+        path: '/',
+        filename: 'test.build.js',
+        libraryTarget: 'commonjs2'
+      },
+      externals: ['vue'],
+      module: {
+        rules: [{ test: /\.vue$/, loader: rawLoaderPath }]
+      }
+    }, code => {
+      const renderer = SSR.createBundleRenderer(code)
+      const context = {}
+      renderer.renderToString(context, (err, res) => {
+        if (err) return done(err)
+        expect(res).to.contain('server-rendered')
+        expect(res).to.contain('<h1>Hello</h1>')
+        expect(res).to.contain('Hello from Component A!')
+        // from main component
+        expect(context.styles).to.contain('h1 { color: green;')
+        // from imported child component
+        expect(context.styles).to.contain('comp-a h2 {\n  color: #f00;')
+        // from imported css file
+        expect(context.styles).to.contain('h1 { color: red;')
+        done()
+      })
     })
   })
 })

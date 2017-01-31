@@ -1,6 +1,6 @@
 {
   "name": "vue-loader",
-  "version": "10.0.4",
+  "version": "10.1.2",
   "description": "Vue.js component loader for Webpack",
   "main": "index.js",
   "repository": {
@@ -34,12 +34,11 @@
     "js-beautify": "^1.6.3",
     "loader-utils": "^0.2.10",
     "lru-cache": "^4.0.1",
-    "object-assign": "^4.0.0",
     "postcss": "^5.0.10",
     "postcss-selector-parser": "^2.0.0",
     "source-map": "^0.5.6",
     "vue-hot-reload-api": "^2.0.1",
-    "vue-style-loader": "^1.0.0",
+    "vue-style-loader": "^2.0.0",
     "vue-template-es2015-compiler": "^1.2.2"
   },
   "peerDependencies": {
@@ -54,16 +53,16 @@
     "coffee-loader": "^0.7.2",
     "coffee-script": "^1.10.0",
     "css-loader": "^0.26.0",
-    "eslint": "^2.9.0",
-    "eslint-config-vue": "^1.0.0",
-    "eslint-plugin-html": "^1.5.2",
+    "eslint": "^3.14.1",
+    "eslint-config-vue": "^2.0.2",
+    "eslint-plugin-vue": "^2.0.0",
     "expose-loader": "^0.7.1",
     "extract-text-webpack-plugin": "^2.0.0-rc.0",
-    "file-loader": "^0.9.0",
+    "file-loader": "^0.10.0",
     "inject-loader": "^2.0.0",
     "jsdom": "^9.2.1",
     "marked": "^0.3.6",
-    "memory-fs": "^0.3.0",
+    "memory-fs": "^0.4.1",
     "mkdirp": "^0.5.1",
     "mocha": "^3.2.0",
     "node-libs-browser": "^2.0.0",
@@ -75,6 +74,7 @@
     "sugarss": "^0.2.0",
     "url-loader": "^0.5.7",
     "vue": "^2.1.0",
+    "vue-server-renderer": "^2.1.10",
     "vue-template-compiler": "^2.1.0",
     "webpack": "^2.2.0"
   }
