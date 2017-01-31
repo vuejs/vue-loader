@@ -57,12 +57,12 @@ function bundle (options, cb) {
       })
     }
     expect(stats.compilation.errors).to.be.empty
-    cb(mfs.readFileSync('/test.build.js').toString())
+    cb(mfs.readFileSync('/test.build.js').toString(), stats.compilation.warnings)
   })
 }
 
 function test (options, assert) {
-  bundle(options, function (code) {
+  bundle(options, function (code, warnings) {
     jsdom.env({
       html: '<!DOCTYPE html><html><head></head><body></body></html>',
       src: [code],
@@ -226,11 +226,10 @@ describe('vue-loader', function () {
   })
 
   it('source map', function (done) {
-    var config = Object.assign({}, globalConfig, {
+    bundle({
       entry: './test/fixtures/basic.vue',
       devtool: '#source-map'
-    })
-    bundle(config, function (code) {
+    }, function (code, warnings) {
       var map = mfs.readFileSync('/test.build.js.map').toString()
       var smc = new SourceMapConsumer(JSON.parse(map))
       var line
@@ -266,7 +265,7 @@ describe('vue-loader', function () {
   })
 
   it('extract CSS', function (done) {
-    bundle(Object.assign({}, globalConfig, {
+    bundle({
       entry: './test/fixtures/extract-css.vue',
       vue: {
         loaders: {
@@ -277,7 +276,7 @@ describe('vue-loader', function () {
       plugins: [
         new ExtractTextPlugin('test.output.css')
       ]
-    }), function () {
+    }, function (code, warnings) {
       var css = mfs.readFileSync('/test.output.css').toString()
       css = normalizeNewline(css)
       expect(css).to.contain('h1 {\n  color: #f00;\n}\n\nh2 {\n  color: green;\n}')
@@ -488,7 +487,7 @@ describe('vue-loader', function () {
       output: Object.assign({}, globalConfig.output, {
         libraryTarget: 'commonjs2'
       })
-    }, function (code) {
+    }, function (code, warnings) {
       // http://stackoverflow.com/questions/17581830/load-node-js-module-from-string-in-memory
       function requireFromString(src, filename) {
         var Module = module.constructor;
@@ -568,6 +567,126 @@ describe('vue-loader', function () {
         expect(context.styles).to.contain('h1 { color: red;')
         done()
       })
+    })
+  })
+
+  it('extract custom blocks to a separate file', function (done) {
+    bundle({
+      entry: './test/fixtures/custom-language.vue',
+      vue: {
+        loaders: {
+          'documentation': ExtractTextPlugin.extract('raw-loader')
+        }
+      },
+      plugins: [
+        new ExtractTextPlugin('doc.md')
+      ]
+    }, function (code, warnings) {
+      var unitTest = mfs.readFileSync('/doc.md').toString()
+      unitTest = normalizeNewline(unitTest)
+      expect(unitTest).to.contain('This is example documentation for a component.')
+      done()
+    })
+  })
+
+  it('add custom blocks to the webpack output', function (done) {
+    bundle({
+      entry: './test/fixtures/custom-language.vue',
+      vue: {
+        loaders: {
+          'unit-test': 'babel-loader'
+        }
+      }
+    }, function (code, warnings) {
+      expect(code).to.contain('describe(\'example\', function () {\n  it(\'basic\', function (done) {\n    done();\n  });\n})')
+      done()
+    })
+  })
+
+  it('custom blocks work with src imports', function (done) {
+    bundle({
+      entry: './test/fixtures/custom-import.vue',
+      vue: {
+        loaders: {
+          'unit-test': 'babel-loader'
+        }
+      }
+    }, function (code, warnings) {
+      expect(code).to.contain('describe(\'example\', function () {\n  it(\'basic\', function (done) {\n    done();\n  });\n})')
+      done()
+    })
+  })
+
+  it('custom blocks can be removed from the output', function (done) {
+    bundle({
+      entry: './test/fixtures/custom-language.vue',
+      vue: {
+        loaders: {
+          'unit-test': 'null-loader'
+        }
+      }
+    }, function (code, warnings) {
+      expect(code).not.to.contain('describe(\'example\', function () {\n  it(\'basic\', function (done) {\n    done();\n  });\n})')
+      done()
+    })
+  })
+
+  it('no warnings when loaders are specified for all custom blocks', function (done) {
+    bundle({
+      entry: './test/fixtures/custom-language.vue',
+      vue: {
+        loaders: {
+          'documentation': 'null-loader',
+          'unit-test': 'null-loader'
+        }
+      }
+    }, function (code, warnings) {
+      expect(warnings.length).to.equal(0)
+      done()
+    })
+  })
+
+  it('warning should be raised when a loader is not specified for a custom block', function (done) {
+    bundle({
+      entry: './test/fixtures/custom-language.vue',
+      vue: {
+        loaders: {
+          'documentation': 'null-loader'
+        }
+      }
+    }, function (code, warnings) {
+      expect(warnings.length).to.equal(1)
+      expect(warnings[0].message).to.equal('Loader for custom block type "unit-test" not found in webpack configuration')
+      done()
+    })
+  })
+
+  it('passes attributes as options to the loader', function (done) {
+    bundle({
+      entry: './test/fixtures/custom-options.vue',
+      vue: {
+        loaders: {
+          'unit-test': 'babel-loader!skeleton-loader'
+        }
+      },
+      plugins: [
+        new webpack.LoaderOptionsPlugin({
+          options: {
+            skeletonLoader: {
+              procedure: function(content, sourceMap, callback, options) {
+                expect(options.foo).to.equal('bar');
+                expect(options.opt2).to.equal('value2');
+
+                // Return the content to output.
+                return content;
+              }
+            }
+          }
+        })
+      ]
+    }, function (code, warnings) {
+      expect(code).to.contain('describe(\'example\', function () {\n  it(\'basic\', function (done) {\n    done();\n  });\n})')
+      done()
     })
   })
 })
