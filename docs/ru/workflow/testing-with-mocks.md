@@ -2,9 +2,7 @@
 
 В настоящих приложениях, наши компоненты скорее всего будут иметь внешние зависимости. Было бы прекрасно, если бы мы могли "передразнивать" эти зависимости в наших тестах, чтобы они опирались только на поведение тестируемого компонента.
 
-`vue-loader` предоставляет возможность внедрять произвольные зависимости в `*.vue` компоненты, используя [inject-loader](https://github.com/plasticine/inject-loader). Основная идея состоит в том, что вместо прямой подгрузки модуля компонента, мы используем `inject-loader`, чтобы создать "фабричную функцию" для этого модуля (ШТА*!*!*). Когда мы вызовем эту функцию с мок-объектом, он вернет нам экземпляр модуля с внедренными мок-объектами. (!!!!!!!!!!!!!!!!!!!!!!!!!)
-
-`vue-loader` provides a feature that allows you to inject arbitrary dependencies to a `*.vue` component, using [inject-loader](https://github.com/plasticine/inject-loader). The general idea is that instead of directly importing the component module, we use `inject-loader` to create a "module factory" function for that module. When this function gets called with an object of mocks, it returns an instance of the module with the mocks injected.
+`vue-loader` предоставляет возможность внедрять произвольные зависимости в `*.vue` компоненты, используя [inject-loader](https://github.com/plasticine/inject-loader). Основная идея состоит в том, что вместо прямой подгрузки модуля компонента, мы используем `inject-loader`, чтобы создать "фабричную функцию" для этого модуля. Когда мы вызовем эту функцию с мок-объектом, она вернет нам экземпляр модуля с внедренными мок-объектами.
 
 Допустим, у нас есть следующий компонент:
 

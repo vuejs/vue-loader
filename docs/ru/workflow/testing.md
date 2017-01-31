@@ -1,12 +1,11 @@
 # Тестирование
 # Testing
 
-> [webpack vue-cli template](https://github.com/vuejs-templates/webpack) предлагает вам готовые решения для юнит- и e2e-тестирования.
-> The [webpack vue-cli template](https://github.com/vuejs-templates/webpack) offers pre-configured unit testing and e2e testing setups for you.
+> [Шаблон webpack vue-cli](https://github.com/vuejs-templates/webpack) предлагает вам готовые решения для юнит- и e2e-тестирования.
 
 Тестируя `*.vue` файлы, мы не можем использовать обычные тестовые движки для CommonJS, поскольку они не знают, как обрабатывать `*.vue` файлы. Вместо этого мы снова воспользуемся Webpack + vue-loader для сборки наших тестов. Мы рекомендуем использовать сочетание [Karma](http://karma-runner.github.io/0.13/index.html) и [karma-webpack](https://github.com/webpack/karma-webpack).
 
-Karma это тестовый движок, который запускает браузеры и прогоняет тесты за вас. Вы можете выбрать, в каких браузерах выполнять тесты и на какой тестовый фреймворк использовать (например, Mocha или Jasmin). Вот пример конфигурации Karma для тестирования в [PhantomJS](http://phantomjs.org/) с помощью фреймворка [Jasmine](http://jasmine.github.io/edge/introduction.html):
+Karma это тестовый движок, который запускает браузеры и прогоняет тесты за вас. Вы можете выбрать, в каких браузерах выполнять тесты и какой тестовый фреймворк использовать (например, Mocha или Jasmin). Вот пример конфигурации Karma для тестирования в [PhantomJS](http://phantomjs.org/) с помощью фреймворка [Jasmine](http://jasmine.github.io/edge/introduction.html):
 
 ``` bash
 npm install\
@@ -19,7 +18,7 @@ npm install\
 ``` js
 // мы можем воспользоваться тем же файлом конфигурации,
 // однако, не забудьте удалить оригинальную точку входа,
-// поскольку во время тестирования нам он не нужен
+// поскольку во время тестирования нам она не нужна
 var webpackConfig = require('./webpack.config.js')
 delete webpackConfig.entry
 
@@ -34,7 +33,7 @@ module.exports = function (config) {
     preprocessors: {
       'test/index.js': ['webpack']
     },
-    // используем конфигурацию ewbpack
+    // используем конфигурацию webpack
     webpack: webpackConfig,
     // избегаем стены бесполезного текста
     webpackMiddleware: {
@@ -55,7 +54,7 @@ var testsContext = require.context('.', true, /\.spec$/)
 testsContext.keys().forEach(testsContext)
 ```
 
-Эта точка входа просто подтягивает все другие файлы, названия которых заканчиваются на `.spec.js` в ту же папку. Теперь мы наконец можем написать немного тестов:
+Эта точка входа просто подтягивает все другие файлы, названия которых заканчиваются на `.spec.js` в ту же папку. Теперь мы наконец-то можем написать немного тестов:
 
 ``` js
 // test/component-a.spec.js
@@ -64,9 +63,9 @@ var ComponentA = require('../../src/components/a.vue')
 
 describe('a.vue', function () {
 
-  // проверяем параметры JavaScript
+  // проверяем свойства JavaScript-объекта
   it('should have correct message', function () {
-    expect(ComponentA.data().msg).toBe('Hello from Component A!')
+    expect(ComponentA.data().msg).toBe('Привет от компонента A!')
   })
 
   // проверяем результаты рендеринга, вызывая рендер компонента
@@ -77,7 +76,7 @@ describe('a.vue', function () {
         'test': ComponentA
       }
     }).$mount()
-    expect(vm.$el.querySelector('h2.red').textContent).toBe('Hello from Component A!')
+    expect(vm.$el.querySelector('h2.red').textContent).toBe('Привет от компонента A!')
   })
 })
 ```
@@ -100,4 +99,4 @@ describe('a.vue', function () {
 npm test
 ```
 
-Опять же, [webpack vue-cli template](https://github.com/vuejs-templates/webpack) содержит готовый рабочий пример с тестами.
+Опять же, [шаблон webpack vue-cli](https://github.com/vuejs-templates/webpack) содержит готовый рабочий пример с тестами.
