@@ -1,8 +1,9 @@
 # Production Build
+# Сборка продакшна
 
-There are two things to do when building our bundle for production:
+Когда мы собираем финальную версию приложения, мы делаем две вещи:
 
-1. Minify our application code;
+1. Минифицируем код нашего приложения;
 2. Use the [setup described in the Vue.js guide](https://vuejs.org/guide/deployment.html) to strip all the warnings from Vue.js source code.
 
 Here's an example config:

@@ -1,11 +1,11 @@
 # Тестирование
 # Testing
 
-> [Шаблон webpack vue-cli](https://github.com/vuejs-templates/webpack) предлагает вам готовые решения для юнит- и e2e-тестирования.
+> [Шаблон webpack vue-cli](https://github.com/vuejs-templates/webpack) предлагает вам готовые решения для модульного и e2e-тестирования.
 
 Тестируя `*.vue` файлы, мы не можем использовать обычные тестовые движки для CommonJS, поскольку они не знают, как обрабатывать `*.vue` файлы. Вместо этого мы снова воспользуемся Webpack + vue-loader для сборки наших тестов. Мы рекомендуем использовать сочетание [Karma](http://karma-runner.github.io/0.13/index.html) и [karma-webpack](https://github.com/webpack/karma-webpack).
 
-Karma - это тестовый движок, который запускает браузеры и прогоняет тесты за вас. Вы можете выбрать, в каких браузерах выполнять тесты и какой тестовый фреймворк использовать (например, Mocha или Jasmin). Вот пример конфигурации Karma для тестирования в [PhantomJS](http://phantomjs.org/) с помощью фреймворка [Jasmine](http://jasmine.github.io/edge/introduction.html):
+Karma – это тестовый движок, который запускает браузеры и прогоняет тесты за вас. Вы можете выбрать, в каких браузерах выполнять тесты и какой тестовый фреймворк использовать (например, Mocha или Jasmin). Вот пример конфигурации Karma для тестирования в [PhantomJS](http://phantomjs.org/) с помощью фреймворка [Jasmine](http://jasmine.github.io/edge/introduction.html):
 
 ``` bash
 npm install\
