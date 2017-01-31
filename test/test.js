@@ -504,6 +504,26 @@ describe('vue-loader', function () {
     })
   })
 
+  it('should allow adding custom html loaders', done => {
+    test({
+      entry: './test/fixtures/markdown.vue',
+      vue: {
+        loaders: {
+          html: 'marked'
+        }
+      }
+    }, (window, module) => {
+      var vnode = mockRender(module, {
+        msg: 'hi'
+      })
+      // <h2 id="-msg-">{{msg}}</h2>
+      expect(vnode.tag).to.equal('h2')
+      expect(vnode.data.attrs.id).to.equal('-msg-')
+      expect(vnode.children[0]).to.equal('hi')
+      done()
+    })
+  })
+
   it('support chaining with other loaders', done => {
     const mockLoaderPath = require.resolve('./mock-loader')
     test({
