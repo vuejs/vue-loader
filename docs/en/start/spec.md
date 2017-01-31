@@ -72,63 +72,11 @@ More details can be found in [Using Pre-Processors](../configurations/pre-proces
 
 ### Custom Blocks
 
-Additional custom blocks can be included in a `*.vue` file for any project specific needs. `vue-loader` will use the tag name to look up which webpack loaders should be applied to the contents of the section. The webpack loaders should be specified in the `loaders` hash of the `vue` section of the webpack configuration in the same way that languages are specified for the standard sections of the file. See [Advanced Loader Configuration](../configurations/advanced.md).
+> Only supported in vue-loader 10.2.0+
 
-Example:
+Additional custom blocks can be included in a `*.vue` file for any project specific needs, for example a `<docs>` block. `vue-loader` will use the tag name to look up which webpack loaders should be applied to the contents of the section. The webpack loaders should be specified in the `loaders` section of `vue-loader` options.
 
-#### component.vue
-``` html
-<unit-test>
-  describe('example', function () {
-    it('basic', function (done) {
-      done();
-    })
-  })
-</unit-test>
-
-<template>
-  <h2 class="red">{{msg}}</h2>
-</template>
-
-<script>
-export default {
-  data () {
-    return {
-      msg: 'Hello from Component A!'
-    }
-  }
-}
-</script>
-
-<style>
-comp-a h2 {
-  color: #f00;
-}
-</style>
-```
-
-#### webpack.config.js
-
-``` js
-// Webpack 2.x (^2.1.0-beta.25)
-module.exports = {
-  module: {
-    rules: [
-      {
-        test: /\.vue$/,
-        loader: 'vue',
-        // vue-loader options go here
-        options: {
-          loaders: {
-            unit-test: 'buble-loader',
-          }
-        }
-      }
-    ]
-  }
-}
-```
-
+For mode details, see [Custom Blocks](../configurations/custom-blocks.md).
 
 ### Src Imports
 

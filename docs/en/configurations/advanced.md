@@ -21,16 +21,16 @@ module.exports = {
     // ... other vue options
     loaders: {
       // load all <script> without "lang" attribute with coffee-loader
-      js: 'coffee',
-      // load <template> directly as HTML string, without piping it
-      // through vue-html-loader first
-      html: 'raw'
+      js: 'coffee-loader',
+      // allows you to write markdown inside <template> tags...
+      // (note this only works for 10.2.0+)
+      html: 'marked'
     }
   }
 }
 ```
 
-### Webpack 2.x (^2.1.0-beta.25)
+### Webpack 2.x
 
 ``` js
 module.exports = {
@@ -44,10 +44,10 @@ module.exports = {
         options: {
           loaders: {
             // load all <script> without "lang" attribute with coffee-loader
-            js: 'coffee',
-            // load <template> directly as HTML string, without piping it
-            // through vue-html-loader first
-            html: 'raw'
+            js: 'coffee-loader',
+            // allows you to write markdown inside <template> tags...
+            // (note this only works for 10.2.0+)
+            html: 'marked'
           }
         }
       }
