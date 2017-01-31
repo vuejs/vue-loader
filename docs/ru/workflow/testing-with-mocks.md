@@ -45,7 +45,7 @@ Notice that crazy require string - we are using some inline [webpack loader requ
 - `!!` в начале строки означает "отключи все загрузчики из глобальной конфигурации"
 - `vue?inject!` значит "используй `vue` загрузчик и передай запрос `?inject`". Это заставляет `vue-loader` скомпилировать компонент в режиме внедрения зависимостей.
 
-Полученный `ExampleInjector` это фабричная функция, которую можно вызвать, чтобы создать экземпляр модуля `example.vue`:
+Полученный `ExampleInjector` - это фабричная функция, которую можно вызвать, чтобы создать экземпляр модуля `example.vue`:
 
 ``` js
 const ExampleWithMocks = ExampleInjector({
