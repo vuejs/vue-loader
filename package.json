@@ -1,7 +1,7 @@
 {
   "name": "vue-loader",
   "version": "10.1.2",
-  "description": "Vue.js component loader for Webpack",
+  "description": "Vue single-file component loader for Webpack",
   "main": "index.js",
   "repository": {
     "type": "git",
@@ -16,7 +16,7 @@
     "index.js",
     "lib"
   ],
-  "author": "Sjoerd Visscher",
+  "author": "Evan You",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/vuejs/vue-loader/issues"
