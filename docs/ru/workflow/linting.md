@@ -1,10 +1,10 @@
-# Linting
+# Статические анализаторы
 
-You may have been wondering how do you lint your code inside `*.vue` files, since they are not JavaScript. We will assume you are using [ESLint](http://eslint.org/) (if you are not, you should!).
+Вы, возможно, гадаете, как же прогонять код в `*.vue` файлах через статические анализаторы, поскольку это не JavaScript. Мы предполагаем, что вы используете [ESLint](http://eslint.org/) (если нет, настоятельно рекомендуем!).
 
-You will also need the [eslint-html-plugin](https://github.com/BenoitZugmeyer/eslint-plugin-html) with supports extracting and linting the JavaScript inside `*.vue` files.
+Вам также понадобится [eslint-html-plugin](https://github.com/BenoitZugmeyer/eslint-plugin-html) с поддержкой извлечения и анализа JavaScript в `*.vue` файлах.
 
-Make sure to include the plugin in your ESLint config:
+Убедитесь в том, что вы добавили плагин в конфигурацию ESLint:
 
 ``` json
 "plugins": [
@@ -12,13 +12,13 @@ Make sure to include the plugin in your ESLint config:
 ]
 ```
 
-Then from the command line:
+Затем в командной строке:
 
 ``` bash
 eslint --ext js,vue MyComponent.vue
 ```
 
-Another option is using [eslint-loader](https://github.com/MoOx/eslint-loader) so that your `*.vue` files are automatically linted on save during development:
+Другой вариант – использовать [eslint-loader](https://github.com/MoOx/eslint-loader), который будет автоматически анализировать `*.vue` файлы после сохранения во время разработки:
 
 ``` bash
 npm install eslint eslint-loader --save-dev
@@ -27,7 +27,7 @@ npm install eslint eslint-loader --save-dev
 ``` js
 // webpack.config.js
 module.exports = {
-  // ... other options
+  // ... прочие опции
   module: {
     loaders: [
       {
@@ -39,16 +39,16 @@ module.exports = {
 }
 ```
 
-Note that Webpack loader chains are applied **right-first**. Make sure to apply `eslint` before `vue` so we are linting the pre-compile source code.
+Обратите внимание, что загрузчики Webpack применяются **справа-налево**. Убедитесь, что `eslint` прописан перед `vue`, чтобы код сначала проходил через анализатор, а затем компилировался.
 
-One thing we need to consider is using third party `*.vue` components shipped in NPM packages. In such case, we want to use `vue-loader` to process the third party component, but do not want to lint it. We can separate the linting into Webpack's [preLoaders](https://webpack.github.io/docs/loaders.html#loader-order):
+Стоит упомянуть об использовании сторонних `*.vue` компонентов, поставляемых в NPM пакетах. В таком случае нам нужно воспользоваться `vue-loader`? чтобы подключить сторонние компоненты, но не анализировать их. Мы можем вынести анализ в [предзагрузчики](https://webpack.github.io/docs/loaders.html#loader-order) Webpack:
 
 ``` js
 // webpack.config.js
 module.exports = {
-  // ... other options
+  // ... прочие опции
   module: {
-    // only lint local *.vue files
+    // анализировать только локальные *.vue файлы
     preLoaders: [
       {
         test: /.vue$/,
@@ -56,7 +56,7 @@ module.exports = {
         exclude: /node_modules/
       }
     ],
-    // but use vue-loader for all *.vue files
+    // но использовать vue-loader для всех *.vue файлов
     loaders: [
       {
         test: /.vue$/,
@@ -67,22 +67,22 @@ module.exports = {
 }
 ```
 
-For Webpack 2.x:
+Для Webpack 2.x:
 
 ``` js
 // webpack.config.js
 module.exports = {
-  // ... other options
+  // ... прочие опции
   module: {
     rules: [
-      // only lint local *.vue files
+      // анализировать только локальные *.vue файлы
       {
         enforce: 'pre',
         test: /.vue$/,
         loader: 'eslint-loader',
         exclude: /node_modules/
       },
-      // but use vue-loader for all *.vue files
+      // но использовать vue-loader для всех *.vue файлов
       {
         test: /.vue$/,
         loader: 'vue-loader'
