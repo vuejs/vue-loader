@@ -2,37 +2,37 @@
 
 ### Что такое `vue-loader`?
 
-`vue-loader` is a loader for Webpack that can transform Vue components written in the following format into a plain JavaScript module:
+`vue-loader` – это загрузчик для Webpack, который преобразует Vue компоненты, написанные в следующем формате в обычные JavaScript модули:
 
 ![screenshot](http://blog.evanyou.me/images/vue-component.png)
 
-There are many cool features provided by `vue-loader`:
+`vue-loader` предлагает множество полезных возможностей:
 
-- ES2015 enabled by default;
-- Allows using other Webpack loaders for each part of a Vue component, for example SASS for `<style>` and Jade for `<template>`;
-- Allows custom sections in a .vue file that can have custom loader chains applied to them
-- Treat static assets referenced in `<style>` and `<template>` as module dependencies and handle them with Webpack loaders;
-- Can simulate scoped CSS for each component;
-- Supports component hot-reloading during development.
+- Поддержка ES2015 по умолчанию;
+- Позволяет использовать разные загрузчики Webpack для разных частей Vue компонента, например, SASS для `<style>` и Jade для `<template>`;
+- Позволяет использовать пользовательские секции во .vue-файлах, применяя к ним пользовательские цепочки загрузчиков
+- Обращается со статическими ресурсами, указанными в `<style>` и `<template>`, как с зависимостями модуля, и обрабатывает их Webpack загрузчиками;
+- Может эмулировать scoped CSS для компонентов;
+- Поддерживает горячую замену модулей.
 
-In a nutshell, the combination of Webpack and `vue-loader` gives you a modern, flexible and extremely powerful front-end workflow for authoring Vue.js applications.
+В двух словах, сочетание Webpack и `vue-loader` предоставляет вам современный, гибкий и невероятно эффективный подход к написанию клиентских приложений на Vue.js.
 
 ### Что такое Webpack?
 
-If you are already familiar with Webpack, feel free to skip the following explanation. But for those of you who are new to Webpack, here's a quick intro:
+Если вы уже знакомы с Webpack, можете пропустить дальнейшее объяснение. Для тех же, кому Webpack в новинку, вот краткая вводная:
 
-[Webpack](http://webpack.github.io/) is a module bundler. It takes a bunch of files, treating each as a module, figuring out the dependencies between them, and bundle them into static assets that are ready for deployment.
+[Webpack](http://webpack.github.io/) – это сборщик модулей. Он берёт кучу файлов, рассматривая каждый как модуль, разрешает зависимости между ними и собирает их в статические ресурсы, готовые к развёртыванию.
 
 ![webpack](http://webpack.github.io/assets/what-is-webpack.png)
 
-For a basic example, imagine we have a bunch of CommonJS modules. They cannot run directly inside the browser, so we need to "bundle" them into a single file that can be included via a `<script>` tag. Webpack can follow the dependencies of the `require()` calls and do that for us.
+В качестве простого примера, представим, что у нас есть набор модулей CommonJS. Они не могут запускаться прямо в браузере, так что нам нужно "собрать" их в единый файл, который можно будет вставить на страницу через тег `<script>`. Webpack может сделать это за нас, следуя инструкциям `require()`.
 
-But Webpack can do more than that. With "loaders", we can teach Webpack to transform all types of files in any way we want before outputting the final bundle. Some examples include:
+Но Webpack может делать и больше. С "загрузчиками", мы можем научить Webpack преобразовывать любые типы файлов любым нужным нам образом, прежде чем выдать финальную сборку. Например:
 
-- Transpile ES2015, CoffeeScript or TypeScript modules into plain ES5 CommonJS modules;
-- Optionally you can pipe the source code through a linter before doing the compilation;
-- Transpile Jade templates into plain HTML and inline it as a JavaScript string;
-- Transpile SASS files into plain CSS, then convert it into a JavaScript snippet that insert the resulting CSS as a `<style>` tag;
-- Process an image file referenced in HTML or CSS, moved it to the desired destination based on the path configurations, and naming it using its md5 hash.
+- Скомпилировать ES2015, CoffeeScript или TypeScript модули в обычные ES5 CommonJS модули;
+- Пропустить код через статический анализатор, прежде чем приступать к компиляции;
+- Скомпилировать Jade шаблоны в обычный HTML и добавить его на страницу в виде строки JavaScript;
+- Скомпилировать SASS файлы в обычный CSS, затем конвертировать его в JS скрипт, который будет добавлять полученный CSS как тег `<style>`;
+- Обработать файлы изображений, указанные в HTML или CSS, переместить их в нужное место, согласно файлу конфигурации, и переименовать, используя их md5 хеш.
 
-Webpack is so powerful that when you understand how it works, it can dramatically improve your front-end workflow. Its primary drawback is verbose and complex configuration; but with this guide you should be able to find solutions for most common issues when using Webpack with Vue.js and `vue-loader`.
+Webpack настолько крут, что когда вы поймете, как он работает, он значительно улучшит ваш процесс разработки клиентской части. Его основным недостатком является многословная и сложная конфигурация; но с этим руководством вы сможете найти решения для большинства задач, возникающих при работе с Webpack в сочетании с Vue.js и `vue-loader`.

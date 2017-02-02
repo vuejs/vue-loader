@@ -1,39 +1,39 @@
-# Production Build
+# Сборка продакшна
 
-There are two things to do when building our bundle for production:
+Когда мы собираем финальную версию приложения, мы делаем две вещи:
 
-1. Minify our application code;
-2. Use the [setup described in the Vue.js guide](https://vuejs.org/guide/deployment.html) to strip all the warnings from Vue.js source code.
+1. Минифицируем код нашего приложения;
+2. Используем [описанные в руководстве по Vue.js настройки](https://vuejs.org/guide/deployment.html), чтобы устранить все возможные проблемы в коде
 
-Here's an example config:
+Вот пример конфигурации:
 
 ``` js
 // webpack.config.js
 module.exports = {
-  // ... other options
+  // ... прочие опции
   plugins: [
-    // short-circuits all Vue.js warning code
+    // разбираемся со всеми предупреждениями в нашем Vue.js коде
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: '"production"'
       }
     }),
-    // minify with dead-code elimination
+    // минифицируем, устраняя весь ненужный код
     new webpack.optimize.UglifyJsPlugin({
       compress: {
         warnings: false
       }
     }),
-    // optimize module ids by occurence count
+    // оптимизируем идентификаторы модулей по числу использований
     new webpack.optimize.OccurenceOrderPlugin()
   ]
 }
 ```
 
-Obviously we don't want to use this config during development, so there are several ways to approach this:
+Очевидно, нам ни к чему использовать эту конфигурацию во время разработки, для этого есть несколько вариантов:
 
-1. Dynamically build up the configuration object based on an environment variable;
+1. Динамически собирать объект конфигурации на основе переменных окружения;
 
-2. Or, use two separate Webpack config files, one for development and one for production. And maybe share some common options between them in a third file, as shown in [vue-hackernews-2.0](https://github.com/vuejs/vue-hackernews-2.0).
+2. Или использовать два отдельных конфигурационных файла Webpack, один для разработки, и один для продакшна. И возможно хранить некоторые их общие опции в третьем файле, как показано в [vue-hackernews-2.0](https://github.com/vuejs/vue-hackernews-2.0).
 
-It's really up to you as long as it achieves the goal.
+Не имеет значения, как вы будете это делать, если это решит задачу.
