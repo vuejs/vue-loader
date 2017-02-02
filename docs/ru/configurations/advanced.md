@@ -21,16 +21,16 @@ module.exports = {
     // ... другие настройки vue
     loaders: {
       // обрабатывать все <script> без атрибута "lang" с помощью coffee-loader
-      js: 'coffee',
-      // обрабатывать <template> непосредственно как HTML-строку,
-      // без обработки содержимого с помощью vue-html-loader сначала
-      html: 'raw'
+      js: 'coffee-loader',
+      // позволяет вам писать markdown внутри <template> тегов...
+      // (это доступно только в версиях 10.2.0+)
+      html: 'marked'
     }
   }
 }
 ```
 
-### Webpack 2.x (^2.1.0-beta.25)
+### Webpack 2.x
 
 ``` js
 module.exports = {
@@ -44,10 +44,10 @@ module.exports = {
         options: {
           loaders: {
             // обрабатывать все теги <script> без атрибута "lang" с помощью coffee-loader
-            js: 'coffee',
-            // обрабатывать <template> непосредственно строкой HTML, без обработки его
-            // с помощью vue-html-loader сначала
-            html: 'raw'
+            js: 'coffee-loader',
+            // позволяет вам писать markdown внутри <template> тегов...
+            // (это доступно только в версиях 10.2.0+)
+            html: 'marked'
           }
         }
       }
