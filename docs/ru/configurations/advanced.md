@@ -41,10 +41,13 @@ module.exports = {
       {
         test: /\.vue$/,
         loader: 'vue-loader',
-        // настройки vue-loader
         options: {
           loaders: {
-            // ...
+            // обрабатывать все теги <script> без атрибута "lang" с помощью coffee-loader
+            js: 'coffee',
+            // обрабатывать <template> непосредственно строкой HTML, без обработки его
+            // с помощью vue-html-loader сначала
+            html: 'raw'
           }
         }
       }
