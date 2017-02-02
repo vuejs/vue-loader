@@ -12,6 +12,7 @@
   - [Asset URL Handling](configurations/asset-url.md)
   - [Продвинутая конфигурация](configurations/advanced.md)
   - [Извлечение CSS в файл](configurations/extract-css.md)
+  - [Пользовательские блоки](configurations/custom-blocks.md)
 - Workflow
   - [Production Build](workflow/production.md)
   - [Линтинг](workflow/linting.md)
