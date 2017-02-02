@@ -10,6 +10,7 @@ There are many cool features provided by `vue-loader`:
 
 - ES2015 enabled by default;
 - Allows using other Webpack loaders for each part of a Vue component, for example SASS for `<style>` and Jade for `<template>`;
+- Allows custom sections in a .vue file that can have custom loader chains applied to them
 - Treat static assets referenced in `<style>` and `<template>` as module dependencies and handle them with Webpack loaders;
 - Can simulate scoped CSS for each component;
 - Supports component hot-reloading during development.
