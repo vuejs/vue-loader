@@ -72,62 +72,11 @@ export default {
 
 ### Пользовательские блоки
 
-Дополнительные пользовательские блоки могут быть добавлены в `*.vue` файл для любых потребностей проекта. `vue-loader` будет использовать имя тега для определения какими загрузчиками Webpack требуется обрабатывать содержимое этой секции. Загрузчики Webpack должны быть указаны в объекте `loaders` секции `vue` конфигурации таким же образом, как определяются языки для стандартных секций файлов. Подробнее в разделе [продвинутой конфигурации загрузчиков](../configurations/advanced.md).
+> Доступно только в версиях vue-loader 10.2.0+
 
-Например:
+Дополнительные пользовательские блоки могут быть добавлены в `*.vue` файл для любых потребностей проекта, например блок `<docs>`. `vue-loader` будет использовать имя тега для определения какими загрузчиками Webpack требуется обрабатывать содержимое этой секции. Загрузчики Webpack должны быть указаны в секции `loaders` настроек `vue-loader`.
 
-#### component.vue
-``` html
-<unit-test>
-  describe('example', function () {
-    it('basic', function (done) {
-      done();
-    })
-  })
-</unit-test>
-
-<template>
-  <h2 class="red">{{msg}}</h2>
-</template>
-
-<script>
-export default {
-  data () {
-    return {
-      msg: 'Hello from Component A!'
-    }
-  }
-}
-</script>
-
-<style>
-comp-a h2 {
-  color: #f00;
-}
-</style>
-```
-
-#### webpack.config.js
-
-``` js
-// Webpack 2.x (^2.1.0-beta.25)
-module.exports = {
-  module: {
-    rules: [
-      {
-        test: /\.vue$/,
-        loader: 'vue',
-        // настройки vue-loader
-        options: {
-          loaders: {
-            unit-test: 'buble-loader',
-          }
-        }
-      }
-    ]
-  }
-}
-```
+Подробнее в разделе [пользовательских блоков](../configurations/custom-blocks.md).
 
 ### Импорт содержимого из других файлов
 
