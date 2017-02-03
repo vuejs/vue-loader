@@ -5,6 +5,7 @@ var jsdom = require('jsdom')
 var webpack = require('webpack')
 var MemoryFS = require('memory-fs')
 var expect = require('chai').expect
+var Vue = require('vue')
 var genId = require('../lib/gen-id')
 var SSR = require('vue-server-renderer')
 var compiler = require('../lib/template-compiler')
@@ -686,6 +687,68 @@ describe('vue-loader', function () {
       ]
     }, function (code, warnings) {
       expect(code).to.contain('describe(\'example\', function () {\n  it(\'basic\', function (done) {\n    done();\n  });\n})')
+      done()
+    })
+  })
+
+  // Vue required tests for more complete test cases
+  it('should allow functional template', done => {
+    test({
+      entry: './test/fixtures/functional.vue',
+      vue: {
+        preserveWhitespace: false
+      }
+    }, (window, module) => {
+      const vm = new Vue({
+        render (h) {
+          const _vm = this
+          return _vm._c(
+            module,
+            {
+              scopedSlots: {
+                scoped: function (props) {
+                  return [_vm._v(_vm._s(props.msg))]
+                }
+              }
+            },
+            [
+              _vm._c('div', [_vm._v('Default slot')]),
+              _vm._c('p', { slot: 'slot2' }, [_vm._v('Second slot')])
+            ]
+          )
+        }
+      }).$mount()
+
+      expect(module.compiled).to.equal(true)
+      expect(module.functional).to.equal(true)
+      expect(module.staticRenderFns).to.exist
+      expect(module.render).to.be.a('function')
+
+
+      // Mount results
+      const vnode = vm._vnode
+      const children = vnode.children
+      // Root vnode
+      expect(vnode.tag).to.equal('div')
+      // Basic vnode
+      expect(children[0].data.staticClass).to.equal('red')
+      expect(children[0].children[0].text).to.equal('hello')
+      // Default slot vnode
+      expect(children[1].tag).to.equal('div')
+      expect(children[1].children[0].text).to.equal('Default slot')
+      // Named slot vnode
+      expect(children[2].tag).to.equal('p')
+      expect(children[2].children[0].text).to.equal('Second slot')
+      // Scoped slot vnode
+      expect(children[3].text).to.equal('hello')
+      // Static content vnode
+      expect(children[4].tag).to.equal('div')
+      expect(children[4].children[0].text).to.equal('Some ')
+      expect(children[4].children[1].tag).to.equal('span')
+      expect(children[4].children[1].children[0].text).to.equal('text')
+      // v-if vnode
+      expect(children[5].text).to.equal('')
+
       done()
     })
   })
