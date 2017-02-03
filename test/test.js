@@ -5,7 +5,7 @@ var jsdom = require('jsdom')
 var webpack = require('webpack')
 var MemoryFS = require('memory-fs')
 var expect = require('chai').expect
-var genId = require('../lib/gen-id')
+var hash = require('hash-sum')
 var SSR = require('vue-server-renderer')
 var compiler = require('../lib/template-compiler')
 var normalizeNewline = require('normalize-newline')
@@ -163,7 +163,7 @@ describe('vue-loader', function () {
     test({
       entry: './test/fixtures/scoped-css.vue'
     }, function (window, module) {
-      var id = 'data-v-' + genId(require.resolve('./fixtures/scoped-css.vue'))
+      var id = 'data-v-' + hash('vue-loader/test/fixtures/scoped-css.vue')
       expect(module._scopeId).to.equal(id)
 
       var vnode = mockRender(module, {
@@ -198,7 +198,7 @@ describe('vue-loader', function () {
       var styles = window.document.querySelectorAll('style')
       expect(styles[0].textContent).to.contain('h1 { color: red;\n}')
       // import with scoped
-      var id = 'data-v-' + genId(require.resolve('./fixtures/style-import.vue'))
+      var id = 'data-v-' + hash('vue-loader/test/fixtures/style-import.vue')
       expect(styles[1].textContent).to.contain('h1[' + id + '] { color: green;\n}')
       done()
     })
@@ -258,7 +258,7 @@ describe('vue-loader', function () {
     }, function (window) {
       var style = window.document.querySelector('style').textContent
       style = normalizeNewline(style)
-      var id = 'data-v-' + genId(require.resolve('./fixtures/media-query.vue'))
+      var id = 'data-v-' + hash('vue-loader/test/fixtures/media-query.vue')
       expect(style).to.contain('@media print {\n.foo[' + id + '] {\n    color: #000;\n}\n}')
       done()
     })
@@ -465,7 +465,7 @@ describe('vue-loader', function () {
         // default module + pre-processor + scoped
         var anotherClassName = module.computed.$style().red
         expect(anotherClassName).to.match(regexToMatch).and.not.equal(className)
-        var id = 'data-v-' + genId(require.resolve('./fixtures/css-modules.vue'))
+        var id = 'data-v-' + hash('vue-loader/test/fixtures/css-modules.vue')
         expect(style).to.contain('.' + anotherClassName + '[' + id + ']')
 
         cb()
