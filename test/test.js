@@ -524,7 +524,7 @@ describe('vue-loader', function () {
   })
 
   it('support chaining with other loaders', done => {
-    const mockLoaderPath = require.resolve('./mock-loader')
+    const mockLoaderPath = require.resolve('./mock-loaders/js')
     test({
       entry: './test/fixtures/basic.vue',
       module: {
@@ -651,6 +651,35 @@ describe('vue-loader', function () {
       ]
     }, function (code, warnings) {
       expect(code).to.contain('describe(\'example\', function () {\n  it(\'basic\', function (done) {\n    done();\n  });\n})')
+      done()
+    })
+  })
+
+  it('pre/post loaders', done => {
+    test({
+      entry: './test/fixtures/basic.vue',
+      vue: {
+        preLoaders: {
+          js: require.resolve('./mock-loaders/js'),
+          css: require.resolve('./mock-loaders/css')
+        },
+        postLoaders: {
+          html: require.resolve('./mock-loaders/html')
+        }
+      }
+    }, (window, module) => {
+      var vnode = mockRender(module, {
+        msg: 'hi'
+      })
+      // <h2 class="green">{{msg}}</h2>
+      expect(vnode.tag).to.equal('h2')
+      expect(vnode.data.staticClass).to.equal('green')
+      expect(vnode.children[0]).to.equal('hi')
+
+      expect(module.data().msg).to.contain('Changed!')
+      var style = window.document.querySelector('style').textContent
+      style = normalizeNewline(style)
+      expect(style).to.contain('comp-a h2 {\n  color: #00f;\n}')
       done()
     })
   })
