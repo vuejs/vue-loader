@@ -4,6 +4,8 @@
 
 You can define custom language blocks inside `*.vue` files. The content of a custom block will be processed by the loaders specified in the `loaders` object of `vue-loader` options and then required by the component module. The configuration is similar to what is described in [Advanced Loader Configuration](../configurations/advanced.md), except the matching uses the tag name instead of the `lang` attribute.
 
+If a matching loader is found for a custom block, it will be processed; otherwise the custom block will simply be ignored.
+
 ## Example
 
 Here's an example of extracting all `<docs>` custom blocks into a single docs file:
@@ -63,5 +65,3 @@ module.exports = {
   }
 }
 ```
-
-Note that custom blocks would require specific configuration to work properly, so you probably want to avoid distributing reusable components with custom blocks in source form.

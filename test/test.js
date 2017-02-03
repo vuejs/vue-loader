@@ -617,46 +617,11 @@ describe('vue-loader', function () {
     })
   })
 
-  it('custom blocks can be removed from the output', function (done) {
+  it('custom blocks can be ignored', function (done) {
     bundle({
-      entry: './test/fixtures/custom-language.vue',
-      vue: {
-        loaders: {
-          'unit-test': 'null-loader'
-        }
-      }
+      entry: './test/fixtures/custom-language.vue'
     }, function (code, warnings) {
       expect(code).not.to.contain('describe(\'example\', function () {\n  it(\'basic\', function (done) {\n    done();\n  });\n})')
-      done()
-    })
-  })
-
-  it('no warnings when loaders are specified for all custom blocks', function (done) {
-    bundle({
-      entry: './test/fixtures/custom-language.vue',
-      vue: {
-        loaders: {
-          'documentation': 'null-loader',
-          'unit-test': 'null-loader'
-        }
-      }
-    }, function (code, warnings) {
-      expect(warnings.length).to.equal(0)
-      done()
-    })
-  })
-
-  it('warning should be raised when a loader is not specified for a custom block', function (done) {
-    bundle({
-      entry: './test/fixtures/custom-language.vue',
-      vue: {
-        loaders: {
-          'documentation': 'null-loader'
-        }
-      }
-    }, function (code, warnings) {
-      expect(warnings.length).to.equal(1)
-      expect(warnings[0].message).to.equal('Loader for custom block type "unit-test" not found in webpack configuration')
       done()
     })
   })
