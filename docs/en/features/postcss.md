@@ -15,6 +15,7 @@ module.exports = {
 }
 ```
 
+<<<<<<< HEAD
 For Webpack 2.x:
 
 ``` js
