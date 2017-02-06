@@ -221,6 +221,27 @@ describe('vue-loader', function () {
     })
   })
 
+  it('extract CSS by extract-text-webpack-plugin 2', function (done) {
+    webpack(Object.assign({}, globalConfig, {
+      entry: './test/fixtures/extract-css.vue',
+      vue: {
+        loaders: {
+          css: [{ loader: ExtractTextPlugin.loader({ remove: true }) }, { loader: 'css-loader' }],
+          stylus: [{ loader: ExtractTextPlugin.loader({ remove: true }) }, { loader: 'css-loader?sourceMap' }, { loader: 'stylus-loader' }]
+        }
+      },
+      plugins: [
+        new ExtractTextPlugin('test.output2.css')
+      ]
+    }), function (err, stats) {
+      expect(stats.compilation.errors).to.be.empty
+      getFile('test.output2.css', function (data) {
+        expect(data).to.contain('h1 {\n  color: #f00;\n}\n\n\n\n\n\n\nh2 {\n  color: green;\n}')
+        done()
+      })
+    })
+  })
+
   it('dependency injection', function (done) {
     test({
       entry: './test/fixtures/inject.js'
