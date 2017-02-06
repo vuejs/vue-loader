@@ -35,6 +35,7 @@
     "loader-utils": "^0.2.10",
     "lru-cache": "^4.0.1",
     "postcss": "^5.0.10",
+    "postcss-load-config": "^1.1.0",
     "postcss-selector-parser": "^2.0.0",
     "source-map": "^0.5.6",
     "vue-hot-reload-api": "^2.0.1",
