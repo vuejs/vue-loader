@@ -1,17 +1,20 @@
 process.env.VUE_LOADER_TEST = true
 
+var fs = require('fs')
 var path = require('path')
+var jsdom = require('jsdom')
 var webpack = require('webpack')
 var MemoryFS = require('memory-fs')
-var jsdom = require('jsdom')
 var expect = require('chai').expect
-var genId = require('../lib/gen-id')
-var SourceMapConsumer = require('source-map').SourceMapConsumer
-var ExtractTextPlugin = require("extract-text-webpack-plugin")
+var hash = require('hash-sum')
+var SSR = require('vue-server-renderer')
 var compiler = require('../lib/template-compiler')
 var normalizeNewline = require('normalize-newline')
+var ExtractTextPlugin = require("extract-text-webpack-plugin")
+var SourceMapConsumer = require('source-map').SourceMapConsumer
 
-var loaderPath = 'expose-loader?vueModule!' + path.resolve(__dirname, '../index.js')
+var rawLoaderPath = path.resolve(__dirname, '../index.js')
+var loaderPath = 'expose-loader?vueModule!' + rawLoaderPath
 var mfs = new MemoryFS()
 var globalConfig = {
   output: {
@@ -42,24 +45,29 @@ function bundle (options, cb) {
 
   var webpackCompiler = webpack(config)
   webpackCompiler.outputFileSystem = mfs
-  webpackCompiler.run(function (err, stats) {
+  webpackCompiler.run((err, stats) => {
     expect(err).to.be.null
     if (stats.compilation.errors.length) {
-      stats.compilation.errors.forEach(function (err) {
+      stats.compilation.errors.forEach((err) => {
+        console.error(err.message)
+      })
+    }
+    if (stats.compilation.errors) {
+      stats.compilation.errors.forEach(err => {
         console.error(err.message)
       })
     }
     expect(stats.compilation.errors).to.be.empty
-    cb(mfs.readFileSync('/test.build.js').toString())
+    cb(mfs.readFileSync('/test.build.js').toString(), stats.compilation.warnings)
   })
 }
 
 function test (options, assert) {
-  bundle(options, function (code) {
+  bundle(options, (code, warnings) => {
     jsdom.env({
       html: '<!DOCTYPE html><html><head></head><body></body></html>',
       src: [code],
-      done: function (err, window) {
+      done: (err, window) => {
         if (err) {
           console.log(err[0].data.error.stack)
           expect(err).to.be.null
@@ -103,11 +111,10 @@ function interopDefault (module) {
 }
 
 describe('vue-loader', function () {
-  it('basic', function (done) {
+  it('basic', done => {
     test({
       entry: './test/fixtures/basic.vue'
-    }, function (window, module, rawModule) {
-      expect(module.name).to.equal('basic')
+    }, (window, module, rawModule) => {
       var vnode = mockRender(module, {
         msg: 'hi'
       })
@@ -124,19 +131,19 @@ describe('vue-loader', function () {
     })
   })
 
-  it('expose filename', function (done) {
+  it('expose filename', done => {
     test({
       entry: './test/fixtures/basic.vue'
-    }, function (window, module, rawModule) {
+    }, (window, module, rawModule) => {
       expect(module.__file).to.equal(path.resolve(__dirname, './fixtures/basic.vue'))
       done()
     })
   })
 
-  it('pre-processors', function (done) {
+  it('pre-processors', done => {
     test({
       entry: './test/fixtures/pre.vue'
-    }, function (window, module) {
+    }, (window, module) => {
       var vnode = mockRender(module)
       // div
       //   h1 This is the app
@@ -153,11 +160,11 @@ describe('vue-loader', function () {
     })
   })
 
-  it('scoped style', function (done) {
+  it('scoped style', done => {
     test({
       entry: './test/fixtures/scoped-css.vue'
-    }, function (window, module) {
-      var id = 'data-v-' + genId(require.resolve('./fixtures/scoped-css.vue'))
+    }, (window, module) => {
+      var id = 'data-v-' + hash('vue-loader/test/fixtures/scoped-css.vue')
       expect(module._scopeId).to.equal(id)
 
       var vnode = mockRender(module, {
@@ -185,23 +192,23 @@ describe('vue-loader', function () {
     })
   })
 
-  it('style import', function (done) {
+  it('style import', done => {
     test({
       entry: './test/fixtures/style-import.vue'
-    }, function (window) {
+    }, (window) => {
       var styles = window.document.querySelectorAll('style')
       expect(styles[0].textContent).to.contain('h1 { color: red;\n}')
       // import with scoped
-      var id = 'data-v-' + genId(require.resolve('./fixtures/style-import.vue'))
+      var id = 'data-v-' + hash('vue-loader/test/fixtures/style-import.vue')
       expect(styles[1].textContent).to.contain('h1[' + id + '] { color: green;\n}')
       done()
     })
   })
 
-  it('template import', function (done) {
+  it('template import', done => {
     test({
       entry: './test/fixtures/template-import.vue'
-    }, function (window, module) {
+    }, (window, module) => {
       var vnode = mockRender(module)
       // '<div><h1>hello</h1></div>'
       expect(vnode.children[0].tag).to.equal('h1')
@@ -210,27 +217,26 @@ describe('vue-loader', function () {
     })
   })
 
-  it('script import', function (done) {
+  it('script import', done => {
     test({
       entry: './test/fixtures/script-import.vue'
-    }, function (window, module) {
+    }, (window, module) => {
       expect(module.data().msg).to.contain('Hello from Component A!')
       done()
     })
   })
 
-  it('source map', function (done) {
-    var config = Object.assign({}, globalConfig, {
+  it('source map', done => {
+    bundle({
       entry: './test/fixtures/basic.vue',
       devtool: '#source-map'
-    })
-    bundle(config, function (code) {
+    }, (code, warnings) => {
       var map = mfs.readFileSync('/test.build.js.map').toString()
       var smc = new SourceMapConsumer(JSON.parse(map))
       var line
       var col
       var targetRE = /^\s+msg: 'Hello from Component A!'/
-      code.split(/\r?\n/g).some(function (l, i) {
+      code.split(/\r?\n/g).some((l, i) => {
         if (targetRE.test(l)) {
           line = i + 1
           col = 0
@@ -247,20 +253,20 @@ describe('vue-loader', function () {
     })
   })
 
-  it('media-query', function (done) {
+  it('media-query', done => {
     test({
       entry: './test/fixtures/media-query.vue'
-    }, function (window) {
+    }, (window) => {
       var style = window.document.querySelector('style').textContent
       style = normalizeNewline(style)
-      var id = 'data-v-' + genId(require.resolve('./fixtures/media-query.vue'))
+      var id = 'data-v-' + hash('vue-loader/test/fixtures/media-query.vue')
       expect(style).to.contain('@media print {\n.foo[' + id + '] {\n    color: #000;\n}\n}')
       done()
     })
   })
 
-  it('extract CSS', function (done) {
-    bundle(Object.assign({}, globalConfig, {
+  it('extract CSS', done => {
+    bundle({
       entry: './test/fixtures/extract-css.vue',
       vue: {
         loaders: {
@@ -271,7 +277,7 @@ describe('vue-loader', function () {
       plugins: [
         new ExtractTextPlugin('test.output.css')
       ]
-    }), function () {
+    }, (code, warnings) => {
       var css = mfs.readFileSync('/test.output.css').toString()
       css = normalizeNewline(css)
       expect(css).to.contain('h1 {\n  color: #f00;\n}\n\nh2 {\n  color: green;\n}')
@@ -279,10 +285,10 @@ describe('vue-loader', function () {
     })
   })
 
-  it('dependency injection', function (done) {
+  it('dependency injection', done => {
     test({
       entry: './test/fixtures/inject.js'
-    }, function (window) {
+    }, (window) => {
       // console.log(window.injector.toString())
       var module = interopDefault(window.injector({
         './service': {
@@ -298,7 +304,7 @@ describe('vue-loader', function () {
     })
   })
 
-  it('translates relative URLs and respects resolve alias', function (done) {
+  it('translates relative URLs and respects resolve alias', done => {
     test({
       entry: './test/fixtures/resolve.vue',
       resolve: {
@@ -312,7 +318,7 @@ describe('vue-loader', function () {
           { test: /\.png$/, loader: 'file-loader?name=[name].[hash:6].[ext]' }
         ]
       }
-    }, function (window, module) {
+    }, (window, module) => {
       var vnode = mockRender(module)
       // <div>
       //   <img src="logo.c9e00e.png">
@@ -330,7 +336,7 @@ describe('vue-loader', function () {
     })
   })
 
-  it('transformToRequire option', function (done) {
+  it('transformToRequire option', done => {
     test({
       entry: './test/fixtures/transform.vue',
       module: {
@@ -342,7 +348,7 @@ describe('vue-loader', function () {
           }
         ]
       }
-    }, function (window, module) {
+    }, (window, module) => {
       function includeDataURL (s) {
         return !!s.match(/\s*data:([a-z]+\/[a-z]+(;[a-z\-]+\=[a-z\-]+)?)?(;base64)?,[a-z0-9\!\$\&\'\,\(\)\*\+\,\;\=\-\.\_\~\:\@\/\?\%\s]*\s*/i)
       }
@@ -358,7 +364,7 @@ describe('vue-loader', function () {
     })
   })
 
-  it('postcss options', function (done) {
+  it('postcss options', done => {
     test({
       entry: './test/fixtures/postcss.vue',
       vue: {
@@ -368,7 +374,7 @@ describe('vue-loader', function () {
           }
         }
       }
-    }, function (window) {
+    }, (window) => {
       var style = window.document.querySelector('style').textContent
       style = normalizeNewline(style)
       expect(style).to.contain('h1 {\n  color: red;\n  font-size: 14px\n}')
@@ -376,10 +382,23 @@ describe('vue-loader', function () {
     })
   })
 
-  it('transpile ES2015 features in template', function (done) {
+  it('load postcss config file', done => {
+    fs.writeFileSync('.postcssrc', JSON.stringify({ parser: 'sugarss' }))
+    test({
+      entry: './test/fixtures/postcss.vue'
+    }, (window) => {
+      var style = window.document.querySelector('style').textContent
+      style = normalizeNewline(style)
+      expect(style).to.contain('h1 {\n  color: red;\n  font-size: 14px\n}')
+      fs.unlinkSync('.postcssrc')
+      done()
+    })
+  })
+
+  it('transpile ES2015 features in template', done => {
     test({
       entry: './test/fixtures/es2015.vue'
-    }, function (window, module) {
+    }, (window, module) => {
       var vnode = mockRender(module, {
         a: 'hello',
         b: true
@@ -392,10 +411,10 @@ describe('vue-loader', function () {
     })
   })
 
-  it('allows to export extended constructor', function (done) {
+  it('allows to export extended constructor', done => {
     test({
       entry: './test/fixtures/extend.vue'
-    }, function (window, Module) {
+    }, (window, Module) => {
       // extend.vue should export Vue constructor
       var vnode = mockRender(Module.options, {
         msg: 'success'
@@ -407,13 +426,13 @@ describe('vue-loader', function () {
     })
   })
 
-  it('support es compatible modules', function (done) {
+  it('support es compatible modules', done => {
     test({
       entry: './test/fixtures/basic.vue',
       vue: {
         esModule: true
       }
-    }, function (window, module, rawModule) {
+    }, (window, module, rawModule) => {
       expect(rawModule.__esModule).to.equal(true)
       var vnode = mockRender(rawModule.default, {
         msg: 'hi'
@@ -427,7 +446,7 @@ describe('vue-loader', function () {
     })
   })
 
-  it('css-modules', function (done) {
+  it('css-modules', done => {
     function testWithIdent (localIdentName, regexToMatch, cb) {
       test({
         entry: './test/fixtures/css-modules.vue',
@@ -436,7 +455,7 @@ describe('vue-loader', function () {
             localIdentName: localIdentName
           }
         }
-      }, function (window) {
+      }, (window) => {
         var module = window.vueModule
 
         // get local class name
@@ -444,7 +463,7 @@ describe('vue-loader', function () {
         expect(className).to.match(regexToMatch)
 
         // class name in style
-        var style = [].slice.call(window.document.querySelectorAll('style')).map(function (style) {
+        var style = [].slice.call(window.document.querySelectorAll('style')).map((style) => {
           return style.textContent
         }).join('\n')
         style = normalizeNewline(style)
@@ -460,14 +479,14 @@ describe('vue-loader', function () {
         // default module + pre-processor + scoped
         var anotherClassName = module.computed.$style().red
         expect(anotherClassName).to.match(regexToMatch).and.not.equal(className)
-        var id = 'data-v-' + genId(require.resolve('./fixtures/css-modules.vue'))
+        var id = 'data-v-' + hash('vue-loader/test/fixtures/css-modules.vue')
         expect(style).to.contain('.' + anotherClassName + '[' + id + ']')
 
         cb()
       })
     }
     // default localIdentName
-    testWithIdent(undefined, /^\w{23}/, function () {
+    testWithIdent(undefined, /^\w{23}/, () => {
       // specified localIdentName
       var ident = '[path][name]---[local]---[hash:base64:5]'
       var regex = /^test-fixtures-css-modules---red---\w{5}/
@@ -475,14 +494,14 @@ describe('vue-loader', function () {
     })
   })
 
-  it('css-modules in SSR', function (done) {
+  it('css-modules in SSR', done => {
     bundle({
       entry: './test/fixtures/css-modules.vue',
       target: 'node',
       output: Object.assign({}, globalConfig.output, {
         libraryTarget: 'commonjs2'
       })
-    }, function (code) {
+    }, (code, warnings) => {
       // http://stackoverflow.com/questions/17581830/load-node-js-module-from-string-in-memory
       function requireFromString(src, filename) {
         var Module = module.constructor;
@@ -494,6 +513,187 @@ describe('vue-loader', function () {
       var output = requireFromString(code, './test.build.js')
       expect(output.computed.style().red).to.exist
 
+      done()
+    })
+  })
+
+  it('should allow adding custom html loaders', done => {
+    test({
+      entry: './test/fixtures/markdown.vue',
+      vue: {
+        loaders: {
+          html: 'marked'
+        }
+      }
+    }, (window, module) => {
+      var vnode = mockRender(module, {
+        msg: 'hi'
+      })
+      // <h2 id="-msg-">{{msg}}</h2>
+      expect(vnode.tag).to.equal('h2')
+      expect(vnode.data.attrs.id).to.equal('-msg-')
+      expect(vnode.children[0]).to.equal('hi')
+      done()
+    })
+  })
+
+  it('support chaining with other loaders', done => {
+    const mockLoaderPath = require.resolve('./mock-loaders/js')
+    test({
+      entry: './test/fixtures/basic.vue',
+      module: {
+        rules: [
+          { test: /\.vue$/, loader: loaderPath + '!' + mockLoaderPath }
+        ]
+      }
+    }, (window, module) => {
+      expect(module.data().msg).to.equal('Changed!')
+      done()
+    })
+  })
+
+  it('SSR style extraction', done => {
+    bundle({
+      target: 'node',
+      entry: './test/fixtures/ssr-style.js',
+      output: {
+        path: '/',
+        filename: 'test.build.js',
+        libraryTarget: 'commonjs2'
+      },
+      externals: ['vue'],
+      module: {
+        rules: [{ test: /\.vue$/, loader: rawLoaderPath }]
+      }
+    }, code => {
+      const renderer = SSR.createBundleRenderer(code)
+      const context = {}
+      renderer.renderToString(context, (err, res) => {
+        if (err) return done(err)
+        expect(res).to.contain('server-rendered')
+        expect(res).to.contain('<h1>Hello</h1>')
+        expect(res).to.contain('Hello from Component A!')
+        // from main component
+        expect(context.styles).to.contain('h1 { color: green;')
+        // from imported child component
+        expect(context.styles).to.contain('comp-a h2 {\n  color: #f00;')
+        // from imported css file
+        expect(context.styles).to.contain('h1 { color: red;')
+        done()
+      })
+    })
+  })
+
+  it('extract custom blocks to a separate file', done => {
+    bundle({
+      entry: './test/fixtures/custom-language.vue',
+      vue: {
+        loaders: {
+          'documentation': ExtractTextPlugin.extract('raw-loader')
+        }
+      },
+      plugins: [
+        new ExtractTextPlugin('doc.md')
+      ]
+    }, (code, warnings) => {
+      var unitTest = mfs.readFileSync('/doc.md').toString()
+      unitTest = normalizeNewline(unitTest)
+      expect(unitTest).to.contain('This is example documentation for a component.')
+      done()
+    })
+  })
+
+  it('add custom blocks to the webpack output', done => {
+    bundle({
+      entry: './test/fixtures/custom-language.vue',
+      vue: {
+        loaders: {
+          'unit-test': 'babel-loader'
+        }
+      }
+    }, (code, warnings) => {
+      expect(code).to.contain('describe(\'example\', function () {\n  it(\'basic\', function (done) {\n    done();\n  });\n})')
+      done()
+    })
+  })
+
+  it('custom blocks work with src imports', done => {
+    bundle({
+      entry: './test/fixtures/custom-import.vue',
+      vue: {
+        loaders: {
+          'unit-test': 'babel-loader'
+        }
+      }
+    }, (code, warnings) => {
+      expect(code).to.contain('describe(\'example\', function () {\n  it(\'basic\', function (done) {\n    done();\n  });\n})')
+      done()
+    })
+  })
+
+  it('custom blocks can be ignored', done => {
+    bundle({
+      entry: './test/fixtures/custom-language.vue'
+    }, (code, warnings) => {
+      expect(code).not.to.contain('describe(\'example\', function () {\n  it(\'basic\', function (done) {\n    done();\n  });\n})')
+      done()
+    })
+  })
+
+  it('passes attributes as options to the loader', done => {
+    bundle({
+      entry: './test/fixtures/custom-options.vue',
+      vue: {
+        loaders: {
+          'unit-test': 'babel-loader!skeleton-loader'
+        }
+      },
+      plugins: [
+        new webpack.LoaderOptionsPlugin({
+          options: {
+            skeletonLoader: {
+              procedure: (content, sourceMap, callback, options) => {
+                expect(options.foo).to.equal('bar');
+                expect(options.opt2).to.equal('value2');
+
+                // Return the content to output.
+                return content;
+              }
+            }
+          }
+        })
+      ]
+    }, (code, warnings) => {
+      expect(code).to.contain('describe(\'example\', function () {\n  it(\'basic\', function (done) {\n    done();\n  });\n})')
+      done()
+    })
+  })
+
+  it('pre/post loaders', done => {
+    test({
+      entry: './test/fixtures/basic.vue',
+      vue: {
+        preLoaders: {
+          js: require.resolve('./mock-loaders/js'),
+          css: require.resolve('./mock-loaders/css')
+        },
+        postLoaders: {
+          html: require.resolve('./mock-loaders/html')
+        }
+      }
+    }, (window, module) => {
+      var vnode = mockRender(module, {
+        msg: 'hi'
+      })
+      // <h2 class="green">{{msg}}</h2>
+      expect(vnode.tag).to.equal('h2')
+      expect(vnode.data.staticClass).to.equal('green')
+      expect(vnode.children[0]).to.equal('hi')
+
+      expect(module.data().msg).to.contain('Changed!')
+      var style = window.document.querySelector('style').textContent
+      style = normalizeNewline(style)
+      expect(style).to.contain('comp-a h2 {\n  color: #00f;\n}')
       done()
     })
   })

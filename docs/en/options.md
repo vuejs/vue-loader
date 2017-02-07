@@ -2,18 +2,7 @@
 
 ## Usage Difference Between Webpack 1 & 2
 
-For Webpack 1.x: add a root `vue` block in your Webpack config:
-
-``` js
-module.exports = {
-  // ...
-  vue: {
-    // vue-loader options
-  }
-}
-```
-
-For Webpack 2 (^2.1.0-beta.25):
+For Webpack 2: pass the options directly to the loader rule.
 
 ``` js
 module.exports = {
@@ -32,11 +21,22 @@ module.exports = {
 }
 ```
 
+For Webpack 1.x: add a root `vue` block in your Webpack config.
+
+``` js
+module.exports = {
+  // ...
+  vue: {
+    // vue-loader options
+  }
+}
+```
+
 ### loaders
 
-- type: `Object`
+- type: `{ [lang: string]: string }`
 
-  An object specifying Webpack loaders to use for language blocks inside `*.vue` files. The key corresponds to the `lang` attribute for language blocks, if specified. The default `lang` for each type is:
+  An object specifying Webpack loaders to overwrite the default loaders used for language blocks inside `*.vue` files. The key corresponds to the `lang` attribute for language blocks, if specified. The default `lang` for each type is:
 
   - `<template>`: `html`
   - `<script>`: `js`
@@ -45,18 +45,43 @@ module.exports = {
   For example, to use `babel-loader` and `eslint-loader` to process all `<script>` blocks:
 
   ``` js
-  // ...
-  vue: {
-    loaders: {
-      js: 'babel!eslint'
-    }
+  // Webpack 2.x config
+  module: {
+    rules: [
+      {
+        test: /\.vue$/,
+        loader: 'vue-loader',
+        options: {
+          loaders: {
+            js: 'babel-loader!eslint-loader'
+          }
+        }
+      }
+    ]
   }
   ```
+
+### preLoaders
+
+- type: `{ [lang: string]: string }`
+- only supported in >=10.3.0
+
+  The config format is the same as `loaders`, but `preLoaders` are applied to corresponding language blocks before the default loaders. You can use this to pre-process language blocks - a common use case would be build-time i18n.
+
+### postLoaders
+
+- type: `{ [lang: string]: string }`
+- only supported in >=10.3.0
+
+  The config format is the same as `loaders`, but `postLoaders` are applied after the default loaders. You can use this to post-process language blocks. However note that this is a bit more complicated:
+
+  - For `html`, the result returned by the default loader will be compiled JavaScript render function code.
+
+  - For `css`, the result will be returned by `vue-style-loader` which isn't particularly useful in most cases. Using a postcss plugin will be a better option.
 
 ### postcss
 
 - type: `Array` or `Function` or `Object`
-- `Object` format only supported in ^8.5.0
 
   Specify custom PostCSS plugins to be applied to CSS inside `*.vue` files. If using a function, the function will called using the same loader context and should return an Array of plugins.
 
