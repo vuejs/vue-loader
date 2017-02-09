@@ -22,8 +22,8 @@ module.exports = {
         options: {
           loaders: {
             css: ExtractTextPlugin.extract({
-              loader: 'css-loader',
-              fallbackLoader: 'vue-style-loader' // <- это внутренняя часть vue-loader, поэтому нет необходимости его устанавливать через NPM
+              use: 'css-loader',
+              fallback: 'vue-style-loader' // <- это внутренняя часть vue-loader, поэтому нет необходимости его устанавливать через NPM
             })
           }
         }
