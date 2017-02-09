@@ -2,6 +2,20 @@
 
 Любой CSS проходящий через `vue-loader` обрабатывается [PostCSS](https://github.com/postcss/postcss) для реализации функциональности scoped CSS. Вы также можете добавить другие плагины PostCSS к процессу обработки. Например, [autoprefixer](https://github.com/postcss/autoprefixer) или [CSSNext](http://cssnext.io/).
 
+## Использование файла конфигурации
+
+Начиная с версии 11.0 `vue-loader` поддерживает файлы конфигурации PostCSS поддерживаемые с помощью `postcss-loader`:
+
+- `postcss.config.js`
+- `.postcssrc`
+- `postcss` поле в `package.json`
+
+Рекомендуется использовать файл конфигурации, это позволяет использовать один и тот же конфиг для обработки ваших CSS файлов, обрабатываемых `postcss-loader` и CSS внутри `*.vue` файлов.
+
+## Указание настроек в опциях vue-loader
+
+В качестве альтернативы, вы можете указать конфигурацию PostCSS специально для `*.vue` файлов с помощью опции `postcss` для `vue-loader`.
+
 Пример использования с Webpack 1.x:
 
 ``` js
