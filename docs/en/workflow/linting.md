@@ -2,7 +2,7 @@
 
 You may have been wondering how do you lint your code inside `*.vue` files, since they are not JavaScript. We will assume you are using [ESLint](http://eslint.org/) (if you are not, you should!).
 
-You will also need the [eslint-html-plugin](https://github.com/BenoitZugmeyer/eslint-plugin-html) with supports extracting and linting the JavaScript inside `*.vue` files.
+You will also need the [eslint-html-plugin](https://github.com/BenoitZugmeyer/eslint-plugin-html) which supports extracting and linting the JavaScript inside `*.vue` files.
 
 Make sure to include the plugin in your ESLint config:
 
@@ -79,13 +79,13 @@ module.exports = {
       {
         enforce: 'pre',
         test: /.vue$/,
-        loader: 'eslint',
+        loader: 'eslint-loader',
         exclude: /node_modules/
       },
       // but use vue-loader for all *.vue files
       {
         test: /.vue$/,
-        loader: 'vue'
+        loader: 'vue-loader'
       }
     ]
   }
