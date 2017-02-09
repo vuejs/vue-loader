@@ -55,8 +55,8 @@ module.exports = {
         options: {
           loaders: {
             css: ExtractTextPlugin.extract({
-              loader: 'css-loader',
-              fallbackLoader: 'vue-style-loader' // <- 이것은 vue-loader의 의존성이므로, npm3를 사용하는 경우에는 명시적으로 설치할 필요가 없습니다.
+              use: 'css-loader',
+              fallback: 'vue-style-loader' // <- 이것은 vue-loader의 의존성이므로, npm3를 사용하는 경우에는 명시적으로 설치할 필요가 없습니다.
             })
           }
         }
