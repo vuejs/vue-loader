@@ -4,7 +4,7 @@ Any CSS output processed by `vue-loader` is piped through [PostCSS](https://gith
 
 ## Using a Config File
 
-Starting in 11.0 `vue-loader` supports auto-loading the same PostCss config files supported by `postcss-loader`:
+Starting in 11.0 `vue-loader` supports auto-loading the same PostCss config files supported by [`postcss-loader`](https://github.com/postcss/postcss-loader#usage):
 
 - `postcss.config.js`
 - `.postcssrc`

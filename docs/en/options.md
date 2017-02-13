@@ -81,17 +81,22 @@ module.exports = {
 
 ### postcss
 
+> Note: in >=11.0.0 it is recommended to use a PostCSS config file instead. [The usage is the same as `postcss-loader`](https://github.com/postcss/postcss-loader#usage).
+
 - type: `Array` or `Function` or `Object`
 
   Specify custom PostCSS plugins to be applied to CSS inside `*.vue` files. If using a function, the function will called using the same loader context and should return an Array of plugins.
 
   ``` js
   // ...
-  vue: {
-    // note: do not nest the `postcss` option under `loaders`
-    postcss: [require('postcss-cssnext')()],
-    loaders: {
-      // ...
+  {
+    loader: 'vue-loader',
+    options: {
+      // note: do not nest the `postcss` option under `loaders`
+      postcss: [require('postcss-cssnext')()],
+      loaders: {
+        // ...
+      }
     }
   }
   ```
