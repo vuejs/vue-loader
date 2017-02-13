@@ -1,19 +1,19 @@
-# CSS 단일 파일로 추출하기
+# Extraindo CSS em um único arquivo
 
-다음 예제 설정을 사용하여 모든 Vue 컴포넌트의 처리된 CSS를 단일 CSS 파일로 추출할 수 있습니다.
+Exemplo de configuração para extrair todo CSS processado de todos componentes Vue em um único arquivo CSS:
 
 ### Webpack 1.x
 
-``` bash
+```bash
 npm install extract-text-webpack-plugin --save-dev
 ```
 
-``` js
+```js
 // webpack.config.js
 var ExtractTextPlugin = require("extract-text-webpack-plugin")
 
 module.exports = {
-  // 이 부분엔 다른 옵션도 들어 갈 수 있습니다.
+  // outras opções...
   module: {
     loaders: [
       {
@@ -25,7 +25,7 @@ module.exports = {
   vue: {
     loaders: {
       css: ExtractTextPlugin.extract("css"),
-      // 당신은 <style lang="less"> 또는 다른 언어도 포함할 수 있습니다.
+      // você também pode incluir <style lang="less"> ou outras linguagens
       less: ExtractTextPlugin.extract("css!less")
     }
   },
@@ -35,28 +35,28 @@ module.exports = {
 }
 ```
 
-### Webpack 2.x (^2.1.0-beta.25)
+### Webpack 2.x \(^2.1.0-beta.25\)
 
-``` bash
+```bash
 npm install extract-text-webpack-plugin@2.x --save-dev
 ```
 
-``` js
+```js
 // webpack.config.js
 var ExtractTextPlugin = require("extract-text-webpack-plugin")
 
 module.exports = {
-  // 이 부분엔 다른 옵션도 들어 갈 수 있습니다.
+  // outras opções...
   module: {
     rules: [
       {
         test: /\.vue$/,
-        loader: 'vue',
+        loader: 'vue-loader',
         options: {
           loaders: {
             css: ExtractTextPlugin.extract({
-              use: 'css-loader',
-              fallback: 'vue-style-loader' // <- 이것은 vue-loader의 의존성이므로, npm3를 사용하는 경우에는 명시적으로 설치할 필요가 없습니다.
+              loader: 'css-loader',
+              fallbackLoader: 'vue-style-loader' // <- isto é uma dependência de vue-loader, então não é necessário instalar explicitamente se estiver usando npm3
             })
           }
         }
