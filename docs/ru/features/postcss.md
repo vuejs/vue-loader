@@ -4,7 +4,7 @@
 
 ## Использование файла конфигурации
 
-Начиная с версии 11.0 `vue-loader` поддерживает файлы конфигурации PostCSS поддерживаемые с помощью `postcss-loader`:
+Начиная с версии 11.0 `vue-loader` поддерживает файлы конфигурации PostCSS поддерживаемые с помощью [`postcss-loader`](https://github.com/postcss/postcss-loader#usage):
 
 - `postcss.config.js`
 - `.postcssrc`
