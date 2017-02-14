@@ -18,6 +18,6 @@ Como `.png` não é um arquivo JavaScript, você precisará configurar o Webpack
 
 Os benefícios de tudo isso são:
 
-1. `file-loader` permite a você configurar onde copiar e colar os arquivos de ativos \(assets\), e como nomeá-lo usando hashes de versão para melhorar o cache. Mas, isso também significa que **você pode simplesmente colocar imagens ao lado de seus arquivos **`.vue`** e usar o caminho relativo com base na estrutura de pastas em vez de se preocupar com URLs de implantação**. Com a configuração apropriada, Webpack irá automaticamente escrever o caminho dos arquivos em URLs corretas na saída empacotada.
+1. `file-loader` permite a você configurar onde copiar e colar os arquivos de ativos \(assets\), e como nomeá-lo usando hashes de versão para melhorar o cache. Mas, isso também significa que **você pode simplesmente colocar imagens ao lado de seus arquivos `.vue` e usar o caminho relativo com base na estrutura de pastas em vez de se preocupar com URLs de implantação**. Com a configuração apropriada, Webpack irá automaticamente escrever o caminho dos arquivos em URLs corretas na saída empacotada.
 
 2. `url-loader` permite a você colocar condicionalmente em linha um arquivo de dados URL base64 se eles forem menor que um determinado limite. Se o arquivo for maior do que o limite ele automaticamente será jogado para `file-loader`.
