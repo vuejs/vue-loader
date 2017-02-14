@@ -117,16 +117,16 @@ module.exports = {
 - Тип: `Boolean`
 - По умолчанию: `true`
 
-  Whether to enable source maps for CSS. Disabling this can avoid some relative path related bugs in `css-loader` and make the build a bit faster.
+  Использование source maps для CSS. Отключение этой опции может позволить избежать некоторых багов с относительными путями в `css-loader` и сделать сборку немного быстрее.
 
-  Note this is automatically set to `false` if the `devtool` option is not present in the main Webpack config.
+  Обратите внимание, эта опция автоматически устанавливается в `false` при отсутствии опции `devtool` в файле конфигурации Webpack.
 
 ### esModule
 
 - Тип: `Boolean`
 - По умолчанию: `undefined`
 
-  Whether to emit esModule compatible code. By default vue-loader will emit default export in commonjs format like `module.exports = ....`. When `esModule` is set to true, default export will be transpiled into `exports.__esModule = true; exports = ...`. Useful for interoperating with transpiler other than Babel, like TypeScript.
+  Генерация esModule совместимого кода. По умолчанию vue-loader генерирует модули в формате commonjs `module.exports = ....`. Когда опция `esModule` установлена в true, экспорт по умолчанию (default export) будет преобразован в `exports.__esModule = true; exports = ...`. Это может быть полезным для настройки взаимодействия с транспиляторами, отличными от  Babel, как например TypeScript.
 
 ### preserveWhitespace
 
@@ -140,18 +140,18 @@ module.exports = {
 - Тип: `{ [tag: string]: string | Array<string> }`
 - По умолчанию: `{ img: 'src' }`
 
-  During template compilation, the compiler can transform certain attributes, such as `src` URLs, into `require` calls, so that the target asset can be handled by Webpack. The default config transforms the `src` attribute on `<img>` tags.
+  Во время компиляции шаблона, компилятор может преобразовывать определённые атрибуты, такие как `src` в ссылках, в вызовы `require`, таким образом чтобы файл обрабатывался с помощью Webpack. Конфигурация по умолчанию преобразует `src` атрибуты внутри тегов `<img>`.
 
 ### buble
 
 - Тип: `Object`
 - По умолчанию: `{}`
 
-  Configure options for `buble-loader` (if present), AND the buble compilation pass for template render functions.
+  Настройка параметров для `buble-loader` (есть он присутствует), И buble-компиляции для шаблонов рендер-функций.
 
   > Примечание: в версиях 9.x, выражения шаблонов настраивались отдельно через опцию `templateBuble`, что удалена в новых версиях.
 
-  The template render functions compilation supports a special transform `stripWith` (enabled by default), which removes the `with` usage in generated render functions to make them strict-mode compliant.
+  Компиляция шаблонов рендер-функций поддерживает специальное преобразование `stripWith` (включена по умолчанию), которая удаляет использование `with` в генерируемых рендер-функциях для соответствия режиму strict.
 
   Пример конфигурации:
 
