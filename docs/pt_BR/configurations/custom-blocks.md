@@ -2,7 +2,7 @@
 
 > Requer versão 10.2.0+
 
-Você pode definir um bloco de linguagem customizado dentro de arquivos `*.vue`. O conteúdo do bloco customizado será processado por carregadores especificado na opção `loaders` do objeto de configuração `vue-loader` e então requerido pelo módulo componente. A configuração é semelhante a descrita em [Configurações Avançada do Carregador](../configurations/advanced.md). exceto o uso padrão do nome da tag em vez do atributo `lang`;
+Você pode definir blocos de linguagem customizados dentro de arquivos `*.vue`. O conteúdo do bloco customizado será processado ppelos carregadores especificados na opção `loaders` do objeto de configuração `vue-loader` e então requerido pelo módulo componente. A configuração é semelhante a descrita em [Configurações Avançada do Carregador](../configurations/advanced.md), exceto o uso padrão do nome da tag em vez do atributo `lang`;
 
 Se for encontrado um carregador correspondente para um bloco customizado, ele será processado. Caso contrário o bloco customizado será simplesmente ignorado.
 

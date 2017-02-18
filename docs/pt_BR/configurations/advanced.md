@@ -12,8 +12,6 @@ Para fazer isto, especifique a opção `loaders` para `vue-loader`:
 
 > Observe que `preLoaders` e`postLoaders` são suportados apenas em verões >=10.3.0
 
-
-
 ### Webpack 2.x
 
 ```js
@@ -36,7 +34,7 @@ module.exports = {
           
           // `preLoaders` são anexados antes dos carregadores padrões
           // Você pode usar isso para pré-processar blocos de linguagem 
-          // - um caso de uso comum seria i18n em tempo de construção.
+          // - um caso de uso comum seria intercionalização (i18n)  em tempo de construção.
           preLoaders: {
             js: '/caminho/personalizado/para/carregador'
           },

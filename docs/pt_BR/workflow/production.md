@@ -36,4 +36,4 @@ Obviamente não queremos usar estás configurações durante o desenvolvimento, 
 
 2. Ou use dois arquivos de configuração do Webpack separados,  um para o desenvolvimento e outro para produção. E talvez compartilhe algumas opções comuns entre eles em um terceiro arquivo, como mostrado em [vue-hackernews-2.0](https://github.com/vuejs/vue-hackernews-2.0).
 
-Isto é com você, desde que o objetivo seja atingido
+Isto é com você, desde que o objetivo seja atingido.

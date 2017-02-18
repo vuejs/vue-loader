@@ -10,12 +10,12 @@
   - [Hot Reload](features/hot-reload.md)
 - Configurações
   - [Pré-Processadores](configurations/pre-processors.md)
-  - [Manipulação de URls de ativos](configurations/asset-url.md)
+  - [Manipulação de recurso de URL](configurations/asset-url.md)
   - [Configuração avançado do loader](configurations/advanced.md)
-  - [Extraindo arquivos css](configurations/extract-css.md)
+  - [Extraindo arquivos CSS](configurations/extract-css.md)
   - [Blocos customizados](configurations/custom-blocks.md)
 - Fluxo de trabalho
-  - [Produção](workflow/production.md)
+  - [Construir Produção](workflow/production.md)
   - [Análise estática do código \(Linting\)](workflow/linting.md)
   - [Testando](workflow/testing.md)
   - [Testando com Mocks](workflow/testing-with-mocks.md)
