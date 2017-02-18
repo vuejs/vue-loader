@@ -25,7 +25,7 @@ module.exports = {
       }
     }),
     // оптимизируем идентификаторы модулей по числу использований
-    new webpack.optimize.OccurenceOrderPlugin()
+    new webpack.optimize.OccurrenceOrderPlugin()
   ]
 }
 ```
