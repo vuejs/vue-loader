@@ -24,8 +24,8 @@ module.exports = {
         warnings: false
       }
     }),
-    // optimize module ids by occurence count
-    new webpack.optimize.OccurenceOrderPlugin()
+    // optimize module ids by occurrence count
+    new webpack.optimize.OccurrenceOrderPlugin()
   ]
 }
 ```
