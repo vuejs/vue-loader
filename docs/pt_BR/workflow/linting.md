@@ -2,7 +2,7 @@
 
 Você pode ter se perguntado como você analisa seu código dentro dos seus arquivos `*.vue`, uma vez que eles não são JavaScript. Vamos supor que você está usando [ESLint](http://eslint.org/) \(se você não está, deveria\).
 
-Você também precisará do [eslint-html-plugin](https://github.com/BenoitZugmeyer/eslint-plugin-html) com suporte de extração e análise estática \(linting\) do JavasScript dentro dos arquivos `*.vue`.
+Você também precisará do [eslint-plugin-html](https://github.com/BenoitZugmeyer/eslint-plugin-html) que suporte de extração e análise estática \(linting\) do JavasScript dentro dos arquivos `*.vue`.
 
 Certifique-se de incluir o plugin dentro de suas configurações ESLint:
 

@@ -41,8 +41,8 @@ const ExemploInjecao = require('!!vue?inject!./exemplo.vue')
 
 Observe que ele requer uma sequência de caracteres - nós estamos usando algumas [requisições de carregador webpack](https://webpack.github.io/docs/loaders.html) em linha aqui. Uma explicação rápida:
 
-* `!!` no início significa "desative todos os carregadores da configuração global";
-* `vue?inject!` significa "use o carregador de `vue`, e passe o `?inject` na consulta". Isso informa ao `vue-loader` para compilar o componente no modo injeção de dependência.
+- `!!` no início significa "desative todos os carregadores da configuração global";
+- `vue?inject!` significa "use o carregador de `vue`, e passe o `?inject` na consulta". Isso informa ao `vue-loader` para compilar o componente no modo injeção de dependência.
 
 O retorno de `ExemploInjecao` é uma função de fábrica que pode ser chamada para criar instâncias do módulo `exemplo.vue`.
 

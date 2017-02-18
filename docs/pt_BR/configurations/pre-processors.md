@@ -1,6 +1,6 @@
 # Unsando Pré-Processadores
 
-No Webpack, todos os pré-processadores precisam ser aplicados com um carregador \(loader\) correspondente. `vue-loader` permite que você use outros carregadores para processar parte do seu componente Vue. Ele irá automaticamente indicar os carregadores apropriados para usar a partir do atributo `lang` de um bloco de linguagem.
+No Webpack, todos os pré-processadores precisam ser aplicados com um carregador \(loader\) correspondente. `vue-loader` permite que você use outros carregadores Webpack para processar uma parte de um componente Vue. Ele irá automaticamente indicar os carregadores apropriados para usar a partir do atributo `lang` de um bloco de linguagem.
 
 ### CSS
 
@@ -20,9 +20,9 @@ Por baixo do capô, o conteúdo de texto dentro da tag `<style>` será primeiram
 
 #### Advertências de sass-loader
 
-Ao contrário do que seu nome indica, [sass-loader](https://github.com/jtangelder/sass-loader) analisa a sintaxe SCSS por padrão. Se você atualmente deseja usar a indentação da sintaxe SASS, você tem que configurar as opções de vue-loader para sass-loader adequadamente.
+Ao contrário do que seu nome indica, [sass-loader](https://github.com/jtangelder/sass-loader) analisa a sintaxe *SCSS* por padrão. Se você atualmente deseja usar a indentação da sintaxe *SASS*, você tem que configurar as opções de vue-loader para sass-loader adequadamente.
 
-```javascript
+```js
 {
   test: /\.vue$/,
   loader: 'vue-loader',
