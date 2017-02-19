@@ -1,10 +1,11 @@
 # Linting
 
+あなたはJavaScriptでない `*.vue` の中のコードをどうやってlintするのか疑問に思っているかも知れません。[ESLint](http://eslint.org/)を使用していると仮定します（もし使っていないのならばすべきです！）
 You may have been wondering how do you lint your code inside `*.vue` files, since they are not JavaScript. We will assume you are using [ESLint](http://eslint.org/) (if you are not, you should!).
 
-You will also need the [eslint-html-plugin](https://github.com/BenoitZugmeyer/eslint-plugin-html) with supports extracting and linting the JavaScript inside `*.vue` files.
+`* .vue`ファイル内のJavaScriptの抽出と埋め込みをサポートする[eslint-plugin-html]（https://github.com/BenoitZugmeyer/eslint-plugin-html）も同様に必要です。
 
-Make sure to include the plugin in your ESLint config:
+あなたのESLintの設定にプラグインを含めてください：
 
 ``` json
 "plugins": [
@@ -12,13 +13,13 @@ Make sure to include the plugin in your ESLint config:
 ]
 ```
 
-Then from the command line:
+コマンドラインで次を実行してください：
 
 ``` bash
 eslint --ext js,vue MyComponent.vue
 ```
 
-Another option is using [eslint-loader](https://github.com/MoOx/eslint-loader) so that your `*.vue` files are automatically linted on save during development:
+別のオプションは `* .vue` ファイルが開発中に保存時されたとき、自動的にlintされるように[eslint-loader]（https://github.com/MoOx/eslint-loader）を使用しています：
 
 ``` bash
 npm install eslint eslint-loader --save-dev
@@ -38,17 +39,16 @@ module.exports = {
   }
 }
 ```
+Webpackローダーチェーンは**まずはじめに**に適用されます。`vue`の前に` eslint`を適用して、コンパイル前のソースコードをlintしてください。
 
-Note that Webpack loader chains are applied **right-first**. Make sure to apply `eslint` before `vue` so we are linting the pre-compile source code.
-
-One thing we need to consider is using third party `*.vue` components shipped in NPM packages. In such case, we want to use `vue-loader` to process the third party component, but do not want to lint it. We can separate the linting into Webpack's [preLoaders](https://webpack.github.io/docs/loaders.html#loader-order):
+一つ私たちが考慮する必要があるのは、NPMパッケージでリリースされているサードパーティの* .vueコンポーネントを使用することです。そのような場合には、サードパーティー製のコンポーネントを処理するために `vue-loader`を使用したいと思いますが、それをlintしたくはありません。そういうときはlintをWebpackの[preLoaders]（https://webpack.github.io/docs/loaders.html#loader-order）に分けることが可能です：
 
 ``` js
 // webpack.config.js
 module.exports = {
-  // ... other options
+  // ... 他のオプション
   module: {
-    // only lint local *.vue files
+    // lint対象はローカルの *.vue ふぁるのみ
     preLoaders: [
       {
         test: /.vue$/,
@@ -56,7 +56,7 @@ module.exports = {
         exclude: /node_modules/
       }
     ],
-    // but use vue-loader for all *.vue files
+    // しかし全ての *.vue ファイルでvue-loaderを使用します
     loaders: [
       {
         test: /.vue$/,
@@ -67,7 +67,7 @@ module.exports = {
 }
 ```
 
-For Webpack 2.x:
+Webpack 2.x:
 
 ``` js
 // webpack.config.js
@@ -79,13 +79,13 @@ module.exports = {
       {
         enforce: 'pre',
         test: /.vue$/,
-        loader: 'eslint',
+        loader: 'eslint-loader',
         exclude: /node_modules/
       },
       // but use vue-loader for all *.vue files
       {
         test: /.vue$/,
-        loader: 'vue'
+        loader: 'vue-loader'
       }
     ]
   }
