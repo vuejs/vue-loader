@@ -1,10 +1,10 @@
-# Testing
+# テスト
 
-> The [webpack vue-cli template](https://github.com/vuejs-templates/webpack) offers pre-configured unit testing and e2e testing setups for you.
+> [webpack vue-cliテンプレート]（https://github.com/vuejs-templates/webpack）には、事前に設定されたユニットテストとe2eテストの設定が用意されています。
 
-When testing `*.vue` files, we cannot use a plain CommonJS-based test runner because it won't know how to handle `*.vue` files. Instead, we still use Webpack + vue-loader to bundle our test files. The recommended setup is using [Karma](http://karma-runner.github.io/0.13/index.html) and [karma-webpack](https://github.com/webpack/karma-webpack).
+`* .vue`ファイルをテストするときには、普通のCommonJSベースのテストランナーを使うことができません。なぜならそのテストランナーは` * .vue`ファイルの扱い方を知らないからです。代わりに、Webpack + vue-loaderを使用してテストファイルをバンドルします。推奨設定は[Karma]（http://karma-runner.github.io/0.13/index.html）と[karma-webpack]（https://github.com/webpack/karma-webpack）です。
 
-Karma is a test runner that launches browsers and runs your tests for you. You can choose what browsers you want to test in and what test framework (e.g. Mocha or Jasmine) you want to use. Here is an example Karma configuration that runs the tests inside [PhantomJS](http://phantomjs.org/) with the [Jasmine](http://jasmine.github.io/edge/introduction.html) test framework:
+Karmaはブラウザを起動してテストを実行するテストランナーです。テストするブラウザと、使用するテストフレームワーク（たとえば、MochaやJasmineなど）を選択できます。[PhantomJS]（http://phantomjs.org/）のテストを[Jasmine]（http://jasmine.github.io/edge/introduction.html）テストフレームワークで実行するKarmaの設定例を次に示します:
 
 ``` bash
 npm install\
@@ -15,9 +15,10 @@ npm install\
 ```
 
 ``` js
-// we can just use the exact same webpack config by requiring it
+// 要求があれば同じWebpackの設定を使用することが可能です
 // however, remember to delete the original entry since we don't
-// need it during tests
+// ただし、テスト中に元のエントリが不要なので、
+// 元のエントリを削除することを忘れないでください
 var webpackConfig = require('./webpack.config.js')
 delete webpackConfig.entry
 
@@ -26,15 +27,15 @@ module.exports = function (config) {
   config.set({
     browsers: ['PhantomJS'],
     frameworks: ['jasmine'],
-    // this is the entry file for all our tests.
+    // これはすべてのテストのエントリーファイルです。
     files: ['test/index.js'],
-    // we will pass the entry file to webpack for bundling.
+    // バンドルのためにエントリーファイルをwebpackに渡します。
     preprocessors: {
       'test/index.js': ['webpack']
     },
-    // use the webpack config
+    // webpackの設定を使用します
     webpack: webpackConfig,
-    // avoid walls of useless text
+    // 使用しないテキストの壁を避ける
     webpackMiddleware: {
       noInfo: true
     },
@@ -43,17 +44,17 @@ module.exports = function (config) {
 }
 ```
 
-And for the entry `test/index.js` file:
+そして`test/index.js`ファイルのエントリの場合：
 
 ``` js
 // test/index.js
-// require all test files using special Webpack feature
+// 特別なWebpackの機能を使用してすべてのテストファイルを必要とさせます
 // https://webpack.github.io/docs/context.html#require-context
 var testsContext = require.context('.', true, /\.spec$/)
 testsContext.keys().forEach(testsContext)
 ```
 
-This entry file simply requires all other files that ends in `.spec.js` in the same folder. Now we can actually write some tests:
+このエントリファイルは、単に同じフォルダ内の`.spec.js`で終わる他のすべてのファイルを必要とします。これで実際にいくつかのテストを書くことができます：
 
 ``` js
 // test/component-a.spec.js
@@ -62,12 +63,12 @@ var ComponentA = require('../../src/components/a.vue')
 
 describe('a.vue', function () {
 
-  // asserting JavaScript options
+  // JavaScriptのオプションのアサーション
   it('should have correct message', function () {
     expect(ComponentA.data().msg).toBe('Hello from Component A!')
   })
 
-  // asserting rendered result by actually rendering the component
+  // 実際にコンポーネントをレンダリングしてレンダリングされた結果をアサートする
   it('should render correct message', function () {
     var vm = new Vue({
       template: '<div><test></test></div>',
@@ -80,7 +81,7 @@ describe('a.vue', function () {
 })
 ```
 
-To run the tests, add the following NPM script:
+テストを実行するには、次のNPMスクリプトを追加します：
 
 ``` js
 // package.json
@@ -92,10 +93,10 @@ To run the tests, add the following NPM script:
 ...
 ```
 
-Finally, run:
+最後に実行します：
 
 ``` bash
 npm test
 ```
 
-Again, [webpack vue-cli template](https://github.com/vuejs-templates/webpack) contains a fully working example with tests.
+最後にもう一度、[webpack vue-cli template]（https://github.com/vuejs-templates/webpack）には、テストに関する完全な実例が含まれています。
