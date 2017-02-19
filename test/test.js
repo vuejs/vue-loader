@@ -162,9 +162,12 @@ describe('vue-loader', function () {
 
   it('scoped style', done => {
     test({
-      entry: './test/fixtures/scoped-css.vue'
+      entry: './test/fixtures/scoped-css.vue',
+      vue: {
+        hashKey: 'foo'
+      }
     }, (window, module) => {
-      var id = 'data-v-' + hash('vue-loader/test/fixtures/scoped-css.vue')
+      var id = 'data-v-' + hash('vue-loader/test/fixtures/scoped-css.vue' + 'foo')
       expect(module._scopeId).to.equal(id)
 
       var vnode = mockRender(module, {
