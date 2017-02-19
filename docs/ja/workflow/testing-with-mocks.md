@@ -1,10 +1,10 @@
-# Testing with Mocks
+# モックを使用したテスト
 
-In a real world application, our components most likely have external dependencies. When writing unit tests for components, it would be ideal if we can mock these external dependencies so that our tests only rely the behavior of the component being tested.
+現実のアプリケーションでは、私たちのコンポーネントは外部依存関係を持つ可能性が高いです。コンポーネントの単体テストを記述するときは、外部依存関係をモックにし、テストはテスト対象のコンポーネントの動作に依存するだけになるのが理想です。
 
-`vue-loader` provides a feature that allows you to inject arbitrary dependencies to a `*.vue` component, using [inject-loader](https://github.com/plasticine/inject-loader). The general idea is that instead of directly importing the component module, we use `inject-loader` to create a "module factory" function for that module. When this function gets called with an object of mocks, it returns an instance of the module with the mocks injected.
+`vue-loader`は、[inject-loader]（https://github.com/plasticine/inject-loader）を使って任意の依存関係を` * .vue`コンポーネントに注入する機能を提供します。一般的な考え方としては、コンポーネントモジュールを直接インポートするのではなく、`inject-loader`を使用して、そのモジュール用の「モジュールファクトリ」関数を作成するというものです。この関数がモックのオブジェクトで呼び出されると、モックが注入されたモジュールのインスタンスが返されます。
 
-Suppose we have a component like this:
+次のようなコンポーネントがあるとします：
 
 ``` html
 <!-- example.vue -->
@@ -13,7 +13,7 @@ Suppose we have a component like this:
 </template>
 
 <script>
-// this dependency needs to be mocked
+// この依存はモックを必要としています
 import SomeService from '../service'
 
 export default {
@@ -26,9 +26,9 @@ export default {
 </script>
 ```
 
-Here's how to import it with mocks:
+モックをインポートする方法は次のとおりです：
 
-> Note: inject-loader@3.x is currently unstable.
+> ノート: inject-loader@3.x は現在不安定です。
 
 ``` bash
 npm install inject-loader@^2.0.0 --save-dev
@@ -39,23 +39,23 @@ npm install inject-loader@^2.0.0 --save-dev
 const ExampleInjector = require('!!vue?inject!./example.vue')
 ```
 
-Notice that crazy require string - we are using some inline [webpack loader requests](https://webpack.github.io/docs/loaders.html) here. A quick explanation:
+注意。クレイジーな文字列を必要とします - ここではいくつかのインライン[webpack loader]（https://webpack.github.io/docs/loaders.html）を使用しています。簡単な説明としては：
 
-- `!!` at the start means "disable all loaders from the global config";
-- `vue?inject!` means "use the `vue` loader, and pass in the `?inject` query". This tells `vue-loader` to compile the component in dependency-injection mode.
+- `!!`は "グローバル設定からすべてのローダを無効にする"ことを意味します；
+- `vue？inject！`は  "'vue`ローダーを使い、`？inject`クエリを渡す"ことを意味します。 これは`vue-loader`に、依存性注入モードでコンポーネントをコンパイルするように指示します。
 
-The returned `ExampleInjector` is a factory function that can be called to create instances of the `example.vue` module:
+返される`ExampleInjector`は、`example.vue`モジュールのインスタンスを生成するために呼び出すことができるファクトリ関数です：
 
 ``` js
 const ExampleWithMocks = ExampleInjector({
-  // mock it
+  // モック
   '../service': {
     msg: 'Hello from a mocked service!'
   }
 })
 ```
 
-Finally, we can test the component like usual:
+最後に、コンポーネントを通常どおりテストすることができます：
 
 ``` js
 it('should render', () => {
