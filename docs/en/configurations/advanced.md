@@ -1,6 +1,60 @@
 # Advanced Loader Configuration
 
-Sometimes you may want to apply a custom loader string to a language instead of letting `vue-loader` infer it. Or you may simply want to overwrite the built-in loader configuration for the default languages. To do that, add a `vue` block in your Webpack config file, and specify the `loaders` option.
+Sometimes the you may want to:
+
+1. Apply a custom loader string to a language instead of letting `vue-loader` infer it;
+
+2. Overwrite the built-in loader configuration for the default languages;
+
+3. Pre-process or post-process a specific language block with custom loaders.
+
+To do that, specify the `loaders` option for `vue-loader`:
+
+> Note that `preLoaders` and `postLoaders` are only supported in >=10.3.0
+
+### Webpack 2.x
+
+``` js
+module.exports = {
+  // other options...
+  module: {
+    // module.rules is the same as module.loaders in 1.x
+    rules: [
+      {
+        test: /\.vue$/,
+        loader: 'vue-loader',
+        options: {
+          // `loaders` will overwrite the default loaders.
+          // The following config will cause all <script> tags without "lang"
+          // attribute to be loaded with coffee-loader
+          loaders: {
+            js: 'coffee-loader'
+          },
+
+          // `preLoaders` are attached before the default loaders.
+          // You can use this to pre-process language blocks - a common use
+          // case would be build-time i18n.
+          preLoaders: {
+            js: '/path/to/custom/loader'
+          },
+
+          // `postLoaders` are attached after the default loaders.
+          //
+          // - For `html`, the result returned by the default loader
+          //   will be compiled JavaScript render function code.
+          //
+          // - For `css`, the result will be returned by vue-style-loader
+          //   which isn't particularly useful in most cases. Using a postcss
+          //   plugin will be a better option.
+          postLoaders: {
+            html: 'babel-loader'
+          }
+        }
+      }
+    ]
+  }
+}
+```
 
 ### Webpack 1.x
 
@@ -18,37 +72,9 @@ module.exports = {
   },
   // vue-loader configurations
   vue: {
-    // ... other vue options
     loaders: {
-      // load all <script> without "lang" attribute with coffee-loader
-      js: 'coffee',
-      // load <template> directly as HTML string, without piping it
-      // through vue-html-loader first
-      html: 'raw'
+      // same configuration rules as above
     }
-  }
-}
-```
-
-### Webpack 2.x (^2.1.0-beta.25)
-
-``` js
-module.exports = {
-  // other options...
-  module: {
-    // module.rules is the same as module.loaders in 1.x
-    rules: [
-      {
-        test: /\.vue$/,
-        loader: 'vue-loader',
-        // vue-loader options goes here
-        options: {
-          loaders: {
-            // ...
-          }
-        }
-      }
-    ]
   }
 }
 ```

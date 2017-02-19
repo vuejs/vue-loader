@@ -1,6 +1,6 @@
 # Vue Component Spec
 
-A `*.vue` file is a custom file format that uses HTML-like syntax to describe a Vue component. Each `*.vue` file consists of three types of top-level language blocks: `<template>`, `<script>` and `<style>`:
+A `*.vue` file is a custom file format that uses HTML-like syntax to describe a Vue component. Each `*.vue` file consists of three types of top-level language blocks: `<template>`, `<script>`, and `<style>`, and optionally additional custom blocks:
 
 ``` html
 <template>
@@ -22,6 +22,10 @@ export default {
   color: red;
 }
 </style>
+
+<custom1>
+  This could be e.g. documentation for the component.
+</custom1>
 ```
 
 `vue-loader` will parse the file, extract each language block, pipe them through other loaders if necessary, and finally assemble them back into a CommonJS module whose `module.exports` is a Vue.js component options object.
@@ -66,6 +70,14 @@ More details can be found in [Using Pre-Processors](../configurations/pre-proces
 
 - By default, contents will be extracted and dynamically inserted into the document's `<head>` as an actual `<style>` tag using `style-loader`. It's also possible to [configure Webpack so that all styles in all components are extracted into a single CSS file](../configurations/extract-css.md).
 
+### Custom Blocks
+
+> Only supported in vue-loader 10.2.0+
+
+Additional custom blocks can be included in a `*.vue` file for any project specific needs, for example a `<docs>` block. `vue-loader` will use the tag name to look up which webpack loaders should be applied to the contents of the section. The webpack loaders should be specified in the `loaders` section of `vue-loader` options.
+
+For mode details, see [Custom Blocks](../configurations/custom-blocks.md).
+
 ### Src Imports
 
 If you prefer splitting up your `*.vue` components into multiple files, you can use the `src` attribute to import an external file for a language block:
@@ -83,9 +95,12 @@ Beware that `src` imports follow the same path resolution rules to CommonJS `req
 <style src="todomvc-app-css/index.css">
 ```
 
-### Component Name
+`src` imports also work with custom blocks, e.g.:
 
-If you don't specified the component name with [name](https://vuejs.org/v2/api/#name) component option, by default, it's named based on your `*.vue` filename (no `.vue` extention).
+``` html
+<unit-test src="./unit-test.js">
+</unit-test>
+```
 
 ### Syntax Highlighting
 

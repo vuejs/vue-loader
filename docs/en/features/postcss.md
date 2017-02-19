@@ -2,6 +2,20 @@
 
 Any CSS output processed by `vue-loader` is piped through [PostCSS](https://github.com/postcss/postcss) for scoped CSS rewriting. You can also add custom PostCSS plugins to the process, for example [autoprefixer](https://github.com/postcss/autoprefixer) or [CSSNext](http://cssnext.io/).
 
+## Using a Config File
+
+Starting in 11.0 `vue-loader` supports auto-loading the same PostCss config files supported by [`postcss-loader`](https://github.com/postcss/postcss-loader#usage):
+
+- `postcss.config.js`
+- `.postcssrc`
+- `postcss` field in `package.json`
+
+Using a config file allows you to share the same config between your normal CSS files processed by `postcss-loader` and the CSS inside `*.vue` files, and is recommended.
+
+## Inline Options
+
+Alternatively, you can specify postcss config specifically for `*.vue` files using the `postcss` option for `vue-loader`.
+
 Example usage in Webpack 1.x:
 
 ``` js
