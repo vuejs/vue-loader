@@ -24,8 +24,8 @@ module.exports = {
         warnings: false
       }
     }),
-    // otimiza ids de módulos por contagem de ocorrência
-    new webpack.optimize.OccurenceOrderPlugin()
+    // Otimizar ids de módulo por contagem de ocorrências
+    new webpack.optimize.OccurrenceOrderPlugin()
   ]
 }
 ```
