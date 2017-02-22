@@ -306,7 +306,7 @@ describe('vue-loader', function () {
 
       // get local class name
       var className = module.computed.style().red
-      expect(className).to.match(/^_/)
+      expect(className).to.match(/_/)
 
       // class name in style
       var style = [].slice.call(window.document.querySelectorAll('style')).map(function (style) {
@@ -323,7 +323,7 @@ describe('vue-loader', function () {
 
       // default module + pre-processor + scoped
       var anotherClassName = module.computed.$style().red
-      expect(anotherClassName).to.match(/^_/).and.not.equal(className)
+      expect(anotherClassName).to.match(/_/).and.not.equal(className)
       var id = '_v-' + hash(require.resolve('./fixtures/css-modules.vue'))
       expect(style).to.contain('.' + anotherClassName + '[' + id + ']')
 
