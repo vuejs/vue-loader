@@ -32,7 +32,7 @@
     "consolidate": "^0.14.0",
     "hash-sum": "^1.0.2",
     "js-beautify": "^1.6.3",
-    "loader-utils": "^0.2.10",
+    "loader-utils": "^1.0.2",
     "lru-cache": "^4.0.1",
     "postcss": "^5.0.10",
     "postcss-load-config": "^1.1.0",
