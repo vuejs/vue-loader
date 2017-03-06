@@ -28,7 +28,7 @@ Ao contrário do que seu nome indica, [sass-loader](https://github.com/jtangelde
   loader: 'vue-loader',
   options: {
     loaders: {
-      scss: 'vue-style-loader!css-loader!sass-loader' // <style lang="scss">
+      scss: 'vue-style-loader!css-loader!sass-loader', // <style lang="scss">
       sass: 'vue-style-loader!css-loader!sass-loader?indentedSyntax' // <style lang="sass">
     }
   }
