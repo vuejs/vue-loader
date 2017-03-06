@@ -1,4 +1,4 @@
-# Unsando Pré-Processadores
+# Usando Pré-Processadores
 
 No Webpack, todos os pré-processadores precisam ser aplicados com um carregador \(loader\) correspondente. `vue-loader` permite que você use outros carregadores Webpack para processar uma parte de um componente Vue. Ele irá automaticamente indicar os carregadores apropriados para usar a partir do atributo `lang` de um bloco de linguagem.
 
