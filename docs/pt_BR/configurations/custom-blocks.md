@@ -57,11 +57,11 @@ module.exports = {
           }
         }
       }
-    ],
-    plugins: [
-      // saída de todos os docs em um único arquivo
-      new ExtractTextPlugin('docs.md')
     ]
-  }
+  },
+  plugins: [
+    // saída de todos os docs em um único arquivo
+    new ExtractTextPlugin('docs.md')
+  ]
 }
 ```
