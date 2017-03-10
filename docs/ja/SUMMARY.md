@@ -12,6 +12,7 @@
   - [Asset URL Handling](configurations/asset-url.md)
   - [Advanced Loader Configuration](configurations/advanced.md)
   - [Extracting CSS File](configurations/extract-css.md)
+  - [Custom Blocks](configurations/custom-blocks.md)
 - Workflow
   - [Production Build](workflow/production.md)
   - [Linting](workflow/linting.md)
