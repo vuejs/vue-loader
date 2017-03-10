@@ -1,19 +1,8 @@
-# Options Reference
+# オプションリファレンス
 
-## Usage Difference Between Webpack 1 & 2
+## Webpack 1と2の使い方の違い
 
-For Webpack 1.x: add a root `vue` block in your Webpack config:
-
-``` js
-module.exports = {
-  // ...
-  vue: {
-    // vue-loader options
-  }
-}
-```
-
-For Webpack 2 (^2.1.0-beta.25):
+Webpack 2の場合：オプションをloaderルールに直接渡します。
 
 ``` js
 module.exports = {
@@ -22,9 +11,9 @@ module.exports = {
     rules: [
       {
         test: /\.vue$/,
-        loader: 'vue',
+        loader: 'vue-loader',
         options: {
-          // vue-loader options
+          // vue-loader オプション
         }
       }
     ]
@@ -32,108 +21,149 @@ module.exports = {
 }
 ```
 
+Webpack 1.xの場合：Webpackの設定のルートに `vue`ブロックを追加します。
+
+``` js
+module.exports = {
+  // ...
+  vue: {
+    // vue-loader オプション
+  }
+}
+```
+
 ### loaders
 
-- type: `Object`
+- 型: `{ [lang: string]: string }`
 
-  An object specifying Webpack loaders to use for language blocks inside `*.vue` files. The key corresponds to the `lang` attribute for language blocks, if specified. The default `lang` for each type is:
+  `* .vue`ファイル内の言語ブロックに使用されるデフォルトのloaderを上書きするWebpack loaderを指定するオブジェクト。キーは指定されている場合、言語ブロックの `lang`属性に対応します。各タイプのデフォルトの `lang`は次のとおりです：
 
   - `<template>`: `html`
   - `<script>`: `js`
   - `<style>`: `css`
 
-  For example, to use `babel-loader` and `eslint-loader` to process all `<script>` blocks:
+  たとえば、`babel-loader`と`eslint-loader`を使ってすべての `<script>`ブロックを処理するには：
 
   ``` js
-  // ...
-  vue: {
-    loaders: {
-      js: 'babel!eslint'
-    }
+  // Webpack 2.x config
+  module: {
+    rules: [
+      {
+        test: /\.vue$/,
+        loader: 'vue-loader',
+        options: {
+          loaders: {
+            js: 'babel-loader!eslint-loader'
+          }
+        }
+      }
+    ]
   }
   ```
+
+### preLoaders
+
+- 型: `{ [lang: string]: string }`
+- 10.3.0 以上でサポートされます。
+
+  config形式は `loaders`と同じですが、` preLoaders`はデフォルトloaderの前に対応する言語ブロックに適用されます。これを使用して言語ブロックを前処理することができます。一般的な使用例としては、i18nのビルド時です。
+
+### postLoaders
+
+- 型: `{ [lang: string]: string }`
+- 10.3.0 以上でサポートされます。
+
+  config形式は `loaders`と同じですが、` postLoaders`はデフォルトloaderの後に適用されます。これを使用して言語ブロックを後処理することができます。ただしこれは少し複雑になります：
+
+  - `html`の場合、デフォルトのloaderによって返される結果は、コンパイルされたJavaScriptレンダリング関数コードになります。
+
+  - `css`の場合、結果は` vue-style-loader`によって返されます。これはほとんどの場合特に有用ではありません。postcssプラグインを使用する方が良いでしょう。
 
 ### postcss
 
-- type: `Array` or `Function` or `Object`
-- `Object` format only supported in ^8.5.0
+  > メモ: 11.0.0 以上では代わりにPostCSSの設定ファイル推奨されています。[使用法は `postcss-loader` と同じです](https://github.com/postcss/postcss-loader#usage)。
 
-  Specify custom PostCSS plugins to be applied to CSS inside `*.vue` files. If using a function, the function will called using the same loader context and should return an Array of plugins.
+- 型： `Array` もしくは `Function` か `Object`
+
+  カスタムしたPostCSSプラグインを `*.vue` ファイル内のCSSに適用するよう指定します。もし関数を使用しているなら、この関数は同じloaderのコンテキストを使用して呼び出され、プラグインの配列を返す必要があります。
 
   ``` js
   // ...
-  vue: {
-    // note: do not nest the `postcss` option under `loaders`
-    postcss: [require('postcss-cssnext')()],
-    loaders: {
-      // ...
+  {
+    loader: 'vue-loader',
+    options: {
+      // メモ: `loaders` 以下に `postcss` のオプションをネストさせてはいけません
+      postcss: [require('postcss-cssnext')()],
+      loaders: {
+        // ...
+      }
     }
   }
   ```
 
-  This option can also be an object that contains options to be passed to the PostCSS processor. This is useful when you are using PostCSS projects that relies on custom parser/stringifiers:
+  そのオプションは PostCSS プロセッサーに渡すオプションを含むオブジェクトにすることもできます。これは カスタムされたパーサー/文字列化に依存した PostCSS プロジェクトを使用しているとき便利です:
 
   ``` js
   postcss: {
-    plugins: [...], // list of plugins
+    plugins: [...], // pluginsのリスト
     options: {
-      parser: sugarss // use sugarss parser
+      parser: sugarss // sugarss パーサを使用
     }
   }
   ```
 
 ### cssSourceMap
 
-- type: `Boolean`
-- default: `true`
+- 型： `Boolean`
+- デフォルト: `true`
 
-  Whether to enable source maps for CSS. Disabling this can avoid some relative path related bugs in `css-loader` and make the build a bit faster.
+  CSSのソースマップをゆこうにするかどうか。これを無効にすると、`css-loader` の相対パス関連のバグを避けることができ、ビルドを少し早くすることができます。
 
-  Note this is automatically set to `false` if the `devtool` option is not present in the main Webpack config.
+  Note: もしメインのWebpackの設定に `devtool` オプションが存在しないければオートで `false` にセットされます。
 
 ### esModule
 
-- type: `Boolean`
-- default: `undefined`
+- 型： `Boolean`
+- デフォルト： `undefined`
 
-  Whether to emit esModule compatible code. By default vue-loader will emit default export in commonjs format like `module.exports = ....`. When `esModule` is set to true, default export will be transpiled into `exports.__esModule = true; exports = ...`. Useful for interoperating with transpiler other than Babel, like TypeScript.
+  esModule 互換コードを発行するかどうか。デフォルトの vue-loader のデフォルトの出力は `module.exports = ....` のような commonjs 形式で発行します。 `esModule` が true にセットされているとき、デフォルトの出力は `exports.__esModule = true; exports = ...` にトランスパイルされます。TypeScript のような Babel 以外の transpiler との相互運用に役立ちます。
 
 ### preserveWhitespace
 
-- type: `Boolean`
-- default: `true`
+- 型： `Boolean`
+- デフォルト： `true`
 
-  If set to `false`, the whitespaces between HTML tags in templates will be ignored.
+  もし `false` にセッとされていたら、テンプレート内の HTMLタグ間の空白は無視されます。
 
 ### transformToRequire
 
-- type: `{ [tag: string]: string | Array<string> }`
-- default: `{ img: 'src' }`
+- 型： `{ [tag: string]: string | Array<string> }`
+- デフォルト： `{ img: 'src', image: 'xlink:href' }`
 
-  During template compilation, the compiler can transform certain attributes, such as `src` URLs, into `require` calls, so that the target asset can be handled by Webpack. The default config transforms the `src` attribute on `<img>` tags.
+  テンプレートのコンパイル中、コンパイラは `src` の URL のような特定の属性を `require` 呼び出しに変換することができます。これによりターゲットの asset を Webpack が処理できるようになります。デフォルトの設定は `<img>` タグの `src` 属性とSVGの `<image>` タグの `xlink：href` 属性を変換します。
 
 ### buble
 
-- type: `Object`
-- default: `{}`
+  型： `Object`
+  デフォルト： `{}`
 
-  Configure options for `buble-loader` (if present), AND the buble compilation pass for template render functions.
+  `bubble-loader`（存在する場合）のオプションとテンプレートレンダリング関数のための buble のコンパイルパスを設定します。
 
-  > version note: in version 9.x, the template expressions are configured separately via the now removed `templateBuble` option.
+  > バージョンメモ： 9.x では、テンプレート式は削除された `templateBuble` オプションによって別々に設定されます。
 
-  The template render functions compilation supports a special transform `stripWith` (enabled by default), which removes the `with` usage in generated render functions to make them strict-mode compliant.
+  このテンプレートレンダリング関数のコンパイルでは、特別な変換 `stripWidth` （デフォルトで有効）がサポートされ、生成されたレンダリング関数で `with` の使用法が削除され、strict-mode に準拠します。
 
-  Example configuration:
+  設定の例：
 
   ``` js
   // webpack 1
   vue: {
     buble: {
-      // enable object spread operator
-      // NOTE: you need to provide Object.assign polyfill yourself!
+      // オブジェクトスプレッド演算子を有効にする
+      // メモ: Object.assign polyfillを自分で提供する必要があります！
       objectAssign: 'Object.assign',
 
-      // turn off the `with` removal
+      // `with` の除去をオフにする
       transforms: {
         stripWith: false
       }
@@ -145,10 +175,10 @@ module.exports = {
     rules: [
       {
         test: /\.vue$/,
-        loader: 'vue',
+        loader: 'vue-loader',
         options: {
           buble: {
-            // same options
+            // 同じオプション
           }
         }
       }
