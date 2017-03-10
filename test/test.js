@@ -700,4 +700,18 @@ describe('vue-loader', function () {
       done()
     })
   })
+
+  it('default lang', function (done) {
+    test({
+      entry: './test/fixtures/default-lang.vue',
+      vue: {
+        defaultLang: {
+          styles: 'stylus'
+        }
+      }
+    }, function (window) {
+      expect(window.document.querySelectorAll('style')[0].textContent).to.contain('.msg {\n  color: #f00;\n}')
+      done()
+    })
+  })
 })
