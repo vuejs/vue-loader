@@ -22,19 +22,19 @@
 
 如果你已经熟悉了 Webpack，随时可以跳过下面的说明。如果你没有使用过 Webpack,下面是一个快速介绍：
 
-[Webpack](http://webpack.github.io/) is a module bundler. It takes a bunch of files, treating each as a module, figuring out the dependencies between them, and bundle them into static assets that are ready for deployment.
-[Webpack](http://webpack.github.io/) is a module bundler. It takes a bunch of files, treating each as a module, figuring out the dependencies between them, and bundle them into static assets that are ready for deployment.
+[Webpack](http://webpack.github.io/) 是一个模块打包工具。它将一堆文件，每个作为一个模块，找出他们的依赖关系，将它们打包为可部署的静态资源。
 
 ![webpack](http://webpack.github.io/assets/what-is-webpack.png)
 
-For a basic example, imagine we have a bunch of CommonJS modules. They cannot run directly inside the browser, so we need to "bundle" them into a single file that can be included via a `<script>` tag. Webpack can follow the dependencies of the `require()` calls and do that for us.
+一个基本的例子，想像我们有一些 CommonJS 模块，它不能直接在浏览器中运行，所以我们需要打包成一个文件，以便可以使用 `<script>` 引用。Webpack 可以遵循 `require()` 调用的依赖关系，为我们完成这些工作。
 
-But Webpack can do more than that. With "loaders", we can teach Webpack to transform all types of files in any way we want before outputting the final bundle. Some examples include:
+但是 Webpack 可以做的不止这些。使用 "loaders"，我们可以教 Webpack 以任何方式去转换所有类型的文件。
 
-- Transpile ES2015, CoffeeScript or TypeScript modules into plain ES5 CommonJS modules;
+- 转换 ES2015,CoffeeScript 或者 TypeScript 模块为 ES5 CommonJS 模块；
 - Optionally you can pipe the source code through a linter before doing the compilation;
-- Transpile Jade templates into plain HTML and inline it as a JavaScript string;
-- Transpile SASS files into plain CSS, then convert it into a JavaScript snippet that insert the resulting CSS as a `<style>` tag;
-- Process an image file referenced in HTML or CSS, moved it to the desired destination based on the path configurations, and naming it using its md5 hash.
+- 将 Jade 模版转换为纯 HTML 并且嵌入 Javascript 字符串中；
+// TODO FIXME
+- 将 SASS 文件转换为纯 CSS,然后转入 JavaScript 片段，将生成的 CSS 放入 `<style>` 标签；
+- 处理 HTML 或者 CSS 中引用的图片，移动到配置的路径中，并且作用 hash 重命名。
 
-Webpack is so powerful that when you understand how it works, it can dramatically improve your front-end workflow. Its primary drawback is its verbose and complex configuration; but with this guide you should be able to find solutions for most common issues when using Webpack with Vue.js and `vue-loader`.
+当你理解 Webpack 原理后会感觉它是如此强大，它可以大大优化你的前端工作流程。它主要的缺点是配置复杂麻烦，但是当配合 Vue.js 和 `vue-loader`使用时，本指南应该可以帮助你找到解决方案。

@@ -1,8 +1,8 @@
-# Setting Up a Project
+# 新建一个项目
 
-### Using `vue-cli`
+### 使用 `vue-cli`
 
-It's recommended to scaffold a project using `vue-loader` with `vue-cli`:
+推荐脚手架工具 `vue-cli` 来构建一个使用 `vue-loader` 的项目：
 
 ``` bash
 npm install -g vue-cli
