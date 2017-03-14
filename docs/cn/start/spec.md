@@ -1,6 +1,6 @@
-# Vue Component Spec
+# Vue 组件细则
 
-A `*.vue` file is a custom file format that uses HTML-like syntax to describe a Vue component. Each `*.vue` file consists of three types of top-level language blocks: `<template>`, `<script>`, and `<style>`, and optionally additional custom blocks:
+`.vue` 文件是一个自定义的文件类型,用类 HTML 语法描述一个 Vue 组件。每个 `.vue` 文件包含三种类型的顶级语言块 `<template>`, `<script>` 和 `<style>`，还允许可选的自定义块：
 
 ``` html
 <template>
@@ -28,9 +28,9 @@ export default {
 </custom1>
 ```
 
-`vue-loader` will parse the file, extract each language block, pipe them through other loaders if necessary, and finally assemble them back into a CommonJS module whose `module.exports` is a Vue.js component options object.
+`vue-loader` 会解析文件，提取每个语言块，如有必要会通过 loaders 处理，最后将他们组装回一个 CommonJS 模块，`module.exports` 出一个 Vue.js 组件对象。
 
-`vue-loader` supports using non-default languages, such as CSS pre-processors and compile-to-HTML template languages, by specifying the `lang` attribute for a language block. For example, you can use SASS for the style of your component like this:
+`vue-loader` 支持使用非默认放言，比如 CSS 预处理器，预编译的 HTML 模版语言，通过设置语言块的 `lang` 属性。例如，你可以像下面这样对 style 块使用 SASS 
 
 ``` html
 <style lang="sass">
@@ -38,49 +38,49 @@ export default {
 </style>
 ```
 
-More details can be found in [Using Pre-Processors](../configurations/pre-processors.md).
+更多细节可以在[使用预处理器](../configurations/pre-processors.md)是找到。
 
-### Language Blocks
+### 语言块
 
 #### `<template>`
 
-- Default language: `html`.
+- 默认语言：`html`。
 
-- Each `*.vue` file can contain at most one `<template>` block at a time.
+- 每个 `.vue` 文件最多包含一个 `<template>` 块
 
-- Contents will be extracted as a string and used as the `template` option for the compiled Vue component.
+- 内容将被提取为字符串，并用作编译 Vue 组件的 `template` 选项。
 
 #### `<script>`
 
-- Default language: `js` (ES2015 is supported automatically if `babel-loader` or `buble-loader` is detected).
+- 默认语言：`js` (ES2015 在检测到 `babel-loader` 或 `buble-loader` 时自动支持).
 
-- Each `*.vue` file can contain at most one `<script>` block at a time.
+- 每个 `.vue` 文件最多包含一个 `<script>` 块
 
-- The script is executed in a CommonJS like environment (just like a normal `.js` module bundled via Webpack), which means you can `require()` other dependencies. And with ES2015 support, you can also use the `import` and `export` syntax.
+- script 在 CommonJS 环境中执行（就像通过 Webpack 打包的正常 js 模块），这意味这你可以 `require()` 其它依赖。在 ES2015 在支持下,你也可以使用 `import` 和 `export` 语法。
 
-- The script must export a Vue.js component options object. Exporting an extended constructor created by `Vue.extend()` is also supported, but a plain object is preferred.
+- script 必须导出 Vue.js 组件对象。也可以导出由 `Vue.extend()` 创建的扩展对象，但是简单对象是最好的选择。
 
 #### `<style>`
 
-- Default Language: `css`.
+- 默认语言： `css`。
 
-- Multiple `<style>` tags are supported in a single `*.vue` file.
+- 一个 `.vue` 文件可以包含多个 `<style>` 标签。
 
-- A `<style>` tag can have `scoped` or `module` attributes (see [Scoped CSS](../features/scoped-css.md) and [CSS Modules](../features/css-modules.md)) to help encapsulating the styles to the current component. Multiple `<style>` tags with different encapsulation modes can be mixed in the same component.
+- `<style>` 标签可以有 `scoped` 或者 `module` 属性 (查看 [Scoped CSS](../features/scoped-css.md) 和 [CSS Modules](../features/css-modules.md)) 以帮助你将样式封装到当前组件。多个不同封装的 `<style>` 标签将会混合在一个组件中。
 
-- By default, contents will be extracted and dynamically inserted into the document's `<head>` as an actual `<style>` tag using `style-loader`. It's also possible to [configure Webpack so that all styles in all components are extracted into a single CSS file](../configurations/extract-css.md).
+- 默认情况下内容将会提取并使用 `style-loader` 动态加入的 `<head>` 中，也可以[通过配置 Webpack 所有 styles 提取到单个 CSS 文件中](../configurations/extract-css.md).
 
-### Custom Blocks
+### 自定义块
 
-> Only supported in vue-loader 10.2.0+
+> 只在 vue-loader 10.2.0+ 中支持
 
-Additional custom blocks can be included in a `*.vue` file for any project specific needs, for example a `<docs>` block. `vue-loader` will use the tag name to look up which webpack loaders should be applied to the contents of the section. The webpack loaders should be specified in the `loaders` section of `vue-loader` options.
+对于项目的特定需求可以在 `.vue` 文件中填加额外的自定义块，例如 `<docs>` 块。`vue-loader` 将会使用标签名来查找对应的 loader。webpack loaders 需要在 `vue-loader` 的选项 `loaders` 中指定。
 
-For mode details, see [Custom Blocks](../configurations/custom-blocks.md).
+更多细节，查看[自定义块](../configurations/custom-blocks.md)。
 
-### Src Imports
+### Src 导入
 
-If you prefer splitting up your `*.vue` components into multiple files, you can use the `src` attribute to import an external file for a language block:
+如果你喜欢分隔你的 `.vue` 文件到多个文件中，你可以通过 `src` 属性导入外部文件形成文件块：
 
 ``` html
 <template src="./template.html"></template>
@@ -88,24 +88,25 @@ If you prefer splitting up your `*.vue` components into multiple files, you can 
 <script src="./script.js"></script>
 ```
 
-Beware that `src` imports follow the same path resolution rules to CommonJS `require()` calls, which means for relative paths you need to start with `./`, and you can import resources directly from installed NPM packages, e.g:
+需要注意的是 `src` 导入遵循和 `require()` 一样的规则，这意味着你相对路径需要以 `./` 开始，你还可以从 NPM packages 中直接导入资源，例如：
 
 ``` html
 <!-- import a file from the installed "todomvc-app-css" npm package -->
 <style src="todomvc-app-css/index.css">
 ```
 
-`src` imports also work with custom blocks, e.g.:
+在自定义块上 `src` 导入同样支持，例如：
 
 ``` html
 <unit-test src="./unit-test.js">
 </unit-test>
 ```
 
-### Syntax Highlighting
+### 语法高亮
 
-Currently there is syntax highlighting support for [Sublime Text](https://github.com/vuejs/vue-syntax-highlight), [Atom](https://atom.io/packages/language-vue), [Vim](https://github.com/posva/vim-vue), [Visual Studio Code](https://marketplace.visualstudio.com/items/liuji-jim.vue), [Brackets](https://github.com/pandao/brackets-vue), and [JetBrains products](https://plugins.jetbrains.com/plugin/8057) (WebStorm, PhpStorm, etc). Contributions for other editors/IDEs are highly appreciated! If you are not using any pre-processors in Vue components, you can also get by treating `*.vue` files as HTML in your editor.
 
-### Comments
+目前语法高亮支持 [Sublime Text](https://github.com/vuejs/vue-syntax-highlight), [Atom](https://atom.io/packages/language-vue), [Vim](https://github.com/posva/vim-vue), [Visual Studio Code](https://marketplace.visualstudio.com/items/liuji-jim.vue), [Brackets](https://github.com/pandao/brackets-vue), and [JetBrains products](https://plugins.jetbrains.com/plugin/8057) (WebStorm, PhpStorm, 等)。 对其他编辑器/IDEs 的贡献将会非常感谢！如果在 Vue 组件中没有使用任何预处理器，你可以把 `.vue` 文件当作HTML对待。
 
-Inside each block you shall use the comment syntax of the language being used (HTML, CSS, JavaScript, Jade, etc). For top-level comments, use HTML comment syntax: `<!-- comment contents here -->`
+### 注释
+
+在语言块中使用该语言块对应的注释语法。顶层注释使用 HTML 注释语法：`<!-- comment contents here -->`
