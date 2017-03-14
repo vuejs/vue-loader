@@ -1,6 +1,6 @@
-# Scoped CSS
+# CSS 作用域
 
-When a `<style>` tag has the `scoped` attribute, its CSS will apply to elements of the current component only. This is similar to the style encapsulation found in Shadow DOM. It comes with some caveats, but doesn't require any polyfills. It is achieved by using PostCSS to transform the following:
+当 `<style>` 标签有 `scoped` 属性时，它的 CSS 只作用于当前组件的元素。 这类似于 Shadow DOM 中的样式封装。它有一些注意事项，但不需要任何 polyfills。 它通过使用 PostCSS 来实现以下转换：
 
 ``` html
 <style scoped>
@@ -14,7 +14,7 @@ When a `<style>` tag has the `scoped` attribute, its CSS will apply to elements 
 </template>
 ```
 
-Into the following:
+转换结果：
 
 ``` html
 <style>
@@ -28,9 +28,9 @@ Into the following:
 </template>
 ```
 
-#### Notes
+#### 注意
 
-1. You can include both scoped and non-scoped styles in the same component:
+1. 你可以在一个组件中同时使用 scoped 和 non-scoped styles
 
   ``` html
   <style>
@@ -42,10 +42,11 @@ Into the following:
   </style>
   ```
 
-2. A child component's root node will be affected by both the parent's scoped CSS and the child's scoped CSS.
+2. 子组件的根节点将同时受父组件作用域和子组件作用域的影响。
 
-3. Partials are not affected by scoped styles.
+3. 不受作用域影响部分。
 
-4. **Scoped styles do not eliminate the need for classes**. Due to the way browsers render various CSS selectors, `p { color: red }` will be many times slower when scoped (i.e. when combined with an attribute selector). If you use classes or ids instead, such as in `.example { color: red }`, then you virtually eliminate that performance hit. [Here's a playground](http://stevesouders.com/efws/css-selectors/csscreate.php) where you can test the differences yourself.
+4. **Styles 作用域不能代替 classes**。考虑到浏览器渲染各种 CSS 选择器的方式，`p { color: red }` 在作用域中会慢很多(即转换为属性选择器)。如果你使用 classes 或者 ids 代替，比如 `.example { color: red }`，这样几乎没有性能影响。[Here's a playground](http://stevesouders.com/efws/css-selectors/csscreate.php)
+4. **Scoped styles do not eliminate the need for classes**. Due to the way browsers render various CSS selectors, `p { color: red }` will be many times slower when scoped (i.e. when combined with an attribute selector). If you use classes or ids instead, such as in `.example { color: red }`, then you virtually eliminate that performance hit. [Here's a playground](http://stevesouders.com/efws/css-selectors/csscreate.php) 你可以测试它们的不同。
 
-5. **Be careful with descendant selectors in recursive components!** For a CSS rule with the selector `.a .b`, if the element that matches `.a` contains a recursive child component, then all `.b` in that child component will be matched by the rule.
+5. **在递归组件中小心使用后代选择器!** CSS 规则 `.a .b`,如果元素 `.a` 包含递归子组件，所有的中组件中的 `.b` 会被匹配。
