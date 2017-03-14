@@ -1,7 +1,7 @@
-# Hot Reload
+# 热加载
 
-"Hot Reload" is not simply reloading the page when you edit a file. With hot reload enabled, when you edit a `*.vue` file, all instances of that component will be swapped in **without reloading the page**. It even preserves the current state of your app and these swapped components! This dramatically improves the development experience when you are tweaking the templates or styling of your components.
+"热加载"是当你修改文件的时候简单重新加载。启用热加载后，当你修改 `.vue` 文件时，所有该组件的实例会被替换，**并且不需要刷新页面**。它甚至保持应用和修改组件的状态！当你调整模版或者修改样式时，这极大的提高了开发体验。
 
 ![hot-reload](http://blog.evanyou.me/images/vue-hot.gif)
 
-When scaffolding the project with `vue-cli`, Hot Reload is enabled out-of-the-box.
+当使用脚手架工具 `vue-cli` 时，热加载是开箱即用的。
