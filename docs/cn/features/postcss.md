@@ -1,22 +1,22 @@
 # PostCSS
 
-Any CSS output processed by `vue-loader` is piped through [PostCSS](https://github.com/postcss/postcss) for scoped CSS rewriting. You can also add custom PostCSS plugins to the process, for example [autoprefixer](https://github.com/postcss/autoprefixer) or [CSSNext](http://cssnext.io/).
+由`vue-loader` 处理的 CSS 作用域重写，所有 CSS 输出都是通过 [PostCSS](https://github.com/postcss/postcss) 完成，你还可以为 PostCSS 添加自定义插件，例如 [autoprefixer](https://github.com/postcss/autoprefixer) 或者 [CSSNext](http://cssnext.io/)。
 
-## Using a Config File
+## 使用配置文件
 
-Starting in 11.0 `vue-loader` supports auto-loading the same PostCss config files supported by [`postcss-loader`](https://github.com/postcss/postcss-loader#usage):
+`vue-loader` 从 11.0 版本开始支持通过 [`postcss-loader`](https://github.com/postcss/postcss-loader#usage) 自动加载配置：
 
 - `postcss.config.js`
 - `.postcssrc`
-- `postcss` field in `package.json`
+- `package.json` 中的 `postcss`
 
-Using a config file allows you to share the same config between your normal CSS files processed by `postcss-loader` and the CSS inside `*.vue` files, and is recommended.
+使用配置文件允许一份配置用于处理普通 CSS 文件(通过`postcss-loader`)，和 `.vue` 文件内的 CSS，这是推荐做法。
 
-## Inline Options
+## 内联选项
 
-Alternatively, you can specify postcss config specifically for `*.vue` files using the `postcss` option for `vue-loader`.
+或者，你可以使用 `vue-loader` 的 `postcss` 选项来为 `.vue` 文件指定配置。
 
-Example usage in Webpack 1.x:
+Webpack 1.x 例子：
 
 ``` js
 // webpack.config.js
@@ -29,7 +29,7 @@ module.exports = {
 }
 ```
 
-For Webpack 2.x:
+Webpack 2.x 例子:
 
 ``` js
 // webpack.config.js
@@ -52,11 +52,11 @@ module.exports = {
 }
 ```
 
-In addition to providing an Array of plugins, the `postcss` option also accepts:
+除了插件数组之外，`postcss` 配置选项也接受：
 
-- A function that returns an array of plugins;
+- 一个返回插件数组的函数；
 
-- An object that contains options to be passed to the PostCSS processor. This is useful when you are using PostCSS projects that relies on custom parser/stringifiers:
+- 一个对象包含配置选项，传递给 PostCSS 处理器。这在使用自定义解析器/stringifiers 时非常有用:
 
   ``` js
   postcss: {
