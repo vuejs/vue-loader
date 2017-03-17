@@ -1,12 +1,12 @@
-# CSS Modules
+# CSS 模块
 
-> requires ^9.8.0
+> 需要 9.8.0
 
-[CSS Modules](https://github.com/css-modules/css-modules) is a popular system for modularizing and composing CSS. `vue-loader` provides first-class integration with CSS Modules as an alternative for simulated scoped CSS.
+[CSS 模块](https://github.com/css-modules/css-modules) 是一个流行的模块化和组合 CSS。`vue-loader` 提供了与 CSS 模块的整合，可以作为作用域 CSS 的替代。
 
-### Usage
+### 使用
 
-Just add the `module` attribute to your `<style>`:
+在你的 `<style>` 上添加 `module` 属性：
 
 ``` html
 <style module>
@@ -19,7 +19,7 @@ Just add the `module` attribute to your `<style>`:
 </style>
 ```
 
-This will turn on CSS Modules mode for `css-loader`, and the resulting class identifier object will be injected into the component as a computed property with the name `$style`. You can use it in your templates with a dynamic class binding:
+这将为 `css-loader` 打开 CSS 模块模式，生成的 CSS 对象将为组件注入一个名叫 `$style` 的计算属性，你可以在你的模块中使用动态绑定：
 
 ``` html
 <template>
@@ -29,7 +29,7 @@ This will turn on CSS Modules mode for `css-loader`, and the resulting class ide
 </template>
 ```
 
-Since it's a computed property, it also works with the object/array syntax of `:class`:
+因为它是一个计算属性，它也与 `：class` 的 object / array 语法一起使用：
 
 ``` html
 <template>
@@ -44,7 +44,7 @@ Since it's a computed property, it also works with the object/array syntax of `:
 </template>
 ```
 
-And you can also access it from JavaScript:
+你也可以在 JavaScript 访问它：
 
 ``` html
 <script>
@@ -58,11 +58,11 @@ export default {
 </script>
 ```
 
-Refer to the [CSS Modules spec](https://github.com/css-modules/css-modules) for mode details such as [global exceptions](https://github.com/css-modules/css-modules#exceptions) and [composition](https://github.com/css-modules/css-modules#composition).
+请参考 [CSS Modules spec](https://github.com/css-modules/css-modules) 了解更多详细信息 [global exceptions](https://github.com/css-modules/css-modules#exceptions) 和 [composition](https://github.com/css-modules/css-modules#composition).
 
-### Custom Inject Name
+### 自定义注入名称
 
-You can have more than one `<style>` tags in a single `*.vue` component. To avoid injected styles to overwrite each other, you can customize the name of the injected computed property by giving the `module` attribute a value:
+在 `.vue` 中你可以定义不止一个 `<style>`，为了避免被覆盖，你可以通过设置 `module` 属性来为它们定义注入后计算属性的名称。
 
 ``` html
 <style module="a">
@@ -74,9 +74,9 @@ You can have more than one `<style>` tags in a single `*.vue` component. To avoi
 </style>
 ```
 
-### Configuring `css-loader` Query
+### 配置 `css-loader` Query
 
-CSS Modules are processed via [css-loader](https://github.com/webpack/css-loader). With `<style module>`, the default query used for `css-loader` is:
+CSS 模块处理是通过 [css-loader](https://github.com/webpack/css-loader)。默认 query 如下：
 
 ``` js
 {
@@ -86,7 +86,7 @@ CSS Modules are processed via [css-loader](https://github.com/webpack/css-loader
 }
 ```
 
-You can use vue-loader's `cssModules` option to provide additional query options to `css-loader`:
+你可以使用 `vue-loader` 的 `cssModules` 选项去为 `css-loader` 添加 query 配置：
 
 ``` js
 // webpack 1
