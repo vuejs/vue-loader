@@ -1,10 +1,10 @@
-# Using Pre-Processors
+# 使用预处理器
 
-In Webpack, all pre-processors need to be applied with a corresponding loader. `vue-loader` allows you to use other Webpack loaders to process a part of a Vue component. It will automatically infer the proper loaders to use from the `lang` attribute of a language block.
+在 Webpack 中，所有的预处理器需要匹配对应的 loader。 `vue-loader` 允许你使用其它 Webpack loaders 处理 Vue 组件的一部分。它会根据 `lang` 属性自动推断出在使用的 loaders。
 
 ### CSS
 
-For example, let's compile our `<style>` tag with SASS:
+例如，使用 SASS 编译我们的 `<style>` 标签：
 
 ``` bash
 npm install sass-loader node-sass --save-dev
@@ -16,11 +16,12 @@ npm install sass-loader node-sass --save-dev
 </style>
 ```
 
+在内部，`<style>` 标签中的内容将会先由 `sass-loader` 进行处理，然后再传递进行下一步处理。
 Under the hood, the text content inside the `<style>` tag will be first compiled by `sass-loader` before being passed on for further processing.
 
 #### sass-loader caveat
 
-Contrary to what its name indicates, [*sass*-loader](https://github.com/jtangelder/sass-loader) parses *SCSS* syntax by default. If you actually want to use the indented *SASS* syntax, you have to configure vue-loader's options for sass-loader accordingly. 
+与名称相反，[*sass*-loader](https://github.com/jtangelder/sass-loader) 默认解析 *SCSS* 语法。如果你想要使用 *SASS* 语法，你需要配置 `vue-loader` 选项：
 
 ```javascript
 {
@@ -35,11 +36,11 @@ Contrary to what its name indicates, [*sass*-loader](https://github.com/jtangeld
 }
 ```
 
-See the [Advanced Loader Configuration](./advanced.md) Section for further information about how to configure vue-loader.
+如要获得更多 `vue-loader` 的配置信息，请查看 [Advanced Loader Configuration](./advanced.md) 章节。
 
 ### JavaScript
 
-All JavaScript inside Vue components are processed by `babel-loader` by default. But you can of course change it:
+Vue 组件中的所有 JavaScript 默认使用 `babel-loader` 处理。你也可以改变处理方式：
 
 ``` bash
 npm install coffee-loader --save-dev
@@ -51,9 +52,9 @@ npm install coffee-loader --save-dev
 </script>
 ```
 
-### Templates
+### 模版
 
-Processing templates is a little different, because most Webpack template loaders such as `pug-loader` return a template function instead of a compiled HTML string. Instead of using `pug-loader`, we can just install the original `pug`:
+模版的处理方式略有不同，因为大多数 Webpack 模版处理器（比如 `pug-loader`）会返回模版处理函数，而不是编译的 HTML 字符串，我们使用原来的 `pug` 替代 `pug-loader`:
 
 ``` bash
 npm install pug --save-dev
@@ -66,11 +67,11 @@ div
 </template>
 ```
 
-> **Important:** If you are using `vue-loader@<8.2.0`, you also need to install `template-html-loader`.
+> **重要:** 如果你使用 `vue-loader@<8.2.0`， 你也需要安装 `template-html-loader`。
 
-### Inline Loader Requests
+### 行内 Loader Requests
 
-You can use [Webpack loader requests](https://webpack.github.io/docs/loaders.html#introduction) in the `lang` attribute:
+你可以在 `lang` 属性中使用 [Webpack loader requests](https://webpack.github.io/docs/loaders.html#introduction) ：
 
 ``` html
 <style lang="sass?outputStyle=expanded">
@@ -78,4 +79,4 @@ You can use [Webpack loader requests](https://webpack.github.io/docs/loaders.htm
 </style>
 ```
 
-However, note this makes your Vue component Webpack-specific and not compatible with Browserify and [vueify](https://github.com/vuejs/vueify). **If you intend to ship your Vue component as a reusable 3rd-party component, avoid using this syntax.**
+但是，这使你的 Vue 组件只适用于 Webpack，不能与 Browserify and [vueify](https://github.com/vuejs/vueify) 一同使用。**如果你打算将你的 Vue 组件作为可重复使用的第三方组件，请避免使用这个语法。**
