@@ -1,6 +1,6 @@
-# Extracting CSS into a Single File
+# 提取 CSS 到单个文件
 
-Example config to extract all the processed CSS in all Vue components into a single CSS file:
+提取所有 Vue 组件中的 CSS 到单个文件的例子：
 
 ### Webpack 2.x
 
