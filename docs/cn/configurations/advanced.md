@@ -1,16 +1,16 @@
-# Advanced Loader Configuration
+# 高级配置
 
-Sometimes the you may want to:
+有些时候你想要这样：
 
-1. Apply a custom loader string to a language instead of letting `vue-loader` infer it;
+1. 对语言应用自定义 loader string，而不是让 `vue-loader` 去推断；
 
-2. Overwrite the built-in loader configuration for the default languages;
+2. 覆盖默认语言的内置配置。
 
-3. Pre-process or post-process a specific language block with custom loaders.
+3. 默认语言预处理或者后处理配置。
 
-To do that, specify the `loaders` option for `vue-loader`:
+为了实现这些，详细说明 `vue-loader` 的 `loaders` 选项：
 
-> Note that `preLoaders` and `postLoaders` are only supported in >=10.3.0
+> 注意 `preLoaders` 和 `postLoaders` 只在版本 >=10.3.0 支持
 
 ### Webpack 2.x
 
@@ -79,4 +79,4 @@ module.exports = {
 }
 ```
 
-A more practical usage of the advanced loader configuration is [extracting CSS inside components into a single file](./extract-css.md).
+高级配置的实际用法在 [extracting CSS inside components into a single file](./extract-css.md) 中。

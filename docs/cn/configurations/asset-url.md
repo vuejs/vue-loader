@@ -20,4 +20,4 @@ createElement('img', { attrs: { src: require('../image.png') }})
 
 1. `file-loader` 允许你指定资源文件的位置，允许使用 hashes 命名以获得长时间的缓存。此外，这意味着 **你可以就近管理你的图片文件，可以使用相对路径而不用担心布署**。使用正确的配置，Webpack 将会在输出中自动重写为正常的文件路径。
 
-2. `url-loader` 允许你设置转换 base-64 的文件最小值，这会减少小文件的 HTTP 请求。如果文件大于设置值，会自动的交给 `file-loader` 处理。
+2. `url-loader` 允许你设置转换为内联 base64 的文件最小值，这会减少小文件的 HTTP 请求。如果文件大于设置值，会自动的交给 `file-loader` 处理。
