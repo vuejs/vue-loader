@@ -1,14 +1,14 @@
-# Custom Blocks
+# 自定义块
 
-> Requires 10.2.0+
+> 在大于 10.2.0 中支持
 
-You can define custom language blocks inside `*.vue` files. The content of a custom block will be processed by the loaders specified in the `loaders` object of `vue-loader` options and then required by the component module. The configuration is similar to what is described in [Advanced Loader Configuration](../configurations/advanced.md), except the matching uses the tag name instead of the `lang` attribute.
+在 `.vue` 文件中，你可以自定义语言块。自定义块将会被 `vue-loader` 中配置的 `loaders` 处理，and then required by the component module。配置类似 [Advanced Loader Configuration](../configurations/advanced.md)，除了使用的是标签名称，而不是 `lang` 属性。
 
-If a matching loader is found for a custom block, it will be processed; otherwise the custom block will simply be ignored.
+如果 loader 匹配到自定义块，它会被处理；其它情况会被忽略。
 
-## Example
+## 例子
 
-Here's an example of extracting all `<docs>` custom blocks into a single docs file:
+这个例子是提取自定义块 `<docs>` 的内容到单个 docs 文件中：
 
 #### component.vue
 
