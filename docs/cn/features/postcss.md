@@ -4,7 +4,7 @@
 
 ## 使用配置文件
 
-`vue-loader` 从 11.0 版本开始支持通过 [`postcss-loader`](https://github.com/postcss/postcss-loader#usage) 自动加载配置：
+`vue-loader` 从 11.0 版本开始支持通过 [`postcss-loader`](https://github.com/postcss/postcss-loader#usage) 自动重载配置：
 
 - `postcss.config.js`
 - `.postcssrc`

@@ -1,6 +1,6 @@
-# Options Reference
+# 配置文档
 
-## Usage Difference Between Webpack 1 & 2
+## Webpack 1 和 2 配置差异
 
 For Webpack 2: pass the options directly to the loader rule.
 
