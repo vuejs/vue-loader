@@ -1,21 +1,21 @@
-- Getting Started
-  - [Vue Component Spec](start/spec.md)
-  - [Setting Up a Project](start/setup.md)
-- Features
+- 入門
+  - [Vue Component の仕様](start/spec.md)
+  - [プロジェクトのセットアップ](start/setup.md)
+- 機能
   - [ES2015](features/es2015.md)
-  - [Scoped CSS](features/scoped-css.md)
-  - [CSS Modules](features/css-modules.md)
+  - [スコープで区切られた CSS](features/scoped-css.md)
+  - [CSS モジュール](features/css-modules.md)
   - [PostCSS](features/postcss.md)
-  - [Hot Reload](features/hot-reload.md)
-- Configurations
-  - [Pre-Processors](configurations/pre-processors.md)
-  - [Asset URL Handling](configurations/asset-url.md)
-  - [Advanced Loader Configuration](configurations/advanced.md)
-  - [Extracting CSS File](configurations/extract-css.md)
-  - [Custom Blocks](configurations/custom-blocks.md)
-- Workflow
-  - [Production Build](workflow/production.md)
-  - [Linting](workflow/linting.md)
-  - [Testing](workflow/testing.md)
-  - [Testing with Mocks](workflow/testing-with-mocks.md)
-- [Options Reference](options.md)
+  - [ホットリロード](features/hot-reload.md)
+- 構成
+  - [プリプロセッサの使用](configurations/pre-processors.md)
+  - [アセット URL ハンドリング](configurations/asset-url.md)
+  - [高度なloaderの設定](configurations/advanced.md)
+  - [CSSを単一のファイルに抽出する](configurations/extract-css.md)
+  - [カスタムブロック](configurations/custom-blocks.md)
+- ワークフロー
+  - [プロダクションビルド](workflow/production.md)
+  - [リント](workflow/linting.md)
+  - [テスト](workflow/testing.md)
+  - [モックを使用したテスト](workflow/testing-with-mocks.md)
+- [オプションリファレンス](options.md)
