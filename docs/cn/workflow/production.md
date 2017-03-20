@@ -1,11 +1,11 @@
-# Production Build
+# 生产环境构建
 
-There are two things to do when building our bundle for production:
+生产环境打包要做两件事：
 
-1. Minify our application code;
-2. Use the [setup described in the Vue.js guide](https://vuejs.org/guide/deployment.html) to strip all the warnings from Vue.js source code.
+1. 缩小软件代码；
+2. 使用 [setup described in the Vue.js guide](https://vuejs.org/guide/deployment.html) 去除 Vue.js 中的警告。
 
-Here's an example config:
+下面是例子：
 
 ``` js
 // webpack.config.js
@@ -30,10 +30,10 @@ module.exports = {
 }
 ```
 
-Obviously we don't want to use this config during development, so there are several ways to approach this:
+显然我们不会想在开发时使用这些配置，有几种方式来实现：
 
-1. Dynamically build up the configuration object based on an environment variable;
+1. 使用环境变量动态的构建；
 
-2. Or, use two separate Webpack config files, one for development and one for production. And maybe share some common options between them in a third file, as shown in [vue-hackernews-2.0](https://github.com/vuejs/vue-hackernews-2.0).
+2. 或者，使用两个分开的 Webpack 配置文件，一个用于开发环境，一个用于生产环境。把可能共用的配置放到第三个文件中，如 [vue-hackernews-2.0](https://github.com/vuejs/vue-hackernews-2.0) 所示。
 
-It's really up to you as long as it achieves the goal.
+只要达到目的，怎么做取决于你。
