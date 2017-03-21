@@ -703,23 +703,31 @@ describe('vue-loader', function () {
 
   it('custom compiler modules', done => {
     test({
-      entry: './test/fixtures/basic.vue',
+      entry: './test/fixtures/custom-module.vue',
       vue: {
         compilerModules: [
           {
             postTransformNode: el => {
-              if (el.staticClass) {
-                el.staticClass = '"red blue"'
+              if (el.staticStyle) {
+                el.staticStyle = `$processStyle(${el.staticStyle})`
+              }
+              if (el.styleBinding) {
+                el.styleBinding = `$processStyle(${el.styleBinding})`
               }
             }
           }
         ]
       }
     }, (window, module) => {
+      var results = []
       var vnode = mockRender(module, {
-        msg: 'hi'
+        $processStyle: style => results.push(style),
+        transform: 'translateX(10px)'
       })
-      expect(vnode.data.staticClass).to.equal('red blue')
+      expect(results).to.deep.equal([
+        { 'flex-direction': 'row' },
+        { 'transform': 'translateX(10px)' }
+      ])
       done()
     })
   })
@@ -728,7 +736,7 @@ describe('vue-loader', function () {
     test({
       entry: './test/fixtures/basic.vue',
       vue: {
-        compilerModules: require.resolve('./fixtures/custom-compiler-module')
+        compilerModules: require.resolve('./fixtures/custom-module')
       }
     }, (window, module) => {
       var vnode = mockRender(module, {
