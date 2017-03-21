@@ -1,6 +1,6 @@
 # CSS 作用域
 
-当 `<style>` 标签有 `scoped` 属性时，它的 CSS 只作用于当前组件的元素。 这类似于 Shadow DOM 中的样式封装。它有一些注意事项，但不需要任何 polyfills。 它通过使用 PostCSS 来实现以下转换：
+当 `<style>` 标签有 `scoped` 属性时，它的 CSS 只作用于当前组件中的元素。 这类似于 Shadow DOM 中的样式封装。它有一些注意事项，但不需要任何 polyfills。 它通过使用 PostCSS 来实现以下转换：
 
 ``` html
 <style scoped>
@@ -44,9 +44,9 @@
 
 2. 子组件的根节点将同时受父组件作用域和子组件作用域的影响。
 
-3. 不受作用域影响部分。
+3. 部分元素不受作用域影响部分。
 
-4. **Styles 作用域不能代替 classes**。考虑到浏览器渲染各种 CSS 选择器的方式，`p { color: red }` 在作用域中会慢很多(即转换为属性选择器)。如果你使用 classes 或者 ids 代替，比如 `.example { color: red }`，这样几乎没有性能影响。[Here's a playground](http://stevesouders.com/efws/css-selectors/csscreate.php)
-4. **Scoped styles do not eliminate the need for classes**. Due to the way browsers render various CSS selectors, `p { color: red }` will be many times slower when scoped (i.e. when combined with an attribute selector). If you use classes or ids instead, such as in `.example { color: red }`, then you virtually eliminate that performance hit. [Here's a playground](http://stevesouders.com/efws/css-selectors/csscreate.php) 你可以测试它们的不同。
+4. **CSS 作用域不能代C替 classes**。考虑到浏览器渲染各种 CSS 选择器的方式，`p { color: red }` 在作用域中会慢很多(即转换为属性选择器)。如果你使用 classes 或者 ids 代替，比如 `.example { color: red }`，这样几乎没有性能影响。[Here's a playground](http://stevesouders.com/efws/css-selectors/csscreate.php) 你可以测试它们的不同。
 
-5. **在递归组件中小心使用后代选择器!** CSS 规则 `.a .b`,如果元素 `.a` 包含递归子组件，所有的中组件中的 `.b` 会被匹配。
+5. **在递归组件中小心使用后代选择器!** 对于带有选择器 `.a .b` 的CSS 规则，如果元素 `.a` 包含递归子组件，所有的子组件中的 `.b` 会被匹配。
+
