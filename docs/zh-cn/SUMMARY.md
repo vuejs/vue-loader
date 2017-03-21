@@ -1,21 +1,21 @@
-- Getting Started
+- 开始
   - [Vue 组件细则](start/spec.md)
-  - [为项目设置](start/setup.md)
-- Features
+  - [创建项目](start/setup.md)
+- 特性
   - [ES2015](features/es2015.md)
   - [CSS 作用域](features/scoped-css.md)
   - [CSS 模块](features/css-modules.md)
   - [PostCSS](features/postcss.md)
   - [热重载](features/hot-reload.md)
-- Configurations
+- 配置
   - [预处理](configurations/pre-processors.md)
   - [处理资源 URL](configurations/asset-url.md)
-  - [高级配置](configurations/advanced.md)
+  - [进阶配置](configurations/advanced.md)
   - [提取 CSS 文件](configurations/extract-css.md)
   - [自定义块](configurations/custom-blocks.md)
-- Workflow
+- 工作流程
   - [生产环境构建](workflow/production.md)
   - [代码检验](workflow/linting.md)
   - [测试](workflow/testing.md)
   - [使用 Mocks 测试](workflow/testing-with-mocks.md)
-- [Options Reference](options.md)
+- [选项参考](options.md)
