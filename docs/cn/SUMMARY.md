@@ -15,7 +15,7 @@
   - [自定义块](configurations/custom-blocks.md)
 - Workflow
   - [生产环境构建](workflow/production.md)
-  - [Linting](workflow/linting.md)
+  - [代码检验](workflow/linting.md)
   - [测试](workflow/testing.md)
   - [使用 Mocks 测试](workflow/testing-with-mocks.md)
 - [Options Reference](options.md)

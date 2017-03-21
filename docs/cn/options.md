@@ -2,7 +2,7 @@
 
 ## Webpack 1 和 2 配置差异
 
-For Webpack 2: pass the options directly to the loader rule.
+Webpack 2：配置直接放到 loader rule 中。
 
 ``` js
 module.exports = {
@@ -21,7 +21,7 @@ module.exports = {
 }
 ```
 
-For Webpack 1.x: add a root `vue` block in your Webpack config.
+Webpack 1.x：在 Webpack 配置中添加根节点 `vue` 块。
 
 ``` js
 module.exports = {
@@ -34,7 +34,7 @@ module.exports = {
 
 ### loaders
 
-- type: `{ [lang: string]: string }`
+- 类型： `{ [lang: string]: string }`
 
   An object specifying Webpack loaders to overwrite the default loaders used for language blocks inside `*.vue` files. The key corresponds to the `lang` attribute for language blocks, if specified. The default `lang` for each type is:
 
@@ -43,6 +43,7 @@ module.exports = {
   - `<style>`: `css`
 
   For example, to use `babel-loader` and `eslint-loader` to process all `<script>` blocks:
+  例如，使用 `babel-loader` 和 `eslint-loader` 处理所有的 `<script>` 块：
 
   ``` js
   // Webpack 2.x config
@@ -63,29 +64,30 @@ module.exports = {
 
 ### preLoaders
 
-- type: `{ [lang: string]: string }`
-- only supported in >=10.3.0
+- 类型： `{ [lang: string]: string }`
+- 在大于 >=10.3.0 版本中支持
 
-  The config format is the same as `loaders`, but `preLoaders` are applied to corresponding language blocks before the default loaders. You can use this to pre-process language blocks - a common use case would be build-time i18n.
-
+  配置格式和 `loaders` 相同，但是 `preLoaders` 会在默认 loaders 之前处理。你可以用来预处理语言块 - 一个例子是用来处理构建时的 i18n。
+  
 ### postLoaders
 
-- type: `{ [lang: string]: string }`
-- only supported in >=10.3.0
+- 类型： `{ [lang: string]: string }`
+- 在大于 >=10.3.0 版本中支持
 
-  The config format is the same as `loaders`, but `postLoaders` are applied after the default loaders. You can use this to post-process language blocks. However note that this is a bit more complicated:
+  配置格式和 `loaders` 相同，但是 `postLoaders` 会在默认 loaders 之后处理。你可以用来后处理语言块。注意这会有些复杂：
 
-  - For `html`, the result returned by the default loader will be compiled JavaScript render function code.
+  - 对于 `html`,默认 loader 返回结果会被编译为 JavaScript 渲染函数。
 
-  - For `css`, the result will be returned by `vue-style-loader` which isn't particularly useful in most cases. Using a postcss plugin will be a better option.
+  - 对于 `css`，由`vue-style-loader` 返回的结果通常不太有用。使用 postcss 插件将会是更好的选择。
 
 ### postcss
 
-> Note: in >=11.0.0 it is recommended to use a PostCSS config file instead. [The usage is the same as `postcss-loader`](https://github.com/postcss/postcss-loader#usage).
+> 注意： 在 >=11.0.0 版本中，推荐使用 PostCSS 配置文件代替. [The usage is the same as `postcss-loader`](https://github.com/postcss/postcss-loader#usage).
 
-- type: `Array` or `Function` or `Object`
+- 类型： `Array` or `Function` or `Object`
 
-  Specify custom PostCSS plugins to be applied to CSS inside `*.vue` files. If using a function, the function will called using the same loader context and should return an Array of plugins.
+
+  指定要应用于 `.vue` 文件中 CSS 的自定义 PostCSS 插件。如果使用函数，函数将使用相同的 loader 上下文调用，并返回一个数组。
 
   ``` js
   // ...
@@ -101,7 +103,7 @@ module.exports = {
   }
   ```
 
-  This option can also be an object that contains options to be passed to the PostCSS processor. This is useful when you are using PostCSS projects that relies on custom parser/stringifiers:
+  这个配置选项也可以是一个对象，这在使用依赖于自定义 parser/stringifiers 的项目会非常有用：
 
   ``` js
   postcss: {
@@ -114,46 +116,49 @@ module.exports = {
 
 ### cssSourceMap
 
-- type: `Boolean`
-- default: `true`
+- 类型: `Boolean`
+- 默认值: `true`
 
-  Whether to enable source maps for CSS. Disabling this can avoid some relative path related bugs in `css-loader` and make the build a bit faster.
+  是否开启 CSS 的 source maps，关闭可以避免 `css-loader` 的 some relative path related bugs 同时可以加快构建速度。
 
-  Note this is automatically set to `false` if the `devtool` option is not present in the main Webpack config.
-
+  注意，这个值会在 Webpack 配置中没有 `devtool` 的情况下自动设置为 `false`。
+  
 ### esModule
 
-- type: `Boolean`
-- default: `undefined`
+- 类型: `Boolean`
+- 默认值: `undefined`
 
+  是否导出 esModule 兼容代码，默认情况下 vue-loader 会导出 commonjs 格式，像 `module.exports = ....`。当 `esModule` 设置为 true 的情况下，导出会变为 `exports.__esModule = true; exports = ...`。Useful for interoperating with transpiler other than Babel，比如 TypeScript。
   Whether to emit esModule compatible code. By default vue-loader will emit default export in commonjs format like `module.exports = ....`. When `esModule` is set to true, default export will be transpiled into `exports.__esModule = true; exports = ...`. Useful for interoperating with transpiler other than Babel, like TypeScript.
 
 ### preserveWhitespace
 
-- type: `Boolean`
-- default: `true`
+- 类型: `Boolean`
+- 默认值: `true`
 
-  If set to `false`, the whitespaces between HTML tags in templates will be ignored.
-
+  如果设置为 `false`，模版中 HTML 标签之前的空格将会被忽略。
+ 
 ### transformToRequire
 
-- type: `{ [tag: string]: string | Array<string> }`
-- default: `{ img: 'src', image: 'xlink:href' }`
+- 类型: `{ [tag: string]: string | Array<string> }`
+- 默认值: `{ img: 'src', image: 'xlink:href' }`
 
-  During template compilation, the compiler can transform certain attributes, such as `src` URLs, into `require` calls, so that the target asset can be handled by Webpack. The default config transforms the `src` attribute on `<img>` tags and `xlink:href` attribute on `<image>` tags of SVG.
+  在模版编译过程中，编译器可以将某些属性，如 `src` 路径，转换为 `require` 调用，以便目标资源可以由 Webpack 处理。 默认配置会转换 `<img>` 标签上的 `src` 属性和 SVG 的 `<image>` 标签上的 `xlink：href` 属性。
 
 ### buble
 
-- type: `Object`
-- default: `{}`
+- 类型: `Object`
+- 默认值: `{}`
 
+  在使用 `buble-loader` 时配置它的选项，
   Configure options for `buble-loader` (if present), AND the buble compilation pass for template render functions.
 
-  > version note: in version 9.x, the template expressions are configured separately via the now removed `templateBuble` option.
+  > 版本警告：在 9.x 版本中，模板表达式通过现在已经删除的 `templateBuble` 选项单独配置。
 
-  The template render functions compilation supports a special transform `stripWith` (enabled by default), which removes the `with` usage in generated render functions to make them strict-mode compliant.
 
-  Example configuration:
+  模板渲染函数编译支持一个特殊的变换 `stripWith`（默认启用），它删除生成的渲染函数中的 `with` 用法，使它们兼容严格模式。
+
+  配置例子：
 
   ``` js
   // webpack 1
