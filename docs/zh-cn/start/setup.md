@@ -1,8 +1,8 @@
-# 为项目设置
+# 创建项目
 
 ### 使用 `vue-cli`
 
-推荐脚手架工具 `vue-cli` 来构建一个使用 `vue-loader` 的项目：
+推荐用脚手架工具 `vue-cli` 来创建一个使用 `vue-loader` 的项目：
 
 ``` bash
 npm install -g vue-cli
