@@ -700,4 +700,42 @@ describe('vue-loader', function () {
       done()
     })
   })
+
+  it('custom compiler modules', done => {
+    test({
+      entry: './test/fixtures/basic.vue',
+      vue: {
+        compilerModules: [
+          {
+            postTransformNode: el => {
+              if (el.staticClass) {
+                el.staticClass = '"red blue"'
+              }
+            }
+          }
+        ]
+      }
+    }, (window, module) => {
+      var vnode = mockRender(module, {
+        msg: 'hi'
+      })
+      expect(vnode.data.staticClass).to.equal('red blue')
+      done()
+    })
+  })
+
+  it('custom compiler modules (string)', done => {
+    test({
+      entry: './test/fixtures/basic.vue',
+      vue: {
+        compilerModules: require.resolve('./fixtures/custom-compiler-module')
+      }
+    }, (window, module) => {
+      var vnode = mockRender(module, {
+        msg: 'hi'
+      })
+      expect(vnode.data.staticClass).to.equal('red blue')
+      done()
+    })
+  })
 })
