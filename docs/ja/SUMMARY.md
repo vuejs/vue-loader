@@ -3,7 +3,7 @@
   - [プロジェクトのセットアップ](start/setup.md)
 - 機能
   - [ES2015](features/es2015.md)
-  - [スコープで区切られた CSS](features/scoped-css.md)
+  - [スコープ付き CSS](features/scoped-css.md)
   - [CSS モジュール](features/css-modules.md)
   - [PostCSS](features/postcss.md)
   - [ホットリロード](features/hot-reload.md)
