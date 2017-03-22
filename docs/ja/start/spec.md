@@ -1,6 +1,6 @@
 # Vue Component の仕様
 
-`*.vue` ファイルは HTM Lライクな構文を使用して Vue コンポーネントを記述するカスタムファイルフォーマットです。各 `*.vue` ファイルは `<template>`、`<script>`、`<style>` の三つのトップレベル言語のブロックで構成されています。
+`*.vue` ファイルは HTML ライクな構文を使用して Vue コンポーネントを記述するカスタムファイルフォーマットです。各 `*.vue` ファイルは `<template>`、`<script>`、`<style>` の三つのトップレベル言語のブロックで構成されています。
 
 ``` html
 <template>
@@ -51,13 +51,13 @@ export default {
 
 #### `<script>`
 
-- デフォルトの言語は `js`（`babel-loader` や `buble-loader' が検出される場合、自動的にES2015がサポートされる）
+- デフォルトの言語は `js`（`babel-loader` や `buble-loader` が検出される場合、自動的にES2015がサポートされる）
 
 - それぞれの `*.vue` ファイルは最大で一つの `<script>` ブロックを含みます。
 
 - スクリプトは CommonJS のように処理されます（ Webpack 経由でバンドルされた通常の `.js` モジュールと同じです）。つまり他の依存関係を `recuire()` することができます。そして ES2015 がサポートされ、`import` と `export` 構文を使用することが出来ます。
 
-- スクリプトは Vue.js コンポーネントのオプションオブジェクトをエクスポートする必要があります。 'Vue.extend()' によって拡張されたコンストラクタもエクスポートすることが可能ですが、プレーンなオブジェクトが優先されます。
+- スクリプトは Vue.js コンポーネントのオプションオブジェクトをエクスポートする必要があります。 'Vue.extend()' によって拡張されたコンストラクタもエクスポートすることが可能ですが、プレーンなオブジェクトが好ましいです。
 
 #### `<style>`
 
@@ -67,15 +67,15 @@ export default {
 
 - `<style>` タグは `scoped` か `module` （詳しくは [Scoped CSS](../features/scoped-css.md) と [CSS Modules](../features/css-modules.md) をみてください）を使用してコンポーネントにスタイルをカプセル化する事が出来ます。異なるカプセルモードをもつ複数の `<style>` タグは同じコンポーネント内で混在させることが出来ます。
 
-- デフォルトではコンテンツは `style-loader` を使用して実際の `<style>` タグとして抽出され、ドキュメントの `<head>` に動的に挿入されます。また、[すべてのコンポーネントのすべてのスタイルが単一のCSSファイルに抽出されるようにWebpackを設定する]（../configurations/extract-css.md)こともできます。
+- デフォルトではコンテンツは `style-loader` を使用して実際の `<style>` タグとして抽出され、ドキュメントの `<head>` に動的に挿入されます。また、[すべてのコンポーネントのすべてのスタイルが単一のCSSファイルに抽出されるようにWebpackを設定する](../configurations/extract-css.md)こともできます。
 
-### Custom Blocks
+### カスタムブロック
 
 > vue-loader 10.2.0+ でのみサポートされます
 
 例えば `<docs>` ブロックのように、プロジェクトの特別な必用に応じて `*.vue` ファイルに カスタムブロックを追加することが出来ます。 `vue-loader`はタグ名を使用してセクションの内容に適用されるべき webpack loader を検索します。webpack loader は、`vue-loader` オプションの `loaders` セクションで指定する必要があります。
 
-このモードの詳細については、[Custom Blocks](../configurations/custom-blocks.md)を参照してください。
+このモードの詳細については、[カスタムブロック](../configurations/custom-blocks.md)を参照してください。
 
 ### ソースのインポート
 
@@ -96,8 +96,8 @@ export default {
 
 ### シンタックスハイライト
 
-現在それらはシンタクスハイライトをサポートしているのは、 [Sublime Text](https://github.com/vuejs/vue-syntax-highlight), [Atom](https://atom.io/packages/language-vue), [Vim](https://github.com/posva/vim-vue), [Visual Studio Code](https://marketplace.visualstudio.com/items/liuji-jim.vue), [Brackets](https://github.com/pandao/brackets-vue), [JetBrains products](https://plugins.jetbrains.com/plugin/8057) (WebStorm, PhpStorm, etc). 他のエディタ/IDEへのコントリビュートは高く評価されます！もしVue コンポーネント内でプリプロセッサを使用していない場合は、エディタで `*.vue` ファイルをHTMLとして扱うことが出来ます。
+現在それらはシンタクスハイライトをサポートしているのは、 [Sublime Text](https://github.com/vuejs/vue-syntax-highlight), [Atom](https://atom.io/packages/language-vue), [Vim](https://github.com/posva/vim-vue), [Visual Studio Code](https://marketplace.visualstudio.com/items/liuji-jim.vue), [Brackets](https://github.com/pandao/brackets-vue), [JetBrains products](https://plugins.jetbrains.com/plugin/8057) (WebStorm, PhpStorm, etc). 他のエディタ/IDEへのコントリビュートは高く評価されます！もし Vue コンポーネント内でプリプロセッサを使用していない場合は、エディタで `*.vue` ファイルを HTML として扱うことが出来ます。
 
 ### コメント
 
-それぞれのブロック内でそれぞれの言語のコメントシンタックスを使用することが出来る（HTML、CSS、JavaScript、Jade、etc）。最上部のコメントはHTMLコメントシンタックスを使用してください： `<!-- コメントはこちら -->`
+それぞれのブロック内でそれぞれの言語のコメントシンタックスを使用することが出来る（HTML、CSS、JavaScript、Jade、etc）。最上部のコメントは HTML コメントシンタックスを使用してください： `<!-- コメントはこちら -->`
