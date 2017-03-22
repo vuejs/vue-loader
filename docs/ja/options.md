@@ -2,7 +2,7 @@
 
 ## Webpack 1と2の使い方の違い
 
-Webpack 2の場合：オプションをloaderルールに直接渡します。
+Webpack 2 の場合：オプションを loader ルールに直接渡します。
 
 ``` js
 module.exports = {
@@ -21,7 +21,7 @@ module.exports = {
 }
 ```
 
-Webpack 1.xの場合：Webpackの設定のルートに `vue`ブロックを追加します。
+Webpack 1.x の場合： Webpack の設定のルートに `vue` ブロックを追加します。
 
 ``` js
 module.exports = {
@@ -34,15 +34,15 @@ module.exports = {
 
 ### loaders
 
-- 型: `{ [lang: string]: string }`
+- 型： `{ [lang: string]: string }`
 
-  `* .vue`ファイル内の言語ブロックに使用されるデフォルトのloaderを上書きするWebpack loaderを指定するオブジェクト。キーは指定されている場合、言語ブロックの `lang`属性に対応します。各タイプのデフォルトの `lang`は次のとおりです：
+  `* .vue` ファイル内の言語ブロックに使用されるデフォルトの loader を上書きする Webpack loader を指定するオブジェクト。キーは指定されている場合、言語ブロックの `lang` 属性に対応します。各タイプのデフォルトの `lang` は次のとおりです：
 
   - `<template>`: `html`
   - `<script>`: `js`
   - `<style>`: `css`
 
-  たとえば、`babel-loader`と`eslint-loader`を使ってすべての `<script>`ブロックを処理するには：
+  たとえば、`babel-loader` と `eslint-loader` を使ってすべての `<script>` ブロックを処理するには：
 
   ``` js
   // Webpack 2.x config
@@ -63,21 +63,21 @@ module.exports = {
 
 ### preLoaders
 
-- 型: `{ [lang: string]: string }`
+- 型： `{ [lang: string]: string }`
 - 10.3.0 以上でサポートされます。
 
-  config形式は `loaders`と同じですが、` preLoaders`はデフォルトloaderの前に対応する言語ブロックに適用されます。これを使用して言語ブロックを前処理することができます。一般的な使用例としては、i18nのビルド時です。
+  config 形式は `loaders` と同じですが、`preLoaders` はデフォルト loader の前に対応する言語ブロックに適用されます。これを使用して言語ブロックを前処理することができます。一般的な使用例としては、i18n のビルド時です。
 
 ### postLoaders
 
-- 型: `{ [lang: string]: string }`
+- 型：`{ [lang: string]: string }`
 - 10.3.0 以上でサポートされます。
 
-  config形式は `loaders`と同じですが、` postLoaders`はデフォルトloaderの後に適用されます。これを使用して言語ブロックを後処理することができます。ただしこれは少し複雑になります：
+  config 形式は `loaders` と同じですが、` postLoaders` はデフォルト loader の後に適用されます。これを使用して言語ブロックを後処理することができます。ただしこれは少し複雑になります：
 
-  - `html`の場合、デフォルトのloaderによって返される結果は、コンパイルされたJavaScriptレンダリング関数コードになります。
+  - `html` の場合、デフォルトの loader によって返される結果は、コンパイルされた JavaScript レンダリング関数コードになります。
 
-  - `css`の場合、結果は` vue-style-loader`によって返されます。これはほとんどの場合特に有用ではありません。postcssプラグインを使用する方が良いでしょう。
+  - `css` の場合、結果は` vue-style-loader` によって返されます。これはほとんどの場合特に有用ではありません。postcss プラグインを使用する方が良いでしょう。
 
 ### postcss
 
@@ -85,7 +85,7 @@ module.exports = {
 
 - 型： `Array` もしくは `Function` か `Object`
 
-  カスタムしたPostCSSプラグインを `*.vue` ファイル内のCSSに適用するよう指定します。もし関数を使用しているなら、この関数は同じloaderのコンテキストを使用して呼び出され、プラグインの配列を返す必要があります。
+  カスタムした PostCSS プラグインを `*.vue` ファイル内の CSS に適用するよう指定します。もし関数を使用しているなら、この関数は同じ loader のコンテキストを使用して呼び出され、プラグインの配列を返す必要があります。
 
   ``` js
   // ...
@@ -117,9 +117,9 @@ module.exports = {
 - 型： `Boolean`
 - デフォルト: `true`
 
-  CSSのソースマップをゆこうにするかどうか。これを無効にすると、`css-loader` の相対パス関連のバグを避けることができ、ビルドを少し早くすることができます。
+  CSS のソースマップをゆこうにするかどうか。これを無効にすると、`css-loader` の相対パス関連のバグを避けることができ、ビルドを少し早くすることができます。
 
-  Note: もしメインのWebpackの設定に `devtool` オプションが存在しないければオートで `false` にセットされます。
+  注意： もしメインの Webpack の設定に `devtool` オプションが存在しないければオートで `false` にセットされます。
 
 ### esModule
 
@@ -133,14 +133,14 @@ module.exports = {
 - 型： `Boolean`
 - デフォルト： `true`
 
-  もし `false` にセッとされていたら、テンプレート内の HTMLタグ間の空白は無視されます。
+  もし `false` にセッとされていたら、テンプレート内の HTML タグ間の空白は無視されます。
 
 ### transformToRequire
 
 - 型： `{ [tag: string]: string | Array<string> }`
 - デフォルト： `{ img: 'src', image: 'xlink:href' }`
 
-  テンプレートのコンパイル中、コンパイラは `src` の URL のような特定の属性を `require` 呼び出しに変換することができます。これによりターゲットの asset を Webpack が処理できるようになります。デフォルトの設定は `<img>` タグの `src` 属性とSVGの `<image>` タグの `xlink：href` 属性を変換します。
+  テンプレートのコンパイル中、コンパイラは `src` の URL のような特定の属性を `require` 呼び出しに変換することができます。これによりターゲットの asset を Webpack が処理できるようになります。デフォルトの設定は `<img>` タグの `src` 属性と SVG の `<image>` タグの `xlink：href` 属性を変換します。
 
 ### buble
 
