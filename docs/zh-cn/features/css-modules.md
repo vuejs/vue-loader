@@ -1,8 +1,8 @@
 # CSS 模块
 
-> 需要 9.8.0
+> 需要 ^9.8.0
 
-[CSS 模块](https://github.com/css-modules/css-modules) 是一个流行的模块化和组合 CSS。`vue-loader` 提供了与 CSS 模块的整合，可以作为作用域 CSS 的替代。
+[CSS 模块](https://github.com/css-modules/css-modules) 是一个用于模块化和组合 CSS的流行系统。`vue-loader` 提供了与 CSS 模块的一流集成，可以作为模拟 CSS 作用域的替代方案。
 
 ### 使用
 
@@ -29,7 +29,7 @@
 </template>
 ```
 
-因为它是一个计算属性，它也与 `：class` 的 object / array 语法一起使用：
+由于它是一个计算属性，它也与 `：class` 的 object/array 语法一起使用：
 
 ``` html
 <template>

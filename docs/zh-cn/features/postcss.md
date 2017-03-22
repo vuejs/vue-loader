@@ -1,10 +1,10 @@
 # PostCSS
 
-由`vue-loader` 处理的 CSS 作用域重写，所有 CSS 输出都是通过 [PostCSS](https://github.com/postcss/postcss) 完成，你还可以为 PostCSS 添加自定义插件，例如 [autoprefixer](https://github.com/postcss/autoprefixer) 或者 [CSSNext](http://cssnext.io/)。
+由`vue-loader` 处理的 CSS 输出，都是通过 [PostCSS](https://github.com/postcss/postcss) 进行作用域重写，你还可以为 PostCSS 添加自定义插件，例如 [autoprefixer](https://github.com/postcss/autoprefixer) 或者 [CSSNext](http://cssnext.io/)。
 
 ## 使用配置文件
 
-`vue-loader` 从 11.0 版本开始支持通过 [`postcss-loader`](https://github.com/postcss/postcss-loader#usage) 自动重载配置：
+`vue-loader` 从 11.0 版本开始支持通过 [`postcss-loader`](https://github.com/postcss/postcss-loader#usage) 自动加载同一个配置文件：
 
 - `postcss.config.js`
 - `.postcssrc`
