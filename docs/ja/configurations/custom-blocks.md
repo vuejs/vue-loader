@@ -1,20 +1,20 @@
-# Custom Blocks
+# カスタムブロック
 
-> Requires 10.2.0+
+> 10.2.0 以上で動作します
 
-You can define custom language blocks inside `*.vue` files. The content of a custom block will be processed by the loaders specified in the `loaders` object of `vue-loader` options and then required by the component module. The configuration is similar to what is described in [Advanced Loader Configuration](../configurations/advanced.md), except the matching uses the tag name instead of the `lang` attribute.
+`*.vue` ファイル内にカスタム言語ブロックを定義することが出来ます。カスタムブロックの内容は `vue-loader` のオブジェクトで指定された loader によって処理され、次にコンポーネントモジュールによって要求されます。この設定は `lang` 属性の代わりにタグ名を使用する点をのぞいて[高度な loader の設定](../configurations/advanced.md)に記載されたものと似ています。
 
-If a matching loader is found for a custom block, it will be processed; otherwise the custom block will simply be ignored.
+もしカスタムブロックにマッチする loader を見つけたら、それは処理されます。でなければそのカスタムブロックは単に無視されます。
 
-## Example
+## 例
 
-Here's an example of extracting all `<docs>` custom blocks into a single docs file:
+全ての `<docs>` カスタムブロックを一つのドキュメントファイルに展開する例を示します：
 
 #### component.vue
 
 ``` html
 <docs>
-## This is an Example component.
+## これは example component です
 </docs>
 
 <template>
@@ -52,7 +52,7 @@ module.exports = {
         loader: 'vue',
         options: {
           loaders: {
-            // extract all <docs> content as raw text
+            // 全ての <docs> の内容は raw text として展開されます
             'docs': ExtractTextPlugin.extract('raw-loader'),
           }
         }
@@ -60,7 +60,7 @@ module.exports = {
     ]
   },
   plugins: [
-    // output all docs into a single file
+    // 全ての docs は一つのファイルに出力されます
     new ExtractTextPlugin('docs.md')
   ]
 }
