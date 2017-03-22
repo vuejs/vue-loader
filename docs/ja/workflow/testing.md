@@ -1,10 +1,10 @@
 # テスト
 
-> [webpack vue-cliテンプレート]（https://github.com/vuejs-templates/webpack）には、事前に設定されたユニットテストとe2eテストの設定が用意されています。
+> [webpack vue-cliテンプレート](https://github.com/vuejs-templates/webpack)には、事前に設定されたユニットテストとe2eテストの設定が用意されています。
 
-`* .vue`ファイルをテストするときには、普通のCommonJSベースのテストランナーを使うことができません。なぜならそのテストランナーは` * .vue`ファイルの扱い方を知らないからです。代わりに、Webpack + vue-loaderを使用してテストファイルをバンドルします。推奨設定は[Karma]（http://karma-runner.github.io/0.13/index.html）と[karma-webpack]（https://github.com/webpack/karma-webpack）です。
+`* .vue`ファイルをテストするときには、普通の CommonJS ベースのテストランナーを使うことができません。なぜならそのテストランナーは `*.vue` ファイルの扱い方を知らないからです。代わりに、Webpack + vue-loader を使用してテストファイルをバンドルします。推奨設定は [Karma](http://karma-runner.github.io/0.13/index.html) と [karma-webpack](https://github.com/webpack/karma-webpack) です。
 
-Karmaはブラウザを起動してテストを実行するテストランナーです。テストするブラウザと、使用するテストフレームワーク（たとえば、MochaやJasmineなど）を選択できます。[PhantomJS]（http://phantomjs.org/）のテストを[Jasmine]（http://jasmine.github.io/edge/introduction.html）テストフレームワークで実行するKarmaの設定例を次に示します:
+Karma はブラウザを起動してテストを実行するテストランナーです。テストするブラウザと、使用するテストフレームワーク（たとえば、MochaやJasmineなど）を選択できます。[PhantomJS](http://phantomjs.org/) のテストを[Jasmine](http://jasmine.github.io/edge/introduction.html) テストフレームワークで実行する Karma の設定例を次に示します:
 
 ``` bash
 npm install\
@@ -16,7 +16,6 @@ npm install\
 
 ``` js
 // 要求があれば同じWebpackの設定を使用することが可能です
-// however, remember to delete the original entry since we don't
 // ただし、テスト中に元のエントリが不要なので、
 // 元のエントリを削除することを忘れないでください
 var webpackConfig = require('./webpack.config.js')
@@ -35,7 +34,7 @@ module.exports = function (config) {
     },
     // webpackの設定を使用します
     webpack: webpackConfig,
-    // 使用しないテキストの壁を避ける
+    // 不要なテキスト出力を回避します
     webpackMiddleware: {
       noInfo: true
     },
@@ -54,7 +53,7 @@ var testsContext = require.context('.', true, /\.spec$/)
 testsContext.keys().forEach(testsContext)
 ```
 
-このエントリファイルは、単に同じフォルダ内の`.spec.js`で終わる他のすべてのファイルを必要とします。これで実際にいくつかのテストを書くことができます：
+このエントリファイルは、単に同じフォルダ内の `.spec.js` で終わる他のすべてのファイルを必要とします。これで実際にいくつかのテストを書くことができます：
 
 ``` js
 // test/component-a.spec.js
@@ -68,7 +67,7 @@ describe('a.vue', function () {
     expect(ComponentA.data().msg).toBe('Hello from Component A!')
   })
 
-  // 実際にコンポーネントをレンダリングしてレンダリングされた結果をアサートする
+  // 実際にコンポーネントをレンダリングしてレンダリングされた結果をアサートします
   it('should render correct message', function () {
     var vm = new Vue({
       template: '<div><test></test></div>',
@@ -81,7 +80,7 @@ describe('a.vue', function () {
 })
 ```
 
-テストを実行するには、次のNPMスクリプトを追加します：
+テストを実行するには、次の NPM スクリプトを追加します：
 
 ``` js
 // package.json
@@ -99,4 +98,4 @@ describe('a.vue', function () {
 npm test
 ```
 
-最後にもう一度、[webpack vue-cli template]（https://github.com/vuejs-templates/webpack）には、テストに関する完全な実例が含まれています。
+最後にもう一度、[こちらを参照してください](https://github.com/vuejs-templates/webpack)。テストに関する完全な実例が含まれています。
