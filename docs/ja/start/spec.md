@@ -24,7 +24,7 @@ export default {
 </style>
 
 <custom1>
-  例えばこのようなことも可能です・コンポーネントのドキュメントを参照してください。
+  例えばコンポーネントのドキュメントを書くことが出来ます
 </custom1>
 ```
 
@@ -96,7 +96,7 @@ export default {
 
 ### シンタックスハイライト
 
-現在それらはシンタクスハイライトをサポートしているのは、 [Sublime Text](https://github.com/vuejs/vue-syntax-highlight), [Atom](https://atom.io/packages/language-vue), [Vim](https://github.com/posva/vim-vue), [Visual Studio Code](https://marketplace.visualstudio.com/items/liuji-jim.vue), [Brackets](https://github.com/pandao/brackets-vue), [JetBrains products](https://plugins.jetbrains.com/plugin/8057) (WebStorm, PhpStorm, etc). 他のエディタ/IDEへのコントリビュートは高く評価されます！もし Vue コンポーネント内でプリプロセッサを使用していない場合は、エディタで `*.vue` ファイルを HTML として扱うことが出来ます。
+現在それらはシンタクスハイライトをサポートしているのは、[Sublime Text](https://github.com/vuejs/vue-syntax-highlight), [Atom](https://atom.io/packages/language-vue), [Vim](https://github.com/posva/vim-vue), [Visual Studio Code](https://marketplace.visualstudio.com/items/liuji-jim.vue), [Brackets](https://github.com/pandao/brackets-vue), [JetBrains products](https://plugins.jetbrains.com/plugin/8057) (WebStorm, PhpStorm, etc). 他のエディタ/IDEへのコントリビュートは高く評価されます！もし Vue コンポーネント内でプリプロセッサを使用していない場合は、エディタで `*.vue` ファイルを HTML として扱うことが出来ます。
 
 ### コメント
 

@@ -1,6 +1,6 @@
 # プリプロセッサの使用
 
-Webpack において、全てのプリプロセッサは対応するloaderを適用する必要があります。 `vue-loader` は他の Webpack の loader を使って Vue コンポーネントを処理することが出来ます。言語ブロックの `lang` 属性から適切なloaderを自動的に推論します。
+Webpack において、全てのプリプロセッサは対応する loader を適用する必要があります。 `vue-loader` は他の Webpack の loader を使って Vue コンポーネントを処理することが出来ます。言語ブロックの `lang` 属性から適切な loader を自動的に推論します。
 
 ### CSS
 
@@ -35,7 +35,7 @@ npm install sass-loader node-sass --save-dev
 }
 ```
 
-vue-loader を構成する方法の詳細については、[高度なloaderの設定]（./advanced.md）セクションを参照してください。
+vue-loader を構成する方法の詳細については、[高度な loader の設定](./advanced.md)セクションを参照してください。
 
 ### JavaScript
 
@@ -47,13 +47,13 @@ npm install coffee-loader --save-dev
 
 ``` html
 <script lang="coffee">
-  # coffeescriptを書いてください!
+  # coffeescript を書いてください!
 </script>
 ```
 
 ### テンプレート
 
-`pug-loader`のようなほとんどのWebpackテンプレートloaderは、コンパイルされたHTML文字列の代わりにテンプレート関数を返すので、templateの処理は少し異なります。`pug-loader` を使う代わりに、オリジナルの `pug` をインストールをするだけです：
+`pug-loader` のようなほとんどのWebpackテンプレート loader は、コンパイルされたHTML文字列の代わりにテンプレート関数を返すので、template の処理は少し異なります。`pug-loader` を使う代わりに、オリジナルの `pug` をインストールをするだけです：
 
 ``` bash
 npm install pug --save-dev
@@ -74,8 +74,8 @@ div
 
 ``` html
 <style lang="sass?outputStyle=expanded">
-  /* use sass here with expanded output */
+  /* ここでは拡張出力で sass を使用します */
 </style>
 ```
 
-ただこれにより Vue コンポーネントが Webpack 固有となり Browserify および [vueify](https://github.com/vuejs/vueify) と互換性がなくなります。 **Vueコンポーネントを再利用可能なサードパーティコンポーネントとして提供する場合は、この構文を使用しないでください。**
+ただこれにより Vue コンポーネントが Webpack 固有となり Browserify および [vueify](https://github.com/vuejs/vueify) と互換性がなくなります。 **Vue コンポーネントを再利用可能なサードパーティコンポーネントとして提供する場合は、この構文を使用しないでください。**

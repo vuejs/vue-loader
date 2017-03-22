@@ -10,12 +10,12 @@
 - 構成
   - [プリプロセッサの使用](configurations/pre-processors.md)
   - [アセット URL ハンドリング](configurations/asset-url.md)
-  - [高度なloaderの設定](configurations/advanced.md)
-  - [CSSを単一のファイルに抽出する](configurations/extract-css.md)
+  - [高度な loader の設定](configurations/advanced.md)
+  - [CSS を単一のファイルに抽出する](configurations/extract-css.md)
   - [カスタムブロック](configurations/custom-blocks.md)
 - ワークフロー
   - [プロダクションビルド](workflow/production.md)
-  - [リント](workflow/linting.md)
+  - [Linting](workflow/linting.md)
   - [テスト](workflow/testing.md)
   - [モックを使用したテスト](workflow/testing-with-mocks.md)
 - [オプションリファレンス](options.md)

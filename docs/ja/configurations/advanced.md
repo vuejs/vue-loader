@@ -1,4 +1,4 @@
-# 高度なloaderの設定
+# 高度な loader の設定
 
 時折こうしたくなるかもしれません：
 
@@ -14,7 +14,7 @@
 
 ``` js
 module.exports = {
-  // 他のオプション...
+  // 他のオプション
   module: {
     // module.rules は 1.x での module.loaders と同じです
     rules: [
@@ -77,4 +77,4 @@ module.exports = {
 }
 ```
 
-高度なローダー設定のより実用的な使用方法は、[コンポーネント内のCSSを1つのファイルに抽出する](./expression-css.md)にあります。
+高度な loader の設定のより実用的な使用方法は、[CSS を単一のファイルに抽出する](./expression-css.md)にあります。
