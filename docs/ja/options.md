@@ -92,7 +92,7 @@ module.exports = {
   {
     loader: 'vue-loader',
     options: {
-      // メモ: `loaders` 以下に `postcss` のオプションをネストさせてはいけません
+      // 注意： `loaders` 以下に `postcss` のオプションをネストさせてはいけません
       postcss: [require('postcss-cssnext')()],
       loaders: {
         // ...
@@ -117,7 +117,7 @@ module.exports = {
 - 型： `Boolean`
 - デフォルト: `true`
 
-  CSS のソースマップをゆこうにするかどうか。これを無効にすると、`css-loader` の相対パス関連のバグを避けることができ、ビルドを少し早くすることができます。
+  CSS のソースマップを有効にするかどうか。これを無効にすると、`css-loader` の相対パス関連のバグを避けることができ、ビルドを少し早くすることができます。
 
   注意： もしメインの Webpack の設定に `devtool` オプションが存在しないければオートで `false` にセットされます。
 
@@ -133,7 +133,7 @@ module.exports = {
 - 型： `Boolean`
 - デフォルト： `true`
 
-  もし `false` にセッとされていたら、テンプレート内の HTML タグ間の空白は無視されます。
+  もし `false` に設定されていたら、テンプレート内の HTML タグ間の空白は無視されます。
 
 ### transformToRequire
 
