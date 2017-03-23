@@ -32,7 +32,7 @@
 - 转换 ES2015,CoffeeScript 或者 TypeScript 模块为普通的 ES5 CommonJS 模块；
 - 可以选择在编译之前检验你的源代码；
 - 将 Jade 模版转换为纯 HTML 并且嵌入 Javascript 字符串中；
-- 将 SASS 文件转换为纯 CSS，then convert it into a JavaScript snippet that insert the resulting CSS as a `<style>` tag; //TODO
+- 将 SASS 文件转换为纯 CSS，then convert it into a JavaScript snippet that insert the resulting CSS as a `<style>` tag;
 - 处理 HTML 或者 CSS 中引用的图片，移动到配置的路径中，并且使用 md5 hash 重命名。
 
 当你理解 Webpack 原理后会感觉它是如此强大，它可以大大优化你的前端工作流程。它主要的缺点是配置复杂麻烦，但是使用本指南， Vue.js 和 `vue-loader`使用时的常见问题，应该可以帮助你找到解决方案。
