@@ -113,7 +113,7 @@ We are now able to access the `<docs>` block's content of imported components du
 ``` html
 <template>
   <div>
-    <component-b \>
+    <component-b />
     <p>{{ docs }}</p>
   </div>
 </template>
