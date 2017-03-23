@@ -6,7 +6,7 @@
 
 Если подходящий загрузчик будет найден для пользовательского блока, он будет обработан; в противном случае пользовательский блок будет просто проигнорирован.
 
-## Пример
+## Пример создания единого файла документации
 
 Пример извлечения всех пользовательских блоков `<docs>` в отдельный файл документации:
 
@@ -64,4 +64,70 @@ module.exports = {
     new ExtractTextPlugin('docs.md')
   ]
 }
+```
+
+## Документация доступная во время выполнения
+
+Вот пример того, как можно встроить пользовательские блоки `<docs>` в компонент, чтобы он был доступен во время выполнения.
+
+#### docs-loader.js 
+
+Для инъекции содержимого пользовательского блока понадобится пользовательский загрузчик: 
+
+``` js
+module.exports = function (source, map) {
+  this.callback(null, 'module.exports = function(Component) {Component.options.__docs = ' +
+    JSON.stringify(source) +
+    '}', map)
+}
+```
+
+#### webpack.config.js
+
+Теперь необходимо настроить Webpack использовать наш загрузчик для пользовательских блоков `<docs>`.
+
+``` js
+const docsLoader = require.resolve('./custom-loaders/docs-loader.js')
+
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.vue$/,
+        loader: 'vue',
+        options: {
+          loaders: {
+            'docs': docsLoader
+          }
+        }
+      }
+    ]
+  }
+}
+```
+
+#### component.vue
+
+Теперь мы можем получить доступ к содержимому блока `<docs>` импортированного компонента на этапе выполнения. 
+
+``` html
+<template>
+  <div>
+    <component-b />>
+    <p>{{ docs }}</p>
+  </div>
+</template>
+
+<script>
+import componentB from 'componentB';
+
+export default = {
+  data () {
+    return {
+      docs: componentB.__docs
+    }
+  },
+  components: {componentB}
+}
+</script>
 ```
