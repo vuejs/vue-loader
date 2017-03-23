@@ -36,13 +36,13 @@ module.exports = {
 
 - 类型： `{ [lang: string]: string }`
 
+  如果指定 Webpack loaders 会覆盖 ` .vue` 文件中的语言块的默认 `lang` 属性。 每种类型的默认 `lang` 是：
   An object specifying Webpack loaders to overwrite the default loaders used for language blocks inside `*.vue` files. The key corresponds to the `lang` attribute for language blocks, if specified. The default `lang` for each type is:
 
   - `<template>`: `html`
   - `<script>`: `js`
   - `<style>`: `css`
 
-  For example, to use `babel-loader` and `eslint-loader` to process all `<script>` blocks:
   例如，使用 `babel-loader` 和 `eslint-loader` 处理所有的 `<script>` 块：
 
   ``` js
@@ -87,7 +87,7 @@ module.exports = {
 - 类型： `Array` or `Function` or `Object`
 
 
-  指定要应用于 `.vue` 文件中 CSS 的自定义 PostCSS 插件。如果使用函数，函数将使用相同的 loader 上下文调用，并返回一个数组。
+  指定要应用于 `.vue` 文件中 CSS 的自定义 PostCSS 插件。如果使用函数，函数将使用相同的 loader 上下文调用，并返回一个插件数组。
 
   ``` js
   // ...
@@ -122,14 +122,13 @@ module.exports = {
   是否开启 CSS 的 source maps，关闭可以避免 `css-loader` 的 some relative path related bugs 同时可以加快构建速度。
 
   注意，这个值会在 Webpack 配置中没有 `devtool` 的情况下自动设置为 `false`。
-  
+
 ### esModule
 
 - 类型: `Boolean`
 - 默认值: `undefined`
 
   是否导出 esModule 兼容代码，默认情况下 vue-loader 会导出 commonjs 格式，像 `module.exports = ....`。当 `esModule` 设置为 true 的情况下，导出会变为 `exports.__esModule = true; exports = ...`。Useful for interoperating with transpiler other than Babel，比如 TypeScript。
-  Whether to emit esModule compatible code. By default vue-loader will emit default export in commonjs format like `module.exports = ....`. When `esModule` is set to true, default export will be transpiled into `exports.__esModule = true; exports = ...`. Useful for interoperating with transpiler other than Babel, like TypeScript.
 
 ### preserveWhitespace
 
@@ -137,7 +136,7 @@ module.exports = {
 - 默认值: `true`
 
   如果设置为 `false`，模版中 HTML 标签之前的空格将会被忽略。
- 
+
 ### transformToRequire
 
 - 类型: `{ [tag: string]: string | Array<string> }`
@@ -150,8 +149,7 @@ module.exports = {
 - 类型: `Object`
 - 默认值: `{}`
 
-  在使用 `buble-loader` 时配置它的选项，
-  Configure options for `buble-loader` (if present), AND the buble compilation pass for template render functions.
+  在使用 `buble-loader` 时配置它的选项，AND the buble compilation pass for template render functions。
 
   > 版本警告：在 9.x 版本中，模板表达式通过现在已经删除的 `templateBuble` 选项单独配置。
 

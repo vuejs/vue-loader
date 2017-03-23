@@ -9,7 +9,7 @@
   - [热重载](features/hot-reload.md)
 - 配置
   - [预处理器](configurations/pre-processors.md)
-  - [处理资源 URL](configurations/asset-url.md)
+  - [处理资源路径](configurations/asset-url.md)
   - [进阶配置](configurations/advanced.md)
   - [提取 CSS 文件](configurations/extract-css.md)
   - [自定义块](configurations/custom-blocks.md)

@@ -1,10 +1,10 @@
 # 使用预处理器
 
-在 Webpack 中，所有的预处理器需要匹配对应的 loader。 `vue-loader` 允许你使用其它 Webpack loaders 处理 Vue 组件的一部分。它会根据 `lang` 属性自动推断出在使用的 loaders。
+在 Webpack 中，所有的预处理器需要匹配对应的 loader。 `vue-loader` 允许你使用其它 Webpack loaders 处理 Vue 组件的某一部分。它会根据 `lang` 属性自动推断出要使用的 loaders。
 
 ### CSS
 
-例如，使用 SASS 编译我们的 `<style>` 标签：
+例如，使用 SASS 编译我们的 `<style>` 语言块：
 
 ``` bash
 npm install sass-loader node-sass --save-dev
@@ -17,11 +17,10 @@ npm install sass-loader node-sass --save-dev
 ```
 
 在内部，`<style>` 标签中的内容将会先由 `sass-loader` 进行处理，然后再传递进行下一步处理。
-Under the hood, the text content inside the `<style>` tag will be first compiled by `sass-loader` before being passed on for further processing.
 
-#### sass-loader caveat
+#### sass-loader 警告
 
-与名称相反，[*sass*-loader](https://github.com/jtangelder/sass-loader) 默认解析 *SCSS* 语法。如果你想要使用 *SASS* 语法，你需要配置 `vue-loader` 选项：
+与名称相反，[*sass*-loader](https://github.com/jtangelder/sass-loader) 默认解析 *SCSS* 语法。如果你想要使用 *SASS* 语法，你需要配置 `vue-loader` 的选项：
 
 ```javascript
 {
@@ -36,7 +35,7 @@ Under the hood, the text content inside the `<style>` tag will be first compiled
 }
 ```
 
-如要获得更多 `vue-loader` 的配置信息，请查看 [Advanced Loader Configuration](./advanced.md) 章节。
+如要获得更多关于 `vue-loader` 的配置信息，请查看 [Loader 进阶配置](./advanced.md) 章节。
 
 ### JavaScript
 
@@ -54,7 +53,7 @@ npm install coffee-loader --save-dev
 
 ### 模版
 
-模版的处理方式略有不同，因为大多数 Webpack 模版处理器（比如 `pug-loader`）会返回模版处理函数，而不是编译的 HTML 字符串，我们使用原来的 `pug` 替代 `pug-loader`:
+模版的处理方式略有不同，因为大多数 Webpack 模版处理器（比如 `pug-loader`）会返回模版处理函数，而不是编译的 HTML 字符串，我们使用原始的 `pug` 替代 `pug-loader`:
 
 ``` bash
 npm install pug --save-dev
@@ -67,7 +66,7 @@ div
 </template>
 ```
 
-> **重要:** 如果你使用 `vue-loader@<8.2.0`， 你也需要安装 `template-html-loader`。
+> **重要:** 如果你使用 `vue-loader@<8.2.0`， 你还需要安装 `template-html-loader`。
 
 ### 行内 Loader Requests
 

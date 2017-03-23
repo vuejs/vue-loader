@@ -56,7 +56,7 @@ module.exports = {
 
 - 一个返回插件数组的函数；
 
-- 一个对象包含配置选项，传递给 PostCSS 处理器。这在使用自定义解析器/stringifiers 时非常有用:
+- 一个对象包含配置选项，传递给 PostCSS 处理器。这在使用自定义 parser/stringifiers 时非常有用:
 
   ``` js
   postcss: {

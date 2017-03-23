@@ -88,7 +88,7 @@ export default {
 <script src="./script.js"></script>
 ```
 
-需要注意的是 `src` 导入遵循和 `require()` 一样的规则，这意味着你相对路径需要以 `./` 开始，你还可以从 NPM packages 中直接导入资源，例如：
+需要注意的是 `src` 导入遵循和 `require()` 一样的规则，这意味着你相对路径需要以 `./` 开始，你还可以从 NPM 包中直接导入资源，例如：
 
 ``` html
 <!-- import a file from the installed "todomvc-app-css" npm package -->
