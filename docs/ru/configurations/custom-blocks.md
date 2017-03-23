@@ -113,7 +113,7 @@ module.exports = {
 ``` html
 <template>
   <div>
-    <component-b />>
+    <component-b />
     <p>{{ docs }}</p>
   </div>
 </template>
