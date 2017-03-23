@@ -634,6 +634,21 @@ describe('vue-loader', function () {
     })
   })
 
+  it('passes Component to custom block loaders', done => {
+    const mockLoaderPath = require.resolve('./mock-loaders/docs')
+    test({
+      entry: './test/fixtures/custom-language.vue',
+      vue: {
+        loaders: {
+          'documentation': mockLoaderPath
+        }
+      }
+    }, (window, module) => {
+      expect(module.__docs).to.contain('This is example documentation for a component.')
+      done()
+    })
+  })
+
   it('custom blocks can be ignored', done => {
     bundle({
       entry: './test/fixtures/custom-language.vue'
