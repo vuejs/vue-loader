@@ -94,7 +94,7 @@ export default {
 <style src="todomvc-app-css/index.css">
 ```
 
-`src` imports also work with custom blocks, e.g.:
+`src` によるインポートはカスタムブロックでも動作します、例:
 
 ``` html
 <unit-test src="./unit-test.js">
