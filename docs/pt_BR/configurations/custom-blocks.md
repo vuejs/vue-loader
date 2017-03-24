@@ -113,7 +113,7 @@ Agora, vamos configurar o webpack para usar o nosso carregador personalizado par
  ``` html
  <template>
    <div>
-     <component-b \>
+     <component-b />
      <p>{{ docs }}</p>
    </div>
  </template>
