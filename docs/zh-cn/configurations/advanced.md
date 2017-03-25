@@ -45,6 +45,11 @@ module.exports = {
           postLoaders: {
             html: 'babel-loader'
           }
+          
+          // `excludedPreLoaders` 的内容是正则表达式
+          // 你可以用来从 Loader chain 上剔除那些你不需要 vue-loader 处理的 preloader
+          // 最常用的就是各种 lint
+          excludedPreLoaders: /(eslint-loader)/
         }
       }
     ]
