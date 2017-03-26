@@ -48,7 +48,7 @@ module.exports = {
             html: 'babel-loader'
           },
 
-          // `excludedPreLoaders` should be regex
+          // `excludedPreLoaders` は正規表現で設定する必要があります。
           excludedPreLoaders: /(eslint-loader)/
         }
       }
