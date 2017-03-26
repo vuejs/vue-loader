@@ -46,7 +46,10 @@ module.exports = {
           //   postcss プラグインを使用する方が良い選択になります。
           postLoaders: {
             html: 'babel-loader'
-          }
+          },
+
+          // `excludedPreLoaders` は正規表現で設定する必要があります。
+          excludedPreLoaders: /(eslint-loader)/
         }
       }
     ]
