@@ -716,6 +716,32 @@ describe('vue-loader', function () {
     })
   })
 
+  it('pre/post loaders for custom blocks', done => {
+    test({
+      entry: './test/fixtures/custom-blocks.vue',
+      vue: {
+        preLoaders: {
+          i18n: require.resolve('./mock-loaders/yaml')
+        },
+        loaders: {
+          i18n: require.resolve('./mock-loaders/i18n'),
+          blog: 'marked'
+        },
+        postLoaders: {
+          blog: require.resolve('./mock-loaders/blog')
+        }
+      }
+    }, (window, module) => {
+      var vnode = mockRender(module, {
+        msg: JSON.parse(module.__i18n).en.hello,
+        blog: module.__blog
+      })
+      expect(vnode.children[0].children[0]).to.equal('hello world')
+      expect(vnode.children[2].data.domProps.innerHTML).to.equal('<h2 id="foo">foo</h2>')
+      done()
+    })
+  })
+
   it('custom compiler modules', done => {
     test({
       entry: './test/fixtures/custom-module.vue',
