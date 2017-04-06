@@ -38,7 +38,7 @@ module.exports = {
 ### Webpack 2.x (^2.1.0-beta.25)
 
 ``` bash
-npm install extract-text-webpack-plugin@2.x --save-dev
+npm install extract-text-webpack-plugin --save-dev
 ```
 
 ``` js
