@@ -1,4 +1,5 @@
 * [English](en/)
 * [한국어](kr/)
 * [Русский](ru/)
-* [Português](pt/)
+* [Português](pt_BR/)
+* [日本語](ja/)

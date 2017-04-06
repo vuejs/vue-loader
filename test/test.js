@@ -162,9 +162,12 @@ describe('vue-loader', function () {
 
   it('scoped style', done => {
     test({
-      entry: './test/fixtures/scoped-css.vue'
+      entry: './test/fixtures/scoped-css.vue',
+      vue: {
+        hashKey: 'foo'
+      }
     }, (window, module) => {
-      var id = 'data-v-' + hash('vue-loader/test/fixtures/scoped-css.vue')
+      var id = 'data-v-' + hash('vue-loader/test/fixtures/scoped-css.vue' + 'foo')
       expect(module._scopeId).to.equal(id)
 
       var vnode = mockRender(module, {
@@ -631,6 +634,21 @@ describe('vue-loader', function () {
     })
   })
 
+  it('passes Component to custom block loaders', done => {
+    const mockLoaderPath = require.resolve('./mock-loaders/docs')
+    test({
+      entry: './test/fixtures/custom-language.vue',
+      vue: {
+        loaders: {
+          'documentation': mockLoaderPath
+        }
+      }
+    }, (window, module) => {
+      expect(module.__docs).to.contain('This is example documentation for a component.')
+      done()
+    })
+  })
+
   it('custom blocks can be ignored', done => {
     bundle({
       entry: './test/fixtures/custom-language.vue'
@@ -694,6 +712,78 @@ describe('vue-loader', function () {
       var style = window.document.querySelector('style').textContent
       style = normalizeNewline(style)
       expect(style).to.contain('comp-a h2 {\n  color: #00f;\n}')
+      done()
+    })
+  })
+
+  it('pre/post loaders for custom blocks', done => {
+    test({
+      entry: './test/fixtures/custom-blocks.vue',
+      vue: {
+        preLoaders: {
+          i18n: require.resolve('./mock-loaders/yaml')
+        },
+        loaders: {
+          i18n: require.resolve('./mock-loaders/i18n'),
+          blog: 'marked'
+        },
+        postLoaders: {
+          blog: require.resolve('./mock-loaders/blog')
+        }
+      }
+    }, (window, module) => {
+      var vnode = mockRender(module, {
+        msg: JSON.parse(module.__i18n).en.hello,
+        blog: module.__blog
+      })
+      expect(vnode.children[0].children[0]).to.equal('hello world')
+      expect(vnode.children[2].data.domProps.innerHTML).to.equal('<h2 id="foo">foo</h2>')
+      done()
+    })
+  })
+
+  it('custom compiler modules', done => {
+    test({
+      entry: './test/fixtures/custom-module.vue',
+      vue: {
+        compilerModules: [
+          {
+            postTransformNode: el => {
+              if (el.staticStyle) {
+                el.staticStyle = `$processStyle(${el.staticStyle})`
+              }
+              if (el.styleBinding) {
+                el.styleBinding = `$processStyle(${el.styleBinding})`
+              }
+            }
+          }
+        ]
+      }
+    }, (window, module) => {
+      var results = []
+      var vnode = mockRender(module, {
+        $processStyle: style => results.push(style),
+        transform: 'translateX(10px)'
+      })
+      expect(results).to.deep.equal([
+        { 'flex-direction': 'row' },
+        { 'transform': 'translateX(10px)' }
+      ])
+      done()
+    })
+  })
+
+  it('custom compiler modules (string)', done => {
+    test({
+      entry: './test/fixtures/basic.vue',
+      vue: {
+        compilerModules: require.resolve('./fixtures/custom-module')
+      }
+    }, (window, module) => {
+      var vnode = mockRender(module, {
+        msg: 'hi'
+      })
+      expect(vnode.data.staticClass).to.equal('red blue')
       done()
     })
   })

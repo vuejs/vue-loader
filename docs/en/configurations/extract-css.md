@@ -5,7 +5,7 @@ Example config to extract all the processed CSS in all Vue components into a sin
 ### Webpack 2.x
 
 ``` bash
-npm install extract-text-webpack-plugin@2.x --save-dev
+npm install extract-text-webpack-plugin --save-dev
 ```
 
 ``` js

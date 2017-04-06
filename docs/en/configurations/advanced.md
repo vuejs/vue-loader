@@ -48,7 +48,10 @@ module.exports = {
           //   plugin will be a better option.
           postLoaders: {
             html: 'babel-loader'
-          }
+          },
+          
+          // `excludedPreLoaders` should be regex
+          excludedPreLoaders: /(eslint-loader)/
         }
       }
     ]
