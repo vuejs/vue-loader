@@ -1,6 +1,6 @@
 # テスト
 
-> [webpack vue-cliテンプレート](https://github.com/vuejs-templates/webpack)には、事前に設定されたユニットテストとe2eテストの設定が用意されています。
+> [webpack vue-cli テンプレート](https://github.com/vuejs-templates/webpack)には、事前に設定された単体テストと e2e テストの設定が用意されています。
 
 `* .vue`ファイルをテストするときには、普通の CommonJS ベースのテストランナーを使うことができません。なぜならそのテストランナーは `*.vue` ファイルの扱い方を知らないからです。代わりに、Webpack + vue-loader を使用してテストファイルをバンドルします。推奨設定は [Karma](http://karma-runner.github.io/0.13/index.html) と [karma-webpack](https://github.com/webpack/karma-webpack) です。
 
@@ -43,7 +43,7 @@ module.exports = function (config) {
 }
 ```
 
-そして`test/index.js`ファイルのエントリの場合：
+そして`test/index.js`ファイルのエントリの場合:
 
 ``` js
 // test/index.js
@@ -53,7 +53,7 @@ var testsContext = require.context('.', true, /\.spec$/)
 testsContext.keys().forEach(testsContext)
 ```
 
-このエントリファイルは、単に同じフォルダ内の `.spec.js` で終わる他のすべてのファイルを必要とします。これで実際にいくつかのテストを書くことができます：
+このエントリファイルは、単に同じフォルダ内の `.spec.js` で終わる他のすべてのファイルを必要とします。これで実際にいくつかのテストを書くことができます:
 
 ``` js
 // test/component-a.spec.js
@@ -80,7 +80,7 @@ describe('a.vue', function () {
 })
 ```
 
-テストを実行するには、次の NPM スクリプトを追加します：
+テストを実行するには、次の NPM スクリプトを追加します:
 
 ``` js
 // package.json
@@ -92,7 +92,7 @@ describe('a.vue', function () {
 ...
 ```
 
-最後に実行します：
+最後に実行します:
 
 ``` bash
 npm test

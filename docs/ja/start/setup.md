@@ -2,7 +2,7 @@
 
 ### `vue-cli` の使用
 
-`vue-loader` を使用するプロジェクトの足場作りは `vue-cli` を使用することをお薦めします：
+`vue-loader` を使用するプロジェクトの足場作り (scaffolding) には `vue-cli` を使用することをお薦めします:
 
 ``` bash
 npm install -g vue-cli

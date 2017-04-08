@@ -4,7 +4,7 @@
 
 `vue-loader` は、[inject-loader](https://github.com/plasticine/inject-loader)を使って任意の依存関係を `*.vue` コンポーネントに注入する機能を提供します。一般的な考え方としては、コンポーネントモジュールを直接インポートするのではなく、`inject-loader` を使用して、そのモジュール用の「モジュールファクトリ」関数を作成するというものです。この関数がモックのオブジェクトで呼び出されると、モックが注入されたモジュールのインスタンスが返されます。
 
-次のようなコンポーネントがあるとします：
+次のようなコンポーネントがあるとします:
 
 ``` html
 <!-- example.vue -->
@@ -26,9 +26,9 @@ export default {
 </script>
 ```
 
-モックをインポートする方法は次のとおりです：
+モックをインポートする方法は次のとおりです:
 
-> 注意: inject-loader@3.x は現在不安定です。
+> 注意: inject-loader@3.x は現在 unstable です。
 
 ``` bash
 npm install inject-loader@^2.0.0 --save-dev
@@ -39,12 +39,12 @@ npm install inject-loader@^2.0.0 --save-dev
 const ExampleInjector = require('!!vue?inject!./example.vue')
 ```
 
-注意。狂気じみた文字列を必要とします - ここではいくつかのインライン [webpack loader](https://webpack.github.io/docs/loaders.html）を使用しています。簡単な説明としては：
+注意。狂気じみた文字列を必要とします - ここではいくつかのインライン [webpack loader](https://webpack.github.io/docs/loaders.html) を使用しています。簡単な説明としては:
 
 - `!!`は "グローバル設定からすべてのローダを無効にする"ことを意味します；
 - `vue？inject！` は  "`vue` loader を使い、`？inject` クエリを渡す"ことを意味します。 これは `vue-loader` に、依存性注入モードでコンポーネントをコンパイルするように指示します。
 
-返される `ExampleInjector` は、`example.vue` モジュールのインスタンスを生成するために呼び出すことができるファクトリ関数です：
+返される `ExampleInjector` は、`example.vue` モジュールのインスタンスを生成するために呼び出すことができるファクトリ関数です:
 
 ``` js
 const ExampleWithMocks = ExampleInjector({
@@ -55,7 +55,7 @@ const ExampleWithMocks = ExampleInjector({
 })
 ```
 
-最後に、コンポーネントを通常どおりテストすることができます：
+最後に、コンポーネントを通常どおりテストすることができます:
 
 ``` js
 it('should render', () => {
