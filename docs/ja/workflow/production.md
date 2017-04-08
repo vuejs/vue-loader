@@ -24,7 +24,7 @@ module.exports = {
         warnings: false
       }
     }),
-    // 発生回数別にモジュールIDを最適化します
+    // Webpack 1 のみ - 発生回数別にモジュールIDを最適化します
     new webpack.optimize.OccurenceOrderPlugin()
   ]
 }
