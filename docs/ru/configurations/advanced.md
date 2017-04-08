@@ -48,7 +48,10 @@ module.exports = {
           //   Использование postcss-плагина будет лучшим вариантом.
           postLoaders: {
             html: 'babel-loader'
-          }
+          },
+
+           // `excludedPreLoaders` должен быть регулярным выражением
+           excludedPreLoaders: /(eslint-loader)/
         }
       }
     ]
