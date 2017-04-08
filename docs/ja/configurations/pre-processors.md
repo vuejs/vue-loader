@@ -4,7 +4,7 @@ Webpack において、全てのプリプロセッサは対応する loader を�
 
 ### CSS
 
-例えば、SASS で `<style>` タグをコンパイルしましょう：
+例えば、SASS で `<style>` タグをコンパイルしましょう:
 
 ``` bash
 npm install sass-loader node-sass --save-dev
@@ -39,7 +39,7 @@ vue-loader を構成する方法の詳細については、[高度な loader の
 
 ### JavaScript
 
-全てのVueコンポーネントのJavaScriptはデフォルトで `babel-loader` によって処理されます。しかしもちろんそれは変更することが可能です：
+全ての Vue コンポーネントの JavaScript はデフォルトで `babel-loader` によって処理されます。しかしもちろんそれは変更することが可能です:
 
 ``` bash
 npm install coffee-loader --save-dev
@@ -53,7 +53,7 @@ npm install coffee-loader --save-dev
 
 ### テンプレート
 
-`pug-loader` のようなほとんどのWebpackテンプレート loader は、コンパイルされたHTML文字列の代わりにテンプレート関数を返すので、template の処理は少し異なります。`pug-loader` を使う代わりに、オリジナルの `pug` をインストールをするだけです：
+`pug-loader` のようなほとんどのWebpackテンプレート loader は、コンパイルされたHTML文字列の代わりにテンプレート関数を返すので、template の処理は少し異なります。`pug-loader` を使う代わりに、オリジナルの `pug` をインストールをするだけです:
 
 ``` bash
 npm install pug --save-dev
@@ -70,7 +70,7 @@ div
 
 ### インラインローダーリクエスト
 
-`lang` 属性で [Webpack loader requests](https://webpack.github.io/docs/loaders.html#introduction) を使用することが可能です：
+`lang` 属性で [Webpack loader requests](https://webpack.github.io/docs/loaders.html#introduction) を使用することが可能です:
 
 ``` html
 <style lang="sass?outputStyle=expanded">
