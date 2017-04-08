@@ -24,7 +24,7 @@ module.exports = {
         warnings: false
       }
     }),
-    // оптимизируем идентификаторы модулей по числу использований
+    // только для Webpack 1 – оптимизируем идентификаторы модулей по числу использований
     new webpack.optimize.OccurrenceOrderPlugin()
   ]
 }
