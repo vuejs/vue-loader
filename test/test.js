@@ -72,7 +72,12 @@ function test (options, assert) {
           console.log(err[0].data.error.stack)
           expect(err).to.be.null
         }
-        assert(window, interopDefault(window.vueModule), window.vueModule)
+        const module = interopDefault(window.vueModule)
+        const instance = {}
+        if (module.beforeCreate) {
+          module.beforeCreate.call(instance)
+        }
+        assert(window, module, window.vueModule, instance)
       }
     })
   })
@@ -458,11 +463,9 @@ describe('vue-loader', function () {
             localIdentName: localIdentName
           }
         }
-      }, (window) => {
-        var module = window.vueModule
-
+      }, (window, module, raw, instance) => {
         // get local class name
-        var className = module.computed.style().red
+        var className = instance.style.red
         expect(className).to.match(regexToMatch)
 
         // class name in style
@@ -480,7 +483,7 @@ describe('vue-loader', function () {
         expect(style).to.contain('animation: ' + animationName + ' 1s;')
 
         // default module + pre-processor + scoped
-        var anotherClassName = module.computed.$style().red
+        var anotherClassName = instance.$style.red
         expect(anotherClassName).to.match(regexToMatch).and.not.equal(className)
         var id = 'data-v-' + hash('vue-loader/test/fixtures/css-modules.vue')
         expect(style).to.contain('.' + anotherClassName + '[' + id + ']')
@@ -514,7 +517,10 @@ describe('vue-loader', function () {
       }
 
       var output = requireFromString(code, './test.build.js')
-      expect(output.computed.style().red).to.exist
+      var mockInstance = {}
+
+      output.beforeCreate.call(mockInstance)
+      expect(mockInstance.style.red).to.exist
 
       done()
     })
