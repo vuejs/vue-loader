@@ -74,8 +74,8 @@ function test (options, assert) {
         }
         const module = interopDefault(window.vueModule)
         const instance = {}
-        if (module.beforeCreate) {
-          module.beforeCreate.call(instance)
+        if (module && module.beforeCreate) {
+          module.beforeCreate.forEach(hook => hook.call(instance))
         }
         assert(window, module, window.vueModule, instance)
       }
@@ -519,7 +519,7 @@ describe('vue-loader', function () {
       var output = requireFromString(code, './test.build.js')
       var mockInstance = {}
 
-      output.beforeCreate.call(mockInstance)
+      output.beforeCreate.forEach(hook => hook.call(mockInstance))
       expect(mockInstance.style.red).to.exist
 
       done()
