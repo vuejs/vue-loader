@@ -4,7 +4,7 @@
 
 ## 設定ファイルの使用
 
-バージョン 11.0 以降、 `vue-loader` は [`postcss-loader`](https://github.com/postcss/postcss-loader#usage) でサポートされているものと同じ PostCss の設定ファイルのオートロードをサポートします：
+バージョン 11.0 以降、 `vue-loader` は [`postcss-loader`](https://github.com/postcss/postcss-loader#usage) でサポートされているものと同じ PostCss の設定ファイルのオートロードをサポートします:
 
 - `postcss.config.js`
 - `.postcssrc`
@@ -16,7 +16,7 @@
 
 あるいは、 `vue-loader` の `postcss` オプションを使用して `*.vue` ファイル用の postcss の設定を指定することが出来ます。
 
-Webpack 1.x の例：
+Webpack 1.x の例:
 
 ``` js
 // webpack.config.js
@@ -52,11 +52,10 @@ module.exports = {
 }
 ```
 
-加えてpluginの配列を提供し、`postcss` オプションは以下も受け入れます：
+加えて plugin の配列を提供し、`postcss` オプションは以下も受け入れます
 
-- プラグインの配列を返す関数；
-
-- PostCSSプロセッサに渡すオプションを含むオブジェクト。これは、カスタム parser/stringifiers に依存するPostCSSプロジェクトを使用している場合に便利です。
+- プラグインの配列を返す関数
+- PostCSSプロセッサに渡すオプションを含むオブジェクト。これは、カスタム parser/stringifiers に依存するPostCSSプロジェクトを使用している場合に便利です:
 
   ``` js
   postcss: {

@@ -24,7 +24,7 @@ module.exports = {
         warnings: false
       }
     }),
-    // optimize module ids by occurrence count
+    // Webpack 1 only - optimize module ids by occurrence count
     new webpack.optimize.OccurrenceOrderPlugin()
   ]
 }
