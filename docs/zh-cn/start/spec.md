@@ -30,7 +30,7 @@ export default {
 
 `vue-loader` 会解析文件，提取每个语言块，如有必要会通过其它 loaders 处理，最后将他们组装成一个 CommonJS 模块，`module.exports` 出一个 Vue.js 组件对象。
 
-`vue-loader` 支持使用非默认放言，比如 CSS 预处理器，预编译的 HTML 模版语言，通过设置语言块的 `lang` 属性。例如，你可以像下面这样使用 SASS 语法编写 style： 
+`vue-loader` 支持使用非默认语言，比如 CSS 预处理器，预编译的 HTML 模版语言，通过设置语言块的 `lang` 属性。例如，你可以像下面这样使用 SASS 语法编写 style： 
 
 ``` html
 <style lang="sass">
