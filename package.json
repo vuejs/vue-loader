@@ -77,9 +77,9 @@
     "stylus-loader": "^2.0.0",
     "sugarss": "^0.2.0",
     "url-loader": "^0.5.7",
-    "vue": "^2.1.0",
-    "vue-server-renderer": "^2.1.10",
-    "vue-template-compiler": "^2.1.0",
+    "vue": "^2.3.0",
+    "vue-server-renderer": "^2.3.0",
+    "vue-template-compiler": "^2.3.0",
     "webpack": "^2.2.0"
   }
 }
