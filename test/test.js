@@ -575,7 +575,9 @@ describe('vue-loader', function () {
         rules: [{ test: /\.vue$/, loader: rawLoaderPath }]
       }
     }, code => {
-      const renderer = SSR.createBundleRenderer(code)
+      const renderer = SSR.createBundleRenderer(code, {
+        basedir: __dirname
+      })
       const context = {}
       renderer.renderToString(context, (err, res) => {
         if (err) return done(err)
