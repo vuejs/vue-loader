@@ -561,7 +561,7 @@ describe('vue-loader', function () {
     })
   })
 
-  it('SSR style extraction', done => {
+  it('SSR style and moduleId extraction', done => {
     bundle({
       target: 'node',
       entry: './test/fixtures/ssr-style.js',
@@ -578,7 +578,9 @@ describe('vue-loader', function () {
       const renderer = SSR.createBundleRenderer(code, {
         basedir: __dirname
       })
-      const context = {}
+      const context = {
+        _registeredComponents: new Set()
+      }
       renderer.renderToString(context, (err, res) => {
         if (err) return done(err)
         expect(res).to.contain('server-rendered')
@@ -590,6 +592,8 @@ describe('vue-loader', function () {
         expect(context.styles).to.contain('comp-a h2 {\n  color: #f00;')
         // from imported css file
         expect(context.styles).to.contain('h1 { color: red;')
+        // collect component identifiers during render
+        expect(Array.from(context._registeredComponents).length).to.equal(2)
         done()
       })
     })
