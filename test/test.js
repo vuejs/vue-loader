@@ -293,6 +293,41 @@ describe('vue-loader', function () {
     })
   })
 
+  it('extract CSS using option', done => {
+    bundle({
+      entry: './test/fixtures/extract-css.vue',
+      vue: {
+        extractCSS: true
+      },
+      plugins: [
+        new ExtractTextPlugin('test.output.css')
+      ]
+    }, (code, warnings) => {
+      var css = mfs.readFileSync('/test.output.css').toString()
+      css = normalizeNewline(css)
+      expect(css).to.contain('h1 {\n  color: #f00;\n}\n\nh2 {\n  color: green;\n}')
+      done()
+    })
+  })
+
+  it('extract CSS using option (passing plugin instance)', done => {
+    const plugin = new ExtractTextPlugin('test.output.css')
+    bundle({
+      entry: './test/fixtures/extract-css.vue',
+      vue: {
+        extractCSS: plugin
+      },
+      plugins: [
+        plugin
+      ]
+    }, (code, warnings) => {
+      var css = mfs.readFileSync('/test.output.css').toString()
+      css = normalizeNewline(css)
+      expect(css).to.contain('h1 {\n  color: #f00;\n}\n\nh2 {\n  color: green;\n}')
+      done()
+    })
+  })
+
   it('dependency injection', done => {
     test({
       entry: './test/fixtures/inject.js'
