@@ -1,10 +1,10 @@
-# Testing
+# 测试
 
-> The [webpack vue-cli template](https://github.com/vuejs-templates/webpack) offers pre-configured unit testing and e2e testing setups for you.
+> [webpack vue-cli 模板](https://github.com/vuejs-templates/webpack) 为你提供预配置的单元测试和 e2e 测试设置。
 
-When testing `*.vue` files, we cannot use a plain CommonJS-based test runner because it won't know how to handle `*.vue` files. Instead, we still use Webpack + vue-loader to bundle our test files. The recommended setup is using [Karma](http://karma-runner.github.io/0.13/index.html) and [karma-webpack](https://github.com/webpack/karma-webpack).
+当测试 `*.vue` 文件时，我们不能使用基于 CommonJS 的简单测试运行器，因为它不知道如何处理 `*.vue` 文件。而是应该使用 Webpack + vue-loader 打包我们的测试文件。推荐的设置是使用 [Karma](http://karma-runner.github.io/0.13/index.html) 和  [karma-webpack](https://github.com/webpack/karma-webpack)。
 
-Karma is a test runner that launches browsers and runs your tests for you. You can choose what browsers you want to test in and what test framework (e.g. Mocha or Jasmine) you want to use. Here is an example Karma configuration that runs the tests inside [PhantomJS](http://phantomjs.org/) with the [Jasmine](http://jasmine.github.io/edge/introduction.html) test framework:
+Karma 是一个启动浏览器并为你运行测试的测试运行器。你可以选择要测试的浏览器以及你要使用的测试框架（例如，Mocha 或  Jasmine）。以下是一个在 [PhantomJS](http://phantomjs.org/) 中使用[Jasmine](http://jasmine.github.io/edge/introduction.html) 测试框架运行测试的 Karma 配置示例：
 
 ``` bash
 npm install\
@@ -15,9 +15,8 @@ npm install\
 ```
 
 ``` js
-// we can just use the exact same webpack config by requiring it
-// however, remember to delete the original entry since we don't
-// need it during tests
+// 我们只需要使用完全相同的 webpack 配置即可
+// 但是，请记得删除原来的 entry，因为我们在测试期间不需要它
 var webpackConfig = require('./webpack.config.js')
 delete webpackConfig.entry
 
@@ -26,13 +25,13 @@ module.exports = function (config) {
   config.set({
     browsers: ['PhantomJS'],
     frameworks: ['jasmine'],
-    // this is the entry file for all our tests.
+    // 这是所有测试的入口文件。
     files: ['test/index.js'],
-    // we will pass the entry file to webpack for bundling.
+    // 把入口文件传给 webpack 以进行打包。
     preprocessors: {
       'test/index.js': ['webpack']
     },
-    // use the webpack config
+    // 使用 webpack 配置
     webpack: webpackConfig,
     // avoid walls of useless text
     webpackMiddleware: {
@@ -43,7 +42,7 @@ module.exports = function (config) {
 }
 ```
 
-And for the entry `test/index.js` file:
+`test/index.js` 文件如下：
 
 ``` js
 // test/index.js
@@ -53,7 +52,7 @@ var testsContext = require.context('.', true, /\.spec$/)
 testsContext.keys().forEach(testsContext)
 ```
 
-This entry file simply requires all other files that ends in `.spec.js` in the same folder. Now we can actually write some tests:
+此入口文件只需要在同一文件夹中的 `.spec.js` 结尾引入其他所有文件。 现在我们可以写一些测试：
 
 ``` js
 // test/component-a.spec.js
@@ -62,12 +61,12 @@ var ComponentA = require('../../src/components/a.vue')
 
 describe('a.vue', function () {
 
-  // asserting JavaScript options
+  // JavaScript 选项断言
   it('should have correct message', function () {
     expect(ComponentA.data().msg).toBe('Hello from Component A!')
   })
 
-  // asserting rendered result by actually rendering the component
+  // 组件实际渲染的渲染结果断言
   it('should render correct message', function () {
     var vm = new Vue({
       template: '<div><test></test></div>',
@@ -80,7 +79,7 @@ describe('a.vue', function () {
 })
 ```
 
-To run the tests, add the following NPM script:
+添加以下 NPM 脚本以运行测试：
 
 ``` js
 // package.json
@@ -92,10 +91,10 @@ To run the tests, add the following NPM script:
 ...
 ```
 
-Finally, run:
+最后运行：
 
 ``` bash
 npm test
 ```
 
-Again, [webpack vue-cli template](https://github.com/vuejs-templates/webpack) contains a fully working example with tests.
+此外，[webpack vue-cli 模板](https://github.com/vuejs-templates/webpack) 包含一个完整的测试用例。

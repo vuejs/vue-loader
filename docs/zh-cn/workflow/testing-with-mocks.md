@@ -1,10 +1,10 @@
-# Testing with Mocks
+# 使用 Mock 测试
 
-In a real world application, our components most likely have external dependencies. When writing unit tests for components, it would be ideal if we can mock these external dependencies so that our tests only rely the behavior of the component being tested.
+在真实世界的应用中，我们的组件很有可能具有外部依赖。在为组件编写单元测试时，理想的状态是我们可以模拟这些外部依赖关系，这样我们的测试只依赖被测组件的行为。
 
-`vue-loader` provides a feature that allows you to inject arbitrary dependencies to a `*.vue` component, using [inject-loader](https://github.com/plasticine/inject-loader). The general idea is that instead of directly importing the component module, we use `inject-loader` to create a "module factory" function for that module. When this function gets called with an object of mocks, it returns an instance of the module with the mocks injected.
+`vue-loader` 提供了一个可以使用 [inject-loader](https://github.com/plasticine/inject-loader) 将任意依赖项注入到 `*.vue` 组件的特性。 大体思路是：我们使用 `inject-loader` 为该模块创建一个 “模块工厂” 功能，而不是直接导入组件模块。当使用 mock 对象调用此函数时，它会返回模块的实例，并注入到 mock 中。
 
-Suppose we have a component like this:
+假设我们有一个这样的组件：
 
 ``` html
 <!-- example.vue -->
@@ -26,9 +26,9 @@ export default {
 </script>
 ```
 
-Here's how to import it with mocks:
+以下是使用 mock 导入的方法：
 
-> Note: inject-loader@3.x is currently unstable.
+> 注意: inject-loader@3.x 当前是不稳定的。
 
 ``` bash
 npm install inject-loader@^2.0.0 --save-dev
@@ -39,12 +39,12 @@ npm install inject-loader@^2.0.0 --save-dev
 const ExampleInjector = require('!!vue?inject!./example.vue')
 ```
 
-Notice that crazy require string - we are using some inline [webpack loader requests](https://webpack.github.io/docs/loaders.html) here. A quick explanation:
+请注意 crazy require string - 我们在这里使用一些内联 [webpack loader requests](https://webpack.github.io/docs/loaders.html)。 简要解释：
 
-- `!!` at the start means "disable all loaders from the global config";
-- `vue?inject!` means "use the `vue` loader, and pass in the `?inject` query". This tells `vue-loader` to compile the component in dependency-injection mode.
+- 以 `!!` 打头意味着 “禁用全局配置中的所有 loader”;
+- `vue?inject!`意思是 “使用 `vue` loader，并传入 `?inject` 查询”。这告诉 `vue-loader` 在依赖注入模式下编译组件。
 
-The returned `ExampleInjector` is a factory function that can be called to create instances of the `example.vue` module:
+返回的 `ExampleInjector` 是一个工厂函数，可以调用它来创建 `example.vue` 模块的实例：
 
 ``` js
 const ExampleWithMocks = ExampleInjector({
@@ -55,7 +55,7 @@ const ExampleWithMocks = ExampleInjector({
 })
 ```
 
-Finally, we can test the component like usual:
+最后，我们可以像往常一样测试组件：
 
 ``` js
 it('should render', () => {
