@@ -6,7 +6,7 @@
 
 ### 使い方
 
-`module` 属性を `<style>` タグに追加します：
+`module` 属性を `<style>` タグに追加します:
 
 ``` html
 <style module>
@@ -29,7 +29,7 @@
 </template>
 ```
 
-これは算出プロパティなので、`:class` の オブジェクト/配列 構文でも動作します：
+これは算出プロパティなので、`:class` の オブジェクト / 配列構文でも動作します:
 
 ``` html
 <template>
@@ -44,7 +44,7 @@
 </template>
 ```
 
-そして JavaScript からもアクセス可能です：
+そして JavaScript からもアクセス可能です:
 
 ``` html
 <script>
@@ -60,9 +60,9 @@ export default {
 
 [CSS Modules spec](https://github.com/css-modules/css-modules) を参照してください。モードの詳細については [global exceptions](https://github.com/css-modules/css-modules#exceptions) と [composition](https://github.com/css-modules/css-modules#composition)を参照してください。
 
-### カスタム代入
+### カスタム注入名
 
-単一の `*.vue` コンポーネントは複数の `<style>` タグを持つことが出来ます。注入されたスタイルが互いに上書きするのを避けるために、 `module`属性に値を与えることによって、注入された計算されたプロパティの名前をカスタマイズすることができます：
+単一の `*.vue` コンポーネントは複数の `<style>` タグを持つことが出来ます。注入されたスタイルが互いに上書きするのを避けるために、 `module`属性に値を与えることによって、注入された計算されたプロパティの名前をカスタマイズすることができます:
 
 ``` html
 <style module="a">
@@ -76,7 +76,7 @@ export default {
 
 ### `css-loader` クエリの設定
 
-CSS モジュールは [css-loader](https://github.com/webpack/css-loader) によって処理されます。`<style module>` では `css-loader` に使われるデフォルトのクエリは次のようになります。
+CSS モジュールは [css-loader](https://github.com/webpack/css-loader) によって処理されます。`<style module>` では `css-loader` に使われるデフォルトのクエリは次のようになります:
 
 ``` js
 {
@@ -86,7 +86,7 @@ CSS モジュールは [css-loader](https://github.com/webpack/css-loader) に�
 }
 ```
 
-vue-loader の `cssModules`オプションを使って` css-loader`に追加のクエリオプションを提供することができます：
+vue-loader の `cssModules`オプションを使って` css-loader`に追加のクエリオプションを提供することができます:
 
 ``` js
 // webpack 1

@@ -15,7 +15,7 @@
   - [カスタムブロック](configurations/custom-blocks.md)
 - ワークフロー
   - [プロダクションビルド](workflow/production.md)
-  - [Linting](workflow/linting.md)
+  - [リント](workflow/linting.md)
   - [テスト](workflow/testing.md)
   - [モックを使用したテスト](workflow/testing-with-mocks.md)
 - [オプションリファレンス](options.md)
