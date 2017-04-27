@@ -196,7 +196,7 @@ module.exports = {
 
 Это должно использоваться только в production, чтобы горячая перезагрузка модулей работала в процессе разработки.
 
-Пример:
+Например:
 
 ``` js
 // webpack.config.js
@@ -221,7 +221,7 @@ module.exports = {
 }
 ```
 
-Or passing in an instance of the plugin:
+Или можно передать экземпляр плагина:
 
 ``` js
 // webpack.config.js
