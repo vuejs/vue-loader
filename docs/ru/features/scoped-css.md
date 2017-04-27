@@ -18,13 +18,13 @@
 
 ``` html
 <style>
-.example[_v-f3f3eg9] {
+.example[data-v-f3f3eg9] {
   color: red;
 }
 </style>
 
 <template>
-  <div class="example" _v-f3f3eg9>hi</div>
+  <div class="example" data-v-f3f3eg9>hi</div>
 </template>
 ```
 
