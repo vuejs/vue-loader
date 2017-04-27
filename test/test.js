@@ -193,12 +193,9 @@ describe('vue-loader', function () {
 
       var style = window.document.querySelector('style').textContent
       style = normalizeNewline(style)
-      expect(style).to.contain(`.test[${id}] {\n  color: yellow;\n}`)
-      expect(style).to.contain(`.test[${id}]:after {\n  content: \'bye!\';\n}`)
-      expect(style).to.contain(`h1[${id}] {\n  color: green;\n}`)
-      // scoped keyframes
-      expect(style).to.contain(`.anim[${id}] {\n  animation: color-${id};\n}`)
-      expect(style).to.contain(`@keyframes color-${id} {`)
+      expect(style).to.contain('.test[' + id + '] {\n  color: yellow;\n}')
+      expect(style).to.contain('.test[' + id + ']:after {\n  content: \'bye!\';\n}')
+      expect(style).to.contain('h1[' + id + '] {\n  color: green;\n}')
       done()
     })
   })

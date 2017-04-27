@@ -8,13 +8,6 @@
 h1 {
   color: green;
 }
-.anim {
-  animation: color;
-}
-@keyframes color {
-  from { color: red; }
-  to { color: green; }
-}
 </style>
 
 <template>
