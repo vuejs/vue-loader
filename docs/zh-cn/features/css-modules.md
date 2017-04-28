@@ -19,7 +19,7 @@
 </style>
 ```
 
-这将为 `css-loader` 打开 CSS 模块模式，生成的 CSS 对象将为组件注入一个名叫 `$style` 的计算属性，你可以在你的模块中使用动态绑定：
+这将为 `css-loader` 打开 CSS 模块模式，生成的 CSS 对象将为组件注入一个名叫 `$style` 的计算属性，你可以在你的模块中使用动态 class 绑定：
 
 ``` html
 <template>
@@ -29,7 +29,7 @@
 </template>
 ```
 
-由于它是一个计算属性，它也与 `：class` 的 object/array 语法一起使用：
+由于它是一个计算属性，它也适用于 `:class` 的 object/array 语法：
 
 ``` html
 <template>

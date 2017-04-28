@@ -10,7 +10,7 @@
 - `.postcssrc`
 - `package.json` 中的 `postcss`
 
-使用配置文件允许一份配置用于处理普通 CSS 文件(通过`postcss-loader`)，和 `.vue` 文件内的 CSS，这是推荐做法。
+使用配置文件允许你在由 `postcss-loader` 处理的普通CSS文件和 `*.vue` 文件中的 CSS 之间共享相同的配置，这是推荐的做法。
 
 ## 内联选项
 
@@ -54,9 +54,9 @@ module.exports = {
 
 除了插件数组之外，`postcss` 配置选项也接受：
 
-- 一个返回插件数组的函数；
+- 返回插件数组的函数；
 
-- 一个对象包含配置选项，传递给 PostCSS 处理器。这在使用自定义 parser/stringifiers 时非常有用:
+- 要传递给 PostCSS 处理器的包含 options 的对象。当你使用的 PostCSS 项目依赖自定义 `parser/stringifiers`时，这很有用：
 
   ``` js
   postcss: {

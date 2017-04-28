@@ -1,14 +1,14 @@
 # Loader 进阶配置
 
-有些时候你想要这样：
+你有时可能想实现：
 
 1. 对语言应用自定义 loader string，而不是让 `vue-loader` 去推断；
 
-2. 覆盖默认语言的内置配置。
+2. 覆盖默认语言的内置 loader 配置。
 
-3. 默认语言预处理或者后处理配置。
+3. 使用自定义 loader 预处理或后处理特定语言块。
 
-为了实现这些，详细说明 `vue-loader` 的 `loaders` 选项：
+为此，请指定 `vue-loader` 的 `loaders` 选项：
 
 > 注意 `preLoaders` 和 `postLoaders` 只在版本 >=10.3.0 支持
 
@@ -18,7 +18,7 @@
 module.exports = {
   // other options...
   module: {
-    // module.rules is the same as module.loaders in 1.x
+    // module.rules 与 1.x中的 module.loaders 相同
     rules: [
       {
         test: /\.vue$/,
@@ -45,10 +45,8 @@ module.exports = {
           postLoaders: {
             html: 'babel-loader'
           }
-          
-          // `excludedPreLoaders` 的内容是正则表达式
-          // 你可以用来从 Loader chain 上剔除那些你不需要 vue-loader 处理的 preloader
-          // 最常用的就是各种 lint
+
+          // `excludedPreLoaders` 应是正则表达式
           excludedPreLoaders: /(eslint-loader)/
         }
       }
