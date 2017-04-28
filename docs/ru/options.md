@@ -185,3 +185,64 @@ module.exports = {
     ]
   }
   ```
+
+### extractCSS
+
+> Добавлено в версии 12.0.0
+
+Автоматически извлекает CSS с помощью `extract-text-webpack-plugin`. Работает для большинства пре-процессоров из коробки и минифицирует при сборке в production.
+
+Передаваемое значение может быть `true`, или экземпляром плагина (так что вы можете использовать несколько экземпляров extract plugin для разных извлекаемых файлов).
+
+Это должно использоваться только в production, чтобы горячая перезагрузка модулей работала в процессе разработки.
+
+Например:
+
+``` js
+// webpack.config.js
+var ExtractTextPlugin = require("extract-text-webpack-plugin")
+
+module.exports = {
+  // другие настройки...
+  module: {
+    rules: [
+      {
+        test: /\.vue$/,
+        loader: 'vue-loader',
+        options: {
+          extractCSS: true
+        }
+      }
+    ]
+  },
+  plugins: [
+    new ExtractTextPlugin("style.css")
+  ]
+}
+```
+
+Или можно передать экземпляр плагина:
+
+``` js
+// webpack.config.js
+var ExtractTextPlugin = require("extract-text-webpack-plugin")
+var plugin = new ExtractTextPlugin("style.css")
+
+module.exports = {
+  // другие настройки...
+  module: {
+    rules: [
+      {
+        test: /\.vue$/,
+        loader: 'vue-loader',
+        options: {
+          extractCSS: plugin
+        }
+      }
+    ]
+  },
+  plugins: [
+    plugin
+  ]
+}
+```
