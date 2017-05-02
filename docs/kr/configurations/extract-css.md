@@ -4,9 +4,9 @@
 npm install extract-text-webpack-plugin --save-dev
 ```
 
-## The Easy Way
+## 쉬운 방법
 
-> requires vue-loader@^12.0.0 and webpack@^2.0.0
+> vue-loader@^12.0.0와 webpack@^2.0.0 필요
 
 ``` js
 // webpack.config.js
@@ -31,13 +31,13 @@ module.exports = {
 }
 ```
 
-The above will automatically handle extraction for `<style>` inside `*.vue` files and works with most pre-processors out of the box.
+위 코드는 `*.vue` 파일 내부에서 `<style>`에 대한 추출을 자동으로 처리하며, 대부분의 프리프로세서와 함께 사용할 수 있습니다.
 
-Note this only extracts `*.vue` files though - CSS imported in JavaScript still needs to be configured separately.
+ `*.vue`만 추출합니다. JavaScript에서 가져온 CSS는 별도로 설정해야합니다.
+ 
+## 수동 설정
 
-## Manual Configuration
-
-Example config to extract all the processed CSS in all Vue components into a single CSS file:
+설정을 사용하여 모든 Vue 컴포넌트에서 처리된 CSS를 단일 CSS 파일로 추출하는 예제 입니다.
 
 ### Webpack 2.x
 
@@ -47,7 +47,7 @@ Example config to extract all the processed CSS in all Vue components into a sin
 var ExtractTextPlugin = require("extract-text-webpack-plugin")
 
 module.exports = {
-  // other options...
+  // 기타 옵션...
   module: {
     rules: [
       {
@@ -57,7 +57,7 @@ module.exports = {
           loaders: {
             css: ExtractTextPlugin.extract({
               use: 'css-loader',
-              fallback: 'vue-style-loader' // <- this is a dep of vue-loader, so no need to explicitly install if using npm3
+              fallback: 'vue-style-loader' // <- vue-loader의 의존성입니다. 그래서 npm3를 사용하면 명시적으로 설치할 필요는 없습니다.
             })
           }
         }
@@ -81,7 +81,7 @@ npm install extract-text-webpack-plugin --save-dev
 var ExtractTextPlugin = require("extract-text-webpack-plugin")
 
 module.exports = {
-  // other options...
+  // 기타 옵션...
   module: {
     loaders: [
       {
@@ -93,7 +93,7 @@ module.exports = {
   vue: {
     loaders: {
       css: ExtractTextPlugin.extract("css"),
-      // you can also include <style lang="less"> or other langauges
+      // <style lang="less"> 또는 다른 언어를 포함할 수 있습니다.
       less: ExtractTextPlugin.extract("css!less")
     }
   },
