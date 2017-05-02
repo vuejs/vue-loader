@@ -2,46 +2,46 @@
 
 `vue-loader`에 의해서 처리된 모든 CSS 출력은 범위가 지정된 CSS의 재 작성을 위해 [PostCSS](https://github.com/postcss/postcss)를 통해 파이프됩니다. 당신은 프로세스에 [autoprefixer](https://github.com/postcss/autoprefixer) 또는 [CSSNext](http://cssnext.io/)와 같은 사용자 정의 PostCSS 플러그인을 추가할 수 있습니다.
 
-## Using a Config File
+## 설정 파일 사용하기
 
-Starting in 11.0 `vue-loader` supports auto-loading the same PostCss config files supported by [`postcss-loader`](https://github.com/postcss/postcss-loader#usage):
+11.0버전 부터 `vue-loader`는 [`postcss-loader`](https://github.com/postcss/postcss-loader#usage)가 지원하는 동일한 PostCSS 파일을 자동으로 불러옵니다.
 
 - `postcss.config.js`
 - `.postcssrc`
-- `postcss` field in `package.json`
+- `package.json`의 `postcss` 필드 
 
-Using a config file allows you to share the same config between your normal CSS files processed by `postcss-loader` and the CSS inside `*.vue` files, and is recommended.
+설정 파일을 사용하면 `postcss-loader`가 처리한 일반적인 CSS파일과 `*.vue` 파일의 CSS에 같은 설정을 공유할 수 있습니다.
 
-## Inline Options
+## 인라인 옵션
 
-Alternatively, you can specify postcss config specifically for `*.vue` files using the `postcss` option for `vue-loader`.
+또는 `vue-loader`에 `postcss` 옵션을 사용해 `*.vue`파일을 위해 postcss 설정을 지정할 수 있습니다.
 
-Example usage in Webpack 1.x:
+Webpack 1버전 예제:
 
 ``` js
 // webpack.config.js
 module.exports = {
-  // other configs...
+  // 기타 설정...
   vue: {
-    // use custom postcss plugins
+    // 사용자 정의 postcss 플러그인 사용
     postcss: [require('postcss-cssnext')()]
   }
 }
 ```
 
-For Webpack 2.x:
+Webpack 2버전 예제:
 
 ``` js
 // webpack.config.js
 module.exports = {
-  // other options...
+  // 기타 설정...
   module: {
-    // module.rules is the same as module.loaders in 1.x
+    // module.rules는 1.x의 module.loaders와 동일
     rules: [
       {
         test: /\.vue$/,
         loader: 'vue-loader',
-        // vue-loader options goes here
+        // vue-loader 옵션은 여기에 지정합니다
         options: {
           // ...
           postcss: [require('postcss-cssnext')()]
@@ -52,17 +52,18 @@ module.exports = {
 }
 ```
 
-In addition to providing an Array of plugins, the `postcss` option also accepts:
+`postcss` 옵션은 플러그인 배열을 제공하는 것 이외에 아래의 내용을 허용합니다.
 
-- A function that returns an array of plugins;
+- 플러그인 배열을 반환하는 함수
 
 - An object that contains options to be passed to the PostCSS processor. This is useful when you are using PostCSS projects that relies on custom parser/stringifiers:
+- PostCSS 프로세서에 전달할 옵션을 포함하는 객체입니다. 이것은 사용자 정의 파서/stingifier에 의존하는 PostCSS 프로젝트를 사용할 때 유용합니다.
 
   ``` js
   postcss: {
-    plugins: [...], // list of plugins
+    plugins: [...], // 플러그인 목록
     options: {
-      parser: sugarss // use sugarss parser
+      parser: sugarss // sugarss 파서 사용
     }
   }
   ```
