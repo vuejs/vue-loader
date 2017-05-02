@@ -1,6 +1,74 @@
 # CSS 단일 파일로 추출하기
 
-다음 예제 설정을 사용하여 모든 Vue 컴포넌트의 처리된 CSS를 단일 CSS 파일로 추출할 수 있습니다.
+``` bash
+npm install extract-text-webpack-plugin --save-dev
+```
+
+## The Easy Way
+
+> requires vue-loader@^12.0.0 and webpack@^2.0.0
+
+``` js
+// webpack.config.js
+var ExtractTextPlugin = require("extract-text-webpack-plugin")
+
+module.exports = {
+  // other options...
+  module: {
+    rules: [
+      {
+        test: /\.vue$/,
+        loader: 'vue-loader',
+        options: {
+          extractCSS: true
+        }
+      }
+    ]
+  },
+  plugins: [
+    new ExtractTextPlugin("style.css")
+  ]
+}
+```
+
+The above will automatically handle extraction for `<style>` inside `*.vue` files and works with most pre-processors out of the box.
+
+Note this only extracts `*.vue` files though - CSS imported in JavaScript still needs to be configured separately.
+
+## Manual Configuration
+
+Example config to extract all the processed CSS in all Vue components into a single CSS file:
+
+### Webpack 2.x
+
+
+``` js
+// webpack.config.js
+var ExtractTextPlugin = require("extract-text-webpack-plugin")
+
+module.exports = {
+  // other options...
+  module: {
+    rules: [
+      {
+        test: /\.vue$/,
+        loader: 'vue-loader',
+        options: {
+          loaders: {
+            css: ExtractTextPlugin.extract({
+              use: 'css-loader',
+              fallback: 'vue-style-loader' // <- this is a dep of vue-loader, so no need to explicitly install if using npm3
+            })
+          }
+        }
+      }
+    ]
+  },
+  plugins: [
+    new ExtractTextPlugin("style.css")
+  ]
+}
+```
 
 ### Webpack 1.x
 
@@ -13,7 +81,7 @@ npm install extract-text-webpack-plugin --save-dev
 var ExtractTextPlugin = require("extract-text-webpack-plugin")
 
 module.exports = {
-  // 이 부분엔 다른 옵션도 들어 갈 수 있습니다.
+  // other options...
   module: {
     loaders: [
       {
@@ -25,43 +93,9 @@ module.exports = {
   vue: {
     loaders: {
       css: ExtractTextPlugin.extract("css"),
-      // 당신은 <style lang="less"> 또는 다른 언어도 포함할 수 있습니다.
+      // you can also include <style lang="less"> or other langauges
       less: ExtractTextPlugin.extract("css!less")
     }
-  },
-  plugins: [
-    new ExtractTextPlugin("style.css")
-  ]
-}
-```
-
-### Webpack 2.x (^2.1.0-beta.25)
-
-``` bash
-npm install extract-text-webpack-plugin --save-dev
-```
-
-``` js
-// webpack.config.js
-var ExtractTextPlugin = require("extract-text-webpack-plugin")
-
-module.exports = {
-  // 이 부분엔 다른 옵션도 들어 갈 수 있습니다.
-  module: {
-    rules: [
-      {
-        test: /\.vue$/,
-        loader: 'vue',
-        options: {
-          loaders: {
-            css: ExtractTextPlugin.extract({
-              use: 'css-loader',
-              fallback: 'vue-style-loader' // <- 이것은 vue-loader의 의존성이므로, npm3를 사용하는 경우에는 명시적으로 설치할 필요가 없습니다.
-            })
-          }
-        }
-      }
-    ]
   },
   plugins: [
     new ExtractTextPlugin("style.css")
