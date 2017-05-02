@@ -1,56 +1,53 @@
 # 고급 로더 설정
 
-Sometimes you may want to:
+아래와 같은 요구사항이 있을 수 있습니다.
 
-1. Apply a custom loader string to a language instead of letting `vue-loader` infer it;
+1. `vue-loader`가 추측하는 대신 언어에 맞는 사용자 정의 로더를 사용해야합니다.
 
-2. Overwrite the built-in loader configuration for the default languages;
+2. 기본 언어에 대한 로더를 덮어써야합니다.
 
-3. Pre-process or post-process a specific language block with custom loaders.
+3. 특정 language block을 위한 사용자 정의 프리 또는 포스트 프로세스를 해야합니다.
 
-To do that, specify the `loaders` option for `vue-loader`:
+이를 위해 `vue-loader`에 `loaders` 옵션을 지정해야합니다.
 
-> Note that `preLoaders` and `postLoaders` are only supported in >=10.3.0
+> 참고: `preLoaders`와 `postLoaders`는 10.3.0 버전 이상에서만 지원합니다.
 
 ### Webpack 2.x
 
 ``` js
 module.exports = {
-  // other options...
+  // 기타 옵션들...
   module: {
-    // module.rules is the same as module.loaders in 1.x
+    // module.rules은 1.x버전의 module.loaders과 같습니다
     rules: [
       {
         test: /\.vue$/,
         loader: 'vue-loader',
         options: {
-          // `loaders` will overwrite the default loaders.
-          // The following config will cause all <script> tags without "lang"
-          // attribute to be loaded with coffee-loader
+          // `loaders`는 기본 로더를 덮어씁니다.
+          // 다음 설정은 "lang" 속성이 없는 
+          // 모든 <script> 태그가 coffee 로더와 함께 로드되도록 합니다
           loaders: {
             js: 'coffee-loader'
           },
 
-          // `preLoaders` are attached before the default loaders.
-          // You can use this to pre-process language blocks - a common use
-          // case would be build-time i18n.
+          // `preLoaders`는 기본 로더 앞에 붙습니다.
+          // 이를 이용해 language block을 프리 프로세스할 수 있습니다.
+          // 일반적으로 빌드타임에 다국어 처리를 할 수 있습니다.
           preLoaders: {
             js: '/path/to/custom/loader'
           },
 
-          // `postLoaders` are attached after the default loaders.
-          //
-          // - For `html`, the result returned by the default loader
-          //   will be compiled JavaScript render function code.
-          //
-          // - For `css`, the result will be returned by vue-style-loader
-          //   which isn't particularly useful in most cases. Using a postcss
-          //   plugin will be a better option.
+          // `postLoaders`는 기본 로더 뒤에 붙습니다.
+          // - `html`의 경우, 기본 로더의 결과는 컴파일 된 JavaScript 렌더링 함수 코드가 됩니다.
+
+          //  - `css`의 경우, 결과는 `vue-style-loader`가 반환하고 
+          // 대부분의 경우 별로 사용할 일은 없습니다. postcss 플러그인을 사용하는 것이 더 좋습니다.
           postLoaders: {
             html: 'babel-loader'
           },
           
-          // `excludedPreLoaders` should be regex
+          // `excludedPreLoaders`는 반드시 정규표현식을 사용합니다
           excludedPreLoaders: /(eslint-loader)/
         }
       }
@@ -64,7 +61,7 @@ module.exports = {
 ``` js
 // webpack.config.js
 module.exports = {
-  // other options...
+  // 기타 옵션들...
   module: {
     loaders: [
       {
@@ -73,10 +70,10 @@ module.exports = {
       }
     ]
   },
-  // vue-loader configurations
+  // vue-loader 설정
   vue: {
     loaders: {
-      // same configuration rules as above
+      // 위와 동일한 설정 규칙입니다
     }
   }
 }
