@@ -52,7 +52,7 @@ module.exports = {
         loader: 'vue',
         options: {
           loaders: {
-            // extract all <docs> content as raw text
+            // 모든 <docs>의 내용을 원문 그대로 추출합니다
             'docs': ExtractTextPlugin.extract('raw-loader'),
           }
         }
@@ -60,7 +60,7 @@ module.exports = {
     ]
   },
   plugins: [
-    // output all docs into a single file
+    // 모든 docs를 하나의 파일로 추출합니다
     new ExtractTextPlugin('docs.md')
   ]
 }
@@ -70,9 +70,9 @@ module.exports = {
 
 다음은 `<docs>` 사용자 정의 블록을 컴포넌트에 넣어 런타임에서 사용할 수 있는 예제입니다.
 
-#### docs-loader.js 
+#### docs-loader.js
 
-In order for the custom block content to be injected, we'll need a custom loader: 
+사용자 정의 블록 콘텐트를 삽입하려면 사용자 정의 로더가 필요합니다.
 
 ``` js
 module.exports = function (source, map) {

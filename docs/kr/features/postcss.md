@@ -8,7 +8,7 @@
 
 - `postcss.config.js`
 - `.postcssrc`
-- `package.json`의 `postcss` 필드 
+- `package.json`의 `postcss` 필드
 
 설정 파일을 사용하면 `postcss-loader`가 처리한 일반적인 CSS파일과 `*.vue` 파일의 CSS에 같은 설정을 공유할 수 있습니다.
 
@@ -56,7 +56,6 @@ module.exports = {
 
 - 플러그인 배열을 반환하는 함수
 
-- An object that contains options to be passed to the PostCSS processor. This is useful when you are using PostCSS projects that relies on custom parser/stringifiers:
 - PostCSS 프로세서에 전달할 옵션을 포함하는 객체입니다. 이것은 사용자 정의 파서/stingifier에 의존하는 PostCSS 프로젝트를 사용할 때 유용합니다.
 
   ``` js
