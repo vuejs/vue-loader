@@ -2,18 +2,7 @@
 
 ## Webpack 1 & 2 사용 방법의 차이점
 
-Webpack 1.x의 경우 Webpack 설정에 루트 `vue` 블럭을 추가합니다.
-
-``` js
-module.exports = {
-  // ...
-  vue: {
-    // vue-loader 옵션
-  }
-}
-```
-
-Webpack 2 (^2.1.0-beta.25)는 다음과 같습니다.
+Webpack 2 : 직접 loader 규칙에 전달합니다
 
 ``` js
 module.exports = {
@@ -32,9 +21,20 @@ module.exports = {
 }
 ```
 
+Webpack 1.x의 경우 Webpack 설정에 루트 `vue` 블럭을 추가합니다.
+
+``` js
+module.exports = {
+  // ...
+  vue: {
+    // vue-loader 옵션
+  }
+}
+```
+
 ### 로더
 
-- 타입: `Object`
+- 타입: `{ [lang: string]: string }`
 
   `*.vue` 파일의 언어 블럭에 사용할 Webpack 로더를 지정하는 객체입니다. 이 키는 특별히 지정된 경우 language block에 대한 `lang` 속성에 해당합니다. 각 타입에 대한 기본적인 `lang`은 다음과 같습니다.
 
@@ -45,15 +45,44 @@ module.exports = {
   예를 들어, `babel-loader`와 `eslint-loader`를 사용하여 모든 `<script>` 블럭을 처리하려면 다음과 같이 사용합니다.
 
   ``` js
-  // ...
-  vue: {
-    loaders: {
-      js: 'babel!eslint'
+  // Webpack 2.x config
+module: {
+  rules: [
+    {
+      test: /\.vue$/,
+      loader: 'vue-loader',
+      options: {
+        loaders: {
+          js: 'babel-loader!eslint-loader'
+        }
+      }
     }
-  }
-  ```
+  ]
+}
+```
+
+### preLoaders
+
+- type: `{ [lang: string]: string }`
+- only supported in >=10.3.0
+
+  The config format is the same as `loaders`, but `preLoaders` are applied to corresponding language blocks before the default loaders. You can use this to pre-process language blocks - a common use case would be build-time i18n.
+
+### postLoaders
+
+- type: `{ [lang: string]: string }`
+- only supported in >=10.3.0
+
+  The config format is the same as `loaders`, but `postLoaders` are applied after the default loaders. You can use this to post-process language blocks. However note that this is a bit more complicated:
+
+  - For `html`, the result returned by the default loader will be compiled JavaScript render function code.
+
+  - For `css`, the result will be returned by `vue-style-loader` which isn't particularly useful in most cases. Using a postcss plugin will be a better option.
+
 
 ### postcss
+
+> Note: in >=11.0.0 it is recommended to use a PostCSS config file instead. [The usage is the same as `postcss-loader`](https://github.com/postcss/postcss-loader#usage).
 
 - 타입: `Array` 또는 `Function`, `Object`
 - `Object` 타입은 오직 ^8.5.0에서 지원됩니다.
@@ -108,7 +137,8 @@ module.exports = {
 ### transformToRequire
 
 - 타입: `{ [tag: string]: string | Array<string> }`
-- 디폴트: `{ img: 'src' }`
+- 디폴트: `{ img: 'src', image: 'xlink:href' }`
+
 
   템플릿 컴파일 중에 컴파일러는 `src` URL과 같은 특정 속성을 `require` 호출로 변환하여 대상 Asset을 Webpack에서 처리할 수 있습니다. 기본 설정은 `<img>` 태그에 `src` 속성을 변환합니다.
 
@@ -129,11 +159,11 @@ module.exports = {
   // webpack 1
   vue: {
     buble: {
-      // Object spread 연산자를 허용합니다.
-      // 참고: 직접 Object.assign polyfill을 제공해야합니다!
+      // enable object spread operator
+      // NOTE: you need to provide Object.assign polyfill yourself!
       objectAssign: 'Object.assign',
 
-      // `with` 제거 옵션을 끄십시오.
+      // turn off the `with` removal
       transforms: {
         stripWith: false
       }
@@ -145,13 +175,74 @@ module.exports = {
     rules: [
       {
         test: /\.vue$/,
-        loader: 'vue',
+        loader: 'vue-loader',
         options: {
           buble: {
-            // 같은 옵션입니다.
+            // same options
           }
         }
       }
     ]
   }
   ```
+
+### extractCSS
+
+> New in 12.0.0
+
+Automatically extracts the CSS using `extract-text-webpack-plugin`. Works for most pre-processors out of the box, and handles minification in production as well.
+
+The value passed in can be `true`, or an instance of the plugin (so that you can use multiple instances of the extract plugin for multiple extracted files).
+
+This should be only used in production so that hot-reload works during development.
+
+Example:
+
+``` js
+// webpack.config.js
+var ExtractTextPlugin = require("extract-text-webpack-plugin")
+
+module.exports = {
+  // other options...
+  module: {
+    rules: [
+      {
+        test: /\.vue$/,
+        loader: 'vue-loader',
+        options: {
+          extractCSS: true
+        }
+      }
+    ]
+  },
+  plugins: [
+    new ExtractTextPlugin("style.css")
+  ]
+}
+```
+
+Or passing in an instance of the plugin:
+
+``` js
+// webpack.config.js
+var ExtractTextPlugin = require("extract-text-webpack-plugin")
+var plugin = new ExtractTextPlugin("style.css")
+
+module.exports = {
+  // other options...
+  module: {
+    rules: [
+      {
+        test: /\.vue$/,
+        loader: 'vue-loader',
+        options: {
+          extractCSS: plugin
+        }
+      }
+    ]
+  },
+  plugins: [
+    plugin
+  ]
+}
+```
