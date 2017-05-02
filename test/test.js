@@ -84,29 +84,30 @@ function test (options, assert) {
 }
 
 function mockRender (options, data) {
+  function h (tag, data, children) {
+    if (Array.isArray(data)) {
+      children = data
+      data = null
+    }
+    return {
+      tag: tag,
+      data: data,
+      children: children
+    }
+  }
   return options.render.call(Object.assign({
     _v (val) {
       return val
     },
     _self: {},
-    $createElement (tag, data, children) {
-      if (Array.isArray(data)) {
-        children = data
-        data = null
-      }
-      return {
-        tag: tag,
-        data: data,
-        children: children
-      }
-    },
+    $createElement: h,
     _m (index) {
       return options.staticRenderFns[index].call(this)
     },
     _s (str) {
       return String(str)
     }
-  }, data))
+  }, data), h)
 }
 
 function interopDefault (module) {
@@ -611,24 +612,28 @@ describe('vue-loader', function () {
       }
     }, code => {
       const renderer = SSR.createBundleRenderer(code, {
-        basedir: __dirname
+        basedir: __dirname,
+        runInNewContext: 'once'
       })
       const context = {
         _registeredComponents: new Set()
       }
       renderer.renderToString(context, (err, res) => {
         if (err) return done(err)
-        expect(res).to.contain('server-rendered')
+        expect(res).to.contain('data-server-rendered')
         expect(res).to.contain('<h1>Hello</h1>')
         expect(res).to.contain('Hello from Component A!')
+        expect(res).to.contain('<div class="foo">functional</div>')
         // from main component
         expect(context.styles).to.contain('h1 { color: green;')
         // from imported child component
         expect(context.styles).to.contain('comp-a h2 {\n  color: #f00;')
         // from imported css file
         expect(context.styles).to.contain('h1 { color: red;')
+        // from imported functional component
+        expect(context.styles).to.contain('.foo { color: red;')
         // collect component identifiers during render
-        expect(Array.from(context._registeredComponents).length).to.equal(2)
+        expect(Array.from(context._registeredComponents).length).to.equal(3)
         done()
       })
     })
@@ -831,6 +836,24 @@ describe('vue-loader', function () {
         msg: 'hi'
       })
       expect(vnode.data.staticClass).to.equal('red blue')
+      done()
+    })
+  })
+
+  it('functional component with styles', done => {
+    test({
+      entry: './test/fixtures/functional-style.vue'
+    }, (window, module, rawModule) => {
+      expect(module.functional).to.equal(true)
+      var vnode = mockRender(module)
+      // <div class="foo">hi</div>
+      expect(vnode.tag).to.equal('div')
+      expect(vnode.data.class).to.equal('foo')
+      expect(vnode.children[0]).to.equal('functional')
+
+      var style = window.document.querySelector('style').textContent
+      style = normalizeNewline(style)
+      expect(style).to.contain('.foo { color: red;\n}')
       done()
     })
   })

@@ -2,14 +2,19 @@
   <div>
     <h1>Hello</h1>
     <basic/>
+    <functional-style/>
   </div>
 </template>
 
 <script>
 import Basic from './basic.vue'
+import FunctionalStyle from './functional-style.vue'
 
 export default {
-  components: { Basic }
+  components: {
+    Basic,
+    FunctionalStyle
+  }
 }
 </script>
 
