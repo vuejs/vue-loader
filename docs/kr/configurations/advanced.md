@@ -1,13 +1,70 @@
 # 고급 로더 설정
 
-때로는 `vue-loader`가 그것을 추론하는 대신 언어에 사용자 정의 로더 문자열을 적용하기를 원할 수도 있습니다. 또는 기본 언어에서 기본적으로 제공되는 로더 설정을 덮어쓰고 싶을 수도 있습니다. 이를 위해서 Webpack 설정 파일에 `vue` 블럭을 추가하고 `loaders` 옵션을 지정할 수 있습니다.
+Sometimes you may want to:
+
+1. Apply a custom loader string to a language instead of letting `vue-loader` infer it;
+
+2. Overwrite the built-in loader configuration for the default languages;
+
+3. Pre-process or post-process a specific language block with custom loaders.
+
+To do that, specify the `loaders` option for `vue-loader`:
+
+> Note that `preLoaders` and `postLoaders` are only supported in >=10.3.0
+
+### Webpack 2.x
+
+``` js
+module.exports = {
+  // other options...
+  module: {
+    // module.rules is the same as module.loaders in 1.x
+    rules: [
+      {
+        test: /\.vue$/,
+        loader: 'vue-loader',
+        options: {
+          // `loaders` will overwrite the default loaders.
+          // The following config will cause all <script> tags without "lang"
+          // attribute to be loaded with coffee-loader
+          loaders: {
+            js: 'coffee-loader'
+          },
+
+          // `preLoaders` are attached before the default loaders.
+          // You can use this to pre-process language blocks - a common use
+          // case would be build-time i18n.
+          preLoaders: {
+            js: '/path/to/custom/loader'
+          },
+
+          // `postLoaders` are attached after the default loaders.
+          //
+          // - For `html`, the result returned by the default loader
+          //   will be compiled JavaScript render function code.
+          //
+          // - For `css`, the result will be returned by vue-style-loader
+          //   which isn't particularly useful in most cases. Using a postcss
+          //   plugin will be a better option.
+          postLoaders: {
+            html: 'babel-loader'
+          },
+          
+          // `excludedPreLoaders` should be regex
+          excludedPreLoaders: /(eslint-loader)/
+        }
+      }
+    ]
+  }
+}
+```
 
 ### Webpack 1.x
 
 ``` js
 // webpack.config.js
 module.exports = {
-  // 이 부분엔 다른 옵션도 들어 갈 수 있습니다.
+  // other options...
   module: {
     loaders: [
       {
@@ -16,41 +73,12 @@ module.exports = {
       }
     ]
   },
-  // vue-loader 설정
+  // vue-loader configurations
   vue: {
-    // 이 부분엔 다른 Vue 옵션도 들어 갈 수 있습니다.
     loaders: {
-      // coffee-loader에 "lang" 속성이 없는 모든 <script>를 로드하세요.
-      js: 'coffee',
-      // <template>을 HTML 문자열로 직접 로드하면
-      // vue-html-loader를 통해 파이핑하지 않아도 됩니다.
-      html: 'raw'
+      // same configuration rules as above
     }
   }
 }
 ```
-
-### Webpack 2.x (^2.1.0-beta.25)
-
-``` js
-module.exports = {
-  // 이 부분엔 다른 옵션도 들어 갈 수 있습니다.
-  module: {
-    // module.rules는 1.x의 module.loaders와 동일합니다.
-    rules: [
-      {
-        test: /\.vue$/,
-        loader: 'vue',
-        // vue-loader 옵션은 이곳에 옵니다.
-        options: {
-          loaders: {
-            // ...
-          }
-        }
-      }
-    ]
-  }
-}
-```
-
 고급 로더 설정을 보다 실용적으로 사용하면 [컴포넌트 내부의 CSS를 단일 파일로 추출할 수 있습니다](./extract-css.md).
