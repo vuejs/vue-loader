@@ -63,26 +63,27 @@ module: {
 
 ### preLoaders
 
-- type: `{ [lang: string]: string }`
+- 타입: `{ [lang: string]: string }`
 - only supported in >=10.3.0
+- 10.3.0 버전 이후 지원 
 
-  The config format is the same as `loaders`, but `preLoaders` are applied to corresponding language blocks before the default loaders. You can use this to pre-process language blocks - a common use case would be build-time i18n.
+  `loaders` 설정의 포맷과 동일하지만, `preLoaders`는 기본 로더보다 우선하여 language block에 적용됩니다. 이를 사용하면 language block을 미리 처리할 수 있습니다. (일반적인 사용 사례는 빌드 타임에 국제화를 적용하는 경우입니다.)
 
 ### postLoaders
 
-- type: `{ [lang: string]: string }`
-- only supported in >=10.3.0
+- 타입: `{ [lang: string]: string }`
+- 10.3.0 버전 이후 지원 
 
-  The config format is the same as `loaders`, but `postLoaders` are applied after the default loaders. You can use this to post-process language blocks. However note that this is a bit more complicated:
+`loaders` 설정의 포맷과 동일하지만, `preLoaders`는 기본 로더보다 나중에 적용됩니다. 이를 사용하면 language block에 대한 사후 처리를 할 수 있습니다. 약간 복잡합니다.
 
-  - For `html`, the result returned by the default loader will be compiled JavaScript render function code.
+  - `html`의 경우, 기본 로더의 결과는 컴파일 된 JavaScript 렌더링 함수 코드가 됩니다.
 
-  - For `css`, the result will be returned by `vue-style-loader` which isn't particularly useful in most cases. Using a postcss plugin will be a better option.
+  - `css`의 경우, 결과는 `vue-style-loader`가 반환하고 대부분의 경우 별로 사용할 일은 없습니다. postcss 플러그인을 사용하는 것이 더 좋습니다.
 
 
 ### postcss
 
-> Note: in >=11.0.0 it is recommended to use a PostCSS config file instead. [The usage is the same as `postcss-loader`](https://github.com/postcss/postcss-loader#usage).
+> 참고: 11.0.0 이후 PostCSS 설정파일을 사용할 것을 권장합니다. [`postcss-loader` 사용법](https://github.com/postcss/postcss-loader#usage).
 
 - 타입: `Array` 또는 `Function`, `Object`
 - `Object` 타입은 오직 ^8.5.0에서 지원됩니다.
@@ -159,11 +160,11 @@ module: {
   // webpack 1
   vue: {
     buble: {
-      // enable object spread operator
-      // NOTE: you need to provide Object.assign polyfill yourself!
+      // object spread 연산자 사용
+      // 참고: Object.assign 에 관한 폴리필을 직접 해야합니다!
       objectAssign: 'Object.assign',
 
-      // turn off the `with` removal
+      // `with` 제거를 끕니다.
       transforms: {
         stripWith: false
       }
@@ -188,15 +189,15 @@ module: {
 
 ### extractCSS
 
-> New in 12.0.0
+> 12.0.0에서 추가되었습니다
 
-Automatically extracts the CSS using `extract-text-webpack-plugin`. Works for most pre-processors out of the box, and handles minification in production as well.
+`extract-text-webpack-plugin`를 사용해 자동으로 CSS를 추출합니다. 대부분의 프리 프로세서를 사용할 수 있으며 프로덕션 모드에서 최소화를 합니다.
 
-The value passed in can be `true`, or an instance of the plugin (so that you can use multiple instances of the extract plugin for multiple extracted files).
+전달된 값은 `true`이거나 플러그인의 인스턴스일 수 있습니다. (추출된 여러 파일에 플러그인의 인스턴스를 사용할 수 있습니다)
 
-This should be only used in production so that hot-reload works during development.
+프로덕션 환경에서만 사용되고, 개발 중에는 핫 리로드가 작동합니다.
 
-Example:
+예제:
 
 ``` js
 // webpack.config.js
@@ -221,7 +222,7 @@ module.exports = {
 }
 ```
 
-Or passing in an instance of the plugin:
+또는 플러그인 인스턴스를 전달합니다.
 
 ``` js
 // webpack.config.js
