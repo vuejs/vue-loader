@@ -20,4 +20,4 @@ npm run dev
 
 This will setup a basic Webpack + `vue-loader` project for you, with `*.vue` files and hot-reloading working out of the box!
 
-For advanced `vue-loader` configuration, checkout the [documentation](http://vuejs.github.io/vue-loader/index.html).
+For advanced `vue-loader` configuration, checkout the [documentation](https://vue-loader.vuejs.org).
