@@ -66,7 +66,7 @@ More details can be found in [Using Pre-Processors](../configurations/pre-proces
 
 - Multiple `<style>` tags are supported in a single `*.vue` file.
 
-- A `<style>` tag can have `scoped` or `module` attributes (see [Scoped CSS](../features/scoped-css.md) and [CSS Modules](../features/css-modules.md)) to help encapsulating the styles to the current component. Multiple `<style>` tags with different encapsulation modes can be mixed in the same component.
+- A `<style>` tag can have `scoped` or `module` attributes (see [Scoped CSS](../features/scoped-css.md) and [CSS Modules](../features/css-modules.md)) to help encapsulate the styles to the current component. Multiple `<style>` tags with different encapsulation modes can be mixed in the same component.
 
 - By default, contents will be extracted and dynamically inserted into the document's `<head>` as an actual `<style>` tag using `style-loader`. It's also possible to [configure Webpack so that all styles in all components are extracted into a single CSS file](../configurations/extract-css.md).
 
