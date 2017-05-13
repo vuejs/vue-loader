@@ -166,6 +166,32 @@ describe('vue-loader', function () {
     })
   })
 
+  it('pre-processors with extract css', done => {
+    test({
+      entry: './test/fixtures/pre.vue',
+      vue: {
+        extractCSS: true
+      },
+      plugins: [
+        new ExtractTextPlugin('test.output.css')
+      ]
+    }, (window, module) => {
+      var vnode = mockRender(module)
+
+      expect(vnode.children[0].tag).to.equal('h1')
+      expect(vnode.children[1].tag).to.equal('comp-a')
+      expect(vnode.children[2].tag).to.equal('comp-b')
+
+      expect(module.data().msg).to.contain('Hello from coffee!')
+
+      var css = mfs.readFileSync('/test.output.css').toString()
+      css = normalizeNewline(css)
+      expect(css).to.contain('body {\n  font: 100% Helvetica, sans-serif;\n  color: #999;\n}')
+
+      done()
+    })
+  })
+
   it('scoped style', done => {
     test({
       entry: './test/fixtures/scoped-css.vue',
