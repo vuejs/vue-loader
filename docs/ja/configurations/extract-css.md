@@ -1,12 +1,45 @@
 # CSS を単一のファイルに抽出する
 
-すべての Vue コンポーネントで処理されたすべての CSS を 1 つの CSS ファイルに抽出する例:
-
-### Webpack 2.x
-
 ``` bash
 npm install extract-text-webpack-plugin --save-dev
 ```
+
+## The Easy Way
+
+> requires vue-loader@^12.0.0 and webpack@^2.0.0
+
+``` js
+// webpack.config.js
+var ExtractTextPlugin = require("extract-text-webpack-plugin")
+
+module.exports = {
+  // other options...
+  module: {
+    rules: [
+      {
+        test: /\.vue$/,
+        loader: 'vue-loader',
+        options: {
+          extractCSS: true
+        }
+      }
+    ]
+  },
+  plugins: [
+    new ExtractTextPlugin("style.css")
+  ]
+}
+```
+
+The above will automatically handle extraction for `<style>` inside `*.vue` files and works with most pre-processors out of the box.
+
+Note this only extracts `*.vue` files though - CSS imported in JavaScript still needs to be configured separately.
+
+## Manual Configuration
+
+すべての Vue コンポーネントで処理されたすべての CSS を 1 つの CSS ファイルに抽出する例:
+
+### Webpack 2.x
 
 ``` js
 // webpack.config.js
