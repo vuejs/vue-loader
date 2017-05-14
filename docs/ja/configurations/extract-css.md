@@ -4,7 +4,7 @@
 npm install extract-text-webpack-plugin --save-dev
 ```
 
-## The Easy Way
+## 簡単な方法
 
 > requires vue-loader@^12.0.0 and webpack@^2.0.0
 
@@ -13,7 +13,7 @@ npm install extract-text-webpack-plugin --save-dev
 var ExtractTextPlugin = require("extract-text-webpack-plugin")
 
 module.exports = {
-  // other options...
+  // 他のオプション...
   module: {
     rules: [
       {
@@ -31,11 +31,11 @@ module.exports = {
 }
 ```
 
-The above will automatically handle extraction for `<style>` inside `*.vue` files and works with most pre-processors out of the box.
+上記は、`*.vue` ファイル内部の `<style>` のための抽出を自動的に処理し、ほとんどのプリプロセッサでそのまま使えます。
 
-Note this only extracts `*.vue` files though - CSS imported in JavaScript still needs to be configured separately.
+これは、`*.vue` ファイルだけを抽出することに注意してください。JavaScript でインポートされた CSS は、別途設定する必要があります。
 
-## Manual Configuration
+## 手動設定
 
 すべての Vue コンポーネントで処理されたすべての CSS を 1 つの CSS ファイルに抽出する例:
 
