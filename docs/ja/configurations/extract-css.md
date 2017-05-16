@@ -6,7 +6,7 @@ npm install extract-text-webpack-plugin --save-dev
 
 ## 簡単な方法
 
-> requires vue-loader@^12.0.0 and webpack@^2.0.0
+> vue-loader@^12.0.0 と webpack@^2.0.0 必須
 
 ``` js
 // webpack.config.js
