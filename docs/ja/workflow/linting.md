@@ -31,7 +31,7 @@ module.exports = {
   module: {
     loaders: [
       {
-        test: /.vue$/,
+        test: /\.vue$/,
         loader: 'vue!eslint'
       }
     ]
@@ -50,7 +50,7 @@ module.exports = {
     // リント対象はローカルの *.vue ファイルのみ
     preLoaders: [
       {
-        test: /.vue$/,
+        test: /\.vue$/,
         loader: 'eslint',
         exclude: /node_modules/
       }
@@ -58,7 +58,7 @@ module.exports = {
     // しかし全ての *.vue ファイルで vue-loader を使用します
     loaders: [
       {
-        test: /.vue$/,
+        test: /\.vue$/,
         loader: 'vue'
       }
     ]
@@ -77,13 +77,13 @@ module.exports = {
       // *.vue のみを検査します
       {
         enforce: 'pre',
-        test: /.vue$/,
+        test: /\.vue$/,
         loader: 'eslint-loader',
         exclude: /node_modules/
       },
       // しかし全ての *.vue ファイルで vue-loader は使用します
       {
-        test: /.vue$/,
+        test: /\.vue$/,
         loader: 'vue-loader'
       }
     ]

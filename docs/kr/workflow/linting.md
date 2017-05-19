@@ -31,7 +31,7 @@ module.exports = {
   module: {
     loaders: [
       {
-        test: /.vue$/,
+        test: /\.vue$/,
         loader: 'vue!eslint'
       }
     ]
@@ -51,7 +51,7 @@ module.exports = {
     // 오직 로컬 *.vue 파일만 lint합니다.
     preLoaders: [
       {
-        test: /.vue$/,
+        test: /\.vue$/,
         loader: 'eslint',
         exclude: /node_modules/
       }
@@ -59,7 +59,7 @@ module.exports = {
     // 하지만 모든 *.vue 파일에 대해 vue-loader를 사용하세요.
     loaders: [
       {
-        test: /.vue$/,
+        test: /\.vue$/,
         loader: 'vue'
       }
     ]
@@ -78,13 +78,13 @@ module.exports = {
       // 오직 로컬 *.vue 파일만 lint합니다.
       {
         enforce: 'pre',
-        test: /.vue$/,
+        test: /\.vue$/,
         loader: 'eslint',
         exclude: /node_modules/
       },
       // 하지만 모든 *.vue 파일에 대해 vue-loader를 사용하세요.
       {
-        test: /.vue$/,
+        test: /\.vue$/,
         loader: 'vue'
       }
     ]
