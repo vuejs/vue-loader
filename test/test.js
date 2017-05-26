@@ -653,7 +653,8 @@ describe('vue-loader', function () {
         // from main component
         expect(context.styles).to.contain('h1 { color: green;')
         // from imported child component
-        expect(context.styles).to.contain('comp-a h2 {\n  color: #f00;')
+        //  expect(context.styles).to.contain('comp-a h2 {\n  color: #f00;')
+        expect(context.styles).to.match(/comp-a\s{1}h2\s{1}{(\r){0,1}\n\s{2}color:\s{1}#f00;/)
         // from imported css file
         expect(context.styles).to.contain('h1 { color: red;')
         // from imported functional component
