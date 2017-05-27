@@ -227,6 +227,8 @@ describe('vue-loader', function () {
       expect(style).to.contain(`.anim[${id}] {\n  animation: color-${id} 5s infinite, other 5s;`)
       expect(style).to.contain(`.anim-2[${id}] {\n  animation-name: color-${id}`)
       expect(style).to.contain(`@keyframes color-${id} {`)
+      // >>> combinator
+      expect(style).to.contain(`.foo p[${id}] .bar {\n  color: red;\n}`)
       done()
     })
   })

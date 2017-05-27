@@ -19,6 +19,9 @@ h1 {
   from { color: red; }
   to { color: green; }
 }
+.foo p >>> .bar {
+  color: red;
+}
 </style>
 
 <template>
