@@ -184,3 +184,76 @@ module.exports = {
     ]
   }
   ```
+
+### extractCSS
+  
+  > New in 12.0.0
+  
+  - type: `boolean`
+  - default: `false`
+
+  Automatically extracts the CSS using `extract-text-webpack-plugin`. Works for most pre-processors out of the box, and handles minification in production as well.
+  
+  The value passed in can be `true`, or an instance of the plugin (so that you can use multiple instances of the extract plugin for multiple extracted files).
+ 
+ This should be only used in production so that hot-reload works during development.
+ 
+ Example:
+ 
+ ``` js
+ // webpack.config.js
+ var ExtractTextPlugin = require("extract-text-webpack-plugin")
+ 
+ module.exports = {
+   // other options...
+   module: {
+     rules: [
+       {
+         test: /\.vue$/,
+         loader: 'vue-loader',
+         options: {
+           extractCSS: true
+         }
+       }
+     ]
+   },
+   plugins: [
+     new ExtractTextPlugin("style.css")
+   ]
+ }
+ ```
+ 
+ Or passing in an instance of the plugin:
+ 
+ ``` js
+ // webpack.config.js
+ var ExtractTextPlugin = require("extract-text-webpack-plugin")
+ var plugin = new ExtractTextPlugin("style.css")
+ 
+ module.exports = {
+   // other options...
+   module: {
+     rules: [
+       {
+         test: /\.vue$/,
+         loader: 'vue-loader',
+         options: {
+           extractCSS: plugin
+         }
+       }
+     ]
+   },
+   plugins: [
+     plugin
+    ]
+  }
+  ```
+
+### optimizeSSR
+
+> New in 12.1.1
+
+- type: `boolean`
+- default: `true` when the webpack config has `target: 'node'` and `vue-template-compiler` is at version 2.4.0 or above.
+
+Enable Vue 2.4 SSR compilation optimization that compiles part of the vdom trees returned by render functions into plain strings, which improves SSR performance. In some cases you might want to explicitly turn it off because the resulting render functions can only be used for SSR and cannot be used for client-side rendering or testing.
