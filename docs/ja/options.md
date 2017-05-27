@@ -113,7 +113,7 @@ module.exports = {
 
 ### cssSourceMap
 
-- 型: `Boolean`
+- 型: `boolean`
 - デフォルト: `true`
 
   CSS のソースマップを有効にするかどうか。これを無効にすると、`css-loader` の相対パス関連のバグを避けることができ、ビルドを少し早くすることができます。
@@ -122,14 +122,14 @@ module.exports = {
 
 ### esModule
 
-- 型: `Boolean`
-- デフォルト: `undefined`
+- 型: `boolean`
+- デフォルト: `false`
 
   esModule 互換コードを発行するかどうか。デフォルトの vue-loader のデフォルトの出力は `module.exports = ....` のような commonjs 形式で発行します。 `esModule` が true にセットされているとき、デフォルトの出力は `exports.__esModule = true; exports = ...` にトランスパイルされます。TypeScript のような Babel 以外の transpiler との相互運用に役立ちます。
 
 ### preserveWhitespace
 
-- 型: `Boolean`
+- 型: `boolean`
 - デフォルトx: `true`
 
   もし `false` に設定されていたら、テンプレート内の HTML タグ間の空白は無視されます。
@@ -187,73 +187,74 @@ module.exports = {
 
 ### extractCSS
   
-  > New in 12.0.0
+  > 12.0.0 で追加
   
-  - type: `boolean`
-  - default: `false`
+  - 型: `boolean`
+  - デフォルト: `false`
 
-  Automatically extracts the CSS using `extract-text-webpack-plugin`. Works for most pre-processors out of the box, and handles minification in production as well.
+  自動的に `extract-text-webpack-plugin` を使用して CSS を抽出します。ほとんどのプリプロセッサに対してすぐに動作し、本番環境においても同様に縮小処理します。
   
-  The value passed in can be `true`, or an instance of the plugin (so that you can use multiple instances of the extract plugin for multiple extracted files).
+  `true` またはプラグインのインスタンス (複数の抽出されたファイルに対して抽出プラグインの複数のインスタンスを使用できるように) を値として渡すことができます。
  
- This should be only used in production so that hot-reload works during development.
- 
- Example:
- 
- ``` js
- // webpack.config.js
- var ExtractTextPlugin = require("extract-text-webpack-plugin")
- 
- module.exports = {
-   // other options...
-   module: {
-     rules: [
-       {
-         test: /\.vue$/,
-         loader: 'vue-loader',
-         options: {
-           extractCSS: true
-         }
-       }
-     ]
-   },
-   plugins: [
-     new ExtractTextPlugin("style.css")
-   ]
- }
- ```
- 
- Or passing in an instance of the plugin:
- 
- ``` js
- // webpack.config.js
- var ExtractTextPlugin = require("extract-text-webpack-plugin")
- var plugin = new ExtractTextPlugin("style.css")
- 
- module.exports = {
-   // other options...
-   module: {
-     rules: [
-       {
-         test: /\.vue$/,
-         loader: 'vue-loader',
-         options: {
-           extractCSS: plugin
-         }
-       }
-     ]
-   },
-   plugins: [
-     plugin
+  これは、開発中にはホットリロードが動作するため本番環境でのみ使用する必要があります。
+  
+  例:
+  
+  ``` js
+  // webpack.config.js
+  var ExtractTextPlugin = require("extract-text-webpack-plugin")
+  
+  module.exports = {
+    // 他のオプション ...
+    module: {
+      rules: [
+        {
+          test: /\.vue$/,
+          loader: 'vue-loader',
+          options: {
+            extractCSS: true
+          }
+        }
+      ]
+    },
+    plugins: [
+      new ExtractTextPlugin("style.css")
+    ]
+  }
+  ```
+  
+  または、プラグインのインスタンスを渡します:
+  
+  ``` js
+  // webpack.config.js
+  var ExtractTextPlugin = require("extract-text-webpack-plugin")
+  var plugin = new ExtractTextPlugin("style.css")
+  
+  module.exports = {
+    // 他のオプション ...
+    module: {
+      rules: [
+        {
+          test: /\.vue$/,
+          loader: 'vue-loader',
+          options: {
+            extractCSS: plugin
+          }
+        }
+      ]
+    },
+    plugins: [
+      plugin
     ]
   }
   ```
 
 ### optimizeSSR
 
-> New in 12.1.1
+> 12.1.1 で追加
 
-- type: `boolean`
-- default: `true` when the webpack config has `target: 'node'` and `vue-template-compiler` is at version 2.4.0 or above.
+- 型: `boolean`
+- デフォルト: webpack 設定が `target: 'node'` でかつ `vue-template-compiler` が バージョン 2.4.0 以上であれば、`true`
 
-Enable Vue 2.4 SSR compilation optimization that compiles part of the vdom trees returned by render functions into plain strings, which improves SSR performance. In some cases you might want to explicitly turn it off because the resulting render functions can only be used for SSR and cannot be used for client-side rendering or testing.
+描画 (render) 関数によって返された vdom ツリーの一部をプレーンな文字列にコンパイルする、Vue 2.4 SSR (サーバサイドレンダリング) のコンパイル最適化を有効にして、SSR のパフォーマンスを改善します。
+描画関数の結果が SSR に対してのみと、クライアントサイドレンダリングまたはテストには使用できないため、あるケースによっては、明示的にオフにしたい場合があります。
