@@ -2,18 +2,7 @@
 
 ## Webpack 1 & 2 사용 방법의 차이점
 
-Webpack 1.x의 경우 Webpack 설정에 루트 `vue` 블럭을 추가합니다.
-
-``` js
-module.exports = {
-  // ...
-  vue: {
-    // vue-loader 옵션
-  }
-}
-```
-
-Webpack 2 (^2.1.0-beta.25)는 다음과 같습니다.
+Webpack 2 : 직접 loader 규칙에 전달합니다
 
 ``` js
 module.exports = {
@@ -32,9 +21,20 @@ module.exports = {
 }
 ```
 
+Webpack 1.x의 경우 Webpack 설정에 루트 `vue` 블럭을 추가합니다.
+
+``` js
+module.exports = {
+  // ...
+  vue: {
+    // vue-loader 옵션
+  }
+}
+```
+
 ### 로더
 
-- 타입: `Object`
+- 타입: `{ [lang: string]: string }`
 
   `*.vue` 파일의 언어 블럭에 사용할 Webpack 로더를 지정하는 객체입니다. 이 키는 특별히 지정된 경우 language block에 대한 `lang` 속성에 해당합니다. 각 타입에 대한 기본적인 `lang`은 다음과 같습니다.
 
@@ -45,15 +45,45 @@ module.exports = {
   예를 들어, `babel-loader`와 `eslint-loader`를 사용하여 모든 `<script>` 블럭을 처리하려면 다음과 같이 사용합니다.
 
   ``` js
-  // ...
-  vue: {
-    loaders: {
-      js: 'babel!eslint'
+  // Webpack 2.x config
+module: {
+  rules: [
+    {
+      test: /\.vue$/,
+      loader: 'vue-loader',
+      options: {
+        loaders: {
+          js: 'babel-loader!eslint-loader'
+        }
+      }
     }
-  }
-  ```
+  ]
+}
+```
+
+### preLoaders
+
+- 타입: `{ [lang: string]: string }`
+- only supported in >=10.3.0
+- 10.3.0 버전 이후 지원 
+
+  `loaders` 설정의 포맷과 동일하지만, `preLoaders`는 기본 로더보다 우선하여 language block에 적용됩니다. 이를 사용하면 language block을 미리 처리할 수 있습니다. (일반적인 사용 사례는 빌드 타임에 국제화를 적용하는 경우입니다.)
+
+### postLoaders
+
+- 타입: `{ [lang: string]: string }`
+- 10.3.0 버전 이후 지원 
+
+`loaders` 설정의 포맷과 동일하지만, `preLoaders`는 기본 로더보다 나중에 적용됩니다. 이를 사용하면 language block에 대한 사후 처리를 할 수 있습니다. 약간 복잡합니다.
+
+  - `html`의 경우, 기본 로더의 결과는 컴파일 된 JavaScript 렌더링 함수 코드가 됩니다.
+
+  - `css`의 경우, 결과는 `vue-style-loader`가 반환하고 대부분의 경우 별로 사용할 일은 없습니다. postcss 플러그인을 사용하는 것이 더 좋습니다.
+
 
 ### postcss
+
+> 참고: 11.0.0 이후 PostCSS 설정파일을 사용할 것을 권장합니다. [`postcss-loader` 사용법](https://github.com/postcss/postcss-loader#usage).
 
 - 타입: `Array` 또는 `Function`, `Object`
 - `Object` 타입은 오직 ^8.5.0에서 지원됩니다.
@@ -108,7 +138,8 @@ module.exports = {
 ### transformToRequire
 
 - 타입: `{ [tag: string]: string | Array<string> }`
-- 디폴트: `{ img: 'src' }`
+- 디폴트: `{ img: 'src', image: 'xlink:href' }`
+
 
   템플릿 컴파일 중에 컴파일러는 `src` URL과 같은 특정 속성을 `require` 호출로 변환하여 대상 Asset을 Webpack에서 처리할 수 있습니다. 기본 설정은 `<img>` 태그에 `src` 속성을 변환합니다.
 
@@ -129,11 +160,11 @@ module.exports = {
   // webpack 1
   vue: {
     buble: {
-      // Object spread 연산자를 허용합니다.
-      // 참고: 직접 Object.assign polyfill을 제공해야합니다!
+      // object spread 연산자 사용
+      // 참고: Object.assign 에 관한 폴리필을 직접 해야합니다!
       objectAssign: 'Object.assign',
 
-      // `with` 제거 옵션을 끄십시오.
+      // `with` 제거를 끕니다.
       transforms: {
         stripWith: false
       }
@@ -145,13 +176,74 @@ module.exports = {
     rules: [
       {
         test: /\.vue$/,
-        loader: 'vue',
+        loader: 'vue-loader',
         options: {
           buble: {
-            // 같은 옵션입니다.
+            // same options
           }
         }
       }
     ]
   }
   ```
+
+### extractCSS
+
+> 12.0.0에서 추가되었습니다
+
+`extract-text-webpack-plugin`를 사용해 자동으로 CSS를 추출합니다. 대부분의 프리 프로세서를 사용할 수 있으며 프로덕션 모드에서 최소화를 합니다.
+
+전달된 값은 `true`이거나 플러그인의 인스턴스일 수 있습니다. (추출된 여러 파일에 플러그인의 인스턴스를 사용할 수 있습니다)
+
+프로덕션 환경에서만 사용되고, 개발 중에는 핫 리로드가 작동합니다.
+
+예제:
+
+``` js
+// webpack.config.js
+var ExtractTextPlugin = require("extract-text-webpack-plugin")
+
+module.exports = {
+  // other options...
+  module: {
+    rules: [
+      {
+        test: /\.vue$/,
+        loader: 'vue-loader',
+        options: {
+          extractCSS: true
+        }
+      }
+    ]
+  },
+  plugins: [
+    new ExtractTextPlugin("style.css")
+  ]
+}
+```
+
+또는 플러그인 인스턴스를 전달합니다.
+
+``` js
+// webpack.config.js
+var ExtractTextPlugin = require("extract-text-webpack-plugin")
+var plugin = new ExtractTextPlugin("style.css")
+
+module.exports = {
+  // other options...
+  module: {
+    rules: [
+      {
+        test: /\.vue$/,
+        loader: 'vue-loader',
+        options: {
+          extractCSS: plugin
+        }
+      }
+    ]
+  },
+  plugins: [
+    plugin
+  ]
+}
+```

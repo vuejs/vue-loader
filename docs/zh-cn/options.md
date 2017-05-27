@@ -1,6 +1,6 @@
-# 配置文档
+# 选项参考
 
-## Webpack 1 和 2 配置差异
+## Webpack 1 和 2 之间的使用差异
 
 Webpack 2：配置直接放到 loader rule 中。
 
@@ -36,8 +36,7 @@ module.exports = {
 
 - 类型： `{ [lang: string]: string }`
 
-  如果指定 Webpack loaders 会覆盖 ` .vue` 文件中的语言块的默认 `lang` 属性。 每种类型的默认 `lang` 是：
-  An object specifying Webpack loaders to overwrite the default loaders used for language blocks inside `*.vue` files. The key corresponds to the `lang` attribute for language blocks, if specified. The default `lang` for each type is:
+  指定 Webpack loader 对象覆盖用于 `*.vue` 文件内的语言块的默认 loader。如果指定，该键对应于语言块的 `lang` 属性。 每种类型的默认 `lang` 是：
 
   - `<template>`: `html`
   - `<script>`: `js`
@@ -65,18 +64,18 @@ module.exports = {
 ### preLoaders
 
 - 类型： `{ [lang: string]: string }`
-- 在大于 >=10.3.0 版本中支持
+- 仅在 >=10.3.0 版本中支持
 
-  配置格式和 `loaders` 相同，但是 `preLoaders` 会在默认 loaders 之前处理。你可以用来预处理语言块 - 一个例子是用来处理构建时的 i18n。
-  
+  配置格式和 `loaders` 相同，但是 `preLoaders` 会在默认 loaders 之前处理。你可以用来预处理语言块 - 一个常见用例是用来处理构建时的 i18n。
+
 ### postLoaders
 
 - 类型： `{ [lang: string]: string }`
-- 在大于 >=10.3.0 版本中支持
+- 仅在 >=10.3.0 版本中支持
 
   配置格式和 `loaders` 相同，但是 `postLoaders` 会在默认 loaders 之后处理。你可以用来后处理语言块。注意这会有些复杂：
 
-  - 对于 `html`,默认 loader 返回结果会被编译为 JavaScript 渲染函数。
+  - 对于 `html`，默认 loader 返回结果会被编译为 JavaScript 渲染函数。
 
   - 对于 `css`，由`vue-style-loader` 返回的结果通常不太有用。使用 postcss 插件将会是更好的选择。
 
@@ -94,7 +93,7 @@ module.exports = {
   {
     loader: 'vue-loader',
     options: {
-      // note: do not nest the `postcss` option under `loaders`
+      // 注意：不要在 `loader` 下嵌入 `postcss` 选项
       postcss: [require('postcss-cssnext')()],
       loaders: {
         // ...
@@ -128,7 +127,7 @@ module.exports = {
 - 类型: `Boolean`
 - 默认值: `undefined`
 
-  是否导出 esModule 兼容代码，默认情况下 vue-loader 会导出 commonjs 格式，像 `module.exports = ....`。当 `esModule` 设置为 true 的情况下，导出会变为 `exports.__esModule = true; exports = ...`。Useful for interoperating with transpiler other than Babel，比如 TypeScript。
+  是否导出兼容 esModule 的代码，默认情况下 vue-loader 会导出 commonjs 格式，像 `module.exports = ....`。当 `esModule` 设置为 true 的情况下，导出会变为 `exports.__esModule = true; exports = ...`。适用于与 Babel 以外的 transpiler 互操作，比如 TypeScript。
 
 ### preserveWhitespace
 
@@ -149,10 +148,9 @@ module.exports = {
 - 类型: `Object`
 - 默认值: `{}`
 
-  在使用 `buble-loader` 时配置它的选项，AND the buble compilation pass for template render functions。
+  配置 `buble-loader` 的选项（如果存在），并且 buble 编译传递模板渲染函数。
 
   > 版本警告：在 9.x 版本中，模板表达式通过现在已经删除的 `templateBuble` 选项单独配置。
-
 
   模板渲染函数编译支持一个特殊的变换 `stripWith`（默认启用），它删除生成的渲染函数中的 `with` 用法，使它们兼容严格模式。
 
@@ -162,8 +160,8 @@ module.exports = {
   // webpack 1
   vue: {
     buble: {
-      // enable object spread operator
-      // NOTE: you need to provide Object.assign polyfill yourself!
+      // 启用对象扩展运算符
+      // 注意：你需要自己提供 Object.assign polyfill！
       objectAssign: 'Object.assign',
 
       // turn off the `with` removal
@@ -188,3 +186,64 @@ module.exports = {
     ]
   }
   ```
+
+### extractCSS
+
+> 12.0.0 新增
+
+使用 `extract-text-webpack-plugin` 自动提取 CSS。 适用于大多数预处理器，且也可在生产环境进行压缩。
+
+传入的值可以是 `true`，也可以是插件的一个实例（这样可以为多个提取的文件使用多个提取插件的实例）。
+
+这应当只用于生产环境，以便可以在开发过程中使用热重载。
+
+示例:
+
+``` js
+// webpack.config.js
+var ExtractTextPlugin = require("extract-text-webpack-plugin")
+
+module.exports = {
+  // other options...
+  module: {
+    rules: [
+      {
+        test: /\.vue$/,
+        loader: 'vue-loader',
+        options: {
+          extractCSS: true
+        }
+      }
+    ]
+  },
+  plugins: [
+    new ExtractTextPlugin("style.css")
+  ]
+}
+```
+
+或者传递插件的一个实例：
+
+``` js
+// webpack.config.js
+var ExtractTextPlugin = require("extract-text-webpack-plugin")
+var plugin = new ExtractTextPlugin("style.css")
+
+module.exports = {
+  // other options...
+  module: {
+    rules: [
+      {
+        test: /\.vue$/,
+        loader: 'vue-loader',
+        options: {
+          extractCSS: plugin
+        }
+      }
+    ]
+  },
+  plugins: [
+    plugin
+  ]
+}
+```

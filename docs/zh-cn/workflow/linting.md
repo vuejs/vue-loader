@@ -30,7 +30,7 @@ module.exports = {
   module: {
     loaders: [
       {
-        test: /.vue$/,
+        test: /\.vue$/,
         loader: 'vue!eslint'
       }
     ]
@@ -40,7 +40,7 @@ module.exports = {
 
 注意 Webpack loader 处理顺序是 **从右到左**。确保在 `vue` 之前应用 `eslint`，这样才能检验编译前的代码。
 
-我们需要考虑使用的 NPM 包中的第三方 `.vue` 组件，实际使用中我们希望使用 `vue-loader` 去处理第三方组件，但是不想检验它们。我们需要把 linting 配置到 Webpack's [preLoaders](https://webpack.github.io/docs/loaders.html#loader-order)中：
+我们需要考虑使用的 NPM 包中的第三方 `.vue` 组件，实际使用中我们希望使用 `vue-loader` 去处理第三方组件，但是不想检验它们。我们需要把 linting 配置到 Webpack 的  [preLoaders](https://webpack.github.io/docs/loaders.html#loader-order) 中：
 
 ``` js
 // webpack.config.js
@@ -50,7 +50,7 @@ module.exports = {
     // only lint local *.vue files
     preLoaders: [
       {
-        test: /.vue$/,
+        test: /\.vue$/,
         loader: 'eslint',
         exclude: /node_modules/
       }
@@ -58,7 +58,7 @@ module.exports = {
     // but use vue-loader for all *.vue files
     loaders: [
       {
-        test: /.vue$/,
+        test: /\.vue$/,
         loader: 'vue'
       }
     ]
@@ -77,13 +77,13 @@ module.exports = {
       // only lint local *.vue files
       {
         enforce: 'pre',
-        test: /.vue$/,
+        test: /\.vue$/,
         loader: 'eslint-loader',
         exclude: /node_modules/
       },
       // but use vue-loader for all *.vue files
       {
-        test: /.vue$/,
+        test: /\.vue$/,
         loader: 'vue-loader'
       }
     ]

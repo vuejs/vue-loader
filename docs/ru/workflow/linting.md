@@ -31,7 +31,7 @@ module.exports = {
   module: {
     loaders: [
       {
-        test: /.vue$/,
+        test: /\.vue$/,
         loader: 'vue!eslint'
       }
     ]
@@ -51,7 +51,7 @@ module.exports = {
     // анализировать только локальные *.vue файлы
     preLoaders: [
       {
-        test: /.vue$/,
+        test: /\.vue$/,
         loader: 'eslint',
         exclude: /node_modules/
       }
@@ -59,7 +59,7 @@ module.exports = {
     // но использовать vue-loader для всех *.vue файлов
     loaders: [
       {
-        test: /.vue$/,
+        test: /\.vue$/,
         loader: 'vue'
       }
     ]
@@ -78,13 +78,13 @@ module.exports = {
       // анализировать только локальные *.vue файлы
       {
         enforce: 'pre',
-        test: /.vue$/,
+        test: /\.vue$/,
         loader: 'eslint-loader',
         exclude: /node_modules/
       },
       // но использовать vue-loader для всех *.vue файлов
       {
-        test: /.vue$/,
+        test: /\.vue$/,
         loader: 'vue-loader'
       }
     ]

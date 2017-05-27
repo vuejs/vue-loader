@@ -8,6 +8,20 @@
 h1 {
   color: green;
 }
+.anim {
+  animation: color 5s infinite, other 5s;
+}
+.anim-2 {
+  animation-name: color;
+  animation-duration: 5s;
+}
+@keyframes color {
+  from { color: red; }
+  to { color: green; }
+}
+.foo p >>> .bar {
+  color: red;
+}
 </style>
 
 <template>

@@ -18,13 +18,13 @@
 
 ``` html
 <style>
-.example[_v-f3f3eg9] {
+.example[data-v-f3f3eg9] {
   color: red;
 }
 </style>
 
 <template>
-  <div class="example" _v-f3f3eg9>hi</div>
+  <div class="example" data-v-f3f3eg9>hi</div>
 </template>
 ```
 
@@ -42,11 +42,10 @@
   </style>
   ```
 
-2. 子组件的根节点将同时受父组件作用域和子组件作用域的影响。
+2. 子组件的根节点将同时受父组件和子组件作用域 CSS 的影响。
 
-3. 部分元素不受作用域影响部分。
+3. Partials 不受作用域样式影响。
 
-4. **CSS 作用域不能代C替 classes**。考虑到浏览器渲染各种 CSS 选择器的方式，`p { color: red }` 在作用域中会慢很多(即转换为属性选择器)。如果你使用 classes 或者 ids 代替，比如 `.example { color: red }`，这样几乎没有性能影响。[Here's a playground](http://stevesouders.com/efws/css-selectors/csscreate.php) 你可以测试它们的不同。
+4. **CSS 作用域不能代替 classes**。考虑到浏览器渲染各种 CSS 选择器的方式，当使用 scoped 时，`p { color: red }` 在作用域中会慢很多倍（即当与属性选择器组合时）。如果你使用 classes 或者 ids 代替，比如 `.example { color: red }`，这样几乎没有性能影响。[Here's a playground](http://stevesouders.com/efws/css-selectors/csscreate.php) 你可以测试它们的不同。
 
 5. **在递归组件中小心使用后代选择器!** 对于带有选择器 `.a .b` 的CSS 规则，如果元素 `.a` 包含递归子组件，所有的子组件中的 `.b` 会被匹配。
-

@@ -114,7 +114,7 @@ module.exports = {
 
 ### cssSourceMap
 
-- type: `Boolean`
+- type: `boolean`
 - default: `true`
 
   Whether to enable source maps for CSS. Disabling this can avoid some relative path related bugs in `css-loader` and make the build a bit faster.
@@ -123,14 +123,14 @@ module.exports = {
 
 ### esModule
 
-- type: `Boolean`
-- default: `undefined`
+- type: `boolean`
+- default: `false`
 
   Whether to emit esModule compatible code. By default vue-loader will emit default export in commonjs format like `module.exports = ....`. When `esModule` is set to true, default export will be transpiled into `exports.__esModule = true; exports = ...`. Useful for interoperating with transpiler other than Babel, like TypeScript.
 
 ### preserveWhitespace
 
-- type: `Boolean`
+- type: `boolean`
 - default: `true`
 
   If set to `false`, the whitespaces between HTML tags in templates will be ignored.
@@ -190,6 +190,9 @@ module.exports = {
 
 > New in 12.0.0
 
+- type: `boolean`
+- default: `false`
+
 Automatically extracts the CSS using `extract-text-webpack-plugin`. Works for most pre-processors out of the box, and handles minification in production as well.
 
 The value passed in can be `true`, or an instance of the plugin (so that you can use multiple instances of the extract plugin for multiple extracted files).
@@ -246,3 +249,12 @@ module.exports = {
   ]
 }
 ```
+
+### optimizeSSR
+
+> New in 12.1.1
+
+- type: `boolean`
+- default: `true` when the webpack config has `target: 'node'` and `vue-template-compiler` is at version 2.4.0 or above.
+
+Enable Vue 2.4 SSR compilation optimization that compiles part of the vdom trees returned by render functions into plain strings, which improves SSR performance. In some cases you might want to explicitly turn it off because the resulting render functions can only be used for SSR and cannot be used for client-side rendering or testing.
