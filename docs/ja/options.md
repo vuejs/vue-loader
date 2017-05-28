@@ -113,7 +113,7 @@ module.exports = {
 
 ### cssSourceMap
 
-- 型: `Boolean`
+- 型: `boolean`
 - デフォルト: `true`
 
   CSS のソースマップを有効にするかどうか。これを無効にすると、`css-loader` の相対パス関連のバグを避けることができ、ビルドを少し早くすることができます。
@@ -122,14 +122,14 @@ module.exports = {
 
 ### esModule
 
-- 型: `Boolean`
-- デフォルト: `undefined`
+- 型: `boolean`
+- デフォルト: `false`
 
   esModule 互換コードを発行するかどうか。デフォルトの vue-loader のデフォルトの出力は `module.exports = ....` のような commonjs 形式で発行します。 `esModule` が true にセットされているとき、デフォルトの出力は `exports.__esModule = true; exports = ...` にトランスパイルされます。TypeScript のような Babel 以外の transpiler との相互運用に役立ちます。
 
 ### preserveWhitespace
 
-- 型: `Boolean`
+- 型: `boolean`
 - デフォルトx: `true`
 
   もし `false` に設定されていたら、テンプレート内の HTML タグ間の空白は無視されます。
@@ -184,3 +184,77 @@ module.exports = {
     ]
   }
   ```
+
+### extractCSS
+  
+  > 12.0.0 で追加
+  
+  - 型: `boolean`
+  - デフォルト: `false`
+
+  自動的に `extract-text-webpack-plugin` を使用して CSS を抽出します。ほとんどのプリプロセッサに対してすぐに動作し、本番環境においても同様に圧縮 (minify) 処理します。
+  
+  `true` またはプラグインのインスタンス (複数の抽出されたファイルに対して `extract-text-webpack-plugin` の複数のインスタンスを使用できるように) を値として渡すことができます。
+ 
+  これは、開発中にはホットリロードが動作するため本番環境でのみ使用する必要があります。
+  
+  例:
+  
+  ``` js
+  // webpack.config.js
+  var ExtractTextPlugin = require("extract-text-webpack-plugin")
+  
+  module.exports = {
+    // 他のオプション ...
+    module: {
+      rules: [
+        {
+          test: /\.vue$/,
+          loader: 'vue-loader',
+          options: {
+            extractCSS: true
+          }
+        }
+      ]
+    },
+    plugins: [
+      new ExtractTextPlugin("style.css")
+    ]
+  }
+  ```
+  
+  または、プラグインのインスタンスを渡します:
+  
+  ``` js
+  // webpack.config.js
+  var ExtractTextPlugin = require("extract-text-webpack-plugin")
+  var plugin = new ExtractTextPlugin("style.css")
+  
+  module.exports = {
+    // 他のオプション ...
+    module: {
+      rules: [
+        {
+          test: /\.vue$/,
+          loader: 'vue-loader',
+          options: {
+            extractCSS: plugin
+          }
+        }
+      ]
+    },
+    plugins: [
+      plugin
+    ]
+  }
+  ```
+
+### optimizeSSR
+
+> 12.1.1 で追加
+
+- 型: `boolean`
+- デフォルト: webpack 設定が `target: 'node'` でかつ `vue-template-compiler` が バージョン 2.4.0 以上であれば、`true`
+
+描画 (render) 関数によって返された vdom ツリーの一部をプレーンな文字列にコンパイルする、Vue 2.4 SSR (サーバサイドレンダリング) のコンパイル最適化を有効にして、SSR のパフォーマンスを改善します。
+描画関数の結果が SSR のみを対象としたものになり、クライアントサイドレンダリングまたはテストには使用できなくなるため、あるケースによっては、明示的にオフにしたくなる場合があります。
