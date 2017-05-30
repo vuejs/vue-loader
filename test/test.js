@@ -141,7 +141,7 @@ describe('vue-loader', function () {
     test({
       entry: './test/fixtures/basic.vue'
     }, (window, module, rawModule) => {
-      expect(module.__file).to.equal(path.resolve(__dirname, './fixtures/basic.vue'))
+      expect(module.__file).to.equal('test/fixtures/basic.vue')
       done()
     })
   })
