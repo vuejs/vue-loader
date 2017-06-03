@@ -36,13 +36,13 @@ npm install inject-loader@^2.0.0 --save-dev
 
 ``` js
 // example.spec.js
-const ExampleInjector = require('!!vue?inject!./example.vue')
+const ExampleInjector = require('!!vue-loader?inject!./example.vue')
 ```
 
 Notice that crazy require string - we are using some inline [webpack loader requests](https://webpack.github.io/docs/loaders.html) here. A quick explanation:
 
 - `!!` at the start means "disable all loaders from the global config";
-- `vue?inject!` means "use the `vue` loader, and pass in the `?inject` query". This tells `vue-loader` to compile the component in dependency-injection mode.
+- `vue-loader?inject!` means "use `vue-loader`, and pass in the `?inject` query". This tells `vue-loader` to compile the component in dependency-injection mode.
 
 The returned `ExampleInjector` is a factory function that can be called to create instances of the `example.vue` module:
 
