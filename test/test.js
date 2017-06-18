@@ -141,7 +141,7 @@ describe('vue-loader', function () {
     test({
       entry: './test/fixtures/basic.vue'
     }, (window, module, rawModule) => {
-      expect(module.__file).to.equal('test/fixtures/basic.vue')
+      expect(module.__file).to.equal('test\\fixtures\\basic.vue')
       done()
     })
   })
@@ -886,6 +886,24 @@ describe('vue-loader', function () {
       var style = window.document.querySelector('style').textContent
       style = normalizeNewline(style)
       expect(style).to.contain('.foo { color: red;\n}')
+      done()
+    })
+  })
+
+  it('should allow markdown template', done => {
+    test({
+      entry: './test/fixtures/markdown-template.vue',
+    }, (window, module) => {
+      var vnode = mockRender(module, {
+        msg: 'hi'
+      })
+      // <h2 id="-msg-">{{msg}}</h2>
+      expect(vnode.tag).to.equal('div')
+      expect(vnode.children[0].tag).to.equal('h2')
+      expect(vnode.children[1]).to.equal(' ')
+      expect(vnode.children[2].tag).to.equal('h3')
+      expect(vnode.children[0].children[0]).to.equal('hi')
+      expect(vnode.children[2].children[0]).to.equal('another tag')
       done()
     })
   })
