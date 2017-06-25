@@ -1,1 +1,3 @@
-<template>## {{msg}}</template>
+<template>
+## {{msg}}
+</template>
