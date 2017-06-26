@@ -10,7 +10,7 @@ Karma is a test runner that launches browsers and runs your tests for you. You c
 npm install\
   karma karma-webpack\
   karma-jasmine jasmine-core\
-  karma-phantomjs-launcher phantomjs\
+  karma-phantomjs-launcher phantomjs-prebuilt\
   --save-dev
 ```
 
