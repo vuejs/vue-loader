@@ -45,7 +45,18 @@ A common request is to be able to load a settings file in each component without
 npm install sass-resources-loader --save-dev
 ```
 
-Then update your `build/utils.js` file:
+Then add the following webpack rule:
+
+``` js
+{
+  loader: 'sass-resources-loader',
+  options: {
+    resources: path.resolve(__dirname, '../src/style/_variables.scss')
+  }
+}
+```
+
+If you are using [vuejs-templates/webpack](https://github.com/vuejs-templates/webpack), modify `build/util.js`:
 
 ``` js
 scss: generateLoaders('sass').concat(
