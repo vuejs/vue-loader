@@ -56,7 +56,7 @@ Then add the following webpack rule:
 }
 ```
 
-If you are using [vuejs-templates/webpack](https://github.com/vuejs-templates/webpack), modify `build/util.js`:
+As an example, if you are using [vuejs-templates/webpack](https://github.com/vuejs-templates/webpack), modify `build/util.js` like so:
 
 ``` js
 scss: generateLoaders('sass').concat(
