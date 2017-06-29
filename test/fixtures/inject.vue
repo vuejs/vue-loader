@@ -3,9 +3,9 @@
 </template>
 
 <script>
-import SomeService from './service'
+const SomeService = require('./service')
 
-export default {
+module.exports = {
   data () {
     return {
       msg: SomeService.msg

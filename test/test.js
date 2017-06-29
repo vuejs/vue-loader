@@ -28,7 +28,10 @@ var globalConfig = {
         loader: loaderPath
       }
     ]
-  }
+  },
+  plugins: [
+    new webpack.optimize.ModuleConcatenationPlugin()
+  ]
 }
 
 function bundle (options, cb) {
@@ -321,7 +324,8 @@ describe('vue-loader', function () {
     }, (code, warnings) => {
       var css = mfs.readFileSync('/test.output.css').toString()
       css = normalizeNewline(css)
-      expect(css).to.contain('h1 {\n  color: #f00;\n}\n\nh2 {\n  color: green;\n}')
+      expect(css).to.contain('h1 {\n  color: #f00;\n}')
+      expect(css).to.contain('h2 {\n  color: green;\n}')
       done()
     })
   })
@@ -338,7 +342,8 @@ describe('vue-loader', function () {
     }, (code, warnings) => {
       var css = mfs.readFileSync('/test.output.css').toString()
       css = normalizeNewline(css)
-      expect(css).to.contain('h1 {\n  color: #f00;\n}\n\nh2 {\n  color: green;\n}')
+      expect(css).to.contain('h1 {\n  color: #f00;\n}')
+      expect(css).to.contain('h2 {\n  color: green;\n}')
       done()
     })
   })
@@ -356,7 +361,8 @@ describe('vue-loader', function () {
     }, (code, warnings) => {
       var css = mfs.readFileSync('/test.output.css').toString()
       css = normalizeNewline(css)
-      expect(css).to.contain('h1 {\n  color: #f00;\n}\n\nh2 {\n  color: green;\n}')
+      expect(css).to.contain('h1 {\n  color: #f00;\n}')
+      expect(css).to.contain('h2 {\n  color: green;\n}')
       done()
     })
   })
@@ -584,7 +590,7 @@ describe('vue-loader', function () {
         return m.exports;
       }
 
-      var output = requireFromString(code, './test.build.js')
+      var output = interopDefault(requireFromString(code, './test.build.js'))
       var mockInstance = {}
 
       output.beforeCreate.forEach(hook => hook.call(mockInstance))
