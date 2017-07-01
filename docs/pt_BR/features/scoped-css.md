@@ -49,3 +49,19 @@ Para o seguinte:
 4. **Os estilos com escopo não eliminam a necessidade de classes**. Devido a forma como navegadores processam vários seletores CSS, `p { color: red }` irá ser muitas vezes mais lento quando com escopo \(exemplo: quando combinado com um seletor de atributo\). Se você usa classes ou ids ao invés, como em `.example { color: red }`, então você elimina praticamente esse desempenho atingido. [Aqui está um playground](http://stevesouders.com/efws/css-selectors/csscreate.php) onde você pode testar as diferenças você mesmo.
 
 5. **Tenha cuidado com seletores descendentes em componentes recursivos!** Para uma regra CSS com o seletor `.a .b`, se o elemento que coincide com `.a` contém um componente filho recursivo, então todos os `.b` nesse componente filho serão correspondidos pela regra.
+
+6. Se você precisa de seletores aninhados em estilos `scoped`, você terá que usar o operador `>>>` para CSS e `/deep/` para `scss`:
+
+``` html
+<style scoped>
+.a >>> .b {
+
+}
+</style>
+     
+<style lang="scss" scoped>
+ .a /deep/ .b {
+
+}
+</style>
+ ```
