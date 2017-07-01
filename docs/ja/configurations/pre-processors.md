@@ -37,15 +37,15 @@ npm install sass-loader node-sass --save-dev
 
 vue-loader を構成する方法の詳細については、[高度な loader の設定](./advanced.md)セクションを参照してください。
 
-#### Loading a global settings file
+#### グローバル設定ファイルの読み込み
 
-A common request is to be able to load a settings file in each component without the need to explicity import it each time, e.g. to use scss variables globally throughout all components. To accomplish this:
+一般的な要求は、毎回明示的にインポートする必要なく、各コンポーネントに設定ファイルを読み込み可能であることです。例としてすべてのコンポーネントで scss 変数をグローバルに使用することです。これを成し遂げるためには:
 
 ``` bash
 npm install sass-resources-loader --save-dev
 ```
 
-Then add the following webpack rule:
+のように `sass-resources-loader` をインストールし、以下の webpack のルールを追加します:
 
 ``` js
 {
@@ -56,7 +56,7 @@ Then add the following webpack rule:
 }
 ```
 
-As an example, if you are using [vuejs-templates/webpack](https://github.com/vuejs-templates/webpack), modify `build/util.js` like so:
+例として、[vuejs-templates/webpack](https://github.com/vuejs-templates/webpack) を使用している場合、 `build/util.js` を以下のように変更してください:
 
 ``` js
 scss: generateLoaders('sass').concat(
@@ -69,7 +69,7 @@ scss: generateLoaders('sass').concat(
 ),
 ```
 
-It is recommended to only include variables, mixins, etc. in this file, to prevent duplicated css in your final, compiled files. 
+最終的にコンパイルされたファイルに css が重複しないように、変数、ミックスインなどをこのファイルに含めることをお勧めします。
 
 ### JavaScript
 
