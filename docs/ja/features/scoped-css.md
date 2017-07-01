@@ -49,3 +49,19 @@
 4. **スコープされたスタイルは class の必要性を排除しません**。ブラウザが様々な CSS セレクタをレンダリングするため、`p { color: red }` はスコープされているとき何倍も遅くなります（すなわち属性セレクタと組み合わせた場合）。もし `.example { color: red }` のように class か id を使用するなら、パフォーマンスヒットは事実上なくなります。[この例](http://stevesouders.com/efws/css-selectors/csscreate.php)で違いをテストすることが出来ます。
 
 5. **再帰されたコンポーネントの子孫セレクタには気をつけてください！** セレクタ `.a .b` を持つ CSS ルールの場合、`.a` にマッチする要素に再帰的な子コンポーネントが含まれている場合、その子コンポーネントのすべての `.b` はルールにマッチします。
+
+6. If you need nested selectors in `scoped` styles, you will have to use `>>>` operator for CSS and `/deep/` for `scss`:
+
+    ``` html
+    <style scoped>
+    .a >>> .b {
+    
+    }
+    </style>
+    
+    <style lang="scss" scoped>
+    .a /deep/ .b {
+    
+    }
+    </style>
+    ```
