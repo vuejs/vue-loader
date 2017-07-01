@@ -50,7 +50,7 @@
 
 5. **再帰されたコンポーネントの子孫セレクタには気をつけてください！** セレクタ `.a .b` を持つ CSS ルールの場合、`.a` にマッチする要素に再帰的な子コンポーネントが含まれている場合、その子コンポーネントのすべての `.b` はルールにマッチします。
 
-6. If you need nested selectors in `scoped` styles, you will have to use `>>>` operator for CSS and `/deep/` for `scss`:
+6. `scoped` スタイルでセレクタが必要なら、CSS に対して `>>>` オペレータを、そして `scss` に対しては `/deep/` を使用する必要があります:
 
     ``` html
     <style scoped>
