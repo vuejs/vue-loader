@@ -10,7 +10,7 @@ Sometimes you may want to:
 
 To do that, specify the `loaders` option for `vue-loader`:
 
-> Note that `preLoaders` and `postLoaders` are only supported in >=10.3.0
+> Note that `preLoaders` and `postLoaders` are only supported in 10.3.0+
 
 ### Webpack 2.x
 
