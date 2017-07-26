@@ -101,7 +101,9 @@ module.exports = {
   }
   ```
 
-  This option can also be an object that contains options to be passed to the PostCSS processor. This is useful when you are using PostCSS projects that relies on custom parser/stringifiers:
+  This option can also be an object that contains options to be passed to the PostCSS processor. This is useful when you are using PostCSS projects that relies on custom parser/s
+  
+  ingifiers:
 
   ``` js
   postcss: {
@@ -124,7 +126,7 @@ module.exports = {
 ### esModule
 
 - type: `boolean`
-- default: `tr`
+- default: `true`
 
   Whether to emit esModule compatible code. By default vue-loader will emit default export in commonjs format like `module.exports = ....`. When `esModule` is set to true, default export will be transpiled into `exports.__esModule = true; exports = ...`. Useful for interoperating with transpiler other than Babel, like TypeScript.
 
