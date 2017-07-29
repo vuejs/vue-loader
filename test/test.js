@@ -98,11 +98,18 @@ function mockRender (options, data) {
       children: children
     }
   }
+  function e (text = '') {
+    return {
+      text:  text,
+      isComment: true
+    }
+  }
   return options.render.call(Object.assign({
     _v (val) {
       return val
     },
     _self: {},
+    _e: e,
     $createElement: h,
     _m (index) {
       return options.staticRenderFns[index].call(this)
@@ -904,6 +911,24 @@ describe('vue-loader', function () {
       var style = window.document.querySelector('style').textContent
       style = normalizeNewline(style)
       expect(style).to.contain('.foo { color: red;\n}')
+      done()
+    })
+  })
+
+  it('template with comments', done => {
+    test({
+      entry: './test/fixtures/template-comment.vue'
+    }, (window, module, rawModule) => {
+      expect(module.comments).to.equal(true)
+      var vnode = mockRender(module, {
+        msg: 'hi'
+      })
+      expect(vnode.tag).to.equal('div')
+      expect(vnode.children.length).to.equal(2)
+      expect(vnode.children[0].data.staticClass).to.equal('red')
+      expect(vnode.children[0].children[0]).to.equal('hi')
+      expect(vnode.children[1].isComment).to.true
+      expect(vnode.children[1].text).to.equal(' comment here ')
       done()
     })
   })
