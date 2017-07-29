@@ -1,4 +1,4 @@
-<template comment>
+<template comments>
   <div>
     <h2 class="red">{{msg}}</h2><!-- comment here -->
   </div>
