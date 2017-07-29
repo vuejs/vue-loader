@@ -64,14 +64,14 @@ module.exports = {
 ### preLoaders
 
 - type: `{ [lang: string]: string }`
-- only supported in >=10.3.0
+- only supported in 10.3.0+
 
   The config format is the same as `loaders`, but `preLoaders` are applied to corresponding language blocks before the default loaders. You can use this to pre-process language blocks - a common use case would be build-time i18n.
 
 ### postLoaders
 
 - type: `{ [lang: string]: string }`
-- only supported in >=10.3.0
+- only supported in 10.3.0+
 
   The config format is the same as `loaders`, but `postLoaders` are applied after the default loaders. You can use this to post-process language blocks. However note that this is a bit more complicated:
 
@@ -81,7 +81,7 @@ module.exports = {
 
 ### postcss
 
-> Note: in >=11.0.0 it is recommended to use a PostCSS config file instead. [The usage is the same as `postcss-loader`](https://github.com/postcss/postcss-loader#usage).
+> Note: in 11.0.0+ it is recommended to use a PostCSS config file instead. [The usage is the same as `postcss-loader`](https://github.com/postcss/postcss-loader#usage).
 
 - type: `Array` or `Function` or `Object`
 
