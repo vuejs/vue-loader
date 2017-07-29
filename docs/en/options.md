@@ -124,10 +124,11 @@ module.exports = {
 ### esModule
 
 - type: `boolean`
-- default: `true`
-- In v12.x or below, default value is `false`
+- default: `true` (v13.0+)
 
   Whether to emit esModule compatible code. By default vue-loader will emit default export in commonjs format like `module.exports = ....`. When `esModule` is set to true, default export will be transpiled into `exports.__esModule = true; exports = ...`. Useful for interoperating with transpiler other than Babel, like TypeScript.
+
+  > version note: up to v12.x, default value is `false`.
 
 ### preserveWhitespace
 
