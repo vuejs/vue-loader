@@ -309,6 +309,18 @@ describe('vue-loader', function () {
     })
   })
 
+  it('supports-query', done => {
+    test({
+      entry: './test/fixtures/supports-query.vue'
+    }, (window) => {
+      var style = window.document.querySelector('style').textContent
+      style = normalizeNewline(style)
+      var id = 'data-v-' + hash('vue-loader/test/fixtures/supports-query.vue')
+      expect(style).to.contain('@supports ( color: #000 ) {\n.foo[' + id + '] {\n    color: #000;\n}\n}')
+      done()
+    })
+  })
+
   it('extract CSS', done => {
     bundle({
       entry: './test/fixtures/extract-css.vue',
