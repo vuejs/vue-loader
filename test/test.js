@@ -8,9 +8,9 @@ var MemoryFS = require('memory-fs')
 var expect = require('chai').expect
 var hash = require('hash-sum')
 var SSR = require('vue-server-renderer')
-var compiler = require('../lib/template-compiler')
+// var compiler = require('../lib/template-compiler')
 var normalizeNewline = require('normalize-newline')
-var ExtractTextPlugin = require("extract-text-webpack-plugin")
+var ExtractTextPlugin = require('extract-text-webpack-plugin')
 var SourceMapConsumer = require('source-map').SourceMapConsumer
 
 var rawLoaderPath = path.resolve(__dirname, '../index.js')
@@ -602,11 +602,11 @@ describe('vue-loader', function () {
       })
     }, (code, warnings) => {
       // http://stackoverflow.com/questions/17581830/load-node-js-module-from-string-in-memory
-      function requireFromString(src, filename) {
-        var Module = module.constructor;
-        var m = new Module();
-        m._compile(src, filename);
-        return m.exports;
+      function requireFromString (src, filename) {
+        var Module = module.constructor
+        var m = new Module()
+        m._compile(src, filename)
+        return m.exports
       }
 
       var output = interopDefault(requireFromString(code, './test.build.js'))
@@ -780,11 +780,11 @@ describe('vue-loader', function () {
           options: {
             skeletonLoader: {
               procedure: (content, sourceMap, callback, options) => {
-                expect(options.foo).to.equal('bar');
-                expect(options.opt2).to.equal('value2');
+                expect(options.foo).to.equal('bar')
+                expect(options.opt2).to.equal('value2')
 
                 // Return the content to output.
-                return content;
+                return content
               }
             }
           }
@@ -870,7 +870,8 @@ describe('vue-loader', function () {
       }
     }, (window, module) => {
       var results = []
-      var vnode = mockRender(module, {
+      // var vnode =
+      mockRender(module, {
         $processStyle: style => results.push(style),
         transform: 'translateX(10px)'
       })
