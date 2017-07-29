@@ -8,7 +8,7 @@
 
 そうするためには、`vue-loader` に `loaders` オプションを指定してください:
 
-> メモ: `preLoaders` と `postLoaders` は 10.3.0 以上でのみサポートされます
+> メモ: `preLoaders` と `postLoaders` は 10.3.0 以降でのみサポートされます
 
 ### Webpack 2.x
 
