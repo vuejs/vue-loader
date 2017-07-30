@@ -124,7 +124,8 @@ module.exports = {
 ### esModule
 
 - Тип: `boolean`
-- По умолчанию: `false`
+- По умолчанию: `true`
+- В версии v12.x или ниже, значение по умолчанию `false`
 
   Генерация esModule совместимого кода. По умолчанию vue-loader генерирует модули в формате commonjs `module.exports = ....`. Когда опция `esModule` установлена в true, экспорт по умолчанию (default export) будет преобразован в `exports.__esModule = true; exports = ...`. Это может быть полезным для настройки взаимодействия с транспиляторами, отличными от  Babel, как например TypeScript.
 
