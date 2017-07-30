@@ -37,6 +37,40 @@ npm install sass-loader node-sass --save-dev
 
 Обратитесь к разделу [продвинутой конфигурации загрузчиков](./advanced.md) для получения дополнительной информации о том, как настраивать vue-loader.
 
+#### Загрузка глобального файла настроек
+
+Общий запрос файла настроек в состоянии загрузить его в каждом компоненте без необходимости явного подключения каждый раз, например использовать переменные scss глобально во всех компонентах. Для этого:
+
+``` bash
+npm install sass-resources-loader --save-dev
+```
+
+Затем добавьте следующее правило в webpack:
+
+``` js
+{
+  loader: 'sass-resources-loader',
+  options: {
+    resources: path.resolve(__dirname, '../src/style/_variables.scss')
+  }
+}
+```
+
+В качестве примера если вы используете [vuejs-templates/webpack](https://github.com/vuejs-templates/webpack), модифицируйте `build/util.js` вот так:
+
+``` js
+scss: generateLoaders('sass').concat(
+  {
+    loader: 'sass-resources-loader',
+    options: {
+      resources: path.resolve(__dirname, '../src/style/_variables.scss')
+    }
+  }
+),
+```
+
+В этот файл рекомендуется включать только переменные, миксины и т.д. для предотвращения дублирования css в окончательных скомпилированных файлах.
+
 ### JavaScript
 
 Весь JavaScript внутри Vue компонентов обрабатывается `babel-loader` по умолчанию. При необходимости это можно изменить:
