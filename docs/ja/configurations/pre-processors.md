@@ -37,6 +37,40 @@ npm install sass-loader node-sass --save-dev
 
 vue-loader を構成する方法の詳細については、[高度な loader の設定](./advanced.md)セクションを参照してください。
 
+#### グローバル設定ファイルの読み込み
+
+一般的な要求は、毎回明示的にインポートする必要なく、各コンポーネントに設定ファイルを読み込み可能であることです。例としてすべてのコンポーネントで scss 変数をグローバルに使用することです。これを成し遂げるためには:
+
+``` bash
+npm install sass-resources-loader --save-dev
+```
+
+のように `sass-resources-loader` をインストールし、以下の webpack のルールを追加します:
+
+``` js
+{
+  loader: 'sass-resources-loader',
+  options: {
+    resources: path.resolve(__dirname, '../src/style/_variables.scss')
+  }
+}
+```
+
+例として、[vuejs-templates/webpack](https://github.com/vuejs-templates/webpack) を使用している場合、 `build/util.js` を以下のように変更してください:
+
+``` js
+scss: generateLoaders('sass').concat(
+  {
+    loader: 'sass-resources-loader',
+    options: {
+      resources: path.resolve(__dirname, '../src/style/_variables.scss')
+    }
+  }
+),
+```
+
+最終的にコンパイルされたファイルに CSS が重複しないように、変数、ミックスインなどのみをこのファイルに含めることをお勧めします。
+
 ### JavaScript
 
 全ての Vue コンポーネントの JavaScript はデフォルトで `babel-loader` によって処理されます。しかしもちろんそれは変更することが可能です:

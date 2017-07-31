@@ -8,9 +8,9 @@ var MemoryFS = require('memory-fs')
 var expect = require('chai').expect
 var hash = require('hash-sum')
 var SSR = require('vue-server-renderer')
-var compiler = require('../lib/template-compiler')
+// var compiler = require('../lib/template-compiler')
 var normalizeNewline = require('normalize-newline')
-var ExtractTextPlugin = require("extract-text-webpack-plugin")
+var ExtractTextPlugin = require('extract-text-webpack-plugin')
 var SourceMapConsumer = require('source-map').SourceMapConsumer
 
 var rawLoaderPath = path.resolve(__dirname, '../index.js')
@@ -28,7 +28,10 @@ var globalConfig = {
         loader: loaderPath
       }
     ]
-  }
+  },
+  plugins: [
+    new webpack.optimize.ModuleConcatenationPlugin()
+  ]
 }
 
 function bundle (options, cb) {
@@ -95,11 +98,18 @@ function mockRender (options, data) {
       children: children
     }
   }
+  function e (text = '') {
+    return {
+      text:  text,
+      isComment: true
+    }
+  }
   return options.render.call(Object.assign({
     _v (val) {
       return val
     },
     _self: {},
+    _e: e,
     $createElement: h,
     _m (index) {
       return options.staticRenderFns[index].call(this)
@@ -141,7 +151,7 @@ describe('vue-loader', function () {
     test({
       entry: './test/fixtures/basic.vue'
     }, (window, module, rawModule) => {
-      expect(module.__file).to.equal(path.resolve(__dirname, './fixtures/basic.vue'))
+      expect(module.__file).to.equal(path.normalize('test/fixtures/basic.vue'))
       done()
     })
   })
@@ -306,6 +316,18 @@ describe('vue-loader', function () {
     })
   })
 
+  it('supports-query', done => {
+    test({
+      entry: './test/fixtures/supports-query.vue'
+    }, (window) => {
+      var style = window.document.querySelector('style').textContent
+      style = normalizeNewline(style)
+      var id = 'data-v-' + hash('vue-loader/test/fixtures/supports-query.vue')
+      expect(style).to.contain('@supports ( color: #000 ) {\n.foo[' + id + '] {\n    color: #000;\n}\n}')
+      done()
+    })
+  })
+
   it('extract CSS', done => {
     bundle({
       entry: './test/fixtures/extract-css.vue',
@@ -321,7 +343,8 @@ describe('vue-loader', function () {
     }, (code, warnings) => {
       var css = mfs.readFileSync('/test.output.css').toString()
       css = normalizeNewline(css)
-      expect(css).to.contain('h1 {\n  color: #f00;\n}\n\nh2 {\n  color: green;\n}')
+      expect(css).to.contain('h1 {\n  color: #f00;\n}')
+      expect(css).to.contain('h2 {\n  color: green;\n}')
       done()
     })
   })
@@ -338,7 +361,8 @@ describe('vue-loader', function () {
     }, (code, warnings) => {
       var css = mfs.readFileSync('/test.output.css').toString()
       css = normalizeNewline(css)
-      expect(css).to.contain('h1 {\n  color: #f00;\n}\n\nh2 {\n  color: green;\n}')
+      expect(css).to.contain('h1 {\n  color: #f00;\n}')
+      expect(css).to.contain('h2 {\n  color: green;\n}')
       done()
     })
   })
@@ -356,7 +380,8 @@ describe('vue-loader', function () {
     }, (code, warnings) => {
       var css = mfs.readFileSync('/test.output.css').toString()
       css = normalizeNewline(css)
-      expect(css).to.contain('h1 {\n  color: #f00;\n}\n\nh2 {\n  color: green;\n}')
+      expect(css).to.contain('h1 {\n  color: #f00;\n}')
+      expect(css).to.contain('h2 {\n  color: green;\n}')
       done()
     })
   })
@@ -577,14 +602,14 @@ describe('vue-loader', function () {
       })
     }, (code, warnings) => {
       // http://stackoverflow.com/questions/17581830/load-node-js-module-from-string-in-memory
-      function requireFromString(src, filename) {
-        var Module = module.constructor;
-        var m = new Module();
-        m._compile(src, filename);
-        return m.exports;
+      function requireFromString (src, filename) {
+        var Module = module.constructor
+        var m = new Module()
+        m._compile(src, filename)
+        return m.exports
       }
 
-      var output = requireFromString(code, './test.build.js')
+      var output = interopDefault(requireFromString(code, './test.build.js'))
       var mockInstance = {}
 
       output.beforeCreate.forEach(hook => hook.call(mockInstance))
@@ -755,11 +780,11 @@ describe('vue-loader', function () {
           options: {
             skeletonLoader: {
               procedure: (content, sourceMap, callback, options) => {
-                expect(options.foo).to.equal('bar');
-                expect(options.opt2).to.equal('value2');
+                expect(options.foo).to.equal('bar')
+                expect(options.opt2).to.equal('value2')
 
                 // Return the content to output.
-                return content;
+                return content
               }
             }
           }
@@ -845,7 +870,8 @@ describe('vue-loader', function () {
       }
     }, (window, module) => {
       var results = []
-      var vnode = mockRender(module, {
+      // var vnode =
+      mockRender(module, {
         $processStyle: style => results.push(style),
         transform: 'translateX(10px)'
       })
@@ -886,6 +912,24 @@ describe('vue-loader', function () {
       var style = window.document.querySelector('style').textContent
       style = normalizeNewline(style)
       expect(style).to.contain('.foo { color: red;\n}')
+      done()
+    })
+  })
+
+  it('template with comments', done => {
+    test({
+      entry: './test/fixtures/template-comment.vue'
+    }, (window, module, rawModule) => {
+      expect(module.comments).to.equal(true)
+      var vnode = mockRender(module, {
+        msg: 'hi'
+      })
+      expect(vnode.tag).to.equal('div')
+      expect(vnode.children.length).to.equal(2)
+      expect(vnode.children[0].data.staticClass).to.equal('red')
+      expect(vnode.children[0].children[0]).to.equal('hi')
+      expect(vnode.children[1].isComment).to.true
+      expect(vnode.children[1].text).to.equal(' comment here ')
       done()
     })
   })

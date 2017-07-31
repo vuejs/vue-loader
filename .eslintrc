@@ -1,4 +1,4 @@
 {
   "root": true,
-  "extends": "vue"
+  "extends": ["plugin:vue-libs/recommended"]
 }

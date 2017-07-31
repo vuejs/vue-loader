@@ -10,7 +10,7 @@ Karma はブラウザを起動してテストを実行するテストランナ�
 npm install\
   karma karma-webpack\
   karma-jasmine jasmine-core\
-  karma-phantomjs-launcher phantomjs\
+  karma-phantomjs-launcher phantomjs--prebuilt\
   --save-dev
 ```
 

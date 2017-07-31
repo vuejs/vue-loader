@@ -36,13 +36,13 @@ npm install inject-loader@^2.0.0 --save-dev
 
 ``` js
 // example.spec.js
-const ExampleInjector = require('!!vue?inject!./example.vue')
+const ExampleInjector = require('!!vue-loader?inject!./example.vue')
 ```
 
 注意。狂気じみた文字列を必要とします - ここではいくつかのインライン [webpack loader](https://webpack.github.io/docs/loaders.html) を使用しています。簡単な説明としては:
 
 - `!!`は "グローバル設定からすべてのローダを無効にする"ことを意味します；
-- `vue？inject！` は  "`vue` loader を使い、`？inject` クエリを渡す"ことを意味します。 これは `vue-loader` に、依存性注入モードでコンポーネントをコンパイルするように指示します。
+- `vue-loader？inject！` は  `vue-loader` を使い、`？inject` クエリを渡す"ことを意味します。 これは `vue-loader` に、依存性注入モードでコンポーネントをコンパイルするように指示します。
 
 返される `ExampleInjector` は、`example.vue` モジュールのインスタンスを生成するために呼び出すことができるファクトリ関数です:
 

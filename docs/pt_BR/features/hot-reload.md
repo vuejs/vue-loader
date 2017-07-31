@@ -4,4 +4,4 @@
 
 ![hot-reload](http://blog.evanyou.me/images/vue-hot.gif)
 
-Quando o esqueleto do projeto é criado com `vue-cli`, Hot Reload é ativado e proto para o uso.
+Quando o esqueleto do projeto é criado com `vue-cli`, Hot Reload é ativado e pronto para o uso.

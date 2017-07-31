@@ -64,14 +64,14 @@ module.exports = {
 ### preLoaders
 
 - type: `{ [lang: string]: string }`
-- only supported in >=10.3.0
+- only supported in 10.3.0+
 
   The config format is the same as `loaders`, but `preLoaders` are applied to corresponding language blocks before the default loaders. You can use this to pre-process language blocks - a common use case would be build-time i18n.
 
 ### postLoaders
 
 - type: `{ [lang: string]: string }`
-- only supported in >=10.3.0
+- only supported in 10.3.0+
 
   The config format is the same as `loaders`, but `postLoaders` are applied after the default loaders. You can use this to post-process language blocks. However note that this is a bit more complicated:
 
@@ -81,7 +81,7 @@ module.exports = {
 
 ### postcss
 
-> Note: in >=11.0.0 it is recommended to use a PostCSS config file instead. [The usage is the same as `postcss-loader`](https://github.com/postcss/postcss-loader#usage).
+> Note: in 11.0.0+ it is recommended to use a PostCSS config file instead. [The usage is the same as `postcss-loader`](https://github.com/postcss/postcss-loader#usage).
 
 - type: `Array` or `Function` or `Object`
 
@@ -124,9 +124,11 @@ module.exports = {
 ### esModule
 
 - type: `boolean`
-- default: `false`
+- default: `true` (v13.0+)
 
   Whether to emit esModule compatible code. By default vue-loader will emit default export in commonjs format like `module.exports = ....`. When `esModule` is set to true, default export will be transpiled into `exports.__esModule = true; exports = ...`. Useful for interoperating with transpiler other than Babel, like TypeScript.
+
+  > version note: up to v12.x, default value is `false`.
 
 ### preserveWhitespace
 

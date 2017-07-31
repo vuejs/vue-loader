@@ -4,4 +4,4 @@ export default {
       msg: 'Hello from Component A!'
     }
   }
-};
+}
