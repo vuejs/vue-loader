@@ -64,14 +64,14 @@ module.exports = {
 ### preLoaders
 
 - 型: `{ [lang: string]: string }`
-- 10.3.0 以上でサポートされます。
+- 10.3.0 以降でサポートされます。
 
   config 形式は `loaders` と同じですが、`preLoaders` はデフォルト loader の前に対応する言語ブロックに適用されます。これを使用して言語ブロックを前処理することができます。一般的な使用例としては、i18n のビルド時です。
 
 ### postLoaders
 
 - 型: `{ [lang: string]: string }`
-- 10.3.0 以上でサポートされます。
+- 10.3.0 以降でサポートされます。
 
   config 形式は `loaders` と同じですが、` postLoaders` はデフォルト loader の後に適用されます。これを使用して言語ブロックを後処理することができます。ただしこれは少し複雑になります:
 
@@ -80,7 +80,7 @@ module.exports = {
 
 ### postcss
 
-  > メモ: 11.0.0 以上では代わりに PostCSS の設定ファイル推奨されています。[使用法は `postcss-loader` と同じです](https://github.com/postcss/postcss-loader#usage)。
+  > メモ: 11.0.0 以降では代わりに PostCSS の設定ファイル推奨されています。[使用法は `postcss-loader` と同じです](https://github.com/postcss/postcss-loader#usage)。
 
 - 型: `Array` もしくは `Function` か `Object`
 
@@ -123,9 +123,11 @@ module.exports = {
 ### esModule
 
 - 型: `boolean`
-- デフォルト: `false`
+- デフォルト: `true` (v13.0以降)
 
   esModule 互換コードを発行するかどうか。デフォルトの vue-loader のデフォルトの出力は `module.exports = ....` のような commonjs 形式で発行します。 `esModule` が true にセットされているとき、デフォルトの出力は `exports.__esModule = true; exports = ...` にトランスパイルされます。TypeScript のような Babel 以外の transpiler との相互運用に役立ちます。
+
+  > バージョンメモ: v12.x までは、デフォルトは `false` です。
 
 ### preserveWhitespace
 
@@ -251,7 +253,7 @@ module.exports = {
 
 ### optimizeSSR
 
-> 12.1.1 で追加
+> 12.1.1 で新規追加
 
 - 型: `boolean`
 - デフォルト: webpack 設定が `target: 'node'` でかつ `vue-template-compiler` が バージョン 2.4.0 以上であれば、`true`

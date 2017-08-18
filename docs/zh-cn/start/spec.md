@@ -74,7 +74,7 @@ export default {
 
 > 只在 vue-loader 10.2.0+ 中支持
 
-可以在 `.vue` 文件中填加额外的自定义块来实现项目的特定需求，例如 `<docs>` 块。`vue-loader` 将会使用标签名来查找对应的 webpack loaders 来应用在对应的块上。webpack loaders 需要在 `vue-loader` 的选项 `loaders` 中指定。
+可以在 `.vue` 文件中添加额外的自定义块来实现项目的特定需求，例如 `<docs>` 块。`vue-loader` 将会使用标签名来查找对应的 webpack loaders 来应用在对应的块上。webpack loaders 需要在 `vue-loader` 的选项 `loaders` 中指定。
 
 更多细节，查看 [自定义块](../configurations/custom-blocks.md)。
 
