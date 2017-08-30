@@ -38,13 +38,13 @@ npm install inject-loader@^2.0.0 --save-dev
 
 ``` js
 // example.spec.js
-const ExampleInjector = require('!!vue?inject!./example.vue')
+const ExampleInjector = require('!!vue-loader?inject!./example.vue')
 ```
 
 Обратите внимание на эту безумную строку импорта – мы используем [запросы к webpack загрузчику](https://webpack.github.io/docs/loaders.html). Краткое пояснение:
 
 - `!!` в начале строки означает "отключи все загрузчики из глобальной конфигурации"
-- `vue?inject!` значит "используй `vue` загрузчик и передай запрос `?inject`". Это заставляет `vue-loader` скомпилировать компонент в режиме внедрения зависимостей.
+- `vue-loader?inject!` значит "используй загрузчик `vue-loader` и передай запрос `?inject`". Это заставляет `vue-loader` скомпилировать компонент в режиме внедрения зависимостей.
 
 Полученный `ExampleInjector` – это фабричная функция, которую можно вызвать, чтобы создать экземпляр модуля `example.vue`:
 

@@ -11,7 +11,7 @@ Karma – это тестовый движок, который запускае�
 npm install\
   karma karma-webpack\
   karma-jasmine jasmine-core\
-  karma-phantomjs-launcher phantomjs\
+  karma-phantomjs-launcher phantomjs-prebuilt\
   --save-dev
 ```
 
