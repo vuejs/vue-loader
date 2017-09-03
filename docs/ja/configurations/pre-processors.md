@@ -56,7 +56,7 @@ npm install sass-resources-loader --save-dev
 }
 ```
 
-例として、[vuejs-templates/webpack](https://github.com/vuejs-templates/webpack) を使用している場合、 `build/util.js` を以下のように変更してください:
+例として、[vuejs-templates/webpack](https://github.com/vuejs-templates/webpack) を使用している場合、 `build/utils.js` を以下のように変更してください:
 
 ``` js
 scss: generateLoaders('sass').concat(
