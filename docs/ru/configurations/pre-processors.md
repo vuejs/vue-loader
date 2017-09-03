@@ -56,11 +56,7 @@ npm install sass-resources-loader --save-dev
 }
 ```
 
-<<<<<<< HEAD
-Например, если вы используете [vuejs-templates/webpack](https://github.com/vuejs-templates/webpack), измените файл `build/util.js` таким образом:
-=======
 Например, если вы используете [vuejs-templates/webpack](https://github.com/vuejs-templates/webpack), измените файл `build/utils.js` таким образом:
->>>>>>> upstream/master
 
 ``` js
 scss: generateLoaders('sass').concat(
@@ -73,7 +69,7 @@ scss: generateLoaders('sass').concat(
 ),
 ```
 
-В этот файл рекомендуется включать только переменные, примеси и т.п., чтобы предотвратить дублирование CSS в финальных скомпилированных файлах. 
+В этот файл рекомендуется включать только переменные, примеси и т.п., чтобы предотвратить дублирование CSS в финальных скомпилированных файлах.
 
 ### JavaScript
 
