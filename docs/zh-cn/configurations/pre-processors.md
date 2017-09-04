@@ -37,6 +37,40 @@ npm install sass-loader node-sass --save-dev
 
 如要获得更多关于 `vue-loader` 的配置信息，请查看 [Loader 进阶配置](./advanced.md) 章节。
 
+### 加载一个全局设置文件
+
+在每个组件里加载一个设置文件，而无需每次都将其显示导入，是一个常见的需求。比如为所有组件全局使用 scss 变量。为了达成此目的：
+
+``` bash
+npm install sass-resources-loader --save-dev
+```
+
+然后增加下面的 webpack 规则：
+
+``` js
+{
+  loader: 'sass-resources-loader',
+  options: {
+    resources: path.resolve(__dirname, '../src/style/_variables.scss')
+  }
+}
+```
+
+举个例子，如果你使用了 [vuejs-templates/webpack](https://github.com/vuejs-templates/webpack)，请如下修改 `build/utils.js`：
+
+``` js
+scss: generateLoaders('sass').concat(
+  {
+    loader: 'sass-resources-loader',
+    options: {
+      resources: path.resolve(__dirname, '../src/style/_variables.scss')
+    }
+  }
+),
+```
+
+在这个文件里，为了避免在最终编译后的文件中出现重复的 CSS，建议只包含变量、mixins 等。
+
 ### JavaScript
 
 Vue 组件中的所有 JavaScript 默认使用 `babel-loader` 处理。你也可以改变处理方式：
