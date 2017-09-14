@@ -7,7 +7,7 @@
 如果找到一个自定义块的 matching loader，该自定义块将被处理; 否则自定义块将被忽略。
 另外，如果找到的 loader 返回一个函数，该函数将以 `* .vue` 文件的组件作为参数来调用。
 
-## 例子
+## 单个文档文件的例子
 
 这是提取自定义块 `<docs>` 的内容到单个 docs 文件中的例子：
 
@@ -65,4 +65,70 @@ module.exports = {
     new ExtractTextPlugin('docs.md')
   ]
 }
+```
+
+## 运行时可用的文档
+
+<!-- todo translation -->Here's an example of injecting the `<docs>` custom blocks into the component so that it's available during runtime.
+
+#### docs-loader.js
+
+In order for the custom block content to be injected, we'll need a custom loader:
+
+``` js
+module.exports = function (source, map) {
+  this.callback(null, 'module.exports = function(Component) {Component.options.__docs = ' +
+    JSON.stringify(source) +
+    '}', map)
+}
+```
+
+#### webpack.config.js
+
+Now we'll configure webpack to use our custom loader for `<docs>` custom blocks.
+
+``` js
+const docsLoader = require.resolve('./custom-loaders/docs-loader.js')
+
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.vue$/,
+        loader: 'vue',
+        options: {
+          loaders: {
+            'docs': docsLoader
+          }
+        }
+      }
+    ]
+  }
+}
+```
+
+#### component.vue
+
+We are now able to access the `<docs>` block's content of imported components during runtime.
+
+``` html
+<template>
+  <div>
+    <component-b />
+    <p>{{ docs }}</p>
+  </div>
+</template>
+
+<script>
+import componentB from 'componentB';
+
+export default = {
+  data () {
+    return {
+      docs: componentB.__docs
+    }
+  },
+  components: {componentB}
+}
+</script>
 ```

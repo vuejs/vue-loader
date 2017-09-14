@@ -247,3 +247,12 @@ module.exports = {
   ]
 }
 ```
+
+### optimizeSSR
+
+> <!-- todo translation later -->New in 12.1.1
+
+- type: `boolean`
+- default: `true` when the webpack config has `target: 'node'` and `vue-template-compiler` is at version 2.4.0 or above.
+
+Enable Vue 2.4 SSR compilation optimization that compiles part of the vdom trees returned by render functions into plain strings, which improves SSR performance. In some cases you might want to explicitly turn it off because the resulting render functions can only be used for SSR and cannot be used for client-side rendering or testing.

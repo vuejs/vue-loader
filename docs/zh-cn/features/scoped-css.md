@@ -49,3 +49,19 @@
 4. **CSS 作用域不能代替 classes**。考虑到浏览器渲染各种 CSS 选择器的方式，当使用 scoped 时，`p { color: red }` 在作用域中会慢很多倍（即当与属性选择器组合时）。如果你使用 classes 或者 ids 代替，比如 `.example { color: red }`，这样几乎没有性能影响。[Here's a playground](http://stevesouders.com/efws/css-selectors/csscreate.php) 你可以测试它们的不同。
 
 5. **在递归组件中小心使用后代选择器!** 对于带有选择器 `.a .b` 的CSS 规则，如果元素 `.a` 包含递归子组件，所有的子组件中的 `.b` 会被匹配。
+
+6. <!-- todo translation -->If you need nested selectors in `scoped` styles, you will have to use `>>>` operator for CSS and `/deep/` for `scss`:
+
+    ``` html
+    <style scoped>
+    .a >>> .b {
+
+    }
+    </style>
+
+    <style lang="scss" scoped>
+    .a /deep/ .b {
+
+    }
+    </style>
+    ```
