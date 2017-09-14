@@ -26,6 +26,7 @@
   - [cssSourceMap](options.md#csssourcemap)
   - [esModule](options.md#esmodule)
   - [preserveWhitespace](options.md#preservewhitespace)
+  - [compilerDirectives](options.md#compilerdirectives)
   - [transformToRequire](options.md#transformtorequire)
   - [buble](options.md#buble)
   - [extractCSS](options.md#extractcss)

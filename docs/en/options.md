@@ -137,6 +137,15 @@ module.exports = {
 
   If set to `false`, the whitespaces between HTML tags in templates will be ignored.
 
+### compilerDirectives
+
+- type: `{ [tag: string]: Function }`
+- default: `{}` (v13.0.5+)
+
+  > version note: in v12.x, supported in v12.2.3+
+
+  Configure `directives` options for `vue-template-compiler`, In about details, see more [`directives` option](https://github.com/vuejs/vue/blob/dev/packages/vue-template-compiler/README.md#compilercompiletemplate-options) of `vue-template-compiler`.
+
 ### transformToRequire
 
 - type: `{ [tag: string]: string | Array<string> }`
