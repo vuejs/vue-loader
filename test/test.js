@@ -100,7 +100,7 @@ function mockRender (options, data) {
   }
   function e (text = '') {
     return {
-      text:  text,
+      text: text,
       isComment: true
     }
   }
@@ -895,6 +895,29 @@ describe('vue-loader', function () {
         msg: 'hi'
       })
       expect(vnode.data.staticClass).to.equal('red blue')
+      done()
+    })
+  })
+
+  it('custom compiler directives', done => {
+    test({
+      entry: './test/fixtures/custom-directive.vue',
+      vue: {
+        compilerDirectives: {
+          i18n (el, dir) {
+            if (dir.name === 'i18n' && dir.value) {
+              el.i18n = dir.value
+              if (!el.props) {
+                el.props = []
+              }
+              el.props.push({ name: 'textContent', value: `_s(${JSON.stringify(dir.value)})` })
+            }
+          }
+        }
+      }
+    }, (window, module) => {
+      var vnode = mockRender(module)
+      expect(vnode.data.domProps.textContent).to.equal('keypath')
       done()
     })
   })
