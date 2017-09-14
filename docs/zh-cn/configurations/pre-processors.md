@@ -39,7 +39,7 @@ npm install sass-loader node-sass --save-dev
 
 ### 加载一个全局设置文件
 
-在每个组件里加载一个设置文件，而无需每次都将其显示导入，是一个常见的需求。比如为所有组件全局使用 scss 变量。为了达成此目的：
+在每个组件里加载一个设置文件，而无需每次都将其显式导入，是一个常见的需求。比如为所有组件全局使用 scss 变量。为了达成此目的：
 
 ``` bash
 npm install sass-resources-loader --save-dev
