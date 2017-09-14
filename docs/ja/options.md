@@ -139,7 +139,7 @@ module.exports = {
 ### compilerModules
 
 - 型: `Array<ModuleOptions>`
-- デフォルト: `{}`
+- デフォルト: `[]`
 
   `vue-template-compiler` の `modules` オプションを設定します。詳細については `vue-template-compiler` の [`modules` option](https://github.com/vuejs/vue/blob/dev/packages/vue-template-compiler/README.md#compilercompiletemplate-options) を参照してください。
 
