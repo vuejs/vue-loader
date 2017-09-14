@@ -132,9 +132,25 @@ module.exports = {
 ### preserveWhitespace
 
 - 型: `boolean`
-- デフォルトx: `true`
+- デフォルト: `true`
 
   もし `false` に設定されていたら、テンプレート内の HTML タグ間の空白は無視されます。
+
+### compilerModules
+
+- 型: `Array<ModuleOptions>`
+- デフォルト: `{}`
+
+  `vue-template-compiler` の `modules` オプションを設定します。詳細については `vue-template-compiler` の [`modules` option](https://github.com/vuejs/vue/blob/dev/packages/vue-template-compiler/README.md#compilercompiletemplate-options) を参照してください。
+
+### compilerDirectives
+
+- 型: `{ [tag: string]: Function }`
+- デフォルト: `{}` (v13.0.5 以降)
+
+  > バージョンメモ: v12.x においては、v12.2.3 以降からサポートされます。
+
+  `vue-template-compiler` の `directives` オプションを設定します。詳細については `vue-template-compiler` の [`directives` option](https://github.com/vuejs/vue/blob/dev/packages/vue-template-compiler/README.md#compilercompiletemplate-options) を参照してください。
 
 ### transformToRequire
 
