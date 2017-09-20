@@ -137,6 +137,22 @@ module.exports = {
 
   При установке в `false` пробельные символы между HTML тегами в шаблонах будут проигнорированы.
 
+### compilerModules
+
+- Тип: `Array<ModuleOptions>`
+- По умолчанию: `[]`
+
+  Настройка опции `modules` для `vue-template-compiler`. См. подробнее в документации `vue-template-compiler` [опция `modules`](https://github.com/vuejs/vue/blob/dev/packages/vue-template-compiler/README.md#compilercompiletemplate-options).
+
+### compilerDirectives
+
+- Тип: `{ [tag: string]: Function }`
+- По умолчанию: `{}` (v13.0.5+)
+
+  > Примечание: в версиях v12.x поддержка добавлена с v12.2.3+
+
+  Настройка опции `directives` для `vue-template-compiler`. См. подробнее в документации `vue-template-compiler` [опция `directives`](https://github.com/vuejs/vue/blob/dev/packages/vue-template-compiler/README.md#compilercompiletemplate-options).
+
 ### transformToRequire
 
 - Тип: `{ [tag: string]: string | Array<string> }`
