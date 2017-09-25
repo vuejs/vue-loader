@@ -1,6 +1,6 @@
 # 代码检验
 
-你可能有疑问，在 `.vue` 文件中你怎么检验你的代码，因为它不是 Javascript。我们假设你使用 [ESLint](http://eslint.org/) (如果你没有使用话，你应该去使用！)。
+你可能有疑问，在 `.vue` 文件中你怎么检验你的代码，因为它不是 Javascript。我们假设你使用 [ESLint](https://eslint.org/) (如果你没有使用话，你应该去使用！)。
 
 你还需要 [eslint-plugin-html](https://github.com/BenoitZugmeyer/eslint-plugin-html) 来支持提取并检验你的 `.vue` 文件中的 JavaScript。
 

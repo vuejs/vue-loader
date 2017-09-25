@@ -21,9 +21,9 @@
 
 如果你已经熟悉了 Webpack，随时可以跳过下面的说明。如果你没有使用过 Webpack,下面是一个快速介绍：
 
-[Webpack](http://webpack.github.io/) 是一个模块打包工具。它将一堆文件中的每个文件都作为一个模块，找出他们的依赖关系，将它们打包为可部署的静态资源。
+[Webpack](https://webpack.github.io/) 是一个模块打包工具。它将一堆文件中的每个文件都作为一个模块，找出他们的依赖关系，将它们打包为可部署的静态资源。
 
-![webpack](http://webpack.github.io/assets/what-is-webpack.png)
+![webpack](https://webpack.github.io/assets/what-is-webpack.png)
 
 一个基本的例子，想像我们有一些 CommonJS 模块，它不能直接在浏览器中运行，所以我们需要打包成一个文件，这样就可以通过`<script>` 标签加载。Webpack 可以遵循 `require()` 调用的依赖关系，为我们完成这些工作。
 
