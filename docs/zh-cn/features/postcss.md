@@ -29,7 +29,7 @@ module.exports = {
 }
 ```
 
-Webpack 2.x 例子:
+Webpack 2.x 例子：
 
 ``` js
 // webpack.config.js

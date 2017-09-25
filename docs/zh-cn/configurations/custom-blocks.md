@@ -4,7 +4,7 @@
 
 在 `.vue` 文件中，你可以自定义语言块。自定义块的内容将由 `vue-loader` 的 options 中的 `loader` 对象中指定的 loader 处理，然后被组件模块依赖。类似 [Loader 进阶配置](../configurations/advanced.md)中的配置，但使用的是标签名匹配，而不是 `lang` 属性。
 
-如果找到一个自定义块的 matching loader，该自定义块将被处理; 否则自定义块将被忽略。
+如果找到一个自定义块的 matching loader，该自定义块将被处理；否则自定义块将被忽略。
 另外，如果找到的 loader 返回一个函数，该函数将以 `* .vue` 文件的组件作为参数来调用。
 
 ## 单个文档文件的例子
