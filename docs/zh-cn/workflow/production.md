@@ -3,7 +3,7 @@
 生产环境打包要做两件事：
 
 1. 压缩应用代码；
-2. 使用 [Vue.js 指南 - 删除警告](https://cn.vuejs.org/v2/guide/deployment.html#删除警告) 去除 Vue.js 中的警告。
+2. 使用 [Vue.js 指南中描述的部署方式](https://cn.vuejs.org/v2/guide/deployment.html)去除 Vue.js 中的警告。
 
 下面是配置示例：
 

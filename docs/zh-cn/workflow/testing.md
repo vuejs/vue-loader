@@ -1,10 +1,10 @@
 # 测试
 
-> [webpack vue-cli 模板](https://github.com/vuejs-templates/webpack) 为你提供预配置的单元测试和 e2e 测试设置。
+> [webpack vue-cli 模板](https://github.com/vuejs-templates/webpack)为你提供预配置的单元测试和 e2e 测试设置。
 
-当测试 `*.vue` 文件时，我们不能使用基于 CommonJS 的简单测试运行器，因为它不知道如何处理 `*.vue` 文件。而是应该使用 Webpack + vue-loader 打包我们的测试文件。推荐的设置是使用 [Karma](http://karma-runner.github.io/0.13/index.html) 和  [karma-webpack](https://github.com/webpack/karma-webpack)。
+当测试 `*.vue` 文件时，我们不能使用基于 CommonJS 的简单测试运行器，因为它不知道如何处理 `*.vue` 文件。而是应该使用 Webpack + vue-loader 打包我们的测试文件。推荐的设置是使用 [Karma](https://karma-runner.github.io/0.13/index.html) 和 [karma-webpack](https://github.com/webpack/karma-webpack)。
 
-Karma 是一个启动浏览器并为你运行测试的测试运行器。你可以选择要测试的浏览器以及你要使用的测试框架（例如，Mocha 或  Jasmine）。以下是一个在 [PhantomJS](http://phantomjs.org/) 中使用[Jasmine](http://jasmine.github.io/edge/introduction.html) 测试框架运行测试的 Karma 配置示例：
+Karma 是一个启动浏览器并为你运行测试的测试运行器。你可以选择要测试的浏览器以及你要使用的测试框架 (例如 Mocha 或 Jasmine)。以下是一个在 [PhantomJS](http://phantomjs.org/) 中使用 [Jasmine](https://jasmine.github.io/edge/introduction.html) 测试框架运行测试的 Karma 配置示例：
 
 ``` bash
 npm install\
@@ -52,7 +52,7 @@ var testsContext = require.context('.', true, /\.spec$/)
 testsContext.keys().forEach(testsContext)
 ```
 
-此入口文件只需要在同一文件夹中的 `.spec.js` 结尾引入其他所有文件。 现在我们可以写一些测试：
+此入口文件只需要在同一文件夹中的 `.spec.js` 结尾引入其他所有文件。现在我们可以写一些测试：
 
 ``` js
 // test/component-a.spec.js
@@ -97,4 +97,4 @@ describe('a.vue', function () {
 npm test
 ```
 
-此外，[webpack vue-cli 模板](https://github.com/vuejs-templates/webpack) 包含一个完整的测试用例。
+此外，[webpack vue-cli 模板](https://github.com/vuejs-templates/webpack)包含一个完整的测试用例。

@@ -2,7 +2,7 @@
 
 在真实世界的应用中，我们的组件很有可能具有外部依赖。在为组件编写单元测试时，理想的状态是我们可以模拟这些外部依赖关系，这样我们的测试只依赖被测组件的行为。
 
-`vue-loader` 提供了一个可以使用 [inject-loader](https://github.com/plasticine/inject-loader) 将任意依赖项注入到 `*.vue` 组件的特性。 大体思路是：我们使用 `inject-loader` 为该模块创建一个 “模块工厂” 功能，而不是直接导入组件模块。当使用 mock 对象调用此函数时，它会返回模块的实例，并注入到 mock 中。
+`vue-loader` 提供了一个可以使用 [inject-loader](https://github.com/plasticine/inject-loader) 将任意依赖项注入到 `*.vue` 组件的特性。大体思路是：我们使用 `inject-loader` 为该模块创建一个 “模块工厂” 功能，而不是直接导入组件模块。当使用 mock 对象调用此函数时，它会返回模块的实例，并注入到 mock 中。
 
 假设我们有一个这样的组件：
 
@@ -39,9 +39,9 @@ npm install inject-loader@^2.0.0 --save-dev
 const ExampleInjector = require('!!vue?inject!./example.vue')
 ```
 
-请注意 crazy require string - 我们在这里使用一些内联 [webpack loader requests](https://webpack.github.io/docs/loaders.html)。 简要解释：
+请注意 crazy require string - 我们在这里使用一些内联 [webpack loader requests](https://webpack.github.io/docs/loaders.html)。简要解释：
 
-- 以 `!!` 打头意味着 “禁用全局配置中的所有 loader”;
+- 以 `!!` 打头意味着 “禁用全局配置中的所有 loader”；
 - `vue?inject!`意思是 “使用 `vue` loader，并传入 `?inject` 查询”。这告诉 `vue-loader` 在依赖注入模式下编译组件。
 
 返回的 `ExampleInjector` 是一个工厂函数，可以调用它来创建 `example.vue` 模块的实例：
