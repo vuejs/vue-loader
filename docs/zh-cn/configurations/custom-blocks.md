@@ -69,11 +69,11 @@ module.exports = {
 
 ## 运行时可用的文档
 
-<!-- todo translation -->Here's an example of injecting the `<docs>` custom blocks into the component so that it's available during runtime.
+这里有一个向组件注入 `<docs>` 自定义块使其在运行时可用的例子。
 
 #### docs-loader.js
 
-In order for the custom block content to be injected, we'll need a custom loader:
+为了使得自定义块内容被注入，我们需要一个自定义的 loader：
 
 ``` js
 module.exports = function (source, map) {
@@ -85,7 +85,7 @@ module.exports = function (source, map) {
 
 #### webpack.config.js
 
-Now we'll configure webpack to use our custom loader for `<docs>` custom blocks.
+现在我们将为 `<docs>` 自定义块配置我们的 webpack 自定义 loader。
 
 ``` js
 const docsLoader = require.resolve('./custom-loaders/docs-loader.js')
@@ -109,7 +109,7 @@ module.exports = {
 
 #### component.vue
 
-We are now able to access the `<docs>` block's content of imported components during runtime.
+现在我们可以在运行时访问已导入组件的 `<docs>` 块内容了。
 
 ``` html
 <template>

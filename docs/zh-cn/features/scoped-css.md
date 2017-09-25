@@ -50,7 +50,7 @@
 
 5. **在递归组件中小心使用后代选择器!** 对于带有选择器 `.a .b` 的CSS 规则，如果元素 `.a` 包含递归子组件，所有的子组件中的 `.b` 会被匹配。
 
-6. <!-- todo translation -->If you need nested selectors in `scoped` styles, you will have to use `>>>` operator for CSS and `/deep/` for `scss`:
+6. 如果 `scoped` 样式中需要嵌套的选择器，你得在 CSS 中使用 `>>>` 操作符，且在 `scss` 中使用 `/deep/`：
 
     ``` html
     <style scoped>
