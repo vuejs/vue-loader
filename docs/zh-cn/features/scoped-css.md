@@ -1,4 +1,4 @@
-# CSS 作用域
+# 有作用域的 CSS
 
 当 `<style>` 标签有 `scoped` 属性时，它的 CSS 只作用于当前组件中的元素。这类似于 Shadow DOM 中的样式封装。它有一些注意事项，但不需要任何 polyfills。它通过使用 PostCSS 来实现以下转换：
 
@@ -28,29 +28,29 @@
 </template>
 ```
 
-## Tips
+## 注意
 
-### Mixing Local and Global Styles
+### 混用本地和全局样式
 
-You can include both scoped and non-scoped styles in the same component:
+你可以在一个组件中同时使用有作用域和无作用域的样式：
 
 ``` html
 <style>
-/* global styles */
+/* 全局样式 */
 </style>
 
 <style scoped>
-/* local styles */
+/* 本地样式 */
 </style>
 ```
 
-### Child Component Root Elements
+### 子组件的根元素
 
-With `scoped`, the parent component's styles will not leak into child components. However, a child component's root node will be affected by both the parent's scoped CSS and the child's scoped CSS. This is by design so that the the parent can style the child root element for layout purposes.
+使用 `scoped` 后，父组件的样式将不会渗透到子组件中。不过一个子组件的根节点会同时受其父组件有作用域的 CSS 和子组件有作用域的 CSS 的影响。这样设计是为了让父组件可以从布局的角度出发，调整其子组件根元素的样式。
 
-### Deep Selectors
+### 深度作用选择器
 
-If you want a selector in `scoped` styles to be "deep", i.e. affecting child components, you can use the `>>>` combinator:
+如果你希望 `scoped` 样式中的一个选择器能够作用得“更深”，例如影响子组件，你可以使用 `>>>` 操作符：
 
 ``` html
 <style scoped>
@@ -58,58 +58,20 @@ If you want a selector in `scoped` styles to be "deep", i.e. affecting child com
 </style>
 ```
 
-The above will be compiled into:
+上述代码将会编译成：
 
 ``` css
 .a[data-v-f3f3eg9] .b { /* ... */ }
 ```
 
-Some pre-processors, such as SASS, may not be able to parse `>>>` properly. In those cases you can use the `/deep/` combinator instead - it's an alias for `>>>` and works exactly the same.
+有些像 SASS 之类的预处理器无法正确解析 `>>>`。这种情况下你可以使用 `/deep/` 操作符取而代之——这是一个 `>>>` 的别名，同样可以正常工作。
 
-### Dynamically Generated Content
+### 动态生成的内容
 
-DOM content created with `v-html` are not affected by scoped styles, but you can still style them using deep selectors.
+通过 `v-html` 创建的 DOM 内容不受作用域内的样式影响，但是你仍然可以通过深度作用选择器来为他们设置样式。
 
-### Also Keep in Mind
+### 还有一些要留意
 
-- **Scoped styles do not eliminate the need for classes**. Due to the way browsers render various CSS selectors, `p { color: red }` will be many times slower when scoped (i.e. when combined with an attribute selector). If you use classes or ids instead, such as in `.example { color: red }`, then you virtually eliminate that performance hit. [Here's a playground](https://stevesouders.com/efws/css-selectors/csscreate.php) where you can test the differences yourself.
+- **CSS 作用域不能代替 classes**。考虑到浏览器渲染各种 CSS 选择器的方式，当 `p { color: red }` 设置了作用域时 (即与特性选择器组合使用时) 会慢很多倍。如果你使用 class 或者 id 取而代之，比如 `.example { color: red }`，性能影响就会消除。你可以在[这块试验田](https://stevesouders.com/efws/css-selectors/csscreate.php)中测试它们的不同。
 
-**Be careful with descendant selectors in recursive components!** For a CSS rule with the selector `.a .b`, if the element that matches `.a` contains a recursive child component, then all `.b` in that child component will be matched by the rule.
-
-<!-- #### 注意
-
-1. 你可以在一个组件中同时使用 scoped 和 non-scoped styles
-
-  ``` html
-  <style>
-  /* global styles */
-  </style>
-
-  <style scoped>
-  /* local styles */
-  </style>
-  ```
-
-2. 子组件的根节点将同时受父组件和子组件作用域 CSS 的影响。
-
-3. Partials 不受作用域样式影响。
-
-4. **CSS 作用域不能代替 classes**。考虑到浏览器渲染各种 CSS 选择器的方式，当使用 scoped 时，`p { color: red }` 在作用域中会慢很多倍 (即当与属性选择器组合时)。如果你使用 classes 或者 ids 代替，比如 `.example { color: red }`，这样几乎没有性能影响。你可以在[这块试验田](https://stevesouders.com/efws/css-selectors/csscreate.php)测试它们的不同。
-
-5. **在递归组件中小心使用后代选择器!** 对于带有选择器 `.a .b` 的CSS 规则，如果元素 `.a` 包含递归子组件，所有的子组件中的 `.b` 会被匹配。
-
-6. 如果 `scoped` 样式中需要嵌套的选择器，你得在 CSS 中使用 `>>>` 操作符，且在 `scss` 中使用 `/deep/`：
-
-    ``` html
-    <style scoped>
-    .a >>> .b {
-
-    }
-    </style>
-
-    <style lang="scss" scoped>
-    .a /deep/ .b {
-
-    }
-    </style>
-    ``` -->
+- **在递归组件中小心使用后代选择器!** 对选择器 `.a .b` 中的 CSS 规则来说，如果匹配 `.a` 的元素包含一个递归子组件，则所有的子组件中的 `.b` 都将被这个规则匹配。
