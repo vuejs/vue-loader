@@ -142,7 +142,7 @@ module.exports = {
 - type: `Array<ModuleOptions>`
 - default: `[]`
 
-  Configure `modules` options for `vue-template-compiler`, In about details, see more [`modules` option](https://github.com/vuejs/vue/blob/dev/packages/vue-template-compiler/README.md#compilercompiletemplate-options) of `vue-template-compiler`.
+  Configure `modules` options for `vue-template-compiler`. In about details, see more [`modules` option](https://github.com/vuejs/vue/blob/dev/packages/vue-template-compiler/README.md#compilercompiletemplate-options) of `vue-template-compiler`.
 
 ### compilerDirectives
 
