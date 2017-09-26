@@ -4,7 +4,7 @@
 - 特性
   - [ES2015](features/es2015.md)
   - [CSS 作用域](features/scoped-css.md)
-  - [CSS 模块](features/css-modules.md)
+  - [CSS Modules](features/css-modules.md)
   - [PostCSS](features/postcss.md)
   - [热重载](features/hot-reload.md)
 - 配置
