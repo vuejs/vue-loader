@@ -1,6 +1,6 @@
 # 使用预处理器
 
-在 Webpack 中，所有的预处理器需要匹配对应的 loader。`vue-loader` 允许你使用其它 Webpack loaders 处理 Vue 组件的某一部分。它会根据 `lang` 属性自动推断出要使用的 loaders。
+在 Webpack 中，所有的预处理器需要匹配对应的 loader。`vue-loader` 允许你使用其它 Webpack loader 处理 Vue 组件的某一部分。它会根据 `lang` 属性自动推断出要使用的 loader。
 
 ### CSS
 
@@ -35,7 +35,7 @@ npm install sass-loader node-sass --save-dev
 }
 ```
 
-如要获得更多关于 `vue-loader` 的配置信息，请查看 [Loader 进阶配置](./advanced.md)章节。
+如要获得更多关于 `vue-loader` 的配置信息，请查看 [loader 进阶配置](./advanced.md)章节。
 
 ### 加载一个全局设置文件
 

@@ -39,7 +39,7 @@ npm install inject-loader@^2.0.0 --save-dev
 const ExampleInjector = require('!!vue?inject!./example.vue')
 ```
 
-请注意 crazy require string - 我们在这里使用一些内联 [webpack loader requests](https://webpack.github.io/docs/loaders.html)。简要解释：
+请注意那些超长的依赖字符串——也就是我们使用的一些内联 [webpack loader 依赖](https://webpack.github.io/docs/loaders.html)。简要解释一下：
 
 - 以 `!!` 打头意味着 “禁用全局配置中的所有 loader”；
 - `vue?inject!`意思是 “使用 `vue` loader，并传入 `?inject` 查询”。这告诉 `vue-loader` 在依赖注入模式下编译组件。
