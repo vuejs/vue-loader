@@ -34,9 +34,9 @@ module.exports = {
 
 ### loaders
 
-- 类型： `{ [lang: string]: string }`
+- 类型：`{ [lang: string]: string }`
 
-  指定 Webpack loader 对象覆盖用于 `*.vue` 文件内的语言块的默认 loader。如果指定，该键对应于语言块的 `lang` 属性。 每种类型的默认 `lang` 是：
+  指定 Webpack loader 对象覆盖用于 `*.vue` 文件内的语言块的默认 loader。如果指定，该键对应于语言块的 `lang` 属性。每种类型的默认 `lang` 是：
 
   - `<template>`: `html`
   - `<script>`: `js`
@@ -63,15 +63,15 @@ module.exports = {
 
 ### preLoaders
 
-- 类型： `{ [lang: string]: string }`
-- 仅在 >=10.3.0 版本中支持
+- 类型：`{ [lang: string]: string }`
+- 仅在 10.3.0+ 版本中支持
 
   配置格式和 `loaders` 相同，但是 `preLoaders` 会在默认 loaders 之前处理。你可以用来预处理语言块 - 一个常见用例是用来处理构建时的 i18n。
 
 ### postLoaders
 
-- 类型： `{ [lang: string]: string }`
-- 仅在 >=10.3.0 版本中支持
+- 类型：`{ [lang: string]: string }`
+- 仅在 10.3.0+ 版本中支持
 
   配置格式和 `loaders` 相同，但是 `postLoaders` 会在默认 loaders 之后处理。你可以用来后处理语言块。注意这会有些复杂：
 
@@ -81,9 +81,9 @@ module.exports = {
 
 ### postcss
 
-> 注意： 在 >=11.0.0 版本中，推荐使用 PostCSS 配置文件代替. [The usage is the same as `postcss-loader`](https://github.com/postcss/postcss-loader#usage).
+> 注意：在 11.0.0+ 版本中，推荐使用 PostCSS 配置文件代替。[用法和 `postcss-loader` 相同](https://github.com/postcss/postcss-loader#usage)。
 
-- 类型： `Array` or `Function` or `Object`
+- 类型：`Array` or `Function` or `Object`
 
 
   指定要应用于 `.vue` 文件中 CSS 的自定义 PostCSS 插件。如果使用函数，函数将使用相同的 loader 上下文调用，并返回一个插件数组。
@@ -141,18 +141,18 @@ module.exports = {
 - 类型: `{ [tag: string]: string | Array<string> }`
 - 默认值: `{ img: 'src', image: 'xlink:href' }`
 
-  在模版编译过程中，编译器可以将某些属性，如 `src` 路径，转换为 `require` 调用，以便目标资源可以由 Webpack 处理。 默认配置会转换 `<img>` 标签上的 `src` 属性和 SVG 的 `<image>` 标签上的 `xlink：href` 属性。
+  在模版编译过程中，编译器可以将某些属性，如 `src` 路径，转换为 `require` 调用，以便目标资源可以由 Webpack 处理。默认配置会转换 `<img>` 标签上的 `src` 属性和 SVG 的 `<image>` 标签上的 `xlink：href` 属性。
 
 ### buble
 
 - 类型: `Object`
 - 默认值: `{}`
 
-  配置 `buble-loader` 的选项（如果存在），并且 buble 编译传递模板渲染函数。
+  配置 `buble-loader` 的选项 (如果存在)，并且 buble 编译传递模板渲染函数。
 
   > 版本警告：在 9.x 版本中，模板表达式通过现在已经删除的 `templateBuble` 选项单独配置。
 
-  模板渲染函数编译支持一个特殊的变换 `stripWith`（默认启用），它删除生成的渲染函数中的 `with` 用法，使它们兼容严格模式。
+  模板渲染函数编译支持一个特殊的变换 `stripWith` (默认启用)，它删除生成的渲染函数中的 `with` 用法，使它们兼容严格模式。
 
   配置例子：
 
@@ -191,13 +191,13 @@ module.exports = {
 
 > 12.0.0 新增
 
-使用 `extract-text-webpack-plugin` 自动提取 CSS。 适用于大多数预处理器，且也可在生产环境进行压缩。
+使用 `extract-text-webpack-plugin` 自动提取 CSS。适用于大多数预处理器，且也可在生产环境进行压缩。
 
-传入的值可以是 `true`，也可以是插件的一个实例（这样可以为多个提取的文件使用多个提取插件的实例）。
+传入的值可以是 `true`，也可以是插件的一个实例 (这样可以为多个提取的文件使用多个提取插件的实例)。
 
 这应当只用于生产环境，以便可以在开发过程中使用热重载。
 
-示例:
+示例：
 
 ``` js
 // webpack.config.js
@@ -247,3 +247,12 @@ module.exports = {
   ]
 }
 ```
+
+### optimizeSSR
+
+> 12.1.1 新增
+
+- 类型: `boolean`
+- 默认值: 当 webpack 配置中包含 `target: 'node'` 且 `vue-template-compiler` 版本号大于等于 2.4.0 时为 `true`。
+
+开启 Vue 2.4 服务端渲染的编译优化之后，渲染函数将会把返回的 vdom 树的一部分编译为字符串，以提升服务端渲染的性能。在一些情况下，你可能想要明确的将其关掉，因为该渲染函数只能用于服务端渲染，而不能用于客户端渲染或测试环境。

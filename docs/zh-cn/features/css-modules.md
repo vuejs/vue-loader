@@ -1,8 +1,8 @@
-# CSS 模块
+# CSS Modules
 
 > 需要 ^9.8.0
 
-[CSS 模块](https://github.com/css-modules/css-modules) 是一个用于模块化和组合 CSS的流行系统。`vue-loader` 提供了与 CSS 模块的一流集成，可以作为模拟 CSS 作用域的替代方案。
+[CSS Modules](https://github.com/css-modules/css-modules)是一个用于模块化和组合 CSS 的流行系统。`vue-loader` 提供了与 CSS 模块的一流集成，可以作为模拟 CSS 作用域的替代方案。
 
 ### 使用
 
@@ -19,7 +19,7 @@
 </style>
 ```
 
-这将为 `css-loader` 打开 CSS 模块模式，生成的 CSS 对象将为组件注入一个名叫 `$style` 的计算属性，你可以在你的模块中使用动态 class 绑定：
+这将为 `css-loader` 打开 CSS Modules 模式，生成的 CSS 对象将为组件注入一个名叫 `$style` 的计算属性，你可以在你的模块中使用动态 class 绑定：
 
 ``` html
 <template>
@@ -58,7 +58,7 @@ export default {
 </script>
 ```
 
-请参考 [CSS Modules spec](https://github.com/css-modules/css-modules) 了解更多详细信息 [global exceptions](https://github.com/css-modules/css-modules#exceptions) 和 [composition](https://github.com/css-modules/css-modules#composition).
+请参考 [CSS Modules 规范](https://github.com/css-modules/css-modules)了解更多诸如 [global exception](https://github.com/css-modules/css-modules#exceptions) 和 [composition](https://github.com/css-modules/css-modules#composition) 等详细信息。
 
 ### 自定义注入名称
 
@@ -76,7 +76,7 @@ export default {
 
 ### 配置 `css-loader` Query
 
-CSS 模块处理是通过 [css-loader](https://github.com/webpack/css-loader)。默认 query 如下：
+CSS Modules 处理是通过 [css-loader](https://github.com/webpack/css-loader)。默认 query 如下：
 
 ``` js
 {
