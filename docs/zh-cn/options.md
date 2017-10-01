@@ -136,6 +136,22 @@ module.exports = {
 
   如果设置为 `false`，模版中 HTML 标签之前的空格将会被忽略。
 
+### compilerModules
+
+- 类型：`Array<ModuleOptions>`
+- 默认值：`[]`
+
+  为 `vue-template-compiler` 配置 `modules` 选项。相关细节请查阅 `vue-template-compiler` 的 [`modules` 选项](https://github.com/vuejs/vue/blob/dev/packages/vue-template-compiler/README.md#compilercompiletemplate-options)。
+
+### compilerDirectives
+
+- 类型：`{ [tag: string]: Function }`
+- 默认值：`{}` (v13.0.5+)
+
+  > 版本说明：在 v12.x 中，从 v12.2.3+ 开始支持
+
+  为 `vue-template-compiler` 配置 `directives` 选项。相关细节请查阅 `vue-template-compiler` 的 [`modules` 选项](https://github.com/vuejs/vue/blob/dev/packages/vue-template-compiler/README.md#compilercompiletemplate-options)。
+
 ### transformToRequire
 
 - 类型: `{ [tag: string]: string | Array<string> }`
