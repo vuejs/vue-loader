@@ -100,7 +100,7 @@ function mockRender (options, data) {
   }
   function e (text = '') {
     return {
-      text:  text,
+      text: text,
       isComment: true
     }
   }
@@ -237,6 +237,7 @@ describe('vue-loader', function () {
       expect(style).to.contain(`.anim[${id}] {\n  animation: color-${id} 5s infinite, other 5s;`)
       expect(style).to.contain(`.anim-2[${id}] {\n  animation-name: color-${id}`)
       expect(style).to.contain(`@keyframes color-${id} {`)
+      expect(style).to.contain(`@-webkit-keyframes color-${id} {`)
       // >>> combinator
       expect(style).to.contain(`.foo p[${id}] .bar {\n  color: red;\n}`)
       done()
@@ -894,6 +895,29 @@ describe('vue-loader', function () {
         msg: 'hi'
       })
       expect(vnode.data.staticClass).to.equal('red blue')
+      done()
+    })
+  })
+
+  it('custom compiler directives', done => {
+    test({
+      entry: './test/fixtures/custom-directive.vue',
+      vue: {
+        compilerDirectives: {
+          i18n (el, dir) {
+            if (dir.name === 'i18n' && dir.value) {
+              el.i18n = dir.value
+              if (!el.props) {
+                el.props = []
+              }
+              el.props.push({ name: 'textContent', value: `_s(${JSON.stringify(dir.value)})` })
+            }
+          }
+        }
+      }
+    }, (window, module) => {
+      var vnode = mockRender(module)
+      expect(vnode.data.domProps.textContent).to.equal('keypath')
       done()
     })
   })

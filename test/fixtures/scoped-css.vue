@@ -19,6 +19,10 @@ h1 {
   from { color: red; }
   to { color: green; }
 }
+@-webkit-keyframes color {
+  from { color: red; }
+  to { color: green; }
+}
 .foo p >>> .bar {
   color: red;
 }

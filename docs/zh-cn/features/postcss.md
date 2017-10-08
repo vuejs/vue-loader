@@ -29,7 +29,7 @@ module.exports = {
 }
 ```
 
-Webpack 2.x 例子:
+Webpack 2.x 例子：
 
 ``` js
 // webpack.config.js
@@ -56,7 +56,7 @@ module.exports = {
 
 - 返回插件数组的函数；
 
-- 要传递给 PostCSS 处理器的包含 options 的对象。当你使用的 PostCSS 项目依赖自定义 `parser/stringifiers`时，这很有用：
+- 要传递给 PostCSS 处理器的包含 options 的对象。当你使用的 PostCSS 项目依赖自定义 parser/stringifiers 时，这很有用：
 
   ``` js
   postcss: {

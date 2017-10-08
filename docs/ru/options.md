@@ -64,14 +64,14 @@ module.exports = {
 ### preLoaders
 
 - Тип: `{ [lang: string]: string }`
-- поддерживается только в версиях >=10.3.0
+- поддерживается только в версиях 10.3.0+
 
   Конфигурация подобна как и в `loaders`, но `preLoaders` будут применены к соответствующим секциям перед стандартными загрузчиками. Вы можете использовать это для предварительной обработки секций - например для локализации на этапе сборки.
 
 ### postLoaders
 
 - Тип: `{ [lang: string]: string }`
-- поддерживается только в версиях >=10.3.0
+- поддерживается только в версиях 10.3.0+
 
   Конфигурация подобна как и в `loaders`, но `postLoaders` применяются после загрузчиков по умолчанию. Вы можете использовать это для пост-обработки языков. Обратите внимание, что тем не менее всё несколько сложнее:
 
@@ -81,7 +81,7 @@ module.exports = {
 
 ### postcss
 
-> Примечание: в версиях >=11.0.0 рекомендуется использовать файл конфигурации PostCSS вместо описания секции. [Использование аналогично как в `postcss-loader`](https://github.com/postcss/postcss-loader#usage).
+> Примечание: в версиях 11.0.0+ рекомендуется использовать файл конфигурации PostCSS вместо описания секции. [Использование аналогично как в `postcss-loader`](https://github.com/postcss/postcss-loader#usage).
 
 - Тип: `Array` или `Function` или `Object`
 
@@ -124,9 +124,11 @@ module.exports = {
 ### esModule
 
 - Тип: `boolean`
-- По умолчанию: `false`
+- По умолчанию: `true` (v13.0+)
 
   Генерация esModule совместимого кода. По умолчанию vue-loader генерирует модули в формате commonjs `module.exports = ....`. Когда опция `esModule` установлена в true, экспорт по умолчанию (default export) будет преобразован в `exports.__esModule = true; exports = ...`. Это может быть полезным для настройки взаимодействия с транспиляторами, отличными от  Babel, как например TypeScript.
+
+> Примечание: до версии v12.x, значение по умолчанию `false`.
 
 ### preserveWhitespace
 
@@ -134,6 +136,22 @@ module.exports = {
 - По умолчанию: `true`
 
   При установке в `false` пробельные символы между HTML тегами в шаблонах будут проигнорированы.
+
+### compilerModules
+
+- Тип: `Array<ModuleOptions>`
+- По умолчанию: `[]`
+
+  Настройка опции `modules` для `vue-template-compiler`. См. подробнее в документации `vue-template-compiler` [опция `modules`](https://github.com/vuejs/vue/blob/dev/packages/vue-template-compiler/README.md#compilercompiletemplate-options).
+
+### compilerDirectives
+
+- Тип: `{ [tag: string]: Function }`
+- По умолчанию: `{}` (v13.0.5+)
+
+  > Примечание: в версиях v12.x поддержка добавлена с v12.2.3+
+
+  Настройка опции `directives` для `vue-template-compiler`. См. подробнее в документации `vue-template-compiler` [опция `directives`](https://github.com/vuejs/vue/blob/dev/packages/vue-template-compiler/README.md#compilercompiletemplate-options).
 
 ### transformToRequire
 

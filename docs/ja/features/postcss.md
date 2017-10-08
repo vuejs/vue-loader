@@ -1,6 +1,6 @@
 # PostCSS
 
-`vue-loader`により処理されたCSSのアウトプットはスコープされたCSSにに書き換えるために[PostCSS](https://github.com/postcss/postcss) を通します。カスタムされた PostCSSプラグインをプロセスに追加することが出来ます。例えば、[autoprefixer](https://github.com/postcss/autoprefixer) や [CSSNext](http://cssnext.io/)があります。
+`vue-loader`により処理されたCSSのアウトプットはスコープされたCSSに書き換えるために[PostCSS](https://github.com/postcss/postcss) を通します。カスタムされた PostCSSプラグインをプロセスに追加することが出来ます。例えば、[autoprefixer](https://github.com/postcss/autoprefixer) や [CSSNext](http://cssnext.io/)があります。
 
 ## 設定ファイルの使用
 

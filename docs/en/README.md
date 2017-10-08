@@ -21,9 +21,9 @@ In a nutshell, the combination of Webpack and `vue-loader` gives you a modern, f
 
 If you are already familiar with Webpack, feel free to skip the following explanation. But for those of you who are new to Webpack, here's a quick intro:
 
-[Webpack](http://webpack.github.io/) is a module bundler. It takes a bunch of files, treating each as a module, figuring out the dependencies between them, and bundle them into static assets that are ready for deployment.
+[Webpack](https://webpack.github.io/) is a module bundler. It takes a bunch of files, treating each as a module, figuring out the dependencies between them, and bundle them into static assets that are ready for deployment.
 
-![webpack](http://webpack.github.io/assets/what-is-webpack.png)
+![webpack](https://webpack.github.io/assets/what-is-webpack.png)
 
 For a basic example, imagine we have a bunch of CommonJS modules. They cannot run directly inside the browser, so we need to "bundle" them into a single file that can be included via a `<script>` tag. Webpack can follow the dependencies of the `require()` calls and do that for us.
 
