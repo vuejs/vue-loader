@@ -112,6 +112,21 @@ module.exports = {
   }
   ```
 
+### postcss.configRoot
+
+> New in 13.2.0
+
+- type: `string`
+- default: `process.cwd()`
+
+  Specify an alternative root directory for [postcss-load-config](https://github.com/michael-ciniawsky/postcss-load-config) to search for PostCSS config files in.
+
+  ``` js
+  postcss: {
+    configRoot: path.resolve('./src')
+  }
+  ```
+
 ### cssSourceMap
 
 - type: `boolean`
@@ -276,3 +291,12 @@ module.exports = {
 - default: `true` when the webpack config has `target: 'node'` and `vue-template-compiler` is at version 2.4.0 or above.
 
 Enable Vue 2.4 SSR compilation optimization that compiles part of the vdom trees returned by render functions into plain strings, which improves SSR performance. In some cases you might want to explicitly turn it off because the resulting render functions can only be used for SSR and cannot be used for client-side rendering or testing.
+
+### cacheBusting
+
+> New in 13.2.0
+
+- type: `boolean`
+- default: `true` in development mode, `false` in production mode.
+
+Whether generate source maps with cache busting by appending a hash query to the file name. Turning this off can help with source map debugging.
