@@ -28,40 +28,50 @@ Into the following:
 </template>
 ```
 
-#### Notes
+## Tips
 
-1. You can include both scoped and non-scoped styles in the same component:
+### Mixing Local and Global Styles
 
-  ``` html
-  <style>
-  /* global styles */
-  </style>
+You can include both scoped and non-scoped styles in the same component:
 
-  <style scoped>
-  /* local styles */
-  </style>
-  ```
+``` html
+<style>
+/* global styles */
+</style>
 
-2. A child component's root node will be affected by both the parent's scoped CSS and the child's scoped CSS.
+<style scoped>
+/* local styles */
+</style>
+```
 
-3. Partials are not affected by scoped styles.
+### Child Component Root Elements
 
-4. **Scoped styles do not eliminate the need for classes**. Due to the way browsers render various CSS selectors, `p { color: red }` will be many times slower when scoped (i.e. when combined with an attribute selector). If you use classes or ids instead, such as in `.example { color: red }`, then you virtually eliminate that performance hit. [Here's a playground](http://stevesouders.com/efws/css-selectors/csscreate.php) where you can test the differences yourself.
+With `scoped`, the parent component's styles will not leak into child components. However, a child component's root node will be affected by both the parent's scoped CSS and the child's scoped CSS. This is by design so that the parent can style the child root element for layout purposes.
 
-5. **Be careful with descendant selectors in recursive components!** For a CSS rule with the selector `.a .b`, if the element that matches `.a` contains a recursive child component, then all `.b` in that child component will be matched by the rule.
+### Deep Selectors
 
-6. If you need nested selectors in `scoped` styles, you will have to use `>>>` operator for CSS and `/deep/` for `scss`:
+If you want a selector in `scoped` styles to be "deep", i.e. affecting child components, you can use the `>>>` combinator:
 
-    ``` html
-    <style scoped>
-    .a >>> .b {
-    
-    }
-    </style>
-    
-    <style lang="scss" scoped>
-    .a /deep/ .b {
-    
-    }
-    </style>
-    ```
+``` html
+<style scoped>
+.a >>> .b { /* ... */ }
+</style>
+```
+
+The above will be compiled into:
+
+``` css
+.a[data-v-f3f3eg9] .b { /* ... */ }
+```
+
+Some pre-processors, such as SASS, may not be able to parse `>>>` properly. In those cases you can use the `/deep/` combinator instead - it's an alias for `>>>` and works exactly the same.
+
+### Dynamically Generated Content
+
+DOM content created with `v-html` are not affected by scoped styles, but you can still style them using deep selectors.
+
+### Also Keep in Mind
+
+- **Scoped styles do not eliminate the need for classes**. Due to the way browsers render various CSS selectors, `p { color: red }` will be many times slower when scoped (i.e. when combined with an attribute selector). If you use classes or ids instead, such as in `.example { color: red }`, then you virtually eliminate that performance hit. [Here's a playground](https://stevesouders.com/efws/css-selectors/csscreate.php) where you can test the differences yourself.
+
+- **Be careful with descendant selectors in recursive components!** For a CSS rule with the selector `.a .b`, if the element that matches `.a` contains a recursive child component, then all `.b` in that child component will be matched by the rule.
