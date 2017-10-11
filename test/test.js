@@ -434,6 +434,16 @@ describe('vue-loader', function () {
       // image tag (SVG)
       expect(includeDataURL(vnode.children[2].children[0].data.attrs['xlink:href'])).to.equal(true)
       var style = window.document.querySelector('style').textContent
+
+      let dataURL = vnode.children[0].data.attrs.src
+
+      // image tag with srcset
+      expect(vnode.children[4].data.attrs.srcset).to.equal(dataURL + " 2x")
+      // image tag with srcset with two candidates
+      expect(vnode.children[6].data.attrs.srcset).to.equal(dataURL + " 2x, " + dataURL + " 3x")
+      // image tag with multiline srcset
+      expect(vnode.children[8].data.attrs.srcset).to.equal(dataURL + " 2x, " + dataURL + " 3x")
+
       // style
       expect(includeDataURL(style)).to.equal(true)
       done()
