@@ -112,20 +112,30 @@ module.exports = {
   }
   ```
 
-### postcss.configRoot
+### postcss.config
 
-> New in 13.2.0
+> New in 13.2.1
 
-- type: `string`
-- default: `process.cwd()`
+- type: `Object`
+- default: `undefined`
 
-  Specify an alternative root directory for [postcss-load-config](https://github.com/michael-ciniawsky/postcss-load-config) to search for PostCSS config files in.
+  This field allows customizing PostCSS config in the same way as [postcss-loader](https://github.com/postcss/postcss-loader#config-1).
 
-  ``` js
-  postcss: {
-    configRoot: path.resolve('./src')
-  }
-  ```
+  - **postcss.config.path**
+
+    Specify a path (file or directory) to load the PostCSS config file from.
+
+    ``` js
+    postcss: {
+      config: {
+        path: path.resolve('./src')
+      }
+    }
+    ```
+
+  - **postcss.config.ctx**
+
+    Provide context to PostCSS plugins. See [postcss-loader docs](https://github.com/postcss/postcss-loader#context-ctx) for more details.
 
 ### cssSourceMap
 

@@ -487,7 +487,9 @@ describe('vue-loader', function () {
       entry: './test/fixtures/postcss.vue',
       vue: {
         postcss: {
-          configRoot: path.resolve('test')
+          config: {
+            path: path.resolve('test')
+          }
         }
       }
     }, (window) => {
