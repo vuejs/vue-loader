@@ -435,14 +435,14 @@ describe('vue-loader', function () {
       expect(includeDataURL(vnode.children[2].children[0].data.attrs['xlink:href'])).to.equal(true)
       var style = window.document.querySelector('style').textContent
 
-      let dataURL = vnode.children[0].data.attrs.src
+      const dataURL = vnode.children[0].data.attrs.src
 
       // image tag with srcset
-      expect(vnode.children[4].data.attrs.srcset).to.equal(dataURL + " 2x")
+      expect(vnode.children[4].data.attrs.srcset).to.equal(dataURL + ' 2x')
       // image tag with srcset with two candidates
-      expect(vnode.children[6].data.attrs.srcset).to.equal(dataURL + " 2x, " + dataURL + " 3x")
+      expect(vnode.children[6].data.attrs.srcset).to.equal(dataURL + ' 2x, ' + dataURL + ' 3x')
       // image tag with multiline srcset
-      expect(vnode.children[8].data.attrs.srcset).to.equal(dataURL + " 2x, " + dataURL + " 3x")
+      expect(vnode.children[8].data.attrs.srcset).to.equal(dataURL + ' 2x, ' + dataURL + ' 3x')
 
       // style
       expect(includeDataURL(style)).to.equal(true)
@@ -956,6 +956,30 @@ describe('vue-loader', function () {
       expect(vnode.children[0].children[0].text).to.equal('hi')
       expect(vnode.children[1].isComment).to.true
       expect(vnode.children[1].text).to.equal(' comment here ')
+      done()
+    })
+  })
+
+  it('cacheBusting: false', done => {
+    test({
+      entry: './test/fixtures/basic.vue',
+      vue: {
+        cacheBusting: false
+      }
+    }, (window, module, rawModule) => {
+      var vnode = mockRender(module, {
+        msg: 'hi'
+      })
+
+      // <h2 class="red">{{msg}}</h2>
+      expect(vnode.tag).to.equal('h2')
+      expect(vnode.data.staticClass).to.equal('red')
+      expect(vnode.children[0].text).to.equal('hi')
+
+      expect(module.data().msg).to.contain('Hello from Component A!')
+      var style = window.document.querySelector('style').textContent
+      style = normalizeNewline(style)
+      expect(style).to.contain('comp-a h2 {\n  color: #f00;\n}')
       done()
     })
   })
