@@ -481,6 +481,24 @@ describe('vue-loader', function () {
     })
   })
 
+  it('load postcss config file by path', done => {
+    fs.writeFileSync('test/.postcssrc', JSON.stringify({ parser: 'sugarss' }))
+    test({
+      entry: './test/fixtures/postcss.vue',
+      vue: {
+        postcss: {
+          configRoot: path.resolve('test')
+        }
+      }
+    }, (window) => {
+      var style = window.document.querySelector('style').textContent
+      style = normalizeNewline(style)
+      expect(style).to.contain('h1 {\n  color: red;\n  font-size: 14px\n}')
+      fs.unlinkSync('test/.postcssrc')
+      done()
+    })
+  })
+
   it('transpile ES2015 features in template', done => {
     test({
       entry: './test/fixtures/es2015.vue'
