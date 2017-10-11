@@ -7,8 +7,8 @@ var webpack = require('webpack')
 var MemoryFS = require('memory-fs')
 var expect = require('chai').expect
 var hash = require('hash-sum')
+var Vue = require('vue')
 var SSR = require('vue-server-renderer')
-var Vue = require('vue/dist/vue.runtime.js')
 // var compiler = require('../lib/template-compiler')
 var normalizeNewline = require('normalize-newline')
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
@@ -933,44 +933,47 @@ describe('vue-loader', function () {
   })
 
   // Vue required tests for more complete test cases
-  it('should allow functional template', done => {
-    test({
-      entry: './test/fixtures/functional-root.vue',
-      vue: {
-        preserveWhitespace: false
-      }
-    }, (window, module) => {
-      expect(module.components.Functional.compiled).to.equal(true)
-      expect(module.components.Functional.functional).to.equal(true)
-      expect(module.components.Functional.staticRenderFns).to.exist
-      expect(module.components.Functional.render).to.be.a('function')
-
-      const vnode = mockRender(module, {
-        fn () {
-          done()
+  // this test case requires Vue >= 2.5
+  if (Number(Vue.version.split('.')[1]) >= 5) {
+    it('functional template', done => {
+      test({
+        entry: './test/fixtures/functional-root.vue',
+        vue: {
+          preserveWhitespace: false
         }
-      }).children[0]
+      }, (window, module) => {
+        expect(module.components.Functional._compiled).to.equal(true)
+        expect(module.components.Functional.functional).to.equal(true)
+        expect(module.components.Functional.staticRenderFns).to.exist
+        expect(module.components.Functional.render).to.be.a('function')
 
-      // Basic vnode
-      expect(vnode.children[0].data.staticClass).to.equal('red')
-      expect(vnode.children[0].children[0].text).to.equal('hello')
-      // Default slot vnode
-      expect(vnode.children[1].tag).to.equal('span')
-      expect(vnode.children[1].children[0].text).to.equal('hello')
-      // Named slot vnode
-      expect(vnode.children[2].tag).to.equal('div')
-      expect(vnode.children[2].children[0].text).to.equal('Second slot')
-      // // Scoped slot vnode
-      expect(vnode.children[3].text).to.equal('hello')
-      // // Static content vnode
-      expect(vnode.children[4].tag).to.equal('div')
-      expect(vnode.children[4].children[0].text).to.equal('Some ')
-      expect(vnode.children[4].children[1].tag).to.equal('span')
-      expect(vnode.children[4].children[1].children[0].text).to.equal('text')
-      // // v-if vnode
-      expect(vnode.children[5].text).to.equal('')
+        const vnode = mockRender(module, {
+          fn () {
+            done()
+          }
+        }).children[0]
 
-      vnode.children[6].data.on.click()
+        // Basic vnode
+        expect(vnode.children[0].data.staticClass).to.equal('red')
+        expect(vnode.children[0].children[0].text).to.equal('hello')
+        // Default slot vnode
+        expect(vnode.children[1].tag).to.equal('span')
+        expect(vnode.children[1].children[0].text).to.equal('hello')
+        // Named slot vnode
+        expect(vnode.children[2].tag).to.equal('div')
+        expect(vnode.children[2].children[0].text).to.equal('Second slot')
+        // // Scoped slot vnode
+        expect(vnode.children[3].text).to.equal('hello')
+        // // Static content vnode
+        expect(vnode.children[4].tag).to.equal('div')
+        expect(vnode.children[4].children[0].text).to.equal('Some ')
+        expect(vnode.children[4].children[1].tag).to.equal('span')
+        expect(vnode.children[4].children[1].children[0].text).to.equal('text')
+        // // v-if vnode
+        expect(vnode.children[5].text).to.equal('')
+
+        vnode.children[6].data.on.click()
+      })
     })
-  })
+  }
 })
