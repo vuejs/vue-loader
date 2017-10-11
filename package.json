@@ -53,7 +53,7 @@
     "source-map": "^0.6.1",
     "vue-hot-reload-api": "^2.1.0",
     "vue-style-loader": "^3.0.0",
-    "vue-template-es2015-compiler": "^1.5.3"
+    "vue-template-es2015-compiler": "^1.6.0"
   },
   "peerDependencies": {
     "css-loader": "*",
