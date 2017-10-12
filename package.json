@@ -1,6 +1,6 @@
 {
   "name": "vue-loader",
-  "version": "13.0.5",
+  "version": "13.3.0",
   "description": "Vue single-file component loader for Webpack",
   "main": "index.js",
   "repository": {
@@ -27,7 +27,7 @@
     "lint:fix": "eslint lib test --fix",
     "precommit": "lint-staged",
     "test": "eslint lib && mocha --slow 5000 --timeout 10000",
-    "docs": "cd docs && gitbook serve",
+    "docs": "cd docs && gitbook install && gitbook serve",
     "docs:deploy": "bash ./docs/deploy.sh"
   },
   "lint-staged": {
@@ -50,10 +50,10 @@
     "postcss-selector-parser": "^2.0.0",
     "prettier": "^1.7.0",
     "resolve": "^1.4.0",
-    "source-map": "^0.5.6",
-    "vue-hot-reload-api": "^2.1.0",
+    "source-map": "^0.6.1",
+    "vue-hot-reload-api": "^2.2.0",
     "vue-style-loader": "^3.0.0",
-    "vue-template-es2015-compiler": "^1.5.3"
+    "vue-template-es2015-compiler": "^1.6.0"
   },
   "peerDependencies": {
     "css-loader": "*",
@@ -71,7 +71,10 @@
     "eslint-plugin-vue-libs": "^1.2.0",
     "expose-loader": "^0.7.1",
     "extract-text-webpack-plugin": "^3.0.0",
-    "file-loader": "^0.11.2",
+    "file-loader": "^1.1.5",
+    "gitbook-plugin-edit-link": "^2.0.2",
+    "gitbook-plugin-github": "^3.0.0",
+    "gitbook-plugin-theme-vuejs": "^1.1.0",
     "husky": "^0.14.3",
     "inject-loader": "^3.0.1",
     "js-yaml": "^3.9.1",
@@ -80,7 +83,7 @@
     "marked": "^0.3.6",
     "memory-fs": "^0.4.1",
     "mkdirp": "^0.5.1",
-    "mocha": "^3.4.2",
+    "mocha": "^4.0.1",
     "node-libs-browser": "^2.0.0",
     "normalize-newline": "^3.0.0",
     "null-loader": "^0.1.1",
@@ -90,10 +93,10 @@
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.1",
     "sugarss": "^1.0.0",
-    "url-loader": "^0.5.9",
-    "vue": "^2.4.2",
-    "vue-server-renderer": "^2.4.2",
-    "vue-template-compiler": "^2.4.2",
+    "url-loader": "^0.6.2",
+    "vue": "^2.4.4",
+    "vue-server-renderer": "^2.4.4",
+    "vue-template-compiler": "^2.4.4",
     "webpack": "^3.4.1"
   }
 }

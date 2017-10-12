@@ -7,6 +7,7 @@ var webpack = require('webpack')
 var MemoryFS = require('memory-fs')
 var expect = require('chai').expect
 var hash = require('hash-sum')
+var Vue = require('vue')
 var SSR = require('vue-server-renderer')
 // var compiler = require('../lib/template-compiler')
 var normalizeNewline = require('normalize-newline')
@@ -86,38 +87,10 @@ function test (options, assert) {
   })
 }
 
-function mockRender (options, data) {
-  function h (tag, data, children) {
-    if (Array.isArray(data)) {
-      children = data
-      data = null
-    }
-    return {
-      tag: tag,
-      data: data,
-      children: children
-    }
-  }
-  function e (text = '') {
-    return {
-      text: text,
-      isComment: true
-    }
-  }
-  return options.render.call(Object.assign({
-    _v (val) {
-      return val
-    },
-    _self: {},
-    _e: e,
-    $createElement: h,
-    _m (index) {
-      return options.staticRenderFns[index].call(this)
-    },
-    _s (str) {
-      return String(str)
-    }
-  }, data), h)
+function mockRender (options, data = {}) {
+  const vm = new Vue(Object.assign({}, options, { data () { return data } }))
+  vm.$mount()
+  return vm._vnode
 }
 
 function interopDefault (module) {
@@ -134,10 +107,11 @@ describe('vue-loader', function () {
       var vnode = mockRender(module, {
         msg: 'hi'
       })
+
       // <h2 class="red">{{msg}}</h2>
       expect(vnode.tag).to.equal('h2')
       expect(vnode.data.staticClass).to.equal('red')
-      expect(vnode.children[0]).to.equal('hi')
+      expect(vnode.children[0].text).to.equal('hi')
 
       expect(module.data().msg).to.contain('Hello from Component A!')
       var style = window.document.querySelector('style').textContent
@@ -222,11 +196,11 @@ describe('vue-loader', function () {
       //   <svg><template><p></p></template></svg>
       // </div>
       expect(vnode.children[0].tag).to.equal('div')
-      expect(vnode.children[1]).to.equal(' ')
+      expect(vnode.children[1].text).to.equal(' ')
       expect(vnode.children[2].tag).to.equal('p')
       expect(vnode.children[2].data.staticClass).to.equal('abc def')
-      expect(vnode.children[4][0].tag).to.equal('p')
-      expect(vnode.children[4][0].data.staticClass).to.equal('test')
+      expect(vnode.children[4].tag).to.equal('p')
+      expect(vnode.children[4].data.staticClass).to.equal('test')
 
       var style = window.document.querySelector('style').textContent
       style = normalizeNewline(style)
@@ -264,7 +238,7 @@ describe('vue-loader', function () {
       var vnode = mockRender(module)
       // '<div><h1>hello</h1></div>'
       expect(vnode.children[0].tag).to.equal('h1')
-      expect(vnode.children[0].children[0]).to.equal('hello')
+      expect(vnode.children[0].children[0].text).to.equal('hello')
       done()
     })
   })
@@ -401,7 +375,7 @@ describe('vue-loader', function () {
       // <div class="msg">{{ msg }}</div>
       expect(vnode.tag).to.equal('div')
       expect(vnode.data.staticClass).to.equal('msg')
-      expect(vnode.children[0]).to.equal('Hello from mocked service!')
+      expect(vnode.children[0].text).to.equal('Hello from mocked service!')
       done()
     })
   })
@@ -460,6 +434,16 @@ describe('vue-loader', function () {
       // image tag (SVG)
       expect(includeDataURL(vnode.children[2].children[0].data.attrs['xlink:href'])).to.equal(true)
       var style = window.document.querySelector('style').textContent
+
+      const dataURL = vnode.children[0].data.attrs.src
+
+      // image tag with srcset
+      expect(vnode.children[4].data.attrs.srcset).to.equal(dataURL + ' 2x')
+      // image tag with srcset with two candidates
+      expect(vnode.children[6].data.attrs.srcset).to.equal(dataURL + ' 2x, ' + dataURL + ' 3x')
+      // image tag with multiline srcset
+      expect(vnode.children[8].data.attrs.srcset).to.equal(dataURL + ' 2x, ' + dataURL + ' 3x')
+
       // style
       expect(includeDataURL(style)).to.equal(true)
       done()
@@ -497,6 +481,26 @@ describe('vue-loader', function () {
     })
   })
 
+  it('load postcss config file by path', done => {
+    fs.writeFileSync('test/.postcssrc', JSON.stringify({ parser: 'sugarss' }))
+    test({
+      entry: './test/fixtures/postcss.vue',
+      vue: {
+        postcss: {
+          config: {
+            path: path.resolve('test')
+          }
+        }
+      }
+    }, (window) => {
+      var style = window.document.querySelector('style').textContent
+      style = normalizeNewline(style)
+      expect(style).to.contain('h1 {\n  color: red;\n  font-size: 14px\n}')
+      fs.unlinkSync('test/.postcssrc')
+      done()
+    })
+  })
+
   it('transpile ES2015 features in template', done => {
     test({
       entry: './test/fixtures/es2015.vue'
@@ -522,7 +526,7 @@ describe('vue-loader', function () {
         msg: 'success'
       })
       expect(vnode.tag).to.equal('div')
-      expect(vnode.children[0]).to.equal('success')
+      expect(vnode.children[0].text).to.equal('success')
       expect(new Module().msg === 'success')
       done()
     })
@@ -541,7 +545,7 @@ describe('vue-loader', function () {
       })
       expect(vnode.tag).to.equal('h2')
       expect(vnode.data.staticClass).to.equal('red')
-      expect(vnode.children[0]).to.equal('hi')
+      expect(vnode.children[0].text).to.equal('hi')
 
       expect(rawModule.default.data().msg).to.contain('Hello from Component A!')
       done()
@@ -635,7 +639,7 @@ describe('vue-loader', function () {
       // <h2 id="-msg-">{{msg}}</h2>
       expect(vnode.tag).to.equal('h2')
       expect(vnode.data.attrs.id).to.equal('-msg-')
-      expect(vnode.children[0]).to.equal('hi')
+      expect(vnode.children[0].text).to.equal('hi')
       done()
     })
   })
@@ -816,7 +820,7 @@ describe('vue-loader', function () {
       // <h2 class="green">{{msg}}</h2>
       expect(vnode.tag).to.equal('h2')
       expect(vnode.data.staticClass).to.equal('green')
-      expect(vnode.children[0]).to.equal('hi')
+      expect(vnode.children[0].text).to.equal('hi')
 
       expect(module.data().msg).to.contain('Changed!')
       var style = window.document.querySelector('style').textContent
@@ -846,7 +850,7 @@ describe('vue-loader', function () {
         msg: JSON.parse(module.__i18n).en.hello,
         blog: module.__blog
       })
-      expect(vnode.children[0].children[0]).to.equal('hello world')
+      expect(vnode.children[0].children[0].text).to.equal('hello world')
       expect(vnode.children[2].data.domProps.innerHTML).to.equal('<h2 id="foo">foo</h2>')
       done()
     })
@@ -872,10 +876,10 @@ describe('vue-loader', function () {
     }, (window, module) => {
       var results = []
       // var vnode =
-      mockRender(module, {
-        $processStyle: style => results.push(style),
-        transform: 'translateX(10px)'
-      })
+      mockRender(
+        Object.assign(module, { methods: { $processStyle: style => results.push(style) }}),
+        { transform: 'translateX(10px)' }
+      )
       expect(results).to.deep.equal([
         { 'flex-direction': 'row' },
         { 'transform': 'translateX(10px)' }
@@ -931,7 +935,7 @@ describe('vue-loader', function () {
       // <div class="foo">hi</div>
       expect(vnode.tag).to.equal('div')
       expect(vnode.data.class).to.equal('foo')
-      expect(vnode.children[0]).to.equal('functional')
+      expect(vnode.children[0].text).to.equal('functional')
 
       var style = window.document.querySelector('style').textContent
       style = normalizeNewline(style)
@@ -951,10 +955,79 @@ describe('vue-loader', function () {
       expect(vnode.tag).to.equal('div')
       expect(vnode.children.length).to.equal(2)
       expect(vnode.children[0].data.staticClass).to.equal('red')
-      expect(vnode.children[0].children[0]).to.equal('hi')
+      expect(vnode.children[0].children[0].text).to.equal('hi')
       expect(vnode.children[1].isComment).to.true
       expect(vnode.children[1].text).to.equal(' comment here ')
       done()
     })
   })
+
+  it('cacheBusting: false', done => {
+    test({
+      entry: './test/fixtures/basic.vue',
+      vue: {
+        cacheBusting: false
+      }
+    }, (window, module, rawModule) => {
+      var vnode = mockRender(module, {
+        msg: 'hi'
+      })
+
+      // <h2 class="red">{{msg}}</h2>
+      expect(vnode.tag).to.equal('h2')
+      expect(vnode.data.staticClass).to.equal('red')
+      expect(vnode.children[0].text).to.equal('hi')
+
+      expect(module.data().msg).to.contain('Hello from Component A!')
+      var style = window.document.querySelector('style').textContent
+      style = normalizeNewline(style)
+      expect(style).to.contain('comp-a h2 {\n  color: #f00;\n}')
+      done()
+    })
+  })
+
+  // Vue required tests for more complete test cases
+  // this test case requires Vue >= 2.5
+  if (Number(Vue.version.split('.')[1]) >= 5) {
+    it('functional template', done => {
+      test({
+        entry: './test/fixtures/functional-root.vue',
+        vue: {
+          preserveWhitespace: false
+        }
+      }, (window, module) => {
+        expect(module.components.Functional._compiled).to.equal(true)
+        expect(module.components.Functional.functional).to.equal(true)
+        expect(module.components.Functional.staticRenderFns).to.exist
+        expect(module.components.Functional.render).to.be.a('function')
+
+        const vnode = mockRender(module, {
+          fn () {
+            done()
+          }
+        }).children[0]
+
+        // Basic vnode
+        expect(vnode.children[0].data.staticClass).to.equal('red')
+        expect(vnode.children[0].children[0].text).to.equal('hello')
+        // Default slot vnode
+        expect(vnode.children[1].tag).to.equal('span')
+        expect(vnode.children[1].children[0].text).to.equal('hello')
+        // Named slot vnode
+        expect(vnode.children[2].tag).to.equal('div')
+        expect(vnode.children[2].children[0].text).to.equal('Second slot')
+        // // Scoped slot vnode
+        expect(vnode.children[3].text).to.equal('hello')
+        // // Static content vnode
+        expect(vnode.children[4].tag).to.equal('div')
+        expect(vnode.children[4].children[0].text).to.equal('Some ')
+        expect(vnode.children[4].children[1].tag).to.equal('span')
+        expect(vnode.children[4].children[1].children[0].text).to.equal('text')
+        // // v-if vnode
+        expect(vnode.children[5].text).to.equal('')
+
+        vnode.children[6].data.on.click()
+      })
+    })
+  }
 })
