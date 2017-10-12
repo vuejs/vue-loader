@@ -7,6 +7,7 @@
   - [CSS Modules](features/css-modules.md)
   - [PostCSS](features/postcss.md)
   - [Hot Reload](features/hot-reload.md)
+  - [Functional Components](features/functional.md)
 - Configurations
   - [Pre-Processors](configurations/pre-processors.md)
   - [Asset URL Handling](configurations/asset-url.md)
