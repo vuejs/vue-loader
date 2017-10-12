@@ -1,10 +1,10 @@
-# Template for Functional Components
+# Шаблоны для функциональных компонентов
 
-> New in 13.1.0, requires Vue >= 2.5.0
+> Добавлено в версии 13.1.0, требует версии Vue 2.5.0+
 
-To denote a template that should be compiled as a functional component, add the `functional` attribute to the template block. This also allows omitting the `functional` option in the `<script>` block.
+Чтобы обозначить шаблон, который должен быть скомпилирован как функциональный компонент, добавьте атрибут `functional` в тег шаблона. Это также позволяет опустить опцию `functional` в теге `<script>`.
 
-Expressions in the template are evaluated in the [functional render context](https://vuejs.org/v2/guide/render-function.html#Functional-Components). This means props need to be accessed as `props.xxx` in the template:
+Выражения в шаблоне исполняются в [контексте функционального рендеринга](https://ru.vuejs.org/v2/guide/render-function.html#Функциональные-компоненты). Это означает, что обращаться к входным параметрам в шаблоне следует через `props.xxx`:
 
 ``` html
 <template functional>
