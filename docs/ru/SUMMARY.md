@@ -23,6 +23,7 @@
   - [preLoaders](options.md#preloaders)
   - [postLoaders](options.md#postloaders)
   - [postcss](options.md#postcss)
+  - [postcss.config](options.md#postcssconfig)
   - [cssSourceMap](options.md#csssourcemap)
   - [esModule](options.md#esmodule)
   - [preserveWhitespace](options.md#preservewhitespace)
@@ -32,3 +33,4 @@
   - [buble](options.md#buble)
   - [extractCSS](options.md#extractcss)
   - [optimizeSSR](options.md#optimizessr)
+  - [cacheBusting](options.md#cachebusting)
