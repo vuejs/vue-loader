@@ -67,6 +67,6 @@ it('should render', () => {
       'test': ExampleWithMocks
     }
   }).$mount()
-  expect(vm.$el.querySelector('.msg').textContent).toBe('Привет от мок-сервиса!')
+  expect(vm.$el.querySelector('.msg').textContent).to.equal('Привет от мок-сервиса!')
 })
 ```
