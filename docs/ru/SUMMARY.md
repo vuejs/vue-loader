@@ -7,6 +7,7 @@
   - [CSS модули](features/css-modules.md)
   - [PostCSS](features/postcss.md)
   - [Горячая замена](features/hot-reload.md)
+  - [Функциональные компоненты](features/functional.md)
 - Настройка
   - [Пре-процессоры](configurations/pre-processors.md)
   - [Обработка вложенных URL](configurations/asset-url.md)
