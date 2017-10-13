@@ -111,6 +111,31 @@ module.exports = {
   }
   ```
 
+### postcss.config
+
+> 13.2.1 で新規追加
+
+- 型: `Object`
+- デフォルト: `undefined`
+
+  このフィールドは、[postcss-loader](https://github.com/postcss/postcss-loader#config-1) と同じ方法で PostCSS の設定をカスタマイズできます。
+
+  - **postcss.config.path**
+
+    PostCSS 設定ファイルを読み込むパス(ファイルまたはディレクトリ)を指定します。
+
+    ``` js
+    postcss: {
+      config: {
+        path: path.resolve('./src')
+      }
+    }
+    ```
+
+  - **postcss.config.ctx**
+
+    PostCSS プラグインにコンテキストを提供します。より詳細については、[postcss-loader のドキュメント](https://github.com/postcss/postcss-loader#context-ctx) を参照してください。
+
 ### cssSourceMap
 
 - 型: `boolean`
@@ -119,6 +144,15 @@ module.exports = {
   CSS のソースマップを有効にするかどうか。これを無効にすると、`css-loader` の相対パス関連のバグを避けることができ、ビルドを少し早くすることができます。
 
   注意: もしメインの Webpack の設定に `devtool` オプションが存在しないければオートで `false` にセットされます。
+
+### cacheBusting
+
+> 13.2.0 で新規追加
+
+- 型: `boolean`
+- デフォルト: 開発モードで `true`、プロダクションモードで `false`
+
+ファイル名にハッシュクエリを追加することによってキャッシュを破損を伴うソースマップを生成するかどうか。これをオフにするとソースマップデバッギングにも役に立ちます。
 
 ### esModule
 
