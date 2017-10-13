@@ -7,6 +7,7 @@
   - [CSS モジュール](features/css-modules.md)
   - [PostCSS](features/postcss.md)
   - [ホットリロード](features/hot-reload.md)
+  - [関数型コンポーネント](features/functional.md)
 - 構成
   - [プリプロセッサの使用](configurations/pre-processors.md)
   - [アセット URL ハンドリング](configurations/asset-url.md)
@@ -23,6 +24,7 @@
   - [preLoaders](options.md#preloaders)
   - [postLoaders](options.md#postloaders)
   - [postcss](options.md#postcss)
+  - [postcss.config](options.md#postcssconfig)
   - [cssSourceMap](options.md#csssourcemap)
   - [esModule](options.md#esmodule)
   - [preserveWhitespace](options.md#preservewhitespace)
@@ -32,3 +34,4 @@
   - [buble](options.md#buble)
   - [extractCSS](options.md#extractcss)
   - [optimizeSSR](options.md#optimizessr)
+  - [cacheBusting](options.md#cachebusting)
