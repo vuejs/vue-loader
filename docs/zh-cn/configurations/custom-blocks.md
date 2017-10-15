@@ -50,7 +50,7 @@ module.exports = {
     rules: [
       {
         test: /\.vue$/,
-        loader: 'vue',
+        loader: 'vue-loader',
         options: {
           loaders: {
             // 提取 <docs> 中的内容为原始文本
