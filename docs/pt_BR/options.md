@@ -110,6 +110,31 @@ module.exports = {
   }
   ```
 
+### postcss.config
+
+> New in 13.2.1
+
+- type: `Object`
+- default: `undefined`
+
+  This field allows customizing PostCSS config in the same way as [postcss-loader](https://github.com/postcss/postcss-loader#config-1).
+
+  - **postcss.config.path**
+
+    Specify a path (file or directory) to load the PostCSS config file from.
+
+    ``` js
+    postcss: {
+      config: {
+        path: path.resolve('./src')
+      }
+    }
+    ```
+
+  - **postcss.config.ctx**
+
+    Provide context to PostCSS plugins. See [postcss-loader docs](https://github.com/postcss/postcss-loader#context-ctx) for more details.
+
 ### cssSourceMap
 
 - tipo: `Boolean`
@@ -132,6 +157,22 @@ module.exports = {
 - padrão: `true`
 
   Se definido para `false`, os espaços em branco entre as tags HTML em templates serão ignorados.
+
+### compilerModules
+
+- type: `Array<ModuleOptions>`
+- default: `[]`
+
+  Configure `modules` options for `vue-template-compiler`. In about details, see more [`modules` option](https://github.com/vuejs/vue/blob/dev/packages/vue-template-compiler/README.md#compilercompiletemplate-options) of `vue-template-compiler`.
+
+### compilerDirectives
+
+- type: `{ [tag: string]: Function }`
+- default: `{}` (v13.0.5+)
+
+  > version note: in v12.x, supported in v12.2.3+
+
+  Configure `directives` options for `vue-template-compiler`, In about details, see more [`directives` option](https://github.com/vuejs/vue/blob/dev/packages/vue-template-compiler/README.md#compilercompiletemplate-options) of `vue-template-compiler`.
 
 ### transformToRequire
 
@@ -183,6 +224,84 @@ module.exports = {
     ]
   }
   ```
+### extractCSS
 
+> New in 12.0.0
 
+- type: `boolean`
+- default: `false`
 
+Automatically extracts the CSS using `extract-text-webpack-plugin`. Works for most pre-processors out of the box, and handles minification in production as well.
+
+The value passed in can be `true`, or an instance of the plugin (so that you can use multiple instances of the extract plugin for multiple extracted files).
+
+This should be only used in production so that hot-reload works during development.
+
+Example:
+
+``` js
+// webpack.config.js
+var ExtractTextPlugin = require("extract-text-webpack-plugin")
+
+module.exports = {
+  // other options...
+  module: {
+    rules: [
+      {
+        test: /\.vue$/,
+        loader: 'vue-loader',
+        options: {
+          extractCSS: true
+        }
+      }
+    ]
+  },
+  plugins: [
+    new ExtractTextPlugin("style.css")
+  ]
+}
+```
+
+Or passing in an instance of the plugin:
+
+``` js
+// webpack.config.js
+var ExtractTextPlugin = require("extract-text-webpack-plugin")
+var plugin = new ExtractTextPlugin("style.css")
+
+module.exports = {
+  // other options...
+  module: {
+    rules: [
+      {
+        test: /\.vue$/,
+        loader: 'vue-loader',
+        options: {
+          extractCSS: plugin
+        }
+      }
+    ]
+  },
+  plugins: [
+    plugin
+  ]
+}
+```
+
+### optimizeSSR
+
+> New in 12.1.1
+
+- type: `boolean`
+- default: `true` when the webpack config has `target: 'node'` and `vue-template-compiler` is at version 2.4.0 or above.
+
+Enable Vue 2.4 SSR compilation optimization that compiles part of the vdom trees returned by render functions into plain strings, which improves SSR performance. In some cases you might want to explicitly turn it off because the resulting render functions can only be used for SSR and cannot be used for client-side rendering or testing.
+
+### cacheBusting
+
+> New in 13.2.0
+
+- type: `boolean`
+- default: `true` in development mode, `false` in production mode.
+
+Whether generate source maps with cache busting by appending a hash query to the file name. Turning this off can help with source map debugging.

@@ -16,7 +16,7 @@ npm install sass-loader node-sass --save-dev
 </style>
 ```
 
-Por baixo do capô, o conteúdo de texto dentro da tag `<style>` será primeiramente compilado por `sass-loader` antes de ser passado para processadores posteriores.
+No intetior, o conteúdo de texto dentro da tag `<style>` será primeiramente compilado por `sass-loader` antes de ser passado para processadores posteriores.
 
 #### Advertências de sass-loader
 
@@ -35,7 +35,41 @@ Ao contrário do que seu nome indica, [sass-loader](https://github.com/jtangelde
 }
 ```
 
-Consulte a seção de [configurações avançadas do carregador](./advanced.md)  para obter mais informações sobre como configurar vue-loader.
+Consulte a seção de [configurações avançadas do carregador](./advanced.md) para obter mais informações sobre como configurar vue-loader.
+
+#### Carregando um arquivo de configurações global
+
+Um pedido comum é poder carregar um arquivo de configurações em cada componente sem a necessidade de importá-lo explicitamente a cada vez, exemplo: usar variáveis ​​scss globalmente em todos os componentes. Para conseguirmos isso:
+
+``` bash
+npm install sass-resources-loader --save-dev
+```
+
+Em seguida, adicione a seguinte regra do webpack:
+
+```js
+{
+  loader: 'sass-resources-loader',
+  options: {
+    resources: path.resolve(__dirname, '../src/style/_variables.scss')
+  }
+}
+```
+
+Por exemplo, se você estiver usando [vuejs-templates/webpack](https://github.com/vuejs-templates/webpack), modifique o arquivo `build/utils.js` com:
+
+``` js
+scss: generateLoaders('sass').concat(
+  {
+    loader: 'sass-resources-loader',
+    options: {
+      resources: path.resolve(__dirname, '../src/style/_variables.scss')
+    }
+  }
+),
+```
+
+Recomenda-se que apenas inclua variáveis, mixins, etc. neste arquivo, para evitar css duplicados em seus arquivos compilados finais.
 
 ### JavaScript
 

@@ -10,12 +10,12 @@ Basta adicionar o atributo `module` ao seu `<style>`;
 
 ```html
 <style module>
-  .red {
-    color: red;
-  }
-  .bold {
-    font-weight: bold;
-  }
+.red {
+  color: red;
+}
+.bold {
+  font-weight: bold;
+}
 </style>
 ```
 
