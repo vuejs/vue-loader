@@ -7,6 +7,7 @@
   - [CSS Modules](features/css-modules.md)
   - [PostCSS](features/postcss.md)
   - [热重载](features/hot-reload.md)
+  - [函数式组件](features/functional.md)
 - 配置
   - [预处理器](configurations/pre-processors.md)
   - [资源路径处理](configurations/asset-url.md)
@@ -23,6 +24,7 @@
   - [preLoaders](options.md#preloaders)
   - [postLoaders](options.md#postloaders)
   - [postcss](options.md#postcss)
+  - [postcss.config](options.md#postcssconfig)
   - [cssSourceMap](options.md#csssourcemap)
   - [esModule](options.md#esmodule)
   - [preserveWhitespace](options.md#preservewhitespace)
@@ -32,3 +34,4 @@
   - [buble](options.md#buble)
   - [extractCSS](options.md#extractcss)
   - [optimizeSSR](options.md#optimizessr)
+  - [cacheBusting](options.md#cachebusting)

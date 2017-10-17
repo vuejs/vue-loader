@@ -113,6 +113,31 @@ module.exports = {
   }
   ```
 
+### postcss.config
+<!-- @todo translation -->
+> New in 13.2.1
+
+- type: `Object`
+- default: `undefined`
+
+  This field allows customizing PostCSS config in the same way as [postcss-loader](https://github.com/postcss/postcss-loader#config-1).
+
+  - **postcss.config.path**
+
+    Specify a path (file or directory) to load the PostCSS config file from.
+
+    ``` js
+    postcss: {
+      config: {
+        path: path.resolve('./src')
+      }
+    }
+    ```
+
+  - **postcss.config.ctx**
+
+    Provide context to PostCSS plugins. See [postcss-loader docs](https://github.com/postcss/postcss-loader#context-ctx) for more details.
+
 ### cssSourceMap
 
 - 类型: `Boolean`
@@ -272,3 +297,12 @@ module.exports = {
 - 默认值: 当 webpack 配置中包含 `target: 'node'` 且 `vue-template-compiler` 版本号大于等于 2.4.0 时为 `true`。
 
 开启 Vue 2.4 服务端渲染的编译优化之后，渲染函数将会把返回的 vdom 树的一部分编译为字符串，以提升服务端渲染的性能。在一些情况下，你可能想要明确的将其关掉，因为该渲染函数只能用于服务端渲染，而不能用于客户端渲染或测试环境。
+
+### cacheBusting
+<!-- @todo translation -->
+> New in 13.2.0
+
+- type: `boolean`
+- default: `true` in development mode, `false` in production mode.
+
+Whether generate source maps with cache busting by appending a hash query to the file name. Turning this off can help with source map debugging.
