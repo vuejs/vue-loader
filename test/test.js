@@ -6,7 +6,7 @@ var jsdom = require('jsdom')
 var webpack = require('webpack')
 var MemoryFS = require('memory-fs')
 var expect = require('chai').expect
-var hash = require('hash-sum')
+var crypto = require('crypto')
 var Vue = require('vue')
 var SSR = require('vue-server-renderer')
 // var compiler = require('../lib/template-compiler')
@@ -99,6 +99,10 @@ function interopDefault (module) {
     : module
 }
 
+function shaSum (file, salt) {
+  return crypto.createHash('sha256').update(salt || '').update(fs.readFileSync(file)).digest('hex').slice(0, 8)
+}
+
 describe('vue-loader', function () {
   it('basic', done => {
     test({
@@ -183,7 +187,7 @@ describe('vue-loader', function () {
         hashKey: 'foo'
       }
     }, (window, module) => {
-      var id = 'data-v-' + hash('vue-loader/test/fixtures/scoped-css.vue' + 'foo')
+      var id = 'data-v-' + shaSum('test/fixtures/scoped-css.vue', 'foo')
       expect(module._scopeId).to.equal(id)
 
       var vnode = mockRender(module, {
@@ -225,7 +229,7 @@ describe('vue-loader', function () {
       var styles = window.document.querySelectorAll('style')
       expect(styles[0].textContent).to.contain('h1 { color: red;\n}')
       // import with scoped
-      var id = 'data-v-' + hash('vue-loader/test/fixtures/style-import.vue')
+      var id = 'data-v-' + shaSum('test/fixtures/style-import.vue')
       expect(styles[1].textContent).to.contain('h1[' + id + '] { color: green;\n}')
       done()
     })
@@ -285,7 +289,7 @@ describe('vue-loader', function () {
     }, (window) => {
       var style = window.document.querySelector('style').textContent
       style = normalizeNewline(style)
-      var id = 'data-v-' + hash('vue-loader/test/fixtures/media-query.vue')
+      var id = 'data-v-' + shaSum('test/fixtures/media-query.vue')
       expect(style).to.contain('@media print {\n.foo[' + id + '] {\n    color: #000;\n}\n}')
       done()
     })
@@ -297,7 +301,7 @@ describe('vue-loader', function () {
     }, (window) => {
       var style = window.document.querySelector('style').textContent
       style = normalizeNewline(style)
-      var id = 'data-v-' + hash('vue-loader/test/fixtures/supports-query.vue')
+      var id = 'data-v-' + shaSum('test/fixtures/supports-query.vue')
       expect(style).to.contain('@supports ( color: #000 ) {\n.foo[' + id + '] {\n    color: #000;\n}\n}')
       done()
     })
@@ -583,7 +587,7 @@ describe('vue-loader', function () {
         // default module + pre-processor + scoped
         var anotherClassName = instance.$style.red
         expect(anotherClassName).to.match(regexToMatch).and.not.equal(className)
-        var id = 'data-v-' + hash('vue-loader/test/fixtures/css-modules.vue')
+        var id = 'data-v-' + shaSum('test/fixtures/css-modules.vue')
         expect(style).to.contain('.' + anotherClassName + '[' + id + ']')
 
         cb()
