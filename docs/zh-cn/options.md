@@ -113,6 +113,31 @@ module.exports = {
   }
   ```
 
+### postcss.config
+
+> 13.2.1 新增
+
+- 类型：`Object`
+- 默认值：`undefined`
+
+  这个字段允许用 [postcss-loader](https://github.com/postcss/postcss-loader#config-1) 同样的方式自定义 PostCSS 插件。
+
+  - **postcss.config.path**
+
+    指定一个加载 PostCSS 配置文件的路径 (文件或目录)。
+
+    ``` js
+    postcss: {
+      config: {
+        path: path.resolve('./src')
+      }
+    }
+    ```
+
+  - **postcss.config.ctx**
+
+    向 PostCSS 插件提供上下文。详见 [postcss-loader 文档](https://github.com/postcss/postcss-loader#context-ctx)。
+
 ### cssSourceMap
 
 - 类型: `Boolean`
@@ -272,3 +297,12 @@ module.exports = {
 - 默认值: 当 webpack 配置中包含 `target: 'node'` 且 `vue-template-compiler` 版本号大于等于 2.4.0 时为 `true`。
 
 开启 Vue 2.4 服务端渲染的编译优化之后，渲染函数将会把返回的 vdom 树的一部分编译为字符串，以提升服务端渲染的性能。在一些情况下，你可能想要明确的将其关掉，因为该渲染函数只能用于服务端渲染，而不能用于客户端渲染或测试环境。
+
+### cacheBusting
+
+> 13.2.0 新增
+
+- 类型：`boolean`
+- 默认值：在开发环境下是 `true`，在生产环境下是 `false`。
+
+是否通过给文件名后加哈希查询值来避免生成的 source map 被缓存。关掉这一选项有益于 source map 调试。

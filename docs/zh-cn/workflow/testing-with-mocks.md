@@ -65,6 +65,6 @@ it('should render', () => {
       'test': ExampleWithMocks
     }
   }).$mount()
-  expect(vm.$el.querySelector('.msg').textContent).toBe('Hello from a mocked service!')
+  expect(vm.$el.querySelector('.msg').textContent).to.equal('Hello from a mocked service!')
 })
 ```
