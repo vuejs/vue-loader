@@ -62,7 +62,7 @@ In addition to providing an Array of plugins, the `postcss` option also accepts:
   postcss: {
     plugins: [...], // list of plugins
     options: {
-      parser: sugarss // use sugarss parser
+      parser: 'sugarss' // use sugarss parser
     }
   }
   ```
