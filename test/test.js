@@ -1027,4 +1027,28 @@ describe('vue-loader', () => {
       vnode.children[6].data.on.click()
     })
   })
+
+  it('hot reload enabled', done => {
+    bundle({
+      entry: './test/fixtures/basic.vue',
+      vue: {
+        hotReload: true
+      }
+    }, (code) => {
+      expect(code).to.contains('require("vue-hot-reload-api")')
+      done()
+    })
+  })
+
+  it('hot reload disabled', done => {
+    bundle({
+      entry: './test/fixtures/basic.vue',
+      vue: {
+        hotReload: false
+      }
+    }, (code) => {
+      expect(code).not.to.contains('require("vue-hot-reload-api")')
+      done()
+    })
+  })
 })
