@@ -36,7 +36,7 @@ const globalConfig = {
 }
 
 function genId (file) {
-  return hash(`test/fixtures/${file}`)
+  return hash(path.join('test', 'fixtures', file))
 }
 
 function bundle (options, cb) {
