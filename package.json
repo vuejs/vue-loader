@@ -94,9 +94,9 @@
     "stylus-loader": "^3.0.1",
     "sugarss": "^1.0.0",
     "url-loader": "^0.6.2",
-    "vue": "^2.4.4",
-    "vue-server-renderer": "^2.4.4",
-    "vue-template-compiler": "^2.4.4",
-    "webpack": "^3.4.1"
+    "vue": "^2.5.0",
+    "vue-server-renderer": "^2.5.0",
+    "vue-template-compiler": "^2.5.0",
+    "webpack": "^3.7.1"
   }
 }
