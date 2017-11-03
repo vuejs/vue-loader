@@ -36,7 +36,7 @@ const globalConfig = {
 }
 
 function genId (file) {
-  return hash(fs.readFileSync(path.resolve(__dirname, './fixtures', file), 'utf-8'))
+  return hash(`test/fixtures/${file}`)
 }
 
 function bundle (options, cb) {
