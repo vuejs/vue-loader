@@ -5,12 +5,20 @@
     <image xlink:href="./logo.png" />
   </svg>
   <img src="./logo.png" srcset="./logo.png 2x">
+  <img src="./logo.png" srcset="~fixures/logo.png 2x">
   <img src="./logo.png" srcset="./logo.png 2x, ./logo.png 3x">
+  <img src="./logo.png" srcset="~fixures/logo.png 2x, ~fixures/logo.png 3x">
   <img
     src="./logo.png"
     srcset="
       ./logo.png 2x,
       ./logo.png 3x
+  ">
+  <img 
+    src="./logo.png" 
+    srcset="
+      ~fixures/logo.png 2x,
+      ~fixures/logo.png 3x
   ">
 </div>
 </template>
