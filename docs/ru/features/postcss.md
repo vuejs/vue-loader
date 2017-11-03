@@ -62,7 +62,7 @@ module.exports = {
   postcss: {
     plugins: [...], // список плагинов
     options: {
-      parser: sugarss // использование парсера sugarss
+      parser: 'sugarss' // использование парсера sugarss
     }
   }
   ```
