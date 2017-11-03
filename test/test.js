@@ -415,6 +415,11 @@ describe('vue-loader', () => {
 
   it('transformToRequire option', done => {
     test({
+      resolve: {
+        alias: {
+          fixures: path.resolve(__dirname, 'fixtures')
+        }
+      },
       entry: './test/fixtures/transform.vue',
       module: {
         rules: [
@@ -440,10 +445,16 @@ describe('vue-loader', () => {
 
       // image tag with srcset
       expect(vnode.children[4].data.attrs.srcset).to.equal(dataURL + ' 2x')
+      // image tag with alias srcset
+      expect(vnode.children[6].data.attrs.srcset).to.equal(dataURL + ' 2x')
       // image tag with srcset with two candidates
-      expect(vnode.children[6].data.attrs.srcset).to.equal(dataURL + ' 2x, ' + dataURL + ' 3x')
-      // image tag with multiline srcset
       expect(vnode.children[8].data.attrs.srcset).to.equal(dataURL + ' 2x, ' + dataURL + ' 3x')
+      // image tag with alias srcset with two candidates
+      expect(vnode.children[10].data.attrs.srcset).to.equal(dataURL + ' 2x, ' + dataURL + ' 3x')
+      // image tag with multiline srcset
+      expect(vnode.children[12].data.attrs.srcset).to.equal(dataURL + ' 2x, ' + dataURL + ' 3x')
+      // image tag with alias multiline srcset
+      expect(vnode.children[14].data.attrs.srcset).to.equal(dataURL + ' 2x, ' + dataURL + ' 3x')
 
       // style
       expect(includeDataURL(style)).to.equal(true)
