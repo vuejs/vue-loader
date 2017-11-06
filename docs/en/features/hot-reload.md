@@ -19,3 +19,27 @@ When scaffolding the project with `vue-cli`, Hot Reload is enabled out-of-the-bo
 When manually setting up your project, hot-reload is enabled automatically when you serve your project with `webpack-dev-server --hot`.
 
 Advanced users may want to check out [vue-hot-reload-api](https://github.com/vuejs/vue-hot-reload-api), which is used internally by `vue-loader`.
+
+## Disabling Hot Reload
+
+Hot Reload is always enabled except following situations:
+
+ * Webpack `target` is `node` (SSR)
+ * Webpack minifies the code
+ * `process.env.NODE_ENV === 'production'`
+  
+You may use `hotReload: false` option to disable the Hot Reload explicitly:
+
+``` js
+module: {
+  rules: [
+    {
+      test: /\.vue$/,
+      loader: 'vue-loader',
+      options: {
+        hotReload: false // disables Hot Reload
+      }
+    }
+  ]
+}
+```

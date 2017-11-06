@@ -310,3 +310,14 @@ Enable Vue 2.4 SSR compilation optimization that compiles part of the vdom trees
 - default: `true` in development mode, `false` in production mode.
 
 Whether generate source maps with cache busting by appending a hash query to the file name. Turning this off can help with source map debugging.
+
+### hotReload
+
+> New in 13.5.0
+
+- type: `boolean`
+- default: `true` in development mode, `false` in production mode or when the webpack config has `target: 'node'`.
+- allowed value: `false` (`true` will not force Hot Reload neither in production mode nor when `target: 'node'`)
+
+Whether to use Webpack [Hot Module Replacement](https://webpack.js.org/concepts/hot-module-replacement/) to apply changes in the browser **without reloading the page**.
+Use this option (value `false`) to disable the Hot Reload feature in development mode.     
