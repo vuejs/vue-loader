@@ -36,7 +36,7 @@ const globalConfig = {
 }
 
 function genId (file) {
-  return hash(fs.readFileSync(path.resolve(__dirname, './fixtures', file), 'utf-8'))
+  return hash(path.join('test', 'fixtures', file))
 }
 
 function bundle (options, cb) {
@@ -1025,6 +1025,30 @@ describe('vue-loader', () => {
       expect(vnode.children[5].text).to.equal('')
 
       vnode.children[6].data.on.click()
+    })
+  })
+
+  it('hot reload enabled', done => {
+    bundle({
+      entry: './test/fixtures/basic.vue',
+      vue: {
+        hotReload: true
+      }
+    }, (code) => {
+      expect(code).to.contains('require("vue-hot-reload-api")')
+      done()
+    })
+  })
+
+  it('hot reload disabled', done => {
+    bundle({
+      entry: './test/fixtures/basic.vue',
+      vue: {
+        hotReload: false
+      }
+    }, (code) => {
+      expect(code).not.to.contains('require("vue-hot-reload-api")')
+      done()
     })
   })
 })
