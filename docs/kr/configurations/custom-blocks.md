@@ -49,7 +49,7 @@ module.exports = {
     rules: [
       {
         test: /\.vue$/,
-        loader: 'vue',
+        loader: 'vue-loader',
         options: {
           loaders: {
             // 모든 <docs>의 내용을 원문 그대로 추출합니다
@@ -94,7 +94,7 @@ module.exports = {
     rules: [
       {
         test: /\.vue$/,
-        loader: 'vue',
+        loader: 'vue-loader',
         options: {
           loaders: {
             'docs': docsLoader

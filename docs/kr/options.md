@@ -11,7 +11,7 @@ module.exports = {
     rules: [
       {
         test: /\.vue$/,
-        loader: 'vue',
+        loader: 'vue-loader',
         options: {
           // vue-loader 옵션
         }
@@ -65,14 +65,14 @@ module: {
 
 - 타입: `{ [lang: string]: string }`
 - only supported in >=10.3.0
-- 10.3.0 버전 이후 지원 
+- 10.3.0 버전 이후 지원
 
   `loaders` 설정의 포맷과 동일하지만, `preLoaders`는 기본 로더보다 우선하여 language block에 적용됩니다. 이를 사용하면 language block을 미리 처리할 수 있습니다. (일반적인 사용 사례는 빌드 타임에 국제화를 적용하는 경우입니다.)
 
 ### postLoaders
 
 - 타입: `{ [lang: string]: string }`
-- 10.3.0 버전 이후 지원 
+- 10.3.0 버전 이후 지원
 
 `loaders` 설정의 포맷과 동일하지만, `preLoaders`는 기본 로더보다 나중에 적용됩니다. 이를 사용하면 language block에 대한 사후 처리를 할 수 있습니다. 약간 복잡합니다.
 
