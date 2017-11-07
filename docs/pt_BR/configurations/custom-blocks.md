@@ -49,7 +49,7 @@ module.exports = {
     rules: [
       {
         test: /\.vue$/,
-        loader: 'vue',
+        loader: 'vue-loader',
         options: {
           loaders: {
             // extrai todo conteúdo de <docs> em texto bruto
@@ -88,13 +88,13 @@ Agora, vamos configurar o webpack para usar o nosso carregador personalizado par
 
 ``` js
  const docsLoader = require.resolve('./custom-loaders/docs-loader.js')
- 
+
  module.exports = {
    module: {
      rules: [
        {
          test: /\.vue$/,
-         loader: 'vue',
+         loader: 'vue-loader',
          options: {
            loaders: {
              'docs': docsLoader
@@ -105,11 +105,11 @@ Agora, vamos configurar o webpack para usar o nosso carregador personalizado par
    }
  }
  ```
- 
+
  #### component.vue
- 
+
  Agora podemos acessar o conteúdo do bloco `<docs>` de componentes importados durante o tempo de execução.
- 
+
  ``` html
  <template>
    <div>
@@ -117,10 +117,10 @@ Agora, vamos configurar o webpack para usar o nosso carregador personalizado par
      <p>{{ docs }}</p>
    </div>
  </template>
- 
+
  <script>
  import componentB from 'componentB';
- 
+
  export default = {
    data () {
      return {
