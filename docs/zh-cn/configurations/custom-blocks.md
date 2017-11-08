@@ -61,7 +61,7 @@ module.exports = {
     ]
   },
   plugins: [
-    // 输出 docs 到当个文件中
+    // 输出 docs 到单个文件中
     new ExtractTextPlugin('docs.md')
   ]
 }
