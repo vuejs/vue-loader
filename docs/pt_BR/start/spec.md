@@ -68,13 +68,13 @@ Mais detalhes podem ser encontrados em [Usando Pré-Processadores](../configurat
 
 - Uma tag `<style>` pode ter atributos `scoped` ou `module` \(consulte [CSS com Escopo](../features/scoped-css.md) e [Módulos CSS](../features/css-modules.md)\)\) para ajudar encapsular o estilo para o seu componente atual. Várias tags `<style>` com diferente modos de encapsulamento pode ser misturados em um mesmo componente.
 
-- Por padrão, o conteúdo será extraído e inserido dinamicamente no `<head>` do documento atual como uma tag `<style>` usando `style-loader`. Também é possível [configurar o Webpack para que todos os estilos em todos os componentes sejam extraídos em um único arquivo CSS](../configurations/extract-css.md).
+- Por padrão, o conteúdo será extraído e inserido dinamicamente no `<head>` do documento atual como uma tag `<style>` usando `style-loader`. Também é possível [configurar o webpack para que todos os estilos em todos os componentes sejam extraídos em um único arquivo CSS](../configurations/extract-css.md).
 
 ### Blocos customizados
 
 > Suportado apenas em vue-loader 10.2.0+
 
-Blocos customizados adicionais pode ser incluídos em um arquivo `*.vue` para qualquer necessidade específica do projeto, por exemplo um bloco `<docs>`. `vue-loader` usará o nome da tag para procurar por carregadores de Webpack. Os carregadores dever ser adicionados na opção `loaders` de `vue-loader`.
+Blocos customizados adicionais pode ser incluídos em um arquivo `*.vue` para qualquer necessidade específica do projeto, por exemplo um bloco `<docs>`. `vue-loader` usará o nome da tag para procurar por carregadores de webpack. Os carregadores dever ser adicionados na opção `loaders` de `vue-loader`.
 
 Para mais detalhes, veja [Blocos Customizados](../configurations/custom-blocks.md).
 

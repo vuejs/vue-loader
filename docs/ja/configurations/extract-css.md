@@ -39,7 +39,7 @@ module.exports = {
 
 すべての Vue コンポーネントで処理されたすべての CSS を 1 つの CSS ファイルに抽出する例:
 
-### Webpack 2.x
+### webpack 2.x
 
 ``` js
 // webpack.config.js
@@ -69,7 +69,7 @@ module.exports = {
 }
 ```
 
-### Webpack 1.x
+### webpack 1.x
 
 ``` bash
 npm install extract-text-webpack-plugin --save-dev

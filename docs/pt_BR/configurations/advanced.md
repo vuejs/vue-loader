@@ -2,9 +2,9 @@
 
 Às vezes você pode querer:
 
-1. Aplicar um carregador personalizado de string a uma linguagem em vez de deixar `vue-loader` responsável. 
+1. Aplicar um carregador personalizado de string a uma linguagem em vez de deixar `vue-loader` responsável.
 
-2. Sobrescrever a configuração embutida do carregador para a linguagem padrão. 
+2. Sobrescrever a configuração embutida do carregador para a linguagem padrão.
 
 3. Pré-processar ou pós-processar um bloco de linguagem especifico com carregadores personalizado.
 
@@ -12,7 +12,7 @@ Para fazer isto, especifique a opção `loaders` para `vue-loader`:
 
 > Observe que `preLoaders` e`postLoaders` são suportados apenas em verões >=10.3.0
 
-### Webpack 2.x
+### webpack 2.x
 
 ```js
 // webpack.config.js
@@ -26,21 +26,21 @@ module.exports = {
         loader: 'vue-loader',
         options: {
           // `loaders` substituirá os carregadores padrões.
-          // A configuração a seguir fará com que todas as tags <script> sem 
+          // A configuração a seguir fará com que todas as tags <script> sem
           // o atributo "lang" sejam carrega com coffee-loader
           loaders: {
             js: 'coffee-loader'
           },
-          
+
           // `preLoaders` são anexados antes dos carregadores padrões
-          // Você pode usar isso para pré-processar blocos de linguagem 
+          // Você pode usar isso para pré-processar blocos de linguagem
           // - um caso de uso comum seria intercionalização (i18n)  em tempo de construção.
           preLoaders: {
             js: '/caminho/personalizado/para/carregador'
           },
-          
+
           // `postLoaders` são anexados após os carregadores padrões.
-          // 
+          //
           // - Para `html`, o resultado retornado pelo carregador padrão
           //   será compilado em código de função de renderização JavaScript.
           //
@@ -50,7 +50,7 @@ module.exports = {
           postLoaders: {
             html: 'babel-loader'
           },
-          
+
           // `excludedPreLoaders` should be regex
           excludedPreLoaders: /(eslint-loader)/
         }
@@ -60,7 +60,7 @@ module.exports = {
 }
 ```
 
-### Webpack 1.x
+### webpack 1.x
 
 ```js
 // webpack.config.js

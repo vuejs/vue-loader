@@ -3,7 +3,7 @@
 
 > [Шаблон webpack vue-cli](https://github.com/vuejs-templates/webpack) предлагает вам готовые решения для модульного и e2e-тестирования.
 
-Тестируя `*.vue` файлы, мы не можем использовать обычные тестовые движки для CommonJS, поскольку они не знают, как обрабатывать `*.vue` файлы. Вместо этого мы снова воспользуемся Webpack + vue-loader для сборки наших тестов. Мы рекомендуем использовать сочетание [Karma](https://karma-runner.github.io/0.13/index.html) и [karma-webpack](https://github.com/webpack/karma-webpack).
+Тестируя `*.vue` файлы, мы не можем использовать обычные тестовые движки для CommonJS, поскольку они не знают, как обрабатывать `*.vue` файлы. Вместо этого мы снова воспользуемся webpack + vue-loader для сборки наших тестов. Мы рекомендуем использовать сочетание [Karma](https://karma-runner.github.io/0.13/index.html) и [karma-webpack](https://github.com/webpack/karma-webpack).
 
 Karma – это тестовый движок, который запускает браузеры и прогоняет тесты за вас. Вы можете выбрать, в каких браузерах выполнять тесты и какой тестовый фреймворк использовать (например, Mocha или Jasmin). Вот пример конфигурации Karma для тестирования в [PhantomJS](http://phantomjs.org/) с помощью фреймворка [Jasmine](https://jasmine.github.io/edge/introduction.html):
 
@@ -48,7 +48,7 @@ module.exports = function (config) {
 
 ``` js
 // test/index.js
-// подтягиваем все файлы тестов, используя специальную возможность Webpack
+// подтягиваем все файлы тестов, используя специальную возможность webpack
 // https://webpack.github.io/docs/context.html#require-context
 var testsContext = require.context('.', true, /\.spec$/)
 testsContext.keys().forEach(testsContext)

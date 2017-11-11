@@ -41,7 +41,7 @@ comp-a h2 {
 #### webpack.config.js
 
 ``` js
-// Webpack 2.x
+// webpack 2.x
 var ExtractTextPlugin = require("extract-text-webpack-plugin")
 
 module.exports = {
@@ -84,7 +84,7 @@ module.exports = function (source, map) {
 
 #### webpack.config.js
 
-Теперь необходимо настроить Webpack использовать наш загрузчик для пользовательских блоков `<docs>`.
+Теперь необходимо настроить webpack использовать наш загрузчик для пользовательских блоков `<docs>`.
 
 ``` js
 const docsLoader = require.resolve('./custom-loaders/docs-loader.js')

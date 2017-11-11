@@ -41,7 +41,7 @@ comp-a h2 {
 #### webpack.config.js
 
 ``` js
-// Webpack 2.x
+// webpack 2.x
 var ExtractTextPlugin = require("extract-text-webpack-plugin")
 
 module.exports = {

@@ -39,7 +39,7 @@ Note this only extracts `*.vue` files though - CSS imported in JavaScript still 
 
 Example config to extract all the processed CSS in all Vue components into a single CSS file:
 
-### Webpack 2.x
+### webpack 2.x
 
 
 ``` js
@@ -70,7 +70,7 @@ module.exports = {
 }
 ```
 
-### Webpack 1.x
+### webpack 1.x
 
 ``` bash
 npm install extract-text-webpack-plugin --save-dev

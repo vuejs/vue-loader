@@ -24,7 +24,7 @@ module.exports = {
         warnings: false
       }
     }),
-    // Webpack 1 only - optimize module ids by occurrence count
+    // webpack 1 only - optimize module ids by occurrence count
     new webpack.optimize.OccurrenceOrderPlugin()
   ]
 }
@@ -34,6 +34,6 @@ Obviously we don't want to use this config during development, so there are seve
 
 1. Dynamically build up the configuration object based on an environment variable;
 
-2. Or, use two separate Webpack config files, one for development and one for production. And maybe share some common options between them in a third file, as shown in [vue-hackernews-2.0](https://github.com/vuejs/vue-hackernews-2.0).
+2. Or, use two separate webpack config files, one for development and one for production. And maybe share some common options between them in a third file, as shown in [vue-hackernews-2.0](https://github.com/vuejs/vue-hackernews-2.0).
 
 It's really up to you as long as it achieves the goal.

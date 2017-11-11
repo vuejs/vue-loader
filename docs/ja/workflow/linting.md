@@ -38,9 +38,9 @@ module.exports = {
   }
 }
 ```
-Webpack ローダーチェーンは**まずはじめに**に適用されることをご了承ください。`vue` の前に `eslint` を適用して、コンパイル前のソースコードをリントしてください。
+webpack ローダーチェーンは**まずはじめに**に適用されることをご了承ください。`vue` の前に `eslint` を適用して、コンパイル前のソースコードをリントしてください。
 
-1 つ私たちが考慮する必要があるのは、NPM パッケージでリリースされているサードパーティの* .vueコンポーネントを使用することです。そのような場合には、サードパーティー製のコンポーネントを処理するために  `vue-loader` を使用したいと思いますが、それをリントしたくはありません。そういうときはリントを Webpack の [preLoaders](https://webpack.github.io/docs/loaders.html#loader-order) に分けることが可能です:
+1 つ私たちが考慮する必要があるのは、NPM パッケージでリリースされているサードパーティの* .vueコンポーネントを使用することです。そのような場合には、サードパーティー製のコンポーネントを処理するために  `vue-loader` を使用したいと思いますが、それをリントしたくはありません。そういうときはリントを webpack の [preLoaders](https://webpack.github.io/docs/loaders.html#loader-order) に分けることが可能です:
 
 ``` js
 // webpack.config.js
@@ -66,7 +66,7 @@ module.exports = {
 }
 ```
 
-Webpack 2.x:
+webpack 2.x:
 
 ``` js
 // webpack.config.js

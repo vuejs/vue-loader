@@ -1,6 +1,6 @@
 # Using Pre-Processors
 
-In Webpack, all pre-processors need to be applied with a corresponding loader. `vue-loader` allows you to use other Webpack loaders to process a part of a Vue component. It will automatically infer the proper loaders to use from the `lang` attribute of a language block.
+In webpack, all pre-processors need to be applied with a corresponding loader. `vue-loader` allows you to use other webpack loaders to process a part of a Vue component. It will automatically infer the proper loaders to use from the `lang` attribute of a language block.
 
 ### CSS
 
@@ -20,7 +20,7 @@ Under the hood, the text content inside the `<style>` tag will be first compiled
 
 #### sass-loader caveat
 
-Contrary to what its name indicates, [*sass*-loader](https://github.com/jtangelder/sass-loader) parses *SCSS* syntax by default. If you actually want to use the indented *SASS* syntax, you have to configure vue-loader's options for sass-loader accordingly. 
+Contrary to what its name indicates, [*sass*-loader](https://github.com/jtangelder/sass-loader) parses *SCSS* syntax by default. If you actually want to use the indented *SASS* syntax, you have to configure vue-loader's options for sass-loader accordingly.
 
 ```javascript
 {
@@ -69,7 +69,7 @@ scss: generateLoaders('sass').concat(
 ),
 ```
 
-It is recommended to only include variables, mixins, etc. in this file, to prevent duplicated css in your final, compiled files. 
+It is recommended to only include variables, mixins, etc. in this file, to prevent duplicated css in your final, compiled files.
 
 ### JavaScript
 
@@ -87,7 +87,7 @@ npm install coffee-loader --save-dev
 
 ### Templates
 
-Processing templates is a little different, because most Webpack template loaders such as `pug-loader` return a template function instead of a compiled HTML string. Instead of using `pug-loader`, we can just install the original `pug`:
+Processing templates is a little different, because most webpack template loaders such as `pug-loader` return a template function instead of a compiled HTML string. Instead of using `pug-loader`, we can just install the original `pug`:
 
 ``` bash
 npm install pug --save-dev
@@ -104,7 +104,7 @@ div
 
 ### Inline Loader Requests
 
-You can use [Webpack loader requests](https://webpack.github.io/docs/loaders.html#introduction) in the `lang` attribute:
+You can use [webpack loader requests](https://webpack.github.io/docs/loaders.html#introduction) in the `lang` attribute:
 
 ``` html
 <style lang="sass?outputStyle=expanded">
@@ -112,4 +112,4 @@ You can use [Webpack loader requests](https://webpack.github.io/docs/loaders.htm
 </style>
 ```
 
-However, note this makes your Vue component Webpack-specific and not compatible with Browserify and [vueify](https://github.com/vuejs/vueify). **If you intend to ship your Vue component as a reusable 3rd-party component, avoid using this syntax.**
+However, note this makes your Vue component webpack-specific and not compatible with Browserify and [vueify](https://github.com/vuejs/vueify). **If you intend to ship your Vue component as a reusable 3rd-party component, avoid using this syntax.**

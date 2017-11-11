@@ -1,6 +1,6 @@
 # Usando Pré-Processadores
 
-No Webpack, todos os pré-processadores precisam ser aplicados com um carregador \(loader\) correspondente. `vue-loader` permite que você use outros carregadores Webpack para processar uma parte de um componente Vue. Ele irá automaticamente indicar os carregadores apropriados para usar a partir do atributo `lang` de um bloco de linguagem.
+No webpack, todos os pré-processadores precisam ser aplicados com um carregador \(loader\) correspondente. `vue-loader` permite que você use outros carregadores webpack para processar uma parte de um componente Vue. Ele irá automaticamente indicar os carregadores apropriados para usar a partir do atributo `lang` de um bloco de linguagem.
 
 ### CSS
 
@@ -53,7 +53,7 @@ npm install coffee-loader --save-dev
 
 ### Templates
 
-O processamento de templates é um pouco diferente, porque a maioria dos carregadores de template do Webpack, como `pug-loader` retornam uma função de template em vez de uma sequência de caracteres HTML compilado. Em vez de usar `pug-loader`, podemos simplesmente instalar o `pug` original.
+O processamento de templates é um pouco diferente, porque a maioria dos carregadores de template do webpack, como `pug-loader` retornam uma função de template em vez de uma sequência de caracteres HTML compilado. Em vez de usar `pug-loader`, podemos simplesmente instalar o `pug` original.
 
 ```bash
 npm install pug --save-dev
@@ -70,7 +70,7 @@ div
 
 ### Solicitação de Carregamento em Linha
 
-Você pode usar \[solicitação de carregador Webpack\] no atributo `lang`:
+Você pode usar \[solicitação de carregador webpack\] no atributo `lang`:
 
 ```html
 <style lang="sass?outputStyle=expanded">
@@ -78,4 +78,4 @@ Você pode usar \[solicitação de carregador Webpack\] no atributo `lang`:
 </style>
 ```
 
-Contudo, observe que isso faz com que seu componente Vue se torne especifico para Webpack e não compatível com Browserify e [vueify](https://github.com/vuejs/vueify). **Se você pretende enviar seu componente Vue como um componente reutilizável para terceiros, evite usar está sintaxe**.
+Contudo, observe que isso faz com que seu componente Vue se torne especifico para webpack e não compatível com Browserify e [vueify](https://github.com/vuejs/vueify). **Se você pretende enviar seu componente Vue como um componente reutilizável para terceiros, evite usar está sintaxe**.

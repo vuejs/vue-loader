@@ -39,9 +39,9 @@ module.exports = {
 }
 ```
 
-Webpack 로더 체인이 **가장 먼저** 적용됩니다. `vue` 전에 `eslint`를 적용하여 컴파일 전 소스코드를 lint하세요.
+webpack 로더 체인이 **가장 먼저** 적용됩니다. `vue` 전에 `eslint`를 적용하여 컴파일 전 소스코드를 lint하세요.
 
-우리가 고려해야할 한 가지는 NPM 패키지에 포함 된 써드파티 `*.vue` 컴포넌트를 사용하는 것 입니다. 이 경우에 우리는 써드파티 컴포넌트를 처리하기 위해 `vue-loader`를 사용하려고 하지만 그것을 lint하고 싶지는 않습니다. 우리는 lint를 Webpack의 [preLoaders](https://webpack.github.io/docs/loaders.html#loader-order)로 분리할 수 있습니다.
+우리가 고려해야할 한 가지는 NPM 패키지에 포함 된 써드파티 `*.vue` 컴포넌트를 사용하는 것 입니다. 이 경우에 우리는 써드파티 컴포넌트를 처리하기 위해 `vue-loader`를 사용하려고 하지만 그것을 lint하고 싶지는 않습니다. 우리는 lint를 webpack의 [preLoaders](https://webpack.github.io/docs/loaders.html#loader-order)로 분리할 수 있습니다.
 
 ``` js
 // webpack.config.js
@@ -67,7 +67,7 @@ module.exports = {
 }
 ```
 
-Webpack 2.x에서는 다음과 같이 처리합니다.
+webpack 2.x에서는 다음과 같이 처리합니다.
 
 ``` js
 // webpack.config.js
