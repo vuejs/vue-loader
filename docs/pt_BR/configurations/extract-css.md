@@ -2,7 +2,7 @@
 
 Exemplo de configuração para extrair todo CSS processado de todos componentes Vue em um único arquivo CSS:
 
-### Webpack 2.x
+### webpack 2.x
 
 ```bash
 npm install extract-text-webpack-plugin --save-dev
@@ -36,7 +36,7 @@ module.exports = {
 }
 ```
 
-### Webpack 1.x
+### webpack 1.x
 
 ```bash
 npm install extract-text-webpack-plugin

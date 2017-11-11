@@ -12,7 +12,7 @@
 
 > Опции `preLoaders` и `postLoaders` доступны только в версиях 10.3.0+
 
-### Webpack 2.x
+### webpack 2.x
 
 ``` js
 module.exports = {
@@ -59,7 +59,7 @@ module.exports = {
 }
 ```
 
-### Webpack 1.x
+### webpack 1.x
 
 ``` js
 // webpack.config.js

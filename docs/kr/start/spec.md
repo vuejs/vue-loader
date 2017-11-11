@@ -47,7 +47,7 @@ export default {
 - 기본 언어 : `html`.
 
 - 각 `*.vue` 파일은 한번에 최대 하나의 `<template>` 블록을 포함할 수 있습니다.
- 
+
 - 내용은 문자열로 추출되어 컴파일 된 Vue 컴포넌트의 `template` 옵션으로 사용합니다.
 
 #### `<script>`
@@ -56,7 +56,7 @@ export default {
 
 - 각 `*.vue` 파일은 한번에 최대 하나의 `<script>` 블록을 포함할 수 있습니다.
 
-- 스크립트는 CommonJS와 같은 (Webpack을 통해 번들된 일반적인 `.js` 모듈같은)환경 에서  실행됩니다. 다른 의존성을 `require()`할 수 있습니다. 또한 ES2015를 지원하여 `import`와 `export`를 사용할 수 있습니다.
+- 스크립트는 CommonJS와 같은 (webpack을 통해 번들된 일반적인 `.js` 모듈같은)환경 에서  실행됩니다. 다른 의존성을 `require()`할 수 있습니다. 또한 ES2015를 지원하여 `import`와 `export`를 사용할 수 있습니다.
 
 - 스크립트는 Vue.js 컴포넌트 옵션 객체를 내보내야합니다. `Vue.extend()`에 의해 생성된 확장 생성자를 export하는 것도 지원되지만 평범한 객체를 추천합니다.
 
@@ -68,13 +68,13 @@ export default {
 
 - `<style>`태그는 `scoped` 또는 `module` 속성을 가질 수 있습니다. ([Scoped CSS](../features/scoped-css.md)와 [CSS Modules](../features/css-modules.md)를 확인하세요) 현재 컴포넌트에 스타일을 캡슐화 하는데 도움을 줍니다. 캡슐화 모드는 다른 여러개의 `<style>` 태그를 동일한 컴포넌트에 사용할 수 있습니다.
 
-- 기본적으로, 내용이 추출되어 `style-loader`를 사용해 실제로 `<style>` 태그로 문서의 `<head>`에 동적으로 삽입됩니다. [모든 컴포넌트의 모든 스타일이 하나의 CSS 파일로 추출되도록  Webpack을 설정](../configurations/extract-css.md)할 수 있습니다.
-- 
+- 기본적으로, 내용이 추출되어 `style-loader`를 사용해 실제로 `<style>` 태그로 문서의 `<head>`에 동적으로 삽입됩니다. [모든 컴포넌트의 모든 스타일이 하나의 CSS 파일로 추출되도록  webpack을 설정](../configurations/extract-css.md)할 수 있습니다.
+-
 ### 사용자 정의 블록
 
 > 10.2.0 이상에서 지원합니다.
 
-사용자 정의 블록은 `<docs>` 블록과 같이 프로젝트에 한정되는 요구에 따라 추가적으로 사용할 수 있습니다. `vue-loader`는 태그 이름을 사용해 섹션의 내용에 적용할 Webpack 로더를 찾습니다. 로더는 `vue-loader` 옵션의 `loaders` 섹션에 지정되어야 합니다.
+사용자 정의 블록은 `<docs>` 블록과 같이 프로젝트에 한정되는 요구에 따라 추가적으로 사용할 수 있습니다. `vue-loader`는 태그 이름을 사용해 섹션의 내용에 적용할 webpack 로더를 찾습니다. 로더는 `vue-loader` 옵션의 `loaders` 섹션에 지정되어야 합니다.
 
 [사용자 정의 블록](../configurations/custom-blocks.md)에서 자세히 다룹니다.
 

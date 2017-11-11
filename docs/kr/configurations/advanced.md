@@ -12,7 +12,7 @@
 
 > 참고: `preLoaders`와 `postLoaders`는 10.3.0 버전 이상에서만 지원합니다.
 
-### Webpack 2.x
+### webpack 2.x
 
 ``` js
 module.exports = {
@@ -25,7 +25,7 @@ module.exports = {
         loader: 'vue-loader',
         options: {
           // `loaders`는 기본 로더를 덮어씁니다.
-          // 다음 설정은 "lang" 속성이 없는 
+          // 다음 설정은 "lang" 속성이 없는
           // 모든 <script> 태그가 coffee 로더와 함께 로드되도록 합니다
           loaders: {
             js: 'coffee-loader'
@@ -41,12 +41,12 @@ module.exports = {
           // `postLoaders`는 기본 로더 뒤에 붙습니다.
           // - `html`의 경우, 기본 로더의 결과는 컴파일 된 JavaScript 렌더링 함수 코드가 됩니다.
 
-          //  - `css`의 경우, 결과는 `vue-style-loader`가 반환하고 
+          //  - `css`의 경우, 결과는 `vue-style-loader`가 반환하고
           // 대부분의 경우 별로 사용할 일은 없습니다. postcss 플러그인을 사용하는 것이 더 좋습니다.
           postLoaders: {
             html: 'babel-loader'
           },
-          
+
           // `excludedPreLoaders`는 반드시 정규표현식을 사용합니다
           excludedPreLoaders: /(eslint-loader)/
         }
@@ -56,7 +56,7 @@ module.exports = {
 }
 ```
 
-### Webpack 1.x
+### webpack 1.x
 
 ``` js
 // webpack.config.js

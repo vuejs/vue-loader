@@ -1,6 +1,6 @@
 # プリプロセッサの使用
 
-Webpack において、全てのプリプロセッサは対応する loader を適用する必要があります。 `vue-loader` は他の Webpack の loader を使って Vue コンポーネントを処理することが出来ます。言語ブロックの `lang` 属性から適切な loader を自動的に推論します。
+webpack において、全てのプリプロセッサは対応する loader を適用する必要があります。 `vue-loader` は他の webpack の loader を使って Vue コンポーネントを処理することが出来ます。言語ブロックの `lang` 属性から適切な loader を自動的に推論します。
 
 ### CSS
 
@@ -87,7 +87,7 @@ npm install coffee-loader --save-dev
 
 ### テンプレート
 
-`pug-loader` のようなほとんどのWebpackテンプレート loader は、コンパイルされたHTML文字列の代わりにテンプレート関数を返すので、template の処理は少し異なります。`pug-loader` を使う代わりに、オリジナルの `pug` をインストールをするだけです:
+`pug-loader` のようなほとんどのwebpackテンプレート loader は、コンパイルされたHTML文字列の代わりにテンプレート関数を返すので、template の処理は少し異なります。`pug-loader` を使う代わりに、オリジナルの `pug` をインストールをするだけです:
 
 ``` bash
 npm install pug --save-dev
@@ -104,7 +104,7 @@ div
 
 ### インラインローダーリクエスト
 
-`lang` 属性で [Webpack loader requests](https://webpack.github.io/docs/loaders.html#introduction) を使用することが可能です:
+`lang` 属性で [webpack loader requests](https://webpack.github.io/docs/loaders.html#introduction) を使用することが可能です:
 
 ``` html
 <style lang="sass?outputStyle=expanded">
@@ -112,4 +112,4 @@ div
 </style>
 ```
 
-ただこれにより Vue コンポーネントが Webpack 固有となり Browserify および [vueify](https://github.com/vuejs/vueify) と互換性がなくなります。 **Vue コンポーネントを再利用可能なサードパーティコンポーネントとして提供する場合は、この構文を使用しないでください。**
+ただこれにより Vue コンポーネントが webpack 固有となり Browserify および [vueify](https://github.com/vuejs/vueify) と互換性がなくなります。 **Vue コンポーネントを再利用可能なサードパーティコンポーネントとして提供する場合は、この構文を使用しないでください。**
