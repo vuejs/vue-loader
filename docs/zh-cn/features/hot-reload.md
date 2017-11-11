@@ -28,7 +28,7 @@
  * webpack 会压缩代码
  * `process.env.NODE_ENV === 'production'`
 
-你可以设置 `hotReload: false` 选项来明确关闭热重载：
+你可以设置 `hotReload: false` 选项来显式关闭热重载：
 
 ``` js
 module: {
