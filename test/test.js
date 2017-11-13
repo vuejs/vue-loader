@@ -287,6 +287,10 @@ describe('vue-loader', function () {
           return true
         }
       })
+      code.split(/\r?\n/g).forEach((l, i) => {
+        const pos = smc.originalPositionFor({ line: i + 1, column: 0 })
+        pos.source ? console.log(l + ' /* map: ' + JSON.stringify(pos) + ' */') : console.log(l)
+      })
       var pos = smc.originalPositionFor({
         line: line,
         column: col
