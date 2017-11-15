@@ -68,6 +68,8 @@ module.exports = {
 
 ## Documentos disponíveis em tempo de execução.
 
+> Requer versão 11.3.0+
+
 Aqui está um exemplo de injetar os blocos personalizados `<docs>` no componente para que ele esteja disponível durante o tempo de execução.
 
 ### docs-loader.js

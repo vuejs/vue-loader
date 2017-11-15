@@ -68,6 +68,8 @@ module.exports = {
 
 ## Runtime available docs
 
+> Requires 11.3.0+
+
 Here's an example of injecting the `<docs>` custom blocks into the component so that it's available during runtime.
 
 #### docs-loader.js
