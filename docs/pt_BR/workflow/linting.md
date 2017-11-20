@@ -39,9 +39,9 @@ module.exports = {
 }
 ```
 
-Lembre-se que a sequência dos carregadores Webpack são aplicados da **direita para esquerda**. Certifique-se de aplicar `eslint` antes de `vue`, de modo que estamos analisando o código fonte pré-compilado.
+Lembre-se que a sequência dos carregadores webpack são aplicados da **direita para esquerda**. Certifique-se de aplicar `eslint` antes de `vue`, de modo que estamos analisando o código fonte pré-compilado.
 
-Uma coisa que precisamos considerar é o uso de componente `*.vue` de terceiros enviados em pacote NPM. Neste caso, usaremos `vue-loader` para processar os componentes de terceiros, mas não queremos aplicar a análise de código estático \(linting\). Para isso nós podemos separar o linting em [preLoaders](https://webpack.github.io/docs/loaders.html#loader-order) do Webpack.
+Uma coisa que precisamos considerar é o uso de componente `*.vue` de terceiros enviados em pacote NPM. Neste caso, usaremos `vue-loader` para processar os componentes de terceiros, mas não queremos aplicar a análise de código estático \(linting\). Para isso nós podemos separar o linting em [preLoaders](https://webpack.github.io/docs/loaders.html#loader-order) do webpack.
 
 ```js
 // webpack.config.js
@@ -67,7 +67,7 @@ module.exports = {
 }
 ```
 
-Para Webpack 2.x:
+Para webpack 2.x:
 
 ```js
 // webpack.config.js

@@ -1,8 +1,8 @@
 # Options Reference
 
-## Usage Difference Between Webpack 1 & 2
+## Usage Difference Between webpack 1 & 2
 
-For Webpack 2: pass the options directly to the loader rule.
+For webpack 2: pass the options directly to the loader rule.
 
 ``` js
 module.exports = {
@@ -21,7 +21,7 @@ module.exports = {
 }
 ```
 
-For Webpack 1.x: add a root `vue` block in your Webpack config.
+For webpack 1.x: add a root `vue` block in your webpack config.
 
 ``` js
 module.exports = {
@@ -36,7 +36,7 @@ module.exports = {
 
 - type: `{ [lang: string]: string }`
 
-  An object specifying Webpack loaders to overwrite the default loaders used for language blocks inside `*.vue` files. The key corresponds to the `lang` attribute for language blocks, if specified. The default `lang` for each type is:
+  An object specifying webpack loaders to overwrite the default loaders used for language blocks inside `*.vue` files. The key corresponds to the `lang` attribute for language blocks, if specified. The default `lang` for each type is:
 
   - `<template>`: `html`
   - `<script>`: `js`
@@ -45,7 +45,7 @@ module.exports = {
   For example, to use `babel-loader` and `eslint-loader` to process all `<script>` blocks:
 
   ``` js
-  // Webpack 2.x config
+  // webpack 2.x config
   module: {
     rules: [
       {
@@ -144,7 +144,7 @@ module.exports = {
 
   Whether to enable source maps for CSS. Disabling this can avoid some relative path related bugs in `css-loader` and make the build a bit faster.
 
-  Note this is automatically set to `false` if the `devtool` option is not present in the main Webpack config.
+  Note this is automatically set to `false` if the `devtool` option is not present in the main webpack config.
 
 ### esModule
 
@@ -183,7 +183,7 @@ module.exports = {
 - type: `{ [tag: string]: string | Array<string> }`
 - default: `{ img: 'src', image: 'xlink:href' }`
 
-  During template compilation, the compiler can transform certain attributes, such as `src` URLs, into `require` calls, so that the target asset can be handled by Webpack. The default config transforms the `src` attribute on `<img>` tags and `xlink:href` attribute on `<image>` tags of SVG.
+  During template compilation, the compiler can transform certain attributes, such as `src` URLs, into `require` calls, so that the target asset can be handled by webpack. The default config transforms the `src` attribute on `<img>` tags and `xlink:href` attribute on `<image>` tags of SVG.
 
 ### buble
 
@@ -319,5 +319,5 @@ Whether generate source maps with cache busting by appending a hash query to the
 - default: `true` in development mode, `false` in production mode or when the webpack config has `target: 'node'`.
 - allowed value: `false` (`true` will not force Hot Reload neither in production mode nor when `target: 'node'`)
 
-Whether to use Webpack [Hot Module Replacement](https://webpack.js.org/concepts/hot-module-replacement/) to apply changes in the browser **without reloading the page**.
+Whether to use webpack [Hot Module Replacement](https://webpack.js.org/concepts/hot-module-replacement/) to apply changes in the browser **without reloading the page**.
 Use this option (value `false`) to disable the Hot Reload feature in development mode.

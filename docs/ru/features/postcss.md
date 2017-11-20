@@ -16,7 +16,7 @@
 
 В качестве альтернативы, вы можете указать конфигурацию PostCSS специально для `*.vue` файлов с помощью опции `postcss` для `vue-loader`.
 
-Пример использования с Webpack 1.x:
+Пример использования с webpack 1.x:
 
 ``` js
 // webpack.config.js
@@ -29,7 +29,7 @@ module.exports = {
 }
 ```
 
-Для Webpack 2.x:
+Для webpack 2.x:
 
 ``` js
 // webpack.config.js

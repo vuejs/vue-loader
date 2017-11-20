@@ -2,7 +2,7 @@
 
 > [webpack vue-cli テンプレート](https://github.com/vuejs-templates/webpack)には、事前に設定された単体テストと e2e テストの設定が用意されています。
 
-`* .vue`ファイルをテストするときには、普通の CommonJS ベースのテストランナーを使うことができません。なぜならそのテストランナーは `*.vue` ファイルの扱い方を知らないからです。代わりに、Webpack + vue-loader を使用してテストファイルをバンドルします。推奨設定は [Karma](http://karma-runner.github.io/0.13/index.html) と [karma-webpack](https://github.com/webpack/karma-webpack) です。
+`* .vue`ファイルをテストするときには、普通の CommonJS ベースのテストランナーを使うことができません。なぜならそのテストランナーは `*.vue` ファイルの扱い方を知らないからです。代わりに、webpack + vue-loader を使用してテストファイルをバンドルします。推奨設定は [Karma](http://karma-runner.github.io/0.13/index.html) と [karma-webpack](https://github.com/webpack/karma-webpack) です。
 
 Karma はブラウザを起動してテストを実行するテストランナーです。テストするブラウザと、使用するテストフレームワーク（たとえば、MochaやJasmineなど）を選択できます。[PhantomJS](http://phantomjs.org/) のテストを[Jasmine](http://jasmine.github.io/edge/introduction.html) テストフレームワークで実行する Karma の設定例を次に示します:
 
@@ -15,7 +15,7 @@ npm install\
 ```
 
 ``` js
-// 要求があれば同じWebpackの設定を使用することが可能です
+// 要求があれば同じwebpackの設定を使用することが可能です
 // ただし、テスト中に元のエントリが不要なので、
 // 元のエントリを削除することを忘れないでください
 var webpackConfig = require('./webpack.config.js')
@@ -47,7 +47,7 @@ module.exports = function (config) {
 
 ``` js
 // test/index.js
-// 特別なWebpackの機能を使用してすべてのテストファイルを必要とさせます
+// 特別なwebpackの機能を使用してすべてのテストファイルを必要とさせます
 // https://webpack.github.io/docs/context.html#require-context
 var testsContext = require.context('.', true, /\.spec$/)
 testsContext.keys().forEach(testsContext)

@@ -1,8 +1,8 @@
 # Referência de Opções
 
-## Diferença do uso entre Webpack 1 & 2
+## Diferença do uso entre webpack 1 & 2
 
-Para Webpack 2: passe as opções diretamente para a regra do carregador.
+Para webpack 2: passe as opções diretamente para a regra do carregador.
 
 ```js
 module.exports = {
@@ -21,7 +21,7 @@ module.exports = {
 }
 ```
 
-Para Webpack 1.x: Adicione um bloco \`vue\` na raiz de suas configurações Webpack:
+Para webpack 1.x: Adicione um bloco \`vue\` na raiz de suas configurações webpack:
 
 ```js
 module.exports = {
@@ -36,7 +36,7 @@ module.exports = {
 
 - tipo: `{ [lang: string]: string }`
 
-  Um objeto especificando carregadores de Webpack para substituir carregadores padrão usados para blocos de linguagem dentro de arquivos `*.vue`. A chave corresponde ao atributo `lang` para o bloco de linguagem, se especificado. O padrão `lang` para cada tipo é:
+  Um objeto especificando carregadores de webpack para substituir carregadores padrão usados para blocos de linguagem dentro de arquivos `*.vue`. A chave corresponde ao atributo `lang` para o bloco de linguagem, se especificado. O padrão `lang` para cada tipo é:
 
   - `<template>`: `html`
   - `<script>`:`js`
@@ -45,7 +45,7 @@ module.exports = {
   Por exemplo, para usar `babel-loader` e `eslint-loader` para processar todos os blocos `<script>`:
 
 ```js
-  // Configuração Webpack 2.X
+  // Configuração webpack 2.X
   module: {
     rules: {
       {
@@ -72,7 +72,7 @@ module.exports = {
 - suportado apenas em >= 10.3.0
 
   O formato de configuração é o mesmo que `loaders`, mas `postLoaders` são aplicados depois dos carregadores padrões. Você pode usar para pós-processar blocos de linguagem. No entanto note que isso é um pouco mais complicado:
-  
+
   - Para `html`, o resultado retornado pelo carregador padrão será compilado em código de função de renderização JavaScript.
 
   - Para `css`, o resultado será retornado por `vue-style-loader` que não é particularmente útil na maioria dos casos. Usando um plugin postcss será uma opção melhor.
@@ -117,7 +117,7 @@ module.exports = {
 
   Se deve habilitar mapas de origem para CSS. Desativar isso pode evitar alguns erros relacionado a caminho relativo em `css-loader` e fazer a construção um pouco mais rápida.
 
-  Observe que isso é automaticamente definido para `false` se a opção `devtoo` não estiver presente na configuração princípai de Webpack.
+  Observe que isso é automaticamente definido para `false` se a opção `devtoo` não estiver presente na configuração princípai de webpack.
 
 ### esModule
 
@@ -138,7 +138,7 @@ module.exports = {
 - tipo: `{ [tag: string]: string | Array<string> }`
 - padrão: `{ img: 'src', image: 'xlink:href' }`
 
-  Durante a compilação do template, o compilador pode transformar certos atributos, tais como URLs `src`, em chamadas `require`, para que o recurso de destino possa ser manipulado pelo Webpack. A configuração padrão transforma o atributo `src` em tags `<img>` e atributos `xlink:href` em tags `<image>` de SVG.
+  Durante a compilação do template, o compilador pode transformar certos atributos, tais como URLs `src`, em chamadas `require`, para que o recurso de destino possa ser manipulado pelo webpack. A configuração padrão transforma o atributo `src` em tags `<img>` e atributos `xlink:href` em tags `<image>` de SVG.
 
 ### buble
 
@@ -157,7 +157,7 @@ module.exports = {
   // webpack 1
   vue: {
     buble: {
-      // ativa o objeto de propagação 
+      // ativa o objeto de propagação
       // NOTA: Você precisa fornecer o polyfill Object.assign por si mesmo!
       objectAssign: 'Object.assign',
 

@@ -16,7 +16,7 @@
 
 또는 `vue-loader`에 `postcss` 옵션을 사용해 `*.vue`파일을 위해 postcss 설정을 지정할 수 있습니다.
 
-Webpack 1버전 예제:
+webpack 1버전 예제:
 
 ``` js
 // webpack.config.js
@@ -29,7 +29,7 @@ module.exports = {
 }
 ```
 
-Webpack 2버전 예제:
+webpack 2버전 예제:
 
 ``` js
 // webpack.config.js

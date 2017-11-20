@@ -2,7 +2,7 @@
 
 > O [template vue-cli do webpack](https://github.com/vuejs-templates/webpack)  oferece testes de unidade pré-configurados e configurações de teste es2 para você.
 
-Ao testar arquivos `*.vue` não podemos usar um corredor de teste simples baseado em CommonJs, porque ele não sabe como manipular arquivos `*.vue`. Em vez disso, nós ainda usaremos Webpack + vue-loader para manipular nossos arquivos de teste. A configuração recomendada é usando [Karma](http://karma-runner.github.io/0.13/index.html) e [karma-webpack](https://github.com/webpack/karma-webpack).
+Ao testar arquivos `*.vue` não podemos usar um corredor de teste simples baseado em CommonJs, porque ele não sabe como manipular arquivos `*.vue`. Em vez disso, nós ainda usaremos webpack + vue-loader para manipular nossos arquivos de teste. A configuração recomendada é usando [Karma](http://karma-runner.github.io/0.13/index.html) e [karma-webpack](https://github.com/webpack/karma-webpack).
 
 Karma é um corredor de teste que inicia navegadores e executa seus testes. Você pode escolher qual navegador você quer para testar e qual framework \(exemplo: Mocha ou Jasmine\) você quer usar. Aqui está um exemplo de configuração Karma que executa os testes dentro de [PhantomJS](http://phantomjs.org/) com o framework de teste [Jasmine](http://jasmine.github.io/edge/introduction.html).
 
@@ -16,7 +16,7 @@ npm install\
 
 ```js
 // podemos usar a mesma configuração que é exigida pelo webpackm
-// entretanto, lembre-se de remover a entrada original, uma vez 
+// entretanto, lembre-se de remover a entrada original, uma vez
 // que não precisamo durante os testes
 var webpackConfig = require('./webpack.config.js')
 delete webpackConfig.entry
@@ -47,7 +47,7 @@ E para o arquivo `test/index.js` de entrada:
 
 ```js
 // test/index.js
-// requisita todos os arquivos de testes usando 0 recursos especial do Webpack
+// requisita todos os arquivos de testes usando 0 recursos especial do webpack
 // https://webpack.github.io/docs/context.html#require-context
 var testsContext = require.context('.', true, /\.spec$/)
 testsContext.keys().forEach(testsContext)

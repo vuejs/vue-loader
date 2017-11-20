@@ -41,7 +41,7 @@ comp-a h2 {
 #### webpack.config.js
 
 ``` js
-// Webpack 2.x
+// webpack 2.x
 var ExtractTextPlugin = require("extract-text-webpack-plugin")
 
 module.exports = {
@@ -67,6 +67,8 @@ module.exports = {
 ```
 
 ## 実行時に利用可能なドキュメント
+
+> 11.3.0 以上で動作します
 
 `<docs>`カスタムブロックをコンポーネントに注入して実行時に利用できるようにする例です。
 

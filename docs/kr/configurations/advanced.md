@@ -12,7 +12,7 @@
 
 > 참고: `preLoaders`와 `postLoaders`는 10.3.0 버전 이상에서만 지원합니다.
 
-### Webpack 2.x
+### webpack 2.x
 
 ``` js
 module.exports = {
@@ -56,7 +56,7 @@ module.exports = {
 }
 ```
 
-### Webpack 1.x
+### webpack 1.x
 
 ``` js
 // webpack.config.js

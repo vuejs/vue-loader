@@ -12,7 +12,7 @@ Para fazer isto, especifique a opção `loaders` para `vue-loader`:
 
 > Observe que `preLoaders` e`postLoaders` são suportados apenas em verões >=10.3.0
 
-### Webpack 2.x
+### webpack 2.x
 
 ```js
 // webpack.config.js
@@ -60,7 +60,7 @@ module.exports = {
 }
 ```
 
-### Webpack 1.x
+### webpack 1.x
 
 ```js
 // webpack.config.js
