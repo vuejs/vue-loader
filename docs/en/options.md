@@ -13,7 +13,7 @@ module.exports = {
         test: /\.vue$/,
         loader: 'vue-loader',
         options: {
-          // vue-loader options
+          // `vue-loader` options
         }
       }
     ]
@@ -27,7 +27,7 @@ For webpack 1.x: add a root `vue` block in your webpack config.
 module.exports = {
   // ...
   vue: {
-    // vue-loader options
+    // `vue-loader` options
   }
 }
 ```

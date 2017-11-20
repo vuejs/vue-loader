@@ -19,7 +19,7 @@ Para fazer isto, especifique a opção `loaders` para `vue-loader`:
 module.exports = {
   // outras opções...
   module: {
-    // module.rules é o mesmo que module.loaders em 1.x
+    // `module.rules` é o mesmo que `module.loaders` em 1.x
     rules : [
       {
         test: /\.vue$/,

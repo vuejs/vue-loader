@@ -16,7 +16,7 @@
 module.exports = {
   // 他のオプション
   module: {
-    // module.rules は 1.x での module.loaders と同じです
+    // `module.rules` は 1.x での `module.loaders` と同じです
     rules: [
       {
         test: /\.vue$/,
@@ -71,7 +71,7 @@ module.exports = {
       }
     ]
   },
-  // vue-loader の設定
+  // `vue-loader` の設定
   vue: {
     loaders: {
       // 上記の設定と同じ

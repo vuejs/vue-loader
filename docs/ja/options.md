@@ -13,7 +13,7 @@ module.exports = {
         test: /\.vue$/,
         loader: 'vue-loader',
         options: {
-          // vue-loader オプション
+          // `vue-loader` オプション
         }
       }
     ]
@@ -27,7 +27,7 @@ webpack 1.x の場合: webpack の設定のルートに `vue` ブロックを追
 module.exports = {
   // ...
   vue: {
-    // vue-loader オプション
+    // `vue-loader` オプション
   }
 }
 ```

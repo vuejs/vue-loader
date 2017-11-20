@@ -18,7 +18,7 @@
 module.exports = {
   // 기타 옵션들...
   module: {
-    // module.rules은 1.x버전의 module.loaders과 같습니다
+    // `module.rules`은 1.x버전의 module.loaders과 같습니다
     rules: [
       {
         test: /\.vue$/,
@@ -70,7 +70,7 @@ module.exports = {
       }
     ]
   },
-  // vue-loader 설정
+  // `vue-loader` 설정
   vue: {
     loaders: {
       // 위와 동일한 설정 규칙입니다

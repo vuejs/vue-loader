@@ -18,7 +18,7 @@
 module.exports = {
   // другие настройки...
   module: {
-    // module.rules тоже самое, что и module.loaders в 1.x
+    // `module.rules` тоже самое, что и `module.loaders` в 1.x
     rules: [
       {
         test: /\.vue$/,

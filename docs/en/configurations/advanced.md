@@ -18,7 +18,7 @@ To do that, specify the `loaders` option for `vue-loader`:
 module.exports = {
   // other options...
   module: {
-    // module.rules is the same as module.loaders in 1.x
+    // `module.rules` is the same as `module.loaders` in 1.x
     rules: [
       {
         test: /\.vue$/,
@@ -73,7 +73,7 @@ module.exports = {
       }
     ]
   },
-  // vue-loader configurations
+  // `vue-loader` configurations
   vue: {
     loaders: {
       // same configuration rules as above
