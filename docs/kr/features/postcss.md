@@ -36,12 +36,12 @@ Webpack 2버전 예제:
 module.exports = {
   // 기타 설정...
   module: {
-    // module.rules는 1.x의 module.loaders와 동일
+    // `module.rules`는 1.x의 module.loaders와 동일
     rules: [
       {
         test: /\.vue$/,
         loader: 'vue-loader',
-        // vue-loader 옵션은 여기에 지정합니다
+        // `vue-loader` 옵션은 여기에 지정합니다
         options: {
           // ...
           postcss: [require('postcss-cssnext')()]

@@ -18,14 +18,14 @@
 module.exports = {
   // 기타 옵션들...
   module: {
-    // module.rules은 1.x버전의 module.loaders과 같습니다
+    // `module.rules`은 1.x버전의 module.loaders과 같습니다
     rules: [
       {
         test: /\.vue$/,
         loader: 'vue-loader',
         options: {
           // `loaders`는 기본 로더를 덮어씁니다.
-          // 다음 설정은 "lang" 속성이 없는 
+          // 다음 설정은 "lang" 속성이 없는
           // 모든 <script> 태그가 coffee 로더와 함께 로드되도록 합니다
           loaders: {
             js: 'coffee-loader'
@@ -41,12 +41,12 @@ module.exports = {
           // `postLoaders`는 기본 로더 뒤에 붙습니다.
           // - `html`의 경우, 기본 로더의 결과는 컴파일 된 JavaScript 렌더링 함수 코드가 됩니다.
 
-          //  - `css`의 경우, 결과는 `vue-style-loader`가 반환하고 
+          //  - `css`의 경우, 결과는 `vue-style-loader`가 반환하고
           // 대부분의 경우 별로 사용할 일은 없습니다. postcss 플러그인을 사용하는 것이 더 좋습니다.
           postLoaders: {
             html: 'babel-loader'
           },
-          
+
           // `excludedPreLoaders`는 반드시 정규표현식을 사용합니다
           excludedPreLoaders: /(eslint-loader)/
         }
@@ -70,7 +70,7 @@ module.exports = {
       }
     ]
   },
-  // vue-loader 설정
+  // `vue-loader` 설정
   vue: {
     loaders: {
       // 위와 동일한 설정 규칙입니다

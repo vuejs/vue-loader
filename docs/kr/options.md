@@ -13,7 +13,7 @@ module.exports = {
         test: /\.vue$/,
         loader: 'vue-loader',
         options: {
-          // vue-loader 옵션
+          // `vue-loader` 옵션
         }
       }
     ]
@@ -27,7 +27,7 @@ Webpack 1.x의 경우 Webpack 설정에 루트 `vue` 블럭을 추가합니다.
 module.exports = {
   // ...
   vue: {
-    // vue-loader 옵션
+    // `vue-loader` 옵션
   }
 }
 ```

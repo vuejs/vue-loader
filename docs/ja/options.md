@@ -13,7 +13,7 @@ module.exports = {
         test: /\.vue$/,
         loader: 'vue-loader',
         options: {
-          // vue-loader オプション
+          // `vue-loader` オプション
         }
       }
     ]
@@ -27,7 +27,7 @@ Webpack 1.x の場合: Webpack の設定のルートに `vue` ブロックを追
 module.exports = {
   // ...
   vue: {
-    // vue-loader オプション
+    // `vue-loader` オプション
   }
 }
 ```
@@ -238,24 +238,24 @@ module.exports = {
   ```
 
 ### extractCSS
-  
+
   > 12.0.0 で追加
-  
+
   - 型: `boolean`
   - デフォルト: `false`
 
   自動的に `extract-text-webpack-plugin` を使用して CSS を抽出します。ほとんどのプリプロセッサに対してすぐに動作し、本番環境においても同様に圧縮 (minify) 処理します。
-  
+
   `true` またはプラグインのインスタンス (複数の抽出されたファイルに対して `extract-text-webpack-plugin` の複数のインスタンスを使用できるように) を値として渡すことができます。
- 
+
   これは、開発中にはホットリロードが動作するため本番環境でのみ使用する必要があります。
-  
+
   例:
-  
+
   ``` js
   // webpack.config.js
   var ExtractTextPlugin = require("extract-text-webpack-plugin")
-  
+
   module.exports = {
     // 他のオプション ...
     module: {
@@ -274,14 +274,14 @@ module.exports = {
     ]
   }
   ```
-  
+
   または、プラグインのインスタンスを渡します:
-  
+
   ``` js
   // webpack.config.js
   var ExtractTextPlugin = require("extract-text-webpack-plugin")
   var plugin = new ExtractTextPlugin("style.css")
-  
+
   module.exports = {
     // 他のオプション ...
     module: {

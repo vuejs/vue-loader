@@ -13,7 +13,7 @@ module.exports = {
         test: /\.vue$/,
         loader: 'vue-loader',
         options: {
-          // vue-loader options
+          // `vue-loader` options
         }
       }
     ]
@@ -27,7 +27,7 @@ For Webpack 1.x: add a root `vue` block in your Webpack config.
 module.exports = {
   // ...
   vue: {
-    // vue-loader options
+    // `vue-loader` options
   }
 }
 ```
@@ -320,4 +320,4 @@ Whether generate source maps with cache busting by appending a hash query to the
 - allowed value: `false` (`true` will not force Hot Reload neither in production mode nor when `target: 'node'`)
 
 Whether to use Webpack [Hot Module Replacement](https://webpack.js.org/concepts/hot-module-replacement/) to apply changes in the browser **without reloading the page**.
-Use this option (value `false`) to disable the Hot Reload feature in development mode.     
+Use this option (value `false`) to disable the Hot Reload feature in development mode.
