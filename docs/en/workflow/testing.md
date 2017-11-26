@@ -2,7 +2,7 @@
 
 > The [webpack vue-cli template](https://github.com/vuejs-templates/webpack) offers pre-configured unit testing and e2e testing setups for you.
 
-When testing `*.vue` files, we cannot use a plain CommonJS-based test runner because it won't know how to handle `*.vue` files. Instead, we still use Webpack + vue-loader to bundle our test files. The recommended setup is using [Karma](https://karma-runner.github.io/0.13/index.html) and [karma-webpack](https://github.com/webpack/karma-webpack).
+When testing `*.vue` files, we cannot use a plain CommonJS-based test runner because it won't know how to handle `*.vue` files. Instead, we still use webpack + vue-loader to bundle our test files. The recommended setup is using [Karma](https://karma-runner.github.io/0.13/index.html) and [karma-webpack](https://github.com/webpack/karma-webpack).
 
 Karma is a test runner that launches browsers and runs your tests for you. You can choose what browsers you want to test in and what test framework (e.g. Mocha or Jasmine) you want to use. Here is an example Karma configuration that runs the tests inside [PhantomJS](http://phantomjs.org/) with the [Jasmine](https://jasmine.github.io/edge/introduction.html) test framework:
 
@@ -47,7 +47,7 @@ And for the entry `test/index.js` file:
 
 ``` js
 // test/index.js
-// require all test files using special Webpack feature
+// require all test files using special webpack feature
 // https://webpack.github.io/docs/context.html#require-context
 var testsContext = require.context('.', true, /\.spec$/)
 testsContext.keys().forEach(testsContext)

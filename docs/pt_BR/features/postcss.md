@@ -16,7 +16,7 @@ O uso de um arquivo de configuração permite que você compartilhe a mesma conf
 
 Como alternativa, você pode especificar configurações postcss especificamente para arquivos `*.vue` usando a opção `postcss` para `vue-loader`.
 
-Exemplo de uso no Webpack 1.x:
+Exemplo de uso no webpack 1.x:
 
 ```js
 // webpack.config.js
@@ -29,14 +29,14 @@ module.exports = {
 }
 ```
 
-Para Webpack 2.x:
+Para webpack 2.x:
 
 ```js
 // webpack.config.js
 module.exports = {
   // outras opções...
   module: {
-    // module.rules é o mesmo que module.loaders em 1.x
+    // `module.rules` é o mesmo que `module.loaders` em 1.x
     rules: [
       {
         test: /\.vue$/,

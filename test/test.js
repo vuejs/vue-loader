@@ -213,6 +213,11 @@ describe('vue-loader', () => {
       expect(style).to.contain(`.anim-2[${id}] {\n  animation-name: color-${id}`)
       expect(style).to.contain(`@keyframes color-${id} {`)
       expect(style).to.contain(`@-webkit-keyframes color-${id} {`)
+
+      expect(style).to.contain(`.anim-multiple[${id}] {\n  animation: color-${id} 5s infinite,opacity-${id} 2s;`)
+      expect(style).to.contain(`.anim-multiple-2[${id}] {\n  animation-name: color-${id},opacity-${id};`)
+      expect(style).to.contain(`@keyframes opacity-${id} {`)
+      expect(style).to.contain(`@-webkit-keyframes opacity-${id} {`)
       // >>> combinator
       expect(style).to.contain(`.foo p[${id}] .bar {\n  color: red;\n}`)
       done()

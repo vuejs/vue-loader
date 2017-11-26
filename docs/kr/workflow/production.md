@@ -34,6 +34,6 @@ module.exports = {
 
 1. 환경변수 기반으로 설정 오브젝트를 동적으로 빌드할 수 있습니다.
 
-2. 또는 개발용 Webpack 설정 파일과 배포용 설정 파일을 분리하여 사용합니다. 그리고 [vue-hackernews-2.0](https://github.com/vuejs/vue-hackernews-2.0)에 표시 된 것처럼 세 번째 파일에서 공통 옵션을 공유할 수도 있습니다.
+2. 또는 개발용 webpack 설정 파일과 배포용 설정 파일을 분리하여 사용합니다. 그리고 [vue-hackernews-2.0](https://github.com/vuejs/vue-hackernews-2.0)에 표시 된 것처럼 세 번째 파일에서 공통 옵션을 공유할 수도 있습니다.
 
 당신에게 목표 달성이 달려있습니다.

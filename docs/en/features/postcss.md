@@ -16,7 +16,7 @@ Using a config file allows you to share the same config between your normal CSS 
 
 Alternatively, you can specify postcss config specifically for `*.vue` files using the `postcss` option for `vue-loader`.
 
-Example usage in Webpack 1.x:
+Example usage in webpack 1.x:
 
 ``` js
 // webpack.config.js
@@ -29,19 +29,19 @@ module.exports = {
 }
 ```
 
-For Webpack 2.x:
+For webpack 2.x:
 
 ``` js
 // webpack.config.js
 module.exports = {
   // other options...
   module: {
-    // module.rules is the same as module.loaders in 1.x
+    // `module.rules` is the same as `module.loaders` in 1.x
     rules: [
       {
         test: /\.vue$/,
         loader: 'vue-loader',
-        // vue-loader options goes here
+        // `vue-loader` options goes here
         options: {
           // ...
           postcss: [require('postcss-cssnext')()]
