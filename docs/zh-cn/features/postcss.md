@@ -21,9 +21,9 @@ Webpack 1.x 例子：
 ``` js
 // webpack.config.js
 module.exports = {
-  // other configs...
+  // 其它配置……
   vue: {
-    // use custom postcss plugins
+    // 使用自定义 postcss 插件
     postcss: [require('postcss-cssnext')()]
   }
 }
@@ -36,12 +36,12 @@ Webpack 2.x 例子：
 module.exports = {
   // other options...
   module: {
-    // `module.rules` is the same as `module.loaders` in 1.x
+    // `module.rules` 和 1.x 里的 `module.loaders` 相同
     rules: [
       {
         test: /\.vue$/,
         loader: 'vue-loader',
-        // `vue-loader` options goes here
+        // `vue-loader` 选项放这里
         options: {
           // ...
           postcss: [require('postcss-cssnext')()]
@@ -60,9 +60,9 @@ module.exports = {
 
   ``` js
   postcss: {
-    plugins: [...], // list of plugins
+    plugins: [...], // 插件列表
     options: {
-      parser: sugarss // use sugarss parser
+      parser: 'sugarss' // 使用 sugarss 解析器
     }
   }
   ```
