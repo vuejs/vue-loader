@@ -34,6 +34,6 @@ module.exports = {
 
 1. 使用环境变量动态构建；
 
-2. 或者，使用两个分开的 Webpack 配置文件，一个用于开发环境，一个用于生产环境。把可能共用的配置放到第三个文件中，如 [vue-hackernews-2.0](https://github.com/vuejs/vue-hackernews-2.0) 所示。
+2. 或者，使用两个分开的 webpack 配置文件，一个用于开发环境，一个用于生产环境。把可能共用的配置放到第三个文件中，如 [vue-hackernews-2.0](https://github.com/vuejs/vue-hackernews-2.0) 所示。
 
 只要达到目标，怎么做取决于你。

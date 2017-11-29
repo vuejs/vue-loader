@@ -16,7 +16,7 @@
 
 或者，你可以使用 `vue-loader` 的 `postcss` 选项来为 `.vue` 文件指定配置。
 
-Webpack 1.x 例子：
+webpack 1.x 例子：
 
 ``` js
 // webpack.config.js
@@ -29,7 +29,7 @@ module.exports = {
 }
 ```
 
-Webpack 2.x 例子：
+webpack 2.x 例子：
 
 ``` js
 // webpack.config.js
