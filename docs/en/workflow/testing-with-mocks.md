@@ -4,6 +4,8 @@ In a real world application, our components most likely have external dependenci
 
 `vue-loader` provides a feature that allows you to inject arbitrary dependencies to a `*.vue` component, using [inject-loader](https://github.com/plasticine/inject-loader). The general idea is that instead of directly importing the component module, we use `inject-loader` to create a "module factory" function for that module. When this function gets called with an object of mocks, it returns an instance of the module with the mocks injected.
 
+> Note: You must disable `esModule` option in inject mode, or you will get an error.
+
 Suppose we have a component like this:
 
 ``` html
@@ -14,9 +16,9 @@ Suppose we have a component like this:
 
 <script>
 // this dependency needs to be mocked
-import SomeService from '../service'
+const SomeService = require('../service')
 
-export default {
+module.exports = {
   data () {
     return {
       msg: SomeService.msg
@@ -28,10 +30,8 @@ export default {
 
 Here's how to import it with mocks:
 
-> Note: inject-loader@3.x is currently unstable.
-
 ``` bash
-npm install inject-loader@^2.0.0 --save-dev
+npm install inject-loader --save-dev
 ```
 
 ``` js
