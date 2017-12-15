@@ -1086,4 +1086,14 @@ describe('vue-loader', () => {
       done()
     })
   })
+
+  it('named exports', done => {
+    test({
+      entry: './test/fixtures/named-exports.vue'
+    }, (window, _, rawModule) => {
+      expect(rawModule.default.name).to.equal('named-exports')
+      expect(rawModule.foo()).to.equal(1)
+      done()
+    })
+  })
 })
