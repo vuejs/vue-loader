@@ -511,6 +511,17 @@ describe('vue-loader', () => {
     })
   })
 
+  it('postcss options', done => {
+    test({
+      entry: './test/fixtures/postcss-lang.vue'
+    }, (window) => {
+      let style = window.document.querySelector('style').textContent
+      style = normalizeNewline(style)
+      expect(style).to.contain('h1 {\n  color: red;\n  font-size: 14px\n}')
+      done()
+    })
+  })
+
   it('transpile ES2015 features in template', done => {
     test({
       entry: './test/fixtures/es2015.vue'
