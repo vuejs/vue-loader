@@ -11,7 +11,7 @@ npm install sass-loader node-sass --save-dev
 ```
 
 ``` html
-<style lang="sass">
+<style lang="scss">
   /* используем SASS здесь */
 </style>
 ```
