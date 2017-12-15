@@ -211,6 +211,7 @@ describe('vue-loader', () => {
       // scoped keyframes
       expect(style).to.contain(`.anim[${id}] {\n  animation: color-${id} 5s infinite, other 5s;`)
       expect(style).to.contain(`.anim-2[${id}] {\n  animation-name: color-${id}`)
+      expect(style).to.contain(`.anim-3[${id}] {\n  animation: 5s color-${id} infinite, 5s other;`)
       expect(style).to.contain(`@keyframes color-${id} {`)
       expect(style).to.contain(`@-webkit-keyframes color-${id} {`)
 
