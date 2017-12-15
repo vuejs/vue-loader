@@ -782,6 +782,21 @@ describe('vue-loader', () => {
     })
   })
 
+  it('custom blocks with ES module default export', done => {
+    test({
+      entry: './test/fixtures/custom-blocks.vue',
+      vue: {
+        loaders: {
+          esm: require.resolve('./mock-loaders/identity')
+        }
+      }
+    }, (window, module) => {
+      // option added by custom block code
+      expect(module.foo).to.equal(1)
+      done()
+    })
+  })
+
   it('passes attributes as options to the loader', done => {
     bundle({
       entry: './test/fixtures/custom-options.vue',
