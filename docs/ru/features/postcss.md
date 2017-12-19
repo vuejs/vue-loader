@@ -34,7 +34,7 @@
 module.exports = {
   // другие настройки...
   vue: {
-    // использование плагинов postcss
+    // использование плагинов PostCSS
     postcss: [require('postcss-cssnext')()]
   }
 }

@@ -78,7 +78,7 @@ module: {
 
   - `html`의 경우, 기본 로더의 결과는 컴파일 된 JavaScript 렌더링 함수 코드가 됩니다.
 
-  - `css`의 경우, 결과는 `vue-style-loader`가 반환하고 대부분의 경우 별로 사용할 일은 없습니다. postcss 플러그인을 사용하는 것이 더 좋습니다.
+  - `css`의 경우, 결과는 `vue-style-loader`가 반환하고 대부분의 경우 별로 사용할 일은 없습니다. PostCSS 플러그인을 사용하는 것이 더 좋습니다.
 
 
 ### postcss

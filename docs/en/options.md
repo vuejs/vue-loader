@@ -77,7 +77,7 @@ module.exports = {
 
   - For `html`, the result returned by the default loader will be compiled JavaScript render function code.
 
-  - For `css`, the result will be returned by `vue-style-loader` which isn't particularly useful in most cases. Using a postcss plugin will be a better option.
+  - For `css`, the result will be returned by `vue-style-loader` which isn't particularly useful in most cases. Using a PostCSS plugin will be a better option.
 
 ### postcss
 
@@ -144,7 +144,7 @@ module.exports = {
 - type: `boolean`
 - default: `true`
 
-  Set this to `false` to disable auto-loading of postcss config files.
+  Set this to `false` to disable auto-loading of PostCSS config files.
 
 ### cssSourceMap
 
