@@ -33,7 +33,7 @@ module.exports = function (config) {
     },
     // 使用 webpack 配置
     webpack: webpackConfig,
-    // 屏蔽无用的文本
+    // 避免被无用文本刷屏
     webpackMiddleware: {
       noInfo: true
     },
