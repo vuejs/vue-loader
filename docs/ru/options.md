@@ -137,6 +137,15 @@ module.exports = {
 
     Предоставляет контекст для плагинов PostCSS. См. подробнее в [документации postcss-loader](https://github.com/postcss/postcss-loader#context-ctx).
 
+### postcss.useConfigFile
+
+> Добавлено в версии 13.6.0
+
+- Тип: `boolean`
+- По умолчанию: `true`
+
+  Установка в значение `false` отключает автозагрузку файла конфигурации postcss.
+
 ### cssSourceMap
 
 - Тип: `boolean`
