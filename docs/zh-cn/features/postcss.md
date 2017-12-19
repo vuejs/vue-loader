@@ -16,7 +16,7 @@
 
 因为 `vue-loader` 内部通过 PostCSS 处理其样式，你只需要对标准的 CSS 文件应用 `postcss-loader` 即可。即便你的工程中存在 PostCSS 配置文件，也无需在样式块上指定 `lang="postcss"`。
 
-有时用户可能只是出于语法高亮的目的使用 `lang="postcss"`。从 13.6.0 开始，如果没有 loader (通过 `vue-loader` 自身的 `loaders` 选项) 显示配置下列 PostCSS 扩展，则它们只会简单的进行 `vue-loader` 的默认 PostCSS 转换：
+有时用户可能只是出于语法高亮的目的使用 `lang="postcss"`。从 13.6.0 开始，如果没有 loader (通过 `vue-loader` 自身的 `loaders` 选项) 显式配置下列 PostCSS 扩展，则它们只会简单的进行 `vue-loader` 的默认 PostCSS 转换：
 
 - `postcss`
 - `pcss`
