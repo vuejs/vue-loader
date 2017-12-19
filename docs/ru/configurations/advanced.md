@@ -12,13 +12,13 @@
 
 > Опции `preLoaders` и `postLoaders` доступны только в версиях 10.3.0+
 
-### Webpack 2.x
+### webpack 2.x
 
 ``` js
 module.exports = {
   // другие настройки...
   module: {
-    // module.rules тоже самое, что и module.loaders в 1.x
+    // `module.rules` тоже самое, что и `module.loaders` в 1.x
     rules: [
       {
         test: /\.vue$/,
@@ -59,7 +59,7 @@ module.exports = {
 }
 ```
 
-### Webpack 1.x
+### webpack 1.x
 
 ``` js
 // webpack.config.js

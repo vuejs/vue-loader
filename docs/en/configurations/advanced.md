@@ -12,13 +12,13 @@ To do that, specify the `loaders` option for `vue-loader`:
 
 > Note that `preLoaders` and `postLoaders` are only supported in 10.3.0+
 
-### Webpack 2.x
+### webpack 2.x
 
 ``` js
 module.exports = {
   // other options...
   module: {
-    // module.rules is the same as module.loaders in 1.x
+    // `module.rules` is the same as `module.loaders` in 1.x
     rules: [
       {
         test: /\.vue$/,
@@ -49,7 +49,7 @@ module.exports = {
           postLoaders: {
             html: 'babel-loader'
           },
-          
+
           // `excludedPreLoaders` should be regex
           excludedPreLoaders: /(eslint-loader)/
         }
@@ -59,7 +59,7 @@ module.exports = {
 }
 ```
 
-### Webpack 1.x
+### webpack 1.x
 
 ``` js
 // webpack.config.js
@@ -73,7 +73,7 @@ module.exports = {
       }
     ]
   },
-  // vue-loader configurations
+  // `vue-loader` configurations
   vue: {
     loaders: {
       // same configuration rules as above

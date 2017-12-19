@@ -18,7 +18,7 @@
 module.exports = {
   // other options...
   module: {
-    // module.rules 与 1.x 中的 module.loaders 相同
+    // `module.rules` 与 1.x 中的 `module.loaders` 相同
     rules: [
       {
         test: /\.vue$/,
@@ -68,7 +68,7 @@ module.exports = {
       }
     ]
   },
-  // vue-loader configurations
+  // `vue-loader` configurations
   vue: {
     loaders: {
       // same configuration rules as above

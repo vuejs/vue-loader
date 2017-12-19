@@ -19,3 +19,27 @@
 当手动设置你的工程时，热重载会在你启动 `webpack-dev-server --hot` 服务时自动开启。
 
 高阶用户可能希望移步 `vue-loader` 内部使用的 [vue-hot-reload-api](https://github.com/vuejs/vue-hot-reload-api) 继续查阅。
+
+## 关闭热重载
+
+热重载默认是开启的，除非遇到以下情况：
+
+ * webpack 的 `target` 的值是 `node` (服务端渲染)
+ * webpack 会压缩代码
+ * `process.env.NODE_ENV === 'production'`
+
+你可以设置 `hotReload: false` 选项来显式关闭热重载：
+
+``` js
+module: {
+  rules: [
+    {
+      test: /\.vue$/,
+      loader: 'vue-loader',
+      options: {
+        hotReload: false // 关闭热重载
+      }
+    }
+  ]
+}
+```

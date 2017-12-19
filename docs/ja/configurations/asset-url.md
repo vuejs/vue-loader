@@ -13,7 +13,7 @@
 ``` js
 createElement('img', { attrs: { src: require('../image.png') }})
 ```
-もちろん `.png` ファイルは JavaScript のファイルではありません。[file-loader](https://github.com/webpack/file-loader) または [url-loader](https://github.com/webpack/url-loader) を使用して Webpack を設定する必要があります。`vue-cli` でスキャフォールドされたプロジェクトでは同じような設定がなされています。
+もちろん `.png` ファイルは JavaScript のファイルではありません。[file-loader](https://github.com/webpack/file-loader) または [url-loader](https://github.com/webpack/url-loader) を使用して webpack を設定する必要があります。`vue-cli` でスキャフォールドされたプロジェクトでは同じような設定がなされています。
 
 利点の全ては次の通りです:
 

@@ -41,7 +41,7 @@ comp-a h2 {
 #### webpack.config.js
 
 ``` js
-// Webpack 2.x
+// webpack 2.x
 var ExtractTextPlugin = require("extract-text-webpack-plugin")
 
 module.exports = {
@@ -67,6 +67,8 @@ module.exports = {
 ```
 
 ## Runtime available docs
+
+> Requires 11.3.0+
 
 Here's an example of injecting the `<docs>` custom blocks into the component so that it's available during runtime.
 

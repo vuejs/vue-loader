@@ -41,7 +41,7 @@ comp-a h2 {
 #### webpack.config.js
 
 ``` js
-// Webpack 2.x
+// webpack 2.x
 var ExtractTextPlugin = require("extract-text-webpack-plugin")
 
 module.exports = {
@@ -67,6 +67,8 @@ module.exports = {
 ```
 
 ## 런타임에서 사용할 수 있는 문서
+
+> 11.3.0 버전 이상에서 지원
 
 다음은 `<docs>` 사용자 정의 블록을 컴포넌트에 넣어 런타임에서 사용할 수 있는 예제입니다.
 

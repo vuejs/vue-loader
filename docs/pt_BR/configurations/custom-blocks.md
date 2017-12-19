@@ -41,7 +41,7 @@ comp-a h2 {
 #### webpack.config.js
 
 ```js
-// Webpack 2.x
+// webpack 2.x
 var ExtractTextPlugin = require("extract-text-webpack-plugin")
 
 module.exports = {
@@ -67,6 +67,8 @@ module.exports = {
 ```
 
 ## Documentos disponíveis em tempo de execução.
+
+> Requer versão 11.3.0+
 
 Aqui está um exemplo de injetar os blocos personalizados `<docs>` no componente para que ele esteja disponível durante o tempo de execução.
 

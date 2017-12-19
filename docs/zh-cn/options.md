@@ -13,7 +13,7 @@ module.exports = {
         test: /\.vue$/,
         loader: 'vue-loader',
         options: {
-          // vue-loader options
+          // `vue-loader` options
         }
       }
     ]
@@ -27,7 +27,7 @@ Webpack 1.x：在 Webpack 配置中添加根节点 `vue` 块。
 module.exports = {
   // ...
   vue: {
-    // vue-loader options
+    // `vue-loader` options
   }
 }
 ```
@@ -306,3 +306,14 @@ module.exports = {
 - 默认值：在开发环境下是 `true`，在生产环境下是 `false`。
 
 是否通过给文件名后加哈希查询值来避免生成的 source map 被缓存。关掉这一选项有益于 source map 调试。
+
+### hotReload
+
+> 13.5.0 新增
+
+- 类型: `boolean`
+- 默认值: 在开发环境下是 `true`，在生产环境下或 webpack 配置中有 `target: 'node'` 的时候是 `false`。
+- 允许的值: `false` (`true` 会强制热重载，即便是生产环境或 `target: 'node'` 时)
+
+是否使用 webpack 的[模块热替换](https://webpack.js.org/concepts/hot-module-replacement/)在浏览器中应用变更而**不重载整个页面**。
+用这个选项 (值设为 `false`) 在开发环境下关闭热重载特性。

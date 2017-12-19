@@ -24,7 +24,7 @@ module.exports = {
         warnings: false
       }
     }),
-    // Webpack 1 apenas - otimiza ids de módulo por contagem de ocorrências
+    // webpack 1 apenas - otimiza ids de módulo por contagem de ocorrências
     new webpack.optimize.OccurrenceOrderPlugin()
   ]
 }
@@ -34,6 +34,6 @@ Obviamente não queremos usar estás configurações durante o desenvolvimento, 
 
 1. Crie dinamicamente o objeto de configuração com base em uma variável de ambiente.
 
-2. Ou use dois arquivos de configuração do Webpack separados,  um para o desenvolvimento e outro para produção. E talvez compartilhe algumas opções comuns entre eles em um terceiro arquivo, como mostrado em [vue-hackernews-2.0](https://github.com/vuejs/vue-hackernews-2.0).
+2. Ou use dois arquivos de configuração do webpack separados,  um para o desenvolvimento e outro para produção. E talvez compartilhe algumas opções comuns entre eles em um terceiro arquivo, como mostrado em [vue-hackernews-2.0](https://github.com/vuejs/vue-hackernews-2.0).
 
 Isto é com você, desde que o objetivo seja atingido.

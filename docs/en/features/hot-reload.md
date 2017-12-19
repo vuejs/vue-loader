@@ -24,10 +24,10 @@ Advanced users may want to check out [vue-hot-reload-api](https://github.com/vue
 
 Hot Reload is always enabled except following situations:
 
- * Webpack `target` is `node` (SSR)
- * Webpack minifies the code
+ * webpack `target` is `node` (SSR)
+ * webpack minifies the code
  * `process.env.NODE_ENV === 'production'`
-  
+
 You may use `hotReload: false` option to disable the Hot Reload explicitly:
 
 ``` js

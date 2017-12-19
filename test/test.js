@@ -211,8 +211,14 @@ describe('vue-loader', () => {
       // scoped keyframes
       expect(style).to.contain(`.anim[${id}] {\n  animation: color-${id} 5s infinite, other 5s;`)
       expect(style).to.contain(`.anim-2[${id}] {\n  animation-name: color-${id}`)
+      expect(style).to.contain(`.anim-3[${id}] {\n  animation: 5s color-${id} infinite, 5s other;`)
       expect(style).to.contain(`@keyframes color-${id} {`)
       expect(style).to.contain(`@-webkit-keyframes color-${id} {`)
+
+      expect(style).to.contain(`.anim-multiple[${id}] {\n  animation: color-${id} 5s infinite,opacity-${id} 2s;`)
+      expect(style).to.contain(`.anim-multiple-2[${id}] {\n  animation-name: color-${id},opacity-${id};`)
+      expect(style).to.contain(`@keyframes opacity-${id} {`)
+      expect(style).to.contain(`@-webkit-keyframes opacity-${id} {`)
       // >>> combinator
       expect(style).to.contain(`.foo p[${id}] .bar {\n  color: red;\n}`)
       done()
@@ -439,11 +445,14 @@ describe('vue-loader', () => {
       const dataURL = vnode.children[0].data.attrs.src
 
       // image tag with srcset
-      expect(vnode.children[4].data.attrs.srcset).to.equal(dataURL + ' 2x')
-      // image tag with srcset with two candidates
-      expect(vnode.children[6].data.attrs.srcset).to.equal(dataURL + ' 2x, ' + dataURL + ' 3x')
+      expect(vnode.children[4].data.attrs.srcset).to.equal(dataURL)
+      expect(vnode.children[6].data.attrs.srcset).to.equal(dataURL + ' 2x')
       // image tag with multiline srcset
-      expect(vnode.children[8].data.attrs.srcset).to.equal(dataURL + ' 2x, ' + dataURL + ' 3x')
+      expect(vnode.children[8].data.attrs.srcset).to.equal(dataURL + ', ' + dataURL + ' 2x')
+      expect(vnode.children[10].data.attrs.srcset).to.equal(dataURL + ' 2x, ' + dataURL)
+      expect(vnode.children[12].data.attrs.srcset).to.equal(dataURL + ' 2x, ' + dataURL + ' 3x')
+      expect(vnode.children[14].data.attrs.srcset).to.equal(dataURL + ', ' + dataURL + ' 2x, ' + dataURL + ' 3x')
+      expect(vnode.children[16].data.attrs.srcset).to.equal(dataURL + ' 2x, ' + dataURL + ' 3x')
 
       // style
       expect(includeDataURL(style)).to.equal(true)
@@ -498,6 +507,17 @@ describe('vue-loader', () => {
       style = normalizeNewline(style)
       expect(style).to.contain('h1 {\n  color: red;\n  font-size: 14px\n}')
       fs.unlinkSync('test/.postcssrc')
+      done()
+    })
+  })
+
+  it('postcss options', done => {
+    test({
+      entry: './test/fixtures/postcss-lang.vue'
+    }, (window) => {
+      let style = window.document.querySelector('style').textContent
+      style = normalizeNewline(style)
+      expect(style).to.contain('h1 {\n  color: red;\n  font-size: 14px\n}')
       done()
     })
   })
@@ -769,6 +789,21 @@ describe('vue-loader', () => {
       entry: './test/fixtures/custom-language.vue'
     }, (code, warnings) => {
       expect(code).not.to.contain('describe(\'example\', function () {\n  it(\'basic\', function (done) {\n    done();\n  });\n})')
+      done()
+    })
+  })
+
+  it('custom blocks with ES module default export', done => {
+    test({
+      entry: './test/fixtures/custom-blocks.vue',
+      vue: {
+        loaders: {
+          esm: require.resolve('./mock-loaders/identity')
+        }
+      }
+    }, (window, module) => {
+      // option added by custom block code
+      expect(module.foo).to.equal(1)
       done()
     })
   })
@@ -1048,6 +1083,16 @@ describe('vue-loader', () => {
       }
     }, (code) => {
       expect(code).not.to.contains('require("vue-hot-reload-api")')
+      done()
+    })
+  })
+
+  it('named exports', done => {
+    test({
+      entry: './test/fixtures/named-exports.vue'
+    }, (window, _, rawModule) => {
+      expect(rawModule.default.name).to.equal('named-exports')
+      expect(rawModule.foo()).to.equal(1)
       done()
     })
   })

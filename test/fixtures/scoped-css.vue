@@ -15,6 +15,17 @@ h1 {
   animation-name: color;
   animation-duration: 5s;
 }
+.anim-3 {
+  animation: 5s color infinite, 5s other;
+}
+.anim-multiple {
+  animation: color 5s infinite, opacity 2s;
+}
+.anim-multiple-2 {
+  animation-name: color, opacity;
+  animation-duration: 5s, 2s;
+}
+
 @keyframes color {
   from { color: red; }
   to { color: green; }
@@ -22,6 +33,14 @@ h1 {
 @-webkit-keyframes color {
   from { color: red; }
   to { color: green; }
+}
+@keyframes opacity {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@-webkit-keyframes opacity {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 .foo p >>> .bar {
   color: red;

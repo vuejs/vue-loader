@@ -34,12 +34,12 @@ module.exports = {
 위 코드는 `*.vue` 파일 내부에서 `<style>`에 대한 추출을 자동으로 처리하며, 대부분의 프리프로세서와 함께 사용할 수 있습니다.
 
  `*.vue`만 추출합니다. JavaScript에서 가져온 CSS는 별도로 설정해야합니다.
- 
+
 ## 수동 설정
 
 설정을 사용하여 모든 Vue 컴포넌트에서 처리된 CSS를 단일 CSS 파일로 추출하는 예제 입니다.
 
-### Webpack 2.x
+### webpack 2.x
 
 
 ``` js
@@ -70,7 +70,7 @@ module.exports = {
 }
 ```
 
-### Webpack 1.x
+### webpack 1.x
 
 ``` bash
 npm install extract-text-webpack-plugin --save-dev

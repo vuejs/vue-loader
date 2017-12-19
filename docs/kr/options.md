@@ -1,8 +1,8 @@
 # 옵션 레퍼런스
 
-## Webpack 1 & 2 사용 방법의 차이점
+## webpack 1 & 2 사용 방법의 차이점
 
-Webpack 2 : 직접 loader 규칙에 전달합니다
+webpack 2 : 직접 loader 규칙에 전달합니다
 
 ``` js
 module.exports = {
@@ -13,7 +13,7 @@ module.exports = {
         test: /\.vue$/,
         loader: 'vue-loader',
         options: {
-          // vue-loader 옵션
+          // `vue-loader` 옵션
         }
       }
     ]
@@ -21,13 +21,13 @@ module.exports = {
 }
 ```
 
-Webpack 1.x의 경우 Webpack 설정에 루트 `vue` 블럭을 추가합니다.
+webpack 1.x의 경우 webpack 설정에 루트 `vue` 블럭을 추가합니다.
 
 ``` js
 module.exports = {
   // ...
   vue: {
-    // vue-loader 옵션
+    // `vue-loader` 옵션
   }
 }
 ```
@@ -36,7 +36,7 @@ module.exports = {
 
 - 타입: `{ [lang: string]: string }`
 
-  `*.vue` 파일의 언어 블럭에 사용할 Webpack 로더를 지정하는 객체입니다. 이 키는 특별히 지정된 경우 language block에 대한 `lang` 속성에 해당합니다. 각 타입에 대한 기본적인 `lang`은 다음과 같습니다.
+  `*.vue` 파일의 언어 블럭에 사용할 webpack 로더를 지정하는 객체입니다. 이 키는 특별히 지정된 경우 language block에 대한 `lang` 속성에 해당합니다. 각 타입에 대한 기본적인 `lang`은 다음과 같습니다.
 
   - `<template>`: `html`
   - `<script>`: `js`
@@ -45,7 +45,7 @@ module.exports = {
   예를 들어, `babel-loader`와 `eslint-loader`를 사용하여 모든 `<script>` 블럭을 처리하려면 다음과 같이 사용합니다.
 
   ``` js
-  // Webpack 2.x config
+  // webpack 2.x config
 module: {
   rules: [
     {
@@ -119,7 +119,7 @@ module: {
 
   CSS 소스 맵을 사용할지 여부를 정합니다. 이 기능을 끄면 `css-loader`에서 상대 경로와 관련된 버그를 피할 수 있고 빌드를 좀 더 빠르게 할 수 있습니다.
 
-  `devtool` 옵션이 메인 Webpack 설정에 없으면 자동으로 `false`로 설정됩니다.
+  `devtool` 옵션이 메인 webpack 설정에 없으면 자동으로 `false`로 설정됩니다.
 
 ### esModule
 
@@ -141,7 +141,7 @@ module: {
 - 디폴트: `{ img: 'src', image: 'xlink:href' }`
 
 
-  템플릿 컴파일 중에 컴파일러는 `src` URL과 같은 특정 속성을 `require` 호출로 변환하여 대상 Asset을 Webpack에서 처리할 수 있습니다. 기본 설정은 `<img>` 태그에 `src` 속성을 변환합니다.
+  템플릿 컴파일 중에 컴파일러는 `src` URL과 같은 특정 속성을 `require` 호출로 변환하여 대상 Asset을 webpack에서 처리할 수 있습니다. 기본 설정은 `<img>` 태그에 `src` 속성을 변환합니다.
 
 ### buble
 
