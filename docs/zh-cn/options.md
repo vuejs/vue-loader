@@ -77,7 +77,7 @@ module.exports = {
 
   - 对于 `html`，默认 loader 返回结果会被编译为 JavaScript 渲染函数。
 
-  - 对于 `css`，由`vue-style-loader` 返回的结果通常不太有用。使用 postcss 插件将会是更好的选择。
+  - 对于 `css`，由`vue-style-loader` 返回的结果通常不太有用。使用 PostCSS 插件将会是更好的选择。
 
 ### postcss
 

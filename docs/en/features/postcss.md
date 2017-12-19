@@ -25,7 +25,7 @@ Sometimes the user may want to use `lang="postcss"` only for syntax highlighting
 
 ## Inline Options
 
-Alternatively, you can specify postcss config specifically for `*.vue` files using the `postcss` option for `vue-loader`.
+Alternatively, you can specify PostCSS config specifically for `*.vue` files using the `postcss` option for `vue-loader`.
 
 Example usage in webpack 1.x:
 
@@ -34,7 +34,7 @@ Example usage in webpack 1.x:
 module.exports = {
   // other configs...
   vue: {
-    // use custom postcss plugins
+    // use custom PostCSS plugins
     postcss: [require('postcss-cssnext')()]
   }
 }
@@ -80,7 +80,7 @@ In addition to providing an Array of plugins, the `postcss` option also accepts:
 
 ### Disabling Auto Config File Loading
 
-In `13.6.0+`, auto postcss config file loading can be disabled by specifying `postcss.useConfigFile: false`:
+In `13.6.0+`, auto PostCSS config file loading can be disabled by specifying `postcss.useConfigFile: false`:
 
 ``` js
 postcss: {
@@ -90,4 +90,4 @@ postcss: {
 }
 ```
 
-This allows the postcss configuration inside `*.vue` files to be entirely controlled by the inline config.
+This allows the PostCSS configuration inside `*.vue` files to be entirely controlled by the inline config.

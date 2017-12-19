@@ -75,7 +75,7 @@ module.exports = {
 
   - Para `html`, o resultado retornado pelo carregador padrão será compilado em código de função de renderização JavaScript.
 
-  - Para `css`, o resultado será retornado por `vue-style-loader` que não é particularmente útil na maioria dos casos. Usando um plugin postcss será uma opção melhor.
+  - Para `css`, o resultado será retornado por `vue-style-loader` que não é particularmente útil na maioria dos casos. Usando um plugin PostCSS será uma opção melhor.
 
 ### postcss
 

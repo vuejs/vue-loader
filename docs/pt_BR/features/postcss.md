@@ -14,7 +14,7 @@ O uso de um arquivo de configuração permite que você compartilhe a mesma conf
 
 ## Opções em Linha
 
-Como alternativa, você pode especificar configurações postcss especificamente para arquivos `*.vue` usando a opção `postcss` para `vue-loader`.
+Como alternativa, você pode especificar configurações PostCSS especificamente para arquivos `*.vue` usando a opção `postcss` para `vue-loader`.
 
 Exemplo de uso no webpack 1.x:
 
@@ -23,7 +23,7 @@ Exemplo de uso no webpack 1.x:
 module.exports = {
   // outras configurações...
   vue: {
-    // use plugins personalizado de postcss
+    // use plugins personalizado de PostCSS
     postcss: [require('postcss-cssnext')()]
   }
 }
