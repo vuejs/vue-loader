@@ -2,11 +2,9 @@
 
 > Vue.js component loader for [Webpack](https://webpack.js.org/).
 
-**NOTE: the master branch (9.0+) only works with Vue 2.x. For usage with Vue 1.x, see the [8.x branch](https://github.com/vuejs/vue-loader/tree/8.x).**
-
-It allows you to write your components in this format:
-
-![screenshot](http://blog.evanyou.me/images/vue-component.png)
+<p align="center">
+  <img width="809px" src="https://raw.githubusercontent.com/vuejs/vue-syntax-highlight/master/samples/screenshot.png">
+</p>
 
 The best way to get started is with [vue-cli](https://github.com/vuejs/vue-cli):
 

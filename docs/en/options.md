@@ -137,6 +137,15 @@ module.exports = {
 
     Provide context to PostCSS plugins. See [postcss-loader docs](https://github.com/postcss/postcss-loader#context-ctx) for more details.
 
+### postcss.useConfigFile
+
+> New in 13.6.0
+
+- type: `boolean`
+- default: `true`
+
+  Set this to `false` to disable auto-loading of postcss config files.
+
 ### cssSourceMap
 
 - type: `boolean`

@@ -15,6 +15,9 @@ h1 {
   animation-name: color;
   animation-duration: 5s;
 }
+.anim-3 {
+  animation: 5s color infinite, 5s other;
+}
 .anim-multiple {
   animation: color 5s infinite, opacity 2s;
 }
