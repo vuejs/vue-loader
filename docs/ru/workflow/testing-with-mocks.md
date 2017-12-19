@@ -6,6 +6,8 @@
 
 `vue-loader` предоставляет возможность внедрять произвольные зависимости в `*.vue` компоненты, используя [inject-loader](https://github.com/plasticine/inject-loader). Основная идея состоит в том, что вместо прямой подгрузки модуля компонента мы используем `inject-loader`, чтобы создать "фабричную функцию" для этого модуля. Когда мы вызовем эту функцию с мок-объектом, она вернет нам экземпляр модуля с внедренными мок-объектами.
 
+> Примечание: Вы должны отключить опцию `esModule` в режиме инжектирования, иначе вы получите ошибку.
+
 Допустим, у нас есть следующий компонент:
 
 ``` html
@@ -16,9 +18,9 @@
 
 <script>
 // эту зависимость нужно подменить мок-объектом
-import SomeService from '../service'
+const SomeService = require('../service')
 
-export default {
+module.exports = {
   data () {
     return {
       msg: SomeService.msg
@@ -30,10 +32,8 @@ export default {
 
 Вот как получить его с мок-объектами:
 
-> Заметка: inject-loader@3.x еще не в стабильной версии
-
 ``` bash
-npm install inject-loader@^2.0.0 --save-dev
+npm install inject-loader --save-dev
 ```
 
 ``` js
