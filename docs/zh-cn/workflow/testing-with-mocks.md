@@ -4,6 +4,8 @@
 
 `vue-loader` 提供了一个可以使用 [inject-loader](https://github.com/plasticine/inject-loader) 将任意依赖项注入到 `*.vue` 组件的特性。大体思路是：我们使用 `inject-loader` 为该模块创建一个 “模块工厂” 功能，而不是直接导入组件模块。当使用 mock 对象调用此函数时，它会返回模块的实例，并注入到 mock 中。
 
+> 注意：你必须在注入模式下禁用 `esModule` 选项，否则会报错。
+
 假设我们有一个这样的组件：
 
 ``` html
@@ -14,9 +16,9 @@
 
 <script>
 // this dependency needs to be mocked
-import SomeService from '../service'
+const SomeService = require('../service')
 
-export default {
+module.exports = {
   data () {
     return {
       msg: SomeService.msg
@@ -28,10 +30,8 @@ export default {
 
 以下是使用 mock 导入的方法：
 
-> 注意: inject-loader@3.x 当前是不稳定的。
-
 ``` bash
-npm install inject-loader@^2.0.0 --save-dev
+npm install inject-loader --save-dev
 ```
 
 ``` js

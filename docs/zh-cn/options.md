@@ -138,6 +138,15 @@ module.exports = {
 
     向 PostCSS 插件提供上下文。详见 [postcss-loader 文档](https://github.com/postcss/postcss-loader#context-ctx)。
 
+### postcss.useConfigFile
+
+> 13.6.0 新增
+
+- 类型：`boolean`
+- 默认值：`true`
+
+  设为 `false` 之后可以禁止自动加载 PostCSS 配置文件。
+
 ### cssSourceMap
 
 - 类型: `Boolean`
