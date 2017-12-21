@@ -511,7 +511,23 @@ describe('vue-loader', () => {
     })
   })
 
-  it('postcss options', done => {
+  it('load postcss config file with js syntax error', done => {
+    fs.writeFileSync('.postcssrc.js', 'module.exports = { hello }')
+    test({
+      entry: './test/fixtures/basic.vue'
+    }, (window, module, vueModule, instance, jsdomErr, webpackInfo) => {
+      const { stats: { compilation: { warnings, errors }}, err } = webpackInfo
+      expect(jsdomErr).to.be.null
+      expect(err).to.be.null
+      expect(warnings).to.be.empty
+      expect(errors.length).to.equal(1)
+      expect(errors[0].message).match(/^Error on Loading PostCSS Config\:/)
+      fs.unlinkSync('.postcssrc.js')
+      done()
+    }, true)
+  })
+
+  it('postcss lang', done => {
     test({
       entry: './test/fixtures/postcss-lang.vue'
     }, (window) => {
