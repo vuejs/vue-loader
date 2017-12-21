@@ -85,7 +85,7 @@ function test (options, assert) {
         if (module && module.beforeCreate) {
           module.beforeCreate.forEach(hook => hook.call(instance))
         }
-        assert(window, module, window.vueModule, instance)
+        assert(window, module, window.vueModule, instance, warnings)
       }
     })
   })
