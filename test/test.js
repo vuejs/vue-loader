@@ -55,11 +55,6 @@ function bundle (options, cb) {
   webpackCompiler.outputFileSystem = mfs
   webpackCompiler.run((err, stats) => {
     expect(err).to.be.null
-    if (stats.compilation.errors.length) {
-      stats.compilation.errors.forEach((err) => {
-        console.error(err.message)
-      })
-    }
     if (stats.compilation.errors) {
       stats.compilation.errors.forEach(err => {
         console.error(err.message)
