@@ -39,7 +39,7 @@ function genId (file) {
   return hash(path.join('test', 'fixtures', file))
 }
 
-function bundle (options, cb) {
+function bundle (options, cb, wontThrowError) {
   const vueOptions = options.vue
   delete options.vue
   const config = Object.assign({}, globalConfig, options)
@@ -54,36 +54,41 @@ function bundle (options, cb) {
   const webpackCompiler = webpack(config)
   webpackCompiler.outputFileSystem = mfs
   webpackCompiler.run((err, stats) => {
-    expect(err).to.be.null
-    if (stats.compilation.errors) {
-      stats.compilation.errors.forEach(err => {
-        console.error(err.message)
-      })
+    const errors = stats.compilation.errors
+    if (!wontThrowError) {
+      expect(err).to.be.null
+      if (errors && errors.length) {
+        errors.forEach(error => {
+          console.error(error.message)
+        })
+      }
+      expect(errors).to.be.empty
     }
-    expect(stats.compilation.errors).to.be.empty
-    cb(mfs.readFileSync('/test.build.js').toString(), stats.compilation.warnings)
+    cb(mfs.readFileSync('/test.build.js').toString(), stats, err)
   })
 }
 
-function test (options, assert) {
-  bundle(options, (code, warnings) => {
+function test (options, assert, wontThrowError) {
+  bundle(options, (code, stats, err) => {
     jsdom.env({
       html: '<!DOCTYPE html><html><head></head><body></body></html>',
       src: [code],
-      done: (err, window) => {
-        if (err) {
-          console.log(err[0].data.error.stack)
-          expect(err).to.be.null
+      done: (errors, window) => {
+        if (errors) {
+          console.log(errors[0].data.error.stack)
+          if (!wontThrowError) {
+            expect(errors).to.be.null
+          }
         }
         const module = interopDefault(window.vueModule)
         const instance = {}
         if (module && module.beforeCreate) {
           module.beforeCreate.forEach(hook => hook.call(instance))
         }
-        assert(window, module, window.vueModule, instance, warnings)
+        assert(window, module, window.vueModule, instance, errors, { stats, err })
       }
     })
-  })
+  }, wontThrowError)
 }
 
 function mockRender (options, data = {}) {
