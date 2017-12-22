@@ -521,7 +521,7 @@ describe('vue-loader', () => {
       expect(err).to.be.null
       expect(warnings).to.be.empty
       expect(errors.length).to.equal(1)
-      expect(errors[0].message).match(/^Error on Loading PostCSS Config\:/)
+      expect(errors[0].message).match(/^Error loading PostCSS config\:/)
       fs.unlinkSync('.postcssrc.js')
       done()
     }, true)
