@@ -39,7 +39,7 @@ function genId (file) {
   return hash(path.join('test', 'fixtures', file))
 }
 
-function bundle (options, cb) {
+function bundle (options, cb, wontThrowError) {
   const vueOptions = options.vue
   delete options.vue
   const config = Object.assign({}, globalConfig, options)
@@ -54,41 +54,41 @@ function bundle (options, cb) {
   const webpackCompiler = webpack(config)
   webpackCompiler.outputFileSystem = mfs
   webpackCompiler.run((err, stats) => {
-    expect(err).to.be.null
-    if (stats.compilation.errors.length) {
-      stats.compilation.errors.forEach((err) => {
-        console.error(err.message)
-      })
+    const errors = stats.compilation.errors
+    if (!wontThrowError) {
+      expect(err).to.be.null
+      if (errors && errors.length) {
+        errors.forEach(error => {
+          console.error(error.message)
+        })
+      }
+      expect(errors).to.be.empty
     }
-    if (stats.compilation.errors) {
-      stats.compilation.errors.forEach(err => {
-        console.error(err.message)
-      })
-    }
-    expect(stats.compilation.errors).to.be.empty
-    cb(mfs.readFileSync('/test.build.js').toString(), stats.compilation.warnings)
+    cb(mfs.readFileSync('/test.build.js').toString(), stats, err)
   })
 }
 
-function test (options, assert) {
-  bundle(options, (code, warnings) => {
+function test (options, assert, wontThrowError) {
+  bundle(options, (code, stats, err) => {
     jsdom.env({
       html: '<!DOCTYPE html><html><head></head><body></body></html>',
       src: [code],
-      done: (err, window) => {
-        if (err) {
-          console.log(err[0].data.error.stack)
-          expect(err).to.be.null
+      done: (errors, window) => {
+        if (errors) {
+          console.log(errors[0].data.error.stack)
+          if (!wontThrowError) {
+            expect(errors).to.be.null
+          }
         }
         const module = interopDefault(window.vueModule)
         const instance = {}
         if (module && module.beforeCreate) {
           module.beforeCreate.forEach(hook => hook.call(instance))
         }
-        assert(window, module, window.vueModule, instance)
+        assert(window, module, window.vueModule, instance, errors, { stats, err })
       }
     })
-  })
+  }, wontThrowError)
 }
 
 function mockRender (options, data = {}) {
@@ -511,7 +511,23 @@ describe('vue-loader', () => {
     })
   })
 
-  it('postcss options', done => {
+  it('load postcss config file with js syntax error', done => {
+    fs.writeFileSync('.postcssrc.js', 'module.exports = { hello }')
+    test({
+      entry: './test/fixtures/basic.vue'
+    }, (window, module, vueModule, instance, jsdomErr, webpackInfo) => {
+      const { stats: { compilation: { warnings, errors }}, err } = webpackInfo
+      expect(jsdomErr).to.be.null
+      expect(err).to.be.null
+      expect(warnings).to.be.empty
+      expect(errors.length).to.equal(1)
+      expect(errors[0].message).match(/^Error on Loading PostCSS Config\:/)
+      fs.unlinkSync('.postcssrc.js')
+      done()
+    }, true)
+  })
+
+  it('postcss lang', done => {
     test({
       entry: './test/fixtures/postcss-lang.vue'
     }, (window) => {
