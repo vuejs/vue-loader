@@ -39,7 +39,7 @@ module.exports = {
 
 将所有 Vue 组件中的所有已处理的 CSS 提取为单个 CSS 文件配置示例：
 
-### Webpack 2.x
+### webpack 2.x
 
 
 ``` js
@@ -70,7 +70,7 @@ module.exports = {
 }
 ```
 
-### Webpack 1.x
+### webpack 1.x
 
 ``` bash
 npm install extract-text-webpack-plugin --save-dev

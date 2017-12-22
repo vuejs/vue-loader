@@ -56,7 +56,7 @@ export default {
 
 - 每个 `.vue` 文件最多包含一个 `<script>` 块。
 
-- 该脚本在类 CommonJS 环境中执行 (就像通过 Webpack 打包的正常 js 模块)，这意味这你可以 `require()` 其它依赖。在 ES2015 支持下，你也可以使用 `import` 和 `export` 语法。
+- 该脚本在类 CommonJS 环境中执行 (就像通过 webpack 打包的正常 js 模块)，这意味这你可以 `require()` 其它依赖。在 ES2015 支持下，你也可以使用 `import` 和 `export` 语法。
 
 - 脚本必须导出 Vue.js 组件对象。也可以导出由 `Vue.extend()` 创建的扩展对象，但是普通对象是更好的选择。
 
@@ -68,13 +68,13 @@ export default {
 
 - `<style>` 标签可以有 `scoped` 或者 `module` 属性 (查看 [CSS 作用域](../features/scoped-css.md)和 [CSS Modules](../features/css-modules.md)) 以帮助你将样式封装到当前组件。具有不同封装模式的多个 `<style>` 标签可以在同一个组件中混合使用。
 
-- 默认情况下，将会使用 `style-loader` 提取内容，并通过 `<style>` 标签动态加入文档的 `<head>` 中，也可以[配置 Webpack 将所有 styles 提取到单个 CSS 文件中](../configurations/extract-css.md)。
+- 默认情况下，将会使用 `style-loader` 提取内容，并通过 `<style>` 标签动态加入文档的 `<head>` 中，也可以[配置 webpack 将所有 styles 提取到单个 CSS 文件中](../configurations/extract-css.md)。
 
 ### 自定义块
 
 > 只在 vue-loader 10.2.0+ 中支持
 
-可以在 `.vue` 文件中添加额外的自定义块来实现项目的特定需求，例如 `<docs>` 块。`vue-loader` 将会使用标签名来查找对应的 webpack loader 来应用在对应的块上。Webpack loader 需要在 `vue-loader` 的选项 `loaders` 中指定。
+可以在 `.vue` 文件中添加额外的自定义块来实现项目的特定需求，例如 `<docs>` 块。`vue-loader` 将会使用标签名来查找对应的 webpack loader 来应用在对应的块上。webpack loader 需要在 `vue-loader` 的选项 `loaders` 中指定。
 
 更多细节，查看[自定义块](../configurations/custom-blocks.md)。
 
