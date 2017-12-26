@@ -205,18 +205,18 @@ describe('vue-loader', () => {
 
       let style = window.document.querySelector('style').textContent
       style = normalizeNewline(style)
-      expect(style).to.contain(`.test[${id}] {\n  color: yellow;\n}`)
-      expect(style).to.contain(`.test[${id}]:after {\n  content: \'bye!\';\n}`)
-      expect(style).to.contain(`h1[${id}] {\n  color: green;\n}`)
+      expect(style).to.contain(`.test[${id}][${id}] {\n  color: yellow;\n}`)
+      expect(style).to.contain(`.test[${id}][${id}]:after {\n  content: \'bye!\';\n}`)
+      expect(style).to.contain(`h1[${id}][${id}] {\n  color: green;\n}`)
       // scoped keyframes
-      expect(style).to.contain(`.anim[${id}] {\n  animation: color-${id} 5s infinite, other 5s;`)
-      expect(style).to.contain(`.anim-2[${id}] {\n  animation-name: color-${id}`)
-      expect(style).to.contain(`.anim-3[${id}] {\n  animation: 5s color-${id} infinite, 5s other;`)
+      expect(style).to.contain(`.anim[${id}][${id}] {\n  animation: color-${id} 5s infinite, other 5s;`)
+      expect(style).to.contain(`.anim-2[${id}][${id}] {\n  animation-name: color-${id}`)
+      expect(style).to.contain(`.anim-3[${id}][${id}] {\n  animation: 5s color-${id} infinite, 5s other;`)
       expect(style).to.contain(`@keyframes color-${id} {`)
       expect(style).to.contain(`@-webkit-keyframes color-${id} {`)
 
-      expect(style).to.contain(`.anim-multiple[${id}] {\n  animation: color-${id} 5s infinite,opacity-${id} 2s;`)
-      expect(style).to.contain(`.anim-multiple-2[${id}] {\n  animation-name: color-${id},opacity-${id};`)
+      expect(style).to.contain(`.anim-multiple[${id}][${id}] {\n  animation: color-${id} 5s infinite,opacity-${id} 2s;`)
+      expect(style).to.contain(`.anim-multiple-2[${id}][${id}] {\n  animation-name: color-${id},opacity-${id};`)
       expect(style).to.contain(`@keyframes opacity-${id} {`)
       expect(style).to.contain(`@-webkit-keyframes opacity-${id} {`)
       // >>> combinator
@@ -234,7 +234,7 @@ describe('vue-loader', () => {
       expect(styles[0].textContent).to.contain('h1 { color: red;\n}')
       // import with scoped
       const id = 'data-v-' + genId('style-import.vue')
-      expect(styles[1].textContent).to.contain('h1[' + id + '] { color: green;\n}')
+      expect(styles[1].textContent).to.contain('h1[' + id + '][' + id + '] { color: green;\n}')
       done()
     })
   })
@@ -294,7 +294,7 @@ describe('vue-loader', () => {
       let style = window.document.querySelector('style').textContent
       style = normalizeNewline(style)
       const id = 'data-v-' + genId('media-query.vue')
-      expect(style).to.contain('@media print {\n.foo[' + id + '] {\n    color: #000;\n}\n}')
+      expect(style).to.contain('@media print {\n.foo[' + id + '][' + id + '] {\n    color: #000;\n}\n}')
       done()
     })
   })
@@ -306,7 +306,7 @@ describe('vue-loader', () => {
       let style = window.document.querySelector('style').textContent
       style = normalizeNewline(style)
       const id = 'data-v-' + genId('supports-query.vue')
-      expect(style).to.contain('@supports ( color: #000 ) {\n.foo[' + id + '] {\n    color: #000;\n}\n}')
+      expect(style).to.contain('@supports ( color: #000 ) {\n.foo[' + id + '][' + id + '] {\n    color: #000;\n}\n}')
       done()
     })
   })
