@@ -104,7 +104,7 @@ export default {
 
 ### Подсветка синтаксиса
 
-На данный момент есть поддержка подсвестки синтаксиса для [Sublime Text](https://github.com/vuejs/vue-syntax-highlight), [Atom](https://atom.io/packages/language-vue), [Vim](https://github.com/posva/vim-vue), [Visual Studio Code](https://marketplace.visualstudio.com/items/liuji-jim.vue), [Brackets](https://github.com/pandao/brackets-vue), и [продуктов JetBrains](https://plugins.jetbrains.com/plugin/8057) (WebStorm, PhpStorm, и т.п.). Будем рады видеть разработки и для других редакторов и IDE! Если вы не используете никаких пре-процессоров в компонентах Vue, вы также можете использовать синтаксис HTML в вашем редакторе для `*.vue` файлов.
+На данный момент есть поддержка подсвестки синтаксиса для [Sublime Text](https://github.com/vuejs/vue-syntax-highlight), [Atom](https://atom.io/packages/language-vue), [Vim](https://github.com/posva/vim-vue), [Emacs](https://github.com/AdamNiederer/vue-mode), [Visual Studio Code](https://marketplace.visualstudio.com/items/liuji-jim.vue), [Brackets](https://github.com/pandao/brackets-vue), и [продуктов JetBrains](https://plugins.jetbrains.com/plugin/8057) (WebStorm, PhpStorm, и т.п.). Будем рады видеть разработки и для других редакторов и IDE! Если вы не используете никаких пре-процессоров в компонентах Vue, вы также можете использовать синтаксис HTML в вашем редакторе для `*.vue` файлов.
 
 ### Комментарии
 
