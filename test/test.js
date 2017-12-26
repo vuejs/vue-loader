@@ -220,7 +220,8 @@ describe('vue-loader', () => {
       expect(style).to.contain(`@keyframes opacity-${id} {`)
       expect(style).to.contain(`@-webkit-keyframes opacity-${id} {`)
       // >>> combinator
-      expect(style).to.contain(`.foo p[${id}] .bar {\n  color: red;\n}`)
+      expect(style).to.contain(`.foo[${id}] p[${id}] .bar {\n  color: red;\n}`)
+      expect(style).to.contain(`.foo[${id}] .bar .baz[${id}] {\n  color: blue;\n}`)
       done()
     })
   })

@@ -45,6 +45,9 @@ h1 {
 .foo p >>> .bar {
   color: red;
 }
+.foo .bar .baz {
+  color: blue;
+}
 </style>
 
 <template>
