@@ -620,17 +620,18 @@ describe('vue-loader', () => {
         // default module + pre-processor + scoped
         const anotherClassName = instance.$style.red
         expect(anotherClassName).to.match(regexToMatch).and.not.equal(className)
+        expect(anotherClassName).to.match(/_1$/)
+        expect(anotherClassName).to.equal(className + '_1')
         const id = 'data-v-' + genId('css-modules.vue')
         expect(style).to.contain('.' + anotherClassName + '[' + id + ']')
-
         cb()
       })
     }
     // default localIdentName
-    testWithIdent(undefined, /^\w{23}/, () => {
+    testWithIdent(undefined, /^\w{21,23}/, () => {
       // specified localIdentName
       const ident = '[path][name]---[local]---[hash:base64:5]'
-      const regex = /^test-fixtures-css-modules---red---\w{5}/
+      const regex = /^test-fixtures-css-modules---red---\w{5,7}/
       testWithIdent(ident, regex, done)
     })
   })
