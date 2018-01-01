@@ -14,7 +14,7 @@
 
 ## インラインオプション
 
-あるいは、 `vue-loader` の `postcss` オプションを使用して `*.vue` ファイル用の postcss の設定を指定することが出来ます。
+あるいは、 `vue-loader` の `postcss` オプションを使用して `*.vue` ファイル用の PostCSS の設定を指定することが出来ます。
 
 webpack 1.x の例:
 
@@ -23,7 +23,7 @@ webpack 1.x の例:
 module.exports = {
   // 他の設定
   vue: {
-    // カスタムされた postcss プラグインを使用します
+    // カスタムされた PostCSS プラグインを使用します
     postcss: [require('postcss-cssnext')()]
   }
 }

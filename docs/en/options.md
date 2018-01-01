@@ -77,7 +77,7 @@ module.exports = {
 
   - For `html`, the result returned by the default loader will be compiled JavaScript render function code.
 
-  - For `css`, the result will be returned by `vue-style-loader` which isn't particularly useful in most cases. Using a postcss plugin will be a better option.
+  - For `css`, the result will be returned by `vue-style-loader` which isn't particularly useful in most cases. Using a PostCSS plugin will be a better option.
 
 ### postcss
 
@@ -144,7 +144,7 @@ module.exports = {
 - type: `boolean`
 - default: `true`
 
-  Set this to `false` to disable auto-loading of postcss config files.
+  Set this to `false` to disable auto-loading of PostCSS config files.
 
 ### cssSourceMap
 
@@ -310,15 +310,6 @@ module.exports = {
 - default: `true` when the webpack config has `target: 'node'` and `vue-template-compiler` is at version 2.4.0 or above.
 
 Enable Vue 2.4 SSR compilation optimization that compiles part of the vdom trees returned by render functions into plain strings, which improves SSR performance. In some cases you might want to explicitly turn it off because the resulting render functions can only be used for SSR and cannot be used for client-side rendering or testing.
-
-### cacheBusting
-
-> New in 13.2.0
-
-- type: `boolean`
-- default: `true` in development mode, `false` in production mode.
-
-Whether generate source maps with cache busting by appending a hash query to the file name. Turning this off can help with source map debugging.
 
 ### hotReload
 

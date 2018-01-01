@@ -1,6 +1,6 @@
 # 使用预处理器
 
-在 Webpack 中，所有的预处理器需要匹配对应的 loader。`vue-loader` 允许你使用其它 Webpack loader 处理 Vue 组件的某一部分。它会根据 `lang` 属性自动推断出要使用的 loader。
+在 webpack 中，所有的预处理器需要匹配对应的 loader。`vue-loader` 允许你使用其它 webpack loader 处理 Vue 组件的某一部分。它会根据 `lang` 属性自动推断出要使用的 loader。
 
 ### CSS
 
@@ -87,7 +87,7 @@ npm install coffee-loader --save-dev
 
 ### 模版
 
-模版的处理方式略有不同，因为大多数 Webpack 模版处理器 (比如 `pug-loader`) 会返回模版处理函数，而不是编译的 HTML 字符串，我们使用原始的 `pug` 替代 `pug-loader`：
+模版的处理方式略有不同，因为大多数 webpack 模版处理器 (比如 `pug-loader`) 会返回模版处理函数，而不是编译的 HTML 字符串，我们使用原始的 `pug` 替代 `pug-loader`：
 
 ``` bash
 npm install pug --save-dev
@@ -104,7 +104,7 @@ div
 
 ### 行内 Loader Requests
 
-你可以在 `lang` 属性中使用 [Webpack loader requests](https://webpack.github.io/docs/loaders.html#introduction)：
+你可以在 `lang` 属性中使用 [webpack loader requests](https://webpack.github.io/docs/loaders.html#introduction)：
 
 ``` html
 <style lang="sass?outputStyle=expanded">
@@ -112,4 +112,4 @@ div
 </style>
 ```
 
-但是，这使你的 Vue 组件只适用于 Webpack，不能与 Browserify 和 [vueify](https://github.com/vuejs/vueify) 一同使用。**如果你打算将你的 Vue 组件作为可重复使用的第三方组件，请避免使用这个语法。**
+但是，这使你的 Vue 组件只适用于 webpack，不能与 Browserify 和 [vueify](https://github.com/vuejs/vueify) 一同使用。**如果你打算将你的 Vue 组件作为可重复使用的第三方组件，请避免使用这个语法。**

@@ -26,8 +26,8 @@ module.exports = {
         loader: 'vue-loader',
         options: {
           // `loaders` substituirá os carregadores padrões.
-          // A configuração a seguir fará com que todas as tags <script> sem
-          // o atributo "lang" sejam carrega com coffee-loader
+          // A configuração a seguir fará com que todas as tags `<script>` sem
+          // o atributo `lang` sejam carrega com `coffee-loader`
           loaders: {
             js: 'coffee-loader'
           },
@@ -44,9 +44,9 @@ module.exports = {
           // - Para `html`, o resultado retornado pelo carregador padrão
           //   será compilado em código de função de renderização JavaScript.
           //
-          // - Para `css`, o resultado será retornado por vue-style-loader
+          // - Para `css`, o resultado será retornado por `vue-style-loader`
           //   que não é particulamente útil em muitos casos. Usando um plugin
-          //   postcss será uma opção melhor.
+          //   PostCSS será uma opção melhor.
           postLoaders: {
             html: 'babel-loader'
           },

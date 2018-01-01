@@ -12,7 +12,7 @@
 
 > 注意 `preLoaders` 和 `postLoaders` 只在 10.3.0+ 版本支持
 
-### Webpack 2.x
+### webpack 2.x
 
 ``` js
 module.exports = {
@@ -25,7 +25,7 @@ module.exports = {
         loader: 'vue-loader',
         options: {
           // `loaders` 覆盖默认 loaders。
-          // 以下配置会导致所有无 "lang" 特性的 <script> 标签加载 coffee-loader
+          // 以下配置会导致所有无 `lang` 特性的 `<script>` 标签加载 `coffee-loader`
           loaders: {
             js: 'coffee-loader'
           },
@@ -40,7 +40,7 @@ module.exports = {
           //
           // - 对于 `html`, 默认 loader 返回会编译为 JavaScript 渲染函数
           //
-          // - 对于 `css`, 由`vue-style-loader` 返回的结果通常不太有用。使用 postcss 插件将会是更好的选择。
+          // - 对于 `css`, 由`vue-style-loader` 返回的结果通常不太有用。使用 PostCSS 插件将会是更好的选择。
           postLoaders: {
             html: 'babel-loader'
           }
@@ -54,7 +54,7 @@ module.exports = {
 }
 ```
 
-### Webpack 1.x
+### webpack 1.x
 
 ``` js
 // webpack.config.js
