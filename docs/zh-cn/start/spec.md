@@ -56,7 +56,7 @@ export default {
 
 - 每个 `.vue` 文件最多包含一个 `<script>` 块。
 
-- 该脚本在类 CommonJS 环境中执行 (就像通过 webpack 打包的正常 js 模块)，这意味这你可以 `require()` 其它依赖。在 ES2015 支持下，你也可以使用 `import` 和 `export` 语法。
+- 该脚本在类 CommonJS 环境中执行 (就像通过 webpack 打包的正常 js 模块)，这意味着你可以 `require()` 其它依赖。在 ES2015 支持下，你也可以使用 `import` 和 `export` 语法。
 
 - 脚本必须导出 Vue.js 组件对象。也可以导出由 `Vue.extend()` 创建的扩展对象，但是普通对象是更好的选择。
 
