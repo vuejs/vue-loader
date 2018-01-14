@@ -81,7 +81,7 @@ CSS 모듈은 [css-loader](https://github.com/webpack/css-loader)를 통해 처�
 ``` js
 {
   modules: true,
-  importLoaders: true,
+  importLoaders: 1,
   localIdentName: '[hash:base64]'
 }
 ```
