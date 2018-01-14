@@ -81,7 +81,7 @@ Módulos CSS são processados via [css-loader](https://github.com/webpack/css-lo
 ```js
 {
   modules: true,
-  importLoaders: true,
+  importLoaders: 1,
   localIdentName: '[hash:base64]'
 }
 ```

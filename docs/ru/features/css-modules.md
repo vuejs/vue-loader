@@ -81,7 +81,7 @@ CSS-модули обрабатываются с помощью [css-loader](htt
 ``` js
 {
   modules: true,
-  importLoaders: true,
+  importLoaders: 1,
   localIdentName: '[hash:base64]'
 }
 ```

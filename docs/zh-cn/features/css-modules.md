@@ -81,7 +81,7 @@ CSS Modules 处理是通过 [css-loader](https://github.com/webpack/css-loader)�
 ``` js
 {
   modules: true,
-  importLoaders: true,
+  importLoaders: 1,
   localIdentName: '[hash:base64]'
 }
 ```
