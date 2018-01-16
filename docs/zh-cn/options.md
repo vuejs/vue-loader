@@ -168,7 +168,7 @@ module.exports = {
 - 类型: `Boolean`
 - 默认值: `true`
 
-  如果设置为 `false`，模版中 HTML 标签之前的空格将会被忽略。
+  如果设置为 `false`，模版中 HTML 标签之间的空格将会被忽略。
 
 ### compilerModules
 
@@ -184,7 +184,7 @@ module.exports = {
 
   > 版本说明：在 v12.x 中，从 v12.2.3+ 开始支持
 
-  为 `vue-template-compiler` 配置 `directives` 选项。相关细节请查阅 `vue-template-compiler` 的 [`modules` 选项](https://github.com/vuejs/vue/blob/dev/packages/vue-template-compiler/README.md#compilercompiletemplate-options)。
+  为 `vue-template-compiler` 配置 `directives` 选项。相关细节请查阅 `vue-template-compiler` 的 [`directives` 选项](https://github.com/vuejs/vue/blob/dev/packages/vue-template-compiler/README.md#compilercompiletemplate-options)。
 
 ### transformToRequire
 
@@ -306,15 +306,6 @@ module.exports = {
 - 默认值: 当 webpack 配置中包含 `target: 'node'` 且 `vue-template-compiler` 版本号大于等于 2.4.0 时为 `true`。
 
 开启 Vue 2.4 服务端渲染的编译优化之后，渲染函数将会把返回的 vdom 树的一部分编译为字符串，以提升服务端渲染的性能。在一些情况下，你可能想要明确的将其关掉，因为该渲染函数只能用于服务端渲染，而不能用于客户端渲染或测试环境。
-
-### cacheBusting
-
-> 13.2.0 新增
-
-- 类型：`boolean`
-- 默认值：在开发环境下是 `true`，在生产环境下是 `false`。
-
-是否通过给文件名后加哈希查询值来避免生成的 source map 被缓存。关掉这一选项有益于 source map 调试。
 
 ### hotReload
 

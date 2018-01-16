@@ -311,15 +311,6 @@ module.exports = {
 
 Enable Vue 2.4 SSR compilation optimization that compiles part of the vdom trees returned by render functions into plain strings, which improves SSR performance. In some cases you might want to explicitly turn it off because the resulting render functions can only be used for SSR and cannot be used for client-side rendering or testing.
 
-### cacheBusting
-
-> New in 13.2.0
-
-- type: `boolean`
-- default: `true` in development mode, `false` in production mode.
-
-Whether generate source maps with cache busting by appending a hash query to the file name. Turning this off can help with source map debugging.
-
 ### hotReload
 
 > New in 13.5.0

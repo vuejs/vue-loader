@@ -14,7 +14,25 @@ will be compiled into:
 createElement('img', { attrs: { src: require('../image.png') }})
 ```
 
+### Transform Rules
+
+- If the URL is an absolute path (e.g. `/images/foo.png`), it will be preserved as-is.
+
+- If the URL starts with `.`, it's interpreted as a relative module request and resolved based on the folder structure on your file system.
+
+- If the URL starts with `~`, anything after it is interpreted as a module request. This means you can even reference assets inside node modules:
+
+  ``` html
+  <img src="~/some-npm-package/foo.png">
+  ```
+
+- (13.7.0+) If the URL starts with `@`, it's also interpreted as a module request. This is useful if your webpack config has an alias for `@`, which by default points to `/src` in any project created by `vue-cli`.
+
+### Related Loaders
+
 Because `.png` is not a JavaScript file, you will need to configure webpack to use [file-loader](https://github.com/webpack/file-loader) or [url-loader](https://github.com/webpack/url-loader) to handle them. The project scaffolded with `vue-cli` has also configured this for you.
+
+### Why
 
 The benefits of all this are:
 
