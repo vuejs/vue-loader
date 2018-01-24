@@ -1088,4 +1088,25 @@ describe('vue-loader', () => {
       done()
     })
   })
+
+  it('style path alias', done => {
+    test({
+      entry: './test/fixtures/style-path-alias.vue',
+      resolve: {
+        alias: {
+          '@': path.resolve(__dirname, 'fixtures')
+        }
+      },
+      module: {
+        rules: [
+          { test: /\.vue$/, loader: loaderPath },
+          { test: /\.png$/, loader: 'file-loader?name=[name].[hash:6].[ext]' }
+        ]
+      }
+    }, (window) => {
+      const style = normalizeNewline(window.document.querySelector('style').textContent)
+      expect(style).to.match(/background: url\(logo\.[a-z0-9]{6}\.png#hash\) center \/ cover;/)
+      done()
+    })
+  })
 })
