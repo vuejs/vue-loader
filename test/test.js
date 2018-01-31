@@ -507,6 +507,20 @@ describe('vue-loader', () => {
     })
   })
 
+  it('load cascading postcss config file', done => {
+    fs.writeFileSync('.postcssrc', JSON.stringify({ parser: 'sugarss' }))
+    test({
+      entry: 'sub/postcss-cascade.vue',
+      vue: { postcss: { cascade: true }}
+    }, (window) => {
+      let style = window.document.querySelector('style').textContent
+      style = normalizeNewline(style)
+      expect(style).to.contain('display: -webkit-box')
+      fs.unlinkSync('.postcssrc')
+      done()
+    })
+  })
+
   it('load postcss config file by path', done => {
     fs.writeFileSync('test/.postcssrc', JSON.stringify({ parser: 'sugarss' }))
     test({
