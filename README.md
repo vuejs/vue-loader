@@ -3,17 +3,16 @@
 > Vue.js component loader for [Webpack](https://webpack.js.org/).
 
 <p align="center">
-  <img width="809px" src="https://raw.githubusercontent.com/vuejs/vue-syntax-highlight/master/samples/screenshot.png">
+  <img width="809px" src="https://raw.githubusercontent.com/vuejs/vue-syntax-highlight/new/samples/screenshot.png">
 </p>
 
 The best way to get started is with [vue-cli](https://github.com/vuejs/vue-cli):
 
 ``` js
-npm install -g vue-cli
-vue init webpack-simple hello
+npm install -g @vue/cli
+vue create hello
 cd hello
-npm install
-npm run dev
+npm run serve
 ```
 
 This will setup a basic Webpack + `vue-loader` project for you, with `*.vue` files and hot-reloading working out of the box!

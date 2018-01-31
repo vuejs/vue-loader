@@ -12,8 +12,6 @@ To do that, specify the `loaders` option for `vue-loader`:
 
 > Note that `preLoaders` and `postLoaders` are only supported in 10.3.0+
 
-### webpack 2.x
-
 ``` js
 module.exports = {
   // other options...
@@ -55,29 +53,6 @@ module.exports = {
         }
       }
     ]
-  }
-}
-```
-
-### webpack 1.x
-
-``` js
-// webpack.config.js
-module.exports = {
-  // other options...
-  module: {
-    loaders: [
-      {
-        test: /\.vue$/,
-        loader: 'vue'
-      }
-    ]
-  },
-  // `vue-loader` configurations
-  vue: {
-    loaders: {
-      // same configuration rules as above
-    }
   }
 }
 ```
