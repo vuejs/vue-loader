@@ -27,20 +27,7 @@ Sometimes the user may want to use `lang="postcss"` only for syntax highlighting
 
 Alternatively, you can specify PostCSS config specifically for `*.vue` files using the `postcss` option for `vue-loader`.
 
-Example usage in webpack 1.x:
-
-``` js
-// webpack.config.js
-module.exports = {
-  // other configs...
-  vue: {
-    // use custom PostCSS plugins
-    postcss: [require('postcss-cssnext')()]
-  }
-}
-```
-
-For webpack 2.x:
+Example:
 
 ``` js
 // webpack.config.js
