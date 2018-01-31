@@ -1088,4 +1088,69 @@ describe('vue-loader', () => {
       done()
     })
   })
+
+  it('multiple rule definitions', done => {
+    test({
+      entry: './test/fixtures/multiple-rules.js',
+      module: {
+        rules: [
+          {
+            test: /\.vue$/,
+            oneOf: [
+              {
+                include: /-1\.vue$/,
+                loader: rawLoaderPath,
+                options: {
+                  postcss: [
+                    css => {
+                      css.walkDecls('font-size', decl => {
+                        decl.value = `${parseInt(decl.value, 10) * 2}px`
+                      })
+                    }
+                  ],
+                  compilerModules: [{
+                    postTransformNode: el => {
+                      el.staticClass = '"multiple-rule-1"'
+                    }
+                  }]
+                }
+              },
+              {
+                include: /-2\.vue$/,
+                loader: rawLoaderPath,
+                options: {
+                  postcss: [
+                    css => {
+                      css.walkDecls('font-size', decl => {
+                        decl.value = `${parseInt(decl.value, 10) / 2}px`
+                      })
+                    }
+                  ],
+                  compilerModules: [{
+                    postTransformNode: el => {
+                      el.staticClass = '"multiple-rule-2"'
+                    }
+                  }]
+                }
+              }
+            ]
+          }
+        ]
+      }
+    }, (window, module) => {
+      const vnode1 = mockRender(window.rules[0])
+      const vnode2 = mockRender(window.rules[1])
+      expect(vnode1.data.staticClass).to.equal('multiple-rule-1')
+      expect(vnode2.data.staticClass).to.equal('multiple-rule-2')
+      const styles = window.document.querySelectorAll('style')
+      const expr = /\.multiple-rule-\d\s*\{\s*font-size:\s*([.0-9]+)px;/
+      for (let i = 0, l = styles.length; i < l; i++) {
+        const content = styles[i].textContent
+        if (expr.test(content)) {
+          expect(parseFloat(RegExp.$1)).to.be.equal(14)
+        }
+      }
+      done()
+    })
+  })
 })
