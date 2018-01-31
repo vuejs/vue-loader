@@ -256,6 +256,19 @@ describe('vue-loader', () => {
     })
   })
 
+  it('style import for a same file twice', done => {
+    test({
+      entry: 'style-import-twice.vue'
+    }, (window) => {
+      const styles = window.document.querySelectorAll('style')
+      expect(styles[0].textContent).to.contain('h1 { color: red;\n}')
+      // import with scoped
+      const id = 'data-v-' + genId('style-import-twice.vue')
+      expect(styles[1].textContent).to.contain('h1[' + id + '] { color: green;\n}')
+      done()
+    })
+  })
+
   it('template import', done => {
     test({
       entry: 'template-import.vue'
