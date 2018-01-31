@@ -121,6 +121,19 @@ function interopDefault (module) {
     : module
 }
 
+function initStylesForAllSubComponents (module) {
+  if (module.components) {
+    for (const name in module.components) {
+      const sub = module.components[name]
+      const instance = {}
+      if (sub && sub.beforeCreate) {
+        sub.beforeCreate.forEach(hook => hook.call(instance))
+      }
+      initStylesForAllSubComponents(sub)
+    }
+  }
+}
+
 describe('vue-loader', () => {
   it('basic', done => {
     test({
@@ -259,12 +272,16 @@ describe('vue-loader', () => {
   it('style import for a same file twice', done => {
     test({
       entry: 'style-import-twice.vue'
-    }, (window) => {
+    }, (window, module) => {
+      initStylesForAllSubComponents(module)
       const styles = window.document.querySelectorAll('style')
+      expect(styles.length).to.equal(3)
       expect(styles[0].textContent).to.contain('h1 { color: red;\n}')
       // import with scoped
       const id = 'data-v-' + genId('style-import-twice.vue')
       expect(styles[1].textContent).to.contain('h1[' + id + '] { color: green;\n}')
+      const id2 = 'data-v-' + genId('style-import-twice-sub.vue')
+      expect(styles[2].textContent).to.contain('h1[' + id2 + '] { color: green;\n}')
       done()
     })
   })
