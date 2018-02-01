@@ -75,7 +75,6 @@
     "gitbook-plugin-edit-link": "^2.0.2",
     "gitbook-plugin-github": "^3.0.0",
     "gitbook-plugin-theme-vuejs": "^1.1.0",
-    "inject-loader": "^3.0.1",
     "js-yaml": "^3.9.1",
     "jsdom": "^9.2.1",
     "lint-staged": "^4.0.2",

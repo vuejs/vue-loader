@@ -386,25 +386,6 @@ describe('vue-loader', () => {
     })
   })
 
-  it('dependency injection', done => {
-    test({
-      entry: './test/fixtures/inject.js'
-    }, (window) => {
-      // console.log(window.injector.toString())
-      const module = interopDefault(window.injector({
-        './service': {
-          msg: 'Hello from mocked service!'
-        }
-      }))
-      const vnode = mockRender(module, module.data())
-      // <div class="msg">{{ msg }}</div>
-      expect(vnode.tag).to.equal('div')
-      expect(vnode.data.staticClass).to.equal('msg')
-      expect(vnode.children[0].text).to.equal('Hello from mocked service!')
-      done()
-    })
-  })
-
   it('translates relative URLs and respects resolve alias', done => {
     test({
       entry: 'resolve.vue',
