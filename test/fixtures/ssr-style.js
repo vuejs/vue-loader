@@ -1,6 +1,6 @@
-var Vue = require('vue')
-var App = require('./ssr-style.vue').default
+import Vue from 'vue'
+import App from './ssr-style.vue'
 
-module.exports = () => new Vue({
+export default () => new Vue({
   render: h => h(App)
 })
