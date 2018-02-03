@@ -27,6 +27,8 @@
   - [cssSourceMap](options.md#csssourcemap)
   - [esModule](options.md#esmodule)
   - [preserveWhitespace](options.md#preservewhitespace)
+  - [trimTextWhitespace](options.md#trimTextWhitespace)
+  - [collapseTextWhitespace](options.md#collapseTextWhitespace)
   - [compilerModules](options.md#compilermodules)
   - [compilerDirectives](options.md#compilerdirectives)
   - [transformToRequire](options.md#transformtorequire)

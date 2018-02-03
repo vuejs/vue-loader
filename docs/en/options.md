@@ -177,6 +177,20 @@ module.exports = {
 
   If set to `false`, the whitespaces between HTML tags in templates will be ignored.
 
+### trimTextWhitespace
+
+- type: `boolean`
+- default: `false`
+
+  If set to `true`, all whitespace characters will be trimmed off the beginning and end of each text node. Enabling this may result in a smaller compiled template, as all EOL, space and tab characters between a HTML tag and its text content will be removed.
+
+### collapseTextWhitespace
+
+- type: `boolean`
+- default: `false`
+
+  If set to `true`, any sequence of multiple whitespace characters within text nodes will be collapsed into a single space character (`0x20`). Enabling this may result in a smaller compiled template.
+
 ### compilerModules
 
 - type: `Array<ModuleOptions>`
