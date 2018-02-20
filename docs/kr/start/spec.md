@@ -30,11 +30,11 @@ export default {
 
 `vue-loader`는 파일을 파싱하고 각 language block을 추출하며 필요한 경우 다른 로더를 통해 파이프 처리한 후 마지막으로 Module.exports가 Vue.js 컴포넌트 엘리먼트 옵션 객체인 CommonJS 모듈로 다시 조합합니다.
 
-`vue-loader`는 language block에 `lang` 속성을 지정하여 CSS 전처리기나 HTML에서 템플릿을 컴파일 하는 것과 같은 기본 언어가 아닌 것을 사용할 수 있게 합니다. 예를 들어 컴포넌트 스타일에 SASS를 사용할 수 있습니다.
+`vue-loader`는 language block에 `lang` 속성을 지정하여 CSS 전처리기나 HTML에서 템플릿을 컴파일 하는 것과 같은 기본 언어가 아닌 것을 사용할 수 있게 합니다. 예를 들어 컴포넌트 스타일에 Sass를 사용할 수 있습니다.
 
 ``` html
 <style lang="sass">
-  /* write SASS! */
+  /* write Sass! */
 </style>
 ```
 
