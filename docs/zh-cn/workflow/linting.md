@@ -2,7 +2,7 @@
 
 你可能有疑问，在 `.vue` 文件中你怎么检验你的代码，因为它不是 JavaScript。我们假设你使用 [ESLint](https://eslint.org/) (如果你没有使用话，你应该去使用！)。
 
-你还需要官方的 [eslint-plugin-vue](https://github.com/vuejs/eslint-plugin-vue)，它同时支持检验你 `.vue` 文件中的模板和脚本。
+你还需要官方的 [eslint-plugin-vue](https://github.com/vuejs/eslint-plugin-vue)，它支持同时检查你 `.vue` 文件中的模板和脚本。
 
 请确保在你的 ESLint 配置中使用了该插件自身的配置：
 
