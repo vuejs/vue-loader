@@ -18,19 +18,12 @@ module.exports = {
         NODE_ENV: '"production"'
       }
     }),
-    // minify with dead-code elimination
-    new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        warnings: false
-      }
-    }),
-    // optimize module ids by occurrence count
-    new webpack.optimize.OccurrenceOrderPlugin()
+    new webpack.optimize.UglifyJsPlugin()
   ]
 }
 ```
 
-显然，我们不想在开发过程中使用这些配置，所以有几种方法可以解决这个问题：
+我们不想在开发过程中使用这些配置，所以有几种方法可以解决这个问题：
 
 1. 使用环境变量动态构建；
 

@@ -1,8 +1,6 @@
 # 选项参考
 
-## webpack 1 和 2 之间的使用差异
-
-webpack 2：配置直接放到 loader rule 中。
+## 选项放在哪里
 
 ``` js
 module.exports = {
@@ -21,20 +19,9 @@ module.exports = {
 }
 ```
 
-webpack 1.x：在 webpack 配置中添加根节点 `vue` 块。
-
-``` js
-module.exports = {
-  // ...
-  vue: {
-    // `vue-loader` options
-  }
-}
-```
-
 ### loaders
 
-- 类型：`{ [lang: string]: string }`
+- 类型：`{ [lang: string]: string | Object | Array }`
 
   指定 webpack loader 对象覆盖用于 `*.vue` 文件内的语言块的默认 loader。如果指定，该键对应于语言块的 `lang` 属性。每种类型的默认 `lang` 是：
 
@@ -45,7 +32,6 @@ module.exports = {
   例如，使用 `babel-loader` 和 `eslint-loader` 处理所有的 `<script>` 块：
 
   ``` js
-  // webpack 2.x config
   module: {
     rules: [
       {
@@ -61,17 +47,36 @@ module.exports = {
   }
   ```
 
+  你也可以使用对象或数组的语法 (注意这些选项必须是可序列化的)：
+
+  ``` js
+  module: {
+    rules: [
+      {
+        test: /\.vue$/,
+        loader: 'vue-loader',
+        options: {
+          loaders: {
+            js: [
+              { loader: 'cache-loader' },
+              { loader: 'babel-loader', options: { presets: ['env'] } }
+            ]
+          }
+        }
+      }
+    ]
+  }
+  ```
+
 ### preLoaders
 
 - 类型：`{ [lang: string]: string }`
-- 仅在 10.3.0+ 版本中支持
 
   配置格式和 `loaders` 相同，但是 `preLoaders` 会在默认 loaders 之前处理。你可以用来预处理语言块 - 一个常见用例是用来处理构建时的 i18n。
 
 ### postLoaders
 
 - 类型：`{ [lang: string]: string }`
-- 仅在 10.3.0+ 版本中支持
 
   配置格式和 `loaders` 相同，但是 `postLoaders` 会在默认 loaders 之后处理。你可以用来后处理语言块。注意这会有些复杂：
 
@@ -81,10 +86,9 @@ module.exports = {
 
 ### postcss
 
-> 注意：在 11.0.0+ 版本中，推荐使用 PostCSS 配置文件代替。[用法和 `postcss-loader` 相同](https://github.com/postcss/postcss-loader#usage)。
+> 注意：这里推荐使用 PostCSS 配置文件代替，这样你的 `.vue` 文件中的样式和普通的 CSS 样式可以共享相同的配置。[用法和 `postcss-loader` 相同](https://github.com/postcss/postcss-loader#usage)。
 
 - 类型：`Array` or `Function` or `Object`
-
 
   指定要应用于 `.vue` 文件中 CSS 的自定义 PostCSS 插件。如果使用函数，函数将使用相同的 loader 上下文调用，并返回一个插件数组。
 
@@ -207,21 +211,6 @@ module.exports = {
   配置例子：
 
   ``` js
-  // webpack 1
-  vue: {
-    buble: {
-      // 启用对象扩展运算符
-      // 注意：你需要自己提供 Object.assign polyfill！
-      objectAssign: 'Object.assign',
-
-      // turn off the `with` removal
-      transforms: {
-        stripWith: false
-      }
-    }
-  }
-
-  // webpack 2
   module: {
     rules: [
       {
