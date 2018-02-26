@@ -1,6 +1,6 @@
 # 介绍
 
-### `vue-loader` 是什么？
+### Vue Loader 是什么？
 
 `vue-loader` 是一个 webpack 的 loader，可以将用下面这个格式编写的 Vue 组件转换为 JavaScript 模块：
 
