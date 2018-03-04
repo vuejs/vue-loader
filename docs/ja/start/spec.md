@@ -30,11 +30,11 @@ export default {
 
 `vue-loader` はファイルを解析し、それぞれの言語ブロックを必要に応じて他の loader を通し、最終的に `module.exports` が Vue.js のコンポーネントオプションオブジェクトの CommonJS モジュールに変換します。
 
-`vue-loader` は CSS プリプロセッサや HTML にコンパイルするテンプレート言語といった、デフォルトでない言語を言語ブロックの `lang` 属性を使用することでサポートします。例えばコンポーネントのスタイルに SASS を使用することが出来ます。
+`vue-loader` は CSS プリプロセッサや HTML にコンパイルするテンプレート言語といった、デフォルトでない言語を言語ブロックの `lang` 属性を使用することでサポートします。例えばコンポーネントのスタイルに Sass を使用することが出来ます。
 
 ``` html
 <style lang="sass">
-  /* SASS で書きます! */
+  /* Sass で書きます! */
 </style>
 ```
 詳細は [プリプロセッサの仕様](../configurations/pre-processors.md) で確認することが出来ます。

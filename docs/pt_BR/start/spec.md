@@ -30,11 +30,11 @@ Um arquivo `*.vue` é um formato de arquivo personalizado que usa sintaxe semelh
 
 `vue-loader` analisará o arquivo, extrair cada bloco de linguagem canalizá-lo através de outros carregadores se necessário, e finalmente montá-lo de volta em um módulo CommonJs cujo `module.exports` seja um objeto de opções do componente Vue.js.
 
-`vue-loader` suporta o uso de linguagens não-padrão, tais como pré-processadores CSS e linguagem que compila para HTML a partir de um template, especificando o atributo `lang` para um bloco de linguagem. Por exemplo, você pode usar SASS para o estilo do seu componente como este:
+`vue-loader` suporta o uso de linguagens não-padrão, tais como pré-processadores CSS e linguagem que compila para HTML a partir de um template, especificando o atributo `lang` para um bloco de linguagem. Por exemplo, você pode usar Sass para o estilo do seu componente como este:
 
 ```html
 <style lang="sass">
-  /* escreva SASS! */
+  /* escreva Sass! */
 </style>
 ```
 

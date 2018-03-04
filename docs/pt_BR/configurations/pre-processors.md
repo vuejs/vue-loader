@@ -4,7 +4,7 @@ No webpack, todos os pré-processadores precisam ser aplicados com um carregador
 
 ### CSS
 
-Por exemplo, vamos compilar nossa tag `<style>` com SASS:
+Por exemplo, vamos compilar nossa tag `<style>` com Sass:
 
 ```bash
 npm install sass-loader node-sass --save-dev
@@ -20,7 +20,7 @@ Por baixo do capô, o conteúdo de texto dentro da tag `<style>` será primeiram
 
 #### Advertências de sass-loader
 
-Ao contrário do que seu nome indica, [sass-loader](https://github.com/jtangelder/sass-loader) analisa a sintaxe *SCSS* por padrão. Se você atualmente deseja usar a indentação da sintaxe *SASS*, você tem que configurar as opções de vue-loader para sass-loader adequadamente.
+Ao contrário do que seu nome indica, [sass-loader](https://github.com/jtangelder/sass-loader) analisa a sintaxe *SCSS* por padrão. Se você atualmente deseja usar a indentação da sintaxe *Sass*, você tem que configurar as opções de vue-loader para sass-loader adequadamente.
 
 ```js
 {
