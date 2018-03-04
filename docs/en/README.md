@@ -1,6 +1,6 @@
 # Introduction
 
-### What is `vue-loader`?
+### What is Vue Loader?
 
 `vue-loader` is a loader for webpack that can transform Vue components written in the following format into a plain JavaScript module:
 

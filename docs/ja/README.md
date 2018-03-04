@@ -1,6 +1,6 @@
 # はじめに
 
-### `vue-loader` とは ?
+### Vue Loader とは ?
 
 `vue-loader` とは以下の形式で記述された Vue コンポーネントをプレーンな JavaScript モジュールに変換する webpack の loader です。
 
