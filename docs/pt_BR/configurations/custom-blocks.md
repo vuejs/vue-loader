@@ -81,6 +81,7 @@ Para que o conteúdo do bloco personalizado seja injetado, precisamos de um carr
    this.callback(null, 'module.exports = function(Component) {Component.options.__docs = ' +
      JSON.stringify(source) +
      '}', map)
+   return;
  }
  ```
 
