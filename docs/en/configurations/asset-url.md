@@ -23,7 +23,7 @@ createElement('img', { attrs: { src: require('../image.png') }})
 - If the URL starts with `~`, anything after it is interpreted as a module request. This means you can even reference assets inside node modules:
 
   ``` html
-  <img src="~/some-npm-package/foo.png">
+  <img src="~some-npm-package/foo.png">
   ```
 
 - (13.7.0+) If the URL starts with `@`, it's also interpreted as a module request. This is useful if your webpack config has an alias for `@`, which by default points to `/src` in any project created by `vue-cli`.
