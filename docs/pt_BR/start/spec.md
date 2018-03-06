@@ -103,7 +103,7 @@ As importações `src` também funcionam com blocos customizados, por exemplo:
 
 ### Realce de Sintaxe
 
-Atualmente existem realce de sintaxe \(ou [coloração de sintaxe](https://pt.wikipedia.org/wiki/Realce_de_sintaxe)\) suportado para [Sublime Text](https://github.com/vuejs/vue-syntax-highlight), [Atom](https://atom.io/packages/language-vue), [Vim](https://github.com/posva/vim-vue), [Visual Studio Code](https://marketplace.visualstudio.com/items/liuji-jim.vue), [Brackets](https://github.com/pandao/brackets-vue), e [JetBrains products](https://plugins.jetbrains.com/plugin/8057) \(WebStorm, PhpStorm, etc\). Contribuições para outros editores/IDEs são incentivadas e muito bem-vindas! Se você não estiver usando nenhum pré-processador em componentes Vue, você também pode tratar arquivos `*.vue` como HTML em seu editor.
+Atualmente existem realce de sintaxe \(ou [coloração de sintaxe](https://pt.wikipedia.org/wiki/Realce_de_sintaxe)\) suportado para [Sublime Text](https://github.com/vuejs/vue-syntax-highlight), [Atom](https://atom.io/packages/language-vue), [Vim](https://github.com/posva/vim-vue), [Emacs](https://github.com/AdamNiederer/vue-mode), [Visual Studio Code](https://marketplace.visualstudio.com/items/liuji-jim.vue), [Brackets](https://github.com/pandao/brackets-vue), e [JetBrains products](https://plugins.jetbrains.com/plugin/8057) \(WebStorm, PhpStorm, etc\). Contribuições para outros editores/IDEs são incentivadas e muito bem-vindas! Se você não estiver usando nenhum pré-processador em componentes Vue, você também pode tratar arquivos `*.vue` como HTML em seu editor.
 
 ### Comentários
 

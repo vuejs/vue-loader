@@ -104,7 +104,7 @@ export default {
 
 ### 구문 강조
 
-현재 구문강조는 [Sublime Text](https://github.com/vuejs/vue-syntax-highlight), [Atom](https://atom.io/packages/language-vue), [Vim](https://github.com/posva/vim-vue), [Visual Studio Code](https://marketplace.visualstudio.com/items/liuji-jim.vue), [Brackets](https://github.com/pandao/brackets-vue), 와 [JetBrains 제품](https://plugins.jetbrains.com/plugin/8057) (WebStorm, PhpStorm, 등)을 지원합니다. 다른 편집기/IDE에 대한 기여를 원합니다! Vue 컴포넌트에서 프리 프로세서를 사용하지 않는 경우 `*.vue`파일을 HTML로 인식하여 사용할 수도 있습니다.
+현재 구문강조는 [Sublime Text](https://github.com/vuejs/vue-syntax-highlight), [Atom](https://atom.io/packages/language-vue), [Vim](https://github.com/posva/vim-vue), [Emacs](https://github.com/AdamNiederer/vue-mode), [Visual Studio Code](https://marketplace.visualstudio.com/items/liuji-jim.vue), [Brackets](https://github.com/pandao/brackets-vue), 와 [JetBrains 제품](https://plugins.jetbrains.com/plugin/8057) (WebStorm, PhpStorm, 등)을 지원합니다. 다른 편집기/IDE에 대한 기여를 원합니다! Vue 컴포넌트에서 프리 프로세서를 사용하지 않는 경우 `*.vue`파일을 HTML로 인식하여 사용할 수도 있습니다.
 
 
 ### 주석
