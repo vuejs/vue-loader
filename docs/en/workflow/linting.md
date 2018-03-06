@@ -2,14 +2,16 @@
 
 You may have been wondering how do you lint your code inside `*.vue` files, since they are not JavaScript. We will assume you are using [ESLint](https://eslint.org/) (if you are not, you should!).
 
-You will also need the [eslint-plugin-html](https://github.com/BenoitZugmeyer/eslint-plugin-html) which supports extracting and linting the JavaScript inside `*.vue` files.
+You will also need the official [eslint-plugin-vue](https://github.com/vuejs/eslint-plugin-vue) which supports linting both the template and script parts of Vue files.
 
-Make sure to include the plugin in your ESLint config:
+Make sure to use the plugin's included config in your ESLint config:
 
 ``` json
-"plugins": [
-  "html"
-]
+{
+  "extends": [
+    "plugin:vue/essential"
+  ]
+}
 ```
 
 Then from the command line:
@@ -24,50 +26,7 @@ Another option is using [eslint-loader](https://github.com/MoOx/eslint-loader) s
 npm install eslint eslint-loader --save-dev
 ```
 
-``` js
-// webpack.config.js
-module.exports = {
-  // ... other options
-  module: {
-    loaders: [
-      {
-        test: /\.vue$/,
-        loader: 'vue!eslint'
-      }
-    ]
-  }
-}
-```
-
-Note that webpack loader chains are applied **right-first**. Make sure to apply `eslint` before `vue` so we are linting the pre-compile source code.
-
-One thing we need to consider is using third party `*.vue` components shipped in NPM packages. In such case, we want to use `vue-loader` to process the third party component, but do not want to lint it. We can separate the linting into webpack's [preLoaders](https://webpack.github.io/docs/loaders.html#loader-order):
-
-``` js
-// webpack.config.js
-module.exports = {
-  // ... other options
-  module: {
-    // only lint local *.vue files
-    preLoaders: [
-      {
-        test: /\.vue$/,
-        loader: 'eslint',
-        exclude: /node_modules/
-      }
-    ],
-    // but use vue-loader for all *.vue files
-    loaders: [
-      {
-        test: /\.vue$/,
-        loader: 'vue'
-      }
-    ]
-  }
-}
-```
-
-For webpack 2.x:
+Make sure it's applied as a pre-loader:
 
 ``` js
 // webpack.config.js
@@ -75,17 +34,11 @@ module.exports = {
   // ... other options
   module: {
     rules: [
-      // only lint local *.vue files
       {
         enforce: 'pre',
-        test: /\.vue$/,
+        test: /\.(js|vue)$/,
         loader: 'eslint-loader',
         exclude: /node_modules/
-      },
-      // but use vue-loader for all *.vue files
-      {
-        test: /\.vue$/,
-        loader: 'vue-loader'
       }
     ]
   }

@@ -4,7 +4,7 @@ webpack에서는 모든 전처리기가 해당 로더와 함께 적용되어야 
 
 ### CSS
 
-예를 들어, SASS로 `<style>`을 컴파일해봅시다.
+예를 들어, Sass로 `<style>`을 컴파일해봅시다.
 
 ``` bash
 npm install sass-loader node-sass --save-dev

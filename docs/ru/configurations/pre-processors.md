@@ -4,7 +4,7 @@
 
 ### CSS
 
-Например, пусть в теге `<style>` будет использоваться SASS:
+Например, пусть в теге `<style>` будет использоваться Sass:
 
 ``` bash
 npm install sass-loader node-sass --save-dev
@@ -12,7 +12,7 @@ npm install sass-loader node-sass --save-dev
 
 ``` html
 <style lang="sass">
-  /* используем SASS здесь */
+  /* используем Sass здесь */
 </style>
 ```
 
@@ -20,7 +20,7 @@ npm install sass-loader node-sass --save-dev
 
 #### Особенность sass-loader
 
-Вопреки тому, что он называется [*sass*-loader](https://github.com/jtangelder/sass-loader), по умолчанию парсится синтаксис *SCSS*. Если вы на самом деле хотите использовать синтаксис *SASS* с отступами, вам требуется настроить vue-loader для sass-loader соответственно.
+Вопреки тому, что он называется [*sass*-loader](https://github.com/jtangelder/sass-loader), по умолчанию парсится синтаксис *SCSS*. Если вы на самом деле хотите использовать синтаксис *Sass* с отступами, вам требуется настроить vue-loader для sass-loader соответственно.
 
 ```javascript
 {
@@ -108,7 +108,7 @@ div
 
 ``` html
 <style lang="sass?outputStyle=expanded">
-  /* используем SASS с расширенным выводом */
+  /* используем Sass с расширенным выводом */
 </style>
 ```
 

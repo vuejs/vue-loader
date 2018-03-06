@@ -1,6 +1,6 @@
 # Introduction
 
-### What is `vue-loader`?
+### What is Vue Loader?
 
 `vue-loader` is a loader for webpack that can transform Vue components written in the following format into a plain JavaScript module:
 
@@ -9,7 +9,7 @@
 There are many cool features provided by `vue-loader`:
 
 - ES2015 enabled by default;
-- Allows using other webpack loaders for each part of a Vue component, for example SASS for `<style>` and Jade for `<template>`;
+- Allows using other webpack loaders for each part of a Vue component, for example Sass for `<style>` and Jade for `<template>`;
 - Allows custom sections in a .vue file that can have custom loader chains applied to them
 - Treat static assets referenced in `<style>` and `<template>` as module dependencies and handle them with webpack loaders;
 - Can simulate scoped CSS for each component;
@@ -32,7 +32,7 @@ But webpack can do more than that. With "loaders", we can teach webpack to trans
 - Transpile ES2015, CoffeeScript or TypeScript modules into plain ES5 CommonJS modules;
 - Optionally you can pipe the source code through a linter before doing the compilation;
 - Transpile Jade templates into plain HTML and inline it as a JavaScript string;
-- Transpile SASS files into plain CSS, then convert it into a JavaScript snippet that insert the resulting CSS as a `<style>` tag;
+- Transpile Sass files into plain CSS, then convert it into a JavaScript snippet that insert the resulting CSS as a `<style>` tag;
 - Process an image file referenced in HTML or CSS, moved it to the desired destination based on the path configurations, and naming it using its md5 hash.
 
 webpack is so powerful that when you understand how it works, it can dramatically improve your front-end workflow. Its primary drawback is its verbose and complex configuration; but with this guide you should be able to find solutions for most common issues when using webpack with Vue.js and `vue-loader`.

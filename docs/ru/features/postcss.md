@@ -27,20 +27,7 @@
 
 В качестве альтернативы, вы можете указать конфигурацию PostCSS специально для `*.vue` файлов с помощью опции `postcss` для `vue-loader`.
 
-Пример использования с webpack 1.x:
-
-``` js
-// webpack.config.js
-module.exports = {
-  // другие настройки...
-  vue: {
-    // использование плагинов PostCSS
-    postcss: [require('postcss-cssnext')()]
-  }
-}
-```
-
-Для webpack 2.x:
+Пример:
 
 ``` js
 // webpack.config.js
