@@ -26,7 +26,8 @@
     "lint": "eslint lib test --fix",
     "test": "eslint lib && mocha --slow 5000 --timeout 10000",
     "docs": "cd docs && gitbook install && gitbook serve",
-    "docs:deploy": "bash ./docs/deploy.sh"
+    "docs:deploy": "bash ./docs/deploy.sh",
+    "postpublish": "conventional-changelog -p angular -r 2 > RELEASE.md"
   },
   "gitHooks": {
     "pre-commit": "lint-staged"
@@ -68,6 +69,7 @@
     "chai": "^4.1.0",
     "coffee-loader": "^0.7.2",
     "coffee-script": "^1.12.7",
+    "conventional-changelog": "^1.1.18",
     "css-loader": "^0.28.4",
     "eslint": "^3.19.0",
     "eslint-plugin-vue-libs": "^1.2.0",

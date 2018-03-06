@@ -6,3 +6,4 @@ docs/_book
 .idea
 *.iml
 *.log
+RELEASE.md
