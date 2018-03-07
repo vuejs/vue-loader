@@ -7,3 +7,4 @@ docs/_book
 *.iml
 *.log
 RELEASE.md
+.options-cache-*
