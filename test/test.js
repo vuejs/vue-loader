@@ -618,7 +618,7 @@ describe('vue-loader', () => {
       })
     }
     // default localIdentName
-    testWithIdent(undefined, /^\w{22}/, () => {
+    testWithIdent(undefined, /^red_\w{8}/, () => {
       // specified localIdentName
       const ident = '[path][name]---[local]---[hash:base64:5]'
       const regex = /css-modules---red---\w{5}/
