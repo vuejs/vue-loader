@@ -162,7 +162,7 @@ module.exports = {
 
 ### esModule
 
-> 这个选项已经从 v14.0 中移除。在 v14.0 及以上版本中，`*.vue` 文件始终暴露为 ES modules。
+> 这个选项已经从 v14.0 中移除。在 v14.0 及以上版本中，`*.vue` 文件始终暴露为 ES 模块。
 
 - 类型: `Boolean`
 - 默认值: `undefined`
