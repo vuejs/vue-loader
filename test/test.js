@@ -416,25 +416,6 @@ describe('vue-loader', () => {
     })
   })
 
-  it('dependency injection', done => {
-    test({
-      entry: './test/fixtures/inject.js'
-    }, (window) => {
-      // console.log(window.injector.toString())
-      const module = interopDefault(window.injector({
-        './service': {
-          msg: 'Hello from mocked service!'
-        }
-      }))
-      const vnode = mockRender(module, module.data())
-      // <div class="msg">{{ msg }}</div>
-      expect(vnode.tag).to.equal('div')
-      expect(vnode.data.staticClass).to.equal('msg')
-      expect(vnode.children[0].text).to.equal('Hello from mocked service!')
-      done()
-    })
-  })
-
   it('translates relative URLs and respects resolve alias', done => {
     test({
       entry: 'resolve.vue',
@@ -532,6 +513,20 @@ describe('vue-loader', () => {
       let style = window.document.querySelector('style').textContent
       style = normalizeNewline(style)
       expect(style).to.contain('h1 {\n  color: red;\n  font-size: 14px\n}')
+      fs.unlinkSync('.postcssrc')
+      done()
+    })
+  })
+
+  it('load cascading postcss config file', done => {
+    fs.writeFileSync('.postcssrc', JSON.stringify({ parser: 'sugarss' }))
+    test({
+      entry: 'sub/postcss-cascade.vue',
+      vue: { postcss: { cascade: true }}
+    }, (window) => {
+      let style = window.document.querySelector('style').textContent
+      style = normalizeNewline(style)
+      expect(style).to.contain('display: -webkit-box')
       fs.unlinkSync('.postcssrc')
       done()
     })
@@ -653,7 +648,7 @@ describe('vue-loader', () => {
       })
     }
     // default localIdentName
-    testWithIdent(undefined, /^\w{23}/, () => {
+    testWithIdent(undefined, /^red_\w{8}/, () => {
       // specified localIdentName
       const ident = '[path][name]---[local]---[hash:base64:5]'
       const regex = /css-modules---red---\w{5}/
@@ -1067,6 +1062,99 @@ describe('vue-loader', () => {
     }, (window, _, rawModule) => {
       expect(rawModule.default.name).to.equal('named-exports')
       expect(rawModule.foo()).to.equal(1)
+      done()
+    })
+  })
+
+  it('multiple rule definitions', done => {
+    test({
+      modify: config => {
+        // remove default rule
+        config.module.rules.shift()
+      },
+      entry: './test/fixtures/multiple-rules.js',
+      module: {
+        rules: [
+          {
+            test: /\.vue$/,
+            oneOf: [
+              {
+                include: /-1\.vue$/,
+                loader: loaderPath,
+                options: {
+                  postcss: [
+                    css => {
+                      css.walkDecls('font-size', decl => {
+                        decl.value = `${parseInt(decl.value, 10) * 2}px`
+                      })
+                    }
+                  ],
+                  compilerModules: [{
+                    postTransformNode: el => {
+                      el.staticClass = '"multiple-rule-1"'
+                    }
+                  }]
+                }
+              },
+              {
+                include: /-2\.vue$/,
+                loader: loaderPath,
+                options: {
+                  postcss: [
+                    css => {
+                      css.walkDecls('font-size', decl => {
+                        decl.value = `${parseInt(decl.value, 10) / 2}px`
+                      })
+                    }
+                  ],
+                  compilerModules: [{
+                    postTransformNode: el => {
+                      el.staticClass = '"multiple-rule-2"'
+                    }
+                  }]
+                }
+              }
+            ]
+          }
+        ]
+      }
+    }, (window, module) => {
+      const vnode1 = mockRender(window.rules[0])
+      const vnode2 = mockRender(window.rules[1])
+      expect(vnode1.data.staticClass).to.equal('multiple-rule-1')
+      expect(vnode2.data.staticClass).to.equal('multiple-rule-2')
+      const styles = window.document.querySelectorAll('style')
+      const expr = /\.multiple-rule-\d\s*\{\s*font-size:\s*([.0-9]+)px;/
+      for (let i = 0, l = styles.length; i < l; i++) {
+        const content = styles[i].textContent
+        if (expr.test(content)) {
+          expect(parseFloat(RegExp.$1)).to.be.equal(14)
+        }
+      }
+      done()
+    })
+  })
+
+  it('thread mode', done => {
+    test({
+      entry: 'basic.vue',
+      vue: {
+        threadMode: true
+      }
+    }, (window, module, rawModule) => {
+      const vnode = mockRender(module, {
+        msg: 'hi'
+      })
+
+      // <h2 class="red">{{msg}}</h2>
+      expect(vnode.tag).to.equal('h2')
+      expect(vnode.data.staticClass).to.equal('red')
+      expect(vnode.children[0].text).to.equal('hi')
+
+      expect(module.data().msg).to.contain('Hello from Component A!')
+      let style = window.document.querySelector('style').textContent
+      style = normalizeNewline(style)
+      expect(style).to.contain('comp-a h2 {\n  color: #f00;\n}')
       done()
     })
   })

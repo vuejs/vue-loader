@@ -1,6 +1,6 @@
 # Introdução
 
-### O que é `vue-loader`?
+### O que é Vue Loader?
 
 `vue-loader` é um carregador para webpack capaz de transformar componentes Vue, como o exemplo abaixo, em um módulo JavaScript sem formatação:
 
@@ -9,7 +9,7 @@
 O `vue-loader` fornece muitos recursos interessantes:
 
 - ES2015 habilitado por padrão;
-- Permite usar outros carregadores webpack para cada parte de um componente Vue, por exemplo SASS para `<style>` e Jade para `<template>`;
+- Permite usar outros carregadores webpack para cada parte de um componente Vue, por exemplo Sass para `<style>` e Jade para `<template>`;
 - Permite seções customizadas em um arquivo .vue que pode ter carregadores encadeados personalizados aplicados a eles;
 - Trata ativos estáticos referenciado em `<style>` e `<template>` como dependência de módulo e então manipula com carregadores webpack;
 - Pode simular escopo CSS para cada componente;
@@ -32,7 +32,7 @@ Mais do que isso, com o uso dos "loaders" o webpack é capaz de transformar todo
 - Transpilar módulos ES2015, CoffeScript ou TypeScript em módulos simples CommonJs ES5;
 - Você pode escolher se quer canalizar o código fonte através de um linter \(analisador de código\) antes de fazer a compilação;
 - Transpilar modelos Jade em HTML sem formatação e em seguida colocá-lo como uma sequência de string JavaScript;
-- Traspilar arquivos SASS em CSS sem formatação, em seguida os converter em trechos de código JavaScript que insere o resultado CSS como uma tag `<style>`;
+- Traspilar arquivos Sass em CSS sem formatação, em seguida os converter em trechos de código JavaScript que insere o resultado CSS como uma tag `<style>`;
 - Processar um arquivo de imagem referenciado em HTML ou CSS, movê-la para o destino desejado baseado no arquivo de configuração, e nomeá-la usando seu hash md5;
 
 webpack é tão poderoso que quando você entender como ele funciona, poderá melhorar drasticamente seu fluxo de trabalho front-end. Sua principal desvantagem é a configuração excessiva e complexa; Mas com este guia você deve se capaz de encontrar solução para muitas questões comuns usando webpack com Vue.js e `vue-loader`.

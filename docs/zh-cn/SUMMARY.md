@@ -18,7 +18,6 @@
   - [生产环境构建](workflow/production.md)
   - [代码检验](workflow/linting.md)
   - [测试](workflow/testing.md)
-  - [使用 Mock 测试](workflow/testing-with-mocks.md)
 - [选项参考](options.md)
   - [loaders](options.md#loaders)
   - [preLoaders](options.md#preloaders)

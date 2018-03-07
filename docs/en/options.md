@@ -163,6 +163,8 @@ module.exports = {
 
 ### esModule
 
+> This option has been removed in v14.0. In v14.0 and above, `*.vue` files always expose ES modules.
+
 - type: `boolean`
 - default: `true` (v13.0+)
 

@@ -30,11 +30,11 @@ export default {
 
 `vue-loader` 会解析文件，提取每个语言块，如有必要会通过其它 loader 处理，最后将他们组装成一个 CommonJS 模块，`module.exports` 出一个 Vue.js 组件对象。
 
-`vue-loader` 支持使用非默认语言，比如 CSS 预处理器，预编译的 HTML 模版语言，通过设置语言块的 `lang` 属性。例如，你可以像下面这样使用 SASS 语法编写样式：
+`vue-loader` 支持使用非默认语言，比如 CSS 预处理器，预编译的 HTML 模版语言，通过设置语言块的 `lang` 属性。例如，你可以像下面这样使用 Sass 语法编写样式：
 
 ``` html
 <style lang="sass">
-  /* write SASS! */
+  /* write Sass! */
 </style>
 ```
 
@@ -105,7 +105,7 @@ export default {
 ### 语法高亮
 
 
-目前语法高亮支持 [Sublime Text](https://github.com/vuejs/vue-syntax-highlight)、[Atom](https://atom.io/packages/language-vue)、[Vim](https://github.com/posva/vim-vue)、[Visual Studio Code](https://marketplace.visualstudio.com/items/liuji-jim.vue)、[Brackets](https://github.com/pandao/brackets-vue) 和 [JetBrains products](https://plugins.jetbrains.com/plugin/8057) (WebStorm、PhpStorm 等)。非常感谢其他编辑器/IDE 所做的贡献！如果在 Vue 组件中没有使用任何预处理器，你可以把 `.vue` 文件当作 HTML 对待。
+目前语法高亮支持 [Sublime Text](https://github.com/vuejs/vue-syntax-highlight)、[Atom](https://atom.io/packages/language-vue)、[Vim](https://github.com/posva/vim-vue)、[Emacs](https://github.com/AdamNiederer/vue-mode)、[Visual Studio Code](https://marketplace.visualstudio.com/items/liuji-jim.vue)、[Brackets](https://github.com/pandao/brackets-vue) 和 [JetBrains products](https://plugins.jetbrains.com/plugin/8057) (WebStorm、PhpStorm 等)。非常感谢其他编辑器/IDE 所做的贡献！如果在 Vue 组件中没有使用任何预处理器，你可以把 `.vue` 文件当作 HTML 对待。
 
 ### 注释
 

@@ -30,11 +30,11 @@ Um arquivo `*.vue` é um formato de arquivo personalizado que usa sintaxe semelh
 
 `vue-loader` analisará o arquivo, extrair cada bloco de linguagem canalizá-lo através de outros carregadores se necessário, e finalmente montá-lo de volta em um módulo CommonJs cujo `module.exports` seja um objeto de opções do componente Vue.js.
 
-`vue-loader` suporta o uso de linguagens não-padrão, tais como pré-processadores CSS e linguagem que compila para HTML a partir de um template, especificando o atributo `lang` para um bloco de linguagem. Por exemplo, você pode usar SASS para o estilo do seu componente como este:
+`vue-loader` suporta o uso de linguagens não-padrão, tais como pré-processadores CSS e linguagem que compila para HTML a partir de um template, especificando o atributo `lang` para um bloco de linguagem. Por exemplo, você pode usar Sass para o estilo do seu componente como este:
 
 ```html
 <style lang="sass">
-  /* escreva SASS! */
+  /* escreva Sass! */
 </style>
 ```
 
@@ -103,7 +103,7 @@ As importações `src` também funcionam com blocos customizados, por exemplo:
 
 ### Realce de Sintaxe
 
-Atualmente existem realce de sintaxe \(ou [coloração de sintaxe](https://pt.wikipedia.org/wiki/Realce_de_sintaxe)\) suportado para [Sublime Text](https://github.com/vuejs/vue-syntax-highlight), [Atom](https://atom.io/packages/language-vue), [Vim](https://github.com/posva/vim-vue), [Visual Studio Code](https://marketplace.visualstudio.com/items/liuji-jim.vue), [Brackets](https://github.com/pandao/brackets-vue), e [JetBrains products](https://plugins.jetbrains.com/plugin/8057) \(WebStorm, PhpStorm, etc\). Contribuições para outros editores/IDEs são incentivadas e muito bem-vindas! Se você não estiver usando nenhum pré-processador em componentes Vue, você também pode tratar arquivos `*.vue` como HTML em seu editor.
+Atualmente existem realce de sintaxe \(ou [coloração de sintaxe](https://pt.wikipedia.org/wiki/Realce_de_sintaxe)\) suportado para [Sublime Text](https://github.com/vuejs/vue-syntax-highlight), [Atom](https://atom.io/packages/language-vue), [Vim](https://github.com/posva/vim-vue), [Emacs](https://github.com/AdamNiederer/vue-mode), [Visual Studio Code](https://marketplace.visualstudio.com/items/liuji-jim.vue), [Brackets](https://github.com/pandao/brackets-vue), e [JetBrains products](https://plugins.jetbrains.com/plugin/8057) \(WebStorm, PhpStorm, etc\). Contribuições para outros editores/IDEs são incentivadas e muito bem-vindas! Se você não estiver usando nenhum pré-processador em componentes Vue, você também pode tratar arquivos `*.vue` como HTML em seu editor.
 
 ### Comentários
 

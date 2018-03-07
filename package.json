@@ -1,6 +1,6 @@
 {
   "name": "vue-loader",
-  "version": "14.0.2",
+  "version": "14.1.1",
   "description": "Vue single-file component loader for Webpack",
   "main": "index.js",
   "repository": {
@@ -26,7 +26,8 @@
     "lint": "eslint lib test --fix",
     "test": "eslint lib && mocha --slow 5000 --timeout 10000",
     "docs": "cd docs && gitbook install && gitbook serve",
-    "docs:deploy": "bash ./docs/deploy.sh"
+    "docs:deploy": "bash ./docs/deploy.sh",
+    "postpublish": "conventional-changelog -p angular -r 2 > RELEASE.md"
   },
   "gitHooks": {
     "pre-commit": "lint-staged"
@@ -61,12 +62,14 @@
     "vue-template-compiler": "^2.0.0"
   },
   "devDependencies": {
+    "autoprefixer": "^7.2.5",
     "babel-core": "^6.25.0",
     "babel-loader": "^7.0.0",
     "babel-preset-env": "^1.6.0",
     "chai": "^4.1.0",
     "coffee-loader": "^0.7.2",
     "coffee-script": "^1.12.7",
+    "conventional-changelog": "^1.1.18",
     "css-loader": "^0.28.4",
     "eslint": "^3.19.0",
     "eslint-plugin-vue-libs": "^1.2.0",
@@ -75,7 +78,6 @@
     "gitbook-plugin-edit-link": "^2.0.2",
     "gitbook-plugin-github": "^3.0.0",
     "gitbook-plugin-theme-vuejs": "^1.1.0",
-    "inject-loader": "^3.0.1",
     "js-yaml": "^3.9.1",
     "jsdom": "^9.2.1",
     "lint-staged": "^4.0.2",
