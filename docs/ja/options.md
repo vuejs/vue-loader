@@ -162,7 +162,7 @@ module.exports = {
 
 ### esModule
 
-> This option has been removed in v14.0. In v14.0 and above, `*.vue` files always expose ES modules.
+> このオプションは v14.0 では削除されました。v14.0 以降では、`*.vue` ファイルは常に ES モジュールをエクスポーズします。
 
 - 型: `boolean`
 - デフォルト: `true` (v13.0以降)
