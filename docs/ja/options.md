@@ -313,6 +313,17 @@ module.exports = {
 描画 (render) 関数によって返された vdom ツリーの一部をプレーンな文字列にコンパイルする、Vue 2.4 SSR (サーバサイドレンダリング) のコンパイル最適化を有効にして、SSR のパフォーマンスを改善します。
 描画関数の結果が SSR のみを対象としたものになり、クライアントサイドレンダリングまたはテストには使用できなくなるため、あるケースによっては、明示的にオフにしたくなる場合があります。
 
+### hotReload
+
+ > New in 13.5.0
+
+ - type: `boolean`
+ - default: `true` in development mode, `false` in production mode or when the webpack config has `target: 'node'`.
+ - allowed value: `false` (`true` will not force Hot Reload neither in production mode nor when `target: 'node'`)
+
+ Whether to use webpack [Hot Module Replacement](https://webpack.js.org/concepts/hot-module-replacement/) to apply changes in the browser **without reloading the page**.
+ Use this option (value `false`) to disable the Hot Reload feature in development mode.
+
 ### threadMode
 
 > New in 14.2.0
