@@ -162,12 +162,12 @@ module.exports = {
 
 ### postcss.cascade
 
-> New in 14.2.0
+> 14.2.0 で新規追加
 
-- type: `boolean`
-- default: `false`
+- 型: `boolean`
+- デフォルト: `false`
 
-  Set this to `true` to enable cascading PostCSS config file loading. For example, you can have extra `.postcssrc` files in nested source directories to apply different PostCSS configs to different files in your project.
+  PostCSS 設定ファイル読み込みのカスケーディングを有効にするにはこれを `true` に設定します。例えば、ネストされたソースディレクトリに `.postcssrc` ファイルを追加するとプロジェクトの異なるファイルに異なる PostCSS 設定を適用することができます。
 
 ### esModule
 
@@ -315,22 +315,22 @@ module.exports = {
 
 ### hotReload
 
-> New in 13.5.0
+> 13.5.0 で新規追加
 
-- type: `boolean`
-- default: `true` in development mode, `false` in production mode or when the webpack config has `target: 'node'`.
-- allowed value: `false` (`true` will not force Hot Reload neither in production mode nor when `target: 'node'`)
+- 型: `boolean`
+- デフォルト: 開発(development)モードでは `true` 、本番(production)モードまたは webpack 設定が `target: 'node' を持っているときは、`false`
+- 許可される値: `false` (`true` は本番モードまたは `target: 'node'` では、ホットリロードは強制されません。)
 
-  Whether to use webpack [Hot Module Replacement](https://webpack.js.org/concepts/hot-module-replacement/) to apply changes in the browser **without reloading the page**.
-  Use this option (value `false`) to disable the Hot Reload feature in development mode.
+  webpack の[ホットリロードリプレースメント](https://webpack.js.org/concepts/hot-module-replacement/) を使用して、**ページをリロードすることなく**ブラウザで変更を適用するかどうか。
+  開発モードでホットリロード機能を無効にするには、このオプション(値は `false`) を使用します。
 
 ### threadMode
 
-> New in 14.2.0
+> 14.2.0 で新規追加
 
-- type: `boolean`
-- default: `false`
+- 型: `boolean`
+- デフォルト: `false`
 
-  Setting this to true enables filesystem-based option caching so that the options for the main `vue-loader` can be properly shared with sub-loaders in other threads.
+  これを true に設定すると、ファイルシステムベースのオプションキャッシングが有効になり、メインの `vue-loader` のオプションを他のスレッドのサブローダーと適切に共有できるようになります。
 
-  Only needed when using together with HappyPack or `thread-loader`.
+  HappyPack または`thread-loader` と一緒に使用する場合にのみ必要です。
