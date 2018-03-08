@@ -138,12 +138,12 @@ module.exports = {
 
 ### postcss.useConfigFile
 
-> New in 13.6.0
+> 13.6.0 で新規追加
 
-- type: `boolean`
-- default: `true`
+- 型: `boolean`
+- デフォルト: `true`
 
-  Set this to `false` to disable auto-loading of postcss config files.
+  postcss 設定ファイルの自動読み込みを無効にするためには、これを `false` に設定します。  
 
 ### cssSourceMap
 
