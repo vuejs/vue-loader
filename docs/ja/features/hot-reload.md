@@ -6,15 +6,15 @@
 
 `vue-cli` を使ってプロジェクトをスキャホールドすると、ホットリロードはすぐに使えるようになります。
 
-## Disabling Hot Reload
+## ホットリロードの無効
 
-Hot Reload is always enabled except following situations:
+ホットリロードは以下の状況を除いて常に有効です:
 
- * Webpack `target` is `node` (SSR)
- * Webpack minifies the code
+ * Webpack の `target` が `node` (SSR)
+ * Webpack ミニファイコード
  * `process.env.NODE_ENV === 'production'`
   
-You may use `hotReload: false` option to disable the Hot Reload explicitly:
+ホットリロードを明示的に無効にするためには、`hotReload: false` オプションを使用してください:
 
 ``` js
 module: {
@@ -23,7 +23,7 @@ module: {
       test: /\.vue$/,
       loader: 'vue-loader',
       options: {
-        hotReload: false // disables Hot Reload
+        hotReload: false // ホットリロードを無効
       }
     }
   ]
