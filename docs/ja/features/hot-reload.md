@@ -10,8 +10,8 @@
 
 ホットリロードは以下の状況を除いて常に有効です:
 
- * Webpack の `target` が `node` (SSR)
- * Webpack ミニファイコード
+ * webpack の `target` が `node` (SSR)
+ * webpack ミニファイコード
  * `process.env.NODE_ENV === 'production'`
   
 ホットリロードを明示的に無効にするためには、`hotReload: false` オプションを使用してください:
