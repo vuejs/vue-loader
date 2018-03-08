@@ -23,7 +23,7 @@ createElement('img', { attrs: { src: require('../image.png') }})
 - 如果路径以 `~` 开头，其后的部分将会被看作模块依赖。这意味着你可以用该特性来引用一个 node 依赖中的资源：
 
   ``` html
-  <img src="~/some-npm-package/foo.png">
+  <img src="~some-npm-package/foo.png">
   ```
 
 - (13.7.0+) 如果路径以 `@` 开头，也会被看作模块依赖。如果你的 webpack 配置中给 `@` 配置了 alias，这就很有用了。所有 `vue-cli` 创建的项目都默认配置了将 `@` 指向 `/src`。

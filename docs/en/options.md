@@ -161,6 +161,15 @@ module.exports = {
 
   Note this is automatically set to `false` if the `devtool` option is not present in the main webpack config.
 
+### postcss.cascade
+
+> New in 14.2.0
+
+- type: `boolean`
+- default: `false`
+
+  Set this to `true` to enable cascading PostCSS config file loading. For example, you can have extra `.postcssrc` files in nested source directories to apply different PostCSS configs to different files in your project.
+
 ### esModule
 
 > This option has been removed in v14.0. In v14.0 and above, `*.vue` files always expose ES modules.
@@ -238,62 +247,62 @@ module.exports = {
 - type: `boolean`
 - default: `false`
 
-Automatically extracts the CSS using `extract-text-webpack-plugin`. Works for most pre-processors out of the box, and handles minification in production as well.
+  Automatically extracts the CSS using `extract-text-webpack-plugin`. Works for most pre-processors out of the box, and handles minification in production as well.
 
-The value passed in can be `true`, or an instance of the plugin (so that you can use multiple instances of the extract plugin for multiple extracted files).
+  The value passed in can be `true`, or an instance of the plugin (so that you can use multiple instances of the extract plugin for multiple extracted files).
 
-This should be only used in production so that hot-reload works during development.
+  This should be only used in production so that hot-reload works during development.
 
-Example:
+  Example:
 
-``` js
-// webpack.config.js
-var ExtractTextPlugin = require("extract-text-webpack-plugin")
+  ``` js
+  // webpack.config.js
+  var ExtractTextPlugin = require("extract-text-webpack-plugin")
 
-module.exports = {
-  // other options...
-  module: {
-    rules: [
-      {
-        test: /\.vue$/,
-        loader: 'vue-loader',
-        options: {
-          extractCSS: true
+  module.exports = {
+    // other options...
+    module: {
+      rules: [
+        {
+          test: /\.vue$/,
+          loader: 'vue-loader',
+          options: {
+            extractCSS: true
+          }
         }
-      }
+      ]
+    },
+    plugins: [
+      new ExtractTextPlugin("style.css")
     ]
-  },
-  plugins: [
-    new ExtractTextPlugin("style.css")
-  ]
-}
-```
+  }
+  ```
 
-Or passing in an instance of the plugin:
+  Or passing in an instance of the plugin:
 
-``` js
-// webpack.config.js
-var ExtractTextPlugin = require("extract-text-webpack-plugin")
-var plugin = new ExtractTextPlugin("style.css")
+  ``` js
+  // webpack.config.js
+  var ExtractTextPlugin = require("extract-text-webpack-plugin")
+  var plugin = new ExtractTextPlugin("style.css")
 
-module.exports = {
-  // other options...
-  module: {
-    rules: [
-      {
-        test: /\.vue$/,
-        loader: 'vue-loader',
-        options: {
-          extractCSS: plugin
+  module.exports = {
+    // other options...
+    module: {
+      rules: [
+        {
+          test: /\.vue$/,
+          loader: 'vue-loader',
+          options: {
+            extractCSS: plugin
+          }
         }
-      }
+      ]
+    },
+    plugins: [
+      plugin
     ]
-  },
-  plugins: [
-    plugin
-  ]
-}
-```
+  }
+  ```
 
 ### optimizeSSR
 
@@ -302,7 +311,7 @@ module.exports = {
 - type: `boolean`
 - default: `true` when the webpack config has `target: 'node'` and `vue-template-compiler` is at version 2.4.0 or above.
 
-Enable Vue 2.4 SSR compilation optimization that compiles part of the vdom trees returned by render functions into plain strings, which improves SSR performance. In some cases you might want to explicitly turn it off because the resulting render functions can only be used for SSR and cannot be used for client-side rendering or testing.
+  Enable Vue 2.4 SSR compilation optimization that compiles part of the vdom trees returned by render functions into plain strings, which improves SSR performance. In some cases you might want to explicitly turn it off because the resulting render functions can only be used for SSR and cannot be used for client-side rendering or testing.
 
 ### hotReload
 
@@ -312,5 +321,16 @@ Enable Vue 2.4 SSR compilation optimization that compiles part of the vdom trees
 - default: `true` in development mode, `false` in production mode or when the webpack config has `target: 'node'`.
 - allowed value: `false` (`true` will not force Hot Reload neither in production mode nor when `target: 'node'`)
 
-Whether to use webpack [Hot Module Replacement](https://webpack.js.org/concepts/hot-module-replacement/) to apply changes in the browser **without reloading the page**.
-Use this option (value `false`) to disable the Hot Reload feature in development mode.
+  Whether to use webpack [Hot Module Replacement](https://webpack.js.org/concepts/hot-module-replacement/) to apply changes in the browser **without reloading the page**.
+  Use this option (value `false`) to disable the Hot Reload feature in development mode.
+
+### threadMode
+
+> New in 14.2.0
+
+- type: `boolean`
+- default: `false`
+
+  Setting this to true enables filesystem-based option caching so that the options for the main `vue-loader` can be properly shared with sub-loaders in other threads.
+
+  Only needed when using together with HappyPack or `thread-loader`.

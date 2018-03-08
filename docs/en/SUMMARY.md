@@ -24,6 +24,8 @@
   - [postLoaders](options.md#postloaders)
   - [postcss](options.md#postcss)
   - [postcss.config](options.md#postcssconfig)
+  - [postcss.useConfigFile](options.md#postcssuseconfigfile)
+  - [postcss.cascade](options.md#postcsscascade)
   - [cssSourceMap](options.md#csssourcemap)
   - [esModule](options.md#esmodule)
   - [preserveWhitespace](options.md#preservewhitespace)
