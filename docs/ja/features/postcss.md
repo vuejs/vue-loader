@@ -14,7 +14,7 @@
 
 ## `postcss-loader` の使用
 
-`vue-laoder` は内部的にはスタイルで PostCSS を扱うため、スタンドアロンの CSS ファイルに `postcss-loader` を適用する必要あります。プロジェクトに PostCSS 設定ファイルがある場合は、style ブロックに `lang="postcss"` を指定する必要はありません。
+`vue-loader` は内部的にはスタイルで PostCSS を扱うため、スタンドアロンの CSS ファイルに `postcss-loader` を適用する必要あります。プロジェクトに PostCSS 設定ファイルがある場合は、style ブロックに `lang="postcss"` を指定する必要はありません。
 
 時々、ユーザーはシンタックスハイライトを目的のみに `lang="postcss"`を使用することもあります。13.6.0 から、以下の一般的な PostCSS 拡張 (`vue-loader` 自身の `loaders` オプションを介して)のためにローダーが明示的に指定されていない場合は、それらは `vue-loader` のデフォルト PostCSS 変換を単に追加します:
 
