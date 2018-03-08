@@ -39,8 +39,6 @@ module.exports = {
 
 すべての Vue コンポーネントで処理されたすべての CSS を 1 つの CSS ファイルに抽出する例:
 
-### webpack 2.x
-
 ``` js
 // webpack.config.js
 var ExtractTextPlugin = require("extract-text-webpack-plugin")
@@ -62,39 +60,6 @@ module.exports = {
         }
       }
     ]
-  },
-  plugins: [
-    new ExtractTextPlugin("style.css")
-  ]
-}
-```
-
-### webpack 1.x
-
-``` bash
-npm install extract-text-webpack-plugin --save-dev
-```
-
-``` js
-// webpack.config.js
-var ExtractTextPlugin = require("extract-text-webpack-plugin")
-
-module.exports = {
-  // 他の設定
-  module: {
-    loaders: [
-      {
-        test: /\.vue$/,
-        loader: 'vue'
-      },
-    ]
-  },
-  vue: {
-    loaders: {
-      css: ExtractTextPlugin.extract("css"),
-      // <style lang="less">　または他の言語も含めることができます
-      less: ExtractTextPlugin.extract("css!less")
-    }
   },
   plugins: [
     new ExtractTextPlugin("style.css")

@@ -89,17 +89,6 @@ CSS モジュールは [css-loader](https://github.com/webpack/css-loader) に�
 vue-loader の `cssModules`オプションを使って` css-loader`に追加のクエリオプションを提供することができます:
 
 ``` js
-// webpack 1
-vue: {
-  cssModules: {
-    // ローカルID名を上書きする
-    localIdentName: '[path][name]---[local]---[hash:base64:5]',
-    // キャメルケースを有効にする
-    camelCase: true
-  }
-}
-
-// webpack 2
 module: {
   rules: [
     {
