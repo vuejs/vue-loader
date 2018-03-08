@@ -160,6 +160,15 @@ module.exports = {
 
   注意: もしメインの webpack の設定に `devtool` オプションが存在しないければオートで `false` にセットされます。
 
+### postcss.cascade
+
+> New in 14.2.0
+
+- type: `boolean`
+- default: `false`
+
+  Set this to `true` to enable cascading PostCSS config file loading. For example, you can have extra `.postcssrc` files in nested source directories to apply different PostCSS configs to different files in your project.
+
 ### esModule
 
 > このオプションは v14.0 では削除されました。v14.0 以降では、`*.vue` ファイルは常に ES モジュールをエクスポーズします。
@@ -303,3 +312,14 @@ module.exports = {
 
 描画 (render) 関数によって返された vdom ツリーの一部をプレーンな文字列にコンパイルする、Vue 2.4 SSR (サーバサイドレンダリング) のコンパイル最適化を有効にして、SSR のパフォーマンスを改善します。
 描画関数の結果が SSR のみを対象としたものになり、クライアントサイドレンダリングまたはテストには使用できなくなるため、あるケースによっては、明示的にオフにしたくなる場合があります。
+
+### threadMode
+
+> New in 14.2.0
+
+- type: `boolean`
+- default: `false`
+
+  Setting this to true enables filesystem-based option caching so that the options for the main `vue-loader` can be properly shared with sub-loaders in other threads.
+
+  Only needed when using together with HappyPack or `thread-loader`.
