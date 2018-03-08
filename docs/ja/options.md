@@ -304,9 +304,9 @@ module.exports = {
 
 ### cacheBusting
 
-> New in 13.2.0
+> 13.2.0 で新規追加
 
-- type: `boolean`
-- default: `true` in development mode, `false` in production mode.
+- 型: `boolean`
+- デフォルト: 開発モードでは `true`、本番モードでは `false`
 
-Whether generate source maps with cache busting by appending a hash query to the file name. Turning this off can help with source map debugging.
+ファイル名にハッシュクエリを追加することによって、キャッシュバスティング (cache busting) によるソースマップを生成するかどうか。これをオフにすることで、ソースマップのデバッグに役立ちます。
