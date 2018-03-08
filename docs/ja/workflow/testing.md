@@ -2,9 +2,9 @@
 
 > [webpack vue-cli テンプレート](https://github.com/vuejs-templates/webpack)には、事前に設定された単体テストと e2e テストの設定が用意されています。
 
-`* .vue`ファイルをテストするときには、普通の CommonJS ベースのテストランナーを使うことができません。なぜならそのテストランナーは `*.vue` ファイルの扱い方を知らないからです。代わりに、webpack + vue-loader を使用してテストファイルをバンドルします。推奨設定は [Karma](http://karma-runner.github.io/0.13/index.html) と [karma-webpack](https://github.com/webpack/karma-webpack) です。
+`* .vue`ファイルをテストするときには、普通の CommonJS ベースのテストランナーを使うことができません。なぜならそのテストランナーは `*.vue` ファイルの扱い方を知らないからです。代わりに、webpack + vue-loader を使用してテストファイルをバンドルします。推奨設定は [Karma](https://karma-runner.github.io/0.13/index.html) と [karma-webpack](https://github.com/webpack/karma-webpack) です。
 
-Karma はブラウザを起動してテストを実行するテストランナーです。テストするブラウザと、使用するテストフレームワーク（たとえば、MochaやJasmineなど）を選択できます。[PhantomJS](http://phantomjs.org/) のテストを[Jasmine](http://jasmine.github.io/edge/introduction.html) テストフレームワークで実行する Karma の設定例を次に示します:
+Karma はブラウザを起動してテストを実行するテストランナーです。テストするブラウザと、使用するテストフレームワーク（たとえば、MochaやJasmineなど）を選択できます。[PhantomJS](http://phantomjs.org/) のテストを[Jasmine](https://jasmine.github.io/edge/introduction.html) テストフレームワークで実行する Karma の設定例を次に示します:
 
 ``` bash
 npm install\

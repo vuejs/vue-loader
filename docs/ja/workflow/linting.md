@@ -1,6 +1,6 @@
 # リント
 
-あなたは JavaScript でない `*.vue` の中のコードをどうやってリント (lint) するのか疑問に思っているかも知れません。[ESLint](http://eslint.org/) を使用していると仮定します(もし使っていないのならばすべきです!)
+あなたは JavaScript でない `*.vue` の中のコードをどうやってリント (lint) するのか疑問に思っているかも知れません。[ESLint](https://eslint.org/) を使用していると仮定します(もし使っていないのならばすべきです!)
 
 `* .vue`ファイル内のJavaScriptの抽出と埋め込みをサポートする[eslint-plugin-html](https://github.com/BenoitZugmeyer/eslint-plugin-html)も同様に必要です。
 

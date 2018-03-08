@@ -20,9 +20,9 @@
 
 すでに webpack に精通している場合は、次の説明を省略してもかまいません。しかし、webpack を初めて使う人のために、ここで簡単な紹介を行います。
 
-[webpack](http://webpack.github.io/) とはモジュールのバンドラーです。それぞれのファイルをモジュールとして扱い、それらの間の依存関係を解決し、デプロイの準備が整った静的アセットにバンドルします。
+[webpack](https://webpack.github.io/) とはモジュールのバンドラーです。それぞれのファイルをモジュールとして扱い、それらの間の依存関係を解決し、デプロイの準備が整った静的アセットにバンドルします。
 
-![webpack](http://webpack.github.io/assets/what-is-webpack.png)
+![webpack](https://webpack.github.io/assets/what-is-webpack.png)
 
 基本的な例として、CommonJS モジュールが多数あるとします。これらはブラウザで直接実行できません。なのでそれらを `<script>` タグを介して読み込むことのできる単一のファイルに "バンドル" する必要があります。webpack は `require()` での依存性解決と実行を行うことが出来ます。
 
