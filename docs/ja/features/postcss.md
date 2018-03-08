@@ -4,13 +4,24 @@
 
 ## 設定ファイルの使用
 
-バージョン 11.0 以降、 `vue-loader` は [`postcss-loader`](https://github.com/postcss/postcss-loader#usage) でサポートされているものと同じ PostCss の設定ファイルのオートロードをサポートします:
+`vue-loader` は [`postcss-loader`](https://github.com/postcss/postcss-loader#usage) でサポートされているものと同じ PostCss の設定ファイルのオートロードをサポートします:
 
 - `postcss.config.js`
 - `.postcssrc`
 - `package.json` 内の `postcss`
 
 設定ファイルを使用すると `postcss-loader` で処理された通常の CSS ファイルと `*.vue` ファイル内の CSS で同じ設定を共有することができます。
+
+## Using with `postcss-loader`
+
+Since `vue-loader` handles PostCSS on its styles internally, you only need to apply `postcss-loader` to standalone CSS files. There's no need to specify `lang="postcss"` on a style block if there is a PostCSS config file in your project.
+
+Sometimes the user may want to use `lang="postcss"` only for syntax highlighting purposes. Starting in 13.6.0, if no loader has been explicitly configured for the following common PostCSS extensions (via `vue-loader`'s own `loaders` option), they will simply go through `vue-loader`'s default PostCSS transforms:
+
+- `postcss`
+- `pcss`
+- `sugarss`
+- `sss`
 
 ## インラインオプション
 
@@ -65,3 +76,17 @@ module.exports = {
     }
   }
   ```
+
+### Disabling Auto Config File Loading
+
+In `13.6.0+`, auto postcss config file loading can be disabled by specifying `postcss.useConfigFile: false`:
+
+``` js
+postcss: {
+  useConfigFile: false,
+  plugins: [/* ... */],
+  options: {/* ... */}
+}
+```
+
+This allows the postcss configuration inside `*.vue` files to be entirely controlled by the inline config.

@@ -136,6 +136,15 @@ module.exports = {
 
     PostCSS プラグインにコンテキストを提供します。より詳細については、[postcss-loader のドキュメント](https://github.com/postcss/postcss-loader#context-ctx) を参照してください。
 
+### postcss.useConfigFile
+
+> New in 13.6.0
+
+- type: `boolean`
+- default: `true`
+
+  Set this to `false` to disable auto-loading of postcss config files.
+
 ### cssSourceMap
 
 - 型: `boolean`
