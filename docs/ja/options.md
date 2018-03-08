@@ -301,3 +301,12 @@ module.exports = {
 
 描画 (render) 関数によって返された vdom ツリーの一部をプレーンな文字列にコンパイルする、Vue 2.4 SSR (サーバサイドレンダリング) のコンパイル最適化を有効にして、SSR のパフォーマンスを改善します。
 描画関数の結果が SSR のみを対象としたものになり、クライアントサイドレンダリングまたはテストには使用できなくなるため、あるケースによっては、明示的にオフにしたくなる場合があります。
+
+### cacheBusting
+
+> New in 13.2.0
+
+- type: `boolean`
+- default: `true` in development mode, `false` in production mode.
+
+Whether generate source maps with cache busting by appending a hash query to the file name. Turning this off can help with source map debugging.
