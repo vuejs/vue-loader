@@ -212,8 +212,8 @@ module.exports = {
 
 ### buble
 
-  型: `Object`
-  デフォルト: `{}`
+- 型: `Object`
+- デフォルト: `{}`
 
   `bubble-loader`(存在する場合)のオプションとテンプレートレンダリング関数のための buble のコンパイルパスを設定します。
 
@@ -241,10 +241,10 @@ module.exports = {
 
 ### extractCSS
 
-  > 12.0.0 で追加
+> 12.0.0 で追加
 
-  - 型: `boolean`
-  - デフォルト: `false`
+- 型: `boolean`
+- デフォルト: `false`
 
   自動的に `extract-text-webpack-plugin` を使用して CSS を抽出します。ほとんどのプリプロセッサに対してすぐに動作し、本番環境においても同様に圧縮 (minify) 処理します。
 
@@ -310,19 +310,19 @@ module.exports = {
 - 型: `boolean`
 - デフォルト: webpack 設定が `target: 'node'` でかつ `vue-template-compiler` が バージョン 2.4.0 以上であれば、`true`
 
-描画 (render) 関数によって返された vdom ツリーの一部をプレーンな文字列にコンパイルする、Vue 2.4 SSR (サーバサイドレンダリング) のコンパイル最適化を有効にして、SSR のパフォーマンスを改善します。
-描画関数の結果が SSR のみを対象としたものになり、クライアントサイドレンダリングまたはテストには使用できなくなるため、あるケースによっては、明示的にオフにしたくなる場合があります。
+  描画 (render) 関数によって返された vdom ツリーの一部をプレーンな文字列にコンパイルする、Vue 2.4 SSR (サーバサイドレンダリング) のコンパイル最適化を有効にして、SSR のパフォーマンスを改善します。
+  描画関数の結果が SSR のみを対象としたものになり、クライアントサイドレンダリングまたはテストには使用できなくなるため、あるケースによっては、明示的にオフにしたくなる場合があります。
 
 ### hotReload
 
- > New in 13.5.0
+> New in 13.5.0
 
- - type: `boolean`
- - default: `true` in development mode, `false` in production mode or when the webpack config has `target: 'node'`.
- - allowed value: `false` (`true` will not force Hot Reload neither in production mode nor when `target: 'node'`)
+- type: `boolean`
+- default: `true` in development mode, `false` in production mode or when the webpack config has `target: 'node'`.
+- allowed value: `false` (`true` will not force Hot Reload neither in production mode nor when `target: 'node'`)
 
- Whether to use webpack [Hot Module Replacement](https://webpack.js.org/concepts/hot-module-replacement/) to apply changes in the browser **without reloading the page**.
- Use this option (value `false`) to disable the Hot Reload feature in development mode.
+  Whether to use webpack [Hot Module Replacement](https://webpack.js.org/concepts/hot-module-replacement/) to apply changes in the browser **without reloading the page**.
+  Use this option (value `false`) to disable the Hot Reload feature in development mode.
 
 ### threadMode
 
