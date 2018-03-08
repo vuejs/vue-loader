@@ -1,10 +1,9 @@
 # オプションリファレンス
 
-## webpack 1 と 2 の使い方の違い
-
-webpack 2 の場合: オプションを loader ルールに直接渡します。
+## オプションの配置場所
 
 ``` js
+// webpack.config.js
 module.exports = {
   // ...
   module: {
@@ -21,20 +20,9 @@ module.exports = {
 }
 ```
 
-webpack 1.x の場合: webpack の設定のルートに `vue` ブロックを追加します。
-
-``` js
-module.exports = {
-  // ...
-  vue: {
-    // `vue-loader` オプション
-  }
-}
-```
-
 ### loaders
 
-- 型: `{ [lang: string]: string }`
+- 型: `{ [lang: string]: string | Object | Array }`
 
   `* .vue` ファイル内の言語ブロックに使用されるデフォルトの loader を上書きする webpack loader を指定するオブジェクト。キーは指定されている場合、言語ブロックの `lang` 属性に対応します。各タイプのデフォルトの `lang` は次のとおりです:
 
@@ -45,7 +33,6 @@ module.exports = {
   たとえば、`babel-loader` と `eslint-loader` を使ってすべての `<script>` ブロックを処理するには:
 
   ``` js
-  // webpack 2.x config
   module: {
     rules: [
       {
@@ -61,17 +48,36 @@ module.exports = {
   }
   ```
 
+  オブジェクトまたは配列構文(オプションはシリアライズ可能でなければなりません)も使用することができます:
+
+  ``` js
+  module: {
+    rules: [
+      {
+        test: /\.vue$/,
+        loader: 'vue-loader',
+        options: {
+          loaders: {
+            js: [
+              { loader: 'cache-loader' },
+              { loader: 'babel-loader', options: { presets: ['env'] } }
+            ]
+          }
+        }
+      }
+    ]
+  }
+  ```
+
 ### preLoaders
 
 - 型: `{ [lang: string]: string }`
-- 10.3.0 以降でサポートされます。
 
   config 形式は `loaders` と同じですが、`preLoaders` はデフォルト loader の前に対応する言語ブロックに適用されます。これを使用して言語ブロックを前処理することができます。一般的な使用例としては、i18n のビルド時です。
 
 ### postLoaders
 
 - 型: `{ [lang: string]: string }`
-- 10.3.0 以降でサポートされます。
 
   config 形式は `loaders` と同じですが、` postLoaders` はデフォルト loader の後に適用されます。これを使用して言語ブロックを後処理することができます。ただしこれは少し複雑になります:
 
@@ -80,7 +86,7 @@ module.exports = {
 
 ### postcss
 
-  > メモ: 11.0.0 以降では代わりに PostCSS の設定ファイル推奨されています。[使用法は `postcss-loader` と同じです](https://github.com/postcss/postcss-loader#usage)。
+  > メモ: 代わりに、vue ファイルと通常の CSS が同じ設定を共有することができるため、PostCSS 設定ファイルの使用を推奨されています。[使用法は `postcss-loader` と同じです](https://github.com/postcss/postcss-loader#usage)。
 
 - 型: `Array` もしくは `Function` か `Object`
 
@@ -207,21 +213,6 @@ module.exports = {
   設定の例:
 
   ``` js
-  // webpack 1
-  vue: {
-    buble: {
-      // オブジェクトスプレッド演算子を有効にする
-      // メモ: Object.assign polyfillを自分で提供する必要があります！
-      objectAssign: 'Object.assign',
-
-      // `with` の除去をオフにする
-      transforms: {
-        stripWith: false
-      }
-    }
-  }
-
-  // webpack 2
   module: {
     rules: [
       {
