@@ -14,25 +14,25 @@
 createElement('img', { attrs: { src: require('../image.png') }})
 ```
 
-### Transform Rules
+### 変換ルール
 
-- If the URL is an absolute path (e.g. `/images/foo.png`), it will be preserved as-is.
+- URL が絶対パス (例: `./images/foo.png`) の場合、そのままの状態で維持されます。
 
-- If the URL starts with `.`, it's interpreted as a relative module request and resolved based on the folder structure on your file system.
+- URL が `.` による開始である場合、相対的なモジュール要求として解釈され、ファイルシステムのフォルダ構造に基いて解決されます。
 
-- If the URL starts with `~`, anything after it is interpreted as a module request. This means you can even reference assets inside node modules:
+- URL が `~` による開始である場合、モジュール要求として解釈された後、何もしません。これは、Node モジュール内部でアセットを参照することもできます:
 
   ``` html
   <img src="~/some-npm-package/foo.png">
   ```
 
-- (13.7.0+) If the URL starts with `@`, it's also interpreted as a module request. This is useful if your webpack config has an alias for `@`, which by default points to `/src` in any project created by `vue-cli`.
+- (13.7.0以降) URL が `@` による開始である場合、モジュール要求として解釈されます。これは、webpack 設定ファイルに `@` のエイリアスがある場合は、便利です。デフォルトでは、`vue-cli` によって作成されたプロジェクトでは `./src` を指します。
 
-### Related Loaders
+### 関連ローダー
 
 もちろん `.png` ファイルは JavaScript のファイルではありません。[file-loader](https://github.com/webpack/file-loader) または [url-loader](https://github.com/webpack/url-loader) を使用して webpack を設定する必要があります。`vue-cli` でスキャフォールドされたプロジェクトでは同じような設定がなされています。
 
-### Why
+### なぜなのか
 
 利点の全ては次の通りです:
 
