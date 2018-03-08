@@ -34,4 +34,3 @@
   - [buble](options.md#buble)
   - [extractCSS](options.md#extractcss)
   - [optimizeSSR](options.md#optimizessr)
-  - [cacheBusting](options.md#cacheBusting)
