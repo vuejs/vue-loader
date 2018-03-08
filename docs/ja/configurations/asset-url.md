@@ -23,7 +23,7 @@ createElement('img', { attrs: { src: require('../image.png') }})
 - URL が `~` による開始である場合、モジュール要求として解釈された後、何もしません。これは、Node モジュール内部でアセットを参照することもできます:
 
   ``` html
-  <img src="~/some-npm-package/foo.png">
+  <img src="~some-npm-package/foo.png">
   ```
 
 - (13.7.0以降) URL が `@` による開始である場合、モジュール要求として解釈されます。これは、webpack 設定ファイルに `@` のエイリアスがある場合は、便利です。デフォルトでは、`vue-cli` によって作成されたプロジェクトでは `./src` を指します。
