@@ -18,7 +18,6 @@
   - [プロダクションビルド](workflow/production.md)
   - [リント](workflow/linting.md)
   - [テスト](workflow/testing.md)
-  - [モックを使用したテスト](workflow/testing-with-mocks.md)
 - [オプションリファレンス](options.md)
   - [loaders](options.md#loaders)
   - [preLoaders](options.md#preloaders)
