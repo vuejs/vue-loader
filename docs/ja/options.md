@@ -86,7 +86,7 @@ module.exports = {
 
 ### postcss
 
-  > メモ: 代わりに、vue ファイルと通常の CSS が同じ設定を共有することができるため、PostCSS 設定ファイルの使用を推奨されています。[使用法は `postcss-loader` と同じです](https://github.com/postcss/postcss-loader#usage)。
+  > メモ: 代わりに、`*.vue` ファイルと通常の CSS が同じ設定を共有することができるため、PostCSS 設定ファイルの使用を推奨されています。[使用法は `postcss-loader` と同じです](https://github.com/postcss/postcss-loader#usage)。
 
 - 型: `Array` もしくは `Function` か `Object`
 

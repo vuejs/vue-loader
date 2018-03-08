@@ -86,11 +86,11 @@ module.exports = {
 
 ### postcss
 
-> 注意：这里推荐使用 PostCSS 配置文件代替，这样你的 `.vue` 文件中的样式和普通的 CSS 样式可以共享相同的配置。[用法和 `postcss-loader` 相同](https://github.com/postcss/postcss-loader#usage)。
+> 注意：这里推荐使用 PostCSS 配置文件代替，这样你的 `*.vue` 文件中的样式和普通的 CSS 样式可以共享相同的配置。[用法和 `postcss-loader` 相同](https://github.com/postcss/postcss-loader#usage)。
 
 - 类型：`Array` or `Function` or `Object`
 
-  指定要应用于 `.vue` 文件中 CSS 的自定义 PostCSS 插件。如果使用函数，函数将使用相同的 loader 上下文调用，并返回一个插件数组。
+  指定要应用于 `*.vue` 文件中 CSS 的自定义 PostCSS 插件。如果使用函数，函数将使用相同的 loader 上下文调用，并返回一个插件数组。
 
   ``` js
   // ...
