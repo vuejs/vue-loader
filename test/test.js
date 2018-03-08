@@ -135,6 +135,7 @@ function initStylesForAllSubComponents (module) {
 }
 
 describe('vue-loader', () => {
+  // basic usage
   it('basic', done => {
     test({
       entry: 'basic.vue'
@@ -156,15 +157,6 @@ describe('vue-loader', () => {
     })
   })
 
-  it('expose filename', done => {
-    test({
-      entry: 'basic.vue'
-    }, (window, module, rawModule) => {
-      expect(module.__file).to.equal(path.normalize('test/fixtures/basic.vue'))
-      done()
-    })
-  })
-
   it('pre-processors', done => {
     test({
       entry: 'pre.vue'
@@ -181,77 +173,6 @@ describe('vue-loader', () => {
       expect(module.data().msg).to.contain('Hello from coffee!')
       const style = window.document.querySelector('style').textContent
       expect(style).to.contain('body {\n  font: 100% Helvetica, sans-serif;\n  color: #999;\n}')
-      done()
-    })
-  })
-
-  it('pre-processors with extract css', done => {
-    test({
-      entry: 'pre.vue',
-      vue: {
-        extractCSS: true
-      },
-      plugins: [
-        new ExtractTextPlugin('test.output.css')
-      ]
-    }, (window, module) => {
-      const vnode = mockRender(module)
-
-      expect(vnode.children[0].tag).to.equal('h1')
-      expect(vnode.children[1].tag).to.equal('comp-a')
-      expect(vnode.children[2].tag).to.equal('comp-b')
-
-      expect(module.data().msg).to.contain('Hello from coffee!')
-
-      let css = mfs.readFileSync('/test.output.css').toString()
-      css = normalizeNewline(css)
-      expect(css).to.contain('body {\n  font: 100% Helvetica, sans-serif;\n  color: #999;\n}')
-
-      done()
-    })
-  })
-
-  it('scoped style', done => {
-    test({
-      entry: 'scoped-css.vue'
-    }, (window, module) => {
-      const id = 'data-v-' + genId('scoped-css.vue')
-      expect(module._scopeId).to.equal(id)
-
-      const vnode = mockRender(module, {
-        ok: true
-      })
-      // <div>
-      //   <div><h1>hi</h1></div>
-      //   <p class="abc def">hi</p>
-      //   <template v-if="ok"><p class="test">yo</p></template>
-      //   <svg><template><p></p></template></svg>
-      // </div>
-      expect(vnode.children[0].tag).to.equal('div')
-      expect(vnode.children[1].text).to.equal(' ')
-      expect(vnode.children[2].tag).to.equal('p')
-      expect(vnode.children[2].data.staticClass).to.equal('abc def')
-      expect(vnode.children[4].tag).to.equal('p')
-      expect(vnode.children[4].data.staticClass).to.equal('test')
-
-      let style = window.document.querySelector('style').textContent
-      style = normalizeNewline(style)
-      expect(style).to.contain(`.test[${id}] {\n  color: yellow;\n}`)
-      expect(style).to.contain(`.test[${id}]:after {\n  content: \'bye!\';\n}`)
-      expect(style).to.contain(`h1[${id}] {\n  color: green;\n}`)
-      // scoped keyframes
-      expect(style).to.contain(`.anim[${id}] {\n  animation: color-${id} 5s infinite, other 5s;`)
-      expect(style).to.contain(`.anim-2[${id}] {\n  animation-name: color-${id}`)
-      expect(style).to.contain(`.anim-3[${id}] {\n  animation: 5s color-${id} infinite, 5s other;`)
-      expect(style).to.contain(`@keyframes color-${id} {`)
-      expect(style).to.contain(`@-webkit-keyframes color-${id} {`)
-
-      expect(style).to.contain(`.anim-multiple[${id}] {\n  animation: color-${id} 5s infinite,opacity-${id} 2s;`)
-      expect(style).to.contain(`.anim-multiple-2[${id}] {\n  animation-name: color-${id},opacity-${id};`)
-      expect(style).to.contain(`@keyframes opacity-${id} {`)
-      expect(style).to.contain(`@-webkit-keyframes opacity-${id} {`)
-      // >>> combinator
-      expect(style).to.contain(`.foo p[${id}] .bar {\n  color: red;\n}`)
       done()
     })
   })
@@ -307,53 +228,54 @@ describe('vue-loader', () => {
     })
   })
 
-  it('source map', done => {
-    bundle({
+  // advanced features
+  it('pre/post loaders', done => {
+    test({
       entry: 'basic.vue',
-      devtool: '#source-map'
-    }, (code, warnings) => {
-      const map = mfs.readFileSync('/test.build.js.map', 'utf-8')
-      const smc = new SourceMapConsumer(JSON.parse(map))
-      let line
-      let col
-      const targetRE = /^\s+msg: 'Hello from Component A!'/
-      code.split(/\r?\n/g).some((l, i) => {
-        if (targetRE.test(l)) {
-          line = i + 1
-          col = 0
-          return true
+      vue: {
+        preLoaders: {
+          js: require.resolve('./mock-loaders/js'),
+          css: require.resolve('./mock-loaders/css')
+        },
+        postLoaders: {
+          html: require.resolve('./mock-loaders/html')
         }
+      }
+    }, (window, module) => {
+      const vnode = mockRender(module, {
+        msg: 'hi'
       })
-      const pos = smc.originalPositionFor({
-        line: line,
-        column: col
-      })
-      expect(pos.source.indexOf('basic.vue') > -1)
-      expect(pos.line).to.equal(9)
+      // <h2 class="green">{{msg}}</h2>
+      expect(vnode.tag).to.equal('h2')
+      expect(vnode.data.staticClass).to.equal('green')
+      expect(vnode.children[0].text).to.equal('hi')
+
+      expect(module.data().msg).to.contain('Changed!')
+      let style = window.document.querySelector('style').textContent
+      style = normalizeNewline(style)
+      expect(style).to.contain('comp-a h2 {\n  color: #00f;\n}')
       done()
     })
   })
 
-  it('media-query', done => {
+  it('support chaining with other loaders', done => {
+    const mockLoaderPath = require.resolve('./mock-loaders/js')
     test({
-      entry: 'media-query.vue'
-    }, (window) => {
-      let style = window.document.querySelector('style').textContent
-      style = normalizeNewline(style)
-      const id = 'data-v-' + genId('media-query.vue')
-      expect(style).to.contain('@media print {\n.foo[' + id + '] {\n    color: #000;\n}\n}')
+      entry: 'basic.vue',
+      modify: config => {
+        config.module.rules[0].loader = loaderPath + '!' + mockLoaderPath
+      }
+    }, (window, module) => {
+      expect(module.data().msg).to.equal('Changed!')
       done()
     })
   })
 
-  it('supports-query', done => {
+  it('expose filename', done => {
     test({
-      entry: 'supports-query.vue'
-    }, (window) => {
-      let style = window.document.querySelector('style').textContent
-      style = normalizeNewline(style)
-      const id = 'data-v-' + genId('supports-query.vue')
-      expect(style).to.contain('@supports ( color: #000 ) {\n.foo[' + id + '] {\n    color: #000;\n}\n}')
+      entry: 'basic.vue'
+    }, (window, module, rawModule) => {
+      expect(module.__file).to.equal(path.normalize('test/fixtures/basic.vue'))
       done()
     })
   })
@@ -412,6 +334,187 @@ describe('vue-loader', () => {
       css = normalizeNewline(css)
       expect(css).to.contain('h1 {\n  color: #f00;\n}')
       expect(css).to.contain('h2 {\n  color: green;\n}')
+      done()
+    })
+  })
+
+  it('pre-processors with extract css', done => {
+    test({
+      entry: 'pre.vue',
+      vue: {
+        extractCSS: true
+      },
+      plugins: [
+        new ExtractTextPlugin('test.output.css')
+      ]
+    }, (window, module) => {
+      const vnode = mockRender(module)
+
+      expect(vnode.children[0].tag).to.equal('h1')
+      expect(vnode.children[1].tag).to.equal('comp-a')
+      expect(vnode.children[2].tag).to.equal('comp-b')
+
+      expect(module.data().msg).to.contain('Hello from coffee!')
+
+      let css = mfs.readFileSync('/test.output.css').toString()
+      css = normalizeNewline(css)
+      expect(css).to.contain('body {\n  font: 100% Helvetica, sans-serif;\n  color: #999;\n}')
+
+      done()
+    })
+  })
+
+  it('source map', done => {
+    bundle({
+      entry: 'basic.vue',
+      devtool: '#source-map'
+    }, (code, warnings) => {
+      const map = mfs.readFileSync('/test.build.js.map', 'utf-8')
+      const smc = new SourceMapConsumer(JSON.parse(map))
+      let line
+      let col
+      const targetRE = /^\s+msg: 'Hello from Component A!'/
+      code.split(/\r?\n/g).some((l, i) => {
+        if (targetRE.test(l)) {
+          line = i + 1
+          col = 0
+          return true
+        }
+      })
+      const pos = smc.originalPositionFor({
+        line: line,
+        column: col
+      })
+      expect(pos.source.indexOf('basic.vue') > -1)
+      expect(pos.line).to.equal(9)
+      done()
+    })
+  })
+
+  it('multiple rule definitions', done => {
+    test({
+      modify: config => {
+        // remove default rule
+        config.module.rules.shift()
+      },
+      entry: './test/fixtures/multiple-rules.js',
+      module: {
+        rules: [
+          {
+            test: /\.vue$/,
+            oneOf: [
+              {
+                include: /-1\.vue$/,
+                loader: loaderPath,
+                options: {
+                  postcss: [
+                    css => {
+                      css.walkDecls('font-size', decl => {
+                        decl.value = `${parseInt(decl.value, 10) * 2}px`
+                      })
+                    }
+                  ],
+                  compilerModules: [{
+                    postTransformNode: el => {
+                      el.staticClass = '"multiple-rule-1"'
+                    }
+                  }]
+                }
+              },
+              {
+                include: /-2\.vue$/,
+                loader: loaderPath,
+                options: {
+                  postcss: [
+                    css => {
+                      css.walkDecls('font-size', decl => {
+                        decl.value = `${parseInt(decl.value, 10) / 2}px`
+                      })
+                    }
+                  ],
+                  compilerModules: [{
+                    postTransformNode: el => {
+                      el.staticClass = '"multiple-rule-2"'
+                    }
+                  }]
+                }
+              }
+            ]
+          }
+        ]
+      }
+    }, (window, module) => {
+      const vnode1 = mockRender(window.rules[0])
+      const vnode2 = mockRender(window.rules[1])
+      expect(vnode1.data.staticClass).to.equal('multiple-rule-1')
+      expect(vnode2.data.staticClass).to.equal('multiple-rule-2')
+      const styles = window.document.querySelectorAll('style')
+      const expr = /\.multiple-rule-\d\s*\{\s*font-size:\s*([.0-9]+)px;/
+      for (let i = 0, l = styles.length; i < l; i++) {
+        const content = styles[i].textContent
+        if (expr.test(content)) {
+          expect(parseFloat(RegExp.$1)).to.be.equal(14)
+        }
+      }
+      done()
+    })
+  })
+
+  it('thread mode', done => {
+    test({
+      entry: 'basic.vue',
+      vue: {
+        threadMode: true
+      }
+    }, (window, module, rawModule) => {
+      const vnode = mockRender(module, {
+        msg: 'hi'
+      })
+
+      // <h2 class="red">{{msg}}</h2>
+      expect(vnode.tag).to.equal('h2')
+      expect(vnode.data.staticClass).to.equal('red')
+      expect(vnode.children[0].text).to.equal('hi')
+
+      expect(module.data().msg).to.contain('Hello from Component A!')
+      let style = window.document.querySelector('style').textContent
+      style = normalizeNewline(style)
+      expect(style).to.contain('comp-a h2 {\n  color: #f00;\n}')
+      done()
+    })
+  })
+
+  // template block features
+  it('template with comments', done => {
+    test({
+      entry: 'template-comment.vue'
+    }, (window, module, rawModule) => {
+      expect(module.comments).to.equal(true)
+      const vnode = mockRender(module, {
+        msg: 'hi'
+      })
+      expect(vnode.tag).to.equal('div')
+      expect(vnode.children.length).to.equal(2)
+      expect(vnode.children[0].data.staticClass).to.equal('red')
+      expect(vnode.children[0].children[0].text).to.equal('hi')
+      expect(vnode.children[1].isComment).to.true
+      expect(vnode.children[1].text).to.equal(' comment here ')
+      done()
+    })
+  })
+
+  it('transpile ES2015 features in template', done => {
+    test({
+      entry: 'es2015.vue'
+    }, (window, module) => {
+      const vnode = mockRender(module, {
+        a: 'hello',
+        b: true
+      })
+      // <div :class="{[a]:true}"></div>
+      expect(vnode.tag).to.equal('div')
+      expect(vnode.data.class['test-hello']).to.equal(true)
+      expect(vnode.data.class['b']).to.equal(true)
       done()
     })
   })
@@ -483,6 +586,210 @@ describe('vue-loader', () => {
 
       // style
       expect(includeDataURL(style)).to.equal(true)
+      done()
+    })
+  })
+
+  it('should allow adding custom html loaders', done => {
+    test({
+      entry: 'markdown.vue',
+      vue: {
+        loaders: {
+          html: 'marked'
+        }
+      }
+    }, (window, module) => {
+      const vnode = mockRender(module, {
+        msg: 'hi'
+      })
+      // <h2 id="-msg-">{{msg}}</h2>
+      expect(vnode.tag).to.equal('h2')
+      expect(vnode.data.attrs.id).to.equal('-msg-')
+      expect(vnode.children[0].text).to.equal('hi')
+      done()
+    })
+  })
+
+  it('custom compiler modules', done => {
+    test({
+      entry: 'custom-module.vue',
+      vue: {
+        compilerModules: [
+          {
+            postTransformNode: el => {
+              if (el.staticStyle) {
+                el.staticStyle = `$processStyle(${el.staticStyle})`
+              }
+              if (el.styleBinding) {
+                el.styleBinding = `$processStyle(${el.styleBinding})`
+              }
+            }
+          }
+        ]
+      }
+    }, (window, module) => {
+      const results = []
+      // var vnode =
+      mockRender(
+        Object.assign(module, { methods: { $processStyle: style => results.push(style) }}),
+        { transform: 'translateX(10px)' }
+      )
+      expect(results).to.deep.equal([
+        { 'flex-direction': 'row' },
+        { 'transform': 'translateX(10px)' }
+      ])
+      done()
+    })
+  })
+
+  it('custom compiler directives', done => {
+    test({
+      entry: 'custom-directive.vue',
+      vue: {
+        compilerDirectives: {
+          i18n (el, dir) {
+            if (dir.name === 'i18n' && dir.value) {
+              el.i18n = dir.value
+              if (!el.props) {
+                el.props = []
+              }
+              el.props.push({ name: 'textContent', value: `_s(${JSON.stringify(dir.value)})` })
+            }
+          }
+        }
+      }
+    }, (window, module) => {
+      const vnode = mockRender(module)
+      expect(vnode.data.domProps.textContent).to.equal('keypath')
+      done()
+    })
+  })
+
+  it('functional component with styles', done => {
+    test({
+      entry: 'functional-style.vue'
+    }, (window, module, rawModule) => {
+      expect(module.functional).to.equal(true)
+      const vnode = mockRender(module)
+      // <div class="foo">hi</div>
+      expect(vnode.tag).to.equal('div')
+      expect(vnode.data.class).to.equal('foo')
+      expect(vnode.children[0].text).to.equal('functional')
+
+      let style = window.document.querySelector('style').textContent
+      style = normalizeNewline(style)
+      expect(style).to.contain('.foo { color: red;\n}')
+      done()
+    })
+  })
+
+  it('functional template', done => {
+    test({
+      entry: 'functional-root.vue',
+      vue: {
+        preserveWhitespace: false
+      }
+    }, (window, module) => {
+      expect(module.components.Functional._compiled).to.equal(true)
+      expect(module.components.Functional.functional).to.equal(true)
+      expect(module.components.Functional.staticRenderFns).to.exist
+      expect(module.components.Functional.render).to.be.a('function')
+
+      const vnode = mockRender(module, {
+        fn () {
+          done()
+        }
+      }).children[0]
+
+      // Basic vnode
+      expect(vnode.children[0].data.staticClass).to.equal('red')
+      expect(vnode.children[0].children[0].text).to.equal('hello')
+      // Default slot vnode
+      expect(vnode.children[1].tag).to.equal('span')
+      expect(vnode.children[1].children[0].text).to.equal('hello')
+      // Named slot vnode
+      expect(vnode.children[2].tag).to.equal('div')
+      expect(vnode.children[2].children[0].text).to.equal('Second slot')
+      // // Scoped slot vnode
+      expect(vnode.children[3].text).to.equal('hello')
+      // // Static content vnode
+      expect(vnode.children[4].tag).to.equal('div')
+      expect(vnode.children[4].children[0].text).to.equal('Some ')
+      expect(vnode.children[4].children[1].tag).to.equal('span')
+      expect(vnode.children[4].children[1].children[0].text).to.equal('text')
+      // // v-if vnode
+      expect(vnode.children[5].text).to.equal('')
+
+      vnode.children[6].data.on.click()
+    })
+  })
+
+  // style block features
+  it('scoped style', done => {
+    test({
+      entry: 'scoped-css.vue'
+    }, (window, module) => {
+      const id = 'data-v-' + genId('scoped-css.vue')
+      expect(module._scopeId).to.equal(id)
+
+      const vnode = mockRender(module, {
+        ok: true
+      })
+      // <div>
+      //   <div><h1>hi</h1></div>
+      //   <p class="abc def">hi</p>
+      //   <template v-if="ok"><p class="test">yo</p></template>
+      //   <svg><template><p></p></template></svg>
+      // </div>
+      expect(vnode.children[0].tag).to.equal('div')
+      expect(vnode.children[1].text).to.equal(' ')
+      expect(vnode.children[2].tag).to.equal('p')
+      expect(vnode.children[2].data.staticClass).to.equal('abc def')
+      expect(vnode.children[4].tag).to.equal('p')
+      expect(vnode.children[4].data.staticClass).to.equal('test')
+
+      let style = window.document.querySelector('style').textContent
+      style = normalizeNewline(style)
+      expect(style).to.contain(`.test[${id}] {\n  color: yellow;\n}`)
+      expect(style).to.contain(`.test[${id}]:after {\n  content: \'bye!\';\n}`)
+      expect(style).to.contain(`h1[${id}] {\n  color: green;\n}`)
+      // scoped keyframes
+      expect(style).to.contain(`.anim[${id}] {\n  animation: color-${id} 5s infinite, other 5s;`)
+      expect(style).to.contain(`.anim-2[${id}] {\n  animation-name: color-${id}`)
+      expect(style).to.contain(`.anim-3[${id}] {\n  animation: 5s color-${id} infinite, 5s other;`)
+      expect(style).to.contain(`@keyframes color-${id} {`)
+      expect(style).to.contain(`@-webkit-keyframes color-${id} {`)
+
+      expect(style).to.contain(`.anim-multiple[${id}] {\n  animation: color-${id} 5s infinite,opacity-${id} 2s;`)
+      expect(style).to.contain(`.anim-multiple-2[${id}] {\n  animation-name: color-${id},opacity-${id};`)
+      expect(style).to.contain(`@keyframes opacity-${id} {`)
+      expect(style).to.contain(`@-webkit-keyframes opacity-${id} {`)
+      // >>> combinator
+      expect(style).to.contain(`.foo p[${id}] .bar {\n  color: red;\n}`)
+      done()
+    })
+  })
+
+  it('media-query', done => {
+    test({
+      entry: 'media-query.vue'
+    }, (window) => {
+      let style = window.document.querySelector('style').textContent
+      style = normalizeNewline(style)
+      const id = 'data-v-' + genId('media-query.vue')
+      expect(style).to.contain('@media print {\n.foo[' + id + '] {\n    color: #000;\n}\n}')
+      done()
+    })
+  })
+
+  it('supports-query', done => {
+    test({
+      entry: 'supports-query.vue'
+    }, (window) => {
+      let style = window.document.querySelector('style').textContent
+      style = normalizeNewline(style)
+      const id = 'data-v-' + genId('supports-query.vue')
+      expect(style).to.contain('@supports ( color: #000 ) {\n.foo[' + id + '] {\n    color: #000;\n}\n}')
       done()
     })
   })
@@ -579,37 +886,6 @@ describe('vue-loader', () => {
     })
   })
 
-  it('transpile ES2015 features in template', done => {
-    test({
-      entry: 'es2015.vue'
-    }, (window, module) => {
-      const vnode = mockRender(module, {
-        a: 'hello',
-        b: true
-      })
-      // <div :class="{[a]:true}"></div>
-      expect(vnode.tag).to.equal('div')
-      expect(vnode.data.class['test-hello']).to.equal(true)
-      expect(vnode.data.class['b']).to.equal(true)
-      done()
-    })
-  })
-
-  it('allows to export extended constructor', done => {
-    test({
-      entry: 'extend.vue'
-    }, (window, Module) => {
-      // extend.vue should export Vue constructor
-      const vnode = mockRender(Module.options, {
-        msg: 'success'
-      })
-      expect(vnode.tag).to.equal('div')
-      expect(vnode.children[0].text).to.equal('success')
-      expect(new Module().msg === 'success')
-      done()
-    })
-  })
-
   it('css-modules', done => {
     function testWithIdent (localIdentName, regexToMatch, cb) {
       test({
@@ -656,104 +932,33 @@ describe('vue-loader', () => {
     })
   })
 
-  it('css-modules in SSR', done => {
-    bundle({
-      entry: 'css-modules.vue',
-      target: 'node',
-      output: Object.assign({}, globalConfig.output, {
-        libraryTarget: 'commonjs2'
-      })
-    }, (code, warnings) => {
-      // http://stackoverflow.com/questions/17581830/load-node-js-module-from-string-in-memory
-      function requireFromString (src, filename) {
-        const Module = module.constructor
-        const m = new Module()
-        m._compile(src, filename)
-        return m.exports
-      }
-
-      const output = interopDefault(requireFromString(code, './test.build.js'))
-      const mockInstance = {}
-
-      output.beforeCreate.forEach(hook => hook.call(mockInstance))
-      expect(mockInstance.style.red).to.exist
-
-      done()
-    })
-  })
-
-  it('should allow adding custom html loaders', done => {
+  // script block features
+  it('allows to export extended constructor', done => {
     test({
-      entry: 'markdown.vue',
-      vue: {
-        loaders: {
-          html: 'marked'
-        }
-      }
-    }, (window, module) => {
-      const vnode = mockRender(module, {
-        msg: 'hi'
+      entry: 'extend.vue'
+    }, (window, Module) => {
+      // extend.vue should export Vue constructor
+      const vnode = mockRender(Module.options, {
+        msg: 'success'
       })
-      // <h2 id="-msg-">{{msg}}</h2>
-      expect(vnode.tag).to.equal('h2')
-      expect(vnode.data.attrs.id).to.equal('-msg-')
-      expect(vnode.children[0].text).to.equal('hi')
+      expect(vnode.tag).to.equal('div')
+      expect(vnode.children[0].text).to.equal('success')
+      expect(new Module().msg === 'success')
       done()
     })
   })
 
-  it('support chaining with other loaders', done => {
-    const mockLoaderPath = require.resolve('./mock-loaders/js')
+  it('named exports', done => {
     test({
-      entry: 'basic.vue',
-      modify: config => {
-        config.module.rules[0].loader = loaderPath + '!' + mockLoaderPath
-      }
-    }, (window, module) => {
-      expect(module.data().msg).to.equal('Changed!')
+      entry: 'named-exports.vue'
+    }, (window, _, rawModule) => {
+      expect(rawModule.default.name).to.equal('named-exports')
+      expect(rawModule.foo()).to.equal(1)
       done()
     })
   })
 
-  it('SSR style and moduleId extraction', done => {
-    bundle({
-      target: 'node',
-      entry: './test/fixtures/ssr-style.js',
-      output: {
-        path: '/',
-        filename: 'test.build.js',
-        libraryTarget: 'commonjs2'
-      },
-      externals: ['vue']
-    }, code => {
-      const renderer = SSR.createBundleRenderer(code, {
-        basedir: __dirname,
-        runInNewContext: 'once'
-      })
-      const context = {
-        _registeredComponents: new Set()
-      }
-      renderer.renderToString(context, (err, res) => {
-        if (err) return done(err)
-        expect(res).to.contain('data-server-rendered')
-        expect(res).to.contain('<h1>Hello</h1>')
-        expect(res).to.contain('Hello from Component A!')
-        expect(res).to.contain('<div class="foo">functional</div>')
-        // from main component
-        expect(context.styles).to.contain('h1 { color: green;')
-        // from imported child component
-        expect(context.styles).to.contain('comp-a h2 {\n  color: #f00;')
-        // from imported css file
-        expect(context.styles).to.contain('h1 { color: red;')
-        // from imported functional component
-        expect(context.styles).to.contain('.foo { color: red;')
-        // collect component identifiers during render
-        expect(Array.from(context._registeredComponents).length).to.equal(3)
-        done()
-      })
-    })
-  })
-
+  // custom block features
   it('extract custom blocks to a separate file', done => {
     bundle({
       entry: 'custom-language.vue',
@@ -869,35 +1074,6 @@ describe('vue-loader', () => {
     })
   })
 
-  it('pre/post loaders', done => {
-    test({
-      entry: 'basic.vue',
-      vue: {
-        preLoaders: {
-          js: require.resolve('./mock-loaders/js'),
-          css: require.resolve('./mock-loaders/css')
-        },
-        postLoaders: {
-          html: require.resolve('./mock-loaders/html')
-        }
-      }
-    }, (window, module) => {
-      const vnode = mockRender(module, {
-        msg: 'hi'
-      })
-      // <h2 class="green">{{msg}}</h2>
-      expect(vnode.tag).to.equal('h2')
-      expect(vnode.data.staticClass).to.equal('green')
-      expect(vnode.children[0].text).to.equal('hi')
-
-      expect(module.data().msg).to.contain('Changed!')
-      let style = window.document.querySelector('style').textContent
-      style = normalizeNewline(style)
-      expect(style).to.contain('comp-a h2 {\n  color: #00f;\n}')
-      done()
-    })
-  })
-
   it('pre/post loaders for custom blocks', done => {
     test({
       entry: 'custom-blocks.vue',
@@ -924,238 +1100,69 @@ describe('vue-loader', () => {
     })
   })
 
-  it('custom compiler modules', done => {
-    test({
-      entry: 'custom-module.vue',
-      vue: {
-        compilerModules: [
-          {
-            postTransformNode: el => {
-              if (el.staticStyle) {
-                el.staticStyle = `$processStyle(${el.staticStyle})`
-              }
-              if (el.styleBinding) {
-                el.styleBinding = `$processStyle(${el.styleBinding})`
-              }
-            }
-          }
-        ]
-      }
-    }, (window, module) => {
-      const results = []
-      // var vnode =
-      mockRender(
-        Object.assign(module, { methods: { $processStyle: style => results.push(style) }}),
-        { transform: 'translateX(10px)' }
-      )
-      expect(results).to.deep.equal([
-        { 'flex-direction': 'row' },
-        { 'transform': 'translateX(10px)' }
-      ])
-      done()
-    })
-  })
-
-  it('custom compiler directives', done => {
-    test({
-      entry: 'custom-directive.vue',
-      vue: {
-        compilerDirectives: {
-          i18n (el, dir) {
-            if (dir.name === 'i18n' && dir.value) {
-              el.i18n = dir.value
-              if (!el.props) {
-                el.props = []
-              }
-              el.props.push({ name: 'textContent', value: `_s(${JSON.stringify(dir.value)})` })
-            }
-          }
-        }
-      }
-    }, (window, module) => {
-      const vnode = mockRender(module)
-      expect(vnode.data.domProps.textContent).to.equal('keypath')
-      done()
-    })
-  })
-
-  it('functional component with styles', done => {
-    test({
-      entry: 'functional-style.vue'
-    }, (window, module, rawModule) => {
-      expect(module.functional).to.equal(true)
-      const vnode = mockRender(module)
-      // <div class="foo">hi</div>
-      expect(vnode.tag).to.equal('div')
-      expect(vnode.data.class).to.equal('foo')
-      expect(vnode.children[0].text).to.equal('functional')
-
-      let style = window.document.querySelector('style').textContent
-      style = normalizeNewline(style)
-      expect(style).to.contain('.foo { color: red;\n}')
-      done()
-    })
-  })
-
-  it('template with comments', done => {
-    test({
-      entry: 'template-comment.vue'
-    }, (window, module, rawModule) => {
-      expect(module.comments).to.equal(true)
-      const vnode = mockRender(module, {
-        msg: 'hi'
+  // SSR
+  it('css-modules in SSR', done => {
+    bundle({
+      entry: 'css-modules.vue',
+      target: 'node',
+      output: Object.assign({}, globalConfig.output, {
+        libraryTarget: 'commonjs2'
       })
-      expect(vnode.tag).to.equal('div')
-      expect(vnode.children.length).to.equal(2)
-      expect(vnode.children[0].data.staticClass).to.equal('red')
-      expect(vnode.children[0].children[0].text).to.equal('hi')
-      expect(vnode.children[1].isComment).to.true
-      expect(vnode.children[1].text).to.equal(' comment here ')
-      done()
-    })
-  })
-
-  it('functional template', done => {
-    test({
-      entry: 'functional-root.vue',
-      vue: {
-        preserveWhitespace: false
+    }, (code, warnings) => {
+      // http://stackoverflow.com/questions/17581830/load-node-js-module-from-string-in-memory
+      function requireFromString (src, filename) {
+        const Module = module.constructor
+        const m = new Module()
+        m._compile(src, filename)
+        return m.exports
       }
-    }, (window, module) => {
-      expect(module.components.Functional._compiled).to.equal(true)
-      expect(module.components.Functional.functional).to.equal(true)
-      expect(module.components.Functional.staticRenderFns).to.exist
-      expect(module.components.Functional.render).to.be.a('function')
 
-      const vnode = mockRender(module, {
-        fn () {
-          done()
-        }
-      }).children[0]
+      const output = interopDefault(requireFromString(code, './test.build.js'))
+      const mockInstance = {}
 
-      // Basic vnode
-      expect(vnode.children[0].data.staticClass).to.equal('red')
-      expect(vnode.children[0].children[0].text).to.equal('hello')
-      // Default slot vnode
-      expect(vnode.children[1].tag).to.equal('span')
-      expect(vnode.children[1].children[0].text).to.equal('hello')
-      // Named slot vnode
-      expect(vnode.children[2].tag).to.equal('div')
-      expect(vnode.children[2].children[0].text).to.equal('Second slot')
-      // // Scoped slot vnode
-      expect(vnode.children[3].text).to.equal('hello')
-      // // Static content vnode
-      expect(vnode.children[4].tag).to.equal('div')
-      expect(vnode.children[4].children[0].text).to.equal('Some ')
-      expect(vnode.children[4].children[1].tag).to.equal('span')
-      expect(vnode.children[4].children[1].children[0].text).to.equal('text')
-      // // v-if vnode
-      expect(vnode.children[5].text).to.equal('')
+      output.beforeCreate.forEach(hook => hook.call(mockInstance))
+      expect(mockInstance.style.red).to.exist
 
-      vnode.children[6].data.on.click()
-    })
-  })
-
-  it('named exports', done => {
-    test({
-      entry: 'named-exports.vue'
-    }, (window, _, rawModule) => {
-      expect(rawModule.default.name).to.equal('named-exports')
-      expect(rawModule.foo()).to.equal(1)
       done()
     })
   })
 
-  it('multiple rule definitions', done => {
-    test({
-      modify: config => {
-        // remove default rule
-        config.module.rules.shift()
+  it('SSR style and moduleId extraction', done => {
+    bundle({
+      target: 'node',
+      entry: './test/fixtures/ssr-style.js',
+      output: {
+        path: '/',
+        filename: 'test.build.js',
+        libraryTarget: 'commonjs2'
       },
-      entry: './test/fixtures/multiple-rules.js',
-      module: {
-        rules: [
-          {
-            test: /\.vue$/,
-            oneOf: [
-              {
-                include: /-1\.vue$/,
-                loader: loaderPath,
-                options: {
-                  postcss: [
-                    css => {
-                      css.walkDecls('font-size', decl => {
-                        decl.value = `${parseInt(decl.value, 10) * 2}px`
-                      })
-                    }
-                  ],
-                  compilerModules: [{
-                    postTransformNode: el => {
-                      el.staticClass = '"multiple-rule-1"'
-                    }
-                  }]
-                }
-              },
-              {
-                include: /-2\.vue$/,
-                loader: loaderPath,
-                options: {
-                  postcss: [
-                    css => {
-                      css.walkDecls('font-size', decl => {
-                        decl.value = `${parseInt(decl.value, 10) / 2}px`
-                      })
-                    }
-                  ],
-                  compilerModules: [{
-                    postTransformNode: el => {
-                      el.staticClass = '"multiple-rule-2"'
-                    }
-                  }]
-                }
-              }
-            ]
-          }
-        ]
-      }
-    }, (window, module) => {
-      const vnode1 = mockRender(window.rules[0])
-      const vnode2 = mockRender(window.rules[1])
-      expect(vnode1.data.staticClass).to.equal('multiple-rule-1')
-      expect(vnode2.data.staticClass).to.equal('multiple-rule-2')
-      const styles = window.document.querySelectorAll('style')
-      const expr = /\.multiple-rule-\d\s*\{\s*font-size:\s*([.0-9]+)px;/
-      for (let i = 0, l = styles.length; i < l; i++) {
-        const content = styles[i].textContent
-        if (expr.test(content)) {
-          expect(parseFloat(RegExp.$1)).to.be.equal(14)
-        }
-      }
-      done()
-    })
-  })
-
-  it('thread mode', done => {
-    test({
-      entry: 'basic.vue',
-      vue: {
-        threadMode: true
-      }
-    }, (window, module, rawModule) => {
-      const vnode = mockRender(module, {
-        msg: 'hi'
+      externals: ['vue']
+    }, code => {
+      const renderer = SSR.createBundleRenderer(code, {
+        basedir: __dirname,
+        runInNewContext: 'once'
       })
-
-      // <h2 class="red">{{msg}}</h2>
-      expect(vnode.tag).to.equal('h2')
-      expect(vnode.data.staticClass).to.equal('red')
-      expect(vnode.children[0].text).to.equal('hi')
-
-      expect(module.data().msg).to.contain('Hello from Component A!')
-      let style = window.document.querySelector('style').textContent
-      style = normalizeNewline(style)
-      expect(style).to.contain('comp-a h2 {\n  color: #f00;\n}')
-      done()
+      const context = {
+        _registeredComponents: new Set()
+      }
+      renderer.renderToString(context, (err, res) => {
+        if (err) return done(err)
+        expect(res).to.contain('data-server-rendered')
+        expect(res).to.contain('<h1>Hello</h1>')
+        expect(res).to.contain('Hello from Component A!')
+        expect(res).to.contain('<div class="foo">functional</div>')
+        // from main component
+        expect(context.styles).to.contain('h1 { color: green;')
+        // from imported child component
+        expect(context.styles).to.contain('comp-a h2 {\n  color: #f00;')
+        // from imported css file
+        expect(context.styles).to.contain('h1 { color: red;')
+        // from imported functional component
+        expect(context.styles).to.contain('.foo { color: red;')
+        // collect component identifiers during render
+        expect(Array.from(context._registeredComponents).length).to.equal(3)
+        done()
+      })
     })
   })
 })
