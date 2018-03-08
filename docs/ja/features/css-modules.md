@@ -81,7 +81,7 @@ CSS モジュールは [css-loader](https://github.com/webpack/css-loader) に�
 ``` js
 {
   modules: true,
-  importLoaders: true,
+  importLoaders: 1,
   localIdentName: '[hash:base64]'
 }
 ```

@@ -81,7 +81,7 @@ CSS Modules are processed via [css-loader](https://github.com/webpack/css-loader
 ``` js
 {
   modules: true,
-  importLoaders: true,
+  importLoaders: 1,
   localIdentName: '[hash:base64]'
 }
 ```
@@ -89,17 +89,6 @@ CSS Modules are processed via [css-loader](https://github.com/webpack/css-loader
 You can use vue-loader's `cssModules` option to provide additional query options to `css-loader`:
 
 ``` js
-// webpack 1
-vue: {
-  cssModules: {
-    // overwrite local ident name
-    localIdentName: '[path][name]---[local]---[hash:base64:5]',
-    // enable camelCase
-    camelCase: true
-  }
-}
-
-// webpack 2
 module: {
   rules: [
     {

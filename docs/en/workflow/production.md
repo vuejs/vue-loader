@@ -19,18 +19,12 @@ module.exports = {
       }
     }),
     // minify with dead-code elimination
-    new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        warnings: false
-      }
-    }),
-    // webpack 1 only - optimize module ids by occurrence count
-    new webpack.optimize.OccurrenceOrderPlugin()
+    new webpack.optimize.UglifyJsPlugin()
   ]
 }
 ```
 
-Obviously we don't want to use this config during development, so there are several ways to approach this:
+We don't want to use this config during development, so there are several ways to approach this:
 
 1. Dynamically build up the configuration object based on an environment variable;
 

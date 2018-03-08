@@ -4,7 +4,7 @@ webpack において、全てのプリプロセッサは対応する loader を�
 
 ### CSS
 
-例えば、SASS で `<style>` タグをコンパイルしましょう:
+例えば、Sass で `<style>` タグをコンパイルしましょう:
 
 ``` bash
 npm install sass-loader node-sass --save-dev
@@ -12,7 +12,7 @@ npm install sass-loader node-sass --save-dev
 
 ``` html
 <style lang="sass">
-  /* ここにSASSを書きます */
+  /* ここにSassを書きます */
 </style>
 ```
 
@@ -20,7 +20,7 @@ npm install sass-loader node-sass --save-dev
 
 #### sass-loader 使用時の注意
 
-その名前が示すものとは対照的に、[* sass * -loader](https://github.com/jtangelder/sass-loader) はデフォルトで *SCSS* の構文を解析します。インデントされた *SASS* 構文を実際に使用する場合は、それに応じて sass-loader へ vue-loader のオプションを設定する必要があります。
+その名前が示すものとは対照的に、[* sass * -loader](https://github.com/jtangelder/sass-loader) はデフォルトで *SCSS* の構文を解析します。インデントされた *Sass* 構文を実際に使用する場合は、それに応じて sass-loader へ vue-loader のオプションを設定する必要があります。
 
 ```javascript
 {

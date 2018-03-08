@@ -39,9 +39,6 @@ module.exports = {
 
 将所有 Vue 组件中的所有已处理的 CSS 提取为单个 CSS 文件配置示例：
 
-### webpack 2.x
-
-
 ``` js
 // webpack.config.js
 var ExtractTextPlugin = require("extract-text-webpack-plugin")
@@ -63,39 +60,6 @@ module.exports = {
         }
       }
     ]
-  },
-  plugins: [
-    new ExtractTextPlugin("style.css")
-  ]
-}
-```
-
-### webpack 1.x
-
-``` bash
-npm install extract-text-webpack-plugin --save-dev
-```
-
-``` js
-// webpack.config.js
-var ExtractTextPlugin = require("extract-text-webpack-plugin")
-
-module.exports = {
-  // other options...
-  module: {
-    loaders: [
-      {
-        test: /\.vue$/,
-        loader: 'vue'
-      },
-    ]
-  },
-  vue: {
-    loaders: {
-      css: ExtractTextPlugin.extract("css"),
-      // 你还可以引入 <style lang="less"> 或其它语言
-      less: ExtractTextPlugin.extract("css!less")
-    }
   },
   plugins: [
     new ExtractTextPlugin("style.css")

@@ -30,11 +30,11 @@ export default {
 
 `vue-loader`는 파일을 파싱하고 각 language block을 추출하며 필요한 경우 다른 로더를 통해 파이프 처리한 후 마지막으로 Module.exports가 Vue.js 컴포넌트 엘리먼트 옵션 객체인 CommonJS 모듈로 다시 조합합니다.
 
-`vue-loader`는 language block에 `lang` 속성을 지정하여 CSS 전처리기나 HTML에서 템플릿을 컴파일 하는 것과 같은 기본 언어가 아닌 것을 사용할 수 있게 합니다. 예를 들어 컴포넌트 스타일에 SASS를 사용할 수 있습니다.
+`vue-loader`는 language block에 `lang` 속성을 지정하여 CSS 전처리기나 HTML에서 템플릿을 컴파일 하는 것과 같은 기본 언어가 아닌 것을 사용할 수 있게 합니다. 예를 들어 컴포넌트 스타일에 Sass를 사용할 수 있습니다.
 
 ``` html
 <style lang="sass">
-  /* write SASS! */
+  /* write Sass! */
 </style>
 ```
 
@@ -104,7 +104,7 @@ export default {
 
 ### 구문 강조
 
-현재 구문강조는 [Sublime Text](https://github.com/vuejs/vue-syntax-highlight), [Atom](https://atom.io/packages/language-vue), [Vim](https://github.com/posva/vim-vue), [Visual Studio Code](https://marketplace.visualstudio.com/items/liuji-jim.vue), [Brackets](https://github.com/pandao/brackets-vue), 와 [JetBrains 제품](https://plugins.jetbrains.com/plugin/8057) (WebStorm, PhpStorm, 등)을 지원합니다. 다른 편집기/IDE에 대한 기여를 원합니다! Vue 컴포넌트에서 프리 프로세서를 사용하지 않는 경우 `*.vue`파일을 HTML로 인식하여 사용할 수도 있습니다.
+현재 구문강조는 [Sublime Text](https://github.com/vuejs/vue-syntax-highlight), [Atom](https://atom.io/packages/language-vue), [Vim](https://github.com/posva/vim-vue), [Emacs](https://github.com/AdamNiederer/vue-mode), [Visual Studio Code](https://marketplace.visualstudio.com/items/liuji-jim.vue), [Brackets](https://github.com/pandao/brackets-vue), 와 [JetBrains 제품](https://plugins.jetbrains.com/plugin/8057) (WebStorm, PhpStorm, 등)을 지원합니다. 다른 편집기/IDE에 대한 기여를 원합니다! Vue 컴포넌트에서 프리 프로세서를 사용하지 않는 경우 `*.vue`파일을 HTML로 인식하여 사용할 수도 있습니다.
 
 
 ### 주석

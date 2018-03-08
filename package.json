@@ -1,6 +1,6 @@
 {
   "name": "vue-loader",
-  "version": "13.6.1",
+  "version": "14.2.0",
   "description": "Vue single-file component loader for Webpack",
   "main": "index.js",
   "repository": {
@@ -23,12 +23,14 @@
   },
   "homepage": "https://github.com/vuejs/vue-loader",
   "scripts": {
-    "lint": "eslint lib test",
-    "lint:fix": "eslint lib test --fix",
-    "precommit": "lint-staged",
+    "lint": "eslint lib test --fix",
     "test": "eslint lib && mocha --slow 5000 --timeout 10000",
     "docs": "cd docs && gitbook install && gitbook serve",
-    "docs:deploy": "bash ./docs/deploy.sh"
+    "docs:deploy": "bash ./docs/deploy.sh",
+    "postpublish": "conventional-changelog -p angular -r 2 > RELEASE.md"
+  },
+  "gitHooks": {
+    "pre-commit": "lint-staged"
   },
   "lint-staged": {
     "lib/**/*.js": [
@@ -52,7 +54,7 @@
     "resolve": "^1.4.0",
     "source-map": "^0.6.1",
     "vue-hot-reload-api": "^2.2.0",
-    "vue-style-loader": "^3.0.0",
+    "vue-style-loader": "^4.0.1",
     "vue-template-es2015-compiler": "^1.6.0"
   },
   "peerDependencies": {
@@ -60,27 +62,26 @@
     "vue-template-compiler": "^2.0.0"
   },
   "devDependencies": {
+    "autoprefixer": "^7.2.5",
     "babel-core": "^6.25.0",
     "babel-loader": "^7.0.0",
     "babel-preset-env": "^1.6.0",
     "chai": "^4.1.0",
     "coffee-loader": "^0.7.2",
     "coffee-script": "^1.12.7",
+    "conventional-changelog": "^1.1.18",
     "css-loader": "^0.28.4",
     "eslint": "^3.19.0",
     "eslint-plugin-vue-libs": "^1.2.0",
-    "expose-loader": "^0.7.1",
     "extract-text-webpack-plugin": "^3.0.0",
     "file-loader": "^1.1.5",
     "gitbook-plugin-edit-link": "^2.0.2",
     "gitbook-plugin-github": "^3.0.0",
     "gitbook-plugin-theme-vuejs": "^1.1.0",
-    "husky": "^0.14.3",
-    "inject-loader": "^3.0.1",
     "js-yaml": "^3.9.1",
     "jsdom": "^9.2.1",
     "lint-staged": "^4.0.2",
-    "marked": "^0.3.6",
+    "marked": "^0.3.12",
     "memory-fs": "^0.4.1",
     "mkdirp": "^0.5.1",
     "mocha": "^4.0.1",
@@ -97,6 +98,8 @@
     "vue": "^2.5.0",
     "vue-server-renderer": "^2.5.0",
     "vue-template-compiler": "^2.5.0",
-    "webpack": "^3.7.1"
+    "webpack": "^3.0.0",
+    "webpack-merge": "^4.1.1",
+    "yorkie": "^1.0.3"
   }
 }

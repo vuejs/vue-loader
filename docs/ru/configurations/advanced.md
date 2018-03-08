@@ -12,8 +12,6 @@
 
 > Опции `preLoaders` и `postLoaders` доступны только в версиях 10.3.0+
 
-### webpack 2.x
-
 ``` js
 module.exports = {
   // другие настройки...
@@ -55,29 +53,6 @@ module.exports = {
         }
       }
     ]
-  }
-}
-```
-
-### webpack 1.x
-
-``` js
-// webpack.config.js
-module.exports = {
-  // другие настройки...
-  module: {
-    loaders: [
-      {
-        test: /\.vue$/,
-        loader: 'vue'
-      }
-    ]
-  },
-  // настройки vue-loader
-  vue: {
-    loaders: {
-      // такая же конфигурация правил как и выше
-    }
   }
 }
 ```

@@ -18,7 +18,6 @@
   - [Production Build](workflow/production.md)
   - [Linting](workflow/linting.md)
   - [Testing](workflow/testing.md)
-  - [Testing with Mocks](workflow/testing-with-mocks.md)
 - [Options Reference](options.md)
   - [loaders](options.md#loaders)
   - [preLoaders](options.md#preloaders)
@@ -34,4 +33,3 @@
   - [buble](options.md#buble)
   - [extractCSS](options.md#extractcss)
   - [optimizeSSR](options.md#optimizessr)
-  - [cacheBusting](options.md#cachebusting)

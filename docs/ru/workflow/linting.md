@@ -2,72 +2,19 @@
 
 Вы, возможно, гадаете, как же прогонять код в `*.vue` файлах через статические анализаторы, поскольку это не JavaScript. Мы предполагаем, что вы используете [ESLint](https://eslint.org/) (если нет, настоятельно рекомендуем!).
 
-Вам также понадобится [eslint-html-plugin](https://github.com/BenoitZugmeyer/eslint-plugin-html) с поддержкой извлечения и анализа JavaScript в `*.vue` файлах.
+Вам также понадобится официальный [eslint-plugin-vue](https://github.com/vuejs/eslint-plugin-vue), который поддерживает анализа шаблона и скриптов в `*.vue` файлах.
 
-Убедитесь в том, что вы добавили плагин в конфигурацию ESLint:
+Убедитесь, что используете поставляемую с плагином конфигурацию в вашей конфигурации ESLint:
 
 ``` json
-"plugins": [
-  "html"
-]
-```
-
-Затем в командной строке:
-
-``` bash
-eslint --ext js,vue MyComponent.vue
-```
-
-Другой вариант – использовать [eslint-loader](https://github.com/MoOx/eslint-loader), который будет автоматически анализировать `*.vue` файлы после сохранения во время разработки:
-
-``` bash
-npm install eslint eslint-loader --save-dev
-```
-
-``` js
-// webpack.config.js
-module.exports = {
-  // ... прочие опции
-  module: {
-    loaders: [
-      {
-        test: /\.vue$/,
-        loader: 'vue!eslint'
-      }
-    ]
-  }
+{
+  "extends": [
+    "plugin:vue/essential"
+  ]
 }
 ```
 
-Обратите внимание, что загрузчики webpack применяются **справа-налево**. Убедитесь, что `eslint` прописан перед `vue`, чтобы код сначала проходил через анализатор, а затем компилировался.
-
-Стоит упомянуть об использовании сторонних `*.vue` компонентов, поставляемых в NPM пакетах. В таком случае нам нужно воспользоваться `vue-loader`? чтобы подключить сторонние компоненты, но не анализировать их. Мы можем вынести анализ в [предзагрузчики](https://webpack.github.io/docs/loaders.html#loader-order) webpack:
-
-``` js
-// webpack.config.js
-module.exports = {
-  // ... прочие опции
-  module: {
-    // анализировать только локальные *.vue файлы
-    preLoaders: [
-      {
-        test: /\.vue$/,
-        loader: 'eslint',
-        exclude: /node_modules/
-      }
-    ],
-    // но использовать vue-loader для всех *.vue файлов
-    loaders: [
-      {
-        test: /\.vue$/,
-        loader: 'vue'
-      }
-    ]
-  }
-}
-```
-
-Для webpack 2.x:
+Убедитесь, что он применяется как предварительный загрузчик:
 
 ``` js
 // webpack.config.js
@@ -75,17 +22,11 @@ module.exports = {
   // ... прочие опции
   module: {
     rules: [
-      // анализировать только локальные *.vue файлы
       {
         enforce: 'pre',
-        test: /\.vue$/,
+        test: /\.(js|vue)$/,
         loader: 'eslint-loader',
         exclude: /node_modules/
-      },
-      // но использовать vue-loader для всех *.vue файлов
-      {
-        test: /\.vue$/,
-        loader: 'vue-loader'
       }
     ]
   }

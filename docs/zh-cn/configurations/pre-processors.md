@@ -4,7 +4,7 @@
 
 ### CSS
 
-例如，使用 SASS 编译我们的 `<style>` 语言块：
+例如，使用 Sass 编译我们的 `<style>` 语言块：
 
 ``` bash
 npm install sass-loader node-sass --save-dev
@@ -20,7 +20,7 @@ npm install sass-loader node-sass --save-dev
 
 #### sass-loader 警告
 
-与名称相反，[*sass*-loader](https://github.com/jtangelder/sass-loader) 默认解析 *SCSS* 语法。如果你想要使用 *SASS* 语法，你需要配置 `vue-loader` 的选项：
+与名称相反，[*sass*-loader](https://github.com/jtangelder/sass-loader) 默认解析 *SCSS* 语法。如果你想要使用 *Sass* 语法，你需要配置 `vue-loader` 的选项：
 
 ```javascript
 {
