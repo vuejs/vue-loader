@@ -4,21 +4,21 @@
 
 ![hot-reload](http://blog.evanyou.me/images/vue-hot.gif)
 
-## State Preservation Rules
+## 状態維持ルール
 
-- When editing the `<template>` of a component, instances of the edited component will re-render in place, preserving all current private state. This is possible because templates are compiled into new render functions that produce no side-effects.
+- コンポーネントの `<template>` を編集するとき、編集されたコンポーネントのインスタンスは、そのまま再描画し、全て現在のプライベートな状態に維持します。これは、テンプレートが副作用を発生させない新しい描画関数にコンパイルされるため可能です。
 
-- When editing the `<script>` part of a component, instances of the edited component will be destroyed and re-created in place. (State of the other components in the app are preserved) This is because `<script>` can include lifecycle hooks that may produce side-effects, so a "reload" instead of re-render is required to ensure consistent behavior. This also means you need to be careful about global side effects such as timers inside your components lifecycle hooks. Sometimes you may need to do a full-page reload if your component produces global side-effects.
+- コンポーネントの `<script>` 部分を編集するとき、編集されたコンポーネントのインスタンスは破棄され、そのまま再作成されます。(アプリケーション内の他のコンポーネントの状態は維持されています。) これは、`<script>` が副作用を生むかもしれないライフサイクルフックを含むことができるため、一貫性のある動作を保証するためには再描画の代わりに"リロード"が必要です。これはまた、コンポーネントライフサイクルフック内のタイマーのようなグローバルな副作用に注意する必要があることを意味します。場合によっては、コンポーネントでグローバルな副作用が発生する場合は、フルページリロードの必要があるかもしれません。
 
-- `<style>` hot reload operates on its own via `vue-style-loader`, so it doesn't affect application state.
+- `<style>` ホットリロードは `vue-style-loader` を介して単独で動作するため、アプリケーションの状態に影響しません。
 
 ## Usage
 
 `vue-cli` を使ってプロジェクトをスキャホールドすると、ホットリロードはすぐに使えるようになります。
 
-When manually setting up your project, hot-reload is enabled automatically when you serve your project with `webpack-dev-server --hot`.
+プロジェクトを手動で設定するときは、ホットリロードは、`webpack-dev-server --hot` によってプロジェクトを提供するとき、自動的に有効なります。
 
-Advanced users may want to check out [vue-hot-reload-api](https://github.com/vuejs/vue-hot-reload-api), which is used internally by `vue-loader`.
+上級者は、`vue-loader` によって内部的に使用されいてる [vue-hot-reload-api](https://github.com/vuejs/vue-hot-reload-api) を確認することができます。
 
 ## ホットリロードの無効
 

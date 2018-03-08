@@ -1,4 +1,4 @@
-# スコープ付き CSS
+**再帰されたコンポーネントの子孫セレクタには気をつけてください！** セレクタ `.a .b` を持つ CSS ルールの場合、`.a` にマッチする要素に再帰的な子コンポーネントが含まれている場合、その子コンポーネントのすべての `.b` はルールにマッチします。# スコープ付き CSS
 
 `scoped` 属性をもつ `<style>` タグを利用するとき、その CSS は現在のコンポーネントの要素にのみ適用されます。これは Shadow DOM のスタイルのカプセル化に似ています。いくつか注意点がありますが、polyfill は必要ありません。PostCSS を使用して以下を変換することによって実現しています:
 
@@ -28,11 +28,11 @@
 </template>
 ```
 
-## Tips
+## 秘訣
 
-### Mixing Local and Global Styles
+### ローカルスタイルとグローバルスタイルの混在
 
-You can include both scoped and non-scoped styles in the same component:
+同じコンポーネントでスコープ付き、そして非スコープ付きスタイル両方を含むことができます:
 
 ``` html
 <style>
@@ -44,13 +44,13 @@ You can include both scoped and non-scoped styles in the same component:
 </style>
 ```
 
-### Child Component Root Elements
+### 子コンポーネントのルート要素
 
-With `scoped`, the parent component's styles will not leak into child components. However, a child component's root node will be affected by both the parent's scoped CSS and the child's scoped CSS. This is by design so that the the parent can style the child root element for layout purposes.
+`scoped` によって、親コンポーネントのスタイルは子コンポーネントに漏れません。ただし、子コンポーネントのルートノードは親スコープの CSS と子スコープの CSS と両方によって影響を受けます。これは、設計上、親はレイアウトが目的で子のルート要素をスタイルすることができます。
 
-### Deep Selectors
+### ディープセレクタ
 
-If you want a selector in `scoped` styles to be "deep", i.e. affecting child components, you can use the `>>>` combinator:
+`scoped` スタイルのセレクタを "deep" にしたい、つまり子コンポーネントに及ぼしたい場合は、`>>>` コンビネータを使用することができます:
 
 ``` html
 <style scoped>
@@ -58,19 +58,19 @@ If you want a selector in `scoped` styles to be "deep", i.e. affecting child com
 </style>
 ```
 
-The above will be compiled into:
+上記は以下にコンパイルされます:
 
 ``` css
 .a[data-v-f3f3eg9] .b { /* ... */ }
 ```
 
-Some pre-processors, such as SASS, may not be able to parse `>>>` properly. In those cases you can use the `/deep/` combinator instead - it's an alias for `>>>` and works exactly the same.
+SASS のようないくつかのプリプロセッサは、`>>>` を適切に解析できないかもしれません。そのようなケースでは `/deep/` コンビネータを代わりに使用することができます。それは、`>>>` のエイリアスで、全く同じような動作します。
 
-### Dynamically Generated Content
+### 動的に生成されるコンテンツ
 
-DOM content created with `v-html` are not affected by scoped styles, but you can still style them using deep selectors.
+`v-html` によって作成された DOM コンテンツは、スコープ付きスタイルにの影響を受けませんが、ディープセレクタを使用してスタイルを設定することはできます。
 
-### Also Keep in Mind
+### 留意すること
 
-- **Scoped styles do not eliminate the need for classes**. Due to the way browsers render various CSS selectors, `p { color: red }` will be many times slower when scoped (i.e. when combined with an attribute selector). If you use classes or ids instead, such as in `.example { color: red }`, then you virtually eliminate that performance hit. [Here's a playground](http://stevesouders.com/efws/css-selectors/csscreate.php) where you can test the differences yourself.
-- **Be careful with descendant selectors in recursive components!** For a CSS rule with the selector `.a .b`, if the element that matches `.a` contains a recursive child component, then all `.b` in that child component will be matched by the rule.
+- **スコープ付きスタイルでは class は必要です。** ブラウザが様々な CSS セレクタを描画するため、`p { color: red }` はスコープされているとき何倍も遅くなります（すなわち属性セレクタと組み合わせた場合）。もし `.example { color: red }` のように class か id を使用するなら、パフォーマンスヒットは事実上なくなります。[この例](http://stevesouders.com/efws/css-selectors/csscreate.php)で違いをテストすることが出来ます。
+- **再帰されたコンポーネントの子孫セレクタには気をつけてください！** セレクタ `.a .b` を持つ CSS ルールの場合、`.a` にマッチする要素に再帰的な子コンポーネントが含まれている場合、その子コンポーネントのすべての `.b` はルールにマッチします。
