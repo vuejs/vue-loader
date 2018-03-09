@@ -87,7 +87,7 @@ module.exports = {
 
 ### postcss
 
-> Note: It is recommended to use a PostCSS config file instead so that your styles in vue files and normal CSS can share the same config. [The usage is the same as `postcss-loader`](https://github.com/postcss/postcss-loader#usage).
+> Note: It is recommended to use a PostCSS config file instead so that your styles in `*.vue` files and normal CSS can share the same config. [The usage is the same as `postcss-loader`](https://github.com/postcss/postcss-loader#usage).
 
 - type: `Array` or `Function` or `Object`
 
