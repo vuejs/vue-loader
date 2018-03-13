@@ -254,7 +254,7 @@ module.exports = {
   var ExtractTextPlugin = require("extract-text-webpack-plugin")
 
   module.exports = {
-    // other options...
+    // 其它选项……
     module: {
       rules: [
         {
@@ -280,7 +280,7 @@ module.exports = {
   var plugin = new ExtractTextPlugin("style.css")
 
   module.exports = {
-    // other options...
+    // 其它选项……
     module: {
       rules: [
         {
