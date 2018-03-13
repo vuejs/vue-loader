@@ -311,9 +311,9 @@ module.exports = {
 
 > 13.5.0 新增
 
-  - 类型: `boolean`
-  - 默认值: 在开发环境下是 `true`，在生产环境下或 webpack 配置中有 `target: 'node'` 的时候是 `false`。
-  - 允许的值: `false` (`true` 会强制热重载，即便是生产环境或 `target: 'node'` 时)
+- 类型: `boolean`
+- 默认值: 在开发环境下是 `true`，在生产环境下或 webpack 配置中有 `target: 'node'` 的时候是 `false`。
+- 允许的值: `false` (`true` 会强制热重载，即便是生产环境或 `target: 'node'` 时)
 
   是否使用 webpack 的[模块热替换](https://webpack.js.org/concepts/hot-module-replacement/)在浏览器中应用变更而**不重载整个页面**。
   用这个选项 (值设为 `false`) 在开发环境下关闭热重载特性。

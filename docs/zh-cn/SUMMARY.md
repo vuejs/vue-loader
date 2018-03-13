@@ -35,3 +35,5 @@
   - [buble](options.md#buble)
   - [extractCSS](options.md#extractcss)
   - [optimizeSSR](options.md#optimizessr)
+  - [hotReload](options.md#hotreload)
+  - [threadMode](options.md#threadmode)
