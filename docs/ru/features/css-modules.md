@@ -81,7 +81,7 @@ CSS-модули обрабатываются с помощью [css-loader](htt
 ``` js
 {
   modules: true,
-  importLoaders: true,
+  importLoaders: 1,
   localIdentName: '[hash:base64]'
 }
 ```
@@ -89,17 +89,6 @@ CSS-модули обрабатываются с помощью [css-loader](htt
 Вы можете использовать в `vue-loader` опцию `cssModules` чтобы добавить дополнительные параметры для `css-loader`:
 
 ``` js
-// webpack 1
-vue: {
-  cssModules: {
-    // другой шаблон для локального имени идентификатора
-    localIdentName: '[path][name]---[local]---[hash:base64:5]',
-    // использование camelCase
-    camelCase: true
-  }
-}
-
-// webpack 2
 module: {
   rules: [
     {

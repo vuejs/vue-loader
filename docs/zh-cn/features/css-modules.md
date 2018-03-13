@@ -81,7 +81,7 @@ CSS Modules 处理是通过 [css-loader](https://github.com/webpack/css-loader)�
 ``` js
 {
   modules: true,
-  importLoaders: true,
+  importLoaders: 1,
   localIdentName: '[hash:base64]'
 }
 ```
@@ -89,17 +89,6 @@ CSS Modules 处理是通过 [css-loader](https://github.com/webpack/css-loader)�
 你可以使用 `vue-loader` 的 `cssModules` 选项去为 `css-loader` 添加 query 配置：
 
 ``` js
-// webpack 1
-vue: {
-  cssModules: {
-    // overwrite local ident name
-    localIdentName: '[path][name]---[local]---[hash:base64:5]',
-    // enable camelCase
-    camelCase: true
-  }
-}
-
-// webpack 2
 module: {
   rules: [
     {

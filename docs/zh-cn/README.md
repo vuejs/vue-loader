@@ -1,6 +1,6 @@
 # 介绍
 
-### `vue-loader` 是什么？
+### Vue Loader 是什么？
 
 `vue-loader` 是一个 webpack 的 loader，可以将用下面这个格式编写的 Vue 组件转换为 JavaScript 模块：
 
@@ -9,7 +9,7 @@
 这里有一些 `vue-loader` 提供的很酷的特性：
 
 - 默认支持 ES2015；
-- 允许对 Vue 组件的组成部分使用其它 webpack loader，比如对 `<style>` 使用 SASS 和对 `<template>` 使用 Jade；
+- 允许对 Vue 组件的组成部分使用其它 webpack loader，比如对 `<style>` 使用 Sass 和对 `<template>` 使用 Jade；
 - `.vue` 文件中允许自定义节点，然后使用自定义的 loader 进行处理；
 - 把 `<style>` 和 `<template>` 中的静态资源当作模块来对待，并使用 webpack loader 进行处理；
 - 对每个组件模拟出 CSS 作用域；
@@ -32,7 +32,7 @@
 - 转换 ES2015，CoffeeScript 或者 TypeScript 模块为普通的 ES5 CommonJS 模块；
 - 可以选择在编译之前检验你的源代码；
 - 将 Jade 模版转换为纯 HTML 并且嵌入 Javascript 字符串中；
-- 将 SASS 文件转换为纯 CSS，然后将其转换成 JavaScript 片段，将生成的 CSS 作为 `<style>` 标签插入页面；
+- 将 Sass 文件转换为纯 CSS，然后将其转换成 JavaScript 片段，将生成的 CSS 作为 `<style>` 标签插入页面；
 - 处理 HTML 或者 CSS 中引用的图片，移动到配置的路径中，并且使用 md5 hash 重命名。
 
 当你理解 webpack 原理后会感觉它是如此强大，它可以大大优化你的前端工作流程。它主要的缺点是配置复杂麻烦，但是使用本指南，应该可以帮助你找到 Vue.js 和 `vue-loader` 使用时的最常见问题的解决方案。

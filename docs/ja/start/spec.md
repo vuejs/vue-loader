@@ -30,11 +30,11 @@ export default {
 
 `vue-loader` はファイルを解析し、それぞれの言語ブロックを必要に応じて他の loader を通し、最終的に `module.exports` が Vue.js のコンポーネントオプションオブジェクトの CommonJS モジュールに変換します。
 
-`vue-loader` は CSS プリプロセッサや HTML にコンパイルするテンプレート言語といった、デフォルトでない言語を言語ブロックの `lang` 属性を使用することでサポートします。例えばコンポーネントのスタイルに SASS を使用することが出来ます。
+`vue-loader` は CSS プリプロセッサや HTML にコンパイルするテンプレート言語といった、デフォルトでない言語を言語ブロックの `lang` 属性を使用することでサポートします。例えばコンポーネントのスタイルに Sass を使用することが出来ます。
 
 ``` html
 <style lang="sass">
-  /* SASS で書きます! */
+  /* Sass で書きます! */
 </style>
 ```
 詳細は [プリプロセッサの仕様](../configurations/pre-processors.md) で確認することが出来ます。
@@ -95,7 +95,7 @@ export default {
 
 ### シンタックスハイライト
 
-現在それらはシンタクスハイライトをサポートしているのは、[Sublime Text](https://github.com/vuejs/vue-syntax-highlight), [Atom](https://atom.io/packages/language-vue), [Vim](https://github.com/posva/vim-vue), [Visual Studio Code](https://marketplace.visualstudio.com/items/liuji-jim.vue), [Brackets](https://github.com/pandao/brackets-vue), [JetBrains products](https://plugins.jetbrains.com/plugin/8057) (WebStorm, PhpStorm, etc). 他のエディタ/IDEへのコントリビュートは高く評価されます！もし Vue コンポーネント内でプリプロセッサを使用していない場合は、エディタで `*.vue` ファイルを HTML として扱うことが出来ます。
+現在それらはシンタクスハイライトをサポートしているのは、[Sublime Text](https://github.com/vuejs/vue-syntax-highlight), [Atom](https://atom.io/packages/language-vue), [Vim](https://github.com/posva/vim-vue), [Emacs](https://github.com/AdamNiederer/vue-mode), [Visual Studio Code](https://marketplace.visualstudio.com/items/liuji-jim.vue), [Brackets](https://github.com/pandao/brackets-vue), [JetBrains products](https://plugins.jetbrains.com/plugin/8057) (WebStorm, PhpStorm, etc). 他のエディタ/IDEへのコントリビュートは高く評価されます！もし Vue コンポーネント内でプリプロセッサを使用していない場合は、エディタで `*.vue` ファイルを HTML として扱うことが出来ます。
 
 ### コメント
 

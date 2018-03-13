@@ -30,11 +30,11 @@ export default {
 
 `vue-loader` парсит файл, извлекает каждую из секций, обрабатывает их при необходимости другими loader'ами, и в итоге собирает всё обратно в модуль CommonJS где `module.exports` будет объектом настроек компонента Vue.js.
 
-`vue-loader` предоставляет возможность использовать нестандартные языки, например пре-процессоры CSS и языки шаблонов компилируемые в HTML просто указав атрибут `lang` для секции файла. Например, вы можете использовать SASS для стилей вашего компонента:
+`vue-loader` предоставляет возможность использовать нестандартные языки, например пре-процессоры CSS и языки шаблонов компилируемые в HTML просто указав атрибут `lang` для секции файла. Например, вы можете использовать Sass для стилей вашего компонента:
 
 ``` html
 <style lang="sass">
-  /* используем SASS! */
+  /* используем Sass! */
 </style>
 ```
 
@@ -104,7 +104,7 @@ export default {
 
 ### Подсветка синтаксиса
 
-На данный момент есть поддержка подсвестки синтаксиса для [Sublime Text](https://github.com/vuejs/vue-syntax-highlight), [Atom](https://atom.io/packages/language-vue), [Vim](https://github.com/posva/vim-vue), [Visual Studio Code](https://marketplace.visualstudio.com/items/liuji-jim.vue), [Brackets](https://github.com/pandao/brackets-vue), и [продуктов JetBrains](https://plugins.jetbrains.com/plugin/8057) (WebStorm, PhpStorm, и т.п.). Будем рады видеть разработки и для других редакторов и IDE! Если вы не используете никаких пре-процессоров в компонентах Vue, вы также можете использовать синтаксис HTML в вашем редакторе для `*.vue` файлов.
+На данный момент есть поддержка подсвестки синтаксиса для [Sublime Text](https://github.com/vuejs/vue-syntax-highlight), [Atom](https://atom.io/packages/language-vue), [Vim](https://github.com/posva/vim-vue), [Emacs](https://github.com/AdamNiederer/vue-mode), [Visual Studio Code](https://marketplace.visualstudio.com/items/liuji-jim.vue), [Brackets](https://github.com/pandao/brackets-vue), и [продуктов JetBrains](https://plugins.jetbrains.com/plugin/8057) (WebStorm, PhpStorm, и т.п.). Будем рады видеть разработки и для других редакторов и IDE! Если вы не используете никаких пре-процессоров в компонентах Vue, вы также можете использовать синтаксис HTML в вашем редакторе для `*.vue` файлов.
 
 ### Комментарии
 

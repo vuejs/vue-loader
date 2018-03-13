@@ -1,10 +1,9 @@
 # Options Reference
 
-## Usage Difference Between webpack 1 & 2
-
-For webpack 2: pass the options directly to the loader rule.
+## Where to Place the Options
 
 ``` js
+// webpack.config.js
 module.exports = {
   // ...
   module: {
@@ -21,20 +20,9 @@ module.exports = {
 }
 ```
 
-For webpack 1.x: add a root `vue` block in your webpack config.
-
-``` js
-module.exports = {
-  // ...
-  vue: {
-    // `vue-loader` options
-  }
-}
-```
-
 ### loaders
 
-- type: `{ [lang: string]: string }`
+- type: `{ [lang: string]: string | Object | Array }`
 
   An object specifying webpack loaders to overwrite the default loaders used for language blocks inside `*.vue` files. The key corresponds to the `lang` attribute for language blocks, if specified. The default `lang` for each type is:
 
@@ -45,7 +33,6 @@ module.exports = {
   For example, to use `babel-loader` and `eslint-loader` to process all `<script>` blocks:
 
   ``` js
-  // webpack 2.x config
   module: {
     rules: [
       {
@@ -61,17 +48,36 @@ module.exports = {
   }
   ```
 
+  You can also use object or array syntax (note the options must be serializable):
+
+  ``` js
+  module: {
+    rules: [
+      {
+        test: /\.vue$/,
+        loader: 'vue-loader',
+        options: {
+          loaders: {
+            js: [
+              { loader: 'cache-loader' },
+              { loader: 'babel-loader', options: { presets: ['env'] } }
+            ]
+          }
+        }
+      }
+    ]
+  }
+  ```
+
 ### preLoaders
 
 - type: `{ [lang: string]: string }`
-- only supported in 10.3.0+
 
   The config format is the same as `loaders`, but `preLoaders` are applied to corresponding language blocks before the default loaders. You can use this to pre-process language blocks - a common use case would be build-time i18n.
 
 ### postLoaders
 
 - type: `{ [lang: string]: string }`
-- only supported in 10.3.0+
 
   The config format is the same as `loaders`, but `postLoaders` are applied after the default loaders. You can use this to post-process language blocks. However note that this is a bit more complicated:
 
@@ -81,7 +87,7 @@ module.exports = {
 
 ### postcss
 
-> Note: in 11.0.0+ it is recommended to use a PostCSS config file instead. [The usage is the same as `postcss-loader`](https://github.com/postcss/postcss-loader#usage).
+> Note: It is recommended to use a PostCSS config file instead so that your styles in `*.vue` files and normal CSS can share the same config. [The usage is the same as `postcss-loader`](https://github.com/postcss/postcss-loader#usage).
 
 - type: `Array` or `Function` or `Object`
 
@@ -155,7 +161,18 @@ module.exports = {
 
   Note this is automatically set to `false` if the `devtool` option is not present in the main webpack config.
 
+### postcss.cascade
+
+> New in 14.2.0
+
+- type: `boolean`
+- default: `false`
+
+  Set this to `true` to enable cascading PostCSS config file loading. For example, you can have extra `.postcssrc` files in nested source directories to apply different PostCSS configs to different files in your project.
+
 ### esModule
+
+> This option has been removed in v14.0. In v14.0 and above, `*.vue` files always expose ES modules.
 
 - type: `boolean`
 - default: `true` (v13.0+)
@@ -208,21 +225,6 @@ module.exports = {
   Example configuration:
 
   ``` js
-  // webpack 1
-  vue: {
-    buble: {
-      // enable object spread operator
-      // NOTE: you need to provide Object.assign polyfill yourself!
-      objectAssign: 'Object.assign',
-
-      // turn off the `with` removal
-      transforms: {
-        stripWith: false
-      }
-    }
-  }
-
-  // webpack 2
   module: {
     rules: [
       {
@@ -245,62 +247,62 @@ module.exports = {
 - type: `boolean`
 - default: `false`
 
-Automatically extracts the CSS using `extract-text-webpack-plugin`. Works for most pre-processors out of the box, and handles minification in production as well.
+  Automatically extracts the CSS using `extract-text-webpack-plugin`. Works for most pre-processors out of the box, and handles minification in production as well.
 
-The value passed in can be `true`, or an instance of the plugin (so that you can use multiple instances of the extract plugin for multiple extracted files).
+  The value passed in can be `true`, or an instance of the plugin (so that you can use multiple instances of the extract plugin for multiple extracted files).
 
-This should be only used in production so that hot-reload works during development.
+  This should be only used in production so that hot-reload works during development.
 
-Example:
+  Example:
 
-``` js
-// webpack.config.js
-var ExtractTextPlugin = require("extract-text-webpack-plugin")
+  ``` js
+  // webpack.config.js
+  var ExtractTextPlugin = require("extract-text-webpack-plugin")
 
-module.exports = {
-  // other options...
-  module: {
-    rules: [
-      {
-        test: /\.vue$/,
-        loader: 'vue-loader',
-        options: {
-          extractCSS: true
+  module.exports = {
+    // other options...
+    module: {
+      rules: [
+        {
+          test: /\.vue$/,
+          loader: 'vue-loader',
+          options: {
+            extractCSS: true
+          }
         }
-      }
+      ]
+    },
+    plugins: [
+      new ExtractTextPlugin("style.css")
     ]
-  },
-  plugins: [
-    new ExtractTextPlugin("style.css")
-  ]
-}
-```
+  }
+  ```
 
-Or passing in an instance of the plugin:
+  Or passing in an instance of the plugin:
 
-``` js
-// webpack.config.js
-var ExtractTextPlugin = require("extract-text-webpack-plugin")
-var plugin = new ExtractTextPlugin("style.css")
+  ``` js
+  // webpack.config.js
+  var ExtractTextPlugin = require("extract-text-webpack-plugin")
+  var plugin = new ExtractTextPlugin("style.css")
 
-module.exports = {
-  // other options...
-  module: {
-    rules: [
-      {
-        test: /\.vue$/,
-        loader: 'vue-loader',
-        options: {
-          extractCSS: plugin
+  module.exports = {
+    // other options...
+    module: {
+      rules: [
+        {
+          test: /\.vue$/,
+          loader: 'vue-loader',
+          options: {
+            extractCSS: plugin
+          }
         }
-      }
+      ]
+    },
+    plugins: [
+      plugin
     ]
-  },
-  plugins: [
-    plugin
-  ]
-}
-```
+  }
+  ```
 
 ### optimizeSSR
 
@@ -309,16 +311,7 @@ module.exports = {
 - type: `boolean`
 - default: `true` when the webpack config has `target: 'node'` and `vue-template-compiler` is at version 2.4.0 or above.
 
-Enable Vue 2.4 SSR compilation optimization that compiles part of the vdom trees returned by render functions into plain strings, which improves SSR performance. In some cases you might want to explicitly turn it off because the resulting render functions can only be used for SSR and cannot be used for client-side rendering or testing.
-
-### cacheBusting
-
-> New in 13.2.0
-
-- type: `boolean`
-- default: `true` in development mode, `false` in production mode.
-
-Whether generate source maps with cache busting by appending a hash query to the file name. Turning this off can help with source map debugging.
+  Enable Vue 2.4 SSR compilation optimization that compiles part of the vdom trees returned by render functions into plain strings, which improves SSR performance. In some cases you might want to explicitly turn it off because the resulting render functions can only be used for SSR and cannot be used for client-side rendering or testing.
 
 ### hotReload
 
@@ -328,5 +321,16 @@ Whether generate source maps with cache busting by appending a hash query to the
 - default: `true` in development mode, `false` in production mode or when the webpack config has `target: 'node'`.
 - allowed value: `false` (`true` will not force Hot Reload neither in production mode nor when `target: 'node'`)
 
-Whether to use webpack [Hot Module Replacement](https://webpack.js.org/concepts/hot-module-replacement/) to apply changes in the browser **without reloading the page**.
-Use this option (value `false`) to disable the Hot Reload feature in development mode.
+  Whether to use webpack [Hot Module Replacement](https://webpack.js.org/concepts/hot-module-replacement/) to apply changes in the browser **without reloading the page**.
+  Use this option (value `false`) to disable the Hot Reload feature in development mode.
+
+### threadMode
+
+> New in 14.2.0
+
+- type: `boolean`
+- default: `false`
+
+  Setting this to true enables filesystem-based option caching so that the options for the main `vue-loader` can be properly shared with sub-loaders in other threads.
+
+  Only needed when using together with HappyPack or `thread-loader`.
