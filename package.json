@@ -1,27 +1,68 @@
 {
-  "name": "vue-loader-next",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "name": "vue-loader",
+  "version": "15.0.0",
+  "description": "Vue single-file component loader for Webpack",
+  "main": "lib/index.js",
   "scripts": {
-    "build": "webpack --config test/webpack.config.js"
+    "test": "jest --env node",
+    "lint": "eslint lib test --fix",
+    "build": "webpack --config exploration/webpack.config.js"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Evan You",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/vuejs/vue-loader/issues"
+  },
+  "homepage": "https://github.com/vuejs/vue-loader",
+  "gitHooks": {
+    "pre-commit": "lint-staged"
+  },
+  "lint-staged": {
+    "lib/**/*.js": [
+      "eslint --fix",
+      "git add"
+    ],
+    "test/**/*.js": [
+      "eslint --fix",
+      "git add"
+    ]
+  },
+  "peerDependencies": {
+    "css-loader": "*",
+    "vue-template-compiler": "^2.0.0"
+  },
   "devDependencies": {
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.4",
     "babel-preset-env": "^1.6.1",
     "css-loader": "^0.28.11",
+    "eslint": "^4.19.0",
+    "eslint-plugin-vue-libs": "^2.1.0",
+    "javascript-stringify": "^1.6.0",
+    "jest": "^22.4.2",
+    "jsdom": "^11.6.2",
+    "lint-staged": "^7.0.0",
+    "node-sass": "^4.7.2",
+    "normalize-newline": "^3.0.0",
+    "pug": "^2.0.1",
+    "sass-loader": "^6.0.7",
+    "stylus": "^0.54.5",
+    "stylus-loader": "^3.0.2",
     "vue": "^2.5.16",
     "vue-template-compiler": "^2.5.16",
     "webpack": "^4.1.0",
-    "webpack-cli": "^2.0.10"
+    "webpack-cli": "^2.0.10",
+    "webpack-merge": "^4.1.2",
+    "yorkie": "^1.0.3"
   },
   "dependencies": {
+    "consolidate": "^0.15.0",
+    "debug": "^3.1.0",
     "hash-sum": "^1.0.2",
     "loader-utils": "^1.1.0",
     "lru-cache": "^4.1.2",
+    "postcss": "^6.0.20",
+    "postcss-selector-parser": "^3.1.1",
     "prettier": "^1.11.1",
     "source-map": "^0.7.2",
     "vue-component-compiler": "vuejs/vue-component-compiler#master",
