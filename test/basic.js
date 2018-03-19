@@ -3,7 +3,7 @@ process.env.VUE_LOADER_TEST = true
 const { expect } = require('chai')
 const {
   genId,
-  test,
+  mockBundleAndRun,
   mockRender,
   initStylesForAllSubComponents
 } = require('./shared')
@@ -12,7 +12,7 @@ const normalizeNewline = require('normalize-newline')
 
 describe('basic usage', () => {
   it('basic', done => {
-    test({
+    mockBundleAndRun({
       entry: 'basic.vue'
     }, (window, module, rawModule) => {
       const vnode = mockRender(module, {
@@ -33,7 +33,7 @@ describe('basic usage', () => {
   })
 
   it('pre-processors', done => {
-    test({
+    mockBundleAndRun({
       entry: 'pre.vue'
     }, (window, module) => {
       const vnode = mockRender(module)
@@ -53,7 +53,7 @@ describe('basic usage', () => {
   })
 
   it('style import', done => {
-    test({
+    mockBundleAndRun({
       entry: 'style-import.vue'
     }, (window) => {
       const styles = window.document.querySelectorAll('style')
@@ -66,7 +66,7 @@ describe('basic usage', () => {
   })
 
   it('style import for a same file twice', done => {
-    test({
+    mockBundleAndRun({
       entry: 'style-import-twice.vue'
     }, (window, module) => {
       initStylesForAllSubComponents(module)
@@ -83,7 +83,7 @@ describe('basic usage', () => {
   })
 
   it('template import', done => {
-    test({
+    mockBundleAndRun({
       entry: 'template-import.vue'
     }, (window, module) => {
       const vnode = mockRender(module)
@@ -95,7 +95,7 @@ describe('basic usage', () => {
   })
 
   it('script import', done => {
-    test({
+    mockBundleAndRun({
       entry: 'script-import.vue'
     }, (window, module) => {
       expect(module.data().msg).to.contain('Hello from Component A!')

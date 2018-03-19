@@ -3,7 +3,7 @@ process.env.VUE_LOADER_TEST = true
 const path = require('path')
 const { expect } = require('chai')
 const {
-  test,
+  mockBundleAndRun,
   mockRender
 } = require('./shared')
 
@@ -11,7 +11,7 @@ const normalizeNewline = require('normalize-newline')
 
 describe('template block features', () => {
   it('template with comments', done => {
-    test({
+    mockBundleAndRun({
       entry: 'template-comment.vue'
     }, (window, module, rawModule) => {
       expect(module.comments).to.equal(true)
@@ -29,7 +29,7 @@ describe('template block features', () => {
   })
 
   it('transpile ES2015 features in template', done => {
-    test({
+    mockBundleAndRun({
       entry: 'es2015.vue'
     }, (window, module) => {
       const vnode = mockRender(module, {
@@ -45,7 +45,7 @@ describe('template block features', () => {
   })
 
   it('translates relative URLs and respects resolve alias', done => {
-    test({
+    mockBundleAndRun({
       entry: 'resolve.vue',
       resolve: {
         alias: {
@@ -76,7 +76,7 @@ describe('template block features', () => {
   })
 
   it('transformToRequire option', done => {
-    test({
+    mockBundleAndRun({
       entry: 'transform.vue',
       module: {
         rules: [
@@ -116,7 +116,7 @@ describe('template block features', () => {
   })
 
   it('should allow adding custom html loaders', done => {
-    test({
+    mockBundleAndRun({
       entry: 'markdown.vue',
       vue: {
         loaders: {
@@ -136,7 +136,7 @@ describe('template block features', () => {
   })
 
   it('custom compiler modules', done => {
-    test({
+    mockBundleAndRun({
       entry: 'custom-module.vue',
       vue: {
         compilerModules: [
@@ -168,7 +168,7 @@ describe('template block features', () => {
   })
 
   it('custom compiler directives', done => {
-    test({
+    mockBundleAndRun({
       entry: 'custom-directive.vue',
       vue: {
         compilerDirectives: {
@@ -191,7 +191,7 @@ describe('template block features', () => {
   })
 
   it('functional component with styles', done => {
-    test({
+    mockBundleAndRun({
       entry: 'functional-style.vue'
     }, (window, module, rawModule) => {
       expect(module.functional).to.equal(true)
@@ -209,7 +209,7 @@ describe('template block features', () => {
   })
 
   it('functional template', done => {
-    test({
+    mockBundleAndRun({
       entry: 'functional-root.vue',
       vue: {
         preserveWhitespace: false

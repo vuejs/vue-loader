@@ -5,7 +5,7 @@ const path = require('path')
 const { expect } = require('chai')
 const {
   genId,
-  test,
+  mockBundleAndRun,
   mockRender
 } = require('./shared')
 
@@ -13,7 +13,7 @@ const normalizeNewline = require('normalize-newline')
 
 describe('style block features', () => {
   it('scoped style', done => {
-    test({
+    mockBundleAndRun({
       entry: 'scoped-css.vue'
     }, (window, module) => {
       const id = 'data-v-' + genId('scoped-css.vue')
@@ -58,7 +58,7 @@ describe('style block features', () => {
   })
 
   it('media-query', done => {
-    test({
+    mockBundleAndRun({
       entry: 'media-query.vue'
     }, (window) => {
       let style = window.document.querySelector('style').textContent
@@ -70,7 +70,7 @@ describe('style block features', () => {
   })
 
   it('supports-query', done => {
-    test({
+    mockBundleAndRun({
       entry: 'supports-query.vue'
     }, (window) => {
       let style = window.document.querySelector('style').textContent
@@ -82,7 +82,7 @@ describe('style block features', () => {
   })
 
   it('postcss options', done => {
-    test({
+    mockBundleAndRun({
       entry: 'postcss.vue',
       vue: {
         postcss: {
@@ -101,7 +101,7 @@ describe('style block features', () => {
 
   it('load postcss config file', done => {
     fs.writeFileSync('.postcssrc', JSON.stringify({ parser: 'sugarss' }))
-    test({
+    mockBundleAndRun({
       entry: 'postcss.vue'
     }, (window) => {
       let style = window.document.querySelector('style').textContent
@@ -114,7 +114,7 @@ describe('style block features', () => {
 
   it('load cascading postcss config file', done => {
     fs.writeFileSync('.postcssrc', JSON.stringify({ parser: 'sugarss' }))
-    test({
+    mockBundleAndRun({
       entry: 'sub/postcss-cascade.vue',
       vue: { postcss: { cascade: true }}
     }, (window) => {
@@ -128,7 +128,7 @@ describe('style block features', () => {
 
   it('load postcss config file by path', done => {
     fs.writeFileSync('test/.postcssrc', JSON.stringify({ parser: 'sugarss' }))
-    test({
+    mockBundleAndRun({
       entry: 'postcss.vue',
       vue: {
         postcss: {
@@ -148,7 +148,7 @@ describe('style block features', () => {
 
   it('load postcss config file with js syntax error', done => {
     fs.writeFileSync('.postcssrc.js', 'module.exports = { hello }')
-    test({
+    mockBundleAndRun({
       entry: 'basic.vue'
     }, (window, module, vueModule, instance, jsdomErr, webpackInfo) => {
       const { stats: { compilation: { warnings, errors }}, err } = webpackInfo
@@ -163,7 +163,7 @@ describe('style block features', () => {
   })
 
   it('postcss lang', done => {
-    test({
+    mockBundleAndRun({
       entry: 'postcss-lang.vue'
     }, (window) => {
       let style = window.document.querySelector('style').textContent
@@ -175,7 +175,7 @@ describe('style block features', () => {
 
   it('css-modules', done => {
     function testWithIdent (localIdentName, regexToMatch, cb) {
-      test({
+      mockBundleAndRun({
         entry: 'css-modules.vue',
         vue: {
           cssModules: localIdentName && {

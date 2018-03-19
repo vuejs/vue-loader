@@ -2,13 +2,13 @@ process.env.VUE_LOADER_TEST = true
 
 const { expect } = require('chai')
 const {
-  test,
+  mockBundleAndRun,
   mockRender
 } = require('./shared')
 
 describe('script block features', () => {
   it('allows to export extended constructor', done => {
-    test({
+    mockBundleAndRun({
       entry: 'extend.vue'
     }, (window, Module) => {
       // extend.vue should export Vue constructor
@@ -23,7 +23,7 @@ describe('script block features', () => {
   })
 
   it('named exports', done => {
-    test({
+    mockBundleAndRun({
       entry: 'named-exports.vue'
     }, (window, _, rawModule) => {
       expect(rawModule.default.name).to.equal('named-exports')

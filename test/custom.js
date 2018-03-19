@@ -4,7 +4,7 @@ const { expect } = require('chai')
 const {
   mfs,
   bundle,
-  test,
+  mockBundleAndRun,
   mockRender
 } = require('./shared')
 
@@ -62,7 +62,7 @@ describe('custom block features', () => {
 
   it('passes Component to custom block loaders', done => {
     const mockLoaderPath = require.resolve('./mock-loaders/docs')
-    test({
+    mockBundleAndRun({
       entry: 'custom-language.vue',
       vue: {
         loaders: {
@@ -85,7 +85,7 @@ describe('custom block features', () => {
   })
 
   it('custom blocks with ES module default export', done => {
-    test({
+    mockBundleAndRun({
       entry: 'custom-blocks.vue',
       vue: {
         loaders: {
@@ -129,7 +129,7 @@ describe('custom block features', () => {
   })
 
   it('pre/post loaders for custom blocks', done => {
-    test({
+    mockBundleAndRun({
       entry: 'custom-blocks.vue',
       vue: {
         preLoaders: {

@@ -6,7 +6,7 @@ const {
   mfs,
   loaderPath,
   bundle,
-  test,
+  mockBundleAndRun,
   mockRender
 } = require('./shared')
 
@@ -16,7 +16,7 @@ const SourceMapConsumer = require('source-map').SourceMapConsumer
 
 describe('advanced features', () => {
   it('pre/post loaders', done => {
-    test({
+    mockBundleAndRun({
       entry: 'basic.vue',
       vue: {
         preLoaders: {
@@ -46,7 +46,7 @@ describe('advanced features', () => {
 
   it('support chaining with other loaders', done => {
     const mockLoaderPath = require.resolve('./mock-loaders/js')
-    test({
+    mockBundleAndRun({
       entry: 'basic.vue',
       modify: config => {
         config.module.rules[0].loader = loaderPath + '!' + mockLoaderPath
@@ -58,7 +58,7 @@ describe('advanced features', () => {
   })
 
   it('expose filename', done => {
-    test({
+    mockBundleAndRun({
       entry: 'basic.vue'
     }, (window, module, rawModule) => {
       expect(module.__file).to.equal(path.normalize('test/fixtures/basic.vue'))
@@ -125,7 +125,7 @@ describe('advanced features', () => {
   })
 
   it('pre-processors with extract css', done => {
-    test({
+    mockBundleAndRun({
       entry: 'pre.vue',
       vue: {
         extractCSS: true
@@ -178,7 +178,7 @@ describe('advanced features', () => {
   })
 
   it('multiple rule definitions', done => {
-    test({
+    mockBundleAndRun({
       modify: config => {
         // remove default rule
         config.module.rules.shift()
@@ -247,7 +247,7 @@ describe('advanced features', () => {
   })
 
   it('thread mode', done => {
-    test({
+    mockBundleAndRun({
       entry: 'basic.vue',
       vue: {
         threadMode: true

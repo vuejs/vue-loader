@@ -78,7 +78,7 @@ function bundle (options, cb, wontThrowError) {
   })
 }
 
-function test (options, assert, wontThrowError) {
+function mockBundleAndRun (options, assert, wontThrowError) {
   bundle(options, (code, stats, err) => {
     jsdom.env({
       html: '<!DOCTYPE html><html><head></head><body></body></html>',
@@ -132,7 +132,7 @@ module.exports = {
   globalConfig,
   genId,
   bundle,
-  test,
+  mockBundleAndRun,
   mockRender,
   interopDefault,
   initStylesForAllSubComponents
