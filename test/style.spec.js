@@ -76,3 +76,78 @@ test('supports-query', done => {
     done()
   })
 })
+
+test('postcss', done => {
+  mockBundleAndRun({
+    entry: 'postcss.vue',
+    module: {
+      rules: [
+        {
+          test: /\.postcss$/,
+          use: [
+            'vue-style-loader',
+            'css-loader',
+            {
+              loader: 'postcss-loader',
+              options: {
+                parser: require('sugarss')
+              }
+            }
+          ]
+        }
+      ]
+    }
+  }, ({ window }) => {
+    const id = 'data-v-' + genId('postcss.vue')
+    let style = window.document.querySelector('style').textContent
+    style = normalizeNewline(style)
+    expect(style).toContain(`h1[${id}] {\n  color: red;\n  font-size: 14px\n}`)
+    done()
+  })
+})
+
+// test('css-modules', done => {
+//   function testWithIdent (localIdentName, regexToMatch, cb) {
+//     mockBundleAndRun({
+//       entry: 'css-modules.vue',
+//       vue: {
+//         cssModules: localIdentName && {
+//           localIdentName: localIdentName
+//         }
+//       }
+//     }, (window, module, raw, instance) => {
+//       // get local class name
+//       const className = instance.style.red
+//       expect(className).toMatch(regexToMatch)
+
+//       // class name in style
+//       let style = [].slice.call(window.document.querySelectorAll('style')).map((style) => {
+//         return style.textContent
+//       }).join('\n')
+//       style = normalizeNewline(style)
+//       expect(style).toContain('.' + className + ' {\n  color: red;\n}')
+
+//       // animation name
+//       const match = style.match(/@keyframes\s+(\S+)\s+{/)
+//       expect(match).toHaveLength(2)
+//       const animationName = match[1]
+//       expect(animationName).not.toBe('fade')
+//       expect(style).toContain('animation: ' + animationName + ' 1s;')
+
+//       // default module + pre-processor + scoped
+//       const anotherClassName = instance.$style.red
+//       expect(anotherClassName).to.match(regexToMatch).not.toBe(className)
+//       const id = 'data-v-' + genId('css-modules.vue')
+//       expect(style).toContain('.' + anotherClassName + '[' + id + ']')
+
+//       cb()
+//     })
+//   }
+//   // default localIdentName
+//   testWithIdent(undefined, /^red_\w{8}/, () => {
+//     // specified localIdentName
+//     const ident = '[path][name]---[local]---[hash:base64:5]'
+//     const regex = /css-modules---red---\w{5}/
+//     testWithIdent(ident, regex, done)
+//   })
+// })
