@@ -74,7 +74,7 @@
     "source-map": "^0.5.6",
     "vue-component-compiler": "vuejs/vue-component-compiler#master",
     "vue-hot-reload-api": "^2.3.0",
-    "vue-style-loader": "^4.0.2",
+    "vue-style-loader": "^4.1.0",
     "vue-template-es2015-compiler": "^1.6.0"
   }
 }
