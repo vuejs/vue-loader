@@ -2,7 +2,9 @@ const SSR = require('vue-server-renderer')
 
 const {
   genId,
-  bundle
+  bundle,
+  baseConfig,
+  interopDefault
 } = require('./utils')
 
 test('SSR style and moduleId extraction', done => {
@@ -96,29 +98,53 @@ test('SSR with scoped CSS', done => {
   })
 })
 
-// TODO
-// test('css-modules in SSR', done => {
-//   bundle({
-//     entry: 'css-modules.vue',
-//     target: 'node',
-//     output: Object.assign({}, globalConfig.output, {
-//       libraryTarget: 'commonjs2'
-//     })
-//   }, (code, warnings) => {
-//     // http://stackoverflow.com/questions/17581830/load-node-js-module-from-string-in-memory
-//     function requireFromString (src, filename) {
-//       const Module = module.constructor
-//       const m = new Module()
-//       m._compile(src, filename)
-//       return m.exports
-//     }
+test('SSR + CSS Modules', done => {
+  const baseLoaders = [
+    'vue-style-loader',
+    {
+      loader: 'css-loader',
+      options: { modules: true }
+    }
+  ]
 
-//     const output = interopDefault(requireFromString(code, './test.build.js'))
-//     const mockInstance = {}
+  bundle({
+    entry: 'css-modules.vue',
+    target: 'node',
+    output: Object.assign({}, baseConfig.output, {
+      libraryTarget: 'commonjs2'
+    }),
+    modify: config => {
+      config.module.rules = [
+        { test: /\.vue$/, loader: 'vue-loader' },
+        {
+          test: /\.css$/,
+          use: baseLoaders
+        },
+        {
+          test: /\.stylus$/,
+          use: [
+            ...baseLoaders,
+            'stylus-loader'
+          ]
+        }
+      ]
+    }
+  }, code => {
+    // http://stackoverflow.com/questions/17581830/load-node-js-module-from-string-in-memory
+    function requireFromString (src, filename) {
+      const Module = require('module')
+      const m = new Module()
+      m._compile(src, filename)
+      return m.exports
+    }
 
-//     output.beforeCreate.forEach(hook => hook.call(mockInstance))
-//     expect(mockInstance.style.red).toBeDefined()
+    const output = interopDefault(requireFromString(code, './test.build.js'))
+    const mockInstance = {}
 
-//     done()
-//   })
-// })
+    output.beforeCreate.forEach(hook => hook.call(mockInstance))
+    expect(mockInstance.style.red).toBeDefined()
+    expect(mockInstance.$style.red).toBeDefined()
+
+    done()
+  })
+})
