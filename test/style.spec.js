@@ -106,6 +106,7 @@ test('postcss', done => {
   })
 })
 
+// TODO
 // test('css-modules', done => {
 //   function testWithIdent (localIdentName, regexToMatch, cb) {
 //     mockBundleAndRun({

@@ -109,6 +109,7 @@ test('transform srcset', done => {
   })
 })
 
+// TODO
 // test('functional component with styles', done => {
 //   mockBundleAndRun({
 //     entry: 'functional-style.vue'
@@ -170,6 +171,7 @@ test('functional template', done => {
   })
 })
 
+// TODO
 // test('customizing template loaders', done => {
 //   mockBundleAndRun({
 //     entry: 'markdown.vue'
