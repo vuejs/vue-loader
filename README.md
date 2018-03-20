@@ -70,6 +70,10 @@ Client-side style injection now injects all styles upfront to ensure consistent 
 
 Note the injection order is still not guaranteed, so you should avoid writing CSS that relies on insertion order.
 
+### PostCSS
+
+`vue-loader` no longer auto applies PostCSS transforms. To use PostCSS, configure `postcss-loader` the same way you would for plain CSS outside `*.vue` files.
+
 ### CSS Modules
 
 CSS Modules now need to be explicitly configured in main webpack config's `css-loader` options. The `module` attribute on `<style>` tags are still needed for locals injection into the component.
