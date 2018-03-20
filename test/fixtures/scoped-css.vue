@@ -55,3 +55,11 @@ h1 {
   <svg><template><p></p></template></svg>
 </div>
 </template>
+
+<script>
+export default {
+  data () {
+    return { ok: true }
+  }
+}
+</script>
