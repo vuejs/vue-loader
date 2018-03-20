@@ -3,7 +3,7 @@ h1
   color red
 </style>
 
-<style>
+<style scoped>
 h2 {
   color: green;
 }
