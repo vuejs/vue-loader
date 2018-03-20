@@ -6,7 +6,8 @@
   "scripts": {
     "test": "jest --env node",
     "lint": "eslint lib test --fix",
-    "build": "webpack --config exploration/webpack.config.js"
+    "build": "webpack --config exploration/webpack.config.js",
+    "dev": "webpack-dev-server --config exploration/webpack.config.js --inline --hot"
   },
   "author": "Evan You",
   "license": "MIT",
@@ -30,6 +31,21 @@
   "peerDependencies": {
     "css-loader": "*",
     "vue-template-compiler": "^2.0.0"
+  },
+  "dependencies": {
+    "consolidate": "^0.15.0",
+    "debug": "^3.1.0",
+    "hash-sum": "^1.0.2",
+    "loader-utils": "^1.1.0",
+    "lru-cache": "^4.1.2",
+    "postcss": "^6.0.20",
+    "postcss-selector-parser": "^3.1.1",
+    "prettier": "^1.11.1",
+    "source-map": "^0.5.6",
+    "vue-component-compiler": "vuejs/vue-component-compiler#master",
+    "vue-hot-reload-api": "^2.3.0",
+    "vue-style-loader": "^4.1.0",
+    "vue-template-es2015-compiler": "^1.6.0"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
@@ -61,20 +77,5 @@
     "webpack-dev-server": "^3.1.1",
     "webpack-merge": "^4.1.2",
     "yorkie": "^1.0.3"
-  },
-  "dependencies": {
-    "consolidate": "^0.15.0",
-    "debug": "^3.1.0",
-    "hash-sum": "^1.0.2",
-    "loader-utils": "^1.1.0",
-    "lru-cache": "^4.1.2",
-    "postcss": "^6.0.20",
-    "postcss-selector-parser": "^3.1.1",
-    "prettier": "^1.11.1",
-    "source-map": "^0.5.6",
-    "vue-component-compiler": "vuejs/vue-component-compiler#master",
-    "vue-hot-reload-api": "^2.3.0",
-    "vue-style-loader": "^4.1.0",
-    "vue-template-es2015-compiler": "^1.6.0"
   }
 }
