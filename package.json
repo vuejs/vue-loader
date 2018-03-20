@@ -59,6 +59,7 @@
     "jest": "^22.4.2",
     "jsdom": "^11.6.2",
     "lint-staged": "^7.0.0",
+    "markdown-loader": "^2.0.2",
     "mini-css-extract-plugin": "^0.2.0",
     "node-sass": "^4.7.2",
     "normalize-newline": "^3.0.0",

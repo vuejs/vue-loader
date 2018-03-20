@@ -171,21 +171,28 @@ test('functional template', done => {
   })
 })
 
-// TODO
-// test('customizing template loaders', done => {
-//   mockBundleAndRun({
-//     entry: 'markdown.vue'
-//   }, ({ window, module }) => {
-//     const vnode = mockRender(module, {
-//       msg: 'hi'
-//     })
-//     // <h2 id="-msg-">{{msg}}</h2>
-//     expect(vnode.tag).toBe('h2')
-//     expect(vnode.data.attrs.id).toBe('-msg-')
-//     expect(vnode.children[0].text).toBe('hi')
-//     done()
-//   })
-// })
+test('customizing template loaders', done => {
+  mockBundleAndRun({
+    entry: 'markdown.vue',
+    module: {
+      rules: [
+        {
+          test: /\.md$/,
+          loader: 'markdown-loader'
+        }
+      ]
+    }
+  }, ({ window, module }) => {
+    const vnode = mockRender(module, {
+      msg: 'hi'
+    })
+    // <h2 id="-msg-">{{msg}}</h2>
+    expect(vnode.tag).toBe('h2')
+    expect(vnode.data.attrs.id).toBe('-msg-')
+    expect(vnode.children[0].text).toBe('hi')
+    done()
+  })
+})
 
 test('custom compiler modules', done => {
   mockBundleAndRun({
