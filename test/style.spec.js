@@ -106,49 +106,79 @@ test('postcss', done => {
   })
 })
 
-// TODO
-// test('css-modules', done => {
-//   function testWithIdent (localIdentName, regexToMatch, cb) {
-//     mockBundleAndRun({
-//       entry: 'css-modules.vue',
-//       vue: {
-//         cssModules: localIdentName && {
-//           localIdentName: localIdentName
-//         }
-//       }
-//     }, (window, module, raw, instance) => {
-//       // get local class name
-//       const className = instance.style.red
-//       expect(className).toMatch(regexToMatch)
+test('css-modules', async () => {
+  function testWithIdent (localIdentName, regexToMatch) {
+    return new Promise((resolve, reject) => {
+      const baseLoaders = [
+        'vue-style-loader',
+        {
+          loader: 'css-loader',
+          options: {
+            modules: true,
+            localIdentName
+          }
+        }
+      ]
+      mockBundleAndRun({
+        entry: 'css-modules.vue',
+        modify: config => {
+          config.module.rules = [
+            {
+              test: /\.vue$/,
+              loader: 'vue-loader'
+            },
+            {
+              test: /\.css$/,
+              use: baseLoaders
+            },
+            {
+              test: /\.stylus$/,
+              use: [
+                ...baseLoaders,
+                'stylus-loader'
+              ]
+            }
+          ]
+        }
+      }, ({ window, instance, jsdomError, bundleError }) => {
+        if (jsdomError) return reject(jsdomError)
+        if (bundleError) return reject(bundleError)
 
-//       // class name in style
-//       let style = [].slice.call(window.document.querySelectorAll('style')).map((style) => {
-//         return style.textContent
-//       }).join('\n')
-//       style = normalizeNewline(style)
-//       expect(style).toContain('.' + className + ' {\n  color: red;\n}')
+        // get local class name
+        const className = instance.style.red
+        expect(className).toMatch(regexToMatch)
 
-//       // animation name
-//       const match = style.match(/@keyframes\s+(\S+)\s+{/)
-//       expect(match).toHaveLength(2)
-//       const animationName = match[1]
-//       expect(animationName).not.toBe('fade')
-//       expect(style).toContain('animation: ' + animationName + ' 1s;')
+        // class name in style
+        let style = [].slice.call(window.document.querySelectorAll('style')).map((style) => {
+          return style.textContent
+        }).join('\n')
+        style = normalizeNewline(style)
+        expect(style).toContain('.' + className + ' {\n  color: red;\n}')
 
-//       // default module + pre-processor + scoped
-//       const anotherClassName = instance.$style.red
-//       expect(anotherClassName).to.match(regexToMatch).not.toBe(className)
-//       const id = 'data-v-' + genId('css-modules.vue')
-//       expect(style).toContain('.' + anotherClassName + '[' + id + ']')
+        // animation name
+        const match = style.match(/@keyframes\s+(\S+)\s+{/)
+        expect(match).toHaveLength(2)
+        const animationName = match[1]
+        expect(animationName).not.toBe('fade')
+        expect(style).toContain('animation: ' + animationName + ' 1s;')
 
-//       cb()
-//     })
-//   }
-//   // default localIdentName
-//   testWithIdent(undefined, /^red_\w{8}/, () => {
-//     // specified localIdentName
-//     const ident = '[path][name]---[local]---[hash:base64:5]'
-//     const regex = /css-modules---red---\w{5}/
-//     testWithIdent(ident, regex, done)
-//   })
-// })
+        // default module + pre-processor + scoped
+        const anotherClassName = instance.$style.red
+        expect(anotherClassName).toMatch(regexToMatch)
+        const id = 'data-v-' + genId('css-modules.vue')
+        expect(style).toContain('.' + anotherClassName + '[' + id + ']')
+
+        resolve()
+      })
+    })
+  }
+
+  // default ident
+  await testWithIdent(undefined, /^\w{22}/)
+
+  // custom ident
+  await testWithIdent(
+    '[path][name]---[local]---[hash:base64:5]',
+    /css-modules---red---\w{5}/
+  )
+})

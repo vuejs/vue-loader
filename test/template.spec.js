@@ -1,4 +1,5 @@
 const path = require('path')
+const normalizeNewline = require('normalize-newline')
 const {
   mockRender,
   mockBundleAndRun
@@ -63,8 +64,8 @@ test('transform relative URLs and respects resolve alias', done => {
     expect(vnode.children[2].data.attrs.src).toBe('logo.c9e00e.png')
 
     const style = window.document.querySelector('style').textContent
-    expect(style).toContain('html { background-image: url(logo.c9e00e.png); }')
-    expect(style).toContain('body { background-image: url(logo.c9e00e.png); }')
+    expect(style).toContain('html { background-image: url(logo.c9e00e.png);\n}')
+    expect(style).toContain('body { background-image: url(logo.c9e00e.png);\n}')
     done()
   })
 })
@@ -109,24 +110,23 @@ test('transform srcset', done => {
   })
 })
 
-// TODO
-// test('functional component with styles', done => {
-//   mockBundleAndRun({
-//     entry: 'functional-style.vue'
-//   }, ({ window, module, rawModule }) => {
-//     expect(module.functional).toBe(true)
-//     const vnode = mockRender(module)
-//     // <div class="foo">hi</div>
-//     expect(vnode.tag).toBe('div')
-//     expect(vnode.data.class).toBe('foo')
-//     expect(vnode.children[0].text).toBe('functional')
+test('functional component with styles', done => {
+  mockBundleAndRun({
+    entry: 'functional-style.vue'
+  }, ({ window, module, rawModule }) => {
+    expect(module.functional).toBe(true)
+    const vnode = mockRender(module)
+    // <div class="foo">hi</div>
+    expect(vnode.tag).toBe('div')
+    expect(vnode.data.class).toBe('foo')
+    expect(vnode.children[0].text).toBe('functional')
 
-//     let style = window.document.querySelector('style').textContent
-//     style = normalizeNewline(style)
-//     expect(style).toContain('.foo { color: red;\n}')
-//     done()
-//   })
-// })
+    let style = window.document.querySelector('style').textContent
+    style = normalizeNewline(style)
+    expect(style).toContain('.foo { color: red;\n}')
+    done()
+  })
+})
 
 test('functional template', done => {
   mockBundleAndRun({

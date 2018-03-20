@@ -10,11 +10,11 @@
 }
 </style>
 
-<style scoped lang="stylus" module>
+<style lang="stylus" module scoped>
 .red
   color: red
 </style>
 
 <script>
-module.exports = {}
+export default {}
 </script>

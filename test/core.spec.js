@@ -75,7 +75,7 @@ test('style import', done => {
     entry: 'style-import.vue'
   }, ({ window }) => {
     const styles = window.document.querySelectorAll('style')
-    expect(styles[0].textContent).toContain('h1 { color: red; }')
+    expect(styles[0].textContent).toContain('h1 { color: red;\n}')
     // import with scoped
     const id = 'data-v-' + genId('style-import.vue')
     expect(styles[1].textContent).toContain('h1[' + id + '] { color: green;\n}')
@@ -90,7 +90,7 @@ test('style import for a same file twice', done => {
     initStylesForAllSubComponents(module)
     const styles = window.document.querySelectorAll('style')
     expect(styles.length).toBe(3)
-    expect(styles[0].textContent).toContain('h1 { color: red; }')
+    expect(styles[0].textContent).toContain('h1 { color: red;\n}')
     // import with scoped
     const id = 'data-v-' + genId('style-import-twice-sub.vue')
     expect(styles[1].textContent).toContain('h1[' + id + '] { color: green;\n}')
