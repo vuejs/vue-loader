@@ -105,6 +105,60 @@ test('extract CSS', done => {
   })
 })
 
+test('support rules with oneOf', async () => {
+  const run = (entry, assert) => new Promise((resolve, reject) => {
+    mockBundleAndRun({
+      entry,
+      modify: config => {
+        config.module.rules = [
+          { test: /\.vue$/, loader: 'vue-loader' },
+          {
+            test: /\.css$/,
+            use: 'vue-style-loader',
+            oneOf: [
+              {
+                resourceQuery: /cssModules/,
+                use: [
+                  {
+                    loader: 'css-loader',
+                    options: {
+                      modules: true,
+                      localIdentName: '[local]_[hash:base64:5]'
+                    }
+                  }
+                ]
+              },
+              {
+                use: ['css-loader']
+              }
+            ]
+          }
+        ]
+      }
+    }, res => {
+      const { jsdomError, bundleError } = res
+      if (jsdomError) return reject(jsdomError)
+      if (bundleError) return reject(bundleError)
+      assert(res)
+      resolve()
+    })
+  })
+
+  await run('basic.vue', ({ window }) => {
+    let style = window.document.querySelector('style').textContent
+    style = normalizeNewline(style)
+    expect(style).toContain('comp-a h2 {\n  color: #f00;\n}')
+  })
+
+  await run('css-modules-simple.vue', ({ window, instance }) => {
+    const className = instance.$style.red
+    expect(className).toMatch(/^red_\w{5}/)
+    let style = window.document.querySelector('style').textContent
+    style = normalizeNewline(style)
+    expect(style).toContain('.' + className + ' {\n  color: red;\n}')
+  })
+})
+
 // TODO
 // test('multiple rule definitions', done => {
 //   mockBundleAndRun({

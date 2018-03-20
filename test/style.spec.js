@@ -106,7 +106,7 @@ test('postcss', done => {
   })
 })
 
-test('css-modules', async () => {
+test('CSS Modules', async () => {
   function testWithIdent (localIdentName, regexToMatch) {
     return new Promise((resolve, reject) => {
       const baseLoaders = [
