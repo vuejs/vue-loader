@@ -60,9 +60,33 @@ module.exports = {
 
 ### Loader Inference
 
-`vue-loader` 15 no longer infers the loader to use based on the `lang` attribute. Instead, the plugin dynamically creates rules that clones your existing config and maps them to vue language block requests. So, in the new version, in order to use SASS loader, you will need to explicitly configure the loader to use like in the example above.
+`vue-loader` 15 now infers loaders to use for language blocks a bit differently.
 
-The benefit is now your plain SASS imports from JavaScript and all `<style lang="scss">` code inside Vue components share exactly the same loaders and options. In the past, if `vue-loader`'s default behavior doesn't match your needs, you'd have to duplicate the config using `vue-loader`'s own `loaders` option, but now it is no longer needed.
+Take `<style lang="less">` as an example: in v14 and below, it will attempt to load the block with `less-loader`, and implicitly chains `css-loader` and `vue-style-loader` after it, all using inline loader strings.
+
+In v15, `<style lang="less">` will behave as if it's an actual `*.less` file being loaded. So, in order to process it, you need to provide an explicit rule in your main webpack config:
+
+``` js
+{
+  module: {
+    rules: [
+      // ...other rules
+      {
+        test: /\.less$/,
+        use: [
+          'vue-style-loader',
+          'css-loader',
+          'less-loader'
+        ]
+      }
+    ]
+  }
+}
+```
+
+The benefit is that this same rule also applies to plain `*.less` imports from JavaScript, and you can configure options for these loaders anyway you want. In v14 and below, if you want to provide custom options to an inferred loader, you'd have to duplicate it under `vue-loader`'s own `loaders` option. In v15 it is no longer necessary.
+
+v15 also allows using non-serializable options for loaders, which was not possible in previous versions.
 
 ### Style Injection
 
@@ -72,15 +96,39 @@ Note the injection order is still not guaranteed, so you should avoid writing CS
 
 ### PostCSS
 
-`vue-loader` no longer auto applies PostCSS transforms. To use PostCSS, configure `postcss-loader` the same way you would for plain CSS outside `*.vue` files.
+`vue-loader` no longer auto applies PostCSS transforms. To use PostCSS, configure `postcss-loader` the same way you would for normal CSS files.
 
 ### CSS Modules
 
-CSS Modules now need to be explicitly configured in main webpack config's `css-loader` options. The `module` attribute on `<style>` tags are still needed for locals injection into the component.
+CSS Modules now need to be explicitly configured via `css-loader` options. The `module` attribute on `<style>` tags is still needed for locals injection into the component.
 
-The good news is that you can now configure `localIdentName` in one place.
+The good news is that you can now configure `localIdentName` in one place:
 
-If you still want the ability to only use CSS Modules in some of your Vue components, you can use a `oneOf` rule and check for the `cssModules` string in resourceQuery:
+``` js
+{
+  module: {
+    rules: [
+      {
+        test: /\.css$/,
+        use: [
+          {
+            loader: 'vue-style-loader'
+          },
+          {
+            loader: 'css-loader',
+            options: {
+              modules: true,
+              localIdentName: '[local]_[hash:base64:8]'
+            }
+          }
+        ]
+      }
+    ]
+  }
+}
+```
+
+If you only want to use CSS Modules in some of your Vue components, you can use a `oneOf` rule and check for the `cssModules` string in resourceQuery:
 
 ``` js
 {
@@ -107,6 +155,36 @@ If you still want the ability to only use CSS Modules in some of your Vue compon
         'css-loader'
       ]
     }
+  ]
+}
+```
+
+## CSS Extraction
+
+Works the same way as you'd configure it for normal CSS. Example usage with [mini-css-extract-plugin](https://github.com/webpack-contrib/mini-css-extract-plugin):
+
+``` js
+{
+  module: {
+    rules: [
+      {
+        test: /\.vue$/,
+        use: 'vue-loader'
+      },
+      {
+        test: /\.css$/,
+        // or ExtractTextWebpackPlugin.extract(...)
+        use: [
+          MiniCssExtractPlugin.loader,
+          'css-loader'
+        ]
+      }
+    ]
+  },
+  plugins: [
+    new MiniCssExtractPlugin({
+      filename: 'output.css'
+    })
   ]
 }
 ```
