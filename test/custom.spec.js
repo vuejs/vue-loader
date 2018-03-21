@@ -1,5 +1,6 @@
 const {
-  bundle
+  bundle,
+  mockBundleAndRun
 } = require('./utils')
 
 test('add custom blocks to the webpack output', done => {
@@ -43,23 +44,22 @@ describe('example', function () {
   })
 })
 
-// TODO
-// test('passes Component to custom block loaders', done => {
-//   mockBundleAndRun({
-//     entry: 'custom-language.vue',
-//     module: {
-//       rules: [
-//         {
-//           resourceQuery: /blockType=documentation/,
-//           loader: require.resolve('./mock-loaders/docs')
-//         }
-//       ]
-//     }
-//   }, ({ module }) => {
-//     expect(module.__docs).toContain('This is example documentation for a component.')
-//     done()
-//   })
-// })
+test('passes Component to custom block loaders', done => {
+  mockBundleAndRun({
+    entry: 'custom-language.vue',
+    module: {
+      rules: [
+        {
+          resourceQuery: /blockType=documentation/,
+          loader: require.resolve('./mock-loaders/docs')
+        }
+      ]
+    }
+  }, ({ module }) => {
+    expect(module.__docs).toContain('This is example documentation for a component.')
+    done()
+  })
+})
 
 test('custom blocks can be ignored', done => {
   bundle({
