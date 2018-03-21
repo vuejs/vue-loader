@@ -218,6 +218,7 @@ The following option has been changed to resourceQuery:
 
 - `compiler`
 - `compilerOptions`
+- `transpileOptions`
 - `transformAssetUrls`
 - `optimizeSSR`
 - `hotReload`
