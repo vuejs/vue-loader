@@ -7,12 +7,6 @@ ja:
 
 <blog>## foo</blog>
 
-<esm>
-export default function (Component) {
-  Component.options.foo = 1
-}
-</esm>
-
 <template>
   <div>
     <h1>{{ msg }}</h1>

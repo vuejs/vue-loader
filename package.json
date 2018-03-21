@@ -65,6 +65,7 @@
     "normalize-newline": "^3.0.0",
     "postcss-loader": "^2.1.2",
     "pug": "^2.0.1",
+    "raw-loader": "^0.5.1",
     "sass-loader": "^6.0.7",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.2",

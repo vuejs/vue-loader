@@ -1,5 +1,5 @@
-describe('example', function () {
-  it('basic', function (done) {
+describe('example', () => {
+  it('basic', done => {
     done()
   })
 })

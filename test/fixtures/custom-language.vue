@@ -1,6 +1,6 @@
-<unit-test>
-  describe('example', function () {
-    it('basic', function (done) {
+<unit-test lang="js">
+  describe('example', () => {
+    it('basic', done => {
       done();
     })
   })
