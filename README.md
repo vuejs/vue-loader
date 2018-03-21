@@ -128,7 +128,7 @@ The good news is that you can now configure `localIdentName` in one place:
 }
 ```
 
-If you only want to use CSS Modules in some of your Vue components, you can use a `oneOf` rule and check for the `cssModules` string in resourceQuery:
+If you only want to use CSS Modules in some of your Vue components, you can use a `oneOf` rule and check for the `module` string in resourceQuery:
 
 ``` js
 {
@@ -136,7 +136,7 @@ If you only want to use CSS Modules in some of your Vue components, you can use 
   oneOf: [
     // this matches <style module>
     {
-      resourceQuery: /cssModules/,
+      resourceQuery: /module/,
       use: [
         'vue-style-loader',
         {

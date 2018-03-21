@@ -117,7 +117,7 @@ test('support rules with oneOf', async () => {
             use: 'vue-style-loader',
             oneOf: [
               {
-                resourceQuery: /cssModules/,
+                resourceQuery: /module/,
                 use: [
                   {
                     loader: 'css-loader',
