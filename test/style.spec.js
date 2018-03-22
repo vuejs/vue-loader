@@ -174,7 +174,7 @@ test('CSS Modules', async () => {
   }
 
   // default ident
-  await testWithIdent(undefined, /^\w{22}/)
+  await testWithIdent(undefined, /^\w{21,}/)
 
   // custom ident
   await testWithIdent(
