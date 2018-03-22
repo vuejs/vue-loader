@@ -1,21 +1,17 @@
-# Test against the latest version of this Node.js version
 environment:
-  nodejs_version: "6"
+  nodejs_version: "8"
 
-# Install scripts. (runs after repo cloning)
 install:
-  # Get the latest stable version of Node.js or io.js
   - ps: Install-Product node $env:nodejs_version
-  # install modules
-  - npm install
+  - yarn
 
-# Post-install test scripts.
 test_script:
-  # Output useful info for debugging.
+  - git --version
   - node --version
-  - npm --version
-  # run tests
-  - npm test
+  - yarn --version
+  - yarn test
 
-# Don't actually build.
+cache:
+  - node_modules -> yarn.lock
+
 build: off
