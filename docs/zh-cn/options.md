@@ -160,6 +160,15 @@ module.exports = {
 
   注意，这个值会在 webpack 配置中没有 `devtool` 的情况下自动设置为 `false`。
 
+### postcss.cascade
+
+> 14.2.0 新增
+
+- 类型：`boolean`
+- 默认值：`false`
+
+  设置为 `true` 的时候会开启层叠式加载 PostCSS 配置文件。比如，你可以在嵌套的源代码目录下放置额外的 `.postcssrc` 文件来为项目中不同的文件应用不同的 PostCSS 配置。
+
 ### esModule
 
 > 这个选项已经从 v14.0 中移除。在 v14.0 及以上版本中，`*.vue` 文件始终暴露为 ES 模块。
@@ -232,62 +241,62 @@ module.exports = {
 
 > 12.0.0 新增
 
-使用 `extract-text-webpack-plugin` 自动提取 CSS。适用于大多数预处理器，且也可在生产环境进行压缩。
+  使用 `extract-text-webpack-plugin` 自动提取 CSS。适用于大多数预处理器，且也可在生产环境进行压缩。
 
-传入的值可以是 `true`，也可以是插件的一个实例 (这样可以为多个提取的文件使用多个提取插件的实例)。
+  传入的值可以是 `true`，也可以是插件的一个实例 (这样可以为多个提取的文件使用多个提取插件的实例)。
 
-这应当只用于生产环境，以便可以在开发过程中使用热重载。
+  这应当只用于生产环境，以便可以在开发过程中使用热重载。
 
-示例：
+  示例：
 
-``` js
-// webpack.config.js
-var ExtractTextPlugin = require("extract-text-webpack-plugin")
+  ``` js
+  // webpack.config.js
+  var ExtractTextPlugin = require("extract-text-webpack-plugin")
 
-module.exports = {
-  // other options...
-  module: {
-    rules: [
-      {
-        test: /\.vue$/,
-        loader: 'vue-loader',
-        options: {
-          extractCSS: true
+  module.exports = {
+    // 其它选项……
+    module: {
+      rules: [
+        {
+          test: /\.vue$/,
+          loader: 'vue-loader',
+          options: {
+            extractCSS: true
+          }
         }
-      }
+      ]
+    },
+    plugins: [
+      new ExtractTextPlugin("style.css")
     ]
-  },
-  plugins: [
-    new ExtractTextPlugin("style.css")
-  ]
-}
-```
+  }
+  ```
 
-或者传递插件的一个实例：
+  或者传递插件的一个实例：
 
-``` js
-// webpack.config.js
-var ExtractTextPlugin = require("extract-text-webpack-plugin")
-var plugin = new ExtractTextPlugin("style.css")
+  ``` js
+  // webpack.config.js
+  var ExtractTextPlugin = require("extract-text-webpack-plugin")
+  var plugin = new ExtractTextPlugin("style.css")
 
-module.exports = {
-  // other options...
-  module: {
-    rules: [
-      {
-        test: /\.vue$/,
-        loader: 'vue-loader',
-        options: {
-          extractCSS: plugin
+  module.exports = {
+    // 其它选项……
+    module: {
+      rules: [
+        {
+          test: /\.vue$/,
+          loader: 'vue-loader',
+          options: {
+            extractCSS: plugin
+          }
         }
-      }
+      ]
+    },
+    plugins: [
+      plugin
     ]
-  },
-  plugins: [
-    plugin
-  ]
-}
-```
+  }
+  ```
 
 ### optimizeSSR
 
@@ -296,7 +305,7 @@ module.exports = {
 - 类型: `boolean`
 - 默认值: 当 webpack 配置中包含 `target: 'node'` 且 `vue-template-compiler` 版本号大于等于 2.4.0 时为 `true`。
 
-开启 Vue 2.4 服务端渲染的编译优化之后，渲染函数将会把返回的 vdom 树的一部分编译为字符串，以提升服务端渲染的性能。在一些情况下，你可能想要明确的将其关掉，因为该渲染函数只能用于服务端渲染，而不能用于客户端渲染或测试环境。
+  开启 Vue 2.4 服务端渲染的编译优化之后，渲染函数将会把返回的 vdom 树的一部分编译为字符串，以提升服务端渲染的性能。在一些情况下，你可能想要明确的将其关掉，因为该渲染函数只能用于服务端渲染，而不能用于客户端渲染或测试环境。
 
 ### hotReload
 
@@ -306,5 +315,16 @@ module.exports = {
 - 默认值: 在开发环境下是 `true`，在生产环境下或 webpack 配置中有 `target: 'node'` 的时候是 `false`。
 - 允许的值: `false` (`true` 会强制热重载，即便是生产环境或 `target: 'node'` 时)
 
-是否使用 webpack 的[模块热替换](https://webpack.js.org/concepts/hot-module-replacement/)在浏览器中应用变更而**不重载整个页面**。
-用这个选项 (值设为 `false`) 在开发环境下关闭热重载特性。
+  是否使用 webpack 的[模块热替换](https://webpack.js.org/concepts/hot-module-replacement/)在浏览器中应用变更而**不重载整个页面**。
+  用这个选项 (值设为 `false`) 在开发环境下关闭热重载特性。
+
+### threadMode
+
+> 14.2.0 新增
+
+- 类型：`boolean`
+- 默认值：`false`
+
+  设置为 `true` 的时候会开启基于文件系统的选项缓存，使得主 `vue-loader` 的选项可以分享给其它线程中的子 loader。
+
+  只在和 HappyPack 或 `thread-loader` 配合使用的时候才用得到。

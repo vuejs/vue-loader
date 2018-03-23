@@ -331,6 +331,6 @@ module.exports = {
 - type: `boolean`
 - default: `false`
 
-  Setting this to true enables filesystem-based option caching so that the options for the main `vue-loader` can be properly shared with sub-loaders in other threads.
+  Setting this to `true` enables filesystem-based option caching so that the options for the main `vue-loader` can be properly shared with sub-loaders in other threads.
 
   Only needed when using together with HappyPack or `thread-loader`.
