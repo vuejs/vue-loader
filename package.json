@@ -6,8 +6,8 @@
   "scripts": {
     "test": "jest --env node",
     "lint": "eslint lib test --fix",
-    "build": "webpack --config exploration/webpack.config.js",
-    "dev": "webpack-dev-server --config exploration/webpack.config.js --inline --hot"
+    "build": "webpack --config example/webpack.config.js --hide-modules",
+    "dev": "webpack-dev-server --config example/webpack.config.js --inline --hot"
   },
   "author": "Evan You",
   "license": "MIT",
@@ -43,6 +43,7 @@
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.4",
     "babel-preset-env": "^1.6.1",
+    "conventional-changelog": "^1.1.19",
     "css-loader": "^0.28.11",
     "eslint": "^4.19.0",
     "eslint-plugin-vue-libs": "^2.1.0",
