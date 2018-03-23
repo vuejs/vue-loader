@@ -56,3 +56,23 @@ test('test-less oneOf rules', done => {
     }
   }, res => assertComponent(res, done))
 })
+
+test('babel-loader inline options', done => {
+  mockBundleAndRun({
+    entry: 'basic.vue',
+    module: {
+      rules: [
+        {
+          test: /\.js/,
+          loader: 'babel-loader',
+          options: {
+            babelrc: false,
+            presets: [
+              [require('babel-preset-env'), { modules: false }]
+            ]
+          }
+        }
+      ]
+    }
+  }, res => assertComponent(res, done))
+})
