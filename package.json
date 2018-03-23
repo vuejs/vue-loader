@@ -1,6 +1,6 @@
 {
   "name": "vue-loader",
-  "version": "15.0.0-beta.4",
+  "version": "15.0.0-beta.5",
   "description": "Vue single-file component loader for Webpack",
   "main": "lib/index.js",
   "scripts": {
