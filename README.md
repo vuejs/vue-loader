@@ -222,3 +222,4 @@ The following option has been changed to resourceQuery:
 - `transformAssetUrls`
 - `optimizeSSR`
 - `hotReload`
+- `productionMode`
