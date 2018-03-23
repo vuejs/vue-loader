@@ -1,3 +1,13 @@
+<a name="15.0.0-beta.5"></a>
+# [15.0.0-beta.5](https://github.com/vuejs/vue-loader/compare/v15.0.0-beta.4...v15.0.0-beta.5) (2018-03-23)
+
+
+### Bug Fixes
+
+* pass correct args to RuleSet.normalizeRule (fix [#1210](https://github.com/vuejs/vue-loader/issues/1210)) ([1c54dc4](https://github.com/vuejs/vue-loader/commit/1c54dc4))
+
+
+
 <a name="15.0.0-beta.4"></a>
 # [15.0.0-beta.4](https://github.com/vuejs/vue-loader/compare/v15.0.0-beta.3...v15.0.0-beta.4) (2018-03-23)
 
