@@ -1,4 +1,5 @@
 const {
+  bundle,
   mockRender,
   mockBundleAndRun
 } = require('./utils')
@@ -58,7 +59,7 @@ test('test-less oneOf rules', done => {
 })
 
 test('babel-loader inline options', done => {
-  mockBundleAndRun({
+  bundle({
     entry: 'basic.vue',
     module: {
       rules: [
@@ -74,5 +75,23 @@ test('babel-loader inline options', done => {
         }
       ]
     }
-  }, res => assertComponent(res, done))
+  }, () => done(), true)
+})
+
+// #1210
+test('normalize multiple use + options', done => {
+  bundle({
+    entry: 'basic.vue',
+    modify: config => {
+      config.module.rules[0] = {
+        test: /\.vue$/,
+        use: [
+          {
+            loader: 'vue-loader',
+            options: {}
+          }
+        ]
+      }
+    }
+  }, () => done(), true)
 })
