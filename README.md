@@ -203,8 +203,9 @@ The following options have been deprecated and should be configured using normal
 
 The following options have been deprecated and should be configured using the new `compilerOptions` option:
 
-- `compilerModules`
-- `compilerDirectives`
+- `preserveWhitespace` (use `compilerOptions.preserveWhitespace`)
+- `compilerModules` (use `compilerOptions.modules`)
+- `compilerDirectives` (use `compilerOptions.directives`)
 
 The following option has been renamed:
 
@@ -212,7 +213,7 @@ The following option has been renamed:
 
 The following option has been changed to resourceQuery:
 
-- `shadowMode` (now use inline resource queries)
+- `shadowMode` (now use inline resource queries, e.g. `foo.vue?shadow`)
 
 ## New Complete Options List
 
