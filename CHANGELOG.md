@@ -1,3 +1,13 @@
+<a name="15.0.0-beta.4"></a>
+# [15.0.0-beta.4](https://github.com/vuejs/vue-loader/compare/v15.0.0-beta.3...v15.0.0-beta.4) (2018-03-23)
+
+
+### Bug Fixes
+
+* avoid babel options validation error (fix [#1209](https://github.com/vuejs/vue-loader/issues/1209)) ([d3e3f5e](https://github.com/vuejs/vue-loader/commit/d3e3f5e))
+
+
+
 <a name="15.0.0-beta.3"></a>
 # [15.0.0-beta.3](https://github.com/vuejs/vue-loader/compare/v15.0.0-beta.2...v15.0.0-beta.3) (2018-03-23)
 
