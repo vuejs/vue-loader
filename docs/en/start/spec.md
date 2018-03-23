@@ -58,7 +58,7 @@ More details can be found in [Using Pre-Processors](../configurations/pre-proces
 
 - The script is executed in a CommonJS like environment (just like a normal `.js` module bundled via webpack), which means you can `require()` other dependencies. And with ES2015 support, you can also use the `import` and `export` syntax.
 
-- The script must export a Vue.js [component options object](https://012.vuejs.org/api/options.html). Exporting an extended constructor created by `Vue.extend()` is also supported, but a plain object is preferred.
+- The script must export a Vue.js [component options object](https://vuejs.org/v2/api/#Options-Data). Exporting an extended constructor created by `Vue.extend()` is also supported, but a plain object is preferred.
 
 #### `<style>`
 
