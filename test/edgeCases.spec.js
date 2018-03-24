@@ -113,13 +113,18 @@ test('should not duplicate css modules value imports', done => {
         ]
       }
     }
-  }, ({ window, module, code }) => {
+  }, ({ window, exports, code }) => {
     const localsRE = /exports.locals = {\s+"color": "red"\s+};/
     const matches = code.match(localsRE)
     expect(matches.length).toBe(1)
 
-    const styles = window.getComputedStyle(window.document.querySelector('h1'))
-    console.log(styles)
+    const styles = window.document.querySelectorAll('style')
+    expect(styles.length).toBe(2) // one for values, one for the component
+    const style = normalizeNewline(styles[1].textContent)
+    // value should be injected
+    expect(style).toMatch('color: red;')
+    // exports is set as the locals imported from values.css
+    expect(exports.color).toBe('red')
     done()
   })
 })
