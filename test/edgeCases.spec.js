@@ -1,10 +1,13 @@
+const path = require('path')
+const normalizeNewline = require('normalize-newline')
+const HTMLPlugin = require('html-webpack-plugin')
+
 const {
+  mfs,
   bundle,
   mockRender,
   mockBundleAndRun
 } = require('./utils')
-
-const normalizeNewline = require('normalize-newline')
 
 const assertComponent = ({ window, module }, done) => {
   const vnode = mockRender(module, {
@@ -127,4 +130,21 @@ test('should not duplicate css modules value imports', done => {
     expect(exports.color).toBe('red')
     done()
   })
+})
+
+test('html-webpack-plugin', done => {
+  bundle({
+    entry: 'basic.vue',
+    plugins: [
+      new HTMLPlugin({
+        inject: true,
+        template: path.resolve(__dirname, 'fixtures/index.html'),
+        filename: 'output.html'
+      })
+    ]
+  }, () => {
+    const html = mfs.readFileSync('/output.html', 'utf-8')
+    expect(html).toMatch('test.build.js')
+    done()
+  }, true)
 })
