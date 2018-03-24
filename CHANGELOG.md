@@ -1,3 +1,14 @@
+<a name="15.0.0-beta.6"></a>
+# [15.0.0-beta.6](https://github.com/vuejs/vue-loader/compare/v15.0.0-beta.5...v15.0.0-beta.6) (2018-03-24)
+
+
+### Bug Fixes
+
+* compat with html-webpack-plugin ([8626739](https://github.com/vuejs/vue-loader/commit/8626739)), closes [#1213](https://github.com/vuejs/vue-loader/issues/1213)
+* only reuse ident for whitelisted loaders ([230abd4](https://github.com/vuejs/vue-loader/commit/230abd4)), closes [#1214](https://github.com/vuejs/vue-loader/issues/1214)
+
+
+
 <a name="15.0.0-beta.5"></a>
 # [15.0.0-beta.5](https://github.com/vuejs/vue-loader/compare/v15.0.0-beta.4...v15.0.0-beta.5) (2018-03-23)
 
