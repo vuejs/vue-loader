@@ -8,7 +8,7 @@ const {
 test('template with comments', done => {
   mockBundleAndRun({
     entry: 'template-comment.vue'
-  }, ({ window, module, rawModule }) => {
+  }, ({ window, module }) => {
     expect(module.comments).toBe(true)
     const vnode = mockRender(module, {
       msg: 'hi'
@@ -113,7 +113,7 @@ test('transform srcset', done => {
 test('functional component with styles', done => {
   mockBundleAndRun({
     entry: 'functional-style.vue'
-  }, ({ window, module, rawModule }) => {
+  }, ({ window, module }) => {
     expect(module.functional).toBe(true)
     const vnode = mockRender(module)
     // <div class="foo">hi</div>

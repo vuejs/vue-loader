@@ -1,7 +1,9 @@
-const Component = require('~target')
+import Component from '~target'
+import * as exports from '~target'
 
 if (typeof window !== 'undefined') {
-  window.vueModule = Component
+  window.module = Component
+  window.exports = exports
 }
 
-module.exports = Component
+export default Component

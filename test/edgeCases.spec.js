@@ -95,3 +95,31 @@ test('normalize multiple use + options', done => {
     }
   }, () => done(), true)
 })
+
+test('should not duplicate css modules value imports', done => {
+  mockBundleAndRun({
+    entry: './test/fixtures/duplicate-cssm.js',
+    modify: config => {
+      config.module.rules[1] = {
+        test: /\.css$/,
+        use: [
+          'vue-style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              modules: true
+            }
+          }
+        ]
+      }
+    }
+  }, ({ window, module, code }) => {
+    const localsRE = /exports.locals = {\s+"color": "red"\s+};/
+    const matches = code.match(localsRE)
+    expect(matches.length).toBe(1)
+
+    const styles = window.getComputedStyle(window.document.querySelector('h1'))
+    console.log(styles)
+    done()
+  })
+})

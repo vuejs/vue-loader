@@ -108,8 +108,7 @@ function mockBundleAndRun (options, assert, wontThrowError) {
     }
 
     const { window } = dom
-    const rawModule = window.vueModule
-    const module = interopDefault(window.vueModule)
+    const { module, exports } = window
     const instance = {}
     if (module && module.beforeCreate) {
       module.beforeCreate.forEach(hook => hook.call(instance))
@@ -117,7 +116,7 @@ function mockBundleAndRun (options, assert, wontThrowError) {
     assert({
       window,
       module,
-      rawModule,
+      exports,
       instance,
       code,
       jsdomError,

@@ -22,9 +22,9 @@ test('allow exporting extended constructor', done => {
 test('named exports', done => {
   mockBundleAndRun({
     entry: 'named-exports.vue'
-  }, ({ window, rawModule }) => {
-    expect(rawModule.default.name).toBe('named-exports')
-    expect(rawModule.foo()).toBe(1)
+  }, ({ exports }) => {
+    expect(exports.default.name).toBe('named-exports')
+    expect(exports.foo()).toBe(1)
     done()
   })
 })

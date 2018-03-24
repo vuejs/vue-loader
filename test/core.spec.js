@@ -10,7 +10,7 @@ const normalizeNewline = require('normalize-newline')
 test('basic', done => {
   mockBundleAndRun({
     entry: 'basic.vue'
-  }, ({ window, module, rawModule }) => {
+  }, ({ window, module }) => {
     const vnode = mockRender(module, {
       msg: 'hi'
     })
