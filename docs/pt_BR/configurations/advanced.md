@@ -34,7 +34,7 @@ module.exports = {
 
           // `preLoaders` são anexados antes dos carregadores padrões
           // Você pode usar isso para pré-processar blocos de linguagem
-          // - um caso de uso comum seria intercionalização (i18n)  em tempo de construção.
+          // - um caso de uso comum seria internaciolização (i18n)  em tempo de construção.
           preLoaders: {
             js: '/caminho/personalizado/para/carregador'
           },
