@@ -88,6 +88,18 @@ The benefit is that this same rule also applies to plain `*.less` imports from J
 
 v15 also allows using non-serializable options for loaders, which was not possible in previous versions.
 
+### Template Handle
+
+v15 still handles template preprocessors by `consolidate` in [@vue/component-compiler-utils](https://github.com/vuejs/component-compiler-utils), so custom loader for `.vue` templates will break, make sure exclude `.vue` files for your others template files, `pug` for example like following:
+
+``` js
+{
+  test: /\.pug$/,
+  use: ['html-loader', 'pug-html-loader'],
+  exclude: /\.vue$/
+}
+```
+
 ### Style Injection
 
 Client-side style injection now injects all styles upfront to ensure consistent behavior between development and extracted mode.
