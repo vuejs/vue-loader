@@ -1,3 +1,19 @@
+<a name="15.0.0-beta.7"></a>
+# [15.0.0-beta.7](https://github.com/vuejs/vue-loader/compare/v15.0.0-beta.6...v15.0.0-beta.7) (2018-03-25)
+
+
+### Features
+
+* handle <template lang="xxx"> with loaders ([c954f32](https://github.com/vuejs/vue-loader/commit/c954f32))
+
+
+### BREAKING CHANGES
+
+* <template lang="xxx"> are now handled
+with webpack loaders as well.
+
+
+
 <a name="15.0.0-beta.6"></a>
 # [15.0.0-beta.6](https://github.com/vuejs/vue-loader/compare/v15.0.0-beta.5...v15.0.0-beta.6) (2018-03-24)
 
