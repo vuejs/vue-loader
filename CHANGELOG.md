@@ -4,12 +4,12 @@
 
 ### Features
 
-* handle <template lang="xxx"> with loaders ([c954f32](https://github.com/vuejs/vue-loader/commit/c954f32))
+* handle `<template lang="xxx">` with loaders ([c954f32](https://github.com/vuejs/vue-loader/commit/c954f32))
 
 
 ### BREAKING CHANGES
 
-* <template lang="xxx"> are now handled
+* `<template lang="xxx">` are now handled
 with webpack loaders as well.
 
 
