@@ -107,7 +107,7 @@ Note that some template loaders such as `pug-loader` exports a compiled templati
 }
 ```
 
-If you also intend to use it to import .pug files as HTML strings in JavaScript, you will need to chain `raw-loader` after the preprocessing loader. Note however adding raw-loader would break the usage in Vue components, so you need to have two rules, one of them excluding Vue components:
+If you also intend to use it to import `.pug` files as HTML strings in JavaScript, you will need to chain `raw-loader` after the preprocessing loader. Note however adding `raw-loader` would break the usage in Vue components, so you need to have two rules, one of them targeting Vue files using a `resourceQuery`, the other one (fallback) targeting JavaScript imports:
 
 ``` js
 {
