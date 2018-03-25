@@ -8,7 +8,7 @@
     "lint": "eslint lib test --fix",
     "build": "webpack --config example/webpack.config.js --hide-modules",
     "dev": "webpack-dev-server --config example/webpack.config.js --inline --hot",
-    "prepublishOnly": "conventional-changelog -p angular -r 0 > CHANGELOG.md"
+    "prepublishOnly": "conventional-changelog -p angular -r 2 -i CHANGELOG.md -s"
   },
   "author": "Evan You",
   "license": "MIT",
