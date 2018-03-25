@@ -34,11 +34,15 @@ test('pre-processors', done => {
     module: {
       rules: [
         {
-          test: /\.js/,
+          test: /\.js$/,
           loader: 'babel-loader'
         },
         {
-          test: /\.stylus/,
+          test: /\.pug$/,
+          loader: 'pug-plain-loader'
+        },
+        {
+          test: /\.stylus$/,
           use: [
             'vue-style-loader',
             'css-loader',
@@ -103,6 +107,26 @@ test('style import for a same file twice', done => {
 test('template import', done => {
   mockBundleAndRun({
     entry: 'template-import.vue'
+  }, ({ window, module }) => {
+    const vnode = mockRender(module)
+    // '<div><h1>hello</h1></div>'
+    expect(vnode.children[0].tag).toBe('h1')
+    expect(vnode.children[0].children[0].text).toBe('hello')
+    done()
+  })
+})
+
+test('template import with pre-processors', done => {
+  mockBundleAndRun({
+    entry: 'template-import-pre.vue',
+    module: {
+      rules: [
+        {
+          test: /\.pug$/,
+          loader: 'pug-plain-loader'
+        }
+      ]
+    }
   }, ({ window, module }) => {
     const vnode = mockRender(module)
     // '<div><h1>hello</h1></div>'

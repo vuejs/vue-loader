@@ -252,3 +252,43 @@ test('custom compiler directives', done => {
     done()
   })
 })
+
+test('separate loader configuration for template lang and js imports', done => {
+  mockBundleAndRun({
+    entry: './test/fixtures/template-pre.js',
+    module: {
+      rules: [
+        {
+          test: /\.pug$/,
+          oneOf: [
+            // this applies to <template lang="pug"> in Vue components
+            {
+              resourceQuery: /^\?vue/,
+              use: ['pug-plain-loader']
+            },
+            // this applies to pug imports inside JavaScript
+            {
+              use: ['raw-loader', 'pug-plain-loader']
+            }
+          ]
+        }
+      ]
+    }
+  }, ({ exports }) => {
+    function assertRender (vnode) {
+      expect(vnode.tag).toBe('div')
+      expect(vnode.children[0].tag).toBe('h1')
+      expect(vnode.children[0].children[0].text).toBe('hello')
+    }
+
+    // <template lang="pug">
+    const vnode1 = mockRender(exports.Comp1, {})
+    assertRender(vnode1)
+    // <template lang="pug" src="./foo.pug">
+    const vnode2 = mockRender(exports.Comp2, {})
+    assertRender(vnode2)
+    // import html from './foo.pug'
+    expect(exports.html).toBe('<div><h1>hello</h1></div>')
+    done()
+  })
+})

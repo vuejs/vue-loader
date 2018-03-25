@@ -1,1 +1,1 @@
-<template lang="pug" src="./template-import.pug"></template>
+<template src="./template-import.html"></template>

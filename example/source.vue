@@ -1,7 +1,6 @@
-<template>
-  <div>
-    <h1 :class="$style.red">{{ msg }}</h1>
-  </div>
+<template lang="pug">
+div(ok)
+  h1(:class="$style.red") hello
 </template>
 
 <script>

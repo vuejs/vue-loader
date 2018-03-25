@@ -88,6 +88,50 @@ The benefit is that this same rule also applies to plain `*.less` imports from J
 
 v15 also allows using non-serializable options for loaders, which was not possible in previous versions.
 
+### Template Preprocessing
+
+v14 and below uses [consolidate](https://github.com/tj/consolidate.js/) to compile `<template lang="xxx">`. v15 now applies preprocessing for them using webpack loaders instead.
+
+Note that some template loaders such as `pug-loader` exports a compiled templating function instead of plain HTML. In order to pass the correct content to Vue's template compiler, you must use a loader that outputs plain HTML instead. For example, to support `<template lang="pug">`, you can use [pug-plain-loader](https://github.com/yyx990803/pug-plain-loader):
+
+``` js
+{
+  module: {
+    rules: [
+      {
+        test: /\.pug$/,
+        loader: 'pug-plain-loader'
+      }
+    ]
+  }
+}
+```
+
+If you also intend to use it to import .pug files as HTML strings in JavaScript, you will need to chain `raw-loader` after the preprocessing loader. Note however adding raw-loader would break the usage in Vue components, so you need to have two rules, one of them excluding Vue components:
+
+``` js
+{
+  module: {
+    rules: [
+      {
+        test: /\.pug$/,
+        oneOf: [
+          // this applies to <template lang="pug"> in Vue components
+          {
+            resourceQuery: /^\?vue/,
+            use: ['pug-plain-loader']
+          },
+          // this applies to pug imports inside JavaScript
+          {
+            use: ['raw-loader', 'pug-plain-loader']
+          }
+        ]
+      }
+    ]
+  }
+}
+```
+
 ### Style Injection
 
 Client-side style injection now injects all styles upfront to ensure consistent behavior between development and extracted mode.
@@ -200,6 +244,7 @@ The following options have been deprecated and should be configured using normal
 - `cssSourceMap`
 - `buble`
 - `extractCSS`
+- `template`
 
 The following options have been deprecated and should be configured using the new `compilerOptions` option:
 
