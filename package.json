@@ -3,6 +3,7 @@
   "version": "15.0.0-beta.7",
   "description": "Vue single-file component loader for Webpack",
   "main": "lib/index.js",
+  "typings": "lib/index.d.ts",
   "scripts": {
     "test": "jest --env node",
     "lint": "eslint lib test --fix",
