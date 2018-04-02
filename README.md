@@ -233,6 +233,25 @@ Works the same way as you'd configure it for normal CSS. Example usage with [min
 }
 ```
 
+## SSR externals
+
+In SSR, we typically use `webpack-node-externals` to exclude npm dependencies from the server build. If you need to import CSS from an npm dependency, the previous solution was using a whitelist like this:
+
+``` js
+// webpack config
+externals: nodeExternals({
+  whitelist: /\.css$/
+})
+```
+
+With v15, imports for `<style src="dep/foo.css">` now has resourceQuery strings appended at the end of the request, so you need to update the above to:
+
+``` js
+externals: nodeExternals({
+  whitelist: [/\.css$/, /\?vue&type=style/]
+})
+```
+
 ## Options Deprecation
 
 The following options have been deprecated and should be configured using normal webpack module rules:
