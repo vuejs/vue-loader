@@ -1,3 +1,13 @@
+<a name="15.0.0-rc.1"></a>
+# [15.0.0-rc.1](https://github.com/vuejs/vue-loader/compare/v15.0.0-beta.7...v15.0.0-rc.1) (2018-04-06)
+
+
+### Features
+
+* support being used on files not ending with .vue ([5a9ee91](https://github.com/vuejs/vue-loader/commit/5a9ee91))
+
+
+
 <a name="15.0.0-beta.7"></a>
 # [15.0.0-beta.7](https://github.com/vuejs/vue-loader/compare/v15.0.0-beta.6...v15.0.0-beta.7) (2018-03-25)
 
