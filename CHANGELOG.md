@@ -1,3 +1,14 @@
+<a name="15.0.0-rc.2"></a>
+# [15.0.0-rc.2](https://github.com/vuejs/vue-loader/compare/v15.0.0-rc.1...v15.0.0-rc.2) (2018-04-11)
+
+
+### Bug Fixes
+
+* avoid bailout of webpack module concatenation ([#1230](https://github.com/vuejs/vue-loader/issues/1230)) ([b983304](https://github.com/vuejs/vue-loader/commit/b983304))
+* reuse ident of css related loaders to avoid duplicates ([#1233](https://github.com/vuejs/vue-loader/issues/1233)) ([b16311f](https://github.com/vuejs/vue-loader/commit/b16311f))
+
+
+
 <a name="15.0.0-rc.1"></a>
 # [15.0.0-rc.1](https://github.com/vuejs/vue-loader/compare/v15.0.0-beta.7...v15.0.0-rc.1) (2018-04-06)
 
