@@ -74,13 +74,13 @@ Chi tiết hơn, xem thêm tại [sử dụng các bộ tiền xử lý](../conf
 
 > Chỉ hỗ trợ trên vue-loader phiên bản 10.2.0+
 
-Additional custom blocks can be included in a `*.vue` file for any project specific needs, for example a `<docs>` block. `vue-loader` will use the tag name to look up which webpack loaders should be applied to the contents of the section. The webpack loaders should be specified in the `loaders` section of `vue-loader` options.
+Các khối tùy chỉnh bổ sung có thể được bao gồm trong tệp `*.vue` cho bất kỳ nhu cầu cụ thể nào của dự án, ví dụ như khối  `<docs>`. `vue-loader` sử dụng tên tag của khối để quyết định xem những loader nào sẽ được áp dụng lên mã nguồn bên trong khối. Những loader đó phải được xác định rõ trong phần `loaders` của `vue-loader` options.
 
-For mode details, see [Custom Blocks](../configurations/custom-blocks.md).
+Để biết thêm chi tiết, xem thêm [Custom Blocks](../configurations/custom-blocks.md).
 
 ### Src Imports
 
-If you prefer splitting up your `*.vue` components into multiple files, you can use the `src` attribute to import an external file for a language block:
+Trong trường hợp bạn cần phân tách tệp `*.vue` thành nhiều file khác nhau (có thể vì khối lượng code của tệp `*.vue` dần trở nên quá lớn), bạn có thể sử dụng thuộc tính `src` để import một tệp bên ngoài cho khối ngôn ngữ tương ứng. Ví dụ:
 
 ``` html
 <template src="./template.html"></template>
@@ -88,14 +88,14 @@ If you prefer splitting up your `*.vue` components into multiple files, you can 
 <script src="./script.js"></script>
 ```
 
-Beware that `src` imports follow the same path resolution rules to CommonJS `require()` calls, which means for relative paths you need to start with `./`, and you can import resources directly from installed NPM packages, e.g:
+Cẩn thận một điều, việc import `src` sẽ tuân theo cùng một quy tắc phân giải đường dẫn như lệnh gọi  `require()` của CommonJS, nghĩa là, những đường dẫn tương đối cần phải được bắt đầu với `./`, hoặc có thể import trực tiếp từ một gói NPM đã được cài đặt như sau:
 
 ``` html
-<!-- import a file from the installed "todomvc-app-css" npm package -->
+<!-- import tệp tin bên trong gói npm tên là "todomvc-app-css" -->
 <style src="todomvc-app-css/index.css">
 ```
 
-`src` imports also work with custom blocks, e.g.:
+`src` import cũng khả dụng với các khối tùy biến:
 
 ``` html
 <unit-test src="./unit-test.js">
@@ -106,6 +106,6 @@ Beware that `src` imports follow the same path resolution rules to CommonJS `req
 
 Currently there is syntax highlighting support for [Sublime Text](https://github.com/vuejs/vue-syntax-highlight), [Atom](https://atom.io/packages/language-vue), [Vim](https://github.com/posva/vim-vue), [Emacs](https://github.com/AdamNiederer/vue-mode), [Visual Studio Code](https://marketplace.visualstudio.com/items/liuji-jim.vue), [Brackets](https://github.com/pandao/brackets-vue), and [JetBrains products](https://plugins.jetbrains.com/plugin/8057) (WebStorm, PhpStorm, etc). Contributions for other editors/IDEs are highly appreciated! If you are not using any pre-processors in Vue components, you can also get by treating `*.vue` files as HTML in your editor.
 
-### Comments
+### Comment trong các khối
 
-Inside each block you shall use the comment syntax of the language being used (HTML, CSS, JavaScript, Jade, etc). For top-level comments, use HTML comment syntax: `<!-- comment contents here -->`
+Bên trong mã nguồn của mỗi khối, khi cần comment, bạn phải sử dụng cú pháp comment của ngôn ngữ tương ứng trong khối (HTML, CSS, JavaScript, Jade, v.v...). Với những comment top-level tức bên ngoài các khối ngôn ngữ, sử dụng cú pháp comment của HTML: `<!-- đây là một cái comment -->`

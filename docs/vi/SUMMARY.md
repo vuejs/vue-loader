@@ -1,6 +1,6 @@
 - Bắt đầu với Vue Loader
   - [Đặc tả Vue Component](start/spec.md)
-  - [Thiết lập một dự án](start/setup.md)
+  - [Thiết lập dự án](start/setup.md)
 - Tính năng
   - [ES2015](features/es2015.md)
   - [Scoped CSS](features/scoped-css.md)

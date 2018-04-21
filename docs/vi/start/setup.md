@@ -1,8 +1,8 @@
-# Setting Up a Project
+# Thiết lập dự án
 
-### Using `@vue/cli`
+### Sử dụng `@vue/cli`
 
-It's recommended to scaffold a project using `vue-loader` with `@vue/cli`:
+Chúng tôi khuyến khích việc khởi tạo nhanh một dự án Vue.js sử dụng `vue-loader` với `@vue/cli`:
 
 ``` bash
 npm install -g @vue/cli
