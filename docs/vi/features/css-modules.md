@@ -1,12 +1,10 @@
 # CSS Modules
 
-> requires ^9.8.0
+> Yêu cầu phiên bản ^9.8.0
 
 [CSS Modules](https://github.com/css-modules/css-modules) is a popular system for modularizing and composing CSS. `vue-loader` provides first-class integration with CSS Modules as an alternative for simulated scoped CSS.
 
-### Usage
-
-Just add the `module` attribute to your `<style>`:
+### Sử dụng
 
 ``` html
 <style module>
@@ -19,32 +17,38 @@ Just add the `module` attribute to your `<style>`:
 </style>
 ```
 
-This will turn on CSS Modules mode for `css-loader`, and the resulting class identifier object will be injected into the component as a computed property with the name `$style`. You can use it in your templates with a dynamic class binding:
+Thuộc tính `module` sau khi được thêm vào khối `<style>` của bạn như mã nguồn phía trên, sẽ khởi động tính năng CSS Module của `css-loader`. Với tính năng CSS Module, quá trình thực thi `css-loader` trên mã nguồn CSS sẽ đi kèm với hai tác vụ tuần tự:
+
+- Bóc tách các tên class (trừ các tên class được chỉ định giữ nguyên tên thông qua `:global(...)`);
+
+- Gộp chúng vào một object, với `key` là tên ban đầu của từng class, `value` là một **identifier** - giá trị biểu thị tên class thực sự sẽ hiển thị trên DOM (sau quá trình ánh xạ có thể được tùy chỉnh lại trên options của `css-loader`). 
+
+Object này của selector sẽ được **inject** (chèn) vào bên trong ngữ cảnh của Vue component dưới dạng một computed property với cái tên `$style`. Khi đó, việc gọi class đã được *"**CSS Module**-hóa* sẽ hơi có phần dài dòng chút, thông qua `$style` như dưới đây:
 
 ``` html
 <template>
   <p :class="$style.red">
-    This should be red
+    Đây là một dòng chữ màu đỏ, hahaha!
   </p>
 </template>
 ```
 
-Since it's a computed property, it also works with the object/array syntax of `:class`:
+Bản chất của `$style` là một computed property, do đó ngoài việc gọi trực tiếp một class đơn lẻ như trên, ta cũng có thể bind nhiều class vào thuộc tính `class` cùng một lúc với sự hỗ trợ của cú pháp mảng/đối tượng trong và `v-bind:class` (hoặc viết tắt là `:class`):
 
 ``` html
 <template>
   <div>
     <p :class="{ [$style.red]: isRed }">
-      Am I red?
+      Tui có phải màu đỏ không???
     </p>
     <p :class="[$style.red, $style.bold]">
-      Red and bold
+      Vừa đỏ, vừa đậm!
     </p>
   </div>
 </template>
 ```
 
-And you can also access it from JavaScript:
+`$style` cũng có thể được truy cập trực tiếp từ mã nguồn JS bên trong khối `script` như dưới đây
 
 ``` html
 <script>
@@ -52,17 +56,17 @@ export default {
   created () {
     console.log(this.$style.red)
     // -> "_1VyoJ-uZOjlOxP7jWUy19_0"
-    // an identifier generated based on filename and className.
+    // identifier được sinh ra dựa trên đường dẫn tuyệt đối của tệp tin mã nguồn và tên gốc của class
   }
 }
 </script>
 ```
 
-Refer to the [CSS Modules spec](https://github.com/css-modules/css-modules) for mode details such as [global exceptions](https://github.com/css-modules/css-modules#exceptions) and [composition](https://github.com/css-modules/css-modules#composition).
+Mọi chi tiết về CSS Module, tham khảo thêm [tài liệu đặc tả CSS Module](https://github.com/css-modules/css-modules) ví dụ như [ngoại lệ toàn cục](https://github.com/css-modules/css-modules#exceptions) và [kết hợp](https://github.com/css-modules/css-modules#composition).
 
-### Custom Inject Name
+### Biến style injected với tên tùy biến
 
-You can have more than one `<style>` tags in a single `*.vue` component. To avoid injected styles to overwrite each other, you can customize the name of the injected computed property by giving the `module` attribute a value:
+Bạn có thể hiện thực nhiều hơn một thẻ `<style>` bên trong một single `*.vue` component. Nếu có từ hai khối style trở lên sử dụng thuộc tính `module`, để tránh việc các biến injected `$style` ghi đè nội dung lẫn nhau trong quá trình thực thi ứng dụng, bạn có thể thay đổi tên biến style injected và sử dụng cùng một lúc các biến đó trong các computed property tương ứng bằng cách truyền cho `module` một giá trị cụ thể (điều này có nghĩa là, mặc định khối `style` được module hóa sẽ injected `$style` nếu giá trị của thuộc tính `module` không được chỉ định):
 
 ``` html
 <style module="a">
@@ -74,9 +78,9 @@ You can have more than one `<style>` tags in a single `*.vue` component. To avoi
 </style>
 ```
 
-### Configuring `css-loader` Query
+### Cấu hình truy vấn cho `css-loader`
 
-CSS Modules are processed via [css-loader](https://github.com/webpack/css-loader). With `<style module>`, the default query used for `css-loader` is:
+CSS Modules được thực thi thông qua [css-loader](https://github.com/webpack/css-loader). Với cú pháp `<style module>`, truy vấn mặc định mà `css-loader` sử dụng là:
 
 ``` js
 {
@@ -86,7 +90,7 @@ CSS Modules are processed via [css-loader](https://github.com/webpack/css-loader
 }
 ```
 
-You can use vue-loader's `cssModules` option to provide additional query options to `css-loader`:
+Khi cần cung cấp truy vấn bổ sung hoặc thay đổi các truy vấn mặc định như trên, ta sẽ sử dụng tùy chọn  `cssModules` bên trong `vue-loader` như đoạn mã phía dưới:
 
 ``` js
 module: {
