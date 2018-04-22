@@ -1,12 +1,12 @@
 # Hot Reload
 
-"Hot Reload" is not simply reloading the page when you edit a file. With hot reload enabled, when you edit a `*.vue` file, all instances of that component will be swapped in **without reloading the page**. It even preserves the current state of your app and these swapped components! This dramatically improves the development experience when you are tweaking the templates or styling of your components.
+"Hot Reload" không làm cho trình duyệt tải lại toàn bộ trang web khi bạn chỉnh sửa mã nguồn. Với tính năng "hot-reload", khi bạn thực hiện chỉnh sửa một tệp `*.vue`, mọi đối tượng của component đó sẽ được thay đổi theo chỉnh sửa của bạn trực tiếp trên trình duyệt **mà không cần tải lại toàn bộ trang web**. It even preserves the current state of your app and these swapped components! This dramatically improves the development experience when you are tweaking the templates or styling of your components.
 
 ![hot-reload](http://blog.evanyou.me/images/vue-hot.gif)
 
-## State Preservation Rules
+## Các quy tắc giữ nguyên trạng thái cho component
 
-- When editing the `<template>` of a component, instances of the edited component will re-render in place, preserving all current private state. This is possible because templates are compiled into new render functions that produce no side-effects.
+- Khi chỉnh sửa khối `<template>` của một component, instances of the edited component will re-render in place, preserving all current private state. This is possible because templates are compiled into new render functions that produce no side-effects.
 
 - When editing the `<script>` part of a component, instances of the edited component will be destroyed and re-created in place. (State of the other components in the app are preserved) This is because `<script>` can include lifecycle hooks that may produce side-effects, so a "reload" instead of re-render is required to ensure consistent behavior. This also means you need to be careful about global side effects such as timers inside your components lifecycle hooks. Sometimes you may need to do a full-page reload if your component produces global side-effects.
 

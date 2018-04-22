@@ -1,41 +1,39 @@
-# Asset URL Handling
+# Xử lý URL tài nguyên
 
-By default, `vue-loader` automatically processes your style and template files with [css-loader](https://github.com/webpack/css-loader) and the Vue template compiler. In this compilation process, all asset URLs such as `<img src="...">`, `background: url(...)` and CSS `@import` are **resolved as module dependencies**.
+Mặc định, `vue-loader` tự động xử lý style và template bên trong các tệp `*.vue` component bởi [css-loader](https://github.com/webpack/css-loader) và bộ biên dịch template của Vue. Trong quá trình biên dịch này, toàn bộ URL tài nguyên ví dụ như `<img src="...">`, `background: url(...)` và CSS `@import` đều được **xử lý như là các module phụ thuộc**.
 
-For example, `url(./image.png)` will be translated into `require('./image.png')`, and
+Ví dụ như, `url(./image.png)` sẽ được thông dịch thành `require('./image.png')`, và
 
 ``` html
 <img src="../image.png">
 ```
 
-will be compiled into:
+sẽ được biên dịch thành:
 
 ``` js
 createElement('img', { attrs: { src: require('../image.png') }})
 ```
 
-### Transform Rules
+### Quy tắc biến đổi URL
 
-- If the URL is an absolute path (e.g. `/images/foo.png`), it will be preserved as-is.
+- Nếu URL là một đường dẫn tuyệt đối (e.g. `/images/foo.png`), nó sẽ được giữ nguyên.
 
-- If the URL starts with `.`, it's interpreted as a relative module request and resolved based on the folder structure on your file system.
+- Nếu URL bắt đầu với `.`, nó sẽ được diễn dịch thành một lệnh import module với đường dẫn tương đối và xử lý dựa trên cấu trúc thư mục của hệ thống.
 
-- If the URL starts with `~`, anything after it is interpreted as a module request. This means you can even reference assets inside node modules:
+- Nếu URL bắt đầu với `~`, mọi thứ phía sau nó sẽ được diễn dịch thành một lệnh import module. Điều đó có nghĩa, bạn có thể tham chiếu đến một tài nguyên tĩnh trong module thuộc node_modules:
 
   ``` html
   <img src="~some-npm-package/foo.png">
   ```
 
-- (13.7.0+) If the URL starts with `@`, it's also interpreted as a module request. This is useful if your webpack config has an alias for `@`, which by default points to `/src` in any project created by `vue-cli`.
+- (13.7.0+) Nếu URL bắt đầu với `@`, tương tự như trên, nó cũng sẽ được diễn dịch thành một lệnh import module. Điều này rất có ích nếu tệp cấu hình webpack của bạn cấu hình một bí danh (alias) `@` mặc định được trỏ đến thư mục `/src` của bất kì dự án nào được khởi tạo bởi `vue-cli`.
 
-### Related Loaders
+### Các loader có liên quan
 
-Because `.png` is not a JavaScript file, you will need to configure webpack to use [file-loader](https://github.com/webpack/file-loader) or [url-loader](https://github.com/webpack/url-loader) to handle them. The project scaffolded with `vue-cli` has also configured this for you.
+Bởi vì `.png` không phải là một tệp mã nguồn JavaScript, bạn cần phải cấu hình webpack với [file-loader](https://github.com/webpack/file-loader) hoặc [url-loader](https://github.com/webpack/url-loader) để xử lý chúng. Tất nhiên việc cấu hình đó cũng đã được thực hiện sẵn luôn cho bạn nếu dự án được khởi tạo nhanh bằng `vue-cli`.
 
-### Why
+### Tại sao?
 
-The benefits of all this are:
+1. `file-loader` cho phép chúng ta chỉ định rõ nơi sao chép và lưu trữ tài nguyên tĩnh, cách thức đặt lại tên với version hash (mã băm phiên bản) cho hiệu quả lưu cache tốt hơn. Hơn thế nữa, điều đó cũng có nghĩa là **you can just place images next to your `*.vue` files and use relative paths based on the folder structure instead of worrying about deployment URLs**. Với cấu hình thích hợp, webpack sẽ tự động viết lại đường dẫn tệp thành những URLs hữu dụng trong kết xuất đã được bundle.
 
-1. `file-loader` allows you to designate where to copy and place the asset file, and how to name it using version hashes for better caching. Moreover, this also means **you can just place images next to your `*.vue` files and use relative paths based on the folder structure instead of worrying about deployment URLs**. With proper config, webpack will auto-rewrite the file paths into correct URLs in the bundled output.
-
-2. `url-loader` allows you to conditionally inline a file as base-64 data URL if they are smaller than a given threshold. This can reduce the amount of HTTP requests for trivial files. If the file is larger than the threshold, it automatically falls back to `file-loader`.
+2. `url-loader` cho phép chúng ta inline nội dung của một tệp tài nguyên dưới dạng mã Base64-URL khi kích thước của chúng nhỏ hơn một giới hạn cho trước. Việc này giảm bớt số truy vấn HTTP vì có thể loại bớt truy vấn với những tài nguyên kích thước quá nhỏ. Ngược lại nếu kích thước tệp vượt quá giới hạn cho trước đó, `url-loader` sẽ bỏ qua và trả lại việc xử lý cho `file-loader`.

@@ -1,22 +1,22 @@
-# Advanced Loader Configuration
+# Cấu hình loader nâng cao
 
-Sometimes you may want to:
+Thỉnh thoảng bạn có những nhu cầu sau:
 
-1. Apply a custom loader string to a language instead of letting `vue-loader` infer it;
+1. Thay đổi dãy loader cho một ngôn ngữ nào đó thay vì để cho `vue-loader` mặc định tự quyết định;
 
-2. Overwrite the built-in loader configuration for the default languages;
+2. Ghi đè cấu hình loader mặc định cho những ngôn ngữ mặc định;
 
-3. Pre-process or post-process a specific language block with custom loaders.
+3. Tiền-xử-lý hoặc hậu-xử-lý một khối ngôn ngữ nào đó với dãy loader do bạn tự chỉ định.
 
-To do that, specify the `loaders` option for `vue-loader`:
+Để thực hiện những nhu cầu trên, chỉ rõ tùy chọn `loaders` cho `vue-loader`:
 
-> Note that `preLoaders` and `postLoaders` are only supported in 10.3.0+
+> Lưu ý rằng `preLoaders` và `postLoaders` chỉ hỗ trợ trên phiên bản 10.3.0+ về sau
 
 ``` js
 module.exports = {
-  // other options...
+  // Các tùy chọn khác...
   module: {
-    // `module.rules` is the same as `module.loaders` in 1.x
+    // `module.rules` ở phiên bản Webpack 2.x giống hệt `module.loaders` ở phiên bản 1.x
     rules: [
       {
         test: /\.vue$/,
@@ -57,4 +57,4 @@ module.exports = {
 }
 ```
 
-A more practical usage of the advanced loader configuration is [extracting CSS inside components into a single file](./extract-css.md).
+Một ví dụ cụ thể hơn của việc cấu hình loader nâng cao là [bóc tách CSS bên trong các tệp component thành một file](./extract-css.md).

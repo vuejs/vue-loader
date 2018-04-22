@@ -44,7 +44,7 @@ Example config to extract all the processed CSS in all Vue components into a sin
 var ExtractTextPlugin = require("extract-text-webpack-plugin")
 
 module.exports = {
-  // other options...
+  // Các tùy chọn khác...
   module: {
     rules: [
       {

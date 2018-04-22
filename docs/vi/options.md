@@ -177,7 +177,7 @@ module.exports = {
 - type: `boolean`
 - default: `true` (v13.0+)
 
-  Whether to emit esModule compatible code. By default vue-loader will emit default export in commonjs format like `module.exports = ....`. When `esModule` is set to true, default export will be transpiled into `exports.__esModule = true; exports = ...`. Useful for interoperating with transpiler other than Babel, like TypeScript.
+  Whether to emit esModule compatible code. Mặc định vue-loader will emit default export in commonjs format like `module.exports = ....`. When `esModule` is set to true, default export will be transpiled into `exports.__esModule = true; exports = ...`. Useful for interoperating with transpiler other than Babel, like TypeScript.
 
   > version note: up to v12.x, default value is `false`.
 
@@ -260,7 +260,7 @@ module.exports = {
   var ExtractTextPlugin = require("extract-text-webpack-plugin")
 
   module.exports = {
-    // other options...
+    // Các tùy chọn khác...
     module: {
       rules: [
         {
@@ -286,7 +286,7 @@ module.exports = {
   var plugin = new ExtractTextPlugin("style.css")
 
   module.exports = {
-    // other options...
+    // Các tùy chọn khác...
     module: {
       rules: [
         {
