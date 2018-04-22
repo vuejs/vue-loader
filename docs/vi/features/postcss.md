@@ -1,22 +1,22 @@
 # PostCSS
 
-Any CSS output processed by `vue-loader` is piped through [PostCSS](https://github.com/postcss/postcss) for scoped CSS rewriting. You can also add custom PostCSS plugins to the process, for example [autoprefixer](https://github.com/postcss/autoprefixer) or [CSSNext](http://cssnext.io/).
+Mã nguồn CSS sau khi được xử lý bởi `vue-loader` sẽ được tiếp tục xử lý bởi [PostCSS](https://github.com/postcss/postcss) nhằm viết lại CSS scoped. Bạn cũng có thể thêm các PostCSS plugin khác cho quá trình xử lý này, ví dụ như [autoprefixer](https://github.com/postcss/autoprefixer) hoặc [CSSNext](http://cssnext.io/).
 
-## Using a Config File
+## Sử dụng tệp cấu hình
 
-`vue-loader` supports auto-loading the same PostCss config files supported by [`postcss-loader`](https://github.com/postcss/postcss-loader#usage):
+`vue-loader` hỗ trợ các tệp cấu hình PostCss tự động giống hệt [`postcss-loader`](https://github.com/postcss/postcss-loader#usage):
 
 - `postcss.config.js`
 - `.postcssrc`
 - `postcss` field in `package.json`
 
-Using a config file allows you to share the same config between your normal CSS files processed by `postcss-loader` and the CSS inside `*.vue` files, and is recommended.
+Sử dụng tệp cấu hình cho phép bạn chia sẻ cùng cấu hình giữa các tệp mã nguồn CSS thông thường, vốn được xử lý bởi `postcss-loader` và mã nguồn CSS bên trong tệp `*.vue`. Chúng tôi khuyến khích bạn thực hiện cách thức cấu hình này.
 
-## Using with `postcss-loader`
+## Sử dụng với `postcss-loader`
 
-Since `vue-loader` handles PostCSS on its styles internally, you only need to apply `postcss-loader` to standalone CSS files. There's no need to specify `lang="postcss"` on a style block if there is a PostCSS config file in your project.
+Bởi vì `vue-loader` chỉ sử dụng PostCSS cho các khối style bên trong các tệp `*.vue`, `postcss-loader` sẽ được xử dụng để xử lý các tệp CSS độc lập. Không cần chỉ rõ `lang="postcss"` bên trong khối style nếu tệp cấu hình PostCss đã tồn tại trong dự án.
 
-Sometimes the user may want to use `lang="postcss"` only for syntax highlighting purposes. Starting in 13.6.0, if no loader has been explicitly configured for the following common PostCSS extensions (via `vue-loader`'s own `loaders` option), they will simply go through `vue-loader`'s default PostCSS transforms:
+Đôi khi bạn cần sử dụng `lang="postcss"` nhằm mục đích hỗ trợ IDE tô màu mã nguồn (syntax highlighting). Kể từ phiên bản `vue-loader` 13.6.0, nếu không có loader nào được cấu hình tường minh cho những extension thông dụng của PostCSS (via `vue-loader`'s own `loaders` option), các transform mặc định sau của PostCSS sẽ được `vue-loader` sử dụng:
 
 - `postcss`
 - `pcss`
@@ -25,21 +25,21 @@ Sometimes the user may want to use `lang="postcss"` only for syntax highlighting
 
 ## Inline Options
 
-Alternatively, you can specify PostCSS config specifically for `*.vue` files using the `postcss` option for `vue-loader`.
+Thay vào đó, bạn có thể chỉ rõ cấu hình PostCSS vốn chỉ áp dụng riêng cho các tệp `*.vue` bằng cách sử dụng tùy chọn `postcss` cho `vue-loader`.
 
-Example:
+Ví dụ:
 
 ``` js
 // webpack.config.js
 module.exports = {
-  // other options...
+  // Các tùy chọn khác...
   module: {
-    // `module.rules` is the same as `module.loaders` in 1.x
+    // `module.rules` ở phiên bản Webpack 2.x giống hệt `module.loaders` ở phiên bản 1.x
     rules: [
       {
         test: /\.vue$/,
         loader: 'vue-loader',
-        // `vue-loader` options goes here
+        // cấu hình `vue-loader` ở đây
         options: {
           // ...
           postcss: [require('postcss-cssnext')()]
@@ -50,11 +50,11 @@ module.exports = {
 }
 ```
 
-In addition to providing an Array of plugins, the `postcss` option also accepts:
+Ngoài việc cung cấp một mảng các plugin như trên, tùy chọn `postcss` cũng có thể nhận:
 
-- A function that returns an array of plugins;
+- Một hàm trả về mảng các plugin;
 
-- An object that contains options to be passed to the PostCSS processor. This is useful when you are using PostCSS projects that relies on custom parser/stringifiers:
+- Một đối tượng chứa các tùy chọn to be passed to the PostCSS processor. Điều này rất hữu ích khi trong một dự án PostCSS that relies on custom parser/stringifiers:
 
   ``` js
   postcss: {
@@ -65,9 +65,9 @@ In addition to providing an Array of plugins, the `postcss` option also accepts:
   }
   ```
 
-### Disabling Auto Config File Loading
+### Vô hiệu hóa tệp cấu hình tự động
 
-In `13.6.0+`, auto PostCSS config file loading can be disabled by specifying `postcss.useConfigFile: false`:
+Trong phiên bản `13.6.0+`, tệp cấu hình PostCSS tự động có thể bị vô hiệu hóa bằng cách chỉ định `postcss.useConfigFile: false`:
 
 ``` js
 postcss: {
@@ -77,4 +77,4 @@ postcss: {
 }
 ```
 
-This allows the PostCSS configuration inside `*.vue` files to be entirely controlled by the inline config.
+Điều này cho phép cấu hình PostCSS bên trong các tệp `*.vue` được kiểm soát hoàn toàn bởi inline config.

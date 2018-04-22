@@ -12,7 +12,7 @@ When a `<style>` tag has the `scoped` attribute, its CSS will apply to elements 
 </style>
 
 <template>
-  <div class="example">hi</div>
+  <div class="example">Chào!</div>
 </template>
 ```
 
@@ -74,6 +74,6 @@ DOM được tạo ra bởi chỉ thị `v-html` không bị ảnh hưởng bở
 
 ### Đừng quên ghi nhớ
 
-- **Scoped styles không giảm bớt đi sự cần thiết của classes**. Due to the way browsers render various CSS selectors, `p { color: red }` will be many times slower when scoped (i.e. when combined with an attribute selector). If you use classes or ids instead, such as in `.example { color: red }`, then you virtually eliminate that performance hit. [Here's a playground](https://stevesouders.com/efws/css-selectors/csscreate.php) where you can test the differences yourself.
+- **Scoped styles không giảm bớt đi sự cần thiết của classes**. Do cách thức các trình duyệt xử lý và hiển thị (render) CSS, về mặt hiện suất `p { color: red }` sau khi scoped tốc độ render sẽ bị chậm đi khá nhiều lần (do kết hợp với selector thuộc tính vốn có tốc độ render khá chậm). Hãy kết hợp với class hoặc id, ví dụ như `.example { color: red }`, bằng cách đấy tốc độ render sẽ được cái thiện rất nhiều. [Ví dụ so sánh này](https://stevesouders.com/efws/css-selectors/csscreate.php) sẽ cho bạn một cách nhìn trực quan về sự khác biệt đó.
 
 - **Hãy cẩn thận với các selector con trong các component đệ quy!** Với những CSS rule mà selector áp dụng lên các thành phần con như `.a .b` chẳng hạn, trường hợp thành phần cha `.a` chứa các component con lặp lại đệ quy, khi đó rule sẽ áp dụng lên không chỉ thành phần `.b` của component hiện tại, mà là tất cả thành phần `.b` bên dưới nó.
