@@ -1,19 +1,19 @@
-# Extracting CSS into a Single File
+# Phân tách CSS thành các file
 
 ``` bash
 npm install extract-text-webpack-plugin --save-dev
 ```
 
-## The Easy Way
+## Cách đơn giản
 
-> requires vue-loader@^12.0.0 and webpack@^2.0.0
+> Yêu cầu phiên bản vue-loader@^12.0.0 và webpack@^2.0.0
 
 ``` js
 // webpack.config.js
 var ExtractTextPlugin = require("extract-text-webpack-plugin")
 
 module.exports = {
-  // other options...
+  // các tùy chọn khác...
   module: {
     rules: [
       {

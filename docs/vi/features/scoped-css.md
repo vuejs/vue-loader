@@ -1,6 +1,8 @@
 # Scoped CSS
 
-When a `<style>` tag has the `scoped` attribute, its CSS will apply to elements of the current component only. This is similar to the style encapsulation found in Shadow DOM. It comes with some caveats, but doesn't require any polyfills. It is achieved by using PostCSS to transform the following:
+Sự xuất hiện của thuộc tính `scoped` trong thẻ `<style>` cho phép mã nguồn CSS bên trong nó được **"scoped"** vào chính component đó (nghĩa là CSS của component sau khi đi qua `css-loader` sẽ chỉ hữu dụng với template của bản thân component, độc lập và không áp dụng ra bên ngoài). Về mặt hình thức, tính năng này tương tự CSS của Shadow DOM.
+
+When a `<style>` tag has the `scoped` attribute, its CSS will apply to elements of the current component only. This is similar to the style encapsulation found in Shadow DOM. Tính năng này đi kèm với một số cảnh báo nho nhỏ sẽ được đề cập ở cuối trang, tuy nhiên nó không yêu cầu bất kỳ polyfill nào. Cơ chế hoạt động của Scoped CSS đơn giản là sử dụng PostCSS để biến đổi mã nguồn từ như thế này...
 
 ``` html
 <style scoped>
@@ -14,7 +16,7 @@ When a `<style>` tag has the `scoped` attribute, its CSS will apply to elements 
 </template>
 ```
 
-Into the following:
+... sang thế này:
 
 ``` html
 <style>
@@ -28,11 +30,11 @@ Into the following:
 </template>
 ```
 
-## Tips
+## Một số bí kíp nhỏ
 
-### Mixing Local and Global Styles
+### Kết hợp scoped style và style toàn cục
 
-You can include both scoped and non-scoped styles in the same component:
+Bạn có thể kết hợp khối style không scoped và có scoped trong cùng một component
 
 ``` html
 <style>
@@ -50,7 +52,7 @@ With `scoped`, the parent component's styles will not leak into child components
 
 ### Deep Selectors
 
-If you want a selector in `scoped` styles to be "deep", i.e. affecting child components, you can use the `>>>` combinator:
+Trong trường hợp Component hiện tại có nhu cầu styling lại những phần tử bên trong các Component con (vốn không bị ảnh hưởng bởi scoped của component cha), hãy dùng toán tử `>>>` như sau
 
 ``` html
 <style scoped>
@@ -58,20 +60,20 @@ If you want a selector in `scoped` styles to be "deep", i.e. affecting child com
 </style>
 ```
 
-The above will be compiled into:
+Đoạn CSS trong ví dụ trên sẽ được thông dịch thành
 
 ``` css
 .a[data-v-f3f3eg9] .b { /* ... */ }
 ```
 
-Some pre-processors, such as Sass, may not be able to parse `>>>` properly. In those cases you can use the `/deep/` combinator instead - it's an alias for `>>>` and works exactly the same.
+Một vài ngôn ngữ tiền-xử-lý CSS, ví dụ như Sass, không tồn tại toán tử `>>>` (và `sass-loader` cũng không thể xử lý toán tử này). Trong trường hợp đó, bạn có thể sử dụng toán tử `/deep/` để thay thế - toán tử này giống hệt `>>>` trừ việc nó được dùng cho Sass, và cách thức làm việc cũng giống y hệt.
 
-### Dynamically Generated Content
+### Làm việc với nội dung động
 
-DOM content created with `v-html` are not affected by scoped styles, but you can still style them using deep selectors.
+DOM được tạo ra bởi chỉ thị `v-html` không bị ảnh hưởng bởi scoped styles, tuy nhiên với deep selector, bạn cũng có thể styling lại nội dung bên trong.
 
-### Also Keep in Mind
+### Đừng quên ghi nhớ
 
-- **Scoped styles do not eliminate the need for classes**. Due to the way browsers render various CSS selectors, `p { color: red }` will be many times slower when scoped (i.e. when combined with an attribute selector). If you use classes or ids instead, such as in `.example { color: red }`, then you virtually eliminate that performance hit. [Here's a playground](https://stevesouders.com/efws/css-selectors/csscreate.php) where you can test the differences yourself.
+- **Scoped styles không giảm bớt đi sự cần thiết của classes**. Due to the way browsers render various CSS selectors, `p { color: red }` will be many times slower when scoped (i.e. when combined with an attribute selector). If you use classes or ids instead, such as in `.example { color: red }`, then you virtually eliminate that performance hit. [Here's a playground](https://stevesouders.com/efws/css-selectors/csscreate.php) where you can test the differences yourself.
 
-- **Be careful with descendant selectors in recursive components!** For a CSS rule with the selector `.a .b`, if the element that matches `.a` contains a recursive child component, then all `.b` in that child component will be matched by the rule.
+- **Hãy cẩn thận với các selector con trong các component đệ quy!** Với những CSS rule mà selector áp dụng lên các thành phần con như `.a .b` chẳng hạn, trường hợp thành phần cha `.a` chứa các component con lặp lại đệ quy, khi đó rule sẽ áp dụng lên không chỉ thành phần `.b` của component hiện tại, mà là tất cả thành phần `.b` bên dưới nó.
