@@ -31,13 +31,13 @@ module.exports = {
 }
 ```
 
-The above will automatically handle extraction for `<style>` inside `*.vue` files and works with most pre-processors out of the box.
+Đoạn cấu hình trên tự động xử lý việc bóc tách mã nguồn CSS bên trong các khối `<style>` của các tệp `*.vue` và hoạt động với các bộ tiền-xử-lý out of the box.
 
-Note this only extracts `*.vue` files though - CSS imported in JavaScript still needs to be configured separately.
+Lưu ý rằng tùy chọn này chỉ hỗ trợ bóc tách bên trong các tệp `*.vue` - CSS được import bên trong JavaScript vẫn phải được cấu hình riêng biệt.
 
-## Manual Configuration
+## Cấu hình bằng tay
 
-Example config to extract all the processed CSS in all Vue components into a single CSS file:
+Một ví dụ cấu hình nhằm bóc tách toàn bộ các CSS bên trong mọi Vue component thành một tệp CSS duy nhất:
 
 ``` js
 // webpack.config.js

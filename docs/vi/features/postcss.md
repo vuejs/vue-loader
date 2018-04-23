@@ -54,7 +54,7 @@ Ngoài việc cung cấp một mảng các plugin như trên, tùy chọn `postc
 
 - Một hàm trả về mảng các plugin;
 
-- Một đối tượng chứa các tùy chọn to be passed to the PostCSS processor. Điều này rất hữu ích khi trong một dự án PostCSS that relies on custom parser/stringifiers:
+- Một đối tượng chứa các tùy chọn to be passed to the PostCSS processor. Điều này rất hữu ích khi trong một dự án PostCSS sử dụng các bộ phân tích cú pháp/biến đổi chuỗi tùy biến.:
 
   ``` js
   postcss: {

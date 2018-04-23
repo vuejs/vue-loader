@@ -1,6 +1,6 @@
-# Options Reference
+# Danh sách các tùy chọn
 
-## Where to Place the Options
+## Vị trí thiết lập tùy chọn
 
 ``` js
 // webpack.config.js
@@ -12,7 +12,7 @@ module.exports = {
         test: /\.vue$/,
         loader: 'vue-loader',
         options: {
-          // `vue-loader` options
+          // các tùy chọn `vue-loader`
         }
       }
     ]
@@ -22,15 +22,15 @@ module.exports = {
 
 ### loaders
 
-- type: `{ [lang: string]: string | Object | Array }`
+- Kiểu: `{ [lang: string]: string | Object | Array }`
 
-  An object specifying webpack loaders to overwrite the default loaders used for language blocks inside `*.vue` files. The key corresponds to the `lang` attribute for language blocks, if specified. The default `lang` for each type is:
+  Một đối tượng chỉ định rõ các loader của webpack nhằm ghi đè các loader mặc định được sử dụng cho các khối ngôn ngữ bên trong các tệp `*.vue`. Thuộc tính của đối tượng tương ứng với thuộc tính `lang` trong các khối ngôn ngữ. Mặc định `lang` cho mỗi kiểu khối ngôn ngữ là:
 
   - `<template>`: `html`
   - `<script>`: `js`
   - `<style>`: `css`
 
-  For example, to use `babel-loader` and `eslint-loader` to process all `<script>` blocks:
+  Ví dụ, để sử dụng `babel-loader` và `eslint-loader` để xử lý tất cả các khối `<script>`:
 
   ``` js
   module: {
@@ -48,7 +48,7 @@ module.exports = {
   }
   ```
 
-  You can also use object or array syntax (note the options must be serializable):
+  Bạn có thể sử dụng cú pháp *object* hoặc *array* (note the options must be serializable):
 
   ``` js
   module: {
@@ -71,34 +71,34 @@ module.exports = {
 
 ### preLoaders
 
-- type: `{ [lang: string]: string }`
+- Kiểu: `{ [lang: string]: string }`
 
-  The config format is the same as `loaders`, but `preLoaders` are applied to corresponding language blocks before the default loaders. You can use this to pre-process language blocks - a common use case would be build-time i18n.
+  Định dạng cấu hình tương tự như `loaders`, tuy nhiên `preLoaders` được áp dụng trên khối ngôn ngữ tương ứng trước khi các loader mặc định được thực thi. Sử dụng tùy chọn này để tiền-xử-lý các khối ngôn ngữ - một ví dụ phổ biến là biên dịch các khối mô tả đa ngôn ngữ i18n.
 
 ### postLoaders
 
-- type: `{ [lang: string]: string }`
+- Kiểu: `{ [lang: string]: string }`
 
-  The config format is the same as `loaders`, but `postLoaders` are applied after the default loaders. You can use this to post-process language blocks. However note that this is a bit more complicated:
+  Định dạng cấu hình tương tự như `loaders`, tuy nhiên `postLoaders` được áp dụng ngay sau khi các loader mặc định được thực thi. Sử dụng tùy chọn này để hậu-xử-lý các khối ngôn ngữ. Tuy nhiên lưu ý rằng `postLoaders` hoạt động hơi phức tạp một chút:
 
-  - For `html`, the result returned by the default loader will be compiled JavaScript render function code.
+  - Với `html`, kết xuất được trả về bởi loader mặc định sẽ được biên dịch thành các hàm render JavaScript.
 
-  - For `css`, the result will be returned by `vue-style-loader` which isn't particularly useful in most cases. Using a PostCSS plugin will be a better option.
+  - Với `css`, kết xuất được trả về bởi `vue-style-loader` không đặc biệt hữu ích trong hầu hết các trường hợp. Sử dụng plugin PostCSS sẽ là lựa chọn tốt hơn.
 
 ### postcss
 
-> Note: It is recommended to use a PostCSS config file instead so that your styles in `*.vue` files and normal CSS can share the same config. [The usage is the same as `postcss-loader`](https://github.com/postcss/postcss-loader#usage).
+> Lưu ý: Việc sử dụng tệp cấu hình PostCSS được khuyến khích, nhằm mục đích cho phép các khối style bên trong các tệp `*.vue` và các tệp CSS bình thường có thể chia sẻ chung một cấu hình PostCSS. [Cách thức cấu hình tương tự `postcss-loader`](https://github.com/postcss/postcss-loader#usage).
 
-- type: `Array` or `Function` or `Object`
+- Kiểu: `Array` hoặc `Function` hoặc `Object`
 
-  Specify custom PostCSS plugins to be applied to CSS inside `*.vue` files. If using a function, the function will called using the same loader context and should return an Array of plugins.
+  Thiết lập danh sách các plugin PostCSS sẽ được áp dụng lên CSS bên trong các tệp `*.vue`. Nếu sử dụng hàm, hàm này sẽ được gọi với cùng ngữ cảnh của loader và trả về một `Array` các plugin.
 
   ``` js
   // ...
   {
     loader: 'vue-loader',
     options: {
-      // note: do not nest the `postcss` option under `loaders`
+      // Lưu ý: không được lồng tùy chọn `postcss` bên dưới `loaders`
       postcss: [require('postcss-cssnext')()],
       loaders: {
         // ...
@@ -107,29 +107,29 @@ module.exports = {
   }
   ```
 
-  This option can also be an object that contains options to be passed to the PostCSS processor. This is useful when you are using PostCSS projects that relies on custom parser/stringifiers:
+  Tùy chọn này cũng có thể nhận một đối tượng trong đó chứa các tùy chọn khác có thể được truyền vào cho bộ xử lý PostCSS. Điều này rất hữu ích khi trong một dự án PostCSS sử dụng các bộ phân tích cú pháp/biến đổi chuỗi tùy biến.:
 
   ``` js
   postcss: {
-    plugins: [...], // list of plugins
+    plugins: [...], // Danh sách các plugin
     options: {
-      parser: sugarss // use sugarss parser
+      parser: sugarss // sử dụng bộ phân tích cú pháp sugarss
     }
   }
   ```
 
 ### postcss.config
 
-> New in 13.2.1
+> Được giới thiệu từ phiên bản 13.2.1
 
-- type: `Object`
-- default: `undefined`
+- Kiểu: `Object`
+- Mặc định: `undefined`
 
-  This field allows customizing PostCSS config in the same way as [postcss-loader](https://github.com/postcss/postcss-loader#config-1).
+  Tùy chọn này cho phép thay đổi cấu hình PostCSS tương tự như [postcss-loader](https://github.com/postcss/postcss-loader#config-1).
 
   - **postcss.config.path**
 
-    Specify a path (file or directory) to load the PostCSS config file from.
+    Chỉ định một đường dẫn (tệp tin hoặc thư mục) chứa tệp cấu hình PostCSS cần load.
 
     ``` js
     postcss: {
@@ -141,88 +141,88 @@ module.exports = {
 
   - **postcss.config.ctx**
 
-    Provide context to PostCSS plugins. See [postcss-loader docs](https://github.com/postcss/postcss-loader#context-ctx) for more details.
+    Cung cấp đối tượng ngữ cảnh cho các plugin PostCSS. Xem [tài liệu postcss-loader](https://github.com/postcss/postcss-loader#context-ctx) để biết thêm chi tiết.
 
 ### postcss.useConfigFile
 
-> New in 13.6.0
+> Được giới thiệu từ phiên bản 13.6.0
 
-- type: `boolean`
-- default: `true`
+- Kiểu: `boolean`
+- Mặc định: `true`
 
-  Set this to `false` to disable auto-loading of PostCSS config files.
+  Đặt giá trị là `false` để vô hiệu hóa việc sử dụng tệp cấu hình PostCSS.
 
 ### cssSourceMap
 
-- type: `boolean`
-- default: `true`
+- Kiểu: `boolean`
+- Mặc định: `true`
 
-  Whether to enable source maps for CSS. Disabling this can avoid some relative path related bugs in `css-loader` and make the build a bit faster.
+  Cho phép sử dụng source maps trong CSS. Vô hiệu hóa tính năng này có thể giúp tránh được các lỗi liên quan đến đường dẫn tương đối trong `css-loader` và giúp cho quá trình build được nhanh hơn.
 
-  Note this is automatically set to `false` if the `devtool` option is not present in the main webpack config.
+  Lưu ý rằng tùy chọn này mặc định có giá trị là `false` nếu tùy chọn `devtool` không tồn tại trong tệp cấu hình webpack.
 
 ### postcss.cascade
 
-> New in 14.2.0
+> Được giới thiệu từ phiên bản 14.2.0
 
-- type: `boolean`
-- default: `false`
+- Kiểu: `boolean`
+- Mặc định: `false`
 
-  Set this to `true` to enable cascading PostCSS config file loading. For example, you can have extra `.postcssrc` files in nested source directories to apply different PostCSS configs to different files in your project.
+  Set this to `true` to enable cascading PostCSS config file loading. Ví dụ, you can have extra `.postcssrc` files in nested source directories to apply different PostCSS configs to different files in your project.
 
 ### esModule
 
-> This option has been removed in v14.0. In v14.0 and above, `*.vue` files always expose ES modules.
+> Tùy chọn này đã được loại bỏ từ phiên bản v14.0. Từ v14.0 trở về sau, mọi tệp `*.vue` luôn luôn được biên dịch thành các ES module.
 
-- type: `boolean`
-- default: `true` (v13.0+)
+- Kiểu: `boolean`
+- Mặc định: `true` (v13.0+)
 
   Whether to emit esModule compatible code. Mặc định vue-loader will emit default export in commonjs format like `module.exports = ....`. When `esModule` is set to true, default export will be transpiled into `exports.__esModule = true; exports = ...`. Useful for interoperating with transpiler other than Babel, like TypeScript.
 
-  > version note: up to v12.x, default value is `false`.
+  > Lưu ý về phiên bản: từ v12.x trở lên, giá trị mặc định là `false`.
 
 ### preserveWhitespace
 
-- type: `boolean`
-- default: `true`
+- Kiểu: `boolean`
+- Mặc định: `true`
 
-  If set to `false`, the whitespaces between HTML tags in templates will be ignored.
+  Nếu giá trị là `false`, khoảng trắng giữa các HTML tag bên trong templates sẽ được loại bỏ.
 
 ### compilerModules
 
-- type: `Array<ModuleOptions>`
-- default: `[]`
+- Kiểu: `Array<ModuleOptions>`
+- Mặc định: `[]`
 
-  Configure `modules` options for `vue-template-compiler`. In about details, see more [`modules` option](https://github.com/vuejs/vue/blob/dev/packages/vue-template-compiler/README.md#compilercompiletemplate-options) of `vue-template-compiler`.
+  Cấu hình tùy chọn `modules` cho `vue-template-compiler`. Chi tiết hơn, xem thêm [tùy chọn `modules`](https://github.com/vuejs/vue/blob/dev/packages/vue-template-compiler/README.md#compilercompiletemplate-options) của `vue-template-compiler`.
 
 ### compilerDirectives
 
-- type: `{ [tag: string]: Function }`
-- default: `{}` (v13.0.5+)
+- Kiểu: `{ [tag: string]: Function }`
+- Mặc định: `{}` (v13.0.5+)
 
-  > version note: in v12.x, supported in v12.2.3+
+  > Lưu ý về phiên bản: in v12.x, supported in v12.2.3+
 
-  Configure `directives` options for `vue-template-compiler`, In about details, see more [`directives` option](https://github.com/vuejs/vue/blob/dev/packages/vue-template-compiler/README.md#compilercompiletemplate-options) of `vue-template-compiler`.
+  Cấu hình tùy chọn `directives` cho `vue-template-compiler`, Chi tiết hơn, xem thêm [tùy chọn `directives`](https://github.com/vuejs/vue/blob/dev/packages/vue-template-compiler/README.md#compilercompiletemplate-options) của `vue-template-compiler`.
 
 ### transformToRequire
 
-- type: `{ [tag: string]: string | Array<string> }`
-- default: `{ img: 'src', image: 'xlink:href' }`
+- Kiểu: `{ [tag: string]: string | Array<string> }`
+- Mặc định: `{ img: 'src', image: 'xlink:href' }`
 
-  During template compilation, the compiler can transform certain attributes, such as `src` URLs, into `require` calls, so that the target asset can be handled by webpack. The default config transforms the `src` attribute on `<img>` tags and `xlink:href` attribute on `<image>` tags of SVG.
+  Trong suốt quá trình biên dịch template, bộ biên dịch sẽ biến đổi một số các thuộc tính HTML nhất định, ví dụ như `src` URL thành lệnh gọi `require` để webpack có thể xử lý được các tệp tài nguyên đích. Cấu hình mặc định sẽ biến đổi thuộc tính `src` trong thẻ `<img>` và thuộc tính `xlink:href` trong thẻ `<image>` của SVG.
 
 ### buble
 
-- type: `Object`
-- default: `{}`
+- Kiểu: `Object`
+- Mặc định: `{}`
 
-  Configure options for `buble-loader` (if present), AND the buble compilation pass for template render functions.
+  Cấu hình tùy chọn cho `buble-loader` (nếu hữu dụng), AND the buble compilation pass for template render functions.
 
-  > version note: in version 9.x, the template expressions are configured separately via the now removed `templateBuble` option.
+  > Lưu ý về phiên bản: từ phiên bản 9.x, the template expressions are configured separately via the now removed `templateBuble` option.
 
   The template render functions compilation supports a special transform `stripWith` (enabled by default), which removes the `with` usage in generated render functions to make them strict-mode compliant.
 
-  Example configuration:
+  Cấu hình ví dụ:
 
   ``` js
   module: {
@@ -242,18 +242,18 @@ module.exports = {
 
 ### extractCSS
 
-> New in 12.0.0
+> Được giới thiệu từ phiên bản 12.0.0
 
-- type: `boolean`
-- default: `false`
+- Kiểu: `boolean`
+- Mặc định: `false`
 
-  Automatically extracts the CSS using `extract-text-webpack-plugin`. Works for most pre-processors out of the box, and handles minification in production as well.
+  Tự động bóc tách CSS với `extract-text-webpack-plugin`. Works for most tiền-xử-lý out of the box, và xử lý tác vụ nén mã nguồn CSS trong chế độ production rất tốt.
 
-  The value passed in can be `true`, or an instance of the plugin (so that you can use multiple instances of the extract plugin for multiple extracted files).
+  Giá trị có thể là `true`, hoặc là một instance của plugin (điều này cho phép bạn sử dụng nhiều instance của plugin để bóc tách thành nhiều tệp CSS khác nhau).
 
-  This should be only used in production so that hot-reload works during development.
+  Chỉ nên sử dụng trong chế độ production.
 
-  Example:
+  Ví dụ:
 
   ``` js
   // webpack.config.js
@@ -278,7 +278,7 @@ module.exports = {
   }
   ```
 
-  Or passing in an instance of the plugin:
+  Hoặc truyền vào một instance của plugin:
 
   ``` js
   // webpack.config.js
@@ -306,31 +306,31 @@ module.exports = {
 
 ### optimizeSSR
 
-> New in 12.1.1
+> Được giới thiệu từ phiên bản 12.1.1
 
-- type: `boolean`
-- default: `true` when the webpack config has `target: 'node'` and `vue-template-compiler` is at version 2.4.0 or above.
+- Kiểu: `boolean`
+- Mặc định: `true` khi webpack được cấu hình `target: 'node'` và phiên bản `vue-template-compiler` từ 2.4.0 trở lên.
 
-  Enable Vue 2.4 SSR compilation optimization that compiles part of the vdom trees returned by render functions into plain strings, which improves SSR performance. In some cases you might want to explicitly turn it off because the resulting render functions can only be used for SSR and cannot be used for client-side rendering or testing.
+  Cho phép tối ưu biên dịch Vue 2.4 SSR nhằm biên dịch một phần cây DOM ảo trả về từ các hàm render thành một chuỗi HTML thuần túy, cải thiện hiệu năng SSR. Trong một số trường hợp bạn cần tắt nó đi vì kết xuất chỉ có thể sử dụng trên SSR và không thể sử dụng để render phía client hoặc kiểm thử.
 
 ### hotReload
 
-> New in 13.5.0
+> Được giới thiệu từ phiên bản 13.5.0
 
-- type: `boolean`
-- default: `true` in development mode, `false` in production mode or when the webpack config has `target: 'node'`.
-- allowed value: `false` (`true` will not force Hot Reload neither in production mode nor when `target: 'node'`)
+- Kiểu: `boolean`
+- Mặc định: `true` trong chế độ development, `false` trong chế độ production hoặc webpack được cấu hình `target: 'node'`.
+- Giá trị được phép sử dụng: `false` (`true` không hữu dụng trong chế độ production hoặc `target: 'node'`)
 
-  Whether to use webpack [Hot Module Replacement](https://webpack.js.org/concepts/hot-module-replacement/) to apply changes in the browser **without reloading the page**.
-  Use this option (value `false`) to disable the Hot Reload feature in development mode.
+  Cho phép sử dụng webpack [Hot Module Replacement](https://webpack.js.org/concepts/hot-module-replacement/) để cập nhật nội dung trên trình duyệt **mà không cần tải lại trang**.
+  Sử dụng tùy chọn này (với giá trị là `false`) to disable the Hot Reload feature in development mode.
 
 ### threadMode
 
-> New in 14.2.0
+> Được giới thiệu từ phiên bản 14.2.0
 
-- type: `boolean`
-- default: `false`
+- Kiểu: `boolean`
+- Mặc định: `false`
 
-  Setting this to `true` enables filesystem-based option caching so that the options for the main `vue-loader` can be properly shared with sub-loaders in other threads.
+  Cài đặt giá trị là `true` cho phép cấu hình hệ thống tệp tin lưu trữ cache nhằm chia sẻ cấu hình của `vue-loader` với các loader con trong các tiến trình (thread) khác.
 
-  Only needed when using together with HappyPack or `thread-loader`.
+  Tùy chọn chỉ hữu dụng khi sử dụng với HappyPack hoặc `thread-loader`.

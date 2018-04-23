@@ -4,7 +4,7 @@ In webpack, all pre-processors need to be applied with a corresponding loader. `
 
 ### CSS
 
-For example, let's compile our `<style>` tag with Sass:
+Ví dụ, let's compile our `<style>` tag with Sass:
 
 ``` bash
 npm install sass-loader node-sass --save-dev
