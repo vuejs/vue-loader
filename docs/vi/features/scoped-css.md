@@ -2,8 +2,6 @@
 
 Sự xuất hiện của thuộc tính `scoped` trong thẻ `<style>` cho phép mã nguồn CSS bên trong nó được **"scoped"** vào chính component đó (nghĩa là CSS của component sau khi đi qua `css-loader` sẽ chỉ hữu dụng với template của bản thân component, độc lập và không áp dụng ra bên ngoài). Về mặt hình thức, tính năng này tương tự CSS của Shadow DOM.
 
-When a `<style>` tag has the `scoped` attribute, its CSS will apply to elements of the current component only. This is similar to the style encapsulation found in Shadow DOM. Tính năng này đi kèm với một số cảnh báo nho nhỏ sẽ được đề cập ở cuối trang, tuy nhiên nó không yêu cầu bất kỳ polyfill nào. Cơ chế hoạt động của Scoped CSS đơn giản là sử dụng PostCSS để biến đổi mã nguồn từ như thế này...
-
 ``` html
 <style scoped>
 .example {
@@ -26,7 +24,7 @@ When a `<style>` tag has the `scoped` attribute, its CSS will apply to elements 
 </style>
 
 <template>
-  <div class="example" data-v-f3f3eg9>hi</div>
+  <div class="example" data-v-f3f3eg9>xin chào</div>
 </template>
 ```
 
@@ -38,17 +36,17 @@ Bạn có thể kết hợp khối style không scoped và có scoped trong cùn
 
 ``` html
 <style>
-/* global styles */
+/* styles toàn cục */
 </style>
 
 <style scoped>
-/* local styles */
+/* styles cục bộ */
 </style>
 ```
 
-### Child Component Root Elements
+### Phần tử root của component con
 
-With `scoped`, the parent component's styles will not leak into child components. However, a child component's root node will be affected by both the parent's scoped CSS and the child's scoped CSS. This is by design so that the parent can style the child root element for layout purposes.
+Với thuộc tính `scoped`, style của component cha sẽ không ảnh hưởng đến style bên trong các component con. Tuy nhiên, phần tử root của các component con sẽ bị ảnh hưởng bởi cả scoped CSS của component cha lẫn scoped CSS của bản thân nó. Điều này cho phép component cha điều chỉnh CSS layout của component con bên trong template một cách dễ dàng.
 
 ### Deep Selectors
 

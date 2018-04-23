@@ -58,9 +58,9 @@ Ngoài việc cung cấp một mảng các plugin như trên, tùy chọn `postc
 
   ``` js
   postcss: {
-    plugins: [...], // list of plugins
+    plugins: [...], // Danh sách các plugin
     options: {
-      parser: 'sugarss' // use sugarss parser
+      parser: 'sugarss' // sử dụng sugarss parser
     }
   }
   ```

@@ -1,6 +1,6 @@
-# Using Pre-Processors
+# Sử dụng tiền-xử-lý
 
-In webpack, all pre-processors need to be applied with a corresponding loader. `vue-loader` allows you to use other webpack loaders to process a part of a Vue component. It will automatically infer the proper loaders to use from the `lang` attribute of a language block.
+In webpack, all tiền-xử-lý need to be applied with a corresponding loader. `vue-loader` allows you to use other webpack loaders to process a part of a Vue component. It will automatically infer the proper loaders to use from the `lang` attribute of a language block.
 
 ### CSS
 
@@ -35,7 +35,7 @@ Contrary to what its name indicates, [*sass*-loader](https://github.com/jtangeld
 }
 ```
 
-See the [Advanced Loader Configuration](./advanced.md) Section for further information about how to configure vue-loader.
+See the [Cấu hình Loader nâng cao](./advanced.md) Section for further information about how to configure vue-loader.
 
 #### Loading a global settings file
 
