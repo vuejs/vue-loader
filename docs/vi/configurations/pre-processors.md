@@ -1,10 +1,10 @@
 # Sử dụng tiền-xử-lý
 
-In webpack, all tiền-xử-lý need to be applied with a corresponding loader. `vue-loader` allows you to use other webpack loaders to process a part of a Vue component. It will automatically infer the proper loaders to use from the `lang` attribute of a language block.
+Trong webpack, quá trình tiền-xử-lý cần phải được áp dụng với loader tương ứng. thuộc tính `vue-loader` allows you to use other webpack loaders to process a part of a Vue component. It will automatically infer the proper loaders to use from the `lang` of a language block.
 
 ### CSS
 
-Ví dụ, let's compile our `<style>` tag with Sass:
+Ví dụ, hãy biên dịch khối `<style>` sau được viết bằng Sass:
 
 ``` bash
 npm install sass-loader node-sass --save-dev
@@ -12,15 +12,15 @@ npm install sass-loader node-sass --save-dev
 
 ``` html
 <style lang="sass">
-  /* write sass here */
+  /* viết mã nguồn SASS ở đây */
 </style>
 ```
 
-Under the hood, the text content inside the `<style>` tag will be first compiled by `sass-loader` before being passed on for further processing.
+Mã nguồn bên trong khối `<style>` sẽ được biên dịch trước tiên bởi `sass-loader` trước khi truyền đến các quá trình xử lý phù hợp khác.
 
-#### sass-loader caveat
+#### Chú ý với sass-loader
 
-Contrary to what its name indicates, [*sass*-loader](https://github.com/jtangelder/sass-loader) parses *SCSS* syntax by default. If you actually want to use the indented *Sass* syntax, you have to configure vue-loader's options for sass-loader accordingly.
+Trái ngược với cái tên của mình, [*sass*-loader](https://github.com/jtangelder/sass-loader) mặc định sẽ xử lý cú pháp *SCSS*. Trường hợp bạn thực sự muốn sử dụng cú pháp thụt lề của *Sass*, bạn cần cấu hình tường minh tùy chọn của vue-loader cho phần sass-loader như dưới đây.
 
 ```javascript
 {
@@ -35,17 +35,17 @@ Contrary to what its name indicates, [*sass*-loader](https://github.com/jtangeld
 }
 ```
 
-See the [Cấu hình Loader nâng cao](./advanced.md) Section for further information about how to configure vue-loader.
+Xem thêm phần [Cấu hình Loader nâng cao](./advanced.md) để biết thêm cách thức cấu hình vue-loader.
 
-#### Loading a global settings file
+#### Load một tệp cài đặt toàn cục
 
-A common request is to be able to load a settings file in each component without the need to explicity import it each time, e.g. to use scss variables globally throughout all components. To accomplish this:
+Một yêu cầu phổ biến là có thể tải tệp cài đặt trong mỗi component mà không cần phải lặp đi lặp lại thao tác import, ví dụ như sử dụng các biến/mixins toàn cục của scss trên toàn bộ các all components. Để thực hiện được điều đó chúng ta làm như sau:
 
 ``` bash
 npm install sass-resources-loader --save-dev
 ```
 
-Then add the following webpack rule:
+Thêm vào tệp cấu hình webpack đoạn mã sau:
 
 ``` js
 {
@@ -56,7 +56,7 @@ Then add the following webpack rule:
 }
 ```
 
-As an example, if you are using [vuejs-templates/webpack](https://github.com/vuejs-templates/webpack), modify `build/utils.js` like so:
+Một ví dụ nữa, nếu bạn xây dựng dự án từ [vuejs-templates/webpack](https://github.com/vuejs-templates/webpack), chỉnh sửa `build/utils.js` như sau:
 
 ``` js
 scss: generateLoaders('sass').concat(
@@ -69,11 +69,11 @@ scss: generateLoaders('sass').concat(
 ),
 ```
 
-It is recommended to only include variables, mixins, etc. in this file, to prevent duplicated css in your final, compiled files.
+Chỉ nên thực hiện điều này với các tệp chứa biến hoặc mixins toàn cục và không chứa selector có thể biên dịch thành CSS được, nhằm tránh hiện tượng mã nguồn CSS bị lặp lại nhiều lần ở tệp kết xuất.
 
 ### JavaScript
 
-All JavaScript inside Vue components are processed by `babel-loader` by default. But you can of course change it:
+Toàn bộ mã nguồn Javascript bên trong Vue component được xử lý mặc định bởi `babel-loader`. Tuy nhiên nếu bạn sử dụng ngôn ngữ khác ví dụ như `CoffeeScript`, bạn có thể thay đổi bằng cách cài đặt gói loader tương ứng, và thêm thuộc tính ngôn ngữ cho khối `<script>`:
 
 ``` bash
 npm install coffee-loader --save-dev
@@ -87,7 +87,7 @@ npm install coffee-loader --save-dev
 
 ### Templates
 
-Processing templates is a little different, because most webpack template loaders such as `pug-loader` return a template function instead of a compiled HTML string. Instead of using `pug-loader`, we can just install the original `pug`:
+Có một chút khác biệt khi xử lý template, bởi phần nhiều các template loader của webpack ví dụ như `pug-loader` trả về một hàm biên dịch template thay vì một chuỗi HTML string đã được biên dịch. Thay vì sử dụng `pug-loader`, chúng ta chỉ cần cài đặt gói `pug` là đủ:
 
 ``` bash
 npm install pug --save-dev
@@ -100,11 +100,11 @@ div
 </template>
 ```
 
-> **Important:** If you are using `vue-loader@<8.2.0`, you also need to install `template-html-loader`.
+> **Ghi nhớ quan trọng:** Nếu bạn sử dụng `vue-loader@<8.2.0`, bạn cần phải cài đặt `template-html-loader`.
 
-### Inline Loader Requests
+### Truy vấn Inline Loader
 
-You can use [webpack loader requests](https://webpack.github.io/docs/loaders.html#introduction) in the `lang` attribute:
+Bạn có thể sử dụng [webpack loader requests](https://webpack.github.io/docs/loaders.html#introduction) bên trong thuộc tính `lang`:
 
 ``` html
 <style lang="sass?outputStyle=expanded">
@@ -112,4 +112,4 @@ You can use [webpack loader requests](https://webpack.github.io/docs/loaders.htm
 </style>
 ```
 
-However, note this makes your Vue component webpack-specific and not compatible with Browserify and [vueify](https://github.com/vuejs/vueify). **If you intend to ship your Vue component as a reusable 3rd-party component, avoid using this syntax.**
+Tuy nhiên, thao tác trên chỉ tương thích với webpack và không hề tương thích với Browserify [vueify](https://github.com/vuejs/vueify). **Nếu bạn có ý định tái sử dụng Vue component, ví dụ như viết plugin cho ứng dụng khác, tránh sử dụng cú pháp này.**
