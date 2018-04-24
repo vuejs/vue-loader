@@ -5,6 +5,10 @@ sidebarDepth: 2
 
 # Migrating from v14
 
+::: tip Heads Up
+We are in the process of upgrading Vue CLI 3 beta to use webpack 4 + Vue Loader v15, so you might want to wait if are planning to upgrade to Vue CLI 3.
+:::
+
 ## Notable Breaking Changes
 
 ### Loader Inference
