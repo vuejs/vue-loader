@@ -148,3 +148,17 @@ test('html-webpack-plugin', done => {
     done()
   }, true)
 })
+
+test('usage with null-loader', done => {
+  mockBundleAndRun({
+    entry: 'basic.vue',
+    modify: config => {
+      config.module.rules[1] = {
+        test: /\.css$/,
+        use: ['null-loader']
+      }
+    }
+  }, ({ window, exports, code }) => {
+    done()
+  })
+})

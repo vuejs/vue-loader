@@ -59,6 +59,7 @@
     "mini-css-extract-plugin": "^0.2.0",
     "node-sass": "^4.7.2",
     "normalize-newline": "^3.0.0",
+    "null-loader": "^0.1.1",
     "postcss-loader": "^2.1.2",
     "pug": "^2.0.1",
     "pug-plain-loader": "^1.0.0",
