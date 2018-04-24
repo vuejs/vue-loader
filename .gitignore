@@ -3,3 +3,4 @@ exploration
 node_modules
 *.log
 example/dist
+docs/.vuepress/dist
