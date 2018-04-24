@@ -31,7 +31,7 @@ module.exports = {
 }
 ```
 
-**The plugin is required.** It is responsible for cloning any other rules you have defined and applying them to the corresponding language blocks in `.vue` files. For example, if you have a rule matching `/\.js$/`, it will be applied to `<script>` blocks in `.vue` files.
+**The plugin is required!** It is responsible for cloning any other rules you have defined and applying them to the corresponding language blocks in `.vue` files. For example, if you have a rule matching `/\.js$/`, it will be applied to `<script>` blocks in `.vue` files.
 
 A more complete example webpack config will look like this:
 
@@ -71,3 +71,5 @@ module.exports = {
   ]
 }
 ```
+
+Also see [Options Reference](../options.md) for all available loader options.

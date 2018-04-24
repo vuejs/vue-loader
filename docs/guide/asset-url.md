@@ -18,7 +18,7 @@ createElement('img', {
 })
 ```
 
-By default the following tag/attribute combinations are transformed, and can be configured using the [transformAssetUrls](../config.md#transformasseturls) option.
+By default the following tag/attribute combinations are transformed, and can be configured using the [transformAssetUrls](../options.md#transformasseturls) option.
 
 In addition, if you have configured to use [css-loader](https://github.com/webpack-contrib/css-loader) for the `<style>` blocks, asset URLs in your CSS will also be processed in a similar fashion.
 
