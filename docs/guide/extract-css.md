@@ -1,12 +1,51 @@
-# Extracting CSS into a Single File
+# CSS Extraction
+
+::: tip
+Only apply CSS extraction for production so that you get CSS hot reload during development.
+:::
+
+## webpack 4
 
 ``` bash
-npm install extract-text-webpack-plugin --save-dev
+npm install -D mini-css-extract-plugin
 ```
 
-## The Easy Way
+``` js
+// webpack.config.js
+var MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
-> requires vue-loader@^12.0.0 and webpack@^2.0.0
+module.exports = {
+  // other options...
+  module: {
+    rules: [
+      // ...other rules omitted
+      {
+        test: /\.css$/,
+        use: [
+          process.env.NODE_ENV !== 'production'
+            ? 'vue-style-loader'
+            : MiniCssExtractPlugin.loader,
+          'css-loader'
+        ]
+      }
+    ]
+  },
+  plugins: [
+    // ...vue-loader plugin omitted
+    new MiniCssExtractPlugin({
+      filename: style.css
+    })
+  ]
+}
+```
+
+Also see [mini-css-extract-plugin docs](https://github.com/webpack-contrib/mini-css-extract-plugin).
+
+## webpack 3
+
+``` bash
+npm install -D extract-text-webpack-plugin
+```
 
 ``` js
 // webpack.config.js
@@ -16,53 +55,21 @@ module.exports = {
   // other options...
   module: {
     rules: [
+      // ...other rules omitted
       {
-        test: /\.vue$/,
-        loader: 'vue-loader',
-        options: {
-          extractCSS: true
-        }
+        test: /\.css$/,
+        loader: ExtractTextPlugin.extract({
+          use: 'css-loader',
+          fallback: 'vue-style-loader'
+        })
       }
     ]
   },
   plugins: [
+    // ...vue-loader plugin omitted
     new ExtractTextPlugin("style.css")
   ]
 }
 ```
 
-The above will automatically handle extraction for `<style>` inside `*.vue` files and works with most pre-processors out of the box.
-
-Note this only extracts `*.vue` files though - CSS imported in JavaScript still needs to be configured separately.
-
-## Manual Configuration
-
-Example config to extract all the processed CSS in all Vue components into a single CSS file:
-
-``` js
-// webpack.config.js
-var ExtractTextPlugin = require("extract-text-webpack-plugin")
-
-module.exports = {
-  // other options...
-  module: {
-    rules: [
-      {
-        test: /\.vue$/,
-        loader: 'vue-loader',
-        options: {
-          loaders: {
-            css: ExtractTextPlugin.extract({
-              use: 'css-loader',
-              fallback: 'vue-style-loader' // <- this is a dep of vue-loader, so no need to explicitly install if using npm3
-            })
-          }
-        }
-      }
-    ]
-  },
-  plugins: [
-    new ExtractTextPlugin("style.css")
-  ]
-}
-```
+Also see [extract-text-webpack-plugin docs](https://github.com/webpack-contrib/extract-text-webpack-plugin).

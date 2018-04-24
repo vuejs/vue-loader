@@ -1,97 +1,223 @@
+---
+sidebarDepth: 2
+---
+
 # Using Pre-Processors
 
-In webpack, all pre-processors need to be applied with a corresponding loader. `vue-loader` allows you to use other webpack loaders to process a part of a Vue component. It will automatically infer the proper loaders to use from the `lang` attribute of a language block.
+In webpack, all pre-processors need to be applied with a corresponding loader. `vue-loader` allows you to use other webpack loaders to process a part of a Vue component. It will automatically infer the proper loaders to use based on the `lang` attribute of a language block and the rules in your webpack config.
 
-### CSS
+## SASS
 
-For example, let's compile our `<style>` tag with Sass:
+For example, to compile our `<style>` tag with SASS/SCSS:
 
 ``` bash
-npm install sass-loader node-sass --save-dev
+npm install -D sass-loader node-sass
 ```
 
+In your webpack config:
+
+``` js
+module.exports = {
+  module: {
+    rules: [
+      // ...other rules omitted
+
+      // this will apply to both plain .scss files
+      // AND <style lang="scss"> blocks in vue files
+      {
+        test: /\.scss$/,
+        use: [
+          'vue-style-loader',
+          'css-loader',
+          'sass-loader'
+        ]
+      }
+    ]
+  },
+  // plugin omitted
+}
+```
+
+Now in addition to being able to `import 'style.scss'`, we can use SCSS in Vue components as well:
+
 ``` html
-<style lang="sass">
-  /* write sass here */
+<style lang="scss">
+/* write SCSS here */
 </style>
 ```
 
-Under the hood, the text content inside the `<style>` tag will be first compiled by `sass-loader` before being passed on for further processing.
+Any content inside the block will be processed by webpack as if it's inside a `*.scss` file.
 
-#### sass-loader caveat
+### SASS vs SCSS
 
-Contrary to what its name indicates, [*sass*-loader](https://github.com/jtangelder/sass-loader) parses *SCSS* syntax by default. If you actually want to use the indented *Sass* syntax, you have to configure vue-loader's options for sass-loader accordingly.
+Note that `sass-loader` processes the non-indent-based `scss` syntax by default. In order to use the indent-based `sass` syntax, you need to pass options to the loader:
 
-```javascript
+``` js
+// webpack.config.js -> module.rules
 {
-  test: /\.vue$/,
-  loader: 'vue-loader',
-  options: {
-    loaders: {
-      scss: 'vue-style-loader!css-loader!sass-loader', // <style lang="scss">
-      sass: 'vue-style-loader!css-loader!sass-loader?indentedSyntax' // <style lang="sass">
+  test: /\.sass$/,
+  use: [
+    'vue-style-loader',
+    'css-loader',
+    {
+      loader: 'sass-loader',
+      options: {
+        indentedSyntax: true
+      }
     }
-  }
+  ]
 }
 ```
 
-See the [Advanced Loader Configuration](./advanced.md) Section for further information about how to configure vue-loader.
+### Sharing Global Variables
 
-#### Loading a global settings file
-
-A common request is to be able to load a settings file in each component without the need to explicity import it each time, e.g. to use scss variables globally throughout all components. To accomplish this:
-
-``` bash
-npm install sass-resources-loader --save-dev
-```
-
-Then add the following webpack rule:
+`sass-loader` also supports a `data` option which allows you to share common variables among all processed files without having to explicit import them:
 
 ``` js
+// webpack.config.js -> module.rules
 {
-  loader: 'sass-resources-loader',
-  options: {
-    resources: path.resolve(__dirname, '../src/style/_variables.scss')
-  }
+  test: /\.scss$/,
+  use: [
+    'vue-style-loader',
+    'css-loader',
+    {
+      loader: 'sass-loader',
+      options: {
+        // you can also read from a file, e.g. `variables.scss`
+        data: `$color: red;`
+      }
+    }
+  ]
 }
 ```
 
-As an example, if you are using [vuejs-templates/webpack](https://github.com/vuejs-templates/webpack), modify `build/utils.js` like so:
+## LESS
+
+``` bash
+npm install -D less less-loader
+```
 
 ``` js
-scss: generateLoaders('sass').concat(
-  {
-    loader: 'sass-resources-loader',
-    options: {
-      resources: path.resolve(__dirname, '../src/style/_variables.scss')
-    }
-  }
-),
+// webpack.config.js -> module.rules
+{
+  test: /\.less$/,
+  use: [
+    'vue-style-loader',
+    'css-loader',
+    'less-loader'
+  ]
+}
 ```
 
-It is recommended to only include variables, mixins, etc. in this file, to prevent duplicated css in your final, compiled files.
-
-### JavaScript
-
-All JavaScript inside Vue components are processed by `babel-loader` by default. But you can of course change it:
+## Stylus
 
 ``` bash
-npm install coffee-loader --save-dev
+npm install -D stylus stylus-loader
 ```
 
-``` html
-<script lang="coffee">
-  # Write coffeescript!
-</script>
+``` js
+// webpack.config.js -> module.rules
+{
+  test: /\.styl(us)?$/,
+  use: [
+    'vue-style-loader',
+    'css-loader',
+    'stylus-loader'
+  ]
+}
 ```
 
-### Templates
+## PostCSS
 
-Processing templates is a little different, because most webpack template loaders such as `pug-loader` return a template function instead of a compiled HTML string. Instead of using `pug-loader`, we can just install the original `pug`:
+::: tip
+Vue Loader v15 no longer applies PostCSS transforms by default. You will need to use PostCSS via `postcss-loader`.
+:::
 
 ``` bash
-npm install pug --save-dev
+npm install -D postcss-loader
 ```
+
+``` js
+// webpack.config.js -> module.rules
+{
+  test: /\.css$/,
+  use: [
+    'style-loader',
+    {
+      loader: 'css-loader',
+      options: { importLoaders: 1 }
+    },
+    'postcss-loader'
+  ]
+}
+```
+
+Configuration of PostCSS can be done via `postcss.config.js` or `postcss-loader` options. For details, consult [postcss-loader docs](https://github.com/postcss/postcss-loader).
+
+`postcss-loader` can also be applied in combination with other pre-processors mentioned above.
+
+## Babel
+
+``` bash
+npm install -D babel-core babel-loader
+```
+
+``` js
+// webpack.config.js -> module.rules
+{
+  test: /\.js?$/,
+  loader: 'babel-loader'
+}
+```
+
+Configuration of Babel can be done via `.babelrc` or `babel-loader` options.
+
+## TypeScript
+
+``` bash
+npm install -D typescript ts-loader
+```
+
+``` js
+// webpack.config.js
+module.exports = {
+  resolve: {
+    // Add `.ts` as a resolvable extension.
+    extensions: ['.ts', '.js']
+  },
+  module: {
+    rules: [
+      // ...other rules omitted
+      {
+        test: /\.ts$/,
+        loader: 'ts-loader',
+        options: { appendTsSuffixTo: [/\.vue$/] }
+      }
+    ]
+  },
+  // ...plugin omitted
+}
+```
+
+Configuration of TypeScipt can be done via `tsconfig.json`. Also see docs for [ts-loader](https://github.com/TypeStrong/ts-loader).
+
+## Pug
+
+Processing templates is a little different, because most webpack template loaders such as `pug-loader` return a template function instead of a compiled HTML string. Instead of using `pug-loader`, we need to use a loader that returns the raw HTML string instead, e.g. `pug-plain-loader`:
+
+``` bash
+npm install -D pug pug-plain-loader
+```
+
+``` js
+// webpack.config.js -> module.rules
+{
+  test: /\.pug$/,
+  loader: 'pug-plain-loader'
+}
+```
+
+Then you can write:
 
 ``` html
 <template lang="pug">
@@ -100,16 +226,22 @@ div
 </template>
 ```
 
-> **Important:** If you are using `vue-loader@<8.2.0`, you also need to install `template-html-loader`.
+If you also intend to use it to import `.pug` files as HTML strings in JavaScript, you will need to chain `raw-loader` after the preprocessing loader. Note however adding `raw-loader` would break the usage in Vue components, so you need to have two rules, one of them targeting Vue files using a `resourceQuery`, the other one (fallback) targeting JavaScript imports:
 
-### Inline Loader Requests
-
-You can use [webpack loader requests](https://webpack.github.io/docs/loaders.html#introduction) in the `lang` attribute:
-
-``` html
-<style lang="sass?outputStyle=expanded">
-  /* use sass here with expanded output */
-</style>
+``` js
+// webpack.config.js -> module.rules
+{
+  test: /\.pug$/,
+  oneOf: [
+    // this applies to <template lang="pug"> in Vue components
+    {
+      resourceQuery: /^\?vue/,
+      use: ['pug-plain-loader']
+    },
+    // this applies to pug imports inside JavaScript
+    {
+      use: ['raw-loader', 'pug-plain-loader']
+    }
+  ]
+}
 ```
-
-However, note this makes your Vue component webpack-specific and not compatible with Browserify and [vueify](https://github.com/vuejs/vueify). **If you intend to ship your Vue component as a reusable 3rd-party component, avoid using this syntax.**

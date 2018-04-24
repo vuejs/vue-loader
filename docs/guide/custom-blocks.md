@@ -1,134 +1,96 @@
 # Custom Blocks
 
-> Requires 10.2.0+
+You can define custom language blocks inside `*.vue` files. Loaders applied for a custom block are matched based on the `lang` attribute of the block, the block's tag name, and the rules in your webpack config.
 
-You can define custom language blocks inside `*.vue` files. The content of a custom block will be processed by the loaders specified in the `loaders` object of `vue-loader` options and then required by the component module. The configuration is similar to what is described in [Advanced Loader Configuration](../configurations/advanced.md), except the matching uses the tag name instead of the `lang` attribute.
+If a `lang` attribute is specified, the custom block will be matched as a file with the `lang` as its extension.
 
-If a matching loader is found for a custom block, it will be processed; otherwise the custom block will simply be ignored. Additionally, if the found loader returns a function, that function will be called with the component of the `*.vue` file as a parameter.
-
-## Single docs file example
-
-Here's an example of extracting all `<docs>` custom blocks into a single docs file:
-
-#### component.vue
-
-``` html
-<docs>
-## This is an Example component.
-</docs>
-
-<template>
-  <h2 class="red">{{msg}}</h2>
-</template>
-
-<script>
-export default {
-  data () {
-    return {
-      msg: 'Hello from Component A!'
-    }
-  }
-}
-</script>
-
-<style>
-comp-a h2 {
-  color: #f00;
-}
-</style>
-```
-
-#### webpack.config.js
+You can also use `resourceQuery` to match a rule against a custom block with no `lang`. For example, to match against `<foo>` custom blocks:
 
 ``` js
-var ExtractTextPlugin = require("extract-text-webpack-plugin")
-
-module.exports = {
+{
   module: {
     rules: [
       {
-        test: /\.vue$/,
-        loader: 'vue-loader',
-        options: {
-          loaders: {
-            // extract all <docs> content as raw text
-            'docs': ExtractTextPlugin.extract('raw-loader'),
-          }
-        }
+        resourceQuery: /blockType=foo/,
+        loader: 'loader-to-use'
       }
     ]
-  },
-  plugins: [
-    // output all docs into a single file
-    new ExtractTextPlugin('docs.md')
-  ]
+  }
 }
 ```
 
-## Runtime available docs
+If a matching rule is found for a custom block, it will be processed; otherwise the custom block will be silently ignored.
 
-> Requires 11.3.0+
+Additionally, if the custom block exports a function as the final result after being processed by all the matching loaders, that function will be called with the component of the `*.vue` file as a parameter.
+
+## Example
 
 Here's an example of injecting the `<docs>` custom blocks into the component so that it's available during runtime.
 
-#### docs-loader.js
-
-In order for the custom block content to be injected, we'll need a custom loader:
+In order for the custom block content to be injected, we'll write a custom loader:
 
 ``` js
 module.exports = function (source, map) {
-  this.callback(null, 'module.exports = function(Component) {Component.options.__docs = ' +
-    JSON.stringify(source) +
-    '}', map)
+  this.callback(
+    null,
+    `export default function (Component) {
+      Component.options.__docs = ${
+        JSON.stringify(source)
+      }
+    }`,
+    map
+  )
 }
 ```
-
-#### webpack.config.js
 
 Now we'll configure webpack to use our custom loader for `<docs>` custom blocks.
 
 ``` js
-const docsLoader = require.resolve('./custom-loaders/docs-loader.js')
-
+// wepback.config.js
 module.exports = {
   module: {
     rules: [
       {
-        test: /\.vue$/,
-        loader: 'vue-loader',
-        options: {
-          loaders: {
-            'docs': docsLoader
-          }
-        }
+        resourceQuery: /blockType=docs/,
+        loader: require.resolve('./docs-loader.js')
       }
     ]
   }
 }
 ```
 
-#### component.vue
-
 We are now able to access the `<docs>` block's content of imported components during runtime.
 
-``` html
+``` vue
+<!-- ComponentB.vue -->
+<template>
+  <div>Hello</div>
+</template>
+
+<docs>
+This is the documentation for component B.
+</docs>
+```
+
+``` vue
+<!-- ComponentA.vue -->
 <template>
   <div>
-    <component-b />
+    <ComponentB/>
     <p>{{ docs }}</p>
   </div>
 </template>
 
 <script>
-import componentB from 'componentB';
+import ComponentB from './ComponentB.vue';
 
 export default = {
+  components: { ComponentB },
   data () {
     return {
-      docs: componentB.__docs
+      docs: ComponentB.__docs
     }
-  },
-  components: {componentB}
+  }
 }
 </script>
 ```

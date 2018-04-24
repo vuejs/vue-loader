@@ -1,14 +1,40 @@
 # CSS Modules
 
-> requires ^9.8.0
-
 [CSS Modules](https://github.com/css-modules/css-modules) is a popular system for modularizing and composing CSS. `vue-loader` provides first-class integration with CSS Modules as an alternative for simulated scoped CSS.
 
-### Usage
+## Usage
 
-Just add the `module` attribute to your `<style>`:
+First, CSS Modules must be enabled by passing `modules: true` to `css-loader`:
 
-``` html
+``` js
+// webpack.config.js
+{
+  module: {
+    rules: [
+      // ... other rules omitted
+      {
+        test: /\.css$/,
+        use: [
+          'vue-style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              // enable CSS Modules
+              modules: true,
+              // customize generated class names
+              localIdentName: '[local]_[hash:base64:8]'
+            }
+          }
+        ]
+      }
+    ]
+  }
+}
+```
+
+Then, add the `module` attribute to your `<style>`:
+
+``` vue
 <style module>
 .red {
   color: red;
@@ -19,9 +45,9 @@ Just add the `module` attribute to your `<style>`:
 </style>
 ```
 
-This will turn on CSS Modules mode for `css-loader`, and the resulting class identifier object will be injected into the component as a computed property with the name `$style`. You can use it in your templates with a dynamic class binding:
+The `module` attribute instructs Vue Loader to inject the CSS modules locals object into the component as a computed property with the name `$style`. You can then use it in your templates with a dynamic class binding:
 
-``` html
+``` vue
 <template>
   <p :class="$style.red">
     This should be red
@@ -31,7 +57,7 @@ This will turn on CSS Modules mode for `css-loader`, and the resulting class ide
 
 Since it's a computed property, it also works with the object/array syntax of `:class`:
 
-``` html
+``` vue
 <template>
   <div>
     <p :class="{ [$style.red]: isRed }">
@@ -46,12 +72,12 @@ Since it's a computed property, it also works with the object/array syntax of `:
 
 And you can also access it from JavaScript:
 
-``` html
+``` vue
 <script>
 export default {
   created () {
     console.log(this.$style.red)
-    // -> "_1VyoJ-uZOjlOxP7jWUy19_0"
+    // -> "red_1VyoJ-uZ"
     // an identifier generated based on filename and className.
   }
 }
@@ -60,7 +86,60 @@ export default {
 
 Refer to the [CSS Modules spec](https://github.com/css-modules/css-modules) for mode details such as [global exceptions](https://github.com/css-modules/css-modules#exceptions) and [composition](https://github.com/css-modules/css-modules#composition).
 
-### Custom Inject Name
+## Opt-in Usage
+
+If you only want to use CSS Modules in some of your Vue components, you can use a `oneOf` rule and check for the `module` string in resourceQuery:
+
+``` js
+// webpack.config.js -> module.rules
+{
+  test: /\.css$/,
+  oneOf: [
+    // this matches <style module>
+    {
+      resourceQuery: /module/,
+      use: [
+        'vue-style-loader',
+        {
+          loader: 'css-loader',
+          options: {
+            modules: true,
+            localIdentName: '[local]_[hash:base64:5]'
+          }
+        }
+      ]
+    },
+    // this matches plain <style> or <style scoped>
+    {
+      use: [
+        'vue-style-loader',
+        'css-loader'
+      ]
+    }
+  ]
+}
+```
+
+## Using with Pre-Processors
+
+CSS Modules can be used along with other pre-processors:
+
+``` js
+// webpack.config.js -> module.rules
+{
+  test: /\.scss$/,
+  use: [
+    'vue-style-loader',
+    {
+      loader: 'css-loader',
+      options: { modules: true }
+    },
+    'sass-loader'
+  ]
+}
+```
+
+## Custom Inject Name
 
 You can have more than one `<style>` tags in a single `*.vue` component. To avoid injected styles to overwrite each other, you can customize the name of the injected computed property by giving the `module` attribute a value:
 
@@ -72,35 +151,4 @@ You can have more than one `<style>` tags in a single `*.vue` component. To avoi
 <style module="b">
   /* identifiers injected as b */
 </style>
-```
-
-### Configuring `css-loader` Query
-
-CSS Modules are processed via [css-loader](https://github.com/webpack/css-loader). With `<style module>`, the default query used for `css-loader` is:
-
-``` js
-{
-  modules: true,
-  importLoaders: 1,
-  localIdentName: '[hash:base64]'
-}
-```
-
-You can use vue-loader's `cssModules` option to provide additional query options to `css-loader`:
-
-``` js
-module: {
-  rules: [
-    {
-      test: '\.vue$',
-      loader: 'vue-loader',
-      options: {
-        cssModules: {
-          localIdentName: '[path][name]---[local]---[hash:base64:5]',
-          camelCase: true
-        }
-      }
-    }
-  ]
-}
 ```

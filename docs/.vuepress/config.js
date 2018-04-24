@@ -27,15 +27,14 @@ module.exports = {
     sidebar: [
       '/',
       '/guide/',
-      '/guide/pre-processors',
       '/guide/asset-url',
+      '/guide/pre-processors',
       '/guide/scoped-css',
       '/guide/css-modules',
-      '/guide/postcss',
       '/guide/hot-reload',
       '/guide/functional',
-      '/guide/extract-css',
       '/guide/custom-blocks',
+      '/guide/extract-css',
       '/guide/linting',
       '/guide/testing'
     ]

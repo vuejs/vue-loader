@@ -1,14 +1,13 @@
 # Linting
 
-You may have been wondering how do you lint your code inside `*.vue` files, since they are not JavaScript. We will assume you are using [ESLint](https://eslint.org/) (if you are not, you should!).
-
-You will also need the official [eslint-plugin-vue](https://github.com/vuejs/eslint-plugin-vue) which supports linting both the template and script parts of Vue files.
+The official [eslint-plugin-vue](https://github.com/vuejs/eslint-plugin-vue) supports linting both the template and script parts of Vue single file components.
 
 Make sure to use the plugin's included config in your ESLint config:
 
-``` json
-{
-  "extends": [
+``` js
+// .eslintrc.js
+module.exports = {
+  extends: [
     "plugin:vue/essential"
   ]
 }
@@ -23,7 +22,7 @@ eslint --ext js,vue MyComponent.vue
 Another option is using [eslint-loader](https://github.com/MoOx/eslint-loader) so that your `*.vue` files are automatically linted on save during development:
 
 ``` bash
-npm install eslint eslint-loader --save-dev
+npm install -D eslint eslint-loader
 ```
 
 Make sure it's applied as a pre-loader:
