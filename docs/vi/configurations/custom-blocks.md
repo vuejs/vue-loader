@@ -1,8 +1,8 @@
-# Custom Blocks
+# Các khối tùy biến
 
-> Requires 10.2.0+
+> Yêu cầu phiên bản 10.2.0+
 
-You can define custom language blocks inside thuộc tính `*.vue` files. The content of a custom block will be processed by the loaders specified in the `loaders` object of `vue-loader` options and then required by the component module. The configuration is similar to what is described in [Cấu hình Loader nâng cao](../configurations/advanced.md), except the matching uses the tag name instead of the `lang`.
+Bạn có thể định nghĩa các khối ngôn ngữ tùy biến bên trong các tệp `*.vue`. Mã nguồn bên trong các khối ngôn ngữ tùy biến sẽ được xử lý bởi các loader được chỉ định bên trong đối tượng `loaders` của tùy chọn `vue-loader` and then required by the component module. The configuration is similar to what is described in [Cấu hình Loader nâng cao](../configurations/advanced.md), except the matching uses the tag name instead of the `lang`.
 
 If a matching loader is found for a custom block, it will be processed; otherwise the custom block will simply be ignored. Additionally, if the found loader returns a function, that function will be called with the component of the `*.vue` file as a parameter.
 

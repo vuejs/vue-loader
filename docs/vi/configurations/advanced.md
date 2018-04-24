@@ -22,9 +22,9 @@ module.exports = {
         test: /\.vue$/,
         loader: 'vue-loader',
         options: {
-          // `loaders` will overwrite the default loaders.
-          // The following config will cause all `<script>` tags without `lang`
-          // attribute to be loaded with `coffee-loader`
+          // `loaders` sẽ ghi đè lên các loader mặc định.
+          // Cấu hình sau sẽ cho phép các khối `<script>` không có thuộc tính `lang`
+          // được xử lý bởi loader tương ứng, ví dụ `coffee-loader`
           loaders: {
             js: 'coffee-loader'
           },
