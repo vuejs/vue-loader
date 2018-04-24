@@ -2,19 +2,19 @@
 
 > Yêu cầu phiên bản 10.2.0+
 
-Bạn có thể định nghĩa các khối ngôn ngữ tùy biến bên trong các tệp `*.vue`. Mã nguồn bên trong các khối ngôn ngữ tùy biến sẽ được xử lý bởi các loader được chỉ định bên trong đối tượng `loaders` của tùy chọn `vue-loader` and then required by the component module. The configuration is similar to what is described in [Cấu hình Loader nâng cao](../configurations/advanced.md), except the matching uses the tag name instead of the `lang`.
+Bạn có thể định nghĩa các khối ngôn ngữ tùy biến bên trong các tệp `*.vue`. Mã nguồn bên trong các khối ngôn ngữ tùy biến sẽ được xử lý bởi các loader được chỉ định bên trong đối tượng `loaders` của tùy chọn `vue-loader` và được sử dụng bởi component module. Cách thức cấu hình tương tự [Cấu hình Loader nâng cao](../configurations/advanced.md), trừ việc the matching uses the tag name instead of the `lang`.
 
-If a matching loader is found for a custom block, it will be processed; otherwise the custom block will simply be ignored. Additionally, if the found loader returns a function, that function will be called with the component of the `*.vue` file as a parameter.
+Nếu loader tương ứng với một khối tùy biến được tìm thấy, nội dung khối tùy biến sẽ được xử lý bởi loader đó; ngược lại khối tùy biến sẽ được bỏ qua. Thêm vào đó, nếu loader được tìm thấy trả về một hàm, hàm này sẽ được gọi với tham số là đối tượng component của tệp `*.vue`.
 
 ## Single docs file example
 
-Here's an example of extracting all `<docs>` custom blocks into a single docs file:
+Ví dụ dưới đây sẽ bóc tách toàn bộ mã nguồn các khối `<docs>` thành một tệp tài liệu đơn:
 
 #### component.vue
 
 ``` html
 <docs>
-## This is an Example component.
+## Đây là một component ví dụ.
 </docs>
 
 <template>
@@ -25,7 +25,7 @@ Here's an example of extracting all `<docs>` custom blocks into a single docs fi
 export default {
   data () {
     return {
-      msg: 'Hello from Component A!'
+      msg: 'Component A xin chào!'
     }
   }
 }
@@ -51,7 +51,7 @@ module.exports = {
         loader: 'vue-loader',
         options: {
           loaders: {
-            // extract all <docs> content as raw text
+            // bóc tách toàn bộ nội dung bên trong <docs> thành các đoạn tài liệu thô
             'docs': ExtractTextPlugin.extract('raw-loader'),
           }
         }
@@ -59,7 +59,7 @@ module.exports = {
     ]
   },
   plugins: [
-    // output all docs into a single file
+    // Lưu toàn bộ tài liệu bóc tách được thành tệp `docs.md`
     new ExtractTextPlugin('docs.md')
   ]
 }
@@ -67,13 +67,13 @@ module.exports = {
 
 ## Runtime available docs
 
-> Requires 11.3.0+
+> Yêu cầu phiên bản 11.3.0+
 
-Here's an example of injecting the `<docs>` custom blocks into the component so that it's available during runtime.
+Ví dụ này sẽ chèn nội dung bên trong khối `<docs>` vào component, cho phép component sử dụng trong quá trình thực thi.
 
 #### docs-loader.js
 
-In order for the custom block content to be injected, we'll need a custom loader:
+Chúng ta cần tự viết một loader trong đó cho phép nội dung bên trong khối `docs` được chèn vào bên trong ngữ cảnh của component:
 
 ``` js
 module.exports = function (source, map) {
@@ -85,7 +85,7 @@ module.exports = function (source, map) {
 
 #### webpack.config.js
 
-Now we'll configure webpack to use our custom loader for `<docs>` custom blocks.
+Bây giờ chúng ta sẽ cấu hình webpack để sử dụng loader phía trên cho khối `docs`.
 
 ``` js
 const docsLoader = require.resolve('./custom-loaders/docs-loader.js')
@@ -109,7 +109,7 @@ module.exports = {
 
 #### component.vue
 
-We are now able to access the `<docs>` block's content of imported components during runtime.
+Ngay bây giờ chúng ta có thể truy cập vào nội dung của khối `<docs>` bên trong những component đã được import trong quá trình thực thi.
 
 ``` html
 <template>
