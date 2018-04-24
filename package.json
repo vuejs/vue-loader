@@ -9,6 +9,7 @@
     "lint": "eslint lib test --fix",
     "build": "webpack --config example/webpack.config.js --hide-modules",
     "dev": "webpack-dev-server --config example/webpack.config.js --inline --hot",
+    "docs": "vuepress dev docs",
     "prepublishOnly": "conventional-changelog -p angular -r 2 -i CHANGELOG.md -s"
   },
   "author": "Evan You",
@@ -72,6 +73,8 @@
     "vue": "^2.5.16",
     "vue-server-renderer": "^2.5.16",
     "vue-template-compiler": "^2.5.16",
+    "vuepress": "^0.8.4",
+    "vuepress-theme-vue": "^1.0.0",
     "webpack": "^4.1.0",
     "webpack-cli": "^2.0.10",
     "webpack-dev-server": "^3.1.1",

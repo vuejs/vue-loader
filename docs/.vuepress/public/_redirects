@@ -1,0 +1,12 @@
+# redirect v14 urls to root
+/en/start/*          /:splat
+/en/features/*       /:splat
+/en/configurations/* /:splat
+/en/workflow/*       /:splat
+
+# redirect any other langs to legacy
+/zh-cn/*             https://vue-loader-v14.vuejs.org/zh-cn/:splat
+/ja/*                https://vue-loader-v14.vuejs.org/ja/:splat
+/kr/*                https://vue-loader-v14.vuejs.org/kr/:splat
+/ru/*                https://vue-loader-v14.vuejs.org/ru/:splat
+/pt_BR/*             https://vue-loader-v14.vuejs.org/pt_BR/:splat
