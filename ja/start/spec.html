@@ -1,0 +1,835 @@
+
+<!DOCTYPE HTML>
+<html lang="ja" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Vue Component の仕様 · vue-loader</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-theme-vuejs/vue.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="setup.html" />
+    
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="検索すると入力" />
+</div>
+
+            
+                <nav role="navigation">
+                
+<script async type="text/javascript" src="//cdn.carbonads.com/carbon.js?zoneid=1673&serve=C6AILKT&placement=vuejs" id="_carbonads_js"></script>
+
+
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" >
+            
+                <span>
+            
+                    
+                    入門
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter active" data-level="1.2.1" data-path="spec.html">
+            
+                <a href="spec.html">
+            
+                    
+                    Vue Component の仕様
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="setup.html">
+            
+                <a href="setup.html">
+            
+                    
+                    プロジェクトのセットアップ
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" >
+            
+                <span>
+            
+                    
+                    機能
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../features/es2015.html">
+            
+                <a href="../features/es2015.html">
+            
+                    
+                    ES2015
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../features/scoped-css.html">
+            
+                <a href="../features/scoped-css.html">
+            
+                    
+                    スコープ付き CSS
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="../features/css-modules.html">
+            
+                <a href="../features/css-modules.html">
+            
+                    
+                    CSS モジュール
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4" data-path="../features/postcss.html">
+            
+                <a href="../features/postcss.html">
+            
+                    
+                    PostCSS
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5" data-path="../features/hot-reload.html">
+            
+                <a href="../features/hot-reload.html">
+            
+                    
+                    ホットリロード
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.6" data-path="../features/functional.html">
+            
+                <a href="../features/functional.html">
+            
+                    
+                    関数型コンポーネント
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" >
+            
+                <span>
+            
+                    
+                    構成
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../configurations/pre-processors.html">
+            
+                <a href="../configurations/pre-processors.html">
+            
+                    
+                    プリプロセッサの使用
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../configurations/asset-url.html">
+            
+                <a href="../configurations/asset-url.html">
+            
+                    
+                    アセット URL ハンドリング
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="../configurations/advanced.html">
+            
+                <a href="../configurations/advanced.html">
+            
+                    
+                    高度な loader の設定
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4" data-path="../configurations/extract-css.html">
+            
+                <a href="../configurations/extract-css.html">
+            
+                    
+                    CSS を単一のファイルに抽出する
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5" data-path="../configurations/custom-blocks.html">
+            
+                <a href="../configurations/custom-blocks.html">
+            
+                    
+                    カスタムブロック
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" >
+            
+                <span>
+            
+                    
+                    ワークフロー
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../workflow/production.html">
+            
+                <a href="../workflow/production.html">
+            
+                    
+                    プロダクションビルド
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="../workflow/linting.html">
+            
+                <a href="../workflow/linting.html">
+            
+                    
+                    リント
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3" data-path="../workflow/testing.html">
+            
+                <a href="../workflow/testing.html">
+            
+                    
+                    テスト
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../options.html">
+            
+                <a href="../options.html">
+            
+                    
+                    オプションリファレンス
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="../options.html">
+            
+                <a href="../options.html#loaders">
+            
+                    
+                    loaders
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2" data-path="../options.html">
+            
+                <a href="../options.html#preloaders">
+            
+                    
+                    preLoaders
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.3" data-path="../options.html">
+            
+                <a href="../options.html#postloaders">
+            
+                    
+                    postLoaders
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.4" data-path="../options.html">
+            
+                <a href="../options.html#postcss">
+            
+                    
+                    postcss
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.5" data-path="../options.html">
+            
+                <a href="../options.html#postcssconfig">
+            
+                    
+                    postcss.config
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.6" data-path="../options.html">
+            
+                <a href="../options.html#postcssuseconfigfile">
+            
+                    
+                    postcss.useConfigFile
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.7" data-path="../options.html">
+            
+                <a href="../options.html#postcsscascade">
+            
+                    
+                    postcss.cascade
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.8" data-path="../options.html">
+            
+                <a href="../options.html#csssourcemap">
+            
+                    
+                    cssSourceMap
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.9" data-path="../options.html">
+            
+                <a href="../options.html#esmodule">
+            
+                    
+                    esModule
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.10" data-path="../options.html">
+            
+                <a href="../options.html#preservewhitespace">
+            
+                    
+                    preserveWhitespace
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.11" data-path="../options.html">
+            
+                <a href="../options.html#compilermodules">
+            
+                    
+                    compilerModules
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.12" data-path="../options.html">
+            
+                <a href="../options.html#compilerdirectives">
+            
+                    
+                    compilerDirectives
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.13" data-path="../options.html">
+            
+                <a href="../options.html#transformtorequire">
+            
+                    
+                    transformToRequire
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.14" data-path="../options.html">
+            
+                <a href="../options.html#buble">
+            
+                    
+                    buble
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.15" data-path="../options.html">
+            
+                <a href="../options.html#extractcss">
+            
+                    
+                    extractCSS
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.16" data-path="../options.html">
+            
+                <a href="../options.html#optimizessr">
+            
+                    
+                    optimizeSSR
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            GitBookで公開 
+        </a>
+    </li>
+</ul>
+
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+  
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >Vue Component の仕様</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="vue-component-&#x306E;&#x4ED5;&#x69D8;">Vue Component &#x306E;&#x4ED5;&#x69D8;</h1>
+<p><code>*.vue</code> &#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x306F; HTML &#x306E;&#x3088;&#x3046;&#x306A;&#x69CB;&#x6587;&#x3092;&#x4F7F;&#x7528;&#x3057;&#x3066; Vue &#x30B3;&#x30F3;&#x30DD;&#x30FC;&#x30CD;&#x30F3;&#x30C8;&#x3092;&#x8A18;&#x8FF0;&#x3059;&#x308B;&#x30AB;&#x30B9;&#x30BF;&#x30E0;&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x30D5;&#x30A9;&#x30FC;&#x30DE;&#x30C3;&#x30C8;&#x3067;&#x3059;&#x3002;&#x5404; <code>*.vue</code> &#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x306F; <code>&lt;template&gt;</code>&#x3001;<code>&lt;script&gt;</code>&#x3001;<code>&lt;style&gt;</code> &#x306E;&#x4E09;&#x3064;&#x306E;&#x30C8;&#x30C3;&#x30D7;&#x30EC;&#x30D9;&#x30EB;&#x8A00;&#x8A9E;&#x306E;&#x30D6;&#x30ED;&#x30C3;&#x30AF;&#x3067;&#x69CB;&#x6210;&#x3055;&#x308C;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;</p>
+<pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">template</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;example&quot;</span>&gt;</span>{{ msg }}<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span>
+
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript">
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> {
+  data () {
+    <span class="hljs-keyword">return</span> {
+      msg: <span class="hljs-string">&apos;Hello world!&apos;</span>
+    }
+  }
+}
+</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+
+<span class="hljs-tag">&lt;<span class="hljs-name">style</span>&gt;</span><span class="css">
+<span class="hljs-selector-class">.example</span> {
+  <span class="hljs-attribute">color</span>: red;
+}
+</span><span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span>
+
+<span class="hljs-tag">&lt;<span class="hljs-name">custom1</span>&gt;</span>
+  &#x4F8B;&#x3048;&#x3070;&#x30B3;&#x30F3;&#x30DD;&#x30FC;&#x30CD;&#x30F3;&#x30C8;&#x306E;&#x30C9;&#x30AD;&#x30E5;&#x30E1;&#x30F3;&#x30C8;&#x3092;&#x66F8;&#x304F;&#x3053;&#x3068;&#x304C;&#x51FA;&#x6765;&#x307E;&#x3059;
+<span class="hljs-tag">&lt;/<span class="hljs-name">custom1</span>&gt;</span>
+</code></pre>
+<p><code>vue-loader</code> &#x306F;&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x3092;&#x89E3;&#x6790;&#x3057;&#x3001;&#x305D;&#x308C;&#x305E;&#x308C;&#x306E;&#x8A00;&#x8A9E;&#x30D6;&#x30ED;&#x30C3;&#x30AF;&#x3092;&#x5FC5;&#x8981;&#x306B;&#x5FDC;&#x3058;&#x3066;&#x4ED6;&#x306E; loader &#x3092;&#x901A;&#x3057;&#x3001;&#x6700;&#x7D42;&#x7684;&#x306B; <code>module.exports</code> &#x304C; Vue.js &#x306E;&#x30B3;&#x30F3;&#x30DD;&#x30FC;&#x30CD;&#x30F3;&#x30C8;&#x30AA;&#x30D7;&#x30B7;&#x30E7;&#x30F3;&#x30AA;&#x30D6;&#x30B8;&#x30A7;&#x30AF;&#x30C8;&#x306E; CommonJS &#x30E2;&#x30B8;&#x30E5;&#x30FC;&#x30EB;&#x306B;&#x5909;&#x63DB;&#x3057;&#x307E;&#x3059;&#x3002;</p>
+<p><code>vue-loader</code> &#x306F; CSS &#x30D7;&#x30EA;&#x30D7;&#x30ED;&#x30BB;&#x30C3;&#x30B5;&#x3084; HTML &#x306B;&#x30B3;&#x30F3;&#x30D1;&#x30A4;&#x30EB;&#x3059;&#x308B;&#x30C6;&#x30F3;&#x30D7;&#x30EC;&#x30FC;&#x30C8;&#x8A00;&#x8A9E;&#x3068;&#x3044;&#x3063;&#x305F;&#x3001;&#x30C7;&#x30D5;&#x30A9;&#x30EB;&#x30C8;&#x3067;&#x306A;&#x3044;&#x8A00;&#x8A9E;&#x3092;&#x8A00;&#x8A9E;&#x30D6;&#x30ED;&#x30C3;&#x30AF;&#x306E; <code>lang</code> &#x5C5E;&#x6027;&#x3092;&#x4F7F;&#x7528;&#x3059;&#x308B;&#x3053;&#x3068;&#x3067;&#x30B5;&#x30DD;&#x30FC;&#x30C8;&#x3057;&#x307E;&#x3059;&#x3002;&#x4F8B;&#x3048;&#x3070;&#x30B3;&#x30F3;&#x30DD;&#x30FC;&#x30CD;&#x30F3;&#x30C8;&#x306E;&#x30B9;&#x30BF;&#x30A4;&#x30EB;&#x306B; Sass &#x3092;&#x4F7F;&#x7528;&#x3059;&#x308B;&#x3053;&#x3068;&#x304C;&#x51FA;&#x6765;&#x307E;&#x3059;&#x3002;</p>
+<pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">style</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">&quot;sass&quot;</span>&gt;</span><span class="css">
+  <span class="hljs-comment">/* Sass &#x3067;&#x66F8;&#x304D;&#x307E;&#x3059;! */</span>
+</span><span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span>
+</code></pre>
+<p>&#x8A73;&#x7D30;&#x306F; <a href="../configurations/pre-processors.html">&#x30D7;&#x30EA;&#x30D7;&#x30ED;&#x30BB;&#x30C3;&#x30B5;&#x306E;&#x4ED5;&#x69D8;</a> &#x3067;&#x78BA;&#x8A8D;&#x3059;&#x308B;&#x3053;&#x3068;&#x304C;&#x51FA;&#x6765;&#x307E;&#x3059;&#x3002;</p>
+<h3 id="&#x8A00;&#x8A9E;&#x30D6;&#x30ED;&#x30C3;&#x30AF;">&#x8A00;&#x8A9E;&#x30D6;&#x30ED;&#x30C3;&#x30AF;</h3>
+<h4 id="template"><code>&lt;template&gt;</code></h4>
+<ul>
+<li>&#x30C7;&#x30D5;&#x30A9;&#x30EB;&#x30C8;&#x306E;&#x8A00;&#x8A9E;&#x306F; <code>html</code></li>
+<li>&#x305D;&#x308C;&#x305E;&#x308C;&#x306E; <code>*.vue</code> &#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x306F;&#x6700;&#x5927;&#x3067;&#x4E00;&#x3064;&#x306E; <code>&lt;template&gt;</code> &#x30D6;&#x30ED;&#x30C3;&#x30AF;&#x3092;&#x542B;&#x307F;&#x307E;&#x3059;</li>
+<li>&#x5185;&#x5BB9;&#x306F;&#x6587;&#x5B57;&#x5217;&#x306B;&#x5C55;&#x958B;&#x3055;&#x308C;&#x3001;&#x30B3;&#x30F3;&#x30D1;&#x30A4;&#x30EB;&#x3055;&#x308C;&#x305F; Vue &#x30B3;&#x30F3;&#x30DD;&#x30FC;&#x30CD;&#x30F3;&#x30C8;&#x306E; <code>template</code> &#x30AA;&#x30D7;&#x30B7;&#x30E7;&#x30F3;&#x3067;&#x4F7F;&#x7528;&#x3055;&#x308C;&#x307E;&#x3059;</li>
+</ul>
+<h4 id="script"><code>&lt;script&gt;</code></h4>
+<ul>
+<li>&#x30C7;&#x30D5;&#x30A9;&#x30EB;&#x30C8;&#x306E;&#x8A00;&#x8A9E;&#x306F; <code>js</code>&#xFF08;<code>babel-loader</code> &#x3084; <code>buble-loader</code> &#x304C;&#x691C;&#x51FA;&#x3055;&#x308C;&#x308B;&#x5834;&#x5408;&#x3001;&#x81EA;&#x52D5;&#x7684;&#x306B;ES2015&#x304C;&#x30B5;&#x30DD;&#x30FC;&#x30C8;&#x3055;&#x308C;&#x308B;&#xFF09;</li>
+<li>&#x305D;&#x308C;&#x305E;&#x308C;&#x306E; <code>*.vue</code> &#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x306F;&#x6700;&#x5927;&#x3067;&#x4E00;&#x3064;&#x306E; <code>&lt;script&gt;</code> &#x30D6;&#x30ED;&#x30C3;&#x30AF;&#x3092;&#x542B;&#x307F;&#x307E;&#x3059;</li>
+<li>&#x30B9;&#x30AF;&#x30EA;&#x30D7;&#x30C8;&#x306F; CommonJS &#x306E;&#x3088;&#x3046;&#x306B;&#x51E6;&#x7406;&#x3055;&#x308C;&#x307E;&#x3059;&#xFF08; webpack &#x7D4C;&#x7531;&#x3067;&#x30D0;&#x30F3;&#x30C9;&#x30EB;&#x3055;&#x308C;&#x305F;&#x901A;&#x5E38;&#x306E; <code>.js</code> &#x30E2;&#x30B8;&#x30E5;&#x30FC;&#x30EB;&#x3068;&#x540C;&#x3058;&#x3067;&#x3059;&#xFF09;&#x3002;&#x3064;&#x307E;&#x308A;&#x4ED6;&#x306E;&#x4F9D;&#x5B58;&#x95A2;&#x4FC2;&#x3092; <code>require()</code> &#x3059;&#x308B;&#x3053;&#x3068;&#x304C;&#x3067;&#x304D;&#x307E;&#x3059;&#x3002;&#x305D;&#x3057;&#x3066; ES2015 &#x304C;&#x30B5;&#x30DD;&#x30FC;&#x30C8;&#x3055;&#x308C;&#x3001;<code>import</code> &#x3068; <code>export</code> &#x69CB;&#x6587;&#x3092;&#x4F7F;&#x7528;&#x3059;&#x308B;&#x3053;&#x3068;&#x304C;&#x51FA;&#x6765;&#x307E;&#x3059;</li>
+<li>&#x30B9;&#x30AF;&#x30EA;&#x30D7;&#x30C8;&#x306F; Vue.js &#x30B3;&#x30F3;&#x30DD;&#x30FC;&#x30CD;&#x30F3;&#x30C8;&#x306E;&#x30AA;&#x30D7;&#x30B7;&#x30E7;&#x30F3;&#x30AA;&#x30D6;&#x30B8;&#x30A7;&#x30AF;&#x30C8;&#x3092;&#x30A8;&#x30AF;&#x30B9;&#x30DD;&#x30FC;&#x30C8;&#x3059;&#x308B;&#x5FC5;&#x8981;&#x304C;&#x3042;&#x308A;&#x307E;&#x3059;&#x3002; <code>Vue.extend()</code> &#x306B;&#x3088;&#x3063;&#x3066;&#x62E1;&#x5F35;&#x3055;&#x308C;&#x305F;&#x30B3;&#x30F3;&#x30B9;&#x30C8;&#x30E9;&#x30AF;&#x30BF;&#x3082;&#x30A8;&#x30AF;&#x30B9;&#x30DD;&#x30FC;&#x30C8;&#x3059;&#x308B;&#x3053;&#x3068;&#x304C;&#x53EF;&#x80FD;&#x3067;&#x3059;&#x304C;&#x3001;&#x30D7;&#x30EC;&#x30FC;&#x30F3;&#x306A;&#x30AA;&#x30D6;&#x30B8;&#x30A7;&#x30AF;&#x30C8;&#x304C;&#x597D;&#x307E;&#x3057;&#x3044;&#x3067;&#x3059;</li>
+</ul>
+<h4 id="style"><code>&lt;style&gt;</code></h4>
+<ul>
+<li>&#x30C7;&#x30D5;&#x30A9;&#x30EB;&#x30C8;&#x306E;&#x8A00;&#x8A9E;&#x306F; <code>css</code></li>
+<li>&#x8907;&#x6570;&#x306E; <code>&lt;style&gt;</code> &#x30BF;&#x30B0;&#x306F;&#x5358;&#x4E00;&#x306E; <code>*.vue</code> &#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x3067;&#x30B5;&#x30DD;&#x30FC;&#x30C8;&#x3055;&#x308C;&#x307E;&#x3059;</li>
+<li><code>&lt;style&gt;</code> &#x30BF;&#x30B0;&#x306F; <code>scoped</code> &#x304B; <code>module</code> &#xFF08;&#x8A73;&#x3057;&#x304F;&#x306F; <a href="../features/scoped-css.html">Scoped CSS</a> &#x3068; <a href="../features/css-modules.html">CSS Modules</a> &#x3092;&#x307F;&#x3066;&#x304F;&#x3060;&#x3055;&#x3044;&#xFF09;&#x3092;&#x4F7F;&#x7528;&#x3057;&#x3066;&#x30B3;&#x30F3;&#x30DD;&#x30FC;&#x30CD;&#x30F3;&#x30C8;&#x306B;&#x30B9;&#x30BF;&#x30A4;&#x30EB;&#x3092;&#x30AB;&#x30D7;&#x30BB;&#x30EB;&#x5316;&#x3059;&#x308B;&#x4E8B;&#x304C;&#x51FA;&#x6765;&#x307E;&#x3059;&#x3002;&#x7570;&#x306A;&#x308B;&#x30AB;&#x30D7;&#x30BB;&#x30EB;&#x30E2;&#x30FC;&#x30C9;&#x3092;&#x3082;&#x3064;&#x8907;&#x6570;&#x306E; <code>&lt;style&gt;</code> &#x30BF;&#x30B0;&#x306F;&#x540C;&#x3058;&#x30B3;&#x30F3;&#x30DD;&#x30FC;&#x30CD;&#x30F3;&#x30C8;&#x5185;&#x3067;&#x6DF7;&#x5728;&#x3055;&#x305B;&#x308B;&#x3053;&#x3068;&#x304C;&#x51FA;&#x6765;&#x307E;&#x3059;</li>
+<li>&#x30C7;&#x30D5;&#x30A9;&#x30EB;&#x30C8;&#x3067;&#x306F;&#x30B3;&#x30F3;&#x30C6;&#x30F3;&#x30C4;&#x306F; <code>style-loader</code> &#x3092;&#x4F7F;&#x7528;&#x3057;&#x3066;&#x5B9F;&#x969B;&#x306E; <code>&lt;style&gt;</code> &#x30BF;&#x30B0;&#x3068;&#x3057;&#x3066;&#x62BD;&#x51FA;&#x3055;&#x308C;&#x3001;&#x30C9;&#x30AD;&#x30E5;&#x30E1;&#x30F3;&#x30C8;&#x306E; <code>&lt;head&gt;</code> &#x306B;&#x52D5;&#x7684;&#x306B;&#x633F;&#x5165;&#x3055;&#x308C;&#x307E;&#x3059;&#x3002;&#x307E;&#x305F;&#x3001;<a href="../configurations/extract-css.html">&#x3059;&#x3079;&#x3066;&#x306E;&#x30B3;&#x30F3;&#x30DD;&#x30FC;&#x30CD;&#x30F3;&#x30C8;&#x306E;&#x3059;&#x3079;&#x3066;&#x306E;&#x30B9;&#x30BF;&#x30A4;&#x30EB;&#x304C;&#x5358;&#x4E00;&#x306E;CSS&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x306B;&#x62BD;&#x51FA;&#x3055;&#x308C;&#x308B;&#x3088;&#x3046;&#x306B;webpack&#x3092;&#x8A2D;&#x5B9A;&#x3059;&#x308B;</a>&#x3053;&#x3068;&#x3082;&#x51FA;&#x6765;&#x307E;&#x3059;</li>
+</ul>
+<h3 id="&#x30AB;&#x30B9;&#x30BF;&#x30E0;&#x30D6;&#x30ED;&#x30C3;&#x30AF;">&#x30AB;&#x30B9;&#x30BF;&#x30E0;&#x30D6;&#x30ED;&#x30C3;&#x30AF;</h3>
+<blockquote>
+<p>vue-loader 10.2.0+ &#x3067;&#x306E;&#x307F;&#x30B5;&#x30DD;&#x30FC;&#x30C8;&#x3055;&#x308C;&#x307E;&#x3059;</p>
+</blockquote>
+<p>&#x4F8B;&#x3048;&#x3070; <code>&lt;docs&gt;</code> &#x30D6;&#x30ED;&#x30C3;&#x30AF;&#x306E;&#x3088;&#x3046;&#x306B;&#x3001;&#x30D7;&#x30ED;&#x30B8;&#x30A7;&#x30AF;&#x30C8;&#x306E;&#x7279;&#x5225;&#x306A;&#x5FC5;&#x7528;&#x306B;&#x5FDC;&#x3058;&#x3066; <code>*.vue</code> &#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x306B; &#x30AB;&#x30B9;&#x30BF;&#x30E0;&#x30D6;&#x30ED;&#x30C3;&#x30AF;&#x3092;&#x8FFD;&#x52A0;&#x3059;&#x308B;&#x3053;&#x3068;&#x304C;&#x51FA;&#x6765;&#x307E;&#x3059;&#x3002; <code>vue-loader</code>&#x306F;&#x30BF;&#x30B0;&#x540D;&#x3092;&#x4F7F;&#x7528;&#x3057;&#x3066;&#x30BB;&#x30AF;&#x30B7;&#x30E7;&#x30F3;&#x306E;&#x5185;&#x5BB9;&#x306B;&#x9069;&#x7528;&#x3055;&#x308C;&#x308B;&#x3079;&#x304D; webpack loader &#x3092;&#x691C;&#x7D22;&#x3057;&#x307E;&#x3059;&#x3002;webpack loader &#x306F;&#x3001;<code>vue-loader</code> &#x30AA;&#x30D7;&#x30B7;&#x30E7;&#x30F3;&#x306E; <code>loaders</code> &#x30BB;&#x30AF;&#x30B7;&#x30E7;&#x30F3;&#x3067;&#x6307;&#x5B9A;&#x3059;&#x308B;&#x5FC5;&#x8981;&#x304C;&#x3042;&#x308A;&#x307E;&#x3059;&#x3002;</p>
+<p>&#x3053;&#x306E;&#x30E2;&#x30FC;&#x30C9;&#x306E;&#x8A73;&#x7D30;&#x306B;&#x3064;&#x3044;&#x3066;&#x306F;&#x3001;<a href="../configurations/custom-blocks.html">&#x30AB;&#x30B9;&#x30BF;&#x30E0;&#x30D6;&#x30ED;&#x30C3;&#x30AF;</a>&#x3092;&#x53C2;&#x7167;&#x3057;&#x3066;&#x304F;&#x3060;&#x3055;&#x3044;&#x3002;</p>
+<h3 id="&#x30BD;&#x30FC;&#x30B9;&#x306E;&#x30A4;&#x30F3;&#x30DD;&#x30FC;&#x30C8;">&#x30BD;&#x30FC;&#x30B9;&#x306E;&#x30A4;&#x30F3;&#x30DD;&#x30FC;&#x30C8;</h3>
+<p>&#x3082;&#x3057; <code>*.vue</code> &#x30B3;&#x30F3;&#x30DD;&#x30FC;&#x30CD;&#x30F3;&#x30C8;&#x3092;&#x8907;&#x6570;&#x306E;&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x306B;&#x5206;&#x5272;&#x3057;&#x305F;&#x3044;&#x5834;&#x5408;&#x306F;&#x3001;<code>src</code> &#x5C5E;&#x6027;&#x3092;&#x4F7F;&#x3063;&#x3066;&#x8A00;&#x8A9E;&#x30D6;&#x30ED;&#x30C3;&#x30AF;&#x7528;&#x306E;&#x5916;&#x90E8;&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x3092;&#x30A4;&#x30F3;&#x30DD;&#x30FC;&#x30C8;&#x3059;&#x308B;&#x3053;&#x3068;&#x304C;&#x51FA;&#x6765;&#x307E;&#x3059;:</p>
+<pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">template</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;./template.html&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">style</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;./style.css&quot;</span>&gt;</span><span class="undefined"></span><span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;./script.js&quot;</span>&gt;</span><span class="undefined"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+</code></pre>
+<p><code>src</code> &#x306E;&#x30A4;&#x30F3;&#x30DD;&#x30FC;&#x30C8;&#x306F; CommonJS &#x306E; <code>require()</code> &#x547C;&#x3073;&#x51FA;&#x3057;&#x3068;&#x540C;&#x3058;&#x30D1;&#x30B9;&#x89E3;&#x6C7A;&#x898F;&#x5247;&#x306B;&#x5F93;&#x3046;&#x3053;&#x3068;&#x306B;&#x6CE8;&#x610F;&#x3057;&#x3066;&#x304F;&#x3060;&#x3055;&#x3044;&#x3002;&#x76F8;&#x5BFE;&#x30D1;&#x30B9;&#x306F; <code>./</code> &#x3067;&#x59CB;&#x3081;&#x308B;&#x5FC5;&#x8981;&#x304C;&#x3042;&#x308A;&#x3001;&#x30A4;&#x30F3;&#x30B9;&#x30C8;&#x30FC;&#x30EB;&#x3055;&#x308C;&#x305F; NPM &#x30D1;&#x30C3;&#x30B1;&#x30FC;&#x30B8;&#x304B;&#x3089;&#x76F4;&#x63A5;&#x30EA;&#x30BD;&#x30FC;&#x30B9;&#x3092;&#x30A4;&#x30F3;&#x30DD;&#x30FC;&#x30C8;&#x3059;&#x308B;&#x3053;&#x3068;&#x304C;&#x3067;&#x304D;&#x307E;&#x3059;:</p>
+<pre><code class="lang-html"><span class="hljs-comment">&lt;!-- &#x30A4;&#x30F3;&#x30B9;&#x30C8;&#x30FC;&#x30EB;&#x3055;&#x308C;&#x305F; &quot;todomvc-app-css&quot; npm &#x30D1;&#x30C3;&#x30B1;&#x30FC;&#x30B8; &#x304B;&#x3089;&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x3092;&#x30A4;&#x30F3;&#x30DD;&#x30FC;&#x30C8;&#x3057;&#x307E;&#x3059;--&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">style</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;todomvc-app-css/index.css&quot;</span>&gt;</span><span class="undefined">
+</span></code></pre>
+<p><code>src</code> &#x306B;&#x3088;&#x308B;&#x30A4;&#x30F3;&#x30DD;&#x30FC;&#x30C8;&#x306F;&#x30AB;&#x30B9;&#x30BF;&#x30E0;&#x30D6;&#x30ED;&#x30C3;&#x30AF;&#x3067;&#x3082;&#x52D5;&#x4F5C;&#x3057;&#x307E;&#x3059;&#x3001;&#x4F8B;:</p>
+<pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">unit-test</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;./unit-test.js&quot;</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">unit-test</span>&gt;</span>
+</code></pre>
+<h3 id="&#x30B7;&#x30F3;&#x30BF;&#x30C3;&#x30AF;&#x30B9;&#x30CF;&#x30A4;&#x30E9;&#x30A4;&#x30C8;">&#x30B7;&#x30F3;&#x30BF;&#x30C3;&#x30AF;&#x30B9;&#x30CF;&#x30A4;&#x30E9;&#x30A4;&#x30C8;</h3>
+<p>&#x73FE;&#x5728;&#x305D;&#x308C;&#x3089;&#x306F;&#x30B7;&#x30F3;&#x30BF;&#x30AF;&#x30B9;&#x30CF;&#x30A4;&#x30E9;&#x30A4;&#x30C8;&#x3092;&#x30B5;&#x30DD;&#x30FC;&#x30C8;&#x3057;&#x3066;&#x3044;&#x308B;&#x306E;&#x306F;&#x3001;<a href="https://github.com/vuejs/vue-syntax-highlight" target="_blank">Sublime Text</a>, <a href="https://atom.io/packages/language-vue" target="_blank">Atom</a>, <a href="https://github.com/posva/vim-vue" target="_blank">Vim</a>, <a href="https://github.com/AdamNiederer/vue-mode" target="_blank">Emacs</a>, <a href="https://marketplace.visualstudio.com/items/liuji-jim.vue" target="_blank">Visual Studio Code</a>, <a href="https://github.com/pandao/brackets-vue" target="_blank">Brackets</a>, <a href="https://plugins.jetbrains.com/plugin/8057" target="_blank">JetBrains products</a> (WebStorm, PhpStorm, etc). &#x4ED6;&#x306E;&#x30A8;&#x30C7;&#x30A3;&#x30BF;/IDE&#x3078;&#x306E;&#x30B3;&#x30F3;&#x30C8;&#x30EA;&#x30D3;&#x30E5;&#x30FC;&#x30C8;&#x306F;&#x9AD8;&#x304F;&#x8A55;&#x4FA1;&#x3055;&#x308C;&#x307E;&#x3059;&#xFF01;&#x3082;&#x3057; Vue &#x30B3;&#x30F3;&#x30DD;&#x30FC;&#x30CD;&#x30F3;&#x30C8;&#x5185;&#x3067;&#x30D7;&#x30EA;&#x30D7;&#x30ED;&#x30BB;&#x30C3;&#x30B5;&#x3092;&#x4F7F;&#x7528;&#x3057;&#x3066;&#x3044;&#x306A;&#x3044;&#x5834;&#x5408;&#x306F;&#x3001;&#x30A8;&#x30C7;&#x30A3;&#x30BF;&#x3067; <code>*.vue</code> &#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x3092; HTML &#x3068;&#x3057;&#x3066;&#x6271;&#x3046;&#x3053;&#x3068;&#x304C;&#x51FA;&#x6765;&#x307E;&#x3059;&#x3002;</p>
+<h3 id="&#x30B3;&#x30E1;&#x30F3;&#x30C8;">&#x30B3;&#x30E1;&#x30F3;&#x30C8;</h3>
+<p>&#x305D;&#x308C;&#x305E;&#x308C;&#x306E;&#x30D6;&#x30ED;&#x30C3;&#x30AF;&#x5185;&#x3067;&#x305D;&#x308C;&#x305E;&#x308C;&#x306E;&#x8A00;&#x8A9E;&#x306E;&#x30B3;&#x30E1;&#x30F3;&#x30C8;&#x30B7;&#x30F3;&#x30BF;&#x30C3;&#x30AF;&#x30B9;&#x3092;&#x4F7F;&#x7528;&#x3059;&#x308B;&#x3053;&#x3068;&#x304C;&#x51FA;&#x6765;&#x308B; (HTML&#x3001;CSS&#x3001;JavaScript&#x3001;Jade&#x3001;etc) &#x3002;&#x6700;&#x4E0A;&#x90E8;&#x306E;&#x30B3;&#x30E1;&#x30F3;&#x30C8;&#x306F; HTML &#x30B3;&#x30E1;&#x30F3;&#x30C8;&#x30B7;&#x30F3;&#x30BF;&#x30C3;&#x30AF;&#x30B9;&#x3092;&#x4F7F;&#x7528;&#x3057;&#x3066;&#x304F;&#x3060;&#x3055;&#x3044;: <code>&lt;!-- &#x30B3;&#x30E1;&#x30F3;&#x30C8;&#x306F;&#x3053;&#x3061;&#x3089; --&gt;</code></p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+  <script src="//m.servedby-buysellads.com/monetization.js" type="text/javascript"></script>
+  <div class="bsa-cpc"></div>
+  <script>
+    (function(){
+      if(typeof _bsa !== 'undefined' && _bsa) {
+      _bsa.init('default', 'CKYD62QM', 'placement:vuejsorg', {
+        target: '.bsa-cpc',
+        align: 'horizontal',
+        disable_css: 'true'
+      });
+        }
+    })();
+  </script>
+
+            </div>
+
+            
+                
+                
+                <a href="setup.html" class="navigation navigation-next navigation-unique" aria-label="Next page: プロジェクトのセットアップ">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Vue Component の仕様","level":"1.2.1","depth":2,"next":{"title":"プロジェクトのセットアップ","level":"1.2.2","depth":2,"path":"start/setup.md","ref":"start/setup.md","articles":[]},"previous":{"title":"入門","level":"1.2","depth":1,"ref":"","articles":[{"title":"Vue Component の仕様","level":"1.2.1","depth":2,"path":"start/spec.md","ref":"start/spec.md","articles":[]},{"title":"プロジェクトのセットアップ","level":"1.2.2","depth":2,"path":"start/setup.md","ref":"start/setup.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["edit-link","theme-vuejs","-fontsettings","github"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"edit-link":{"label":"Edit This Page","base":"https://github.com/vuejs/vue-loader/tree/master/docs"},"github":{"url":"https://github.com/vuejs/vue-loader/"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-vuejs":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"vue-loader","language":"ja","links":{"sharing":{"facebook":false,"twitter":false}},"gitbook":"*"},"file":{"path":"start/spec.md","mtime":"2018-03-06T21:08:20.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-04-24T16:29:37.026Z"},"basePath":"..","book":{"language":"ja"}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../../gitbook/gitbook.js"></script>
+    <script src="../../gitbook/theme.js"></script>
+    
+        
+        <script src="../../gitbook/gitbook-plugin-edit-link/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-github/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+
+    </body>
+</html>
+

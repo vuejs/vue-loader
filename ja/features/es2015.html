@@ -1,0 +1,801 @@
+
+<!DOCTYPE HTML>
+<html lang="ja" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>ES2015 · vue-loader</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-theme-vuejs/vue.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="scoped-css.html" />
+    
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="検索すると入力" />
+</div>
+
+            
+                <nav role="navigation">
+                
+<script async type="text/javascript" src="//cdn.carbonads.com/carbon.js?zoneid=1673&serve=C6AILKT&placement=vuejs" id="_carbonads_js"></script>
+
+
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" >
+            
+                <span>
+            
+                    
+                    入門
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="../start/spec.html">
+            
+                <a href="../start/spec.html">
+            
+                    
+                    Vue Component の仕様
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="../start/setup.html">
+            
+                <a href="../start/setup.html">
+            
+                    
+                    プロジェクトのセットアップ
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" >
+            
+                <span>
+            
+                    
+                    機能
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter active" data-level="1.3.1" data-path="es2015.html">
+            
+                <a href="es2015.html">
+            
+                    
+                    ES2015
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="scoped-css.html">
+            
+                <a href="scoped-css.html">
+            
+                    
+                    スコープ付き CSS
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="css-modules.html">
+            
+                <a href="css-modules.html">
+            
+                    
+                    CSS モジュール
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4" data-path="postcss.html">
+            
+                <a href="postcss.html">
+            
+                    
+                    PostCSS
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5" data-path="hot-reload.html">
+            
+                <a href="hot-reload.html">
+            
+                    
+                    ホットリロード
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.6" data-path="functional.html">
+            
+                <a href="functional.html">
+            
+                    
+                    関数型コンポーネント
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" >
+            
+                <span>
+            
+                    
+                    構成
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../configurations/pre-processors.html">
+            
+                <a href="../configurations/pre-processors.html">
+            
+                    
+                    プリプロセッサの使用
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../configurations/asset-url.html">
+            
+                <a href="../configurations/asset-url.html">
+            
+                    
+                    アセット URL ハンドリング
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="../configurations/advanced.html">
+            
+                <a href="../configurations/advanced.html">
+            
+                    
+                    高度な loader の設定
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4" data-path="../configurations/extract-css.html">
+            
+                <a href="../configurations/extract-css.html">
+            
+                    
+                    CSS を単一のファイルに抽出する
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5" data-path="../configurations/custom-blocks.html">
+            
+                <a href="../configurations/custom-blocks.html">
+            
+                    
+                    カスタムブロック
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" >
+            
+                <span>
+            
+                    
+                    ワークフロー
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../workflow/production.html">
+            
+                <a href="../workflow/production.html">
+            
+                    
+                    プロダクションビルド
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="../workflow/linting.html">
+            
+                <a href="../workflow/linting.html">
+            
+                    
+                    リント
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3" data-path="../workflow/testing.html">
+            
+                <a href="../workflow/testing.html">
+            
+                    
+                    テスト
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../options.html">
+            
+                <a href="../options.html">
+            
+                    
+                    オプションリファレンス
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="../options.html">
+            
+                <a href="../options.html#loaders">
+            
+                    
+                    loaders
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2" data-path="../options.html">
+            
+                <a href="../options.html#preloaders">
+            
+                    
+                    preLoaders
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.3" data-path="../options.html">
+            
+                <a href="../options.html#postloaders">
+            
+                    
+                    postLoaders
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.4" data-path="../options.html">
+            
+                <a href="../options.html#postcss">
+            
+                    
+                    postcss
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.5" data-path="../options.html">
+            
+                <a href="../options.html#postcssconfig">
+            
+                    
+                    postcss.config
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.6" data-path="../options.html">
+            
+                <a href="../options.html#postcssuseconfigfile">
+            
+                    
+                    postcss.useConfigFile
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.7" data-path="../options.html">
+            
+                <a href="../options.html#postcsscascade">
+            
+                    
+                    postcss.cascade
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.8" data-path="../options.html">
+            
+                <a href="../options.html#csssourcemap">
+            
+                    
+                    cssSourceMap
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.9" data-path="../options.html">
+            
+                <a href="../options.html#esmodule">
+            
+                    
+                    esModule
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.10" data-path="../options.html">
+            
+                <a href="../options.html#preservewhitespace">
+            
+                    
+                    preserveWhitespace
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.11" data-path="../options.html">
+            
+                <a href="../options.html#compilermodules">
+            
+                    
+                    compilerModules
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.12" data-path="../options.html">
+            
+                <a href="../options.html#compilerdirectives">
+            
+                    
+                    compilerDirectives
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.13" data-path="../options.html">
+            
+                <a href="../options.html#transformtorequire">
+            
+                    
+                    transformToRequire
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.14" data-path="../options.html">
+            
+                <a href="../options.html#buble">
+            
+                    
+                    buble
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.15" data-path="../options.html">
+            
+                <a href="../options.html#extractcss">
+            
+                    
+                    extractCSS
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.16" data-path="../options.html">
+            
+                <a href="../options.html#optimizessr">
+            
+                    
+                    optimizeSSR
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            GitBookで公開 
+        </a>
+    </li>
+</ul>
+
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+  
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >ES2015</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="es2015">ES2015</h1>
+<p>&#x540C;&#x4E00;&#x30D7;&#x30ED;&#x30B8;&#x30A7;&#x30AF;&#x30C8;&#x5185;&#x3067; <code>babel-loader</code> &#x304B; <code>buble-loader</code> &#x3092;&#x691C;&#x51FA;&#x3057;&#x305F;&#x3068;&#x304D;&#x3001;&#x5168;&#x3066;&#x306E; <code>*.vue</code> &#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x306E; <code>&lt;script&gt;</code> &#x30BF;&#x30B0;&#x3092;&#x51E6;&#x7406;&#x3059;&#x308B;&#x305F;&#x3081;&#x306B;&#x305D;&#x308C;&#x3089;&#x3092;&#x4F7F;&#x7528;&#x3057; Vue &#x30B3;&#x30F3;&#x30DD;&#x30FC;&#x30CD;&#x30F3;&#x30C8;&#x5185;&#x3067; ES2015 &#x3092;&#x4F7F;&#x7528;&#x3067;&#x304D;&#x308B;&#x3088;&#x3046;&#x306B;&#x3057;&#x307E;&#x3059;&#x3002;&#x3082;&#x3057;&#x3042;&#x306A;&#x305F;&#x304C;&#x307E;&#x3060;&#x65B0;&#x3057;&#x3044;&#x8A00;&#x8A9E;&#x6A5F;&#x80FD;&#x3092;&#x624B;&#x306B;&#x5165;&#x308C;&#x3066;&#x3044;&#x306A;&#x3044;&#x306E;&#x3067;&#x3042;&#x308C;&#x3070;&#x3001;&#x5B66;&#x3076;&#x3079;&#x304D;&#x3067;&#x3059;&#x3002;&#x3044;&#x304F;&#x3064;&#x304B;&#x306E;&#x3088;&#x3044;&#x5B66;&#x7FD2;&#x30EA;&#x30BD;&#x30FC;&#x30B9;&#x306F;&#x3053;&#x3061;&#x3089;:</p>
+<ul>
+<li><a href="https://babeljs.io/docs/learn-es2015/" target="_blank">Babel - Learn ES2015</a></li>
+<li><a href="https://github.com/lukehoban/es6features" target="_blank">ES6 Features</a></li>
+<li><a href="https://leanpub.com/exploring-es6" target="_blank">Exploring ES6 (book)</a></li>
+</ul>
+<p>&#x4ED6;&#x306E; Vue &#x30B3;&#x30F3;&#x30DD;&#x30FC;&#x30CD;&#x30F3;&#x30C8;&#x3092;&#x8AAD;&#x307F;&#x8FBC;&#x3080;&#x969B;&#x306E;&#x5178;&#x578B;&#x7684;&#x306A;&#x30D1;&#x30BF;&#x30FC;&#x30F3;&#x306F;&#x3053;&#x3061;&#x3089;&#x3067;&#x3059;:</p>
+<pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript">
+<span class="hljs-keyword">import</span> ComponentA <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;./ComponentA.vue&apos;</span>
+<span class="hljs-keyword">import</span> ComponentB <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;./ComponentB.vue&apos;</span>
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> {
+  components: {
+    ComponentA,
+    ComponentB
+  }
+}
+</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+</code></pre>
+<p>&#x3053;&#x3053;&#x3067;&#x306F; ES2015 &#x306E;&#x30AA;&#x30D6;&#x30B8;&#x30A7;&#x30AF;&#x30C8;&#x30EA;&#x30C6;&#x30E9;&#x30EB;&#x3092;&#x4F7F;&#x7528;&#x3057;&#x3066;&#x5B50;&#x30B3;&#x30F3;&#x30DD;&#x30FC;&#x30CD;&#x30F3;&#x30C8;&#x3092;&#x5B9A;&#x7FA9;&#x3057;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;<code>{ ComponentA }</code> &#x306F; <code>{ ComponentA: ComponentA }</code> &#x306E;&#x7C21;&#x7565;&#x5F62;&#x3067;&#x3059;&#x3002; Vue &#x306F;&#x81EA;&#x52D5;&#x3067;&#x30AD;&#x30FC;&#x3092; <code>component-a</code> &#x306B;&#x5909;&#x63DB;&#x3057;&#x3001;&#x30A4;&#x30F3;&#x30DD;&#x30FC;&#x30C8;&#x3055;&#x308C;&#x305F;&#x30B3;&#x30F3;&#x30DD;&#x30FC;&#x30CD;&#x30F3;&#x30C8;&#x3092;&#x30C6;&#x30F3;&#x30D7;&#x30EC;&#x30FC;&#x30C8;&#x5185;&#x3067; <code>&lt;component-a&gt;</code> &#x3068;&#x3057;&#x3066;&#x4F7F;&#x7528;&#x3059;&#x308B;&#x3053;&#x3068;&#x304C;&#x51FA;&#x6765;&#x307E;&#x3059;&#x3002;</p>
+<h3 id="&#x30C6;&#x30F3;&#x30D7;&#x30EC;&#x30FC;&#x30C8;&#x5185;&#x306E;es2015">&#x30C6;&#x30F3;&#x30D7;&#x30EC;&#x30FC;&#x30C8;&#x5185;&#x306E;ES2015</h3>
+<p><code>*.vue</code> &#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x5185;&#x306E; <code>&lt;template&gt;</code> &#x306F; JavaScript &#x306E; render &#x95A2;&#x6570;&#x306B;&#x30B3;&#x30F3;&#x30D1;&#x30A4;&#x30EB;&#x3055;&#x308C;<a href="https://buble.surge.sh/guide/" target="_blank">Buble</a> &#x306E;&#x30AB;&#x30B9;&#x30BF;&#x30E0;&#x30D3;&#x30EB;&#x30C9;&#x3067;&#x51E6;&#x7406;&#x3055;&#x308C; ES2015 &#x306E;&#x6A5F;&#x80FD;&#x3092;&#x30B5;&#x30DD;&#x30FC;&#x30C8;&#x3057;&#x307E;&#x3059;&#x3002;&#x3053;&#x308C;&#x306B;&#x3088;&#x308A; <a href="https://buble.surge.sh/guide/#object-shorthand-methods-and-properties-transforms-concisemethodproperty-" target="_blank">Object shorthand properties</a> &#x3068;<a href="https://buble.surge.sh/guide/#computed-properties-transforms-computedproperty-" target="_blank">&#x7B97;&#x51FA;&#x30D7;&#x30ED;&#x30D1;&#x30C6;&#x30A3;</a>&#x306A;&#x3069;&#x306E;&#x6A5F;&#x80FD;&#x304C;&#x4F7F;&#x7528;&#x3067;&#x304D;&#x308B;&#x3088;&#x3046;&#x306B;&#x306A;&#x308A;&#x307E;&#x3059;:</p>
+<pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">:class</span>=<span class="hljs-string">&quot;[{ active: active }, isButton ? prefix + &apos;-button&apos; : null]&quot;</span>&gt;</span>
+</code></pre>
+<p>&#x6B21;&#x306E;&#x3088;&#x3046;&#x306B;&#x5358;&#x7D14;&#x5316;&#x3059;&#x308B;&#x3053;&#x3068;&#x304C;&#x3067;&#x304D;&#x307E;&#x3059;:</p>
+<pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">:class</span>=<span class="hljs-string">&quot;{ active, [`${prefix}-button`]: isButton }&quot;</span>&gt;</span>
+</code></pre>
+<p><strong>vue@^2.1.0 &#x306E;&#x307F;&#x5229;&#x7528;&#x53EF;&#x80FD;:</strong> <code>v-for</code> &#x304B;&#x30B9;&#x30B3;&#x30FC;&#x30D7;&#x4ED8;&#x304D;&#x30B9;&#x30ED;&#x30C3;&#x30C8;&#x3092;&#x4F7F;&#x7528;&#x3059;&#x308B;&#x3053;&#x3068;&#x3067;&#x3001;&#x69CB;&#x9020;&#x5316;&#x3055;&#x308C;&#x305F;&#x30D1;&#x30E9;&#x30E1;&#x30FC;&#x30BF;&#x3092;&#x4F7F;&#x7528;&#x3059;&#x308B;&#x3053;&#x3068;&#x304C;&#x51FA;&#x6765;&#x307E;&#x3059;:</p>
+<pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">v-for</span>=<span class="hljs-string">&quot;{ id, text } in items&quot;</span>&gt;</span>
+  {{ id }} {{ text }}
+<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+</code></pre>
+<pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">my-component</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">template</span> <span class="hljs-attr">slot-scope</span>=<span class="hljs-string">&quot;{ id, text }&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>{{ id }} {{ text }}<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">my-component</span>&gt;</span>
+</code></pre>
+<p><a href="../options.html#buble">buble &#x30AA;&#x30D7;&#x30B7;&#x30E7;&#x30F3;</a>&#x3092;&#x4F7F;&#x7528;&#x3057;&#x3066;&#x30C6;&#x30F3;&#x30D7;&#x30EC;&#x30FC;&#x30C8;&#x3067;&#x30B5;&#x30DD;&#x30FC;&#x30C8;&#x3055;&#x308C;&#x305F;&#x6A5F;&#x80FD;&#x3092;&#x30AB;&#x30B9;&#x30BF;&#x30DE;&#x30A4;&#x30BA;&#x3059;&#x308B;&#x3053;&#x3068;&#x304C;&#x51FA;&#x6765;&#x307E;&#x3059;&#x3002;</p>
+<h3 id="js-&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x306E;&#x30C8;&#x30E9;&#x30F3;&#x30B9;&#x30D1;&#x30A4;&#x30EB;"><code>.js</code> &#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x306E;&#x30C8;&#x30E9;&#x30F3;&#x30B9;&#x30D1;&#x30A4;&#x30EB;</h3>
+<p><code>vue-loader</code> &#x306F; <code>*.vue</code> &#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x306E;&#x307F;&#x51E6;&#x7406;&#x3059;&#x308B;&#x306E;&#x3067;&#x3001;webpack &#x306E;&#x8A2D;&#x5B9A;&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x306B; <code>babel-loader</code> &#x307E;&#x305F;&#x306F; <code>buble-loader</code> &#x3092;&#x4F7F;&#x3063;&#x3066; <code>*.js</code> &#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x3092;&#x51E6;&#x7406;&#x3059;&#x308B;&#x3088;&#x3046;&#x306B; Webapck &#x306B;&#x6307;&#x793A;&#x3059;&#x308B;&#x5FC5;&#x8981;&#x304C;&#x3042;&#x308A;&#x307E;&#x3059;&#x3002; <code>vue-cli</code> &#x3067;&#x30D7;&#x30ED;&#x30B8;&#x30A7;&#x30AF;&#x30C8;&#x3092;&#x4F5C;&#x6210;&#x3057;&#x3066;&#x3044;&#x308B;&#x3068;&#x3059;&#x3067;&#x306B;&#x305D;&#x308C;&#x306F;&#x7528;&#x610F;&#x3055;&#x308C;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;</p>
+<h3 id="babelrc-&#x306B;&#x3088;&#x308B;-babel-&#x306E;&#x8A2D;&#x5B9A;"><code>.babelrc</code> &#x306B;&#x3088;&#x308B; Babel &#x306E;&#x8A2D;&#x5B9A;</h3>
+<p><code>babel-loader</code> &#x306F; <a href="https://babeljs.io/docs/usage/babelrc/" target="_blank"><code>.babelrc</code></a>&#x3092;&#x9075;&#x5B88;&#x3057;&#x3066;&#x3044;&#x308B;&#x306E;&#x3067;&#x3001;Babel &#x306E;&#x30D7;&#x30EA;&#x30BB;&#x30C3;&#x30C8;&#x3068;&#x30D7;&#x30E9;&#x30B0;&#x30A4;&#x30F3;&#x3067;&#x8A2D;&#x5B9A;&#x3059;&#x308B;&#x3053;&#x3068;&#x304C;&#x63A8;&#x5968;&#x3055;&#x308C;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;</p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+  <script src="//m.servedby-buysellads.com/monetization.js" type="text/javascript"></script>
+  <div class="bsa-cpc"></div>
+  <script>
+    (function(){
+      if(typeof _bsa !== 'undefined' && _bsa) {
+      _bsa.init('default', 'CKYD62QM', 'placement:vuejsorg', {
+        target: '.bsa-cpc',
+        align: 'horizontal',
+        disable_css: 'true'
+      });
+        }
+    })();
+  </script>
+
+            </div>
+
+            
+                
+                
+                <a href="scoped-css.html" class="navigation navigation-next navigation-unique" aria-label="Next page: スコープ付き CSS">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"ES2015","level":"1.3.1","depth":2,"next":{"title":"スコープ付き CSS","level":"1.3.2","depth":2,"path":"features/scoped-css.md","ref":"features/scoped-css.md","articles":[]},"previous":{"title":"機能","level":"1.3","depth":1,"ref":"","articles":[{"title":"ES2015","level":"1.3.1","depth":2,"path":"features/es2015.md","ref":"features/es2015.md","articles":[]},{"title":"スコープ付き CSS","level":"1.3.2","depth":2,"path":"features/scoped-css.md","ref":"features/scoped-css.md","articles":[]},{"title":"CSS モジュール","level":"1.3.3","depth":2,"path":"features/css-modules.md","ref":"features/css-modules.md","articles":[]},{"title":"PostCSS","level":"1.3.4","depth":2,"path":"features/postcss.md","ref":"features/postcss.md","articles":[]},{"title":"ホットリロード","level":"1.3.5","depth":2,"path":"features/hot-reload.md","ref":"features/hot-reload.md","articles":[]},{"title":"関数型コンポーネント","level":"1.3.6","depth":2,"path":"features/functional.md","ref":"features/functional.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["edit-link","theme-vuejs","-fontsettings","github"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"edit-link":{"label":"Edit This Page","base":"https://github.com/vuejs/vue-loader/tree/master/docs"},"github":{"url":"https://github.com/vuejs/vue-loader/"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-vuejs":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"vue-loader","language":"ja","links":{"sharing":{"facebook":false,"twitter":false}},"gitbook":"*"},"file":{"path":"features/es2015.md","mtime":"2018-03-06T21:08:20.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-04-24T16:29:37.026Z"},"basePath":"..","book":{"language":"ja"}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../../gitbook/gitbook.js"></script>
+    <script src="../../gitbook/theme.js"></script>
+    
+        
+        <script src="../../gitbook/gitbook-plugin-edit-link/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-github/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+
+    </body>
+</html>
+

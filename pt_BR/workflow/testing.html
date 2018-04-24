@@ -1,0 +1,632 @@
+
+<!DOCTYPE HTML>
+<html lang="pt_BR" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Testando · vue-loader</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-theme-vuejs/vue.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="testing-with-mocks.html" />
+    
+    
+    <link rel="prev" href="linting.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+<script async type="text/javascript" src="//cdn.carbonads.com/carbon.js?zoneid=1673&serve=C6AILKT&placement=vuejs" id="_carbonads_js"></script>
+
+
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Introdução
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" >
+            
+                <span>
+            
+                    
+                    Começando
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="../start/spec.html">
+            
+                <a href="../start/spec.html">
+            
+                    
+                    Especificação do Vue Component
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="../start/setup.html">
+            
+                <a href="../start/setup.html">
+            
+                    
+                    Configurando um projeto
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" >
+            
+                <span>
+            
+                    
+                    Características
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../features/es2015.html">
+            
+                <a href="../features/es2015.html">
+            
+                    
+                    ES2015
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../features/scoped-css.html">
+            
+                <a href="../features/scoped-css.html">
+            
+                    
+                    CSS com Escopo
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="../features/css-modules.html">
+            
+                <a href="../features/css-modules.html">
+            
+                    
+                    Módulos CSS
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4" data-path="../features/postcss.html">
+            
+                <a href="../features/postcss.html">
+            
+                    
+                    PostCSS
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5" data-path="../features/hot-reload.html">
+            
+                <a href="../features/hot-reload.html">
+            
+                    
+                    Hot Reload
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" >
+            
+                <span>
+            
+                    
+                    Configurações
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../configurations/pre-processors.html">
+            
+                <a href="../configurations/pre-processors.html">
+            
+                    
+                    Pré-Processadores
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../configurations/asset-url.html">
+            
+                <a href="../configurations/asset-url.html">
+            
+                    
+                    Manipulação de recurso de URL
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="../configurations/advanced.html">
+            
+                <a href="../configurations/advanced.html">
+            
+                    
+                    Configuração avançado do loader
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4" data-path="../configurations/extract-css.html">
+            
+                <a href="../configurations/extract-css.html">
+            
+                    
+                    Extraindo arquivos CSS
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5" data-path="../configurations/custom-blocks.html">
+            
+                <a href="../configurations/custom-blocks.html">
+            
+                    
+                    Blocos customizados
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" >
+            
+                <span>
+            
+                    
+                    Fluxo de trabalho
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="production.html">
+            
+                <a href="production.html">
+            
+                    
+                    Construir Produção
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="linting.html">
+            
+                <a href="linting.html">
+            
+                    
+                    Análise estática do código (Linting)
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.5.3" data-path="testing.html">
+            
+                <a href="testing.html">
+            
+                    
+                    Testando
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.4" data-path="testing-with-mocks.html">
+            
+                <a href="testing-with-mocks.html">
+            
+                    
+                    Testando com Mocks
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../options.html">
+            
+                <a href="../options.html">
+            
+                    
+                    Referência de opções
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+  
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >Testando</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="testando">Testando</h1>
+<blockquote>
+<p>O <a href="https://github.com/vuejs-templates/webpack" target="_blank">template vue-cli do webpack</a>  oferece testes de unidade pr&#xE9;-configurados e configura&#xE7;&#xF5;es de teste es2 para voc&#xEA;.</p>
+</blockquote>
+<p>Ao testar arquivos <code>*.vue</code> n&#xE3;o podemos usar um corredor de teste simples baseado em CommonJs, porque ele n&#xE3;o sabe como manipular arquivos <code>*.vue</code>. Em vez disso, n&#xF3;s ainda usaremos webpack + vue-loader para manipular nossos arquivos de teste. A configura&#xE7;&#xE3;o recomendada &#xE9; usando <a href="http://karma-runner.github.io/0.13/index.html" target="_blank">Karma</a> e <a href="https://github.com/webpack/karma-webpack" target="_blank">karma-webpack</a>.</p>
+<p>Karma &#xE9; um corredor de teste que inicia navegadores e executa seus testes. Voc&#xEA; pode escolher qual navegador voc&#xEA; quer para testar e qual framework (exemplo: Mocha ou Jasmine) voc&#xEA; quer usar. Aqui est&#xE1; um exemplo de configura&#xE7;&#xE3;o Karma que executa os testes dentro de <a href="http://phantomjs.org/" target="_blank">PhantomJS</a> com o framework de teste <a href="http://jasmine.github.io/edge/introduction.html" target="_blank">Jasmine</a>.</p>
+<pre><code class="lang-bash">npm install\
+  karma karma-webpack\
+  karma-jasmine jasmine-core\
+  karma-phantomjs-launcher phantomjs\
+  --save-dev
+</code></pre>
+<pre><code class="lang-js"><span class="hljs-comment">// podemos usar a mesma configura&#xE7;&#xE3;o que &#xE9; exigida pelo webpackm</span>
+<span class="hljs-comment">// entretanto, lembre-se de remover a entrada original, uma vez</span>
+<span class="hljs-comment">// que n&#xE3;o precisamo durante os testes</span>
+<span class="hljs-keyword">var</span> webpackConfig = <span class="hljs-built_in">require</span>(<span class="hljs-string">&apos;./webpack.config.js&apos;</span>)
+<span class="hljs-keyword">delete</span> webpackConfig.entry
+
+<span class="hljs-comment">// karma.conf.js</span>
+<span class="hljs-built_in">module</span>.exports = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">config</span>) </span>{
+  config.set({
+    browsers: [<span class="hljs-string">&apos;PhantomJS&apos;</span>],
+    frameworks: [<span class="hljs-string">&apos;jasmine&apos;</span>],
+    <span class="hljs-comment">// este &#xE9; o arquivo de entrada para todos os nossos testes</span>
+    files: [<span class="hljs-string">&apos;test/index.js&apos;</span>],
+    <span class="hljs-comment">// vamos passar o arquivo de entrada para webpack empacotar</span>
+    preprocessors: {
+      <span class="hljs-string">&apos;test/index.js&apos;</span>: [<span class="hljs-string">&apos;webpack&apos;</span>]
+    },
+    <span class="hljs-comment">// use a configura&#xE7;&#xE3;o do webpack</span>
+    webpack: webpackConfig,
+    <span class="hljs-comment">// evita peda&#xE7;os de texto in&#xFA;teis</span>
+    webpackMiddleware: {
+      noInfo: <span class="hljs-literal">true</span>
+    },
+    singleRun: <span class="hljs-literal">true</span>
+  })
+}
+</code></pre>
+<p>E para o arquivo <code>test/index.js</code> de entrada:</p>
+<pre><code class="lang-js"><span class="hljs-comment">// test/index.js</span>
+<span class="hljs-comment">// requisita todos os arquivos de testes usando 0 recursos especial do webpack</span>
+<span class="hljs-comment">// https://webpack.github.io/docs/context.html#require-context</span>
+<span class="hljs-keyword">var</span> testsContext = <span class="hljs-built_in">require</span>.context(<span class="hljs-string">&apos;.&apos;</span>, <span class="hljs-literal">true</span>, <span class="hljs-regexp">/\.spec$/</span>)
+testsContext.keys().forEach(testsContext)
+</code></pre>
+<p>Este recurso de entrada simplesmente requisita todos os outros arquivos na pasta que terminam com <code>.spec.js</code>. Agora podemos realmente escrever alguns testes:</p>
+<pre><code class="lang-js"><span class="hljs-comment">// test/component-a.spec.js</span>
+<span class="hljs-keyword">var</span> Vue = <span class="hljs-built_in">require</span>(<span class="hljs-string">&apos;vue&apos;</span>)
+<span class="hljs-keyword">var</span> ComponentA = <span class="hljs-built_in">require</span>(<span class="hljs-string">&apos;../../src/components/a.vue&apos;</span>)
+
+describe(<span class="hljs-string">&apos;a.vue&apos;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+
+  <span class="hljs-comment">// Op&#xE7;&#xF5;es JavaScript de afirma&#xE7;&#xE3;o (asserting)</span>
+  it(<span class="hljs-string">&apos;should have correct message&apos;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+    expect(ComponentA.data().msg).toBe(<span class="hljs-string">&apos;Ol&#xE1; do componente A!&apos;</span>)
+  })
+
+  <span class="hljs-comment">// Afirmando o resultado renderizado fornecido pelo componente</span>
+  it(<span class="hljs-string">&apos;should render correct message&apos;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+    <span class="hljs-keyword">var</span> vm = <span class="hljs-keyword">new</span> Vue({
+      template: <span class="hljs-string">&apos;&lt;div&gt;&lt;test&gt;&lt;/test&gt;&lt;/div&gt;&apos;</span>,
+      components: {
+        <span class="hljs-string">&apos;test&apos;</span>: ComponentA
+      }
+    }).$mount()
+    expect(vm.$el.querySelector(<span class="hljs-string">&apos;h2.red&apos;</span>).textContent).toBe(<span class="hljs-string">&apos;Ol&#xE1; do componente A!&apos;</span>)
+  })
+})
+</code></pre>
+<p>Para executar os testes, adicione o seguinte script NPM:</p>
+<pre><code class="lang-js"><span class="hljs-comment">// package.json</span>
+...
+<span class="hljs-string">&quot;scripts&quot;</span>: {
+  ...
+  <span class="hljs-string">&quot;test&quot;</span>: <span class="hljs-string">&quot;karma start karma.conf.js&quot;</span>
+}
+...
+</code></pre>
+<p>Finalmente execute:</p>
+<pre><code class="lang-bash">npm <span class="hljs-built_in">test</span>
+</code></pre>
+<p>Novamente, <a href="https://github.com/vuejs-templates/webpack" target="_blank">template vue-cli webpack</a> cont&#xE9;m um exemplo totalmente funcional com testes.</p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+  <script src="//m.servedby-buysellads.com/monetization.js" type="text/javascript"></script>
+  <div class="bsa-cpc"></div>
+  <script>
+    (function(){
+      if(typeof _bsa !== 'undefined' && _bsa) {
+      _bsa.init('default', 'CKYD62QM', 'placement:vuejsorg', {
+        target: '.bsa-cpc',
+        align: 'horizontal',
+        disable_css: 'true'
+      });
+        }
+    })();
+  </script>
+
+            </div>
+
+            
+                
+                <a href="linting.html" class="navigation navigation-prev " aria-label="Previous page: Análise estática do código (Linting)">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="testing-with-mocks.html" class="navigation navigation-next " aria-label="Next page: Testando com Mocks">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Testando","level":"1.5.3","depth":2,"next":{"title":"Testando com Mocks","level":"1.5.4","depth":2,"path":"workflow/testing-with-mocks.md","ref":"workflow/testing-with-mocks.md","articles":[]},"previous":{"title":"Análise estática do código (Linting)","level":"1.5.2","depth":2,"path":"workflow/linting.md","ref":"workflow/linting.md","articles":[]},"dir":"ltr"},"config":{"plugins":["edit-link","theme-vuejs","-fontsettings","github"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"edit-link":{"label":"Edit This Page","base":"https://github.com/vuejs/vue-loader/tree/master/docs"},"github":{"url":"https://github.com/vuejs/vue-loader/"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-vuejs":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"vue-loader","language":"pt_BR","links":{"sharing":{"facebook":false,"twitter":false}},"gitbook":"*"},"file":{"path":"workflow/testing.md","mtime":"2018-03-06T21:08:20.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-04-24T16:29:37.026Z"},"basePath":"..","book":{"language":"pt_BR"}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../../gitbook/gitbook.js"></script>
+    <script src="../../gitbook/theme.js"></script>
+    
+        
+        <script src="../../gitbook/gitbook-plugin-edit-link/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-github/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+
+    </body>
+</html>
+

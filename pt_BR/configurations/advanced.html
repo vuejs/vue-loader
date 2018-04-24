@@ -1,0 +1,629 @@
+
+<!DOCTYPE HTML>
+<html lang="pt_BR" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Configuração avançado do loader · vue-loader</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-theme-vuejs/vue.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="extract-css.html" />
+    
+    
+    <link rel="prev" href="asset-url.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+<script async type="text/javascript" src="//cdn.carbonads.com/carbon.js?zoneid=1673&serve=C6AILKT&placement=vuejs" id="_carbonads_js"></script>
+
+
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Introdução
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" >
+            
+                <span>
+            
+                    
+                    Começando
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="../start/spec.html">
+            
+                <a href="../start/spec.html">
+            
+                    
+                    Especificação do Vue Component
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="../start/setup.html">
+            
+                <a href="../start/setup.html">
+            
+                    
+                    Configurando um projeto
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" >
+            
+                <span>
+            
+                    
+                    Características
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../features/es2015.html">
+            
+                <a href="../features/es2015.html">
+            
+                    
+                    ES2015
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../features/scoped-css.html">
+            
+                <a href="../features/scoped-css.html">
+            
+                    
+                    CSS com Escopo
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="../features/css-modules.html">
+            
+                <a href="../features/css-modules.html">
+            
+                    
+                    Módulos CSS
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4" data-path="../features/postcss.html">
+            
+                <a href="../features/postcss.html">
+            
+                    
+                    PostCSS
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5" data-path="../features/hot-reload.html">
+            
+                <a href="../features/hot-reload.html">
+            
+                    
+                    Hot Reload
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" >
+            
+                <span>
+            
+                    
+                    Configurações
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="pre-processors.html">
+            
+                <a href="pre-processors.html">
+            
+                    
+                    Pré-Processadores
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="asset-url.html">
+            
+                <a href="asset-url.html">
+            
+                    
+                    Manipulação de recurso de URL
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.4.3" data-path="advanced.html">
+            
+                <a href="advanced.html">
+            
+                    
+                    Configuração avançado do loader
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4" data-path="extract-css.html">
+            
+                <a href="extract-css.html">
+            
+                    
+                    Extraindo arquivos CSS
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5" data-path="custom-blocks.html">
+            
+                <a href="custom-blocks.html">
+            
+                    
+                    Blocos customizados
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" >
+            
+                <span>
+            
+                    
+                    Fluxo de trabalho
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../workflow/production.html">
+            
+                <a href="../workflow/production.html">
+            
+                    
+                    Construir Produção
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="../workflow/linting.html">
+            
+                <a href="../workflow/linting.html">
+            
+                    
+                    Análise estática do código (Linting)
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3" data-path="../workflow/testing.html">
+            
+                <a href="../workflow/testing.html">
+            
+                    
+                    Testando
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.4" data-path="../workflow/testing-with-mocks.html">
+            
+                <a href="../workflow/testing-with-mocks.html">
+            
+                    
+                    Testando com Mocks
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../options.html">
+            
+                <a href="../options.html">
+            
+                    
+                    Referência de opções
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+  
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >Configuração avançado do loader</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="configura&#xE7;&#xF5;es-avan&#xE7;adas-do-carregador">Configura&#xE7;&#xF5;es avan&#xE7;adas do carregador</h1>
+<p>&#xC0;s vezes voc&#xEA; pode querer:</p>
+<ol>
+<li><p>Aplicar um carregador personalizado de string a uma linguagem em vez de deixar <code>vue-loader</code> respons&#xE1;vel.</p>
+</li>
+<li><p>Sobrescrever a configura&#xE7;&#xE3;o embutida do carregador para a linguagem padr&#xE3;o.</p>
+</li>
+<li><p>Pr&#xE9;-processar ou p&#xF3;s-processar um bloco de linguagem especifico com carregadores personalizado.</p>
+</li>
+</ol>
+<p>Para fazer isto, especifique a op&#xE7;&#xE3;o <code>loaders</code> para <code>vue-loader</code>:</p>
+<blockquote>
+<p>Observe que <code>preLoaders</code> e<code>postLoaders</code> s&#xE3;o suportados apenas em ver&#xF5;es &gt;=10.3.0</p>
+</blockquote>
+<h3 id="webpack-2x">webpack 2.x</h3>
+<pre><code class="lang-js"><span class="hljs-comment">// webpack.config.js</span>
+<span class="hljs-built_in">module</span>.exports = {
+  <span class="hljs-comment">// outras op&#xE7;&#xF5;es...</span>
+  <span class="hljs-built_in">module</span>: {
+    <span class="hljs-comment">// `module.rules` &#xE9; o mesmo que `module.loaders` em 1.x</span>
+    rules : [
+      {
+        test: <span class="hljs-regexp">/\.vue$/</span>,
+        loader: <span class="hljs-string">&apos;vue-loader&apos;</span>,
+        options: {
+          <span class="hljs-comment">// `loaders` substituir&#xE1; os carregadores padr&#xF5;es.</span>
+          <span class="hljs-comment">// A configura&#xE7;&#xE3;o a seguir far&#xE1; com que todas as tags `&lt;script&gt;` sem</span>
+          <span class="hljs-comment">// o atributo `lang` sejam carrega com `coffee-loader`</span>
+          loaders: {
+            js: <span class="hljs-string">&apos;coffee-loader&apos;</span>
+          },
+
+          <span class="hljs-comment">// `preLoaders` s&#xE3;o anexados antes dos carregadores padr&#xF5;es</span>
+          <span class="hljs-comment">// Voc&#xEA; pode usar isso para pr&#xE9;-processar blocos de linguagem</span>
+          <span class="hljs-comment">// - um caso de uso comum seria intercionaliza&#xE7;&#xE3;o (i18n)  em tempo de constru&#xE7;&#xE3;o.</span>
+          preLoaders: {
+            js: <span class="hljs-string">&apos;/caminho/personalizado/para/carregador&apos;</span>
+          },
+
+          <span class="hljs-comment">// `postLoaders` s&#xE3;o anexados ap&#xF3;s os carregadores padr&#xF5;es.</span>
+          <span class="hljs-comment">//</span>
+          <span class="hljs-comment">// - Para `html`, o resultado retornado pelo carregador padr&#xE3;o</span>
+          <span class="hljs-comment">//   ser&#xE1; compilado em c&#xF3;digo de fun&#xE7;&#xE3;o de renderiza&#xE7;&#xE3;o JavaScript.</span>
+          <span class="hljs-comment">//</span>
+          <span class="hljs-comment">// - Para `css`, o resultado ser&#xE1; retornado por `vue-style-loader`</span>
+          <span class="hljs-comment">//   que n&#xE3;o &#xE9; particulamente &#xFA;til em muitos casos. Usando um plugin</span>
+          <span class="hljs-comment">//   PostCSS ser&#xE1; uma op&#xE7;&#xE3;o melhor.</span>
+          postLoaders: {
+            html: <span class="hljs-string">&apos;babel-loader&apos;</span>
+          },
+
+          <span class="hljs-comment">// `excludedPreLoaders` should be regex</span>
+          excludedPreLoaders: <span class="hljs-regexp">/(eslint-loader)/</span>
+        }
+      }
+    ]
+  }
+}
+</code></pre>
+<h3 id="webpack-1x">webpack 1.x</h3>
+<pre><code class="lang-js"><span class="hljs-comment">// webpack.config.js</span>
+<span class="hljs-built_in">module</span>.exports = {
+  <span class="hljs-comment">// outras op&#xE7;&#xF5;es...</span>
+  <span class="hljs-built_in">module</span>: {
+    loaders: [
+      {
+        test: <span class="hljs-regexp">/\.vue$/</span>,
+        loader: <span class="hljs-string">&apos;vue&apos;</span>
+      }
+    ]
+  },
+  <span class="hljs-comment">// configura&#xE7;&#xF5;es vue-loader</span>
+  vue: {
+    loaders: {
+      <span class="hljs-comment">// mesmo que as regras de configura&#xE7;&#xF5;es acima</span>
+    }
+  }
+}
+</code></pre>
+<p>Um uso mais pr&#xE1;tico das configura&#xE7;&#xF5;es avan&#xE7;adas do carregador &#xE9; <a href="extract-css.html">extrair o CSS do componente em um &#xFA;nico arquivo</a>.</p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+  <script src="//m.servedby-buysellads.com/monetization.js" type="text/javascript"></script>
+  <div class="bsa-cpc"></div>
+  <script>
+    (function(){
+      if(typeof _bsa !== 'undefined' && _bsa) {
+      _bsa.init('default', 'CKYD62QM', 'placement:vuejsorg', {
+        target: '.bsa-cpc',
+        align: 'horizontal',
+        disable_css: 'true'
+      });
+        }
+    })();
+  </script>
+
+            </div>
+
+            
+                
+                <a href="asset-url.html" class="navigation navigation-prev " aria-label="Previous page: Manipulação de recurso de URL">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="extract-css.html" class="navigation navigation-next " aria-label="Next page: Extraindo arquivos CSS">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Configuração avançado do loader","level":"1.4.3","depth":2,"next":{"title":"Extraindo arquivos CSS","level":"1.4.4","depth":2,"path":"configurations/extract-css.md","ref":"configurations/extract-css.md","articles":[]},"previous":{"title":"Manipulação de recurso de URL","level":"1.4.2","depth":2,"path":"configurations/asset-url.md","ref":"configurations/asset-url.md","articles":[]},"dir":"ltr"},"config":{"plugins":["edit-link","theme-vuejs","-fontsettings","github"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"edit-link":{"label":"Edit This Page","base":"https://github.com/vuejs/vue-loader/tree/master/docs"},"github":{"url":"https://github.com/vuejs/vue-loader/"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-vuejs":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"vue-loader","language":"pt_BR","links":{"sharing":{"facebook":false,"twitter":false}},"gitbook":"*"},"file":{"path":"configurations/advanced.md","mtime":"2018-03-06T21:08:20.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-04-24T16:29:37.026Z"},"basePath":"..","book":{"language":"pt_BR"}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../../gitbook/gitbook.js"></script>
+    <script src="../../gitbook/theme.js"></script>
+    
+        
+        <script src="../../gitbook/gitbook-plugin-edit-link/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-github/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+
+    </body>
+</html>
+

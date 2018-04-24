@@ -1,0 +1,622 @@
+
+<!DOCTYPE HTML>
+<html lang="kr" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Linting · vue-loader</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-theme-vuejs/vue.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="testing.html" />
+    
+    
+    <link rel="prev" href="production.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+<script async type="text/javascript" src="//cdn.carbonads.com/carbon.js?zoneid=1673&serve=C6AILKT&placement=vuejs" id="_carbonads_js"></script>
+
+
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    소개
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" >
+            
+                <span>
+            
+                    
+                    시작하기
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="../start/spec.html">
+            
+                <a href="../start/spec.html">
+            
+                    
+                    Vue 컴포넌트 스펙
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="../start/setup.html">
+            
+                <a href="../start/setup.html">
+            
+                    
+                    프로젝트 세팅하기
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" >
+            
+                <span>
+            
+                    
+                    기능
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../features/es2015.html">
+            
+                <a href="../features/es2015.html">
+            
+                    
+                    ES2015
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../features/scoped-css.html">
+            
+                <a href="../features/scoped-css.html">
+            
+                    
+                    범위 CSS
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="../features/css-modules.html">
+            
+                <a href="../features/css-modules.html">
+            
+                    
+                    CSS Modules
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4" data-path="../features/postcss.html">
+            
+                <a href="../features/postcss.html">
+            
+                    
+                    PostCSS
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5" data-path="../features/hot-reload.html">
+            
+                <a href="../features/hot-reload.html">
+            
+                    
+                    Hot Reload
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" >
+            
+                <span>
+            
+                    
+                    설정
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../configurations/pre-processors.html">
+            
+                <a href="../configurations/pre-processors.html">
+            
+                    
+                    전처리기
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../configurations/asset-url.html">
+            
+                <a href="../configurations/asset-url.html">
+            
+                    
+                    Asset URL 핸들링
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="../configurations/advanced.html">
+            
+                <a href="../configurations/advanced.html">
+            
+                    
+                    고급 로더 설정
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4" data-path="../configurations/extract-css.html">
+            
+                <a href="../configurations/extract-css.html">
+            
+                    
+                    CSS 단일 파일로 추출하기
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5" data-path="../configurations/custom-blocks.html">
+            
+                <a href="../configurations/custom-blocks.html">
+            
+                    
+                    사용자 정의 블록
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" >
+            
+                <span>
+            
+                    
+                    개발 환경
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="production.html">
+            
+                <a href="production.html">
+            
+                    
+                    배포용 빌드
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.5.2" data-path="linting.html">
+            
+                <a href="linting.html">
+            
+                    
+                    Linting
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3" data-path="testing.html">
+            
+                <a href="testing.html">
+            
+                    
+                    테스트
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.4" data-path="testing-with-mocks.html">
+            
+                <a href="testing-with-mocks.html">
+            
+                    
+                    목업을 이용한 테스트
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../options.html">
+            
+                <a href="../options.html">
+            
+                    
+                    옵션 레퍼런스
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+  
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >Linting</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="linting">Linting</h1>
+<p><code>*.vue</code> &#xD30C;&#xC77C;&#xC740; JavaScript&#xAC00; &#xC544;&#xB2C8;&#xAE30; &#xB54C;&#xBB38;&#xC5D0; &#xB0B4;&#xBD80; &#xCF54;&#xB4DC;&#xB97C; &#xC5B4;&#xB5BB;&#xAC8C; lint&#xD558;&#xB294;&#xC9C0; &#xAD81;&#xAE08;&#xD588;&#xC744; &#xAC81;&#xB2C8;&#xB2E4;. &#xC6B0;&#xB9AC;&#xB294; &#xB2F9;&#xC2E0;&#xC774; <a href="http://eslint.org/" target="_blank">ESLint</a>&#xB97C; &#xC0AC;&#xC6A9;&#xD558;&#xACE0; &#xC788;&#xB2E4;&#xACE0; &#xAC00;&#xC815;&#xD569;&#xB2C8;&#xB2E4;. (&#xADF8;&#xB807;&#xC9C0; &#xC54A;&#xB2E4;&#xBA74; &#xC0AC;&#xC6A9;&#xD574;&#xC57C;&#xD569;&#xB2C8;&#xB2E4;!)</p>
+<p><code>*.vue</code> &#xD30C;&#xC77C; &#xB0B4;&#xC5D0;&#xC11C; JavaScript&#xB97C; &#xCD94;&#xCD9C;&#xD558;&#xACE0; linting&#xD558;&#xB294; &#xAC83;&#xACFC; &#xD568;&#xAED8; <a href="https://github.com/BenoitZugmeyer/eslint-plugin-html" target="_blank">eslint-html-plugin</a>&#xC774; &#xD544;&#xC694;&#xD569;&#xB2C8;&#xB2E4;.</p>
+<p>&#xADF8;&#xB9AC;&#xACE0; ESLint &#xC124;&#xC815;&#xC5D0; &#xD50C;&#xB7EC;&#xADF8;&#xC778;&#xC744; &#xD3EC;&#xD568;&#xD574;&#xC57C; &#xD569;&#xB2C8;&#xB2E4;.</p>
+<pre><code class="lang-json"><span class="hljs-string">&quot;plugins&quot;</span>: [
+  <span class="hljs-string">&quot;html&quot;</span>
+]
+</code></pre>
+<p>&#xADF8; &#xB2E4;&#xC74C; &#xCEE4;&#xB9E8;&#xB4DC; &#xB77C;&#xC778;&#xC5D0;&#xC11C; &#xB2E4;&#xC74C;&#xACFC; &#xAC19;&#xC774; &#xC785;&#xB825;&#xD569;&#xB2C8;&#xB2E4;.</p>
+<pre><code class="lang-bash">eslint --ext js,vue MyComponent.vue
+</code></pre>
+<p>&#xB610; &#xB2E4;&#xB978; &#xC635;&#xC158;&#xC740; <a href="https://github.com/MoOx/eslint-loader" target="_blank">eslint-loader</a>&#xB97C; &#xC0AC;&#xC6A9;&#xD558;&#xC5EC; &#xAC1C;&#xBC1C; &#xC911;&#xC5D0; <code>*.vue</code> &#xD30C;&#xC77C;&#xC774; &#xC800;&#xC7A5;&#xB420; &#xB54C; &#xC790;&#xB3D9;&#xC73C;&#xB85C; lint&#xD560; &#xC218; &#xC788;&#xC2B5;&#xB2C8;&#xB2E4;.</p>
+<pre><code class="lang-bash">npm install eslint eslint-loader --save-dev
+</code></pre>
+<pre><code class="lang-js"><span class="hljs-comment">// webpack.config.js</span>
+<span class="hljs-built_in">module</span>.exports = {
+  <span class="hljs-comment">// &#xC5EC;&#xAE30;&#xC5D0; &#xB2E4;&#xB978; &#xC635;&#xC158;&#xC774; &#xC62C; &#xC218; &#xC788;&#xC2B5;&#xB2C8;&#xB2E4;.</span>
+  <span class="hljs-built_in">module</span>: {
+    loaders: [
+      {
+        test: <span class="hljs-regexp">/\.vue$/</span>,
+        loader: <span class="hljs-string">&apos;vue!eslint&apos;</span>
+      }
+    ]
+  }
+}
+</code></pre>
+<p>webpack &#xB85C;&#xB354; &#xCCB4;&#xC778;&#xC774; <strong>&#xAC00;&#xC7A5; &#xBA3C;&#xC800;</strong> &#xC801;&#xC6A9;&#xB429;&#xB2C8;&#xB2E4;. <code>vue</code> &#xC804;&#xC5D0; <code>eslint</code>&#xB97C; &#xC801;&#xC6A9;&#xD558;&#xC5EC; &#xCEF4;&#xD30C;&#xC77C; &#xC804; &#xC18C;&#xC2A4;&#xCF54;&#xB4DC;&#xB97C; lint&#xD558;&#xC138;&#xC694;.</p>
+<p>&#xC6B0;&#xB9AC;&#xAC00; &#xACE0;&#xB824;&#xD574;&#xC57C;&#xD560; &#xD55C; &#xAC00;&#xC9C0;&#xB294; NPM &#xD328;&#xD0A4;&#xC9C0;&#xC5D0; &#xD3EC;&#xD568; &#xB41C; &#xC368;&#xB4DC;&#xD30C;&#xD2F0; <code>*.vue</code> &#xCEF4;&#xD3EC;&#xB10C;&#xD2B8;&#xB97C; &#xC0AC;&#xC6A9;&#xD558;&#xB294; &#xAC83; &#xC785;&#xB2C8;&#xB2E4;. &#xC774; &#xACBD;&#xC6B0;&#xC5D0; &#xC6B0;&#xB9AC;&#xB294; &#xC368;&#xB4DC;&#xD30C;&#xD2F0; &#xCEF4;&#xD3EC;&#xB10C;&#xD2B8;&#xB97C; &#xCC98;&#xB9AC;&#xD558;&#xAE30; &#xC704;&#xD574; <code>vue-loader</code>&#xB97C; &#xC0AC;&#xC6A9;&#xD558;&#xB824;&#xACE0; &#xD558;&#xC9C0;&#xB9CC; &#xADF8;&#xAC83;&#xC744; lint&#xD558;&#xACE0; &#xC2F6;&#xC9C0;&#xB294; &#xC54A;&#xC2B5;&#xB2C8;&#xB2E4;. &#xC6B0;&#xB9AC;&#xB294; lint&#xB97C; webpack&#xC758; <a href="https://webpack.github.io/docs/loaders.html#loader-order" target="_blank">preLoaders</a>&#xB85C; &#xBD84;&#xB9AC;&#xD560; &#xC218; &#xC788;&#xC2B5;&#xB2C8;&#xB2E4;.</p>
+<pre><code class="lang-js"><span class="hljs-comment">// webpack.config.js</span>
+<span class="hljs-built_in">module</span>.exports = {
+  <span class="hljs-comment">// &#xC5EC;&#xAE30;&#xC5D0; &#xB2E4;&#xB978; &#xC635;&#xC158;&#xC774; &#xC62C; &#xC218; &#xC788;&#xC2B5;&#xB2C8;&#xB2E4;.</span>
+  <span class="hljs-built_in">module</span>: {
+    <span class="hljs-comment">// &#xC624;&#xC9C1; &#xB85C;&#xCEEC; *.vue &#xD30C;&#xC77C;&#xB9CC; lint&#xD569;&#xB2C8;&#xB2E4;.</span>
+    preLoaders: [
+      {
+        test: <span class="hljs-regexp">/\.vue$/</span>,
+        loader: <span class="hljs-string">&apos;eslint&apos;</span>,
+        exclude: <span class="hljs-regexp">/node_modules/</span>
+      }
+    ],
+    <span class="hljs-comment">// &#xD558;&#xC9C0;&#xB9CC; &#xBAA8;&#xB4E0; *.vue &#xD30C;&#xC77C;&#xC5D0; &#xB300;&#xD574; vue-loader&#xB97C; &#xC0AC;&#xC6A9;&#xD558;&#xC138;&#xC694;.</span>
+    loaders: [
+      {
+        test: <span class="hljs-regexp">/\.vue$/</span>,
+        loader: <span class="hljs-string">&apos;vue&apos;</span>
+      }
+    ]
+  }
+}
+</code></pre>
+<p>webpack 2.x&#xC5D0;&#xC11C;&#xB294; &#xB2E4;&#xC74C;&#xACFC; &#xAC19;&#xC774; &#xCC98;&#xB9AC;&#xD569;&#xB2C8;&#xB2E4;.</p>
+<pre><code class="lang-js"><span class="hljs-comment">// webpack.config.js</span>
+<span class="hljs-built_in">module</span>.exports = {
+  <span class="hljs-comment">// &#xC5EC;&#xAE30;&#xC5D0; &#xB2E4;&#xB978; &#xC635;&#xC158;&#xC774; &#xC62C; &#xC218; &#xC788;&#xC2B5;&#xB2C8;&#xB2E4;.</span>
+  <span class="hljs-built_in">module</span>: {
+    rules: [
+      <span class="hljs-comment">// &#xC624;&#xC9C1; &#xB85C;&#xCEEC; *.vue &#xD30C;&#xC77C;&#xB9CC; lint&#xD569;&#xB2C8;&#xB2E4;.</span>
+      {
+        enforce: <span class="hljs-string">&apos;pre&apos;</span>,
+        test: <span class="hljs-regexp">/\.vue$/</span>,
+        loader: <span class="hljs-string">&apos;eslint&apos;</span>,
+        exclude: <span class="hljs-regexp">/node_modules/</span>
+      },
+      <span class="hljs-comment">// &#xD558;&#xC9C0;&#xB9CC; &#xBAA8;&#xB4E0; *.vue &#xD30C;&#xC77C;&#xC5D0; &#xB300;&#xD574; vue-loader&#xB97C; &#xC0AC;&#xC6A9;&#xD558;&#xC138;&#xC694;.</span>
+      {
+        test: <span class="hljs-regexp">/\.vue$/</span>,
+        loader: <span class="hljs-string">&apos;vue&apos;</span>
+      }
+    ]
+  }
+}
+</code></pre>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+  <script src="//m.servedby-buysellads.com/monetization.js" type="text/javascript"></script>
+  <div class="bsa-cpc"></div>
+  <script>
+    (function(){
+      if(typeof _bsa !== 'undefined' && _bsa) {
+      _bsa.init('default', 'CKYD62QM', 'placement:vuejsorg', {
+        target: '.bsa-cpc',
+        align: 'horizontal',
+        disable_css: 'true'
+      });
+        }
+    })();
+  </script>
+
+            </div>
+
+            
+                
+                <a href="production.html" class="navigation navigation-prev " aria-label="Previous page: 배포용 빌드">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="testing.html" class="navigation navigation-next " aria-label="Next page: 테스트">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Linting","level":"1.5.2","depth":2,"next":{"title":"테스트","level":"1.5.3","depth":2,"path":"workflow/testing.md","ref":"workflow/testing.md","articles":[]},"previous":{"title":"배포용 빌드","level":"1.5.1","depth":2,"path":"workflow/production.md","ref":"workflow/production.md","articles":[]},"dir":"ltr"},"config":{"plugins":["edit-link","theme-vuejs","-fontsettings","github"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"edit-link":{"label":"Edit This Page","base":"https://github.com/vuejs/vue-loader/tree/master/docs"},"github":{"url":"https://github.com/vuejs/vue-loader/"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-vuejs":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"vue-loader","language":"kr","links":{"sharing":{"facebook":false,"twitter":false}},"gitbook":"*"},"file":{"path":"workflow/linting.md","mtime":"2018-03-06T21:08:20.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-04-24T16:29:37.026Z"},"basePath":"..","book":{"language":"kr"}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../../gitbook/gitbook.js"></script>
+    <script src="../../gitbook/theme.js"></script>
+    
+        
+        <script src="../../gitbook/gitbook-plugin-edit-link/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-github/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+
+    </body>
+</html>
+

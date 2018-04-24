@@ -1,0 +1,604 @@
+
+<!DOCTYPE HTML>
+<html lang="pt_BR" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Testando com Mocks · vue-loader</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-theme-vuejs/vue.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="../options.html" />
+    
+    
+    <link rel="prev" href="testing.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+<script async type="text/javascript" src="//cdn.carbonads.com/carbon.js?zoneid=1673&serve=C6AILKT&placement=vuejs" id="_carbonads_js"></script>
+
+
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Introdução
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" >
+            
+                <span>
+            
+                    
+                    Começando
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="../start/spec.html">
+            
+                <a href="../start/spec.html">
+            
+                    
+                    Especificação do Vue Component
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="../start/setup.html">
+            
+                <a href="../start/setup.html">
+            
+                    
+                    Configurando um projeto
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" >
+            
+                <span>
+            
+                    
+                    Características
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../features/es2015.html">
+            
+                <a href="../features/es2015.html">
+            
+                    
+                    ES2015
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../features/scoped-css.html">
+            
+                <a href="../features/scoped-css.html">
+            
+                    
+                    CSS com Escopo
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="../features/css-modules.html">
+            
+                <a href="../features/css-modules.html">
+            
+                    
+                    Módulos CSS
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4" data-path="../features/postcss.html">
+            
+                <a href="../features/postcss.html">
+            
+                    
+                    PostCSS
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5" data-path="../features/hot-reload.html">
+            
+                <a href="../features/hot-reload.html">
+            
+                    
+                    Hot Reload
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" >
+            
+                <span>
+            
+                    
+                    Configurações
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../configurations/pre-processors.html">
+            
+                <a href="../configurations/pre-processors.html">
+            
+                    
+                    Pré-Processadores
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../configurations/asset-url.html">
+            
+                <a href="../configurations/asset-url.html">
+            
+                    
+                    Manipulação de recurso de URL
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="../configurations/advanced.html">
+            
+                <a href="../configurations/advanced.html">
+            
+                    
+                    Configuração avançado do loader
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4" data-path="../configurations/extract-css.html">
+            
+                <a href="../configurations/extract-css.html">
+            
+                    
+                    Extraindo arquivos CSS
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5" data-path="../configurations/custom-blocks.html">
+            
+                <a href="../configurations/custom-blocks.html">
+            
+                    
+                    Blocos customizados
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" >
+            
+                <span>
+            
+                    
+                    Fluxo de trabalho
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="production.html">
+            
+                <a href="production.html">
+            
+                    
+                    Construir Produção
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="linting.html">
+            
+                <a href="linting.html">
+            
+                    
+                    Análise estática do código (Linting)
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3" data-path="testing.html">
+            
+                <a href="testing.html">
+            
+                    
+                    Testando
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.5.4" data-path="testing-with-mocks.html">
+            
+                <a href="testing-with-mocks.html">
+            
+                    
+                    Testando com Mocks
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../options.html">
+            
+                <a href="../options.html">
+            
+                    
+                    Referência de opções
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+  
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >Testando com Mocks</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="testes-com-mocks">Testes com Mocks</h1>
+<p>Em uma aplica&#xE7;&#xE3;o do mundo real, nossos componentes provavelmente tem uma depend&#xEA;ncia externa. Ao escrever testes de unidades para componentes, seria ideal se pud&#xE9;ssemos simular (mock) essas depend&#xEA;ncias externas de modo que nossos testes dependam apenas do comportamento do componente que est&#xE1; sendo testado.</p>
+<p><code>vue-loader</code> fornece um recurso que permite voc&#xEA; injetar depend&#xEA;ncias arbitr&#xE1;ria para um componente <code>*.vue</code>, usando o <a href="https://github.com/plasticine/inject-loader" target="_blank">inject-loader</a>. A ideia geral &#xE9; que, em vez de importar diretamente o m&#xF3;dulo componente, n&#xF3;s usaremos <code>inject-loader</code> para criar uma fun&#xE7;&#xE3;o &quot;f&#xE1;brica de m&#xF3;dulos&quot; para este m&#xF3;dulo. Quando est&#xE1; fun&#xE7;&#xE3;o &#xE9; chamada com um objeto de mocks, ele retorna uma inst&#xE2;ncia do m&#xF3;dulo com os mocks injetados.</p>
+<p>Suponha que temos um componente como este:</p>
+<pre><code class="lang-html"><span class="hljs-comment">&lt;!-- exemplo.vue --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">template</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;msg&quot;</span>&gt;</span>{{ msg }}<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span>
+
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript">
+<span class="hljs-comment">// est&#xE1; depend&#xEA;ncia precisa ser encadeada</span>
+<span class="hljs-keyword">import</span> AgumServico <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;../servico&apos;</span>
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> {
+  data () {
+    <span class="hljs-keyword">return</span> {
+      msg: AgumServico.msg
+    }
+  }
+}
+</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+</code></pre>
+<p>Veja como import&#xE1;-lo com simula&#xE7;&#xF5;es:</p>
+<blockquote>
+<p>Nota: inject-loader@3.x est&#xE1; atualmente inst&#xE1;vel.</p>
+</blockquote>
+<pre><code class="lang-bash">npm install inject-loader@^2.0.0 --save-dev
+</code></pre>
+<pre><code class="lang-js"><span class="hljs-comment">// exemplo.spec.js</span>
+<span class="hljs-keyword">const</span> ExemploInjecao = <span class="hljs-built_in">require</span>(<span class="hljs-string">&apos;!!vue-loader?inject!./exemplo.vue&apos;</span>)
+</code></pre>
+<p>Observe que ele requer uma sequ&#xEA;ncia de caracteres - n&#xF3;s estamos usando algumas <a href="https://webpack.github.io/docs/loaders.html" target="_blank">requisi&#xE7;&#xF5;es de carregador webpack</a> em linha aqui. Uma explica&#xE7;&#xE3;o r&#xE1;pida:</p>
+<ul>
+<li><code>!!</code> no in&#xED;cio significa &quot;desative todos os carregadores da configura&#xE7;&#xE3;o global&quot;;</li>
+<li><code>vue-loader?inject!</code> significa &quot;use <code>vue-loader</code>, e passe o <code>?inject</code> na consulta&quot;. Isso informa ao <code>vue-loader</code> para compilar o componente no modo inje&#xE7;&#xE3;o de depend&#xEA;ncia.</li>
+</ul>
+<p>O retorno de <code>ExemploInjecao</code> &#xE9; uma fun&#xE7;&#xE3;o de f&#xE1;brica que pode ser chamada para criar inst&#xE2;ncias do m&#xF3;dulo <code>exemplo.vue</code>.</p>
+<pre><code class="lang-js"><span class="hljs-keyword">const</span> ExemploComMocks = ExemploInjecao({
+  <span class="hljs-comment">// simula&#xE7;&#xE3;o de servi&#xE7;o</span>
+  <span class="hljs-string">&apos;../servico&apos;</span>: {
+    msg: <span class="hljs-string">&apos;Ol&#xE1; de uma simula&#xE7;&#xE3;o de servi&#xE7;o!&apos;</span>
+  }
+})
+</code></pre>
+<p>Finalmente, podemos testar o componente como de costume:</p>
+<pre><code class="lang-js">it(<span class="hljs-string">&apos;Deve renderizar&apos;</span>, () =&gt; {
+  <span class="hljs-keyword">const</span> vm = <span class="hljs-keyword">new</span> Vue({
+    template: <span class="hljs-string">&apos;&lt;div&gt;&lt;test&gt;&lt;/test&gt;&lt;/div&gt;&apos;</span>,
+    components: {
+      <span class="hljs-string">&apos;test&apos;</span>: ExemploComMocks
+    }
+  }).$mount()
+  expect(vm.$el.querySelector(<span class="hljs-string">&apos;.msg&apos;</span>).textContent).toBe(<span class="hljs-string">&apos;Ol&#xE1; de uma simula&#xE7;&#xE3;o de servi&#xE7;o!&apos;</span>)
+})
+</code></pre>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+  <script src="//m.servedby-buysellads.com/monetization.js" type="text/javascript"></script>
+  <div class="bsa-cpc"></div>
+  <script>
+    (function(){
+      if(typeof _bsa !== 'undefined' && _bsa) {
+      _bsa.init('default', 'CKYD62QM', 'placement:vuejsorg', {
+        target: '.bsa-cpc',
+        align: 'horizontal',
+        disable_css: 'true'
+      });
+        }
+    })();
+  </script>
+
+            </div>
+
+            
+                
+                <a href="testing.html" class="navigation navigation-prev " aria-label="Previous page: Testando">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="../options.html" class="navigation navigation-next " aria-label="Next page: Referência de opções">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Testando com Mocks","level":"1.5.4","depth":2,"next":{"title":"Referência de opções","level":"1.6","depth":1,"path":"options.md","ref":"options.md","articles":[]},"previous":{"title":"Testando","level":"1.5.3","depth":2,"path":"workflow/testing.md","ref":"workflow/testing.md","articles":[]},"dir":"ltr"},"config":{"plugins":["edit-link","theme-vuejs","-fontsettings","github"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"edit-link":{"label":"Edit This Page","base":"https://github.com/vuejs/vue-loader/tree/master/docs"},"github":{"url":"https://github.com/vuejs/vue-loader/"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-vuejs":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"vue-loader","language":"pt_BR","links":{"sharing":{"facebook":false,"twitter":false}},"gitbook":"*"},"file":{"path":"workflow/testing-with-mocks.md","mtime":"2018-03-06T21:08:20.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-04-24T16:29:37.026Z"},"basePath":"..","book":{"language":"pt_BR"}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../../gitbook/gitbook.js"></script>
+    <script src="../../gitbook/theme.js"></script>
+    
+        
+        <script src="../../gitbook/gitbook-plugin-edit-link/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-github/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+
+    </body>
+</html>
+
