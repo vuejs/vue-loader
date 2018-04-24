@@ -1,5 +1,5 @@
-# Testing
+# Kiểm thử
 
-- [@vue/cli](https://github.com/vuejs/vue-cli) offers pre-configured unit testing and e2e testing setups for you.
+- [@vue/cli](https://github.com/vuejs/vue-cli) cho phép cấu hình kiểm thử đơn vị và kiểm thử e2e.
 
-- If you are interested in manually setting up unit tests for `*.vue` files, consult [the docs for `@vue/test-utils`](https://vue-test-utils.vuejs.org/en/).
+- Nếu bạn muốn tự mình thiết lập quá trình kiểm thử đơn vị cho các tệp `*.vue`, tham khảo [tài liệu `@vue/test-utils`](https://vue-test-utils.vuejs.org/en/).
