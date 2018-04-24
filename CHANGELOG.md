@@ -1,3 +1,18 @@
+<a name="15.0.0"></a>
+# [15.0.0](https://github.com/vuejs/vue-loader/compare/v15.0.0-rc.2...v15.0.0) (2018-04-24)
+
+
+### Bug Fixes
+
+* compat with null-loader (close [#1239](https://github.com/vuejs/vue-loader/issues/1239)) ([5cd5f6f](https://github.com/vuejs/vue-loader/commit/5cd5f6f))
+
+
+### Features
+
+* support declaring rules using .vue.html (ref [#1238](https://github.com/vuejs/vue-loader/issues/1238)) ([a3af6b3](https://github.com/vuejs/vue-loader/commit/a3af6b3))
+
+
+
 <a name="15.0.0-rc.2"></a>
 # [15.0.0-rc.2](https://github.com/vuejs/vue-loader/compare/v15.0.0-rc.1...v15.0.0-rc.2) (2018-04-11)
 
