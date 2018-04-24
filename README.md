@@ -2,6 +2,8 @@
 
 > webpack loader for Vue Single-File Components
 
+**NOTE:** The master branch now hosts the code for v15! Legacy code is now in the [v14 branch](https://github.com/vuejs/vue-loader/tree/v14).
+
 - [Documentation](https://vue-loader.vuejs.org)
 - [Migrating from v14](https://vue-loader.vuejs.org/migrating.html)
 
