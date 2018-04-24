@@ -1,7 +1,7 @@
 # Introduction
 
 :::tip VERSION NOTE
-This is the documentation for Vue Loader v15 and above. If you are upgrading from v14 or an earlier version, check out the [Migration Guide](../migrating.md). If you are using an older version, the old docs are [here](vue-loader-v14.vuejs.org).
+This is the documentation for Vue Loader v15 and above. If you are upgrading from v14 or an earlier version, check out the [Migration Guide](../migrating.md). If you are using an older version, the old docs are [here](https://vue-loader-v14.vuejs.org).
 :::
 
 ## What is Vue Loader?
