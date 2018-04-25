@@ -2,7 +2,7 @@
 
 ## Vue CLI
 
-If you are not interested in manually setting up webpack, it is recommended to scaffold a project with [Vue CLI](https://github.com/vuejs/vue-cli) instead. Projects created by Vue CLI is pre-configured with most of the common development needs and works out of the box.
+If you are not interested in manually setting up webpack, it is recommended to scaffold a project with [Vue CLI](https://github.com/vuejs/vue-cli) instead. Projects created by Vue CLI are pre-configured with most of the common development needs working out of the box.
 
 Follow this guide if the built-in configuration of Vue CLI does not suit your needs, or you'd rather create your own webpack config from scratch.
 

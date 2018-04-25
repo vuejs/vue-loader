@@ -6,14 +6,30 @@ sidebarDepth: 2
 # Migrating from v14
 
 ::: tip Heads Up
-We are in the process of upgrading Vue CLI 3 beta to use webpack 4 + Vue Loader v15, so you might want to wait if are planning to upgrade to Vue CLI 3.
+We are in the process of upgrading Vue CLI 3 beta to use webpack 4 + Vue Loader 15, so you might want to wait if you are planning to upgrade to Vue CLI 3.
 :::
 
 ## Notable Breaking Changes
 
+### A Plugin is Now Required
+
+Vue Loader 15 now requires an accompanying webpack plugin to function properly:
+
+``` js
+// webpack.config.js
+const { VueLoaderPlugin } = require('vue-loader')
+
+module.exports = {
+  // ...
+  plugins: [
+    new VueLoaderPlugin()
+  ]
+}
+```
+
 ### Loader Inference
 
-`vue-loader` 15 now infers loaders to use for language blocks a bit differently.
+Vue Loader 15 now uses a different strategy to infer loaders to use for language blocks.
 
 Take `<style lang="less">` as an example: in v14 and below, it will attempt to load the block with `less-loader`, and implicitly chains `css-loader` and `vue-style-loader` after it, all using inline loader strings.
 
@@ -37,7 +53,7 @@ In v15, `<style lang="less">` will behave as if it's an actual `*.less` file bei
 }
 ```
 
-The benefit is that this same rule also applies to plain `*.less` imports from JavaScript, and you can configure options for these loaders anyway you want. In v14 and below, if you want to provide custom options to an inferred loader, you'd have to duplicate it under `vue-loader`'s own `loaders` option. In v15 it is no longer necessary.
+The benefit is that this same rule also applies to plain `*.less` imports from JavaScript, and you can configure options for these loaders anyway you want. In v14 and below, if you want to provide custom options to an inferred loader, you'd have to duplicate it under Vue Loader's own `loaders` option. In v15 it is no longer necessary.
 
 v15 also allows using non-serializable options for loaders, which was not possible in previous versions.
 
@@ -93,7 +109,7 @@ Note the injection order is still not guaranteed, so you should avoid writing CS
 
 ### PostCSS
 
-`vue-loader` no longer auto applies PostCSS transforms. To use PostCSS, configure `postcss-loader` the same way you would for normal CSS files.
+Vue Loader no longer auto applies PostCSS transforms. To use PostCSS, configure `postcss-loader` the same way you would for normal CSS files.
 
 ### CSS Modules
 
