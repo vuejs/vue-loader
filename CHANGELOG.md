@@ -1,3 +1,14 @@
+<a name="15.0.1"></a>
+## [15.0.1](https://github.com/vuejs/vue-loader/compare/v15.0.0...v15.0.1) (2018-04-25)
+
+
+### Bug Fixes
+
+* prioritize .vue rules in plugin (fix [#1246](https://github.com/vuejs/vue-loader/issues/1246)) ([bffacd5](https://github.com/vuejs/vue-loader/commit/bffacd5))
+* warn missing plugin ([068bb81](https://github.com/vuejs/vue-loader/commit/068bb81))
+
+
+
 <a name="15.0.0"></a>
 # [15.0.0](https://github.com/vuejs/vue-loader/compare/v15.0.0-rc.2...v15.0.0) (2018-04-24)
 
