@@ -1,3 +1,13 @@
+<a name="15.0.2"></a>
+## [15.0.2](https://github.com/vuejs/vue-loader/compare/v15.0.1...v15.0.2) (2018-04-26)
+
+
+### Bug Fixes
+
+* remove resource field in cloned rules (fix [#1254](https://github.com/vuejs/vue-loader/issues/1254)) ([35ca03f](https://github.com/vuejs/vue-loader/commit/35ca03f))
+
+
+
 <a name="15.0.1"></a>
 ## [15.0.1](https://github.com/vuejs/vue-loader/compare/v15.0.0...v15.0.1) (2018-04-25)
 
