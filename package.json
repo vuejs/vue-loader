@@ -37,7 +37,7 @@
     "vue-template-compiler": "^2.0.0"
   },
   "dependencies": {
-    "@vue/component-compiler-utils": "^1.0.0",
+    "@vue/component-compiler-utils": "^1.2.1",
     "hash-sum": "^1.0.2",
     "loader-utils": "^1.1.0",
     "vue-hot-reload-api": "^2.3.0",

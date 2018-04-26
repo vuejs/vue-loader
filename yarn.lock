@@ -66,6 +66,20 @@
     source-map "^0.5.6"
     vue-template-es2015-compiler "^1.6.0"
 
+"@vue/component-compiler-utils@^1.2.1":
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/@vue/component-compiler-utils/-/component-compiler-utils-1.2.1.tgz#3d543baa75cfe5dab96e29415b78366450156ef6"
+  dependencies:
+    consolidate "^0.15.1"
+    hash-sum "^1.0.2"
+    lru-cache "^4.1.2"
+    merge-source-map "^1.1.0"
+    postcss "^6.0.20"
+    postcss-selector-parser "^3.1.1"
+    prettier "^1.11.1"
+    source-map "^0.5.6"
+    vue-template-es2015-compiler "^1.6.0"
+
 JSONStream@^1.0.4:
   version "1.3.2"
   resolved "https://registry.yarnpkg.com/JSONStream/-/JSONStream-1.3.2.tgz#c102371b6ec3a7cf3b847ca00c20bb0fce4c6dea"
@@ -5967,6 +5981,12 @@ merge-options@^1.0.0:
   resolved "https://registry.yarnpkg.com/merge-options/-/merge-options-1.0.0.tgz#5b4f339a957192b5b98994a3ac5c95d2ca651b94"
   dependencies:
     is-plain-obj "^1.1"
+
+merge-source-map@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/merge-source-map/-/merge-source-map-1.1.0.tgz#2fdde7e6020939f70906a68f2d7ae685e4c8c646"
+  dependencies:
+    source-map "^0.6.1"
 
 merge-stream@^1.0.1:
   version "1.0.1"
