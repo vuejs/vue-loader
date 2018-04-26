@@ -1,3 +1,13 @@
+<a name="15.0.3"></a>
+## [15.0.3](https://github.com/vuejs/vue-loader/compare/v15.0.2...v15.0.3) (2018-04-26)
+
+
+### Bug Fixes
+
+* handle rule.use being a string (ref: [#1256](https://github.com/vuejs/vue-loader/issues/1256)) ([fc2ba27](https://github.com/vuejs/vue-loader/commit/fc2ba27))
+
+
+
 <a name="15.0.2"></a>
 ## [15.0.2](https://github.com/vuejs/vue-loader/compare/v15.0.1...v15.0.2) (2018-04-26)
 
