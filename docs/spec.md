@@ -45,7 +45,7 @@ export default {
 </style>
 ```
 
-More details can be found in [Using Pre-Processors](./pre-processors.md).
+More details can be found in [Using Pre-Processors](./guide/pre-processors.md).
 
 ## Language Blocks
 
@@ -71,7 +71,7 @@ More details can be found in [Using Pre-Processors](./pre-processors.md).
 
 - A single `*.vue` file can contain multiple `<style>` tags.
 
-- A `<style>` tag can have `scoped` or `module` attributes (see [Scoped CSS](./scoped-css.md) and [CSS Modules](./css-modules.md)) to help encapsulate the styles to the current component. Multiple `<style>` tags with different encapsulation modes can be mixed in the same component.
+- A `<style>` tag can have `scoped` or `module` attributes (see [Scoped CSS](./guide/scoped-css.md) and [CSS Modules](./guide/css-modules.md)) to help encapsulate the styles to the current component. Multiple `<style>` tags with different encapsulation modes can be mixed in the same component.
 
 - Any webpack rules that match against `.css` files (or the extension specified by the `lang` attribute) will be applied to contents in the `<style>` blocks as well.
 
@@ -79,7 +79,7 @@ More details can be found in [Using Pre-Processors](./pre-processors.md).
 
 Additional custom blocks can be included in a `*.vue` file for any project specific needs, for example a `<docs>` block. `vue-loader` will use the tag name to look up which webpack loaders should be applied to the contents of the section. The webpack loaders should be specified in the `loaders` section of `vue-loader` options.
 
-For mode details, see [Custom Blocks](./custom-blocks.md).
+For mode details, see [Custom Blocks](./guide/custom-blocks.md).
 
 ### Src Imports
 
