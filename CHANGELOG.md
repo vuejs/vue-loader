@@ -1,3 +1,13 @@
+<a name="15.0.4"></a>
+## [15.0.4](https://github.com/vuejs/vue-loader/compare/v15.0.3...v15.0.4) (2018-04-27)
+
+
+### Bug Fixes
+
+* enable whitelist in exclude function ([5b0e392](https://github.com/vuejs/vue-loader/commit/5b0e392))
+
+
+
 <a name="15.0.3"></a>
 ## [15.0.3](https://github.com/vuejs/vue-loader/compare/v15.0.2...v15.0.3) (2018-04-26)
 
