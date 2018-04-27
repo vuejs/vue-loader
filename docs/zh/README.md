@@ -1,12 +1,12 @@
-# Introduction
+# 介绍
 
-:::tip VERSION NOTE
-This is the documentation for Vue Loader v15 and above. If you are upgrading from v14 or an earlier version, check out the [Migration Guide](../migrating.md). If you are using an older version, the old docs are [here](https://vue-loader-v14.vuejs.org).
+:::tip 版本注明
+这份文档是为 Vue Loader v15 及以上版本撰写的。如果你正在从 v14 或更早的版本往这里迁移，请查阅[迁移指南](../migrating.md)。如果你正在使用老版本，其对应的就文档[在此](https://vue-loader-v14.vuejs.org)。
 :::
 
-## What is Vue Loader?
+## Vue Loader 是什么？
 
-`vue-loader` is a loader for [webpack](https://webpack.js.org/) that allows you to author Vue components in a format called [Single-File Components (SFCs)](./spec.md):
+Vue Loader 是一个 [webpack](https://webpack.js.org/) 的 loader，它允许你以一种名为[单文件组件 (SFCs)](./spec.md)的格式撰写 Vue 组件：
 
 ``` vue
 <template>
@@ -30,12 +30,12 @@ export default {
 </style>
 ```
 
-There are many cool features provided by `vue-loader`:
+Vue Loader 还提供了很多酷炫的特性：
 
-- Allows using other webpack loaders for each part of a Vue component, for example Sass for `<style>` and Pug for `<template>`;
-- Allows custom blocks in a `.vue` file that can have custom loader chains applied to them;
-- Treat static assets referenced in `<style>` and `<template>` as module dependencies and handle them with webpack loaders;
-- Simulate scoped CSS for each component;
-- State-preserving hot-reloading during development.
+- 允许为 Vue 组件的每个部分使用其它的 webpack loader，例如在 `<style>` 的部分使用 Sass 和在 `<template>` 的部分使用 Pug；
+- 允许在一个 `.vue` 文件中使用自定义块，并对其运用自定义的 loader 链；
+- 使用 webpack loader 将 `<style>` 和 `<template>` 中引用的资源当作模块依赖来处理；
+- 为每个组件模拟出带作用域的 CSS；
+- 在开发过程中可以保持状态的热重载。
 
-In a nutshell, the combination of webpack and `vue-loader` gives you a modern, flexible and extremely powerful front-end workflow for authoring Vue.js applications.
+简而言之，webpack 和 Vue Loader 的结合为你提供了一个撰写 Vue.js 应用的、现代的、灵活的和极致强大的前端工作流。
