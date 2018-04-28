@@ -1,3 +1,11 @@
+<a name="15.0.5"></a>
+## [15.0.5](https://github.com/davidrunger/vue-loader/compare/v15.0.4...v15.0.5) (2018-04-28)
+
+
+### Bug Fixes
+
+* Don't reuse ident of `style-loader` ([e7b6b30](https://github.com/vuejs/vue-loader/commit/e7b6b30))
+
 <a name="15.0.4"></a>
 ## [15.0.4](https://github.com/vuejs/vue-loader/compare/v15.0.3...v15.0.4) (2018-04-27)
 
