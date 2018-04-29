@@ -1,51 +1,51 @@
-# Asset URL Handling
+# 处理资产路径
 
-When Vue Loader compiles the `<template>` blocks in SFCs, it also converts any encountered asset URLs into **webpack module requests**.
+当 Vue Loader 编译单文件组件中的 `<template>` 块时，它也会将所有遇到的资产 URL URL 转换为 **webpack 模块请求**。
 
-For example, the following template snippet
+例如，下面的模板代码片段
 
 ``` vue
 <img src="../image.png">
 ```
 
-will be compiled into:
+将会被编译成为：
 
 ``` js
 createElement('img', {
   attrs: {
-    src: require('../image.png') // this is now a module request
+    src: require('../image.png') // 现在这不是一个模块请求
   }
 })
 ```
 
-By default the following tag/attribute combinations are transformed, and can be configured using the [transformAssetUrls](../options.md#transformasseturls) option.
+默认下列标签/特性的组合会被转换，且这些组合时可以使用 [transformAssetUrls](../options.md#transformasseturls) 选项进行配置的。
 
-In addition, if you have configured to use [css-loader](https://github.com/webpack-contrib/css-loader) for the `<style>` blocks, asset URLs in your CSS will also be processed in a similar fashion.
+额外的，如果你配置了为 `<style>` 块使用 [css-loader](https://github.com/webpack-contrib/css-loader)，则你的 CSS 中的资产 URL 也会被同等处理。
 
-## Transform Rules
+## 转换规则
 
-Asset URL transforms adhere to the following rules:
+资产 URL 转换会遵循如下规则：
 
-- If the URL is an absolute path (e.g. `/images/foo.png`), it will be preserved as-is.
+- 如果路径是绝对路径 (例如 `/images/foo.png`)，会原样保留。
 
-- If the URL starts with `.`, it's interpreted as a relative module request and resolved based on the folder structure on your file system.
+- 如果路径以 `.` 开头，将会被看作相对的模块依赖，并按照你的本地文件系统上的目录结构进行解析。
 
-- If the URL starts with `~`, anything after it is interpreted as a module request. This means you can even reference assets inside node modules:
+- 如果路径以 `~` 开头，其后的部分将会被看作模块依赖。这意味着你可以用该特性来引用一个 node 依赖中的资源：
 
   ``` html
   <img src="~some-npm-package/foo.png">
   ```
 
-- If the URL starts with `@`, it's also interpreted as a module request. This is useful if your webpack config has an alias for `@`, which by default points to `/src` in any project created by `vue-cli`.
+- 如果路径以 `@` 开头，也会被看作模块依赖。如果你的 webpack 配置中给 `@` 配置了 alias，这就很有用了。所有 `vue-cli` 创建的项目都默认配置了将 `@` 指向 `/src`。
 
-## Related Loaders
+## 相关的 Loader
 
-Because extensions like `.png` are not JavaScript modules, you will need to configure webpack to use [file-loader](https://github.com/webpack/file-loader) or [url-loader](https://github.com/webpack/url-loader) to properly handle them. Projects created with Vue CLI has this pre-configured.
+因为像 `.png` 这样的文件不是一个 JavaScript 模块，你需要配置 webpack 使用 [file-loader](https://github.com/webpack/file-loader) 或者 [url-loader](https://github.com/webpack/url-loader) 去合理的处理它们。通过 Vue CLI 创建的项目已经把这些预配置好了。
 
-## Why
+## 为什么
 
-The benefits of asset URL transforms are:
+转换资产 URL 的好处是：
 
-1. `file-loader` allows you to designate where to copy and place the asset file, and how to name it using version hashes for better caching. Moreover, this also means **you can just place images next to your `*.vue` files and use relative paths based on the folder structure instead of worrying about deployment URLs**. With proper config, webpack will auto-rewrite the file paths into correct URLs in the bundled output.
+1. `file-loader` 可以指定要复制和放置资源文件的位置，以及如何使用版本哈希命名以获得更好的缓存。此外，这意味着 **你可以就近管理图片文件，可以使用相对路径而不用担心布署时URL问题**。使用正确的配置，webpack 将会在打包输出中自动重写文件路径为正确的URL。
 
-2. `url-loader` allows you to conditionally inline a file as base-64 data URL if they are smaller than a given threshold. This can reduce the amount of HTTP requests for trivial files. If the file is larger than the threshold, it automatically falls back to `file-loader`.
+2. `url-loader` 允许你有条件将文件转换为内联的 base-64 URL (当文件小于给定的阈值)，这会减少小文件的 HTTP 请求。如果文件大于该阈值，会自动的交给 `file-loader` 处理。

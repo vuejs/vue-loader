@@ -94,7 +94,7 @@ export default {
 需要注意的是 `src` 导入遵循和 webpack 模块请求相同的路径解析规则，这意味着：
 
 - 相对路径需要以 `./` 开始
-- 你可以从 NPM 依赖中导入资源：
+- 你可以从 NPM 依赖中导入资产：
 
 ``` vue
 <!-- import a file from the installed "todomvc-app-css" npm package -->
