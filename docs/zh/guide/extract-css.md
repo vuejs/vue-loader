@@ -1,7 +1,7 @@
-# CSS Extraction
+# CSS 提取
 
-::: tip
-Only apply CSS extraction for production so that you get CSS hot reload during development.
+:::tip 提示
+只有生产环境才会运用 CSS 提取，这有便于你在开发环境下进行热重载。
 :::
 
 ## webpack 4
@@ -15,10 +15,10 @@ npm install -D mini-css-extract-plugin
 var MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 module.exports = {
-  // other options...
+  // 其它选项...
   module: {
     rules: [
-      // ...other rules omitted
+      // ...其它规则忽略
       {
         test: /\.css$/,
         use: [
@@ -31,7 +31,7 @@ module.exports = {
     ]
   },
   plugins: [
-    // ...vue-loader plugin omitted
+    // ...vue-loader 插件忽略
     new MiniCssExtractPlugin({
       filename: style.css
     })
@@ -39,7 +39,7 @@ module.exports = {
 }
 ```
 
-Also see [mini-css-extract-plugin docs](https://github.com/webpack-contrib/mini-css-extract-plugin).
+你还可以查阅 [mini-css-extract-plugin 文档](https://github.com/webpack-contrib/mini-css-extract-plugin)。
 
 ## webpack 3
 
@@ -52,10 +52,10 @@ npm install -D extract-text-webpack-plugin
 var ExtractTextPlugin = require("extract-text-webpack-plugin")
 
 module.exports = {
-  // other options...
+  // 其它选项...
   module: {
     rules: [
-      // ...other rules omitted
+      // ...其它规则忽略
       {
         test: /\.css$/,
         loader: ExtractTextPlugin.extract({
@@ -66,10 +66,10 @@ module.exports = {
     ]
   },
   plugins: [
-    // ...vue-loader plugin omitted
+    // ...vue-loader 插件忽略
     new ExtractTextPlugin("style.css")
   ]
 }
 ```
 
-Also see [extract-text-webpack-plugin docs](https://github.com/webpack-contrib/extract-text-webpack-plugin).
+你也可以查阅 [extract-text-webpack-plugin 文档](https://github.com/webpack-contrib/extract-text-webpack-plugin)。
