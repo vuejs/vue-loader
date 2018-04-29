@@ -1,10 +1,10 @@
-# Custom Blocks
+# 自定义块
 
-You can define custom language blocks inside `*.vue` files. Loaders applied for a custom block are matched based on the `lang` attribute of the block, the block's tag name, and the rules in your webpack config.
+在 `.vue` 文件中，你可以自定义语言块。应用于一个自定义块的 loader 是基于这个块的 `lang` 特性、块的标签名以及你的 webpack 配置进行匹配的。
 
-If a `lang` attribute is specified, the custom block will be matched as a file with the `lang` as its extension.
+如果一个 `lang` 特性被指定，则这个自定义块将会作为一个带有该 `lang` 扩展名的文件进行匹配。
 
-You can also use `resourceQuery` to match a rule against a custom block with no `lang`. For example, to match against `<foo>` custom blocks:
+你也可以使用 `resourceQuery` 来为一个没有 `lang` 的自定义块匹配一条规则。例如为了匹配自定义块 `<foo>`：
 
 ``` js
 {
@@ -19,15 +19,15 @@ You can also use `resourceQuery` to match a rule against a custom block with no 
 }
 ```
 
-If a matching rule is found for a custom block, it will be processed; otherwise the custom block will be silently ignored.
+如果找到了一个自定义块的匹配规则，它将会被处理，否则该自定义块会被默默忽略。
 
-Additionally, if the custom block exports a function as the final result after being processed by all the matching loaders, that function will be called with the component of the `*.vue` file as a parameter.
+额外的，如果这个自定义块被所有匹配的 loader 处理之后导出一个函数作为最终结果，则这个 `*.vue` 文件的组件会作为一个参数被这个函数调用。
 
 ## Example
 
-Here's an example of injecting the `<docs>` custom blocks into the component so that it's available during runtime.
+这里有一个向组件内注入 `<docs>` 自定义块的示例，且它是在运行时可用的。
 
-In order for the custom block content to be injected, we'll write a custom loader:
+为了注入自定义块的内容，我们将会撰写一个自定义 loader：
 
 ``` js
 module.exports = function (source, map) {
@@ -43,7 +43,7 @@ module.exports = function (source, map) {
 }
 ```
 
-Now we'll configure webpack to use our custom loader for `<docs>` custom blocks.
+现在我们将会配置 webpack 来使用我们为 `<docs>` 自定义块撰写的自定义 loader。
 
 ``` js
 // wepback.config.js
@@ -59,7 +59,7 @@ module.exports = {
 }
 ```
 
-We are now able to access the `<docs>` block's content of imported components during runtime.
+现在我们可以在运行时访问被导入组件的 `<docs>` 块内容了。
 
 ``` vue
 <!-- ComponentB.vue -->
