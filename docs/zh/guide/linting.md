@@ -1,8 +1,8 @@
-# Linting
+# 校验
 
-The official [eslint-plugin-vue](https://github.com/vuejs/eslint-plugin-vue) supports linting both the template and script parts of Vue single file components.
+官方的 [eslint-plugin-vue](https://github.com/vuejs/eslint-plugin-vue) 同时支持在 Vue 单文件组件的模板和脚本部分的校验。
 
-Make sure to use the plugin's included config in your ESLint config:
+请确认在你的 ESLint 配置文件中使用该插件要导入的配置：
 
 ``` js
 // .eslintrc.js
@@ -13,24 +13,24 @@ module.exports = {
 }
 ```
 
-Then from the command line:
+接下来从命令行运行：
 
 ``` bash
 eslint --ext js,vue MyComponent.vue
 ```
 
-Another option is using [eslint-loader](https://github.com/MoOx/eslint-loader) so that your `*.vue` files are automatically linted on save during development:
+另一个选项是使用 [eslint-loader](https://github.com/MoOx/eslint-loader) 那么你的 `*.vue` 文件在开发过程中每次保存的时候就会自动进行校验：
 
 ``` bash
 npm install -D eslint eslint-loader
 ```
 
-Make sure it's applied as a pre-loader:
+请确认它是作为一个 pre-loader 运用的：
 
 ``` js
 // webpack.config.js
 module.exports = {
-  // ... other options
+  // ... 其它选项
   module: {
     rules: [
       {
