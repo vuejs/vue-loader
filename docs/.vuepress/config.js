@@ -68,7 +68,7 @@ module.exports = {
             link: '/zh/spec.html'
           },
           {
-            text: '选项手册',
+            text: '选项参考',
             link: '/zh/options.html'
           },
           {
