@@ -43,7 +43,7 @@ sidebar: auto
 
   Configure ES2015+ to ES5 transpiling options for the generated render function code. The [transpiler](https://github.com/vuejs/vue-template-es2015-compiler) is a fork of [Buble](https://github.com/Rich-Harris/buble), so consult the available options [here](https://buble.surge.sh/guide/#using-the-javascript-api).
 
-  The template render functions compilation supports a special transform `stripWith` (enabled by default), which removes the `with` usage in generated render functions to make them strict-mode compliant. This is enabled by default.
+  The template render functions compilation supports a special transform `stripWith` (enabled by default), which removes the `with` usage in generated render functions to make them strict-mode compliant.
 
 ## optimizeSSR
 
