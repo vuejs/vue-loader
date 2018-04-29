@@ -1,34 +1,34 @@
-# Hot Reload
+# 热重载
 
-"Hot Reload" is not simply reloading the page when you edit a file. With hot reload enabled, when you edit a `*.vue` file, all instances of that component will be swapped in **without reloading the page**. It even preserves the current state of your app and these swapped components! This dramatically improves the development experience when you are tweaking the templates or styling of your components.
+"热重载"不是当你修改文件的时候简单重新加载页面。启用热重载后，当你修改 `.vue` 文件时，所有该组件的实例会被替换，**并且不需要刷新页面**。它甚至保持应用程序和被替换组件的当前状态！当你调整模版或者修改样式时，这极大的提高了开发体验。
 
 ![hot-reload](http://blog.evanyou.me/images/vue-hot.gif)
 
-## State Preservation Rules
+## 状态保留规则
 
-- When editing the `<template>` of a component, instances of the edited component will re-render in place, preserving all current private state. This is possible because templates are compiled into new render functions that produce no side-effects.
+- 当编辑一个组件的 `<template>` 时，这个组件实例将就地重新渲染，并保留当前所有的私有状态。能够做到这一点是因为模板被编译成了新的无副作用的渲染函数。
 
-- When editing the `<script>` part of a component, instances of the edited component will be destroyed and re-created in place. (State of the other components in the app are preserved) This is because `<script>` can include lifecycle hooks that may produce side-effects, so a "reload" instead of re-render is required to ensure consistent behavior. This also means you need to be careful about global side effects such as timers inside your components lifecycle hooks. Sometimes you may need to do a full-page reload if your component produces global side-effects.
+- 当编辑一个组件的 `<script>` 时，这个组件实例将就地销毁并重新创建。(应用中其它组件的状态将会被保留) 是因为 `<script>` 可能包含带有副作用的生命周期钩子，所以将重新渲染替换为重新加载是必须的，这样做可以确保组件行为的一致性。这也意味着，如果你的组件带有全局副作用，则整个页面将会被重新加载。
 
-- `<style>` hot reload operates on its own via `vue-style-loader`, so it doesn't affect application state.
+- `<style>` 会通过 `vue-style-loader` 自行热重载，所以它不会影响应用的状态。
 
-## Usage
+## 用法
 
-When scaffolding the project with `vue-cli`, Hot Reload is enabled out-of-the-box.
+当使用脚手架工具 `vue-cli` 时，热重载是开箱即用的。
 
-When manually setting up your project, hot-reload is enabled automatically when you serve your project with `webpack-dev-server --hot`.
+当手动设置你的工程时，热重载会在你启动 `webpack-dev-server --hot` 服务时自动开启。
 
-Advanced users may want to check out [vue-hot-reload-api](https://github.com/vuejs/vue-hot-reload-api), which is used internally by `vue-loader`.
+高阶用户可能希望移步 `vue-loader` 内部使用的 [vue-hot-reload-api](https://github.com/vuejs/vue-hot-reload-api) 继续查阅。
 
-## Disabling Hot Reload
+## 关闭热重载
 
-Hot Reload is always enabled except following situations:
+热重载默认是开启的，除非遇到以下情况：
 
- * webpack `target` is `node` (SSR)
- * webpack minifies the code
+ * webpack 的 `target` 的值是 `node` (服务端渲染)
+ * webpack 会压缩代码
  * `process.env.NODE_ENV === 'production'`
 
-You may use `hotReload: false` option to disable the Hot Reload explicitly:
+你可以设置 `hotReload: false` 选项来显式关闭热重载：
 
 ``` js
 module: {
@@ -37,7 +37,7 @@ module: {
       test: /\.vue$/,
       loader: 'vue-loader',
       options: {
-        hotReload: false // disables Hot Reload
+        hotReload: false // 关闭热重载
       }
     }
   ]
