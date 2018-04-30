@@ -142,7 +142,7 @@ npm install -D postcss-loader
 {
   test: /\.css$/,
   use: [
-    'style-loader',
+    'vue-style-loader',
     {
       loader: 'css-loader',
       options: { importLoaders: 1 }
