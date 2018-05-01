@@ -1,4 +1,4 @@
-# Testing
+# 测试
 
 - [Vue CLI](https://github.com/vuejs/vue-cli) 提供了预配置的单元测试和 e2e 测试安装。
 

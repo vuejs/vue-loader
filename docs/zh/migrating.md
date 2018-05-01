@@ -3,17 +3,17 @@ sidebar: auto
 sidebarDepth: 2
 ---
 
-# Migrating from v14
+# 从 v14 迁移
 
-::: tip Heads Up
-We are in the process of upgrading Vue CLI 3 beta to use webpack 4 + Vue Loader 15, so you might want to wait if you are planning to upgrade to Vue CLI 3.
+::: tip 注意
+我们正在升级 Vue CLI 3 beta 的过程中，并使用了 webpack 4 + Vue Loader 15，所以如果你计划升级到 Vue CLI 3 的话，可能需要等待。
 :::
 
-## Notable Breaking Changes
+## 值得注意的不兼容变更
 
-### A Plugin is Now Required
+### 现在你需要一个插件
 
-Vue Loader 15 now requires an accompanying webpack plugin to function properly:
+Vue Loader 15 现在需要伴随一个 webpack 插件才能正确使用：
 
 ``` js
 // webpack.config.js
@@ -27,19 +27,19 @@ module.exports = {
 }
 ```
 
-### Loader Inference
+### Loader 推导
 
-Vue Loader 15 now uses a different strategy to infer loaders to use for language blocks.
+现在 Vue Loader 15 使用了一个不一样的策略来推导语言块使用的 loader。
 
-Take `<style lang="less">` as an example: in v14 and below, it will attempt to load the block with `less-loader`, and implicitly chains `css-loader` and `vue-style-loader` after it, all using inline loader strings.
+拿 `<style lang="less">` 举例：在 v14 或更低版本中，它会尝试使用 `less-loader` 加载这个块，并在其后面隐式地链上 `css-loader` 和 `vue-style-loader`，这一切都使用内联的 loader 字符串。
 
-In v15, `<style lang="less">` will behave as if it's an actual `*.less` file being loaded. So, in order to process it, you need to provide an explicit rule in your main webpack config:
+这 v15 中，`<style lang="less">` 会完成把它当作一个真实的 `*.less` 文件来加载。因此，为了这样处理它，你需要在你的主 webpack 配置中显式地提供一条规则：
 
 ``` js
 {
   module: {
     rules: [
-      // ...other rules
+      // ... 其它规则
       {
         test: /\.less$/,
         use: [
@@ -53,15 +53,15 @@ In v15, `<style lang="less">` will behave as if it's an actual `*.less` file bei
 }
 ```
 
-The benefit is that this same rule also applies to plain `*.less` imports from JavaScript, and you can configure options for these loaders anyway you want. In v14 and below, if you want to provide custom options to an inferred loader, you'd have to duplicate it under Vue Loader's own `loaders` option. In v15 it is no longer necessary.
+这样做的好处是这条规则同样应用在 JavaScript 里普通的 `*.less` 导入中，并且你可以为这些 loader 配置任何你想要的选项。在 v14 或更低版本中，如果你想为一个推导出来的 loader 定制选项，你不得不在 Vue Loader 自己的 `loaders` 选项中将它重复一遍。在 v15 中你再也没有必要这么做了。
 
-v15 also allows using non-serializable options for loaders, which was not possible in previous versions.
+v15 也允许为 loader 使用非序列化的选项，这种选项在之前的版本中是无法使用的。
 
-### Template Preprocessing
+### 模板预处理
 
-v14 and below uses [consolidate](https://github.com/tj/consolidate.js/) to compile `<template lang="xxx">`. v15 now applies preprocessing for them using webpack loaders instead.
+v14 或更低版本使用 [consolidate](https://github.com/tj/consolidate.js/) 来编译 `<template lang="xxx">`。v15 现在取而代之的是使用 webpack loader 为它们应用预处理器。
 
-Note that some template loaders such as `pug-loader` exports a compiled templating function instead of plain HTML. In order to pass the correct content to Vue's template compiler, you must use a loader that outputs plain HTML instead. For example, to support `<template lang="pug">`, you can use [pug-plain-loader](https://github.com/yyx990803/pug-plain-loader):
+注意有些模板的 loader 会导出一个编译好的模板函数而不是普通的 HTML，诸如 `pug-loader`。为了向 Vue 的模板编译器传递正确的内容，你必须换用一个输出普通 HTML 的 loader。例如，为了支持 `<template lang="pug">`，你可以使用 [pug-plain-loader](https://github.com/yyx990803/pug-plain-loader)：
 
 ``` js
 {
@@ -76,7 +76,7 @@ Note that some template loaders such as `pug-loader` exports a compiled templati
 }
 ```
 
-If you also intend to use it to import `.pug` files as HTML strings in JavaScript, you will need to chain `raw-loader` after the preprocessing loader. Note however adding `raw-loader` would break the usage in Vue components, so you need to have two rules, one of them targeting Vue files using a `resourceQuery`, the other one (fallback) targeting JavaScript imports:
+如果你还打算使用它在 JavaScript 中将 `.pug` 文件作为字符串导入，你需要在这个预处理 loader 之后链上 `raw-loader`。注意添加 `raw-loader` 会破坏 Vue 组件内的用法，所以你需要定义两条规则，其中一条指向使用了一个 `resourceQuery` 的 Vue 文件，另一条指向 (回退到) JavaScript 导入：
 
 ``` js
 {
@@ -85,12 +85,12 @@ If you also intend to use it to import `.pug` files as HTML strings in JavaScrip
       {
         test: /\.pug$/,
         oneOf: [
-          // this applies to <template lang="pug"> in Vue components
+          // 这条规则应用到 Vue 组件内的 `<template lang="pug">`
           {
             resourceQuery: /^\?vue/,
             use: ['pug-plain-loader']
           },
-          // this applies to pug imports inside JavaScript
+          // 这条规则应用到 JavaScript 内的 pug 导入
           {
             use: ['raw-loader', 'pug-plain-loader']
           }
@@ -101,21 +101,21 @@ If you also intend to use it to import `.pug` files as HTML strings in JavaScrip
 }
 ```
 
-### Style Injection
+### 样式注入
 
-Client-side style injection now injects all styles upfront to ensure consistent behavior between development and extracted mode.
+现在客户端的样式注入会在最前面注入所有的样式以确保开发模式和提取模式下行为的一致性。
 
-Note the injection order is still not guaranteed, so you should avoid writing CSS that relies on insertion order.
+注意它们注入的顺序仍然是不受担保的，所以你撰写的 CSS 应该避免依赖插入的顺序。
 
 ### PostCSS
 
-Vue Loader no longer auto applies PostCSS transforms. To use PostCSS, configure `postcss-loader` the same way you would for normal CSS files.
+Vue Loader v15 不再默认应用 PostCSS 变换。想要使用 PostCSS，请像为普通 CSS 文件一样的方式配置 `postcss-loader`。
 
 ### CSS Modules
 
-CSS Modules now need to be explicitly configured via `css-loader` options. The `module` attribute on `<style>` tags is still needed for locals injection into the component.
+CSS Modules 现在需要通过 `css-loader` 选项显式地配置。`<style>` 标签上的 `module` 特性仍然需要用来局部注入到组件中。
 
-The good news is that you can now configure `localIdentName` in one place:
+好消息是你现在可以在同一处配置 `localIdentName` 了：
 
 ``` js
 {
@@ -141,13 +141,13 @@ The good news is that you can now configure `localIdentName` in one place:
 }
 ```
 
-If you only want to use CSS Modules in some of your Vue components, you can use a `oneOf` rule and check for the `module` string in resourceQuery:
+如果你只想在某些 Vue 组件中使用 CSS Modules，你可以使用 `oneOf` 规则并在 `resourceQuery` 字符串中检查 `module` 字符串：
 
 ``` js
 {
   test: /\.css$/,
   oneOf: [
-    // this matches <style module>
+    // 这里匹配 `<style module>`
     {
       resourceQuery: /module/,
       use: [
@@ -161,7 +161,7 @@ If you only want to use CSS Modules in some of your Vue components, you can use 
         }
       ]
     },
-    // this matches plain <style> or <style scoped>
+    // 这里匹配普通的 `<style>` 或 `<style scoped>`
     {
       use: [
         'vue-style-loader',
@@ -172,9 +172,9 @@ If you only want to use CSS Modules in some of your Vue components, you can use 
 }
 ```
 
-## CSS Extraction
+## CSS 提取
 
-Works the same way as you'd configure it for normal CSS. Example usage with [mini-css-extract-plugin](https://github.com/webpack-contrib/mini-css-extract-plugin):
+用法和你为普通 CSS 的配置一样。示例用法在 [mini-css-extract-plugin](https://github.com/webpack-contrib/mini-css-extract-plugin)：
 
 ``` js
 {
@@ -186,7 +186,7 @@ Works the same way as you'd configure it for normal CSS. Example usage with [min
       },
       {
         test: /\.css$/,
-        // or ExtractTextWebpackPlugin.extract(...)
+        // 或 `ExtractTextWebpackPlugin.extract(...)`
         use: [
           MiniCssExtractPlugin.loader,
           'css-loader'
@@ -202,18 +202,18 @@ Works the same way as you'd configure it for normal CSS. Example usage with [min
 }
 ```
 
-## SSR externals
+## 服务端渲染的外置
 
-In SSR, we typically use `webpack-node-externals` to exclude npm dependencies from the server build. If you need to import CSS from an npm dependency, the previous solution was using a whitelist like this:
+在服务端渲染中，我们通常使用 `webpack-node-externals` 来从服务端构建中排除 npm 依赖。如果你需要从一个 npm 依赖导入 CSS，之前的方案是使用像这样的一个白名单：
 
 ``` js
-// webpack config
+// webpack 配置
 externals: nodeExternals({
   whitelist: /\.css$/
 })
 ```
 
-With v15, imports for `<style src="dep/foo.css">` now has resourceQuery strings appended at the end of the request, so you need to update the above to:
+使用 v15，导入 `<style src="dep/foo.css">` 现在会在请求的末尾追加 resourceQuery 字符串，所以你需要将上述内容更新为：
 
 ``` js
 externals: nodeExternals({
@@ -221,9 +221,9 @@ externals: nodeExternals({
 })
 ```
 
-## Options Deprecation
+## 废弃的选项
 
-The following options have been deprecated and should be configured using normal webpack module rules:
+下列选项已经被废弃了，它们应该使用普通的 webpack 模块的规则来配置：
 
 - `loader`
 - `preLoaders`
@@ -234,20 +234,20 @@ The following options have been deprecated and should be configured using normal
 - `extractCSS`
 - `template`
 
-The following options have been deprecated and should be configured using the new `compilerOptions` option:
+下列选项已经被废弃了，它们应该使用新的 `compilerOptions` 选项来配置：
 
-- `preserveWhitespace` (use `compilerOptions.preserveWhitespace`)
-- `compilerModules` (use `compilerOptions.modules`)
-- `compilerDirectives` (use `compilerOptions.directives`)
+- `preserveWhitespace` (使用 `compilerOptions.preserveWhitespace`)
+- `compilerModules` (使用 `compilerOptions.modules`)
+- `compilerDirectives` (使用 `compilerOptions.directives`)
 
-The following option has been renamed:
+下列选项已经被改名了：
 
-- `transformToRequire` (now renamed to `transformAssetUrls`)
+- `transformToRequire` (现象改名为 `transformAssetUrls`)
 
-The following option has been changed to resourceQuery:
+下列选项已经被改为 `resourceQuery`：
 
-- `shadowMode` (now use inline resource queries, e.g. `foo.vue?shadow`)
+- `shadowMode` (现在使用内联资源查询语句，例如 `foo.vue?shadow`)
 
 :::tip
-For a complete list of new options, see [Options Reference](./options.md).
+想查阅新选项的完整列表，请移步[选项参考](./options.md)。
 :::
