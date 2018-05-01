@@ -2,28 +2,28 @@
 sidebarDepth: 2
 ---
 
-# Using Pre-Processors
+# 使用预处理器
 
-In webpack, all pre-processors need to be applied with a corresponding loader. `vue-loader` allows you to use other webpack loaders to process a part of a Vue component. It will automatically infer the proper loaders to use based on the `lang` attribute of a language block and the rules in your webpack config.
+在 webpack 中，所有的预处理器需要匹配对应的 loader。Vue Loader 允许你使用其它 webpack loader 处理 Vue 组件的某一部分。它会根据 `lang` 特性以及你 webpack 配置中的规则自动推断出要使用的 loader。
 
 ## SASS
 
-For example, to compile our `<style>` tag with SASS/SCSS:
+例如，为了通过 SASS/SCSS 编译我们的 `<style>` 标签：
 
 ``` bash
 npm install -D sass-loader node-sass
 ```
 
-In your webpack config:
+在你的 webpack 配置中：
 
 ``` js
 module.exports = {
   module: {
     rules: [
-      // ...other rules omitted
+      // ...其它规则忽略
 
-      // this will apply to both plain .scss files
-      // AND <style lang="scss"> blocks in vue files
+      // 普通的 `.scss` 文件和 `*.vue` 文件中的
+      // `<style lang="scss">` 块都运用它
       {
         test: /\.scss$/,
         use: [
@@ -34,23 +34,23 @@ module.exports = {
       }
     ]
   },
-  // plugin omitted
+  // 插件忽略
 }
 ```
 
-Now in addition to being able to `import 'style.scss'`, we can use SCSS in Vue components as well:
+额外的如果想 `import 'style.scss'`，我们也可以在 Vue 组件中使用 SCSS：
 
 ``` html
 <style lang="scss">
-/* write SCSS here */
+/* 在这里撰写 SCSS */
 </style>
 ```
 
-Any content inside the block will be processed by webpack as if it's inside a `*.scss` file.
+这个块里的任何内容都会被 webpack 当作在一个 `*.scss` 文件中一样被处理。
 
 ### SASS vs SCSS
 
-Note that `sass-loader` processes the non-indent-based `scss` syntax by default. In order to use the indent-based `sass` syntax, you need to pass options to the loader:
+注意 `sass-loader` 会默认处理不基于缩进的 `scss` 语法。为了使用基于缩进的 `sass` 语法，你需要向这个 loader 传递选项：
 
 ``` js
 // webpack.config.js -> module.rules
@@ -69,9 +69,9 @@ Note that `sass-loader` processes the non-indent-based `scss` syntax by default.
 }
 ```
 
-### Sharing Global Variables
+### 共享全局变量
 
-`sass-loader` also supports a `data` option which allows you to share common variables among all processed files without having to explicit import them:
+`sass-loader` 也支持一个 `data` 选项，这个选项允许你在所有被处理的文件之间共享常见的变量，而不需要显式地导入它们：
 
 ``` js
 // webpack.config.js -> module.rules
@@ -83,7 +83,7 @@ Note that `sass-loader` processes the non-indent-based `scss` syntax by default.
     {
       loader: 'sass-loader',
       options: {
-        // you can also read from a file, e.g. `variables.scss`
+        // 你也可以从一个文件读取，例如 `variables.scss`
         data: `$color: red;`
       }
     }
@@ -130,7 +130,7 @@ npm install -D stylus stylus-loader
 ## PostCSS
 
 ::: tip
-Vue Loader v15 no longer applies PostCSS transforms by default. You will need to use PostCSS via `postcss-loader`.
+Vue Loader v15 不再默认应用 PostCSS 变换。你需要通过 `postcss-loader` 使用 PostCSS。
 :::
 
 ``` bash
@@ -152,9 +152,9 @@ npm install -D postcss-loader
 }
 ```
 
-Configuration of PostCSS can be done via `postcss.config.js` or `postcss-loader` options. For details, consult [postcss-loader docs](https://github.com/postcss/postcss-loader).
+PostCSS 的配置可以通过 `postcss.config.js` 或 `postcss-loader` 选项来完成。其更多细节请咨询 [postcss-loader 文档](https://github.com/postcss/postcss-loader)。
 
-`postcss-loader` can also be applied in combination with other pre-processors mentioned above.
+`postcss-loader` 也可以和上述其它预处理器结合使用。
 
 ## Babel
 
@@ -170,7 +170,7 @@ npm install -D babel-core babel-loader
 }
 ```
 
-Configuration of Babel can be done via `.babelrc` or `babel-loader` options.
+Babel 的配置可以通过 `.babelrc` 或 `babel-loader` 选项来完成。
 
 ## TypeScript
 
@@ -199,11 +199,11 @@ module.exports = {
 }
 ```
 
-Configuration of TypeScipt can be done via `tsconfig.json`. Also see docs for [ts-loader](https://github.com/TypeStrong/ts-loader).
+TypeScript 的配置可以通过 `tsconfig.json` 来完成。你也可以查阅 [ts-loader](https://github.com/TypeStrong/ts-loader) 的文档。
 
 ## Pug
 
-Processing templates is a little different, because most webpack template loaders such as `pug-loader` return a template function instead of a compiled HTML string. Instead of using `pug-loader`, we need to use a loader that returns the raw HTML string instead, e.g. `pug-plain-loader`:
+模板的处理会稍微有些不同，因为绝大对数 webpack 的模板类 loader，诸如 `pug-loader`，会返回一个模板函数而不是一个编译好的 HTML 字符串。所以我们需要使用一个返回原始的 HTML 字符串的 loader，例如 `pug-plain-loader`，而不是使用 `pug-loader`。
 
 ``` bash
 npm install -D pug pug-plain-loader
@@ -217,7 +217,7 @@ npm install -D pug pug-plain-loader
 }
 ```
 
-Then you can write:
+然后你可以写：
 
 ``` html
 <template lang="pug">
@@ -226,19 +226,19 @@ div
 </template>
 ```
 
-If you also intend to use it to import `.pug` files as HTML strings in JavaScript, you will need to chain `raw-loader` after the preprocessing loader. Note however adding `raw-loader` would break the usage in Vue components, so you need to have two rules, one of them targeting Vue files using a `resourceQuery`, the other one (fallback) targeting JavaScript imports:
+如果你还打算使用它在 JavaScript 中将 `.pug` 文件作为字符串导入，你需要在这个预处理 loader 之后链上 `raw-loader`。注意添加 `raw-loader` 会破坏 Vue 组件内的用法，所以你需要定义两条规则，其中一条指向使用了一个 `resourceQuery` 的 Vue 文件，另一条指向 (回退到) JavaScript 导入：
 
 ``` js
 // webpack.config.js -> module.rules
 {
   test: /\.pug$/,
   oneOf: [
-    // this applies to <template lang="pug"> in Vue components
+    // 这条规则应用到 Vue 组件内的 `<template lang="pug">`
     {
       resourceQuery: /^\?vue/,
       use: ['pug-plain-loader']
     },
-    // this applies to pug imports inside JavaScript
+    // 这条规则应用到 JavaScript 内的 pug 导入
     {
       use: ['raw-loader', 'pug-plain-loader']
     }
