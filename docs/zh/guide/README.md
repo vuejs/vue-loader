@@ -1,14 +1,14 @@
-# Getting Started
+# 如何起步
 
 ## Vue CLI
 
-If you are not interested in manually setting up webpack, it is recommended to scaffold a project with [Vue CLI](https://github.com/vuejs/vue-cli) instead. Projects created by Vue CLI are pre-configured with most of the common development needs working out of the box.
+如果你没有手动设置 webpack 的兴趣，我们推荐使用 [Vue CLI](https://github.com/vuejs/vue-cli) 直接创建一个项目的脚手架。通过 Vue CLI 创建的项目会预配置好绝大多数的开发需求，它们开箱即用。
 
-Follow this guide if the built-in configuration of Vue CLI does not suit your needs, or you'd rather create your own webpack config from scratch.
+如果 Vue CLI 提供的内建的配置没有满足你的需求，或者你乐于从零开始创建你自己的 webpack 配置，那么请跟随这份指南。
 
-## Manual Configuration
+## 手动配置
 
-Vue Loader's configuration is a bit different form other loaders. In addition to a rule that applies `vue-loader` to any files with extension `.vue`, make sure to add Vue Loader's plugin to your webpack config:
+Vue Loader 的配置和其它的 loader 不太一样。除了通过一条规则将 `vue-loader` 应用到所有扩展名为 `.vue` 的文件上之外，请确认在你的 webpack 配置中添加 Vue Loader 的插件：
 
 ``` js
 // webpack.config.js
@@ -17,7 +17,7 @@ const { VueLoaderPlugin } = require('vue-loader')
 module.exports = {
   module: {
     rules: [
-      // ... other rules
+      // ... 其它规则
       {
         test: /\.vue$/,
         loader: 'vue-loader'
@@ -25,15 +25,15 @@ module.exports = {
     ]
   },
   plugins: [
-    // make sure to include the plugin!
+    // 请确认引入这个插件！
     new VueLoaderPlugin()
   ]
 }
 ```
 
-**The plugin is required!** It is responsible for cloning any other rules you have defined and applying them to the corresponding language blocks in `.vue` files. For example, if you have a rule matching `/\.js$/`, it will be applied to `<script>` blocks in `.vue` files.
+**这个插件是必须的！**它的职责是将你定义过的其它规则克隆并应用到 `.vue` 文件里相应语言的块。例如，如果你有一条匹配 `/\.js$` 的规则，那么它会应用到 `.vue` 文件里的 `<script>` 块。
 
-A more complete example webpack config will look like this:
+一个更完整的 webpack 配置示例看起来像是如下的样子：
 
 ``` js
 // webpack.config.js
@@ -48,14 +48,14 @@ module.exports = {
         test: /\.vue$/,
         loader: 'vue-loader'
       },
-      // this will apply to both plain .js files
-      // AND <script> blocks in vue files
+      // 它会应用到普通的 `.js` 文件
+      // 以及 `.vue` 文件中的 `<script>` 块
       {
         test: /\.js$/,
         loader: 'babel-loader'
       },
-      // this will apply to both plain .css files
-      // AND <style> blocks in vue files
+      // 它会应用到普通的 `.css` 文件
+      // 以及 `.vue` 文件中的 `<style>` 块
       {
         test: /\.css$/,
         use: [
@@ -66,10 +66,10 @@ module.exports = {
     ]
   },
   plugins: [
-    // make sure to include the plugin for the magic
+    // 请确认引入这个插件来实现这些魔力
     new VueLoaderPlugin()
   ]
 }
 ```
 
-Also see [Options Reference](../options.md) for all available loader options.
+你也可以在[选项参考](../options.md)查阅所有可用的 loader 选项。
