@@ -70,6 +70,8 @@
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.2",
     "sugarss": "^1.0.1",
+    "ts-loader": "^4.2.0",
+    "typescript": "^2.8.3",
     "url-loader": "^1.0.1",
     "vue": "^2.5.16",
     "vue-server-renderer": "^2.5.16",
