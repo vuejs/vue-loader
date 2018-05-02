@@ -1,3 +1,13 @@
+<a name="15.0.6"></a>
+## [15.0.6](https://github.com/vuejs/vue-loader/compare/v15.0.5...v15.0.6) (2018-05-02)
+
+
+### Bug Fixes
+
+* duplicate loaders when using src import with loader options ([37329e1](https://github.com/vuejs/vue-loader/commit/37329e1)), closes [#1278](https://github.com/vuejs/vue-loader/issues/1278)
+
+
+
 <a name="15.0.5"></a>
 ## [15.0.5](https://github.com/vuejs/vue-loader/compare/v15.0.4...v15.0.5) (2018-04-30)
 
