@@ -45,7 +45,7 @@ export default {
 </style>
 ```
 
-更多细节可以在[使用预处理器](./pre-processors.md)中找到。
+更多细节可以在[使用预处理器](./guide/pre-processors.md)中找到。
 
 ## 语言块
 
@@ -71,7 +71,7 @@ export default {
 
 - 一个 `.vue` 文件可以包含多个 `<style>` 标签。
 
-- `<style>` 标签可以有 `scoped` 或者 `module` 属性 (查看 [CSS 作用域](./scoped-css.md)和 [CSS Modules](./css-modules.md)) 以帮助你将样式封装到当前组件。具有不同封装模式的多个 `<style>` 标签可以在同一个组件中混合使用。
+- `<style>` 标签可以有 `scoped` 或者 `module` 属性 (查看 [CSS 作用域](./guide/scoped-css.md)和 [CSS Modules](./guide/css-modules.md)) 以帮助你将样式封装到当前组件。具有不同封装模式的多个 `<style>` 标签可以在同一个组件中混合使用。
 
 - 任何匹配 `.css` 文件 (或通过它的 `lang` 特性指定的扩展名) 的 webpack 规则都将会运用到这个 `<style>` 块的内容中。
 
@@ -79,7 +79,7 @@ export default {
 
 可以在 `.vue` 文件中添加额外的自定义块来实现项目的特定需求，例如 `<docs>` 块。`vue-loader` 将会使用标签名来查找对应的 webpack loader 来应用在对应的块上。webpack loader 需要在 `vue-loader` 的选项 `loaders` 中指定。
 
-更多细节，查看[自定义块](./custom-blocks.md)。
+更多细节，查看[自定义块](./guide/custom-blocks.md)。
 
 ### Src 导入
 
