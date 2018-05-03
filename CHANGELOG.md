@@ -1,3 +1,13 @@
+<a name="15.0.7"></a>
+## [15.0.7](https://github.com/vuejs/vue-loader/compare/v15.0.6...v15.0.7) (2018-05-03)
+
+
+### Bug Fixes
+
+* stylePostLoader injection for windows flat node_modules ([a9a4412](https://github.com/vuejs/vue-loader/commit/a9a4412)), closes [#1284](https://github.com/vuejs/vue-loader/issues/1284)
+
+
+
 <a name="15.0.6"></a>
 ## [15.0.6](https://github.com/vuejs/vue-loader/compare/v15.0.5...v15.0.6) (2018-05-02)
 
