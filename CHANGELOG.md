@@ -1,3 +1,13 @@
+<a name="15.0.9"></a>
+## [15.0.9](https://github.com/vuejs/vue-loader/compare/v15.0.8...v15.0.9) (2018-05-04)
+
+
+### Bug Fixes
+
+* shadowMode still has to be an option ([4529f83](https://github.com/vuejs/vue-loader/commit/4529f83))
+
+
+
 <a name="15.0.8"></a>
 ## [15.0.8](https://github.com/vuejs/vue-loader/compare/v15.0.7...v15.0.8) (2018-05-04)
 
