@@ -1,3 +1,13 @@
+<a name="15.0.8"></a>
+## [15.0.8](https://github.com/vuejs/vue-loader/compare/v15.0.7...v15.0.8) (2018-05-04)
+
+
+### Bug Fixes
+
+* avoid mutating original rules array ([14bfc01](https://github.com/vuejs/vue-loader/commit/14bfc01)), closes [#1286](https://github.com/vuejs/vue-loader/issues/1286)
+
+
+
 <a name="15.0.7"></a>
 ## [15.0.7](https://github.com/vuejs/vue-loader/compare/v15.0.6...v15.0.7) (2018-05-03)
 
