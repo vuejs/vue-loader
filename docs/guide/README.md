@@ -12,7 +12,7 @@ Vue Loader's configuration is a bit different form other loaders. In addition to
 
 ``` js
 // webpack.config.js
-const { VueLoaderPlugin } = require('vue-loader')
+const VueLoaderPlugin = require('vue-loader/lib/plugin')
 
 module.exports = {
   module: {
@@ -38,7 +38,7 @@ A more complete example webpack config will look like this:
 ``` js
 // webpack.config.js
 const path = require('path')
-const { VueLoaderPlugin } = require('vue-loader')
+const VueLoaderPlugin = require('vue-loader/lib/plugin')
 
 module.exports = {
   mode: 'development',
