@@ -67,3 +67,10 @@ sidebar: auto
 - default: `process.env.NODE_ENV === 'production'`
 
 Force production mode, which prohibits the loader from emitting code (e.g. hot-reload related code) that is development-only.
+
+## shadowMode
+
+- type: `boolean`
+- default: `false`
+
+Compiled the component for usage inside Shadow DOM. In this mode, the styles of the component will be injected into `this.$root.$options.shadowRoot` instead of the document head.

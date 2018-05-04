@@ -261,10 +261,6 @@ The following option has been renamed:
 
 - `transformToRequire` (now renamed to `transformAssetUrls`)
 
-The following option has been changed to `resourceQuery`:
-
-- `shadowMode` (now use inline resource queries, e.g. `foo.vue?shadow`)
-
 :::tip
 For a complete list of new options, see [Options Reference](./options.md).
 :::
