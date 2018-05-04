@@ -6,14 +6,14 @@ sidebarDepth: 2
 # Migrating from v14
 
 ::: tip Heads Up
-We are in the process of upgrading Vue CLI 3 beta to use webpack 4 + Vue Loader 15, so you might want to wait if you are planning to upgrade to Vue CLI 3.
+We are in the process of upgrading Vue CLI 3 beta to use webpack 4 + Vue Loader v15, so you might want to wait if you are planning to upgrade to Vue CLI 3.
 :::
 
 ## Notable Breaking Changes
 
 ### A Plugin is Now Required
 
-Vue Loader 15 now requires an accompanying webpack plugin to function properly:
+Vue Loader v15 now requires an accompanying webpack plugin to function properly:
 
 ``` js
 // webpack.config.js
@@ -29,7 +29,7 @@ module.exports = {
 
 ### Loader Inference
 
-Vue Loader 15 now uses a different strategy to infer loaders to use for language blocks.
+Vue Loader v15 now uses a different strategy to infer loaders to use for language blocks.
 
 Take `<style lang="less">` as an example: in v14 and below, it will attempt to load the block with `less-loader`, and implicitly chains `css-loader` and `vue-style-loader` after it, all using inline loader strings.
 
@@ -39,7 +39,7 @@ In v15, `<style lang="less">` will behave as if it's an actual `*.less` file bei
 {
   module: {
     rules: [
-      // ...other rules
+      // ... other rules
       {
         test: /\.less$/,
         use: [
@@ -102,7 +102,7 @@ If you also intend to use it to import `.pug` files as HTML strings in JavaScrip
       {
         test: /\.pug$/,
         oneOf: [
-          // this applies to <template lang="pug"> in Vue components
+          // this applies to `<template lang="pug">` in Vue components
           {
             resourceQuery: /^\?vue/,
             use: ['pug-plain-loader']
@@ -158,13 +158,13 @@ The good news is that you can now configure `localIdentName` in one place:
 }
 ```
 
-If you only want to use CSS Modules in some of your Vue components, you can use a `oneOf` rule and check for the `module` string in resourceQuery:
+If you only want to use CSS Modules in some of your Vue components, you can use a `oneOf` rule and check for the `module` string in `resourceQuery`:
 
 ``` js
 {
   test: /\.css$/,
   oneOf: [
-    // this matches <style module>
+    // this matches `<style module>`
     {
       resourceQuery: /module/,
       use: [
@@ -178,7 +178,7 @@ If you only want to use CSS Modules in some of your Vue components, you can use 
         }
       ]
     },
-    // this matches plain <style> or <style scoped>
+    // this matches plain `<style>` or `<style scoped>`
     {
       use: [
         'vue-style-loader',
@@ -203,7 +203,7 @@ Works the same way as you'd configure it for normal CSS. Example usage with [min
       },
       {
         test: /\.css$/,
-        // or ExtractTextWebpackPlugin.extract(...)
+        // or `ExtractTextWebpackPlugin.extract(...)`
         use: [
           MiniCssExtractPlugin.loader,
           'css-loader'
@@ -230,7 +230,7 @@ externals: nodeExternals({
 })
 ```
 
-With v15, imports for `<style src="dep/foo.css">` now has resourceQuery strings appended at the end of the request, so you need to update the above to:
+With v15, imports for `<style src="dep/foo.css">` now has `resourceQuery` strings appended at the end of the request, so you need to update the above to:
 
 ``` js
 externals: nodeExternals({
@@ -261,7 +261,7 @@ The following option has been renamed:
 
 - `transformToRequire` (now renamed to `transformAssetUrls`)
 
-The following option has been changed to resourceQuery:
+The following option has been changed to `resourceQuery`:
 
 - `shadowMode` (now use inline resource queries, e.g. `foo.vue?shadow`)
 

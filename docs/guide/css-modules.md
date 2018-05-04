@@ -88,14 +88,14 @@ Refer to the [CSS Modules spec](https://github.com/css-modules/css-modules) for 
 
 ## Opt-in Usage
 
-If you only want to use CSS Modules in some of your Vue components, you can use a `oneOf` rule and check for the `module` string in resourceQuery:
+If you only want to use CSS Modules in some of your Vue components, you can use a `oneOf` rule and check for the `module` string in `resourceQuery`:
 
 ``` js
 // webpack.config.js -> module.rules
 {
   test: /\.css$/,
   oneOf: [
-    // this matches <style module>
+    // this matches `<style module>`
     {
       resourceQuery: /module/,
       use: [
@@ -109,7 +109,7 @@ If you only want to use CSS Modules in some of your Vue components, you can use 
         }
       ]
     },
-    // this matches plain <style> or <style scoped>
+    // this matches plain `<style>` or `<style scoped>`
     {
       use: [
         'vue-style-loader',
