@@ -18,7 +18,7 @@ sidebar: auto
   }
   ```
 
-  在模板编译过程中，编译器可以将某些特性转换为 `require` 调用，例如 `src` 中的 URL。因此这些目标资产可以被 webpack 处理。例如 `<img src="./foo.png">` 会找到你文件系统中的 `./foo.png` 并将其作为一个依赖包含在你的包里。
+  在模板编译过程中，编译器可以将某些特性转换为 `require` 调用，例如 `src` 中的 URL。因此这些目标资源可以被 webpack 处理。例如 `<img src="./foo.png">` 会找到你文件系统中的 `./foo.png` 并将其作为一个依赖包含在你的包里。
 
 ## compiler
 

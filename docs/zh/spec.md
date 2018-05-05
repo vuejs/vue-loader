@@ -71,7 +71,7 @@ export default {
 
 - 一个 `.vue` 文件可以包含多个 `<style>` 标签。
 
-- `<style>` 标签可以有 `scoped` 或者 `module` 属性 (查看 [CSS 作用域](./guide/scoped-css.md)和 [CSS Modules](./guide/css-modules.md)) 以帮助你将样式封装到当前组件。具有不同封装模式的多个 `<style>` 标签可以在同一个组件中混合使用。
+- `<style>` 标签可以有 `scoped` 或者 `module` 属性 (查看 [scoped CSS](./guide/scoped-css.md)和 [CSS Modules](./guide/css-modules.md)) 以帮助你将样式封装到当前组件。具有不同封装模式的多个 `<style>` 标签可以在同一个组件中混合使用。
 
 - 任何匹配 `.css` 文件 (或通过它的 `lang` 特性指定的扩展名) 的 webpack 规则都将会运用到这个 `<style>` 块的内容中。
 
@@ -94,7 +94,7 @@ export default {
 需要注意的是 `src` 导入遵循和 webpack 模块请求相同的路径解析规则，这意味着：
 
 - 相对路径需要以 `./` 开始
-- 你可以从 NPM 依赖中导入资产：
+- 你可以从 NPM 依赖中导入资源：
 
 ``` vue
 <!-- import a file from the installed "todomvc-app-css" npm package -->

@@ -1,6 +1,6 @@
 # CSS Modules
 
-[CSS Modules](https://github.com/css-modules/css-modules)是一个用于模块化和组合 CSS 的流行系统。`vue-loader` 提供了与 CSS 模块的一流集成，可以作为模拟 CSS 作用域的替代方案。
+[CSS Modules](https://github.com/css-modules/css-modules)是一个用于模块化和组合 CSS 的流行系统。`vue-loader` 提供了与 CSS 模块的一流集成，可以作为模拟 scoped CSS 的替代方案。
 
 ## 用法
 
