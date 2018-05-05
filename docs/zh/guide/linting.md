@@ -1,4 +1,4 @@
-# 校验
+# 校验 (Linting)
 
 官方的 [eslint-plugin-vue](https://github.com/vuejs/eslint-plugin-vue) 同时支持在 Vue 单文件组件的模板和脚本部分的校验。
 
