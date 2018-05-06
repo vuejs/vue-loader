@@ -2,7 +2,7 @@
 
 When Vue Loader compiles the `<template>` blocks in SFCs, it also converts any encountered asset URLs into **webpack module requests**.
 
-For example, the following template snippet
+For example, the following template snippet:
 
 ``` vue
 <img src="../image.png">

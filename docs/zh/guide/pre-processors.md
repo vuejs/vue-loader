@@ -38,7 +38,7 @@ module.exports = {
 }
 ```
 
-额外的如果想 `import 'style.scss'`，我们也可以在 Vue 组件中使用 SCSS：
+现在，除了能够 `import 'style.scss'`，我们还可以在 Vue 组件中使用 SCSS：
 
 ``` html
 <style lang="scss">

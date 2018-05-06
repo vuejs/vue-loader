@@ -1,7 +1,7 @@
 # 介绍
 
 :::tip 版本注明
-这份文档是为 Vue Loader v15 及以上版本撰写的。如果你正在从 v14 或更早的版本往这里迁移，请查阅[迁移指南](../migrating.md)。如果你正在使用老版本，其对应的就文档[在此](https://vue-loader-v14.vuejs.org)。
+这份文档是为 Vue Loader v15 及以上版本撰写的。如果你正在从 v14 或更早的版本往这里迁移，请查阅[迁移指南](../migrating.md)。如果你正在使用老版本，其对应的文档[在此](https://vue-loader-v14.vuejs.org)。
 :::
 
 ## Vue Loader 是什么？

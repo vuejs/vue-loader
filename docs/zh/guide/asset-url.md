@@ -1,8 +1,8 @@
 # 处理资源路径
 
-当 Vue Loader 编译单文件组件中的 `<template>` 块时，它也会将所有遇到的资源 URL URL 转换为 **webpack 模块请求**。
+当 Vue Loader 编译单文件组件中的 `<template>` 块时，它也会将所有遇到的资源 URL 转换为 **webpack 模块请求**。
 
-例如，下面的模板代码片段
+例如，下面的模板代码片段：
 
 ``` vue
 <img src="../image.png">
@@ -20,7 +20,7 @@ createElement('img', {
 
 默认下列标签/特性的组合会被转换，且这些组合时可以使用 [transformAssetUrls](../options.md#transformasseturls) 选项进行配置的。
 
-额外的，如果你配置了为 `<style>` 块使用 [css-loader](https://github.com/webpack-contrib/css-loader)，则你的 CSS 中的资源 URL 也会被同等处理。
+此外，如果你配置了为 `<style>` 块使用 [css-loader](https://github.com/webpack-contrib/css-loader)，则你的 CSS 中的资源 URL 也会被同等处理。
 
 ## 转换规则
 
@@ -40,12 +40,12 @@ createElement('img', {
 
 ## 相关的 Loader
 
-因为像 `.png` 这样的文件不是一个 JavaScript 模块，你需要配置 webpack 使用 [file-loader](https://github.com/webpack/file-loader) 或者 [url-loader](https://github.com/webpack/url-loader) 去合理的处理它们。通过 Vue CLI 创建的项目已经把这些预配置好了。
+因为像 `.png` 这样的文件不是一个 JavaScript 模块，你需要配置 webpack 使用 [file-loader](https://github.com/webpack/file-loader) 或者 [url-loader](https://github.com/webpack/url-loader) 去合理地处理它们。通过 Vue CLI 创建的项目已经把这些预配置好了。
 
 ## 为什么
 
 转换资源 URL 的好处是：
 
-1. `file-loader` 可以指定要复制和放置资源文件的位置，以及如何使用版本哈希命名以获得更好的缓存。此外，这意味着 **你可以就近管理图片文件，可以使用相对路径而不用担心布署时URL问题**。使用正确的配置，webpack 将会在打包输出中自动重写文件路径为正确的URL。
+1. `file-loader` 可以指定要复制和放置资源文件的位置，以及如何使用版本哈希命名以获得更好的缓存。此外，这意味着 **你可以就近管理图片文件，可以使用相对路径而不用担心部署时 URL 的问题**。使用正确的配置，webpack 将会在打包输出中自动重写文件路径为正确的URL。
 
-2. `url-loader` 允许你有条件将文件转换为内联的 base-64 URL (当文件小于给定的阈值)，这会减少小文件的 HTTP 请求。如果文件大于该阈值，会自动的交给 `file-loader` 处理。
+2. `url-loader` 允许你有条件地将文件转换为内联的 base-64 URL (当文件小于给定的阈值)，这会减少小文件的 HTTP 请求。如果文件大于该阈值，会自动的交给 `file-loader` 处理。

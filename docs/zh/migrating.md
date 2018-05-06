@@ -33,7 +33,7 @@ module.exports = {
 
 拿 `<style lang="less">` 举例：在 v14 或更低版本中，它会尝试使用 `less-loader` 加载这个块，并在其后面隐式地链上 `css-loader` 和 `vue-style-loader`，这一切都使用内联的 loader 字符串。
 
-这 v15 中，`<style lang="less">` 会完成把它当作一个真实的 `*.less` 文件来加载。因此，为了这样处理它，你需要在你的主 webpack 配置中显式地提供一条规则：
+在 v15 中，`<style lang="less">` 会完成把它当作一个真实的 `*.less` 文件来加载。因此，为了这样处理它，你需要在你的主 webpack 配置中显式地提供一条规则：
 
 ``` js
 {
@@ -242,7 +242,7 @@ externals: nodeExternals({
 
 下列选项已经被改名了：
 
-- `transformToRequire` (现象改名为 `transformAssetUrls`)
+- `transformToRequire` (现在改名为 `transformAssetUrls`)
 
 下列选项已经被改为 `resourceQuery`：
 
