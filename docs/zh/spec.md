@@ -118,7 +118,7 @@ export default {
 - [Vim](https://github.com/posva/vim-vue)
 - [Emacs](https://github.com/AdamNiederer/vue-mode)
 - [Brackets](https://github.com/pandao/brackets-vue)
-- [JetBrains IDEs](https://plugins.jetbrains.com/plugin/8057) (WebStorm, PhpStorm 等)
+- [JetBrains IDEs](https://plugins.jetbrains.com/plugin/8057) (WebStorm、PhpStorm 等)
 
 非常感谢其他编辑器/IDE 所做的贡献！如果在 Vue 组件中没有使用任何预处理器，你可以把 `.vue` 文件当作 HTML 对待。
 
