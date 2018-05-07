@@ -45,8 +45,7 @@
 ### Bug Fixes
 
 * ignore VueLoaderPlugin check when using thread-loader ([#1268](https://github.com/vuejs/vue-loader/issues/1268)) ([476f466](https://github.com/vuejs/vue-loader/commit/476f466)), closes [#1267](https://github.com/vuejs/vue-loader/issues/1267)
-
-
+* **Fork**: Don't reuse ident of `style-loader` ([e7b6b30](https://github.com/vuejs/vue-loader/commit/e7b6b30))
 
 <a name="15.0.4"></a>
 ## [15.0.4](https://github.com/vuejs/vue-loader/compare/v15.0.3...v15.0.4) (2018-04-27)
