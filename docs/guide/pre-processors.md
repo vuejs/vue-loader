@@ -20,10 +20,10 @@ In your webpack config:
 module.exports = {
   module: {
     rules: [
-      // ...other rules omitted
+      // ... other rules omitted
 
-      // this will apply to both plain .scss files
-      // AND <style lang="scss"> blocks in vue files
+      // this will apply to both plain `.scss` files
+      // AND `<style lang="scss">` blocks in `.vue` files
       {
         test: /\.scss$/,
         use: [
@@ -142,7 +142,7 @@ npm install -D postcss-loader
 {
   test: /\.css$/,
   use: [
-    'style-loader',
+    'vue-style-loader',
     {
       loader: 'css-loader',
       options: { importLoaders: 1 }
@@ -204,7 +204,7 @@ module.exports = {
   },
   module: {
     rules: [
-      // ...other rules omitted
+      // ... other rules omitted
       {
         test: /\.ts$/,
         loader: 'ts-loader',
@@ -212,7 +212,7 @@ module.exports = {
       }
     ]
   },
-  // ...plugin omitted
+  // ... plugin omitted
 }
 ```
 
@@ -220,7 +220,7 @@ Configuration of TypeScipt can be done via `tsconfig.json`. Also see docs for [t
 
 ## Pug
 
-Processing templates is a little different, because most webpack template loaders such as `pug-loader` return a template function instead of a compiled HTML string. Instead of using `pug-loader`, we need to use a loader that returns the raw HTML string instead, e.g. `pug-plain-loader`:
+Processing templates is a little different, because most webpack template loaders such as `pug-loader` return a template function instead of a compiled HTML string. Instead of using `pug-loader`, we need to use a loader that returns the raw HTML string, e.g. `pug-plain-loader`:
 
 ``` bash
 npm install -D pug pug-plain-loader
@@ -250,7 +250,7 @@ If you also intend to use it to import `.pug` files as HTML strings in JavaScrip
 {
   test: /\.pug$/,
   oneOf: [
-    // this applies to <template lang="pug"> in Vue components
+    // this applies to `<template lang="pug">` in Vue components
     {
       resourceQuery: /^\?vue/,
       use: ['pug-plain-loader']

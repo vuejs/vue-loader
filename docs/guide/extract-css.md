@@ -18,7 +18,7 @@ module.exports = {
   // other options...
   module: {
     rules: [
-      // ...other rules omitted
+      // ... other rules omitted
       {
         test: /\.css$/,
         use: [
@@ -31,7 +31,7 @@ module.exports = {
     ]
   },
   plugins: [
-    // ...vue-loader plugin omitted
+    // ... Vue Loader plugin omitted
     new MiniCssExtractPlugin({
       filename: style.css
     })
@@ -55,7 +55,7 @@ module.exports = {
   // other options...
   module: {
     rules: [
-      // ...other rules omitted
+      // ... other rules omitted
       {
         test: /\.css$/,
         loader: ExtractTextPlugin.extract({
@@ -66,7 +66,7 @@ module.exports = {
     ]
   },
   plugins: [
-    // ...vue-loader plugin omitted
+    // ... Vue Loader plugin omitted
     new ExtractTextPlugin("style.css")
   ]
 }

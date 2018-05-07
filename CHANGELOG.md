@@ -1,10 +1,51 @@
-<a name="15.0.5"></a>
-## [15.0.5](https://github.com/davidrunger/vue-loader/compare/v15.0.4...v15.0.5) (2018-04-28)
+<a name="15.0.9"></a>
+## [15.0.9](https://github.com/vuejs/vue-loader/compare/v15.0.8...v15.0.9) (2018-05-04)
 
 
 ### Bug Fixes
 
-* Don't reuse ident of `style-loader` ([e7b6b30](https://github.com/vuejs/vue-loader/commit/e7b6b30))
+* shadowMode still has to be an option ([4529f83](https://github.com/vuejs/vue-loader/commit/4529f83))
+
+
+
+<a name="15.0.8"></a>
+## [15.0.8](https://github.com/vuejs/vue-loader/compare/v15.0.7...v15.0.8) (2018-05-04)
+
+
+### Bug Fixes
+
+* avoid mutating original rules array ([14bfc01](https://github.com/vuejs/vue-loader/commit/14bfc01)), closes [#1286](https://github.com/vuejs/vue-loader/issues/1286)
+
+
+
+<a name="15.0.7"></a>
+## [15.0.7](https://github.com/vuejs/vue-loader/compare/v15.0.6...v15.0.7) (2018-05-03)
+
+
+### Bug Fixes
+
+* stylePostLoader injection for windows flat node_modules ([a9a4412](https://github.com/vuejs/vue-loader/commit/a9a4412)), closes [#1284](https://github.com/vuejs/vue-loader/issues/1284)
+
+
+
+<a name="15.0.6"></a>
+## [15.0.6](https://github.com/vuejs/vue-loader/compare/v15.0.5...v15.0.6) (2018-05-02)
+
+
+### Bug Fixes
+
+* duplicate loaders when using src import with loader options ([37329e1](https://github.com/vuejs/vue-loader/commit/37329e1)), closes [#1278](https://github.com/vuejs/vue-loader/issues/1278)
+
+
+
+<a name="15.0.5"></a>
+## [15.0.5](https://github.com/vuejs/vue-loader/compare/v15.0.4...v15.0.5) (2018-04-30)
+
+
+### Bug Fixes
+
+* ignore VueLoaderPlugin check when using thread-loader ([#1268](https://github.com/vuejs/vue-loader/issues/1268)) ([476f466](https://github.com/vuejs/vue-loader/commit/476f466)), closes [#1267](https://github.com/vuejs/vue-loader/issues/1267)
+* **Fork**: Don't reuse ident of `style-loader` ([e7b6b30](https://github.com/vuejs/vue-loader/commit/e7b6b30))
 
 <a name="15.0.4"></a>
 ## [15.0.4](https://github.com/vuejs/vue-loader/compare/v15.0.3...v15.0.4) (2018-04-27)

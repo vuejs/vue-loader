@@ -10,6 +10,10 @@ const {
 } = require('./utils')
 
 const assertComponent = ({ window, module }, done) => {
+  if (typeof module === 'function') {
+    module = module.options
+  }
+
   const vnode = mockRender(module, {
     msg: 'hi'
   })
@@ -161,4 +165,22 @@ test('usage with null-loader', done => {
   }, ({ window, exports, code }) => {
     done()
   })
+})
+
+test('proper dedupe on src-imports with options', done => {
+  mockBundleAndRun({
+    entry: 'ts.vue',
+    resolve: {
+      extensions: ['.ts', '.js']
+    },
+    module: {
+      rules: [
+        {
+          test: /\.ts$/,
+          loader: 'ts-loader',
+          options: { appendTsSuffixTo: [/\.vue$/] }
+        }
+      ]
+    }
+  }, res => assertComponent(res, done))
 })
