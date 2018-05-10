@@ -33,7 +33,7 @@ module.exports = {
   plugins: [
     // ... Vue Loader plugin omitted
     new MiniCssExtractPlugin({
-      filename: style.css
+      filename: 'style.css'
     })
   ]
 }
