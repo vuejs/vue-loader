@@ -1,3 +1,13 @@
+<a name="15.0.10"></a>
+## [15.0.10](https://github.com/vuejs/vue-loader/compare/v15.0.9...v15.0.10) (2018-05-11)
+
+
+### Bug Fixes
+
+* improve HMR reliability ([52012cd](https://github.com/vuejs/vue-loader/commit/52012cd))
+
+
+
 <a name="15.0.9"></a>
 ## [15.0.9](https://github.com/vuejs/vue-loader/compare/v15.0.8...v15.0.9) (2018-05-04)
 
