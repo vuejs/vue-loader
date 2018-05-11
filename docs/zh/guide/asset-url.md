@@ -13,7 +13,7 @@
 ``` js
 createElement('img', {
   attrs: {
-    src: require('../image.png') // 现在这不是一个模块请求
+    src: require('../image.png') // 现在这是一个模块的请求了
   }
 })
 ```
