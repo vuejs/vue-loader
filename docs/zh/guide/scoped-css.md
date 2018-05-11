@@ -30,7 +30,7 @@
 
 ## 混用本地和全局样式
 
-你可以在一个组件中同时使用有 scoped 和 non-scoped 样式：
+你可以在一个组件中同时使用有 scoped 和非 scoped 样式：
 
 ``` html
 <style>

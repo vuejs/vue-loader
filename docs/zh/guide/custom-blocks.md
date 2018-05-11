@@ -2,7 +2,7 @@
 
 在 `.vue` 文件中，你可以自定义语言块。应用于一个自定义块的 loader 是基于这个块的 `lang` 特性、块的标签名以及你的 webpack 配置进行匹配的。
 
-如果一个 `lang` 特性被指定，则这个自定义块将会作为一个带有该 `lang` 扩展名的文件进行匹配。
+如果指定了一个 `lang` 特性，则这个自定义块将会作为一个带有该 `lang` 扩展名的文件进行匹配。
 
 你也可以使用 `resourceQuery` 来为一个没有 `lang` 的自定义块匹配一条规则。例如为了匹配自定义块 `<foo>`：
 
@@ -43,7 +43,7 @@ module.exports = function (source, map) {
 }
 ```
 
-现在我们将会配置 webpack 来使用我们为 `<docs>` 自定义块撰写的自定义 loader。
+现在我们将会配置 webpack 来使用为 `<docs>` 自定义块撰写的自定义 loader。
 
 ``` js
 // wepback.config.js

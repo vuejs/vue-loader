@@ -13,7 +13,7 @@ sidebarDepth: 2
 
 ### 现在你需要一个插件
 
-Vue Loader 15 现在需要伴随一个 webpack 插件才能正确使用：
+Vue Loader 15 现在需要配合一个 webpack 插件才能正确使用：
 
 ``` js
 // webpack.config.js
@@ -105,11 +105,11 @@ v14 或更低版本使用 [consolidate](https://github.com/tj/consolidate.js/) �
 
 现在客户端的样式注入会在最前面注入所有的样式以确保开发模式和提取模式下行为的一致性。
 
-注意它们注入的顺序仍然是不受担保的，所以你撰写的 CSS 应该避免依赖插入的顺序。
+注意它们注入的顺序是不能保证的，所以你撰写的 CSS 应该避免依赖插入的顺序。
 
 ### PostCSS
 
-Vue Loader v15 不再默认应用 PostCSS 变换。想要使用 PostCSS，请像为普通 CSS 文件一样的方式配置 `postcss-loader`。
+Vue Loader v15 不再默认应用 PostCSS 变换。想要使用 PostCSS，请像配置普通 CSS 文件那样配置 `postcss-loader`。
 
 ### CSS Modules
 

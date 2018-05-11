@@ -25,7 +25,7 @@ eslint --ext js,vue MyComponent.vue
 npm install -D eslint eslint-loader
 ```
 
-请确认它是作为一个 pre-loader 运用的：
+请确保它是作为一个 pre-loader 运用的：
 
 ``` js
 // webpack.config.js

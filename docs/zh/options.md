@@ -41,9 +41,9 @@ sidebar: auto
 - 类型：`Object`
 - 默认值：`{}`
 
-  为渲染函数的生成码配置从 ES2015+ 到 ES5 的转译选项。这里的[转译器](https://github.com/vuejs/vue-template-es2015-compiler)是一份 [Buble](https://github.com/Rich-Harris/buble) 的 fork，因此你可以在[这里](https://buble.surge.sh/guide/#using-the-javascript-api)咨询可用的选项。
+  为渲染函数的生成码配置从 ES2015+ 到 ES5 的转译选项。这里的[转译器](https://github.com/vuejs/vue-template-es2015-compiler)是一份 [Buble](https://github.com/Rich-Harris/buble) 的 fork，因此你可以在[这里](https://buble.surge.sh/guide/#using-the-javascript-api)查阅可用的选项。
 
-  模板渲染函数编译支持一个特殊的变换 `stripWith` (默认启用)，它删除生成的渲染函数中的 `with` 用法，使它们兼容严格模式。
+  模板渲染函数编译支持一个特殊的变换 `stripWith` (默认启用)，它会删除生成的渲染函数中的 `with` 用法，使它们兼容严格模式。
 
 ## optimizeSSR
 

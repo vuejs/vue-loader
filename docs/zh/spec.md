@@ -83,7 +83,7 @@ export default {
 
 ### Src 导入
 
-如果你喜欢分隔你的 `.vue` 文件到多个文件中，你可以通过 `src` 属性导入外部文件：
+如果喜欢把 `.vue` 文件分隔到多个文件中，你可以通过 `src` 属性导入外部文件：
 
 ``` vue
 <template src="./template.html"></template>
@@ -124,4 +124,4 @@ export default {
 
 ## 注释
 
-在语言块中使用该语言块对应的注释语法 (HTML、CSS、JavaScript、Jade 等)。顶层注释使用 HTML 注释语法：`<!-- comment contents here -->`
+在语言块中使用该语言块对应的注释语法 (HTML、CSS、JavaScript、Jade 等)。顶层注释使用 HTML 注释语法：`<!-- comment contents here -->`。

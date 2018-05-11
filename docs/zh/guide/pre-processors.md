@@ -6,9 +6,9 @@ sidebarDepth: 2
 
 在 webpack 中，所有的预处理器需要匹配对应的 loader。Vue Loader 允许你使用其它 webpack loader 处理 Vue 组件的某一部分。它会根据 `lang` 特性以及你 webpack 配置中的规则自动推断出要使用的 loader。
 
-## SASS
+## Sass
 
-例如，为了通过 SASS/SCSS 编译我们的 `<style>` 标签：
+例如，为了通过 Sass/SCSS 编译我们的 `<style>` 标签：
 
 ``` bash
 npm install -D sass-loader node-sass
@@ -20,10 +20,10 @@ npm install -D sass-loader node-sass
 module.exports = {
   module: {
     rules: [
-      // ...其它规则忽略
+      // ... 忽略其它规则
 
       // 普通的 `.scss` 文件和 `*.vue` 文件中的
-      // `<style lang="scss">` 块都运用它
+      // `<style lang="scss">` 块都应用它
       {
         test: /\.scss$/,
         use: [
@@ -48,7 +48,7 @@ module.exports = {
 
 这个块里的任何内容都会被 webpack 当作在一个 `*.scss` 文件中一样被处理。
 
-### SASS vs SCSS
+### Sass vs SCSS
 
 注意 `sass-loader` 会默认处理不基于缩进的 `scss` 语法。为了使用基于缩进的 `sass` 语法，你需要向这个 loader 传递选项：
 
@@ -91,7 +91,7 @@ module.exports = {
 }
 ```
 
-## LESS
+## Less
 
 ``` bash
 npm install -D less less-loader
@@ -152,7 +152,7 @@ npm install -D postcss-loader
 }
 ```
 
-PostCSS 的配置可以通过 `postcss.config.js` 或 `postcss-loader` 选项来完成。其更多细节请咨询 [postcss-loader 文档](https://github.com/postcss/postcss-loader)。
+PostCSS 的配置可以通过 `postcss.config.js` 或 `postcss-loader` 选项来完成。其更多细节请查阅 [postcss-loader 文档](https://github.com/postcss/postcss-loader)。
 
 `postcss-loader` 也可以和上述其它预处理器结合使用。
 
@@ -182,12 +182,12 @@ npm install -D typescript ts-loader
 // webpack.config.js
 module.exports = {
   resolve: {
-    // Add `.ts` as a resolvable extension.
+    // 将 `.ts` 添加为一个可解析的扩展名。
     extensions: ['.ts', '.js']
   },
   module: {
     rules: [
-      // ...other rules omitted
+      // ... 忽略其它规则
       {
         test: /\.ts$/,
         loader: 'ts-loader',

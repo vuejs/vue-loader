@@ -1,6 +1,6 @@
 # CSS Modules
 
-[CSS Modules](https://github.com/css-modules/css-modules)是一个用于模块化和组合 CSS 的流行系统。`vue-loader` 提供了与 CSS 模块的一流集成，可以作为模拟 scoped CSS 的替代方案。
+[CSS Modules](https://github.com/css-modules/css-modules) 是一个流行的，用于模块化和组合 CSS 的系统。`vue-loader` 提供了与 CSS Modules 的一流集成，可以作为模拟 scoped CSS 的替代方案。
 
 ## 用法
 
@@ -86,7 +86,7 @@ export default {
 
 你可以查阅 [CSS Modules 规范](https://github.com/css-modules/css-modules)了解更多细节，诸如 [global exceptions](https://github.com/css-modules/css-modules#exceptions) 和 [composition](https://github.com/css-modules/css-modules#composition) 等。
 
-## 可选加入的用法
+## 可选用法
 
 如果你只想在某些 Vue 组件中使用 CSS Modules，你可以使用 `oneOf` 规则并在 `resourceQuery` 字符串中检查 `module` 字符串：
 
@@ -122,7 +122,7 @@ export default {
 
 ## 和预处理器配合使用
 
-CSS Modules 可以独立用于其它预处理器：
+CSS Modules 可以与其它预处理器一起使用：
 
 ``` js
 // webpack.config.js -> module.rules

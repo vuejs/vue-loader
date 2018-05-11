@@ -1,6 +1,6 @@
 # 介绍
 
-:::tip 版本注明
+:::tip 版本说明
 这份文档是为 Vue Loader v15 及以上版本撰写的。如果你正在从 v14 或更早的版本往这里迁移，请查阅[迁移指南](../migrating.md)。如果你正在使用老版本，其对应的文档[在此](https://vue-loader-v14.vuejs.org)。
 :::
 
@@ -36,6 +36,6 @@ Vue Loader 还提供了很多酷炫的特性：
 - 允许在一个 `.vue` 文件中使用自定义块，并对其运用自定义的 loader 链；
 - 使用 webpack loader 将 `<style>` 和 `<template>` 中引用的资源当作模块依赖来处理；
 - 为每个组件模拟出 scoped CSS；
-- 在开发过程中可以保持状态的热重载。
+- 在开发过程中使用热重载来保持状态。
 
-简而言之，webpack 和 Vue Loader 的结合为你提供了一个撰写 Vue.js 应用的、现代的、灵活的和极致强大的前端工作流。
+简而言之，webpack 和 Vue Loader 的结合为你提供了一个现代、灵活且极其强大的前端工作流，来帮助撰写 Vue.js 应用。
