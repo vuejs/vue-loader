@@ -1,6 +1,6 @@
-# 校验 (Linting)
+# 代码校验 (Linting)
 
-官方的 [eslint-plugin-vue](https://github.com/vuejs/eslint-plugin-vue) 同时支持在 Vue 单文件组件的模板和脚本部分的校验。
+官方的 [eslint-plugin-vue](https://github.com/vuejs/eslint-plugin-vue) 同时支持在 Vue 单文件组件的模板和脚本部分的代码校验。
 
 请确认在你的 ESLint 配置文件中使用该插件要导入的配置：
 
@@ -19,7 +19,7 @@ module.exports = {
 eslint --ext js,vue MyComponent.vue
 ```
 
-另一个选项是使用 [eslint-loader](https://github.com/MoOx/eslint-loader) 那么你的 `*.vue` 文件在开发过程中每次保存的时候就会自动进行校验：
+另一个选项是使用 [eslint-loader](https://github.com/MoOx/eslint-loader) 那么你的 `*.vue` 文件在开发过程中每次保存的时候就会自动进行代码校验：
 
 ``` bash
 npm install -D eslint eslint-loader
