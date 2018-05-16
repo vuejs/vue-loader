@@ -67,3 +67,10 @@ sidebar: auto
 - 默认值：`process.env.NODE_ENV === 'production'`
 
 强制指定为生产环境，即禁止 loader 注入只在开发环境有效的代码 (例如 hot-reload 相关的代码)。
+
+## shadowMode
+
+- 类型：`boolean`
+- 默认值：`false`
+
+Compiled the component for usage inside Shadow DOM. In this mode, the styles of the component will be injected into `this.$root.$options.shadowRoot` instead of the document head.

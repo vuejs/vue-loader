@@ -142,7 +142,7 @@ npm install -D postcss-loader
 {
   test: /\.css$/,
   use: [
-    'style-loader',
+    'vue-style-loader',
     {
       loader: 'css-loader',
       options: { importLoaders: 1 }
@@ -171,6 +171,23 @@ npm install -D babel-core babel-loader
 ```
 
 Babel 的配置可以通过 `.babelrc` 或 `babel-loader` 选项来完成。
+
+### Excluding node_modules
+
+It is common to have `exclude: /node_modules/` for JS transpilation rules (e.g. `babel-loader`) that apply to `.js` files. Due to the inference change of v15, if you import a Vue SFC inside `node_modules`, its `<script>` part will be excluded from transpilation as well.
+
+In order to ensure JS transpilation is applied to Vue SFCs in `node_modules`, you need to whitelist them by using an exclude function instead:
+
+``` js
+{
+  test: /\.js$/,
+  loader: 'babel-loader',
+  exclude: file => (
+    /node_modules/.test(file) &&
+    !/\.vue\.js/.test(file)
+  )
+}
+```
 
 ## TypeScript
 
