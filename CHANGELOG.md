@@ -1,3 +1,13 @@
+<a name="15.0.12"></a>
+## [15.0.12](https://github.com/vuejs/vue-loader/compare/v15.0.11...v15.0.12) (2018-05-18)
+
+
+### Bug Fixes
+
+* ignore attrs that might interfere with query generation ([3a37269](https://github.com/vuejs/vue-loader/commit/3a37269)), closes [vuejs/vue-cli#1324](https://github.com/vuejs/vue-cli/issues/1324)
+
+
+
 <a name="15.0.11"></a>
 ## [15.0.11](https://github.com/vuejs/vue-loader/compare/v15.0.9...v15.0.11) (2018-05-15)
 
