@@ -1,3 +1,13 @@
+<a name="15.1.0"></a>
+# [15.1.0](https://github.com/vuejs/vue-loader/compare/v15.0.12...v15.1.0) (2018-05-19)
+
+
+### Performance Improvements
+
+* avoid duplicate linting when used with eslint-loader ([3d07f81](https://github.com/vuejs/vue-loader/commit/3d07f81))
+
+
+
 <a name="15.0.12"></a>
 ## [15.0.12](https://github.com/vuejs/vue-loader/compare/v15.0.11...v15.0.12) (2018-05-18)
 
