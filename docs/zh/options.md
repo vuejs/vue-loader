@@ -73,4 +73,4 @@ sidebar: auto
 - 类型：`boolean`
 - 默认值：`false`
 
-Compiled the component for usage inside Shadow DOM. In this mode, the styles of the component will be injected into `this.$root.$options.shadowRoot` instead of the document head.
+编译用于 Shadow DOM 内部的组件。在该模式下，组件的样式会被注入到 `this.$root.$options.shadowRoot`，而不是文档的 head 部分。

@@ -57,11 +57,11 @@ module.exports = {
 
 v15 也允许为 loader 使用非序列化的选项，这种选项在之前的版本中是无法使用的。
 
-### Importing SFCs from Dependencies
+### 从依赖中导入单文件组件
 
-It is common to have `exclude: /node_modules/` for JS transpilation rules (e.g. `babel-loader`) that apply to `.js` files. Due to the inference change of v15, if you import a Vue SFC inside `node_modules`, its `<script>` part will be excluded from transpilation as well.
+`exclude: /node_modules/` 在运用于 `.js` 文件的 JS 转译规则 (例如 `babel-loader`) 中是蛮常见的。鉴于 v15 中的推导变化，如果你导入一个 `node_modules` 内的 Vue 单文件组件，它的 `<script>` 部分在转译时将会被排除在外。
 
-In order to ensure JS transpilation is applied to Vue SFCs in `node_modules`, you need to whitelist them by using an exclude function instead:
+为了确保 JS 的转译应用到 `node_modules` 的 Vue 单文件组件，你需要通过替换使用一个排除函数将其设为白名单：
 
 ``` js
 {
