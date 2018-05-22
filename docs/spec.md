@@ -79,7 +79,7 @@ More details can be found in [Using Pre-Processors](./guide/pre-processors.md).
 
 Additional custom blocks can be included in a `*.vue` file for any project specific needs, for example a `<docs>` block. `vue-loader` will use the tag name to look up which webpack loaders should be applied to the contents of the section. The webpack loaders should be specified in the `loaders` section of `vue-loader` options.
 
-For mode details, see [Custom Blocks](./guide/custom-blocks.md).
+For more details, see [Custom Blocks](./guide/custom-blocks.md).
 
 ### Src Imports
 
