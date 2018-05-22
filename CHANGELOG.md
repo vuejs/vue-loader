@@ -1,3 +1,13 @@
+<a name="15.2.0"></a>
+# [15.2.0](https://github.com/vuejs/vue-loader/compare/v15.1.0...v15.2.0) (2018-05-22)
+
+
+### Features
+
+* enable template compile caching ([28e0fd3](https://github.com/vuejs/vue-loader/commit/28e0fd3))
+
+
+
 <a name="15.1.0"></a>
 # [15.1.0](https://github.com/vuejs/vue-loader/compare/v15.0.12...v15.1.0) (2018-05-19)
 
