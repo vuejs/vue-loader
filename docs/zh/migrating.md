@@ -6,18 +6,18 @@ sidebarDepth: 2
 # 从 v14 迁移
 
 ::: tip 注意
-我们正在升级 Vue CLI 3 beta 的过程中，并使用了 webpack 4 + Vue Loader 15，所以如果你计划升级到 Vue CLI 3 的话，可能需要等待。
+我们正在升级 Vue CLI 3 beta 的过程中，并使用了 webpack 4 + Vue Loader v15，所以如果你计划升级到 Vue CLI 3 的话，可能需要等待。
 :::
 
 ## 值得注意的不兼容变更
 
 ### 现在你需要一个插件
 
-Vue Loader 15 现在需要配合一个 webpack 插件才能正确使用：
+Vue Loader v15 现在需要配合一个 webpack 插件才能正确使用：
 
 ``` js
 // webpack.config.js
-const { VueLoaderPlugin } = require('vue-loader')
+const VueLoaderPlugin = require('vue-loader/lib/plugin')
 
 module.exports = {
   // ...
@@ -29,7 +29,7 @@ module.exports = {
 
 ### Loader 推导
 
-现在 Vue Loader 15 使用了一个不一样的策略来推导语言块使用的 loader。
+现在 Vue Loader v15 使用了一个不一样的策略来推导语言块使用的 loader。
 
 拿 `<style lang="less">` 举例：在 v14 或更低版本中，它会尝试使用 `less-loader` 加载这个块，并在其后面隐式地链上 `css-loader` 和 `vue-style-loader`，这一切都使用内联的 loader 字符串。
 
@@ -56,6 +56,23 @@ module.exports = {
 这样做的好处是这条规则同样应用在 JavaScript 里普通的 `*.less` 导入中，并且你可以为这些 loader 配置任何你想要的选项。在 v14 或更低版本中，如果你想为一个推导出来的 loader 定制选项，你不得不在 Vue Loader 自己的 `loaders` 选项中将它重复一遍。在 v15 中你再也没有必要这么做了。
 
 v15 也允许为 loader 使用非序列化的选项，这种选项在之前的版本中是无法使用的。
+
+### 从依赖中导入单文件组件
+
+`exclude: /node_modules/` 在运用于 `.js` 文件的 JS 转译规则 (例如 `babel-loader`) 中是蛮常见的。鉴于 v15 中的推导变化，如果你导入一个 `node_modules` 内的 Vue 单文件组件，它的 `<script>` 部分在转译时将会被排除在外。
+
+为了确保 JS 的转译应用到 `node_modules` 的 Vue 单文件组件，你需要通过使用一个排除函数将它们加入白名单：
+
+``` js
+{
+  test: /\.js$/,
+  loader: 'babel-loader',
+  exclude: file => (
+    /node_modules/.test(file) &&
+    !/\.vue\.js/.test(file)
+  )
+}
+```
 
 ### 模板预处理
 
@@ -243,10 +260,6 @@ externals: nodeExternals({
 下列选项已经被改名了：
 
 - `transformToRequire` (现在改名为 `transformAssetUrls`)
-
-下列选项已经被改为 `resourceQuery`：
-
-- `shadowMode` (现在使用内联资源查询语句，例如 `foo.vue?shadow`)
 
 :::tip
 想查阅新选项的完整列表，请移步[选项参考](./options.md)。
