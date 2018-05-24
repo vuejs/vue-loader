@@ -174,9 +174,9 @@ Babel 的配置可以通过 `.babelrc` 或 `babel-loader` 选项来完成。
 
 ### 排除 node_modules
 
-`exclude: /node_modules/` 在运用于 `.js` 文件的 JS 转译规则 (例如 `babel-loader`) 中是蛮常见的。鉴于 v15 中的推导变化，如果你导入一个 `node_modules` 内的 Vue 单文件组件，它的 `<script>` 部分在转译时将会被排除在外。
+`exclude: /node_modules/` 在应用于 `.js` 文件的 JS 转译规则 (例如 `babel-loader`) 中是蛮常见的。鉴于 v15 中的推导变化，如果你导入一个 `node_modules` 内的 Vue 单文件组件，它的 `<script>` 部分在转译时将会被排除在外。
 
-为了确保 JS 的转译应用到 `node_modules` 的 Vue 单文件组件，你需要通过替换使用一个排除函数将其设为白名单：
+为了确保 JS 的转译应用到 `node_modules` 的 Vue 单文件组件，你需要通过使用一个排除函数将它们加入白名单：
 
 ``` js
 {
