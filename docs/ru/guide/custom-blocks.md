@@ -6,15 +6,15 @@
 
 Вы также можете использовать `resourceQuery` для определения правила для блока без атрибута `lang`. Например, для сопоставления пользовательского блока `<foo>`:
 
-``` js
+```js
 {
   module: {
     rules: [
       {
         resourceQuery: /blockType=foo/,
-        loader: 'loader-to-use'
+        loader: "loader-to-use"
       }
-    ]
+    ];
   }
 }
 ```
@@ -29,39 +29,37 @@
 
 Для внедрения содержимого пользовательского блока мы напишем собственный загрузчик:
 
-``` js
-module.exports = function (source, map) {
+```js
+module.exports = function(source, map) {
   this.callback(
     null,
     `export default function (Component) {
-      Component.options.__docs = ${
-        JSON.stringify(source)
-      }
+      Component.options.__docs = ${JSON.stringify(source)}
     }`,
     map
-  )
-}
+  );
+};
 ```
 
 Настроим webpack использовать наш загрузчик для пользовательских блоков `<docs>`.
 
-``` js
+```js
 // wepback.config.js
 module.exports = {
   module: {
     rules: [
       {
         resourceQuery: /blockType=docs/,
-        loader: require.resolve('./docs-loader.js')
+        loader: require.resolve("./docs-loader.js")
       }
     ]
   }
-}
+};
 ```
 
 Теперь мы можем получить доступ к содержимому блока `<docs>` импортированного компонента на этапе выполнения.
 
-``` vue
+```vue
 <!-- ComponentB.vue -->
 <template>
   <div>Hello</div>
@@ -72,7 +70,7 @@ This is the documentation for component B.
 </docs>
 ```
 
-``` vue
+```vue
 <!-- ComponentA.vue -->
 <template>
   <div>
@@ -82,15 +80,15 @@ This is the documentation for component B.
 </template>
 
 <script>
-import ComponentB from './ComponentB.vue';
+import ComponentB from "./ComponentB.vue";
 
-export default = {
+export default {
   components: { ComponentB },
-  data () {
+  data() {
     return {
       docs: ComponentB.__docs
-    }
+    };
   }
-}
+};
 </script>
 ```
