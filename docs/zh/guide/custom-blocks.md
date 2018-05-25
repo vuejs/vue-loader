@@ -84,7 +84,7 @@ This is the documentation for component B.
 <script>
 import ComponentB from './ComponentB.vue';
 
-export default = {
+export default {
   components: { ComponentB },
   data () {
     return {
