@@ -1,3 +1,13 @@
+<a name="15.2.1"></a>
+## [15.2.1](https://github.com/vuejs/vue-loader/compare/v15.2.0...v15.2.1) (2018-05-25)
+
+
+### Bug Fixes
+
+* ensure template cache uses unique identifier ([bdb13be](https://github.com/vuejs/vue-loader/commit/bdb13be))
+
+
+
 <a name="15.2.0"></a>
 # [15.2.0](https://github.com/vuejs/vue-loader/compare/v15.1.0...v15.2.0) (2018-05-22)
 
