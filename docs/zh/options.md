@@ -74,3 +74,10 @@ sidebar: auto
 - 默认值：`false`
 
 编译用于 Shadow DOM 内部的组件。在该模式下，组件的样式会被注入到 `this.$root.$options.shadowRoot`，而不是文档的 head 部分。
+
+## cacheDirectory / cacheIdentifier
+
+- 类型：`string`
+- 默认值：`undefined`
+
+当这两个选项同时被设置时，开启基于文件系统的模板编译缓存 (需要在工程里安装 `cache-loader`)。
