@@ -81,3 +81,10 @@ Compiled the component for usage inside Shadow DOM. In this mode, the styles of 
 - default: `undefined`
 
 When both options are specified, enables file-system-based template compilation caching (requires `cache-loader` to be installed in the same project).
+
+## templatePostLoaders
+
+- type: `Array<string>`
+- default: `[]`
+
+Attach an array of loaders to post-process a template's render function. This option only exists because Webpack's `enforce: 'post'` option is not preserved and cannot be used to determine whether loaders defined as Rules within a Webpack configuration should be attached after the `template-compiler`.

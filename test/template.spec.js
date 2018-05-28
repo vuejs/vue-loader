@@ -292,3 +292,17 @@ test('separate loader configuration for template lang and js imports', done => {
     done()
   })
 })
+
+test('render function post loaders', done => {
+  mockBundleAndRun({
+    entry: './test/fixtures/template-post.js',
+    vue: {
+      templatePostLoaders: [
+        path.resolve(__dirname, './mock-loaders/js')
+      ]
+    }
+  }, ({ exports }) => {
+    expect(exports.staticRenderFns[0].toString()).toContain('Changed!')
+    done()
+  })
+})
