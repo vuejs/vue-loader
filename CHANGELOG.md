@@ -1,3 +1,14 @@
+<a name="15.2.2"></a>
+## [15.2.2](https://github.com/vuejs/vue-loader/compare/v15.2.0...v15.2.2) (2018-05-28)
+
+
+### Bug Fixes
+
+* check loader for cnpm(npminstall) ([#1321](https://github.com/vuejs/vue-loader/issues/1321)) ([37fbaeb](https://github.com/vuejs/vue-loader/commit/37fbaeb))
+* ensure template cache uses unique identifier ([538198e](https://github.com/vuejs/vue-loader/commit/538198e))
+
+
+
 <a name="15.2.1"></a>
 ## [15.2.1](https://github.com/vuejs/vue-loader/compare/v15.2.0...v15.2.1) (2018-05-25)
 
