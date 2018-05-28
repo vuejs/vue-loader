@@ -9,6 +9,11 @@ module.exports = {
       lang: 'zh-CN',
       title: 'Vue Loader',
       description: '处理 Vue 单文件组件的 Webpack loader'
+    },
+    '/ru/': {
+      lang: 'ru',
+      title: 'Vue Loader',
+      description: 'Webpack loader для однофайловых компонентов Vue'
     }
   },
   serviceWorker: true,
@@ -89,6 +94,43 @@ module.exports = {
           '/zh/guide/extract-css',
           '/zh/guide/linting',
           '/zh/guide/testing'
+        ]
+      },
+      '/ru/': {
+        label: 'Русский',
+        selectText: 'Languages',
+        editLinkText: 'Изменить эту страницу на GitHub',
+        nav: [
+          {
+            text: 'Руководство',
+            link: '/ru/guide/'
+          },
+          {
+            text: 'Однофайловые компоненты',
+            link: '/ru/spec.html'
+          },
+          {
+            text: 'Настройки',
+            link: '/ru/options.html'
+          },
+          {
+            text: 'Миграция с версии v14',
+            link: '/ru/migrating.md'
+          }
+        ],
+        sidebar: [
+          '/ru/',
+          '/ru/guide/',
+          '/ru/guide/asset-url',
+          '/ru/guide/pre-processors',
+          '/ru/guide/scoped-css',
+          '/ru/guide/css-modules',
+          '/ru/guide/hot-reload',
+          '/ru/guide/functional',
+          '/ru/guide/custom-blocks',
+          '/ru/guide/extract-css',
+          '/ru/guide/linting',
+          '/ru/guide/testing'
         ]
       }
     }
