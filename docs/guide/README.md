@@ -8,7 +8,7 @@ Follow this guide if the built-in configuration of Vue CLI does not suit your ne
 
 ## Manual Configuration
 
-Vue Loader's configuration is a bit different form other loaders. In addition to a rule that applies `vue-loader` to any files with extension `.vue`, make sure to add Vue Loader's plugin to your webpack config:
+Vue Loader's configuration is a bit different from other loaders. In addition to a rule that applies `vue-loader` to any files with extension `.vue`, make sure to add Vue Loader's plugin to your webpack config:
 
 ``` js
 // webpack.config.js
