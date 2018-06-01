@@ -1,3 +1,57 @@
+<a name="15.2.4"></a>
+## [15.2.4](https://github.com/vuejs/vue-loader/compare/v15.2.2...v15.2.4) (2018-06-01)
+
+
+### Bug Fixes
+
+* ensure plugin error is emitted only once ([0b006a3](https://github.com/vuejs/vue-loader/commit/0b006a3))
+* fix unexpected error when options of cache-loader contains ! ([#1334](https://github.com/vuejs/vue-loader/issues/1334)) ([c4a2719](https://github.com/vuejs/vue-loader/commit/c4a2719))
+* use constant plugin NS ([0fb5172](https://github.com/vuejs/vue-loader/commit/0fb5172)), closes [#1331](https://github.com/vuejs/vue-loader/issues/1331)
+
+
+### Features
+
+* inject issuerPath to resourceQuery for custom block src imports ([#1313](https://github.com/vuejs/vue-loader/issues/1313)) ([a004e30](https://github.com/vuejs/vue-loader/commit/a004e30))
+
+
+
+<a name="15.2.3"></a>
+## [15.2.3](https://github.com/vuejs/vue-loader/compare/v15.2.2...v15.2.3) (2018-06-01)
+
+
+### Bug Fixes
+
+* ensure plugin error is emitted only once ([0b006a3](https://github.com/vuejs/vue-loader/commit/0b006a3))
+* use constant plugin NS ([0fb5172](https://github.com/vuejs/vue-loader/commit/0fb5172)), closes [#1331](https://github.com/vuejs/vue-loader/issues/1331)
+
+
+### Features
+
+* inject issuerPath to resourceQuery for custom block src imports ([#1313](https://github.com/vuejs/vue-loader/issues/1313)) ([a004e30](https://github.com/vuejs/vue-loader/commit/a004e30))
+
+
+
+<a name="15.2.2"></a>
+## [15.2.2](https://github.com/vuejs/vue-loader/compare/v15.2.0...v15.2.2) (2018-05-28)
+
+
+### Bug Fixes
+
+* check loader for cnpm(npminstall) ([#1321](https://github.com/vuejs/vue-loader/issues/1321)) ([37fbaeb](https://github.com/vuejs/vue-loader/commit/37fbaeb))
+* ensure template cache uses unique identifier ([538198e](https://github.com/vuejs/vue-loader/commit/538198e))
+
+
+
+<a name="15.2.1"></a>
+## [15.2.1](https://github.com/vuejs/vue-loader/compare/v15.2.0...v15.2.1) (2018-05-25)
+
+
+### Bug Fixes
+
+* ensure template cache uses unique identifier ([bdb13be](https://github.com/vuejs/vue-loader/commit/bdb13be))
+
+
+
 <a name="15.2.0"></a>
 # [15.2.0](https://github.com/vuejs/vue-loader/compare/v15.1.0...v15.2.0) (2018-05-22)
 
