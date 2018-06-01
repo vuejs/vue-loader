@@ -1,3 +1,19 @@
+<a name="15.2.3"></a>
+## [15.2.3](https://github.com/vuejs/vue-loader/compare/v15.2.2...v15.2.3) (2018-06-01)
+
+
+### Bug Fixes
+
+* ensure plugin error is emitted only once ([0b006a3](https://github.com/vuejs/vue-loader/commit/0b006a3))
+* use constant plugin NS ([0fb5172](https://github.com/vuejs/vue-loader/commit/0fb5172)), closes [#1331](https://github.com/vuejs/vue-loader/issues/1331)
+
+
+### Features
+
+* inject issuerPath to resourceQuery for custom block src imports ([#1313](https://github.com/vuejs/vue-loader/issues/1313)) ([a004e30](https://github.com/vuejs/vue-loader/commit/a004e30))
+
+
+
 <a name="15.2.2"></a>
 ## [15.2.2](https://github.com/vuejs/vue-loader/compare/v15.2.0...v15.2.2) (2018-05-28)
 
