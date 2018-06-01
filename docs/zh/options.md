@@ -81,3 +81,7 @@ sidebar: auto
 - 默认值：`undefined`
 
 当这两个选项同时被设置时，开启基于文件系统的模板编译缓存 (需要在工程里安装 `cache-loader`)。
+
+::: tip 注意
+  在内部，`vue-loader` 和 `cache-loader` 之间的交互使用了 [loader 的内联 import 语法](https://webpack.js.org/concepts/loaders/#inline)，`!` 将会被认为是不同 loaders 之间的分隔符，所以请确保你的 `cacheDirectory` 路径中不包含 `!`。
+:::
