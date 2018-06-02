@@ -58,6 +58,7 @@
     "jsdom": "^11.6.2",
     "lint-staged": "^7.0.0",
     "markdown-loader": "^2.0.2",
+    "memory-fs": "^0.4.1",
     "mini-css-extract-plugin": "^0.2.0",
     "node-sass": "^4.7.2",
     "normalize-newline": "^3.0.0",
@@ -67,6 +68,7 @@
     "pug-plain-loader": "^1.0.0",
     "raw-loader": "^0.5.1",
     "sass-loader": "^6.0.7",
+    "source-map": "^0.5.0",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.2",
     "sugarss": "^1.0.1",
@@ -83,5 +85,8 @@
     "webpack-dev-server": "^3.1.1",
     "webpack-merge": "^4.1.2",
     "yorkie": "^1.0.3"
+  },
+  "peerDependencies": {
+    "webpack": "^4.1.0"
   }
 }
