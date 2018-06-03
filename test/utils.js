@@ -57,7 +57,7 @@ function bundle (options, cb, wontThrowError) {
     config.module.rules[vueIndex] = Object.assign({}, vueRule, { options: vueOptions })
   }
 
-  if (/\.vue$/.test(config.entry)) {
+  if (/\.vue/.test(config.entry)) {
     const vueFile = config.entry
     config = merge(config, {
       entry: require.resolve('./fixtures/entry'),
