@@ -28,6 +28,24 @@ test('support chaining with other loaders', done => {
   })
 })
 
+test('inherit queries on files', done => {
+  mockBundleAndRun({
+    entry: 'basic.vue?change',
+    modify: config => {
+      config.module.rules[0] = {
+        test: /\.vue$/,
+        use: [
+          'vue-loader',
+          require.resolve('./mock-loaders/query')
+        ]
+      }
+    }
+  }, ({ module }) => {
+    expect(module.data().msg).toBe('Changed!')
+    done()
+  })
+})
+
 test('expose filename', done => {
   mockBundleAndRun({
     entry: 'basic.vue'

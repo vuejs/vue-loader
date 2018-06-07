@@ -3,3 +3,5 @@ test
 *.yml
 *.log
 yarn.lock
+tsconfig.json
+docs

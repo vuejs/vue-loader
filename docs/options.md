@@ -82,6 +82,10 @@ Compiled the component for usage inside Shadow DOM. In this mode, the styles of 
 
 When both options are specified, enables file-system-based template compilation caching (requires `cache-loader` to be installed in the same project).
 
+::: tip
+  Interaction between `vue-loader` and `cache-loader` uses [inline loader import syntax](https://webpack.js.org/concepts/loaders/#inline) under the hook, the `!` will be treated as the separator between different loaders, so please ensure `cacheDirectory` doesn't contain `!`.
+:::
+
 ## templatePostLoaders
 
 - type: `Array<string>`

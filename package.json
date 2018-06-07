@@ -1,11 +1,11 @@
 {
   "name": "vue-loader",
-  "version": "15.2.2",
+  "version": "15.2.4",
   "description": "Vue single-file component loader for Webpack",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
   "scripts": {
-    "test": "jest --env node",
+    "test": "yarn lint && jest --env node",
     "lint": "eslint lib test --fix",
     "build": "webpack --config example/webpack.config.js --hide-modules",
     "dev": "webpack-dev-server --config example/webpack.config.js --inline --hot",
@@ -37,7 +37,7 @@
     "vue-template-compiler": "^2.0.0"
   },
   "dependencies": {
-    "@vue/component-compiler-utils": "^1.2.1",
+    "@vue/component-compiler-utils": "^2.0.0",
     "hash-sum": "^1.0.2",
     "loader-utils": "^1.1.0",
     "vue-hot-reload-api": "^2.3.0",
