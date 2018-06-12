@@ -1,5 +1,7 @@
 # 代码校验 (Linting)
 
+## ESLint
+
 官方的 [eslint-plugin-vue](https://github.com/vuejs/eslint-plugin-vue) 同时支持在 Vue 单文件组件的模板和脚本部分的代码校验。
 
 请确认在你的 ESLint 配置文件中使用该插件要导入的配置：
@@ -41,5 +43,37 @@ module.exports = {
       }
     ]
   }
+}
+```
+## stylelint
+
+[stylelint](https://stylelint.io) 支持在 Vue 单文件组件的样式部分的代码校验。
+
+[请确认在你的 stylelint 配置文件正确。](https://stylelint.io/user-guide/configuration/)
+
+接下来从命令行运行：
+
+``` bash
+stylelint MyComponent.vue
+```
+
+另一个选项是使用 [stylelint-webpack-plugin](https://github.com/webpack-contrib/stylelint-webpack-plugin):
+
+``` bash
+npm install -D stylelint-webpack-plugin
+```
+
+请确保它是作为一个插件运用的：
+
+``` js
+// webpack.config.js
+const StyleLintPlugin = require('stylelint-webpack-plugin');
+module.exports = {
+  // ... 其它选项
+  plugins: [
+    new StyleLintPlugin({
+      files: ['**/*.{vue,htm,html,css,sss,less,scss,sass}'],
+    })
+  ]
 }
 ```
