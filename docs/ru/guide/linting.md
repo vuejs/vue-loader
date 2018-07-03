@@ -47,23 +47,23 @@ module.exports = {
 ```
 ## stylelint
 
-[stylelint](https://stylelint.io) supports linting style parts of Vue single file components.
+[stylelint](https://stylelint.io) поддерживает проверку секций стилей в однофайловых компонентах Vue.
 
-[Make sure that your stylelint config is right.](https://stylelint.io/user-guide/configuration/)
+[Убедитесь, что ваша конфигурация stylelint корректна.](https://stylelint.io/user-guide/configuration/)
 
-Затем в командной строке:
+Затем выполните в командной строке:
 
 ``` bash
 stylelint MyComponent.vue
 ```
 
-Другим вариантом использования будет [stylelint-webpack-plugin](https://github.com/webpack-contrib/stylelint-webpack-plugin):
+Вы также можете использовать плагин [stylelint-webpack-plugin](https://github.com/webpack-contrib/stylelint-webpack-plugin):
 
 ``` bash
 npm install -D stylelint-webpack-plugin
 ```
 
-Make sure it's applied as a plugin:
+Убедитесь, что добавили плагин в конфигурацию:
 
 ``` js
 // webpack.config.js
