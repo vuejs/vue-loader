@@ -1,3 +1,20 @@
+<a name="15.2.5"></a>
+## [15.2.5](https://github.com/vuejs/vue-loader/compare/v15.2.4...v15.2.5) (2018-07-17)
+
+
+### Bug Fixes
+
+* ensure same compiler is used for both parse and tempalte compilation ([1bfc08a](https://github.com/vuejs/vue-loader/commit/1bfc08a))
+* should not remove eslint-loader on src import blocks (close [#1359](https://github.com/vuejs/vue-loader/issues/1359)) ([6f1d404](https://github.com/vuejs/vue-loader/commit/6f1d404))
+* support usage with other loaders with enforce: post ([be2384c](https://github.com/vuejs/vue-loader/commit/be2384c)), closes [#1351](https://github.com/vuejs/vue-loader/issues/1351)
+
+
+### Features
+
+* inherit root request query in custom block loaders ([#1330](https://github.com/vuejs/vue-loader/issues/1330)) ([0f0b09b](https://github.com/vuejs/vue-loader/commit/0f0b09b))
+
+
+
 <a name="15.2.4"></a>
 ## [15.2.4](https://github.com/vuejs/vue-loader/compare/v15.2.2...v15.2.4) (2018-06-01)
 
