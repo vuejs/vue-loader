@@ -43,7 +43,7 @@ const baseConfig = {
 }
 
 function genId (file) {
-  return hash(path.join('test', 'fixtures', file))
+  return hash(path.join('test', 'fixtures', file).replace(/\\/g, '/'))
 }
 
 function bundle (options, cb, wontThrowError) {
