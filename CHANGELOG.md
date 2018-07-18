@@ -1,3 +1,13 @@
+<a name="15.2.6"></a>
+## [15.2.6](https://github.com/vuejs/vue-loader/compare/v15.2.5...v15.2.6) (2018-07-18)
+
+
+### Bug Fixes
+
+* ensure consistent component id on different OS ([0766fe7](https://github.com/vuejs/vue-loader/commit/0766fe7)), closes [vuejs/vue-cli#1728](https://github.com/vuejs/vue-cli/issues/1728)
+
+
+
 <a name="15.2.5"></a>
 ## [15.2.5](https://github.com/vuejs/vue-loader/compare/v15.2.4...v15.2.5) (2018-07-17)
 
