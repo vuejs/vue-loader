@@ -46,13 +46,28 @@ test('inherit queries on files', done => {
   })
 })
 
-test('expose filename', done => {
+test('expose file path as __file outside production', done => {
   mockBundleAndRun({
     entry: 'basic.vue'
   }, ({ module }) => {
     expect(module.__file).toBe(path.normalize('test/fixtures/basic.vue'))
     done()
   })
+})
+
+test('expose file basename as __file in production', done => {
+  const origNodeEnv = process.env.NODE_ENV
+  process.env.NODE_ENV = 'production'
+  mockBundleAndRun(
+    {
+      entry: 'basic.vue'
+    },
+    ({ module }) => {
+      expect(module.__file).toBe('basic.vue')
+      process.env.NODE_ENV = origNodeEnv
+      done()
+    }
+  )
 })
 
 test('source map', done => {
