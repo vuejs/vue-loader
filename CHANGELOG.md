@@ -1,3 +1,18 @@
+<a name="15.3.0"></a>
+# [15.3.0](https://github.com/vuejs/vue-loader/compare/v15.2.7...v15.3.0) (2018-08-07)
+
+
+### Bug Fixes
+
+* avoid absolute path in cache-loader inline options ([c6ab50a](https://github.com/vuejs/vue-loader/commit/c6ab50a)), closes [#1367](https://github.com/vuejs/vue-loader/issues/1367)
+
+
+### Features
+
+* set file basename to __file in production ([#1368](https://github.com/vuejs/vue-loader/issues/1368)) ([2f441b9](https://github.com/vuejs/vue-loader/commit/2f441b9))
+
+
+
 <a name="15.2.7"></a>
 ## [15.2.7](https://github.com/vuejs/vue-loader/compare/v15.2.6...v15.2.7) (2018-08-07)
 
