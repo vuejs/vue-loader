@@ -1,3 +1,8 @@
+<a name="15.2.7"></a>
+## [15.2.7](https://github.com/vuejs/vue-loader/compare/v15.2.6...v15.2.7) (2018-08-07)
+
+
+
 <a name="15.2.6"></a>
 ## [15.2.6](https://github.com/vuejs/vue-loader/compare/v15.2.5...v15.2.6) (2018-07-18)
 
