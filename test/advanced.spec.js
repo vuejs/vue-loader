@@ -1,4 +1,3 @@
-const path = require('path')
 const { SourceMapConsumer } = require('source-map')
 const normalizeNewline = require('normalize-newline')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
@@ -50,7 +49,7 @@ test('expose file path as __file outside production', done => {
   mockBundleAndRun({
     entry: 'basic.vue'
   }, ({ module }) => {
-    expect(module.__file).toBe(path.normalize('test/fixtures/basic.vue'))
+    expect(module.__file).toBe('test/fixtures/basic.vue')
     done()
   })
 })
