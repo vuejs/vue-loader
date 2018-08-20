@@ -1,3 +1,18 @@
+<a name="15.4.0"></a>
+# [15.4.0](https://github.com/vuejs/vue-loader/compare/v15.3.0...v15.4.0) (2018-08-20)
+
+
+### Bug Fixes
+
+* fix inconsistent path between Windows and POSIX systems (‏ ([#1384](https://github.com/vuejs/vue-loader/issues/1384) ([74a7dbd](https://github.com/vuejs/vue-loader/commit/74a7dbd))
+
+
+### Features
+
+* append the file extension to the mapping files in devtools ([#1372](https://github.com/vuejs/vue-loader/issues/1372)) ([0c2da0f](https://github.com/vuejs/vue-loader/commit/0c2da0f)), closes [#1371](https://github.com/vuejs/vue-loader/issues/1371)
+
+
+
 <a name="15.3.0"></a>
 # [15.3.0](https://github.com/vuejs/vue-loader/compare/v15.2.7...v15.3.0) (2018-08-07)
 
