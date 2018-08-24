@@ -36,7 +36,7 @@ const globalConfig = {
 }
 
 function genId (file) {
-  return hash(path.join('test', 'fixtures', file))
+  return hash(path.join('test', 'fixtures', file).replace(/\\/g, '/'))
 }
 
 function bundle (options, cb, wontThrowError) {
@@ -129,7 +129,7 @@ describe('vue-loader', () => {
     test({
       entry: './test/fixtures/basic.vue'
     }, (window, module, rawModule) => {
-      expect(module.__file).to.equal(path.normalize('test/fixtures/basic.vue'))
+      expect(module.__file).to.equal(path.normalize('test/fixtures/basic.vue').replace(/\\/g, '/'))
       done()
     })
   })
