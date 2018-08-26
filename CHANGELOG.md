@@ -1,3 +1,13 @@
+<a name="15.4.1"></a>
+## [15.4.1](https://github.com/vuejs/vue-loader/compare/v15.4.0...v15.4.1) (2018-08-26)
+
+
+### Bug Fixes
+
+* hide ext appending behind a flag (ref [#1372](https://github.com/vuejs/vue-loader/issues/1372)) ([f0beed3](https://github.com/vuejs/vue-loader/commit/f0beed3))
+
+
+
 <a name="15.4.0"></a>
 # [15.4.0](https://github.com/vuejs/vue-loader/compare/v15.3.0...v15.4.0) (2018-08-20)
 
