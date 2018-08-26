@@ -179,6 +179,6 @@ test('CSS Modules', async () => {
   // custom ident
   await testWithIdent(
     '[path][name]---[local]---[hash:base64:5]',
-    /css-modules-vue---red---\w{5}/
+    /css-modules---red---\w{5}/
   )
 })
