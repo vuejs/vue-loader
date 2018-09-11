@@ -1,3 +1,13 @@
+<a name="15.4.2"></a>
+## [15.4.2](https://github.com/vuejs/vue-loader/compare/v15.4.1...v15.4.2) (2018-09-11)
+
+
+### Bug Fixes
+
+* include query in loader dedupe ([4a894de](https://github.com/vuejs/vue-loader/commit/4a894de)), closes [vue-cli#2451](https://github.com/vue-cli/issues/2451)
+
+
+
 <a name="15.4.1"></a>
 ## [15.4.1](https://github.com/vuejs/vue-loader/compare/v15.4.0...v15.4.1) (2018-08-26)
 
