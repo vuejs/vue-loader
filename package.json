@@ -44,7 +44,7 @@
   },
   "peerDependencies": {
     "@babel/core": "7.*",
-    "@babel-loader": "7.*",
+    "babel-loader": "7.*",
     "@babel/runtime": "7.*",
     "css-loader": "*",
     "vue-hot-reload-api": "^1.2.0",
