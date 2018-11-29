@@ -21,6 +21,9 @@ module.exports = {
   themeConfig: {
     repo: 'vuejs/vue-loader',
     docsDir: 'docs',
+    serviceWorker: {
+      updatePop: true
+    },
     locales: {
       '/': {
         label: 'English',

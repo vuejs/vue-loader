@@ -1,5 +1,7 @@
 # Linting
 
+## ESLint
+
 The official [eslint-plugin-vue](https://github.com/vuejs/eslint-plugin-vue) supports linting both the template and script parts of Vue single file components.
 
 Make sure to use the plugin's included config in your ESLint config:
@@ -41,5 +43,37 @@ module.exports = {
       }
     ]
   }
+}
+```
+## stylelint
+
+[stylelint](https://stylelint.io) supports linting style parts of Vue single file components.
+
+[Make sure that your stylelint config is right.](https://stylelint.io/user-guide/configuration/)
+
+Then from the command line:
+
+``` bash
+stylelint MyComponent.vue
+```
+
+Another option is using [stylelint-webpack-plugin](https://github.com/webpack-contrib/stylelint-webpack-plugin):
+
+``` bash
+npm install -D stylelint-webpack-plugin
+```
+
+Make sure it's applied as a plugin:
+
+``` js
+// webpack.config.js
+const StyleLintPlugin = require('stylelint-webpack-plugin');
+module.exports = {
+  // ... other options
+  plugins: [
+    new StyleLintPlugin({
+      files: ['**/*.{vue,htm,html,css,sss,less,scss,sass}'],
+    })
+  ]
 }
 ```

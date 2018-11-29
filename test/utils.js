@@ -43,7 +43,7 @@ const baseConfig = {
 }
 
 function genId (file) {
-  return hash(path.join('test', 'fixtures', file))
+  return hash(path.join('test', 'fixtures', file).replace(/\\/g, '/'))
 }
 
 function bundle (options, cb, wontThrowError) {
@@ -57,7 +57,7 @@ function bundle (options, cb, wontThrowError) {
     config.module.rules[vueIndex] = Object.assign({}, vueRule, { options: vueOptions })
   }
 
-  if (/\.vue$/.test(config.entry)) {
+  if (/\.vue/.test(config.entry)) {
     const vueFile = config.entry
     config = merge(config, {
       entry: require.resolve('./fixtures/entry'),

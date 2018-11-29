@@ -1,5 +1,7 @@
 # Статический анализ кода
 
+## ESLint
+
 Официальный плагин [eslint-plugin-vue](https://github.com/vuejs/eslint-plugin-vue) поддерживает проверку секций шаблона и кода в однофайловых компонентах Vue.
 
 Убедитесь, что используете поставляемую с плагином конфигурацию в вашей конфигурации ESLint:
@@ -41,5 +43,37 @@ module.exports = {
       }
     ]
   }
+}
+```
+## stylelint
+
+[stylelint](https://stylelint.io) поддерживает проверку секций стилей в однофайловых компонентах Vue.
+
+[Убедитесь, что ваша конфигурация stylelint корректна.](https://stylelint.io/user-guide/configuration/)
+
+Затем выполните в командной строке:
+
+``` bash
+stylelint MyComponent.vue
+```
+
+Вы также можете использовать плагин [stylelint-webpack-plugin](https://github.com/webpack-contrib/stylelint-webpack-plugin):
+
+``` bash
+npm install -D stylelint-webpack-plugin
+```
+
+Убедитесь, что добавили плагин в конфигурацию:
+
+``` js
+// webpack.config.js
+const StyleLintPlugin = require('stylelint-webpack-plugin');
+module.exports = {
+  // ... другие настройки
+  plugins: [
+    new StyleLintPlugin({
+      files: ['**/*.{vue,htm,html,css,sss,less,scss,sass}'],
+    })
+  ]
 }
 ```

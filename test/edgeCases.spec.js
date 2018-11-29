@@ -9,7 +9,11 @@ const {
   mockBundleAndRun
 } = require('./utils')
 
-const assertComponent = ({ window, module }, done) => {
+const assertComponent = ({
+  window,
+  module,
+  expectedMsg = 'Hello from Component A!'
+}, done) => {
   if (typeof module === 'function') {
     module = module.options
   }
@@ -23,7 +27,7 @@ const assertComponent = ({ window, module }, done) => {
   expect(vnode.data.staticClass).toBe('red')
   expect(vnode.children[0].text).toBe('hi')
 
-  expect(module.data().msg).toContain('Hello from Component A!')
+  expect(module.data().msg).toContain(expectedMsg)
   let style = window.document.querySelector('style').textContent
   style = normalizeNewline(style)
   expect(style).toContain('comp-a h2 {\n  color: #f00;\n}')
@@ -183,4 +187,28 @@ test('proper dedupe on src-imports with options', done => {
       ]
     }
   }, res => assertComponent(res, done))
+})
+
+// #1351
+test('use with postLoader', done => {
+  mockBundleAndRun({
+    entry: 'basic.vue',
+    module: {
+      rules: [
+        {
+          test: /\.js$/,
+          use: {
+            loader: require.resolve('./mock-loaders/js')
+          },
+          enforce: 'post'
+        }
+      ]
+    }
+  }, ({ window, module }) => {
+    assertComponent({
+      window,
+      module,
+      expectedMsg: 'Changed!'
+    }, done)
+  })
 })
