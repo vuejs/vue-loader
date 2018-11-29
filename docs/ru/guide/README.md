@@ -37,7 +37,6 @@ module.exports = {
 
 ``` js
 // webpack.config.js
-const path = require('path')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 
 module.exports = {
