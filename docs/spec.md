@@ -126,3 +126,6 @@ Contributions for other editors/IDEs are highly appreciated! If you are not usin
 
 Inside each block you shall use the comment syntax of the language being used (HTML, CSS, JavaScript, Jade, etc). For top-level comments, use HTML comment syntax: `<!-- comment contents here -->`
 
+## `__file` Option
+
+Every single-file component that is imported is assigned a special option `__file` which contains the file name of the `*.vue` file. From within the component you can access this via `this.$options.__file`.
