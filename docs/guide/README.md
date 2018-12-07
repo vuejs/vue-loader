@@ -37,7 +37,6 @@ A more complete example webpack config will look like this:
 
 ``` js
 // webpack.config.js
-const path = require('path')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 
 module.exports = {

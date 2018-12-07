@@ -1,3 +1,85 @@
+<a name="15.4.2"></a>
+## [15.4.2](https://github.com/vuejs/vue-loader/compare/v15.4.1...v15.4.2) (2018-09-11)
+
+
+### Bug Fixes
+
+* include query in loader dedupe ([4a894de](https://github.com/vuejs/vue-loader/commit/4a894de)), closes [vue-cli#2451](https://github.com/vue-cli/issues/2451)
+
+
+
+<a name="15.4.1"></a>
+## [15.4.1](https://github.com/vuejs/vue-loader/compare/v15.4.0...v15.4.1) (2018-08-26)
+
+
+### Bug Fixes
+
+* hide ext appending behind a flag (ref [#1372](https://github.com/vuejs/vue-loader/issues/1372)) ([f0beed3](https://github.com/vuejs/vue-loader/commit/f0beed3))
+
+
+
+<a name="15.4.0"></a>
+# [15.4.0](https://github.com/vuejs/vue-loader/compare/v15.3.0...v15.4.0) (2018-08-20)
+
+
+### Bug Fixes
+
+* fix inconsistent path between Windows and POSIX systems (‏ ([#1384](https://github.com/vuejs/vue-loader/issues/1384) ([74a7dbd](https://github.com/vuejs/vue-loader/commit/74a7dbd))
+
+
+### Features
+
+* append the file extension to the mapping files in devtools ([#1372](https://github.com/vuejs/vue-loader/issues/1372)) ([0c2da0f](https://github.com/vuejs/vue-loader/commit/0c2da0f)), closes [#1371](https://github.com/vuejs/vue-loader/issues/1371)
+
+
+
+<a name="15.3.0"></a>
+# [15.3.0](https://github.com/vuejs/vue-loader/compare/v15.2.7...v15.3.0) (2018-08-07)
+
+
+### Bug Fixes
+
+* avoid absolute path in cache-loader inline options ([c6ab50a](https://github.com/vuejs/vue-loader/commit/c6ab50a)), closes [#1367](https://github.com/vuejs/vue-loader/issues/1367)
+
+
+### Features
+
+* set file basename to __file in production ([#1368](https://github.com/vuejs/vue-loader/issues/1368)) ([2f441b9](https://github.com/vuejs/vue-loader/commit/2f441b9))
+
+
+
+<a name="15.2.7"></a>
+## [15.2.7](https://github.com/vuejs/vue-loader/compare/v15.2.6...v15.2.7) (2018-08-07)
+
+
+
+<a name="15.2.6"></a>
+## [15.2.6](https://github.com/vuejs/vue-loader/compare/v15.2.5...v15.2.6) (2018-07-18)
+
+
+### Bug Fixes
+
+* ensure consistent component id on different OS ([0766fe7](https://github.com/vuejs/vue-loader/commit/0766fe7)), closes [vuejs/vue-cli#1728](https://github.com/vuejs/vue-cli/issues/1728)
+
+
+
+<a name="15.2.5"></a>
+## [15.2.5](https://github.com/vuejs/vue-loader/compare/v15.2.4...v15.2.5) (2018-07-17)
+
+
+### Bug Fixes
+
+* ensure same compiler is used for both parse and tempalte compilation ([1bfc08a](https://github.com/vuejs/vue-loader/commit/1bfc08a))
+* should not remove eslint-loader on src import blocks (close [#1359](https://github.com/vuejs/vue-loader/issues/1359)) ([6f1d404](https://github.com/vuejs/vue-loader/commit/6f1d404))
+* support usage with other loaders with enforce: post ([be2384c](https://github.com/vuejs/vue-loader/commit/be2384c)), closes [#1351](https://github.com/vuejs/vue-loader/issues/1351)
+
+
+### Features
+
+* inherit root request query in custom block loaders ([#1330](https://github.com/vuejs/vue-loader/issues/1330)) ([0f0b09b](https://github.com/vuejs/vue-loader/commit/0f0b09b))
+
+
+
 <a name="15.2.4"></a>
 ## [15.2.4](https://github.com/vuejs/vue-loader/compare/v15.2.2...v15.2.4) (2018-06-01)
 
