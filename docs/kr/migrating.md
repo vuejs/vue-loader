@@ -3,9 +3,9 @@ sidebar: auto
 sidebarDepth: 2
 ---
 
-# Migrating from v14
+# v14에서 v15로 마이그레이션
 
-::: tip Heads Up
+::: tip 주의사항
 We are in the process of upgrading Vue CLI 3 beta to use webpack 4 + Vue Loader v15, so you might want to wait if you are planning to upgrade to Vue CLI 3.
 :::
 

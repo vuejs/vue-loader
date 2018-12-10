@@ -14,6 +14,11 @@ module.exports = {
       lang: 'ru',
       title: 'Vue Loader',
       description: 'Webpack loader для однофайловых компонентов Vue'
+    },
+    '/kr/': {
+      lang: 'kr',
+      title: 'Vue Loader',
+      description: '싱글 파일 Vue 컴포넌트를 위한 Webpack 로더'
     }
   },
   serviceWorker: true,
@@ -134,6 +139,43 @@ module.exports = {
           '/ru/guide/extract-css',
           '/ru/guide/linting',
           '/ru/guide/testing'
+        ]
+      },
+      '/kr/': {
+        label: '한국어',
+        selectText: '다른 언어로 보기',
+        editLinkText: 'GitHub에서 수정하기',
+        nav: [
+          {
+            text: '가이드',
+            link: '/kr/guide/'
+          },
+          {
+            text: 'SFC 스펙',
+            link: '/kr/spec.html'
+          },
+          {
+            text: '설정',
+            link: '/kr/options.html'
+          },
+          {
+            text: 'v14에서 마이그레이션',
+            link: '/kr/migrating.md'
+          }
+        ],
+        sidebar: [
+          '/kr/',
+          '/kr/guide/',
+          '/kr/guide/asset-url',
+          '/kr/guide/pre-processors',
+          '/kr/guide/scoped-css',
+          '/kr/guide/css-modules',
+          '/kr/guide/hot-reload',
+          '/kr/guide/functional',
+          '/kr/guide/custom-blocks',
+          '/kr/guide/extract-css',
+          '/kr/guide/linting',
+          '/kr/guide/testing'
         ]
       }
     }

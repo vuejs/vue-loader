@@ -6,7 +6,7 @@ Vue Loader v15 이상을 위한 문서입니다. 만약 v14이하 버전의 Vue 
 
 ## Vue Loader는 무엇인가요?
 
-`vue-loader`는 [단일 파일 컴포넌트 (SFCs)](./spec.md)라는 형식으로 Vue 컴포넌트를 작성하는 것을 허용하는 [webpack](https://webpack.js.org/)의 로더이다.
+`vue-loader`는 [싱글 파일 컴포넌트 (SFCs)](./spec.md)라는 형식으로 Vue 컴포넌트를 작성하는 것을 허용하는 [webpack](https://webpack.js.org/)의 로더이다.
 
 ``` vue
 <template>
