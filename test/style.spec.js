@@ -182,3 +182,43 @@ test('CSS Modules', async () => {
     /css-modules---red---\w{5}/
   )
 })
+
+test('CSS Modules Extend', async () => {
+  return new Promise((resolve, reject) => {
+    const baseLoaders = [
+      'vue-style-loader',
+      {
+        loader: 'css-loader',
+        options: {
+          modules: true
+        }
+      }
+    ]
+    mockBundleAndRun({
+      entry: 'css-modules-extend.vue',
+      modify: config => {
+        config.module.rules = [
+          {
+            test: /\.vue$/,
+            loader: 'vue-loader'
+          },
+          {
+            test: /\.css$/,
+            use: baseLoaders
+          }
+        ]
+      }
+    }, ({ window, module, instance, jsdomError, bundleError }) => {
+      if (jsdomError) return reject(jsdomError)
+      if (bundleError) return reject(bundleError)
+
+      const vnode = mockRender(module)
+      expect(vnode.data.class).toBe(instance.$style.red)
+
+      const style = window.document.querySelectorAll('style')[1].textContent
+      expect(style).toContain(`.${instance.$style.red} {\n  color: #FF0000;\n}`)
+
+      resolve()
+    })
+  })
+})
