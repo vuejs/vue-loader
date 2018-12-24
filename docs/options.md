@@ -85,3 +85,10 @@ When both options are specified, enables file-system-based template compilation 
 ::: tip
   Interaction between `vue-loader` and `cache-loader` uses [inline loader import syntax](https://webpack.js.org/concepts/loaders/#inline) under the hook, the `!` will be treated as the separator between different loaders, so please ensure `cacheDirectory` doesn't contain `!`.
 :::
+
+## templatePostLoaders
+
+- type: `Array<string>`
+- default: `[]`
+
+Attach an array of loaders to post-process a template's render function. This option only exists because Webpack's `enforce: 'post'` option is not preserved and cannot be used to determine whether loaders defined as Rules within a Webpack configuration should be attached after the `template-compiler`.

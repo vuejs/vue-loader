@@ -251,6 +251,10 @@ The following options have been deprecated and should be configured using normal
 - `extractCSS`
 - `template`
 
+:::tip
+Template render functions cannot be post-processed by Webpack Rules because the `enforce: 'post'` option is not preserved for Vue Loader to interact with. `templatePostLoaders` now exists to accommodate these use cases.
+:::
+
 The following options have been deprecated and should be configured using the new `compilerOptions` option:
 
 - `preserveWhitespace` (use `compilerOptions.preserveWhitespace`)
