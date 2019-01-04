@@ -33,10 +33,11 @@
     ]
   },
   "peerDependencies": {
-    "css-loader": "*"
+    "css-loader": "*",
+    "webpack": "^4.1.0"
   },
   "dependencies": {
-    "@vue/component-compiler-utils": "^2.0.0",
+    "@vue/component-compiler-utils": "^2.4.0",
     "hash-sum": "^1.0.2",
     "loader-utils": "^1.1.0",
     "vue-hot-reload-api": "^2.3.0",
@@ -80,12 +81,9 @@
     "vuepress": "^0.14.2",
     "vuepress-theme-vue": "^1.1.0",
     "webpack": "^4.1.0",
-    "webpack-cli": "^2.0.10",
+    "webpack-cli": "^3.2.0",
     "webpack-dev-server": "^3.1.1",
     "webpack-merge": "^4.1.2",
     "yorkie": "^1.0.3"
-  },
-  "peerDependencies": {
-    "webpack": "^4.1.0"
   }
 }

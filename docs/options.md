@@ -85,3 +85,10 @@ When both options are specified, enables file-system-based template compilation 
 ::: tip
   Interaction between `vue-loader` and `cache-loader` uses [inline loader import syntax](https://webpack.js.org/concepts/loaders/#inline) under the hook, the `!` will be treated as the separator between different loaders, so please ensure `cacheDirectory` doesn't contain `!`.
 :::
+
+## prettify
+
+- type: `boolean`
+- default: `true`
+
+In development mode, we use [prettier](https://prettier.io/) to format the compiled render function for ease of debugging by default. However, if you encounter any obscure bug of prettier, such as [exponential compilation time for deeply nested functions](https://github.com/prettier/prettier/issues/4672), you can disable this option to circumvent it.

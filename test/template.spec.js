@@ -292,3 +292,16 @@ test('separate loader configuration for template lang and js imports', done => {
     done()
   })
 })
+
+// #1426
+test('disable prettify', done => {
+  mockBundleAndRun({
+    entry: 'prettier-bug.vue',
+    vue: {
+      productionMode: false,
+      prettify: false
+    }
+  }, () => {
+    done()
+  })
+})
