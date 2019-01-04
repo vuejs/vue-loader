@@ -85,3 +85,10 @@ sidebar: auto
 ::: tip 注意
   在内部，`vue-loader` 和 `cache-loader` 之间的交互使用了 [loader 的内联 import 语法](https://webpack.js.org/concepts/loaders/#inline)，`!` 将会被认为是不同 loaders 之间的分隔符，所以请确保你的 `cacheDirectory` 路径中不包含 `!`。
 :::
+
+## prettify
+
+- 类型：`boolean`
+- 默认值：`true`
+
+在开发环境下，我们默认使用 [prettier](https://prettier.io/) 格式化编译后的模板渲染代码，以方便调试。然而，如果你开发时碰到了 prettier 的某些罕见 bug，比如[格式化多层嵌套的函数时运行时间过长](https://github.com/prettier/prettier/issues/4672)，你可以通过禁用这个选项来绕开。
