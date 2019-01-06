@@ -137,6 +137,38 @@ test('extract CSS', done => {
   })
 })
 
+test('extract CSS with code spliting', done => {
+  bundle({
+    entry: 'extract-css-chunks.vue',
+    modify: config => {
+      config.module.rules = [
+        {
+          test: /\.vue$/,
+          use: 'vue-loader'
+        },
+        {
+          test: /\.css$/,
+          use: [
+            MiniCssExtractPlugin.loader,
+            'css-loader'
+          ]
+        }
+      ]
+    },
+    plugins: [
+      new MiniCssExtractPlugin({
+        filename: 'test.output.css'
+      })
+    ]
+  }, code => {
+    const css = normalizeNewline(mfs.readFileSync('/test.output.css').toString())
+    expect(css).toContain(`h1 {\n  color: red;\n}`)
+    expect(mfs.existsSync('/empty.test.output.css')).toBe(false)
+    expect(mfs.existsSync('/basic.test.output.css')).toBe(true)
+    done()
+  })
+})
+
 test('support rules with oneOf', async () => {
   const run = (entry, assert) => new Promise((resolve, reject) => {
     mockBundleAndRun({
