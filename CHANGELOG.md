@@ -1,3 +1,13 @@
+<a name="15.5.1"></a>
+## [15.5.1](https://github.com/vuejs/vue-loader/compare/v15.5.0...v15.5.1) (2019-01-08)
+
+
+### Bug Fixes
+
+* avoid to generate empty css chunk files ([#1464](https://github.com/vuejs/vue-loader/issues/1464)) ([c444ab6](https://github.com/vuejs/vue-loader/commit/c444ab6))
+
+
+
 <a name="15.5.0"></a>
 # [15.5.0](https://github.com/vuejs/vue-loader/compare/v15.4.0...v15.5.0) (2019-01-04)
 
