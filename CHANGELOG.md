@@ -1,3 +1,30 @@
+<a name="15.5.1"></a>
+## [15.5.1](https://github.com/vuejs/vue-loader/compare/v15.5.0...v15.5.1) (2019-01-08)
+
+
+### Bug Fixes
+
+* avoid to generate empty css chunk files ([#1464](https://github.com/vuejs/vue-loader/issues/1464)) ([c444ab6](https://github.com/vuejs/vue-loader/commit/c444ab6))
+
+
+
+<a name="15.5.0"></a>
+# [15.5.0](https://github.com/vuejs/vue-loader/compare/v15.4.0...v15.5.0) (2019-01-04)
+
+
+### Bug Fixes
+
+* css modules extends error ([#1452](https://github.com/vuejs/vue-loader/issues/1452)) ([082c6ea](https://github.com/vuejs/vue-loader/commit/082c6ea)), closes [#1449](https://github.com/vuejs/vue-loader/issues/1449)
+* hide ext appending behind a flag (ref [#1372](https://github.com/vuejs/vue-loader/issues/1372)) ([f0beed3](https://github.com/vuejs/vue-loader/commit/f0beed3))
+* include query in loader dedupe ([4a894de](https://github.com/vuejs/vue-loader/commit/4a894de)), closes [vue-cli#2451](https://github.com/vue-cli/issues/2451)
+
+
+### Features
+
+* add `prettify` option ([#1461](https://github.com/vuejs/vue-loader/issues/1461)) ([62a9155](https://github.com/vuejs/vue-loader/commit/62a9155)), closes [#1426](https://github.com/vuejs/vue-loader/issues/1426)
+
+
+
 <a name="15.4.2"></a>
 ## [15.4.2](https://github.com/vuejs/vue-loader/compare/v15.4.1...v15.4.2) (2018-09-11)
 

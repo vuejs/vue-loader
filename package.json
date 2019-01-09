@@ -1,6 +1,6 @@
 {
   "name": "vue-loader",
-  "version": "15.4.2",
+  "version": "15.5.1",
   "description": "Vue single-file component loader for Webpack",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
@@ -33,10 +33,11 @@
     ]
   },
   "peerDependencies": {
-    "css-loader": "*"
+    "css-loader": "*",
+    "webpack": "^4.1.0"
   },
   "dependencies": {
-    "@vue/component-compiler-utils": "^2.0.0",
+    "@vue/component-compiler-utils": "^2.4.0",
     "hash-sum": "^1.0.2",
     "loader-utils": "^1.1.0",
     "vue-hot-reload-api": "^2.3.0",
@@ -57,6 +58,7 @@
     "jsdom": "^11.6.2",
     "lint-staged": "^7.0.0",
     "markdown-loader": "^2.0.2",
+    "memory-fs": "^0.4.1",
     "mini-css-extract-plugin": "^0.4.1",
     "node-sass": "^4.7.2",
     "normalize-newline": "^3.0.0",
@@ -66,6 +68,7 @@
     "pug-plain-loader": "^1.0.0",
     "raw-loader": "^0.5.1",
     "sass-loader": "^6.0.7",
+    "source-map": "^0.5.0",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.2",
     "sugarss": "^1.0.1",
@@ -78,7 +81,7 @@
     "vuepress": "^0.14.2",
     "vuepress-theme-vue": "^1.1.0",
     "webpack": "^4.1.0",
-    "webpack-cli": "^2.0.10",
+    "webpack-cli": "^3.2.0",
     "webpack-dev-server": "^3.1.1",
     "webpack-merge": "^4.1.2",
     "yorkie": "^1.0.3"
