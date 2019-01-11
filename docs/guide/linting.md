@@ -2,7 +2,7 @@
 
 ## ESLint
 
-The official [eslint-plugin-vue](https://vuejs.github.io/eslint-plugin-vue/) supports linting both the template and script parts of Vue single file components.
+The official [eslint-plugin-vue](https://eslint.vuejs.org/) supports linting both the template and script parts of Vue single file components.
 
 Make sure to use the plugin's included config in your ESLint config:
 
