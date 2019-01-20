@@ -54,12 +54,30 @@ test('expose file path as __file outside production', done => {
   })
 })
 
-test('expose file basename as __file in production', done => {
+test('no __file in production when exposeFilename disabled', done => {
   const origNodeEnv = process.env.NODE_ENV
   process.env.NODE_ENV = 'production'
   mockBundleAndRun(
     {
       entry: 'basic.vue'
+    },
+    ({ module }) => {
+      expect(module.__file).toBe(undefined)
+      process.env.NODE_ENV = origNodeEnv
+      done()
+    }
+  )
+})
+
+test('expose file basename as __file in production when exposeFilename enabled', done => {
+  const origNodeEnv = process.env.NODE_ENV
+  process.env.NODE_ENV = 'production'
+  mockBundleAndRun(
+    {
+      entry: 'basic.vue',
+      vue: {
+        exposeFilename: true
+      }
     },
     ({ module }) => {
       expect(module.__file).toBe('basic.vue')
