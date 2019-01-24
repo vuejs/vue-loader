@@ -6,7 +6,21 @@ If you are not interested in manually setting up webpack, it is recommended to s
 
 Follow this guide if the built-in configuration of Vue CLI does not suit your needs, or you'd rather create your own webpack config from scratch.
 
-## Manual Configuration
+## Manual Setup
+
+### Installation
+
+Unless you are an advanced user using your own forked version of Vue's template compiler, you should install `vue-loader` and `vue-template-compiler` together:
+
+``` bash
+npm install -D vue-loader vue-template-compiler
+```
+
+The reason `vue-template-compiler` has to be installed separately is so that you can individually specify its version.
+
+Every time a new version of `vue` is released, a corresponding version of `vue-template-compiler` is released together. The compiler's version must be in sync with the base `vue` package so that `vue-loader` produces code that is compatible with the runtime. This means **every time you upgrade `vue` in your project, you should upgrade `vue-template-compiler` to match it as well.**
+
+### webpack Configuration
 
 Vue Loader's configuration is a bit different from other loaders. In addition to a rule that applies `vue-loader` to any files with extension `.vue`, make sure to add Vue Loader's plugin to your webpack config:
 
