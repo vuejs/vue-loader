@@ -1,3 +1,13 @@
+<a name="15.6.1"></a>
+## [15.6.1](https://github.com/vuejs/vue-loader/compare/v15.6.0...v15.6.1) (2019-01-25)
+
+
+### Bug Fixes
+
+* relay correct error message on vue-template-compiler version mismatch ([fdd0338](https://github.com/vuejs/vue-loader/commit/fdd0338))
+
+
+
 <a name="15.6.0"></a>
 # [15.6.0](https://github.com/vuejs/vue-loader/compare/v15.5.1...v15.6.0) (2019-01-23)
 
