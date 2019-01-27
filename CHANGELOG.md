@@ -1,3 +1,30 @@
+<a name="15.6.1"></a>
+## [15.6.1](https://github.com/vuejs/vue-loader/compare/v15.6.0...v15.6.1) (2019-01-25)
+
+
+### Bug Fixes
+
+* relay correct error message on vue-template-compiler version mismatch ([fdd0338](https://github.com/vuejs/vue-loader/commit/fdd0338))
+
+
+
+<a name="15.6.0"></a>
+# [15.6.0](https://github.com/vuejs/vue-loader/compare/v15.5.1...v15.6.0) (2019-01-23)
+
+
+### Bug Fixes
+
+* template comments replace windows \ to / confirm consistent hash ([#1477](https://github.com/vuejs/vue-loader/issues/1477)) ([adc6dd6](https://github.com/vuejs/vue-loader/commit/adc6dd6))
+
+
+### Features
+
+* make `__file` injection opt-in in production ([#1475](https://github.com/vuejs/vue-loader/issues/1475)) ([001382d](https://github.com/vuejs/vue-loader/commit/001382d))
+* support for compiler 2.6 outputSourceRange ([2215585](https://github.com/vuejs/vue-loader/commit/2215585))
+* support webpack 5 hooks ([#1469](https://github.com/vuejs/vue-loader/issues/1469)) ([7275ae4](https://github.com/vuejs/vue-loader/commit/7275ae4))
+
+
+
 <a name="15.5.1"></a>
 ## [15.5.1](https://github.com/vuejs/vue-loader/compare/v15.5.0...v15.5.1) (2019-01-08)
 

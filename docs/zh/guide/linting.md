@@ -2,7 +2,7 @@
 
 ## ESLint
 
-官方的 [eslint-plugin-vue](https://github.com/vuejs/eslint-plugin-vue) 同时支持在 Vue 单文件组件的模板和脚本部分的代码校验。
+官方的 [eslint-plugin-vue](https://eslint.vuejs.org/) 同时支持在 Vue 单文件组件的模板和脚本部分的代码校验。
 
 请确认在你的 ESLint 配置文件中使用该插件要导入的配置：
 
