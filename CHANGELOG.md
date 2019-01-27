@@ -1,3 +1,13 @@
+<a name="15.6.2"></a>
+## [15.6.2](https://github.com/vuejs/vue-loader/compare/v15.6.1...v15.6.2) (2019-01-27)
+
+
+### Bug Fixes
+
+* fix wrong outputSourceRange usage ([#1482](https://github.com/vuejs/vue-loader/issues/1482)) ([2d96215](https://github.com/vuejs/vue-loader/commit/2d96215))
+
+
+
 <a name="15.6.1"></a>
 ## [15.6.1](https://github.com/vuejs/vue-loader/compare/v15.6.0...v15.6.1) (2019-01-25)
 
