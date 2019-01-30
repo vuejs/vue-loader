@@ -10,7 +10,7 @@
 
 ### 安装
 
-你应该将 `vue-loader` 和 `vue-template-compiler` 一起安装——除非你是拥有自行 fork 版本的 Vue 模板编译器的高阶用户：
+你应该将 `vue-loader` 和 `vue-template-compiler` 一起安装——除非你是使用自行 fork 版本的 Vue 模板编译器的高阶用户：
 
 ``` bash
 npm install -D vue-loader vue-template-compiler
