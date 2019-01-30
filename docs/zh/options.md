@@ -92,3 +92,12 @@ sidebar: auto
 - 默认值：`true`
 
 在开发环境下，我们默认使用 [prettier](https://prettier.io/) 格式化编译后的模板渲染代码，以方便调试。然而，如果你开发时碰到了 prettier 的某些罕见 bug，比如[格式化多层嵌套的函数时运行时间过长](https://github.com/prettier/prettier/issues/4672)，你可以通过禁用这个选项来绕开。
+
+## exposeFilename
+
+- 类型：`boolean`
+- 默认值：`false`
+
+在非生产环境下，`vue-loader` 会为组件注入一个 `__file` 属性以提升调试体验。如果一个组件没有 `name` 属性，Vue 会通过 `__file` 字段进行推断，并用于控制台警告中的展示。
+
+这个属性在生产环境构建时会被去掉。但如果你在开发一个组件库并且烦于为每个组件设置 `name`，你可能还是想得到它。这时可以把这个选项打开。
