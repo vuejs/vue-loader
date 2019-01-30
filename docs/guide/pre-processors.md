@@ -91,6 +91,36 @@ Note that `sass-loader` processes the non-indent-based `scss` syntax by default.
 }
 ```
 
+### Sharing Variables & Mixins via single import
+`sass-resources-loader` in conjunction with `mini-css-extract-plugin` can be used to share variables and mixins across the Vue.js project without having to call an `import` for each component.
+
+```js
+// Require MiniCssExtractPlugin
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+
+module: {
+  rules: [
+    // CSS & SCSS Processing
+    {
+      test: /\.(sa|sc|c)ss$/,
+      use: [
+        MiniCssExtractPlugin.loader,
+        'css-loader',
+        'postcss-loader',
+        'sass-loader',
+        {
+          loader: 'sass-resources-loader',
+          options: {
+            // Load common SCSS [ Vars & Mixins ]
+            resources: './path/to/shared/variables.scss',
+          },
+        }
+      ],
+    },
+  ]
+},
+```
+
 ## LESS
 
 ``` bash
