@@ -1,3 +1,4 @@
+const path = require('path')
 const {
   bundle,
   mockBundleAndRun
@@ -68,4 +69,27 @@ test('custom blocks can be ignored', done => {
     expect(code).not.toContain(`describe('example'`)
     done()
   })
+})
+
+test('custom blocks can be ignored even if cache-loader processes them', done => {
+  bundle(
+    {
+      entry: 'custom-language.vue',
+      module: {
+        rules: [
+          {
+            test: /.vue$/,
+            loader: 'cache-loader',
+            options: {
+              cacheDirectory: path.resolve(__dirname, '.cache')
+            }
+          }
+        ]
+      }
+    },
+    code => {
+      expect(code).not.toContain(`describe('example'`)
+      done()
+    }
+  )
 })
