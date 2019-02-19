@@ -13,6 +13,11 @@ export default {
 </script>
 
 <style>
+
+</style>
+
+
+<style>
 comp-a h2 {
   color: #f00;
 }
