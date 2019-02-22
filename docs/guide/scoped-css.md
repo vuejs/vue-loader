@@ -62,7 +62,7 @@ The above will be compiled into:
 .a[data-v-f3f3eg9] .b { /* ... */ }
 ```
 
-Some pre-processors, such as Sass, may not be able to parse `>>>` properly. In those cases you can use the `/deep/` or `::v-deep` combinator instead - both are alias for `>>>` and work exactly the same.
+Some pre-processors, such as Sass, may not be able to parse `>>>` properly. In those cases you can use the `/deep/` or `::v-deep` combinator instead - both are aliases for `>>>` and work exactly the same.
 
 ## Dynamically Generated Content
 
