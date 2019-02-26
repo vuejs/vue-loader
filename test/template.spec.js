@@ -305,3 +305,20 @@ test('disable prettify', done => {
     done()
   })
 })
+
+test('postLoaders support', done => {
+  mockBundleAndRun({
+    entry: 'functional-root.vue',
+    module: {
+      rules: [
+        {
+          resourceQuery: /^\?vue&type=template/,
+          enforce: 'post',
+          loader: path.resolve(__dirname, './mock-loaders/js')
+        }
+      ]
+    }
+  }, ({ module }) => {
+    done()
+  })
+})
