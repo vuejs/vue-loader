@@ -1,3 +1,13 @@
+<a name="15.7.0"></a>
+# [15.7.0](https://github.com/vuejs/vue-loader/compare/v15.6.4...v15.7.0) (2019-02-28)
+
+
+### Features
+
+* support post loaders for template blocks ([#1500](https://github.com/vuejs/vue-loader/issues/1500)) ([731a7ad](https://github.com/vuejs/vue-loader/commit/731a7ad))
+
+
+
 <a name="15.6.4"></a>
 ## [15.6.4](https://github.com/vuejs/vue-loader/compare/v15.6.0...v15.6.4) (2019-02-19)
 
