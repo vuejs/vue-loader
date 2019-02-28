@@ -308,17 +308,19 @@ test('disable prettify', done => {
 
 test('postLoaders support', done => {
   mockBundleAndRun({
-    entry: 'functional-root.vue',
+    entry: 'basic.vue',
     module: {
       rules: [
         {
           resourceQuery: /^\?vue&type=template/,
           enforce: 'post',
-          loader: path.resolve(__dirname, './mock-loaders/js')
+          loader: path.resolve(__dirname, './mock-loaders/html')
         }
       ]
     }
   }, ({ module }) => {
+    // class="red" -> { staticClass: "red" } -> { staticClass: "green" }
+    expect(module.render.toString()).toMatch(`green`)
     done()
   })
 })
