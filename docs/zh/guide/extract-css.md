@@ -33,7 +33,7 @@ module.exports = {
   plugins: [
     // ... 忽略 vue-loader 插件
     new MiniCssExtractPlugin({
-      filename: style.css
+      filename: 'style.css'
     })
   ]
 }
