@@ -253,6 +253,16 @@ test('custom compiler directives', done => {
   })
 })
 
+test('multiple roots in template', done => {
+  mockBundleAndRun({
+    entry: 'multiple-roots-template.vue'
+  }, ({ bundleStats }) => {
+    expect(bundleStats.compilation.errors).toHaveLength(1)
+    expect(bundleStats.compilation.errors[0].message).toMatch('should contain exactly one root element')
+    done()
+  }, true)
+})
+
 test('separate loader configuration for template lang and js imports', done => {
   mockBundleAndRun({
     entry: './test/fixtures/template-pre.js',
