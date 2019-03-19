@@ -1,15 +1,20 @@
 <template lang="pug">
 div(ok)
   h1(:class="$style.red") hello
+  p() {{msg}}
+
+  <ExtraJs></ExtraJs>
 </template>
 
 <script>
+
 export default {
   data () {
     return {
       msg: 'fesfff'
     }
   }
+
 }
 </script>
 

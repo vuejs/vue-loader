@@ -10,7 +10,7 @@ module.exports = {
     publicPath: '/dist/'
   },
   devServer: {
-    stats: "minimal",
+    stats: 'minimal',
     contentBase: __dirname
   },
   module: {

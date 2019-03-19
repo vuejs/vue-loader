@@ -6,3 +6,4 @@ example/dist
 docs/.vuepress/dist
 test/.cache
 .idea
+package-lock.json
