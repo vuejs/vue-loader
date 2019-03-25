@@ -1,3 +1,38 @@
+<a name="15.7.0"></a>
+# [15.7.0](https://github.com/vuejs/vue-loader/compare/v15.6.4...v15.7.0) (2019-02-28)
+
+
+### Features
+
+* support post loaders for template blocks ([#1500](https://github.com/vuejs/vue-loader/issues/1500)) ([731a7ad](https://github.com/vuejs/vue-loader/commit/731a7ad))
+
+
+
+<a name="15.6.4"></a>
+## [15.6.4](https://github.com/vuejs/vue-loader/compare/v15.6.0...v15.6.4) (2019-02-19)
+
+
+### Bug Fixes
+
+* **templateLoder:** honor options.productionMode ([#1409](https://github.com/vuejs/vue-loader/issues/1409)) ([01990d0](https://github.com/vuejs/vue-loader/commit/01990d0))
+* avoid generating custom block when there is only cache-loader ([#1493](https://github.com/vuejs/vue-loader/issues/1493)) ([a1af343](https://github.com/vuejs/vue-loader/commit/a1af343))
+* fix wrong outputSourceRange usage ([#1482](https://github.com/vuejs/vue-loader/issues/1482)) ([2d96215](https://github.com/vuejs/vue-loader/commit/2d96215))
+* keep style index consistent when filtering styles ([#1496](https://github.com/vuejs/vue-loader/issues/1496)) ([e02d937](https://github.com/vuejs/vue-loader/commit/e02d937))
+* relay correct error message on vue-template-compiler version mismatch ([fdd0338](https://github.com/vuejs/vue-loader/commit/fdd0338))
+
+
+
+<a name="15.6.3"></a>
+## [15.6.3](https://github.com/vuejs/vue-loader/compare/v15.6.2...v15.6.3) (2019-02-18)
+
+
+### Bug Fixes
+
+* **templateLoder:** honor options.productionMode ([#1409](https://github.com/vuejs/vue-loader/issues/1409)) ([01990d0](https://github.com/vuejs/vue-loader/commit/01990d0))
+* avoid generating custom block when there is only cache-loader ([#1493](https://github.com/vuejs/vue-loader/issues/1493)) ([a1af343](https://github.com/vuejs/vue-loader/commit/a1af343))
+
+
+
 <a name="15.6.2"></a>
 ## [15.6.2](https://github.com/vuejs/vue-loader/compare/v15.6.1...v15.6.2) (2019-01-27)
 

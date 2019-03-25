@@ -253,6 +253,16 @@ test('custom compiler directives', done => {
   })
 })
 
+test('multiple roots in template', done => {
+  mockBundleAndRun({
+    entry: 'multiple-roots-template.vue'
+  }, ({ bundleStats }) => {
+    expect(bundleStats.compilation.errors).toHaveLength(1)
+    expect(bundleStats.compilation.errors[0].message).toMatch('should contain exactly one root element')
+    done()
+  }, true)
+})
+
 test('separate loader configuration for template lang and js imports', done => {
   mockBundleAndRun({
     entry: './test/fixtures/template-pre.js',
@@ -302,6 +312,25 @@ test('disable prettify', done => {
       prettify: false
     }
   }, () => {
+    done()
+  })
+})
+
+test('postLoaders support', done => {
+  mockBundleAndRun({
+    entry: 'basic.vue',
+    module: {
+      rules: [
+        {
+          resourceQuery: /^\?vue&type=template/,
+          enforce: 'post',
+          loader: path.resolve(__dirname, './mock-loaders/html')
+        }
+      ]
+    }
+  }, ({ module }) => {
+    // class="red" -> { staticClass: "red" } -> { staticClass: "green" }
+    expect(module.render.toString()).toMatch(`green`)
     done()
   })
 })
