@@ -28,6 +28,14 @@ sidebar: auto
 
   Override the default compiler used to compile `<template>` blocks in single file components.
 
+
+## compilerFile
+
+- Type: `string`
+- default: `undefined`
+
+  Supplementary option for `compiler`. Override the default compiler with the compiler in file path, to compile `<template>` blocks in single file components.
+
 ## compilerOptions
 
 - type: `Object`
