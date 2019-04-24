@@ -1,29 +1,13 @@
 import { Plugin } from 'webpack'
-import {
-  CompilerOptions,
-  parseComponent,
-  compile,
-  compileToFunctions,
-  ssrCompile,
-  ssrCompileToFunctions,
-  generateCodeFrame
-} from 'vue-template-compiler'
+import { VueTemplateCompiler } from '@vue/component-compiler-utils/lib/types'
+import { CompilerOptions } from 'vue-template-compiler'
 
 declare namespace VueLoader {
   class VueLoaderPlugin extends Plugin {}
 
-  interface VueLoaderTemplateCompiler {
-    parseComponent?: typeof parseComponent
-    compile?: typeof compile
-    compileToFunctions?: typeof compileToFunctions
-    ssrCompile?: typeof ssrCompile
-    ssrCompileToFunctions?: typeof ssrCompileToFunctions
-    generateCodeFrame?: typeof generateCodeFrame
-  }
-
   interface VueLoaderOptions {
     transformAssetUrls?: { [tag: string]: string | Array<string> }
-    compiler?: VueLoaderTemplateCompiler
+    compiler?: VueTemplateCompiler
     compilerOptions?: CompilerOptions
     transpileOptions?: Object
     optimizeSSR?: boolean
