@@ -1,3 +1,13 @@
+<a name="15.7.1"></a>
+## [15.7.1](https://github.com/vuejs/vue-loader/compare/v15.7.0...v15.7.1) (2019-07-18)
+
+
+### Bug Fixes
+
+* use "api.isRecorded" instead of "module.hot.data" ([#1569](https://github.com/vuejs/vue-loader/issues/1569)) ([6a05115](https://github.com/vuejs/vue-loader/commit/6a05115))
+
+
+
 <a name="15.7.0"></a>
 # [15.7.0](https://github.com/vuejs/vue-loader/compare/v15.6.4...v15.7.0) (2019-02-28)
 
