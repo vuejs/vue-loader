@@ -62,7 +62,9 @@ module.exports = {
     {
       loader: 'sass-loader',
       options: {
-        indentedSyntax: true
+        sassOptions: {
+          indentedSyntax: true
+        }
       }
     }
   ]
