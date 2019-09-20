@@ -62,6 +62,8 @@ module.exports = {
     {
       loader: 'sass-loader',
       options: {
+        indentedSyntax: true
+        // sass-loader > 8 version
         sassOptions: {
           indentedSyntax: true
         }
