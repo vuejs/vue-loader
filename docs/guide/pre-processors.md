@@ -63,7 +63,7 @@ Note that `sass-loader` processes the non-indent-based `scss` syntax by default.
       loader: 'sass-loader',
       options: {
         indentedSyntax: true
-        // sass-loader > 8 version
+        // sass-loader version >= 8
         sassOptions: {
           indentedSyntax: true
         }
