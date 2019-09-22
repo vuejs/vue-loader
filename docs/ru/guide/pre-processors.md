@@ -88,7 +88,8 @@ module.exports = {
       loader: 'sass-loader',
       options: {
         // вы можете также указать файл, например `variables.scss`
-        data: `$color: red;`
+        // use `data` here if sass-loader version < 8
+        prependData: `$color: red;`
       }
     }
   ]

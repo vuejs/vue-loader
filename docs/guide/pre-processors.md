@@ -88,7 +88,8 @@ Note that `sass-loader` processes the non-indent-based `scss` syntax by default.
       loader: 'sass-loader',
       options: {
         // you can also read from a file, e.g. `variables.scss`
-        data: `$color: red;`
+        // use `data` here if sass-loader version < 8
+        prependData: `$color: red;`
       }
     }
   ]
