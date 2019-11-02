@@ -1,3 +1,14 @@
+<a name="15.7.2"></a>
+## [15.7.2](https://github.com/vuejs/vue-loader/compare/v15.7.1...v15.7.2) (2019-11-02)
+
+
+### Bug Fixes
+
+* add cache-loader to optional peer dependency ([e9d8b71](https://github.com/vuejs/vue-loader/commit/e9d8b71))
+* use `require.resolve` when referencing `cache-loader` ([#1585](https://github.com/vuejs/vue-loader/issues/1585)) ([d3fa467](https://github.com/vuejs/vue-loader/commit/d3fa467))
+
+
+
 <a name="15.7.1"></a>
 ## [15.7.1](https://github.com/vuejs/vue-loader/compare/v15.7.0...v15.7.1) (2019-07-18)
 
