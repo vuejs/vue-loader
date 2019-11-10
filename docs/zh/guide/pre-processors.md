@@ -225,7 +225,7 @@ TypeScript 的配置可以通过 `tsconfig.json` 来完成。你也可以查阅 
 
 ## Pug
 
-模板的处理会稍微有些不同，因为绝大对数 webpack 的模板类 loader，诸如 `pug-loader`，会返回一个模板函数而不是一个编译好的 HTML 字符串。所以我们需要使用一个返回原始的 HTML 字符串的 loader，例如 `pug-plain-loader`，而不是使用 `pug-loader`。
+模板的处理会稍微有些不同，因为绝大多数 webpack 的模板类 loader，诸如 `pug-loader`，会返回一个模板函数而不是一个编译好的 HTML 字符串。所以我们需要使用一个返回原始的 HTML 字符串的 loader，例如 `pug-plain-loader`，而不是使用 `pug-loader`。
 
 ``` bash
 npm install -D pug pug-plain-loader
