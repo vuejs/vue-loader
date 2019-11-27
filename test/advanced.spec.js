@@ -90,7 +90,7 @@ test('expose file basename as __file in production when exposeFilename enabled',
 test('source map', done => {
   bundle({
     entry: 'basic.vue',
-    devtool: '#source-map'
+    devtool: 'source-map'
   }, code => {
     const map = mfs.readFileSync('/test.build.js.map', 'utf-8')
     const smc = new SourceMapConsumer(JSON.parse(map))
