@@ -74,7 +74,7 @@ This is the documentation for component B.
 <!-- ComponentA.vue -->
 <template>
   <div>
-    <ComponentB/>
+    <ComponentB />
     <p>{{ docs }}</p>
   </div>
 </template>
