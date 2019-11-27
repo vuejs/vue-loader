@@ -63,6 +63,10 @@ module.exports = {
       loader: 'sass-loader',
       options: {
         indentedSyntax: true
+        // sass-loader version >= 8
+        sassOptions: {
+          indentedSyntax: true
+        }
       }
     }
   ]
@@ -71,7 +75,7 @@ module.exports = {
 
 ### 共享全局变量
 
-`sass-loader` 也支持一个 `data` 选项，这个选项允许你在所有被处理的文件之间共享常见的变量，而不需要显式地导入它们：
+`sass-loader` 也支持一个 `prependData` 选项，这个选项允许你在所有被处理的文件之间共享常见的变量，而不需要显式地导入它们：
 
 ``` js
 // webpack.config.js -> module.rules
@@ -84,7 +88,8 @@ module.exports = {
       loader: 'sass-loader',
       options: {
         // 你也可以从一个文件读取，例如 `variables.scss`
-        data: `$color: red;`
+        // 如果 sass-loader 版本 < 8，这里使用 `data` 字段
+        prependData: `$color: red;`
       }
     }
   ]
@@ -220,7 +225,7 @@ TypeScript 的配置可以通过 `tsconfig.json` 来完成。你也可以查阅 
 
 ## Pug
 
-模板的处理会稍微有些不同，因为绝大对数 webpack 的模板类 loader，诸如 `pug-loader`，会返回一个模板函数而不是一个编译好的 HTML 字符串。所以我们需要使用一个返回原始的 HTML 字符串的 loader，例如 `pug-plain-loader`，而不是使用 `pug-loader`。
+模板的处理会稍微有些不同，因为绝大多数 webpack 的模板类 loader，诸如 `pug-loader`，会返回一个模板函数而不是一个编译好的 HTML 字符串。所以我们需要使用一个返回原始的 HTML 字符串的 loader，例如 `pug-plain-loader`，而不是使用 `pug-loader`。
 
 ``` bash
 npm install -D pug pug-plain-loader

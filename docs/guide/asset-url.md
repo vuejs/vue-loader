@@ -25,7 +25,8 @@ By default the following tag/attribute combinations are transformed, and can be 
   video: ['src', 'poster'],
   source: 'src',
   img: 'src',
-  image: 'xlink:href'
+  image: ['xlink:href', 'href'],
+  use: ['xlink:href', 'href']
 }
 ```
 

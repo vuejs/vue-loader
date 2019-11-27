@@ -63,6 +63,10 @@ module.exports = {
       loader: 'sass-loader',
       options: {
         indentedSyntax: true
+        // sass-loader >= 8
+        sassOptions: {
+          indentedSyntax: true
+        }
       }
     }
   ]
@@ -71,7 +75,7 @@ module.exports = {
 
 ### Передача глобальных переменных
 
-`sass-loader` также поддерживает опцию `data`, которая позволяет вам передавать общие переменные во все обрабатываемые файлы без необходимости везде их явно импортировать:
+`sass-loader` также поддерживает опцию `prependData`, которая позволяет вам передавать общие переменные во все обрабатываемые файлы без необходимости везде их явно импортировать:
 
 ``` js
 // webpack.config.js -> module.rules
@@ -84,7 +88,8 @@ module.exports = {
       loader: 'sass-loader',
       options: {
         // вы можете также указать файл, например `variables.scss`
-        data: `$color: red;`
+        // use `data` here if sass-loader version < 8
+        prependData: `$color: red;`
       }
     }
   ]

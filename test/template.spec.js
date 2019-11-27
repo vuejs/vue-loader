@@ -49,7 +49,13 @@ test('transform relative URLs and respects resolve alias', done => {
     },
     module: {
       rules: [
-        { test: /\.png$/, loader: 'file-loader?name=[name].[hash:6].[ext]' }
+        {
+          test: /\.png$/,
+          loader: 'file-loader',
+          options: {
+            name: '[name].[hash:6].[ext]'
+          }
+        }
       ]
     }
   }, ({ window, module }) => {
