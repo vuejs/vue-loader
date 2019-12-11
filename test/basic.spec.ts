@@ -1,3 +1,0 @@
-test('should work', () => {
-
-})
