@@ -1,0 +1,40 @@
+{
+  "name": "vue-loader",
+  "version": "16.0.0-alpha.0",
+  "license": "MIT",
+  "author": "Evan You",
+  "main": "dist/index.js",
+  "module": "dist/vue-loader.esm.js",
+  "typings": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "start": "tsdx watch",
+    "build": "tsdx build",
+    "test": "tsdx test",
+    "lint": "tsdx lint"
+  },
+  "peerDependencies": {
+    "@vue/compiler-sfc": "^3.0.0-alpha.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "tsdx lint --fix"
+    }
+  },
+  "prettier": {
+    "printWidth": 80,
+    "semi": false,
+    "singleQuote": true
+  },
+  "devDependencies": {
+    "@types/jest": "^24.0.23",
+    "@types/webpack": "^4.41.0",
+    "husky": "^3.1.0",
+    "tsdx": "^0.11.0",
+    "tslib": "^1.10.0",
+    "typescript": "^3.7.3",
+    "webpack": "^4.41.2"
+  }
+}
