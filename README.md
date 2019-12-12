@@ -49,7 +49,7 @@ In a nutshell, the combination of webpack and `vue-loader` gives you a modern, f
 
 `vue-loader` is not a simple source transform loader. It handles each language blocks inside an SFC with its own dedicated loader chain (you can think of each block as a "virtual module"), and finally assembles the blocks together into the final module. Here's a brief overview of how the whole thing works:
 
-1. `vue-loader` parses the SFC source code into an *SFC Descriptor* using `@vue/compiler-sfc`. It then generates an import for each language block so the actual returned module code looks like this:
+1. `vue-loader` parses the SFC source code into an *SFC Descriptor* using `@vue/component-compiler-utils`. It then generates an import for each language block so the actual returned module code looks like this:
 
     ``` js
     // code returned from the main loader for 'source.vue'
