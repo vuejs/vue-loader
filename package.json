@@ -10,7 +10,8 @@
   ],
   "scripts": {
     "build": "tsc",
-    "dev": "webpack-dev-server --config example/webpack.config.js --inline --hot"
+    "dev": "webpack-dev-server --config example/webpack.config.js --inline --hot",
+    "build-example": "webpack --config example/webpack.config.js --mode=production"
   },
   "peerDependencies": {
     "@vue/compiler-sfc": "^3.0.0-alpha.0"

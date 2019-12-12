@@ -11,6 +11,7 @@ import {
   TemplateCompileOptions
 } from '@vue/compiler-sfc'
 import { selectBlock } from './select'
+import { genHotReloadCode } from './hotReload'
 
 const VueLoaderPlugin = require('./plugin')
 
@@ -147,8 +148,8 @@ const loader: webpack.loader.Loader = function(source) {
   }
 
   if (needsHotReload) {
-    // TODO hot reload
-    templateRequest
+    code += `\nscript.__hmrId = "${id}"`
+    code += genHotReloadCode(id, templateRequest)
   }
 
   // Expose filename. This is used by the devtools and Vue runtime warnings.

@@ -4,7 +4,7 @@ import loaderUtils from 'loader-utils'
 import hash from 'hash-sum'
 import { VueLoaderOptions } from 'src'
 
-const selfPath = require.resolve('../index')
+const selfPath = require.resolve('./index')
 const templateLoaderPath = require.resolve('./templateLoader')
 const stylePostLoaderPath = require.resolve('./stylePostLoader')
 
@@ -163,8 +163,7 @@ pitcher.pitch = function() {
       ...preLoaders
     ])
     // console.log(request)
-    // the template compiler uses esm exports
-    return `export * from ${request}`
+    return `import mod from ${request}; export default mod;`
   }
 
   // if a custom block has no other matching loader other than vue-loader itself

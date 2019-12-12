@@ -1,5 +1,5 @@
 <template>
-  <button @click="inc">{{ count }}</button>
+  <button @click="inc">{{ count }}!</button>
 </template>
 
 <script>
