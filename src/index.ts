@@ -8,7 +8,7 @@ import {
   TemplateCompiler,
   CompilerOptions,
   SFCBlock,
-  TemplateCompileOptions
+  SFCTemplateCompileOptions
 } from '@vue/compiler-sfc'
 import { selectBlock } from './select'
 import { genHotReloadCode } from './hotReload'
@@ -16,7 +16,7 @@ import { genHotReloadCode } from './hotReload'
 const VueLoaderPlugin = require('./plugin')
 
 export interface VueLoaderOptions {
-  transformAssetUrls?: TemplateCompileOptions['transformAssetUrls']
+  transformAssetUrls?: SFCTemplateCompileOptions['transformAssetUrls']
   compiler?: TemplateCompiler
   compilerOptions?: CompilerOptions
   hotReload?: boolean

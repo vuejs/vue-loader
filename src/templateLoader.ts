@@ -1,45 +1,37 @@
 import * as webpack from 'webpack'
 import qs from 'querystring'
+import chalk from 'chalk'
 import loaderUtils from 'loader-utils'
 import { VueLoaderOptions } from './'
-import {
-  compileTemplate,
-  TemplateCompileOptions,
-  generateCodeFrame
-} from '@vue/compiler-sfc'
+import { SourceMapConsumer, RawSourceMap } from 'source-map'
+import { compileTemplate, generateCodeFrame } from '@vue/compiler-sfc'
 
 // Loader that compiles raw template into JavaScript functions.
 // This is injected by the global pitcher (../pitch) for template
 // selection requests initiated from vue files.
-const TemplateLoader: webpack.loader.Loader = function(source) {
+const TemplateLoader: webpack.loader.Loader = function(source, inMap) {
   source = String(source)
   const loaderContext = this
-  const query = qs.parse(this.resourceQuery.slice(1))
 
   // although this is not the main vue-loader, we can get access to the same
   // vue-loader options because we've set an ident in the plugin and used that
   // ident to create the request for this loader in the pitcher.
   const options = (loaderUtils.getOptions(loaderContext) ||
     {}) as VueLoaderOptions
-  const { id } = query
+
   // const isServer = loaderContext.target === 'node'
   // const isProduction = options.productionMode || loaderContext.minimize || process.env.NODE_ENV === 'production'
+  const query = qs.parse(this.resourceQuery.slice(1))
+  const scopedId = query.scoped ? `data-v-${query.id}` : null
+  scopedId // TODO this is for SSR
 
-  const compilerOptions = Object.assign({}, options.compilerOptions, {
-    // TODO line offset
-    scopeId: query.scoped ? `data-v-${id}` : null
-  })
-
-  // for vue-component-compiler
-  const finalOptions: TemplateCompileOptions = {
+  const compiled = compileTemplate({
     source,
     filename: this.resourcePath,
     compiler: options.compiler,
-    compilerOptions,
+    compilerOptions: options.compilerOptions,
     transformAssetUrls: options.transformAssetUrls || true
-  }
-
-  const compiled = compileTemplate(finalOptions)
+  })
 
   // tips
   if (compiled.tips.length) {
@@ -50,17 +42,24 @@ const TemplateLoader: webpack.loader.Loader = function(source) {
 
   // errors
   if (compiled.errors && compiled.errors.length) {
+    const lineOffset = inMap ? getLineOffset(inMap) : 0
     compiled.errors.forEach(err => {
       if (typeof err === 'string') {
         loaderContext.emitError(err)
       } else {
         if (err.loc) {
-          err.message = `\n${err.message}\n\n${
-            generateCodeFrame(
+          const filePath = chalk.blueBright(`${
+            loaderContext.resourcePath
+          }:${err.loc.start.line}:${err.loc.start.column}`)
+          err.message = `\n${filePath}\n${
+            chalk.red(err.message.replace(/\s+\(\d+:\d+\)/, ''))
+          }\n${
+            chalk.yellow(generateCodeFrame(
             source as string,
             err.loc.start.offset,
-            err.loc.end.offset
-          )}`
+            err.loc.end.offset,
+            lineOffset
+          ))}\n`
         }
         loaderContext.emitError(err)
       }
@@ -69,6 +68,15 @@ const TemplateLoader: webpack.loader.Loader = function(source) {
 
   const { code, map } = compiled
   loaderContext.callback(null, code, map as any)
+}
+
+function getLineOffset(map: RawSourceMap): number {
+  const consumer = new SourceMapConsumer(map)
+  let offset = 0
+  consumer.eachMapping(map => {
+    offset = map.originalLine - map.generatedLine
+  })
+  return offset
 }
 
 module.exports = TemplateLoader
