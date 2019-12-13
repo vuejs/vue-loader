@@ -1,5 +1,6 @@
 <template>
-  <button @click="inc">{{ count }}!</button>
+  <button @click="inc">{{ count }}</button>
+  <slot/>
 </template>
 
 <script>

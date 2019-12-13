@@ -50,9 +50,9 @@ const TemplateLoader: webpack.loader.Loader = function(source, inMap) {
         if (err.loc) {
           const filePath = chalk.blueBright(`${
             loaderContext.resourcePath
-          }:${err.loc.start.line}:${err.loc.start.column}`)
+          }:${err.loc.start.line + lineOffset}:${err.loc.start.column}`)
           err.message = `\n${filePath}\n${
-            chalk.red(err.message.replace(/\s+\(\d+:\d+\)/, ''))
+            chalk.red(err.message)
           }\n${
             chalk.yellow(generateCodeFrame(
             source as string,

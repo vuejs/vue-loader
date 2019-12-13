@@ -14,11 +14,25 @@ module.exports = {
     stats: "minimal",
     contentBase: __dirname
   },
+  optimization: {
+    minimize: false
+  },
   module: {
     rules: [
       {
         test: /\.vue$/,
         loader: 'vue-loader'
+      },
+      {
+        test: /\.png$/,
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 8192
+            }
+          }
+        ]
       }
     ]
   },
