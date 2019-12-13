@@ -115,8 +115,8 @@ const loader: webpack.loader.Loader = function(source) {
     const scopedQuery = hasScoped ? `&scoped=true` : ``
     const attrsQuery = attrsToQuery(descriptor.template.attrs)
     const query = `?vue&type=template${idQuery}${scopedQuery}${attrsQuery}${inheritQuery}`
-    const request = (templateRequest = stringifyRequest(src + query))
-    templateImport = `import render from ${request}`
+    templateRequest = stringifyRequest(src + query)
+    templateImport = `import render from ${templateRequest}`
   }
 
   // script
@@ -125,9 +125,10 @@ const loader: webpack.loader.Loader = function(source) {
     const src = descriptor.script.src || resourcePath
     const attrsQuery = attrsToQuery(descriptor.script.attrs, 'js')
     const query = `?vue&type=script${attrsQuery}${inheritQuery}`
-    const request = stringifyRequest(src + query)
+    const scriptRequest = stringifyRequest(src + query)
     scriptImport =
-      `import script from ${request}\n` + `export * from ${request}` // support named exports
+      `import script from ${scriptRequest}\n` +
+      `export * from ${scriptRequest}` // support named exports
   }
 
   // styles

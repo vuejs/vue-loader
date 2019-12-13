@@ -1,14 +1,15 @@
 // __VUE_HMR_RUNTIME__ is injected to global scope by @vue/runtime-core
 
-export function genHotReloadCode(id: string, templateRequest?: string): string {
+export function genHotReloadCode(
+  id: string,
+  templateRequest: string | undefined
+): string {
   return `
 /* hot reload */
 if (module.hot) {
   const api = __VUE_HMR_RUNTIME__
   module.hot.accept()
-  if (!api.isRecorded('${id}')) {
-    api.createRecord('${id}', script)
-  } else {
+  if (!api.createRecord('${id}', script)) {
     api.reload('${id}', script)
   }
   ${templateRequest ? genTemplateHotReloadCode(id, templateRequest) : ''}

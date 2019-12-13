@@ -4,6 +4,7 @@ const VueLoaderPlugin = require('../dist/plugin')
 module.exports = {
   mode: 'development',
   entry: path.resolve(__dirname, './main.js'),
+  devtool: 'cheap-module-eval-source-map',
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js',
