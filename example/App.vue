@@ -1,13 +1,9 @@
 <template>
-  <img src="./logo.png">
+  <img class="logo" src="./logo.png">
+  <Button>slotttt</Button>
   <Button>slot content</Button>
   <Button>slot content</Button>
-  <Button>slot content</Button>
-  <div class="hmmmmm">
-    <span>fsefesfsefsef</span>
-  </div>
 </template>
-
 
 <script>
 import Button from './Button.vue'
@@ -18,3 +14,10 @@ export default {
   }
 }
 </script>
+
+<style>
+.logo {
+  width: 100px;
+  border: 1px solid red;
+}
+</style>

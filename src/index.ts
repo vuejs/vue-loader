@@ -8,7 +8,8 @@ import {
   TemplateCompiler,
   CompilerOptions,
   SFCBlock,
-  SFCTemplateCompileOptions
+  SFCTemplateCompileOptions,
+  SFCStyleBlock
 } from '@vue/compiler-sfc'
 import { selectBlock } from './select'
 import { genHotReloadCode } from './hotReload'
@@ -134,7 +135,18 @@ const loader: webpack.loader.Loader = function(source) {
   // styles
   let stylesCode = ``
   if (descriptor.styles.length) {
-    // TODO handle style
+    descriptor.styles.forEach((style: SFCStyleBlock, i: number) => {
+      const src = style.src || resourcePath
+      const attrsQuery = attrsToQuery(style.attrs, 'css')
+      const inheritQuery = `&${loaderContext.resourceQuery.slice(1)}`
+      // make sure to only pass id when necessary so that we don't inject
+      // duplicate tags when multiple components import the same css file
+      const idQuery = style.scoped ? `&id=${id}` : ``
+      const query = `?vue&type=style&index=${i}${idQuery}${attrsQuery}${inheritQuery}`
+      const styleRequest = stringifyRequest(src + query)
+      // TODO CSS Modules & SSR
+      stylesCode += `import ${styleRequest}`
+    })
   }
 
   let code = [

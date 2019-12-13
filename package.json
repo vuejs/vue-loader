@@ -12,7 +12,7 @@
     "dev": "tsc --watch",
     "build": "tsc",
     "dev-example": "webpack-dev-server --config example/webpack.config.js --inline --hot",
-    "build-example": "webpack --config example/webpack.config.js --mode=production"
+    "build-example": "webpack --config example/webpack.config.js --mode=production --devtool=source-map"
   },
   "peerDependencies": {
     "@vue/compiler-sfc": "^3.0.0-alpha.0"
@@ -29,6 +29,7 @@
     "@types/webpack": "^4.41.0",
     "css-loader": "^3.3.2",
     "file-loader": "^5.0.2",
+    "mini-css-extract-plugin": "^0.8.0",
     "typescript": "^3.7.3",
     "url-loader": "^3.0.0",
     "webpack": "^4.41.2",
