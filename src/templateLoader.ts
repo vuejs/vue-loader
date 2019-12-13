@@ -12,6 +12,7 @@ import {
 // This is injected by the global pitcher (../pitch) for template
 // selection requests initiated from vue files.
 const TemplateLoader: webpack.loader.Loader = function(source) {
+  source = String(source)
   const loaderContext = this
   const query = qs.parse(this.resourceQuery.slice(1))
 
@@ -25,13 +26,13 @@ const TemplateLoader: webpack.loader.Loader = function(source) {
   // const isProduction = options.productionMode || loaderContext.minimize || process.env.NODE_ENV === 'production'
 
   const compilerOptions = Object.assign({}, options.compilerOptions, {
-    // TODO inMap
+    // TODO line offset
     scopeId: query.scoped ? `data-v-${id}` : null
   })
 
   // for vue-component-compiler
   const finalOptions: TemplateCompileOptions = {
-    source: String(source),
+    source,
     filename: this.resourcePath,
     compiler: options.compiler,
     compilerOptions,
@@ -49,8 +50,21 @@ const TemplateLoader: webpack.loader.Loader = function(source) {
 
   // errors
   if (compiled.errors && compiled.errors.length) {
-    // TODO generate codeframes for errors
-    generateCodeFrame
+    compiled.errors.forEach(err => {
+      if (typeof err === 'string') {
+        loaderContext.emitError(err)
+      } else {
+        if (err.loc) {
+          err.message = `\n${err.message}\n\n${
+            generateCodeFrame(
+            source as string,
+            err.loc.start.offset,
+            err.loc.end.offset
+          )}`
+        }
+        loaderContext.emitError(err)
+      }
+    })
   }
 
   const { code, map } = compiled
