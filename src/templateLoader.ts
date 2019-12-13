@@ -67,7 +67,7 @@ const TemplateLoader: webpack.loader.Loader = function(source, inMap) {
   }
 
   const { code, map } = compiled
-  loaderContext.callback(null, code, map as any)
+  loaderContext.callback(null, code, map)
 }
 
 function getLineOffset(map: RawSourceMap): number {

@@ -19,9 +19,7 @@ export function selectBlock (
     loaderContext.callback(
       null,
       template.content,
-      // a verison mismatch for the source-map package used in compiler-sfc
-      // and webpack but it shouldn't matter
-      template.map as any
+      template.map
     )
     return
   }
@@ -35,7 +33,7 @@ export function selectBlock (
     loaderContext.callback(
       null,
       script.content,
-      script.map as any
+      script.map
     )
     return
   }
@@ -49,7 +47,7 @@ export function selectBlock (
     loaderContext.callback(
       null,
       style.content,
-      style.map as any
+      style.map
     )
     return
   }
@@ -60,7 +58,7 @@ export function selectBlock (
     loaderContext.callback(
       null,
       block.content,
-      block.map as any
+      block.map
     )
   }
 }

@@ -11,7 +11,7 @@ const StylePostLoader: webpack.loader.Loader = function(source, inMap) {
     source: source as string,
     filename: this.resourcePath,
     id: `data-v-${query.id}`,
-    map: inMap as any,
+    map: inMap,
     scoped: !!query.scoped,
     trim: true
   })
@@ -19,7 +19,7 @@ const StylePostLoader: webpack.loader.Loader = function(source, inMap) {
   if (errors.length) {
     this.callback(errors[0])
   } else {
-    this.callback(null, code, map as any)
+    this.callback(null, code, map)
   }
 }
 
