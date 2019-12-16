@@ -50,12 +50,13 @@ const TemplateLoader: webpack.loader.Loader = function(source, inMap) {
         loaderContext.emitError(err)
       } else {
         if (err.loc) {
-          const filePath = chalk.blueBright(`${
+          const filePath = chalk.gray(`at ${
             loaderContext.resourcePath
           }:${err.loc.start.line + lineOffset}:${err.loc.start.column}`)
-          err.message = `\n${filePath}\n${
-            chalk.red(err.message)
-          }\n${
+
+          err.message = `\n${
+            chalk.red(`Syntax Error: ${err.message}`)
+          }\n${filePath}\n${
             chalk.yellow(generateCodeFrame(
             source as string,
             err.loc.start.offset,
