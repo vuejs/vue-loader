@@ -1,3 +1,18 @@
+<a name="15.8.0"></a>
+# [15.8.0](https://github.com/vuejs/vue-loader/compare/v15.7.2...v15.8.0) (2019-12-16)
+
+
+### Bug Fixes
+
+* **types:** should import type definition from the `dist` folder ([0751213](https://github.com/vuejs/vue-loader/commit/0751213))
+
+
+### Features
+
+* add support for webpack5 ([#1613](https://github.com/vuejs/vue-loader/issues/1613)) ([59eebca](https://github.com/vuejs/vue-loader/commit/59eebca))
+
+
+
 <a name="15.7.2"></a>
 ## [15.7.2](https://github.com/vuejs/vue-loader/compare/v15.7.1...v15.7.2) (2019-11-02)
 
