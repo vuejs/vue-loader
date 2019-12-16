@@ -42,7 +42,7 @@
     }
   },
   "dependencies": {
-    "@vue/component-compiler-utils": "^3.0.0",
+    "@vue/component-compiler-utils": "^3.1.0",
     "hash-sum": "^1.0.2",
     "loader-utils": "^1.1.0",
     "vue-hot-reload-api": "^2.3.0",
