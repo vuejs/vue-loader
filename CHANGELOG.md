@@ -9,7 +9,7 @@
 
 ### Bug Fixes
 
-* fix compatibility with webpack 3 ([745d054](https://github.com/vuejs/vue-loader/commit/745d054)), closes [/vue-loader.vuejs.org/guide/extract-css.html#webpack-3](https://github.com//vue-loader.vuejs.org/guide/extract-css.html/issues/webpack-3)
+* fix compatibility with webpack 3 ([745d054](https://github.com/vuejs/vue-loader/commit/745d054))
 
 
 
