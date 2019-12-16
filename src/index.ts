@@ -160,6 +160,11 @@ const loader: webpack.loader.Loader = function(source) {
     // TODO custom blocks
   }
 
+  // attach scope Id for runtime use
+  if (hasScoped) {
+    code += `\nscript.__scopeId = "data-v-${id}"`
+  }
+
   if (needsHotReload) {
     code += `\nscript.__hmrId = "${id}"`
     code += genHotReloadCode(id, templateRequest)

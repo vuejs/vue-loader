@@ -22,14 +22,16 @@ const TemplateLoader: webpack.loader.Loader = function(source, inMap) {
   // const isServer = loaderContext.target === 'node'
   // const isProduction = options.productionMode || loaderContext.minimize || process.env.NODE_ENV === 'production'
   const query = qs.parse(this.resourceQuery.slice(1))
-  const scopedId = query.scoped ? `data-v-${query.id}` : null
-  scopedId // TODO this is for SSR
+  const scopeId = query.scoped ? `data-v-${query.id}` : null
 
   const compiled = compileTemplate({
     source,
     filename: this.resourcePath,
     compiler: options.compiler,
-    compilerOptions: options.compilerOptions,
+    compilerOptions: {
+      ...options.compilerOptions,
+      scopeId
+    },
     transformAssetUrls: options.transformAssetUrls || true
   })
 
