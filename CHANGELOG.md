@@ -1,3 +1,13 @@
+<a name="15.8.2"></a>
+## [15.8.2](https://github.com/vuejs/vue-loader/compare/v15.8.1...v15.8.2) (2019-12-16)
+
+
+### Bug Fixes
+
+* fix compatibility with webpack 3 ([745d054](https://github.com/vuejs/vue-loader/commit/745d054)), closes [/vue-loader.vuejs.org/guide/extract-css.html#webpack-3](https://github.com//vue-loader.vuejs.org/guide/extract-css.html/issues/webpack-3)
+
+
+
 <a name="15.8.0"></a>
 # [15.8.0](https://github.com/vuejs/vue-loader/compare/v15.7.2...v15.8.0) (2019-12-16)
 
