@@ -5,6 +5,7 @@ import loaderUtils from 'loader-utils'
 import { VueLoaderOptions } from './'
 import { SourceMapConsumer, RawSourceMap } from 'source-map'
 import { compileTemplate, generateCodeFrame } from '@vue/compiler-sfc'
+import mergeSourceMap from 'merge-source-map'
 
 // Loader that compiles raw template into JavaScript functions.
 // This is injected by the global pitcher (../pitch) for template
@@ -21,12 +22,13 @@ const TemplateLoader: webpack.loader.Loader = function(source, inMap) {
 
   // const isServer = loaderContext.target === 'node'
   // const isProduction = options.productionMode || loaderContext.minimize || process.env.NODE_ENV === 'production'
-  const query = qs.parse(this.resourceQuery.slice(1))
+  const query = qs.parse(loaderContext.resourceQuery.slice(1))
   const scopeId = query.scoped ? `data-v-${query.id}` : null
 
   const compiled = compileTemplate({
     source,
-    filename: this.resourcePath,
+    // avoid source content overwriting the original
+    filename: loaderContext.resourcePath,
     compiler: options.compiler,
     compilerOptions: {
       ...options.compilerOptions,
@@ -69,7 +71,12 @@ const TemplateLoader: webpack.loader.Loader = function(source, inMap) {
     })
   }
 
-  const { code, map } = compiled
+  let { code, map } = compiled
+  if (map && inMap) {
+    // avoid overwritting original *.vue source during merge
+    map.sourcesContent = []
+    map = mergeSourceMap(inMap, map)
+  }
   loaderContext.callback(null, code, map)
 }
 

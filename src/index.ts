@@ -70,14 +70,9 @@ const loader: webpack.loader.Loader = function(source) {
   const isProduction =
     options.productionMode || minimize || process.env.NODE_ENV === 'production'
 
-  const filename = path.basename(resourcePath)
-  const context = rootContext || process.cwd()
-  const sourceRoot = path.dirname(path.relative(context, resourcePath))
-
   const descriptor = parse(String(source), {
-    filename,
-    sourceMap,
-    sourceRoot
+    filename: resourcePath,
+    sourceMap
   })
 
   // if the query has a type field, this is a language block request
@@ -94,7 +89,7 @@ const loader: webpack.loader.Loader = function(source) {
 
   // module id for scoped CSS & hot-reload
   const rawShortFilePath = path
-    .relative(context, resourcePath)
+    .relative(rootContext || process.cwd(), resourcePath)
     .replace(/^(\.\.[\/\\])+/, '')
   const shortFilePath = rawShortFilePath.replace(/\\/g, '/') + resourceQuery
   const id = hash(isProduction ? shortFilePath + '\n' + source : shortFilePath)
@@ -180,7 +175,7 @@ const loader: webpack.loader.Loader = function(source) {
   } else if (options.exposeFilename) {
     // Libraies can opt-in to expose their components' filenames in production builds.
     // For security reasons, only expose the file's basename in production.
-    code += `\nscript.__file = ${JSON.stringify(filename)}`
+    code += `\nscript.__file = ${JSON.stringify(path.basename(resourcePath))}`
   }
 
   // finalize
