@@ -22,8 +22,6 @@ export interface VueLoaderOptions {
   compiler?: TemplateCompiler
   compilerOptions?: CompilerOptions
   hotReload?: boolean
-  cacheDirectory?: string
-  cacheIdentifier?: string
   exposeFilename?: boolean
   appendExtension?: boolean
 }
@@ -61,7 +59,6 @@ const loader: webpack.loader.Loader = function(source) {
   } = loaderContext
 
   const rawQuery = resourceQuery.slice(1)
-  const inheritQuery = `&${rawQuery}`
   const incomingQuery = qs.parse(rawQuery)
   const options = (loaderUtils.getOptions(loaderContext) ||
     {}) as VueLoaderOptions
@@ -109,7 +106,7 @@ const loader: webpack.loader.Loader = function(source) {
     const idQuery = `&id=${id}`
     const scopedQuery = hasScoped ? `&scoped=true` : ``
     const attrsQuery = attrsToQuery(descriptor.template.attrs)
-    const query = `?vue&type=template${idQuery}${scopedQuery}${attrsQuery}${inheritQuery}`
+    const query = `?vue&type=template${idQuery}${scopedQuery}${attrsQuery}${resourceQuery}`
     templateRequest = stringifyRequest(src + query)
     templateImport = `import render from ${templateRequest}`
   }
@@ -119,7 +116,7 @@ const loader: webpack.loader.Loader = function(source) {
   if (descriptor.script) {
     const src = descriptor.script.src || resourcePath
     const attrsQuery = attrsToQuery(descriptor.script.attrs, 'js')
-    const query = `?vue&type=script${attrsQuery}${inheritQuery}`
+    const query = `?vue&type=script${attrsQuery}${resourceQuery}`
     const scriptRequest = stringifyRequest(src + query)
     scriptImport =
       `import script from ${scriptRequest}\n` + `export * from ${scriptRequest}` // support named exports
@@ -132,11 +129,10 @@ const loader: webpack.loader.Loader = function(source) {
     descriptor.styles.forEach((style: SFCStyleBlock, i: number) => {
       const src = style.src || resourcePath
       const attrsQuery = attrsToQuery(style.attrs, 'css')
-      const inheritQuery = `&${loaderContext.resourceQuery.slice(1)}`
       // make sure to only pass id when necessary so that we don't inject
       // duplicate tags when multiple components import the same css file
       const idQuery = style.scoped ? `&id=${id}` : ``
-      const query = `?vue&type=style&index=${i}${idQuery}${attrsQuery}${inheritQuery}`
+      const query = `?vue&type=style&index=${i}${idQuery}${attrsQuery}${resourceQuery}`
       const styleRequest = stringifyRequest(src + query)
       if (style.module) {
         if (!hasCSSModules) {

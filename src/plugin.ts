@@ -55,11 +55,7 @@ class VueLoaderPlugin implements webpack.Plugin {
       )
     }
 
-    // make sure vue-loader options has a known ident so that we can share
-    // options by reference in the template-loader by using a ref query like
-    // template-loader??vue-loader-options
     const vueLoaderUse = vueUse[vueLoaderUseIndex]
-    vueLoaderUse.ident = 'vue-loader-options'
     const vueLoaderOptions = (vueLoaderUse.options = vueLoaderUse.options || {}) as VueLoaderOptions
 
     // for each user rule (expect the vue rule), create a cloned rule
@@ -68,23 +64,38 @@ class VueLoaderPlugin implements webpack.Plugin {
       .filter(r => r !== vueRule)
       .map(cloneRule)
 
-    // global pitcher (responsible for injecting template compiler loader & CSS
-    // post loader)
+    // rule for template compiler
+    const templateCompilerRule = {
+      loader: require.resolve('./templateLoader'),
+      test: /\.vue$/,
+      resourceQuery: isVueTemplateBlock,
+      options: vueLoaderOptions
+    }
+
+    // for each rule that matches plain .js files, also create a clone and
+    // match it against the compiled template code inside *.vue files, so that
+    // compiled vue render functions receive the same treatment as user code
+    // (mostly babel)
+    const matchesJS = createMatcher(`test.js`)
+    const jsRulesForRenderFn = rules
+      .filter(r => r !== vueRule && matchesJS(r))
+      .map(cloneRuleForRenderFn)
+
+    // pitcher for block requests (for injecting stylePostLoader and deduping
+    // loaders matched for src imports)
     const pitcher = {
       loader: require.resolve('./pitcher'),
       resourceQuery: (query: string) => {
         const parsed = qs.parse(query.slice(1))
         return parsed.vue != null
-      },
-      options: {
-        cacheDirectory: vueLoaderOptions.cacheDirectory,
-        cacheIdentifier: vueLoaderOptions.cacheIdentifier
       }
     }
 
     // replace original rules
     compiler.options.module!.rules = [
       pitcher,
+      ...jsRulesForRenderFn,
+      templateCompilerRule,
       ...clonedRules,
       ...rules
     ]
@@ -114,7 +125,8 @@ function cloneRule (rule: webpack.RuleSetRule) {
   // it in `resourceQuery`. This ensures when we use the normalized rule's
   // resource check, include/exclude are matched correctly.
   let currentResource: string
-  const res = Object.assign({}, rule, {
+  const res = {
+    ...rule,
     resource: {
       test: (resource: string) => {
         currentResource = resource
@@ -138,12 +150,31 @@ function cloneRule (rule: webpack.RuleSetRule) {
       }
       return true
     }
-  })
+  }
 
   if (rule.oneOf) {
     res.oneOf = rule.oneOf.map(cloneRule)
   }
 
+  return res
+}
+
+function isVueTemplateBlock(query: string) {
+  const parsed = qs.parse(query.slice(1))
+  return parsed.vue != null && parsed.type === 'template'
+}
+
+function cloneRuleForRenderFn(rule: webpack.RuleSetRule) {
+  const res = {
+    ...rule,
+    resource: {
+      test: /\.vue$/
+    },
+    resourceQuery: isVueTemplateBlock
+  }
+  if (rule.oneOf) {
+    res.oneOf = rule.oneOf.map(cloneRule)
+  }
   return res
 }
 
