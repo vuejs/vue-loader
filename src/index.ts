@@ -13,6 +13,7 @@ import {
 } from '@vue/compiler-sfc'
 import { selectBlock } from './select'
 import { genHotReloadCode } from './hotReload'
+import { genCSSModulesCode } from './cssModules'
 
 const VueLoaderPlugin = require('./plugin')
 
@@ -97,7 +98,7 @@ const loader: webpack.loader.Loader = function(source) {
   const needsHotReload =
     !isServer &&
     !isProduction &&
-    (descriptor.script || descriptor.template) &&
+    !!(descriptor.script || descriptor.template) &&
     options.hotReload !== false
 
   // template
@@ -121,12 +122,12 @@ const loader: webpack.loader.Loader = function(source) {
     const query = `?vue&type=script${attrsQuery}${inheritQuery}`
     const scriptRequest = stringifyRequest(src + query)
     scriptImport =
-      `import script from ${scriptRequest}\n` +
-      `export * from ${scriptRequest}` // support named exports
+      `import script from ${scriptRequest}\n` + `export * from ${scriptRequest}` // support named exports
   }
 
   // styles
   let stylesCode = ``
+  let hasCSSModules = false
   if (descriptor.styles.length) {
     descriptor.styles.forEach((style: SFCStyleBlock, i: number) => {
       const src = style.src || resourcePath
@@ -137,8 +138,22 @@ const loader: webpack.loader.Loader = function(source) {
       const idQuery = style.scoped ? `&id=${id}` : ``
       const query = `?vue&type=style&index=${i}${idQuery}${attrsQuery}${inheritQuery}`
       const styleRequest = stringifyRequest(src + query)
-      // TODO CSS Modules & SSR
-      stylesCode += `import ${styleRequest}`
+      if (style.module) {
+        if (!hasCSSModules) {
+          stylesCode += `const cssModules = script.__cssModules = {}`
+          hasCSSModules = true
+        }
+        stylesCode += genCSSModulesCode(
+          id,
+          i,
+          styleRequest,
+          style.module,
+          needsHotReload
+        )
+      } else {
+        stylesCode += `\nimport ${styleRequest}`
+      }
+      // TODO SSR critical CSS collection
     })
   }
 
