@@ -21,7 +21,6 @@ export interface VueLoaderOptions {
   compiler?: TemplateCompiler
   compilerOptions?: CompilerOptions
   hotReload?: boolean
-  productionMode?: boolean
   cacheDirectory?: string
   cacheIdentifier?: string
   exposeFilename?: boolean
@@ -52,8 +51,8 @@ const loader: webpack.loader.Loader = function(source) {
     loaderUtils.stringifyRequest(loaderContext, r)
 
   const {
+    mode,
     target,
-    minimize,
     sourceMap,
     rootContext,
     resourcePath,
@@ -67,8 +66,7 @@ const loader: webpack.loader.Loader = function(source) {
     {}) as VueLoaderOptions
 
   const isServer = target === 'node'
-  const isProduction =
-    options.productionMode || minimize || process.env.NODE_ENV === 'production'
+  const isProduction = mode === 'production'
 
   const descriptor = parse(String(source), {
     filename: resourcePath,
