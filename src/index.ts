@@ -160,10 +160,6 @@ const loader: webpack.loader.Loader = function(source) {
     `script.render = render`
   ].join('\n')
 
-  if (descriptor.customBlocks && descriptor.customBlocks.length) {
-    // TODO custom blocks
-  }
-
   // attach scope Id for runtime use
   if (hasScoped) {
     code += `\nscript.__scopeId = "data-v-${id}"`
@@ -185,6 +181,27 @@ const loader: webpack.loader.Loader = function(source) {
     // Libraies can opt-in to expose their components' filenames in production builds.
     // For security reasons, only expose the file's basename in production.
     code += `\nscript.__file = ${JSON.stringify(path.basename(resourcePath))}`
+  }
+
+  // custom blocks
+  if (descriptor.customBlocks && descriptor.customBlocks.length) {
+    code += `\n/* custom blocks */\n`
+    code +=
+      descriptor.customBlocks
+        .map((block, i) => {
+          const src = block.attrs.src || resourcePath
+          const attrsQuery = attrsToQuery(block.attrs)
+          const blockTypeQuery = `&blockType=${qs.escape(block.type)}`
+          const issuerQuery = block.attrs.src
+            ? `&issuerPath=${qs.escape(resourcePath)}`
+            : ''
+          const query = `?vue&type=custom&index=${i}${blockTypeQuery}${issuerQuery}${attrsQuery}${resourceQuery}`
+          return (
+            `import block${i} from ${stringifyRequest(src + query)}\n` +
+            `if (typeof block${i} === 'function') block${i}(script)`
+          )
+        })
+        .join(`\n`) + `\n`
   }
 
   // finalize

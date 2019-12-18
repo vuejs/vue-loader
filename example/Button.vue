@@ -22,3 +22,7 @@ export default {
   color: green;
 }
 </style>
+
+<docs>
+This component is fire. // <-- this should be logged
+</docs>

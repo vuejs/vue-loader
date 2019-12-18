@@ -39,6 +39,11 @@ module.exports = {
           },
           'css-loader'
         ]
+      },
+      // target <docs> custom blocks
+      {
+        resourceQuery: /blockType=docs/,
+        loader: require.resolve('./docs-loader')
       }
     ]
   },
