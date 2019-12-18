@@ -19,6 +19,6 @@ export default {
 
 <style scoped>
 ::v-slotted(*) {
-  color: red;
+  color: green;
 }
 </style>

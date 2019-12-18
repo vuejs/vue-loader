@@ -11,10 +11,6 @@ module.exports = {
     filename: 'bundle.js',
     publicPath: '/dist/'
   },
-  devServer: {
-    stats: "minimal",
-    contentBase: __dirname
-  },
   module: {
     rules: [
       {
@@ -46,15 +42,20 @@ module.exports = {
       }
     ]
   },
-  resolveLoader: {
-    alias: {
-      'vue-loader': require.resolve('../')
-    }
-  },
   plugins: [
     new VueLoaderPlugin(),
     new MiniCssExtractPlugin({
       filename: '[name].css'
     })
-  ]
+  ],
+  devServer: {
+    stats: "minimal",
+    contentBase: __dirname,
+    overlay: true
+  },
+  resolveLoader: {
+    alias: {
+      'vue-loader': require.resolve('../')
+    }
+  }
 }
