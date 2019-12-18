@@ -16,3 +16,9 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+::v-slotted(*) {
+  color: red;
+}
+</style>

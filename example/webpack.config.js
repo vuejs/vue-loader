@@ -15,9 +15,6 @@ module.exports = {
     stats: "minimal",
     contentBase: __dirname
   },
-  optimization: {
-    minimize: false
-  },
   module: {
     rules: [
       {
@@ -48,11 +45,6 @@ module.exports = {
         ]
       }
     ]
-  },
-  resolve: {
-    alias: {
-      'vue': '@vue/runtime-dom'
-    }
   },
   resolveLoader: {
     alias: {
