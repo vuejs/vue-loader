@@ -82,7 +82,7 @@ pitcher.pitch = function() {
   }
 
   // Rewrite request. Technically this should only be done when we have deduped
-  // loaders. But somehow this is required for template source map to work...
+  // loaders. But somehow this is required for block source maps to work.
   return genProxyModule(loaders, context)
 }
 

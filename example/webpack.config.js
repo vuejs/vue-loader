@@ -56,7 +56,8 @@ module.exports = (env = {}) => {
                 cacheIdentifier: hash(
                   fs.readFileSync(path.resolve(__dirname, '../package.json')) +
                     JSON.stringify(env)
-                )
+                ),
+                cacheDirectory: path.resolve(__dirname, '../.cache')
               }
             },
             ...(babel
@@ -88,16 +89,7 @@ module.exports = (env = {}) => {
       })
     ],
     optimization: {
-      minimize,
-      splitChunks: {
-        cacheGroups: {
-          commons: {
-            test: /esm-bundler/,
-            name: 'vendors',
-            chunks: 'all'
-          }
-        }
-      }
+      minimize
     },
     devServer: {
       stats: 'minimal',
