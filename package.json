@@ -49,9 +49,7 @@
     "file-loader": "^5.0.2",
     "jest": "^24.9.0",
     "lint-staged": "^9.5.0",
-    "memory-fs": "^0.5.0",
     "mini-css-extract-plugin": "^0.8.0",
-    "normalize-newline": "^3.0.0",
     "prettier": "^1.19.1",
     "pug": "^2.0.4",
     "pug-plain-loader": "^1.0.0",
@@ -63,7 +61,6 @@
     "webpack": "^4.41.2",
     "webpack-cli": "^3.3.10",
     "webpack-dev-server": "^3.9.0",
-    "webpack-merge": "^4.2.2",
     "yorkie": "^2.0.0"
   }
 }
