@@ -12,7 +12,7 @@
     "dev": "tsc --watch",
     "build": "tsc",
     "dev-example": "webpack-dev-server --config example/webpack.config.js --inline --hot",
-    "build-example": "webpack --config example/webpack.config.js --mode=production --devtool=source-map",
+    "build-example": "webpack --config example/webpack.config.js --env.prod",
     "lint": "prettier --write --parser typescript \"src/**/*.ts\""
   },
   "gitHooks": {
