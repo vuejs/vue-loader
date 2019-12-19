@@ -81,10 +81,9 @@ pitcher.pitch = function() {
     return ``
   }
 
-  // rewrite if we have deduped loaders
-  if (loaders.length !== rawLoaders.length) {
-    return genProxyModule(loaders, context)
-  }
+  // Rewrite request. Technically this should only be done when we have deduped
+  // loaders. But somehow this is required for template source map to work...
+  return genProxyModule(loaders, context)
 }
 
 function genProxyModule(

@@ -3,9 +3,7 @@ import qs from 'querystring'
 import chalk from 'chalk'
 import loaderUtils from 'loader-utils'
 import { VueLoaderOptions } from './'
-import { SourceMapConsumer, RawSourceMap } from 'source-map'
 import { compileTemplate, generateCodeFrame } from '@vue/compiler-sfc'
-import mergeSourceMap from 'merge-source-map'
 
 // Loader that compiles raw template into JavaScript functions.
 // This is injected by the global pitcher (../pitch) for template
@@ -27,7 +25,7 @@ const TemplateLoader: webpack.loader.Loader = function(source, inMap) {
 
   const compiled = compileTemplate({
     source,
-    // avoid source content overwriting the original
+    inMap,
     filename: loaderContext.resourcePath,
     compiler: options.compiler,
     compilerOptions: {
@@ -46,49 +44,32 @@ const TemplateLoader: webpack.loader.Loader = function(source, inMap) {
 
   // errors
   if (compiled.errors && compiled.errors.length) {
-    const lineOffset = inMap ? getLineOffset(inMap) : 0
     compiled.errors.forEach(err => {
       if (typeof err === 'string') {
         loaderContext.emitError(err)
       } else {
         if (err.loc) {
-          const filePath = chalk.gray(
-            `at ${loaderContext.resourcePath}:${err.loc.start.line +
-              lineOffset}:${err.loc.start.column}`
+          const loc = `:${err.loc.start.line}:${err.loc.start.column}`
+          const filePath = chalk.gray(`at ${loaderContext.resourcePath}${loc}`)
+          const originalSource = inMap
+            ? inMap.sourcesContent![0]
+            : (source as string)
+          const codeframe = generateCodeFrame(
+            originalSource,
+            err.loc.start.offset,
+            err.loc.end.offset
           )
-
           err.message = `\n${chalk.red(
             `Syntax Error: ${err.message}`
-          )}\n${filePath}\n${chalk.yellow(
-            generateCodeFrame(
-              source as string,
-              err.loc.start.offset,
-              err.loc.end.offset,
-              lineOffset
-            )
-          )}\n`
+          )}\n${filePath}\n${chalk.yellow(codeframe)}\n`
         }
         loaderContext.emitError(err)
       }
     })
   }
 
-  let { code, map } = compiled
-  if (map && inMap) {
-    // avoid overwritting original *.vue source during merge
-    map.sourcesContent = []
-    map = mergeSourceMap(inMap, map)
-  }
+  const { code, map } = compiled
   loaderContext.callback(null, code, map)
-}
-
-function getLineOffset(map: RawSourceMap): number {
-  const consumer = new SourceMapConsumer(map)
-  let offset = 0
-  consumer.eachMapping(map => {
-    offset = map.originalLine - map.generatedLine
-  })
-  return offset
 }
 
 module.exports = TemplateLoader
