@@ -101,11 +101,7 @@ function genProxyModule(
   )
   // return a proxy module which simply re-exports everything from the
   // actual request.
-  return (
-    `import mod from ${request};` +
-    `export default mod;` +
-    `export * from ${request}`
-  )
+  return `export { default } from ${request}; export * from ${request}`
 }
 
 function shouldIgnoreCustomBlock(loaders: Loader[]) {
