@@ -91,17 +91,21 @@ function genProxyModule(
   loaders: Loader[],
   context: webpack.loader.LoaderContext
 ) {
+  const request = genRequest(loaders, context)
+  // return a proxy module which simply re-exports everything from the
+  // actual request.
+  return `export { default } from ${request}; export * from ${request}`
+}
+
+function genRequest(loaders: Loader[], context: webpack.loader.LoaderContext) {
   const loaderStrings = loaders.map(loader => {
     return typeof loader === 'string' ? loader : loader.request
   })
   const resource = context.resourcePath + context.resourceQuery
-  const request = loaderUtils.stringifyRequest(
+  return loaderUtils.stringifyRequest(
     context,
     '-!' + [...loaderStrings, resource].join('!')
   )
-  // return a proxy module which simply re-exports everything from the
-  // actual request.
-  return `export { default } from ${request}; export * from ${request}`
 }
 
 function shouldIgnoreCustomBlock(loaders: Loader[]) {

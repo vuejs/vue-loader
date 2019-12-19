@@ -1,4 +1,6 @@
+const fs = require('fs')
 const path = require('path')
+const hash = require('hash-sum')
 const VueLoaderPlugin = require('../dist/plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
@@ -13,7 +15,7 @@ module.exports = (env = {}) => {
     devtool: isProd ? 'source-map' : 'cheap-module-eval-source-map',
     output: {
       path: path.resolve(__dirname, 'dist'),
-      filename: 'bundle.js',
+      filename: '[name].js',
       publicPath: '/dist/'
     },
     module: {
@@ -47,16 +49,27 @@ module.exports = (env = {}) => {
         },
         {
           test: /\.js$/,
-          use: babel
-            ? {
-                loader: 'babel-loader',
-                options: {
-                  presets: ['@babel/preset-env']
-                }
+          use: [
+            {
+              loader: 'cache-loader',
+              options: {
+                cacheIdentifier: hash(
+                  fs.readFileSync(path.resolve(__dirname, '../package.json')) +
+                    JSON.stringify(env)
+                )
               }
-            : [
-                /* skip babel */
-              ]
+            },
+            ...(babel
+              ? [
+                  {
+                    loader: 'babel-loader',
+                    options: {
+                      presets: ['@babel/preset-env']
+                    }
+                  }
+                ]
+              : [])
+          ]
         },
         // target <docs> custom blocks
         {
@@ -72,7 +85,16 @@ module.exports = (env = {}) => {
       })
     ],
     optimization: {
-      minimize
+      minimize,
+      splitChunks: {
+        cacheGroups: {
+          commons: {
+            test: /esm-bundler/,
+            name: 'vendors',
+            chunks: 'all'
+          }
+        }
+      }
     },
     devServer: {
       stats: 'minimal',
