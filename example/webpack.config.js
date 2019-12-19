@@ -64,6 +64,9 @@ module.exports = (env = {}) => {
                   {
                     loader: 'babel-loader',
                     options: {
+                      // use yarn build-example --env.noMinimize to verify that
+                      // babel is properly applied to all js code, including the
+                      // render function compiled from SFC templates.
                       presets: ['@babel/preset-env']
                     }
                   }
