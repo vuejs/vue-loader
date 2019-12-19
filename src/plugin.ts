@@ -67,7 +67,10 @@ class VueLoaderPlugin implements webpack.Plugin {
     const templateCompilerRule = {
       loader: require.resolve('./templateLoader'),
       test: /\.vue$/,
-      resourceQuery: isVueTemplateBlock,
+      resourceQuery: (query: string) => {
+        const parsed = qs.parse(query.slice(1))
+        return parsed.vue != null && parsed.type === 'template'
+      },
       options: vueLoaderOptions
     }
 
@@ -154,18 +157,32 @@ function cloneRule(rule: webpack.RuleSetRule) {
   return res
 }
 
-function isVueTemplateBlock(query: string) {
-  const parsed = qs.parse(query.slice(1))
-  return parsed.vue != null && parsed.type === 'template'
-}
-
 function cloneRuleForRenderFn(rule: webpack.RuleSetRule) {
+  const resource = rule.resource as Function
+  const resourceQuery = rule.resourceQuery as Function
+  let currentResource: string
   const res = {
     ...rule,
     resource: {
-      test: /\.vue$/
+      test: (resource: string) => {
+        currentResource = resource
+        return true
+      }
     },
-    resourceQuery: isVueTemplateBlock
+    resourceQuery: (query: string) => {
+      const parsed = qs.parse(query.slice(1))
+      if (parsed.vue == null || parsed.type !== 'template') {
+        return false
+      }
+      const fakeResourcePath = `${currentResource}.js`
+      if (resource && !resource(fakeResourcePath)) {
+        return false
+      }
+      if (resourceQuery && !resourceQuery(query)) {
+        return false
+      }
+      return true
+    }
   }
   if (rule.oneOf) {
     res.oneOf = rule.oneOf.map(cloneRule)

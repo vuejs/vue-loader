@@ -26,7 +26,7 @@ module.exports = pitcher
 
 // This pitching loader is responsible for intercepting all vue block requests
 // and transform it into appropriate requests.
-pitcher.pitch = function(r) {
+pitcher.pitch = function() {
   const context = this as webpack.loader.LoaderContext
   const rawLoaders = context.loaders.filter(isNotPitcher)
   let loaders = rawLoaders

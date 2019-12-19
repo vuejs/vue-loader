@@ -40,6 +40,15 @@ module.exports = {
           'css-loader'
         ]
       },
+      {
+        test: /\.js$/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-env']
+          }
+        }
+      },
       // target <docs> custom blocks
       {
         resourceQuery: /blockType=docs/,
@@ -54,7 +63,7 @@ module.exports = {
     })
   ],
   devServer: {
-    stats: "minimal",
+    stats: 'minimal',
     contentBase: __dirname,
     overlay: true
   },
@@ -62,5 +71,8 @@ module.exports = {
     alias: {
       'vue-loader': require.resolve('../')
     }
+  },
+  optimization: {
+    // minimize: false
   }
 }
