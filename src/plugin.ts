@@ -31,7 +31,7 @@ class VueLoaderPlugin implements webpack.Plugin {
     if (!vueRule) {
       throw new Error(
         `[VueLoaderPlugin Error] No matching rule for .vue files found.\n` +
-        `Make sure there is at least one root-level rule that matches .vue or .vue.html files.`
+          `Make sure there is at least one root-level rule that matches .vue or .vue.html files.`
       )
     }
 
@@ -51,18 +51,17 @@ class VueLoaderPlugin implements webpack.Plugin {
     if (vueLoaderUseIndex < 0) {
       throw new Error(
         `[VueLoaderPlugin Error] No matching use for vue-loader is found.\n` +
-        `Make sure the rule matching .vue files include vue-loader in its use.`
+          `Make sure the rule matching .vue files include vue-loader in its use.`
       )
     }
 
     const vueLoaderUse = vueUse[vueLoaderUseIndex]
-    const vueLoaderOptions = (vueLoaderUse.options = vueLoaderUse.options || {}) as VueLoaderOptions
+    const vueLoaderOptions = (vueLoaderUse.options =
+      vueLoaderUse.options || {}) as VueLoaderOptions
 
     // for each user rule (expect the vue rule), create a cloned rule
     // that targets the corresponding language blocks in *.vue files.
-    const clonedRules = rules
-      .filter(r => r !== vueRule)
-      .map(cloneRule)
+    const clonedRules = rules.filter(r => r !== vueRule).map(cloneRule)
 
     // rule for template compiler
     const templateCompilerRule = {
@@ -102,21 +101,17 @@ class VueLoaderPlugin implements webpack.Plugin {
   }
 }
 
-function createMatcher (fakeFile: string) {
+function createMatcher(fakeFile: string) {
   return (rule: webpack.RuleSetRule) => {
     // #1201 we need to skip the `include` check when locating the vue rule
     const clone = Object.assign({}, rule)
     delete clone.include
     const normalized = RuleSet.normalizeRule(clone, {}, '')
-    return (
-      !rule.enforce &&
-      normalized.resource &&
-      normalized.resource(fakeFile)
-    )
+    return !rule.enforce && normalized.resource && normalized.resource(fakeFile)
   }
 }
 
-function cloneRule (rule: webpack.RuleSetRule) {
+function cloneRule(rule: webpack.RuleSetRule) {
   const resource = rule.resource as Function
   const resourceQuery = rule.resourceQuery as Function
   // Assuming `test` and `resourceQuery` tests are executed in series and

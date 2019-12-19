@@ -50,11 +50,12 @@ pitcher.pitch = function(r) {
   // resourceQuery-only rule that intends to target a custom block with no lang
   const seen = new Map()
   loaders = loaders.filter(loader => {
-    const identifier = typeof loader === 'string'
-      ? loader
-      // Dedupe based on both path and query if available. This is important
-      // in Vue CLI so that postcss-loaders with different options can co-exist
-      : (loader.path + loader.query)
+    const identifier =
+      typeof loader === 'string'
+        ? loader
+        : // Dedupe based on both path and query if available. This is important
+          // in Vue CLI so that postcss-loaders with different options can co-exist
+          loader.path + loader.query
     if (!seen.has(identifier)) {
       seen.set(identifier, true)
       return true
@@ -67,11 +68,10 @@ pitcher.pitch = function(r) {
     if (cssLoaderIndex > -1) {
       const afterLoaders = loaders.slice(0, cssLoaderIndex + 1)
       const beforeLoaders = loaders.slice(cssLoaderIndex + 1)
-      return genProxyModule([
-        ...afterLoaders,
-        stylePostLoaderPath,
-        ...beforeLoaders
-      ], context)
+      return genProxyModule(
+        [...afterLoaders, stylePostLoaderPath, ...beforeLoaders],
+        context
+      )
     }
   }
 
@@ -87,15 +87,18 @@ pitcher.pitch = function(r) {
   }
 }
 
-function genProxyModule(loaders: Loader[], context: webpack.loader.LoaderContext) {
+function genProxyModule(
+  loaders: Loader[],
+  context: webpack.loader.LoaderContext
+) {
   const loaderStrings = loaders.map(loader => {
     return typeof loader === 'string' ? loader : loader.request
   })
   const resource = context.resourcePath + context.resourceQuery
-  const request = loaderUtils.stringifyRequest(context, '-!' + [
-    ...loaderStrings,
-    resource
-  ].join('!'))
+  const request = loaderUtils.stringifyRequest(
+    context,
+    '-!' + [...loaderStrings, resource].join('!')
+  )
   // return a proxy module which simply re-exports everything from the
   // actual request.
   return (

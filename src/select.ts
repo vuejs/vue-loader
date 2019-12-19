@@ -2,7 +2,7 @@ import * as webpack from 'webpack'
 import { SFCDescriptor } from '@vue/compiler-sfc'
 import { ParsedUrlQuery } from 'querystring'
 
-export function selectBlock (
+export function selectBlock(
   descriptor: SFCDescriptor,
   loaderContext: webpack.loader.LoaderContext,
   query: ParsedUrlQuery,
@@ -16,11 +16,7 @@ export function selectBlock (
     if (appendExtension) {
       loaderContext.resourcePath += '.' + (template.lang || 'html')
     }
-    loaderContext.callback(
-      null,
-      template.content,
-      template.map
-    )
+    loaderContext.callback(null, template.content, template.map)
     return
   }
 
@@ -30,11 +26,7 @@ export function selectBlock (
     if (appendExtension) {
       loaderContext.resourcePath += '.' + (script.lang || 'js')
     }
-    loaderContext.callback(
-      null,
-      script.content,
-      script.map
-    )
+    loaderContext.callback(null, script.content, script.map)
     return
   }
 
@@ -44,21 +36,13 @@ export function selectBlock (
     if (appendExtension) {
       loaderContext.resourcePath += '.' + (style.lang || 'css')
     }
-    loaderContext.callback(
-      null,
-      style.content,
-      style.map
-    )
+    loaderContext.callback(null, style.content, style.map)
     return
   }
 
   // custom
   if (query.type === 'custom' && query.index != null) {
     const block = descriptor.customBlocks[Number(query.index)]
-    loaderContext.callback(
-      null,
-      block.content,
-      block.map
-    )
+    loaderContext.callback(null, block.content, block.map)
   }
 }
