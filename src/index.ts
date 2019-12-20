@@ -1,3 +1,12 @@
+try {
+  require.resolve('@vue/compiler-sfc')
+} catch (e) {
+  throw new Error(
+    'vue-loader requires @vue/compiler-sfc to be present in the dependency ' +
+      'tree.'
+  )
+}
+
 import * as webpack from 'webpack'
 import path from 'path'
 import qs from 'querystring'
