@@ -150,6 +150,10 @@ function cloneRule(rule: webpack.RuleSetRule) {
     }
   }
 
+  if (rule.rules) {
+    res.rules = rule.rules.map(cloneRule)
+  }
+
   if (rule.oneOf) {
     res.oneOf = rule.oneOf.map(cloneRule)
   }
@@ -184,9 +188,15 @@ function cloneRuleForRenderFn(rule: webpack.RuleSetRule) {
       return true
     }
   }
-  if (rule.oneOf) {
-    res.oneOf = rule.oneOf.map(cloneRule)
+
+  if (rule.rules) {
+    res.rules = rule.rules.map(cloneRuleForRenderFn)
   }
+
+  if (rule.oneOf) {
+    res.oneOf = rule.oneOf.map(cloneRuleForRenderFn)
+  }
+
   return res
 }
 
