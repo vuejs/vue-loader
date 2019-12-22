@@ -23,6 +23,7 @@ import {
 import { selectBlock } from './select'
 import { genHotReloadCode } from './hotReload'
 import { genCSSModulesCode } from './cssModules'
+import { formatError } from './formatError'
 
 const VueLoaderPlugin = require('./plugin')
 
@@ -37,7 +38,7 @@ export interface VueLoaderOptions {
 
 let errorEmitted = false
 
-const loader: webpack.loader.Loader = function(source) {
+const loader: webpack.loader.Loader = function(source: string) {
   const loaderContext = this
 
   // check if plugin is installed
@@ -75,10 +76,17 @@ const loader: webpack.loader.Loader = function(source) {
   const isServer = target === 'node'
   const isProduction = mode === 'production'
 
-  const descriptor = parse(String(source), {
-    filename: resourcePath,
-    sourceMap
-  })
+  let descriptor
+  try {
+    descriptor = parse(source, {
+      filename: resourcePath,
+      sourceMap
+    })
+  } catch (e) {
+    formatError(e, source, resourcePath)
+    loaderContext.emitError(e)
+    return ``
+  }
 
   // if the query has a type field, this is a language block request
   // e.g. foo.vue?type=template&id=xxxxx

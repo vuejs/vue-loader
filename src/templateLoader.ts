@@ -1,9 +1,9 @@
 import * as webpack from 'webpack'
 import qs from 'querystring'
-import chalk from 'chalk'
 import loaderUtils from 'loader-utils'
 import { VueLoaderOptions } from './'
-import { compileTemplate, generateCodeFrame } from '@vue/compiler-sfc'
+import { formatError } from './formatError'
+import { compileTemplate } from '@vue/compiler-sfc'
 
 // Loader that compiles raw template into JavaScript functions.
 // This is injected by the global pitcher (../pitch) for template
@@ -48,21 +48,11 @@ const TemplateLoader: webpack.loader.Loader = function(source, inMap) {
       if (typeof err === 'string') {
         loaderContext.emitError(err)
       } else {
-        if (err.loc) {
-          const loc = `:${err.loc.start.line}:${err.loc.start.column}`
-          const filePath = chalk.gray(`at ${loaderContext.resourcePath}${loc}`)
-          const originalSource = inMap
-            ? inMap.sourcesContent![0]
-            : (source as string)
-          const codeframe = generateCodeFrame(
-            originalSource,
-            err.loc.start.offset,
-            err.loc.end.offset
-          )
-          err.message = `\n${chalk.red(
-            `Syntax Error: ${err.message}`
-          )}\n${filePath}\n${chalk.yellow(codeframe)}\n`
-        }
+        formatError(
+          err,
+          inMap ? inMap.sourcesContent![0] : (source as string),
+          loaderContext.resourcePath
+        )
         loaderContext.emitError(err)
       }
     })
