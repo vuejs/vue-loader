@@ -83,17 +83,22 @@ pitcher.pitch = function() {
 
   // Rewrite request. Technically this should only be done when we have deduped
   // loaders. But somehow this is required for block source maps to work.
-  return genProxyModule(loaders, context)
+  return genProxyModule(loaders, context, query.type !== 'template')
 }
 
 function genProxyModule(
   loaders: Loader[],
-  context: webpack.loader.LoaderContext
+  context: webpack.loader.LoaderContext,
+  exportDefault = true
 ) {
   const request = genRequest(loaders, context)
   // return a proxy module which simply re-exports everything from the
-  // actual request.
-  return `export { default } from ${request}; export * from ${request}`
+  // actual request. Note for template blocks the compiled module has no
+  // default export.
+  return (
+    (exportDefault ? `export { default } from ${request}; ` : ``) +
+    `export * from ${request}`
+  )
 }
 
 function genRequest(loaders: Loader[], context: webpack.loader.LoaderContext) {

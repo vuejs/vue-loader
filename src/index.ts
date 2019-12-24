@@ -76,15 +76,16 @@ const loader: webpack.loader.Loader = function(source: string) {
   const isServer = target === 'node'
   const isProduction = mode === 'production'
 
-  let descriptor
-  try {
-    descriptor = parse(source, {
-      filename: resourcePath,
-      sourceMap
+  const { descriptor, errors } = parse(source, {
+    filename: resourcePath,
+    sourceMap
+  })
+
+  if (errors.length) {
+    errors.forEach(err => {
+      formatError(err, source, resourcePath)
+      loaderContext.emitError(err)
     })
-  } catch (e) {
-    formatError(e, source, resourcePath)
-    loaderContext.emitError(e)
     return ``
   }
 
@@ -125,7 +126,7 @@ const loader: webpack.loader.Loader = function(source: string) {
     const attrsQuery = attrsToQuery(descriptor.template.attrs)
     const query = `?vue&type=template${idQuery}${scopedQuery}${attrsQuery}${resourceQuery}`
     templateRequest = stringifyRequest(src + query)
-    templateImport = `import render from ${templateRequest}`
+    templateImport = `import { render } from ${templateRequest}`
   }
 
   // script
