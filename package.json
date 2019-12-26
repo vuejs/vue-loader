@@ -19,6 +19,10 @@
     "url": "https://github.com/vuejs/vue-loader/issues"
   },
   "homepage": "https://github.com/vuejs/vue-loader",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vuejs/vue-loader.git"
+  },
   "gitHooks": {
     "pre-commit": "lint-staged"
   },
