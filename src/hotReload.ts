@@ -7,6 +7,7 @@ export function genHotReloadCode(
   return `
 /* hot reload */
 if (module.hot) {
+  script.__hmrId = "${id}"
   const api = __VUE_HMR_RUNTIME__
   module.hot.accept()
   if (!api.createRecord('${id}', script)) {

@@ -184,7 +184,6 @@ const loader: webpack.loader.Loader = function(source: string) {
   }
 
   if (needsHotReload) {
-    code += `\nscript.__hmrId = "${id}"`
     code += genHotReloadCode(id, templateRequest)
   }
 
