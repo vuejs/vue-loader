@@ -13,7 +13,8 @@
     "build": "tsc",
     "dev-example": "webpack-dev-server --config example/webpack.config.js --inline --hot",
     "build-example": "rm -rf example/dist && webpack --config example/webpack.config.js --env.prod",
-    "lint": "prettier --write --parser typescript \"src/**/*.ts\""
+    "lint": "prettier --write --parser typescript \"src/**/*.ts\"",
+    "prepublishOnly": "tsc"
   },
   "gitHooks": {
     "pre-commit": "lint-staged"
