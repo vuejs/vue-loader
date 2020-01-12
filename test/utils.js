@@ -76,6 +76,7 @@ function bundle (options, cb, wontThrowError) {
 
   const webpackCompiler = webpack(config)
   webpackCompiler.outputFileSystem = mfs
+  webpackCompiler.outputFileSystem.join = path.join.bind(path)
   webpackCompiler.run((err, stats) => {
     const errors = stats.compilation.errors
     if (!wontThrowError) {
