@@ -4,9 +4,9 @@ const hash = require('hash-sum')
 const { JSDOM, VirtualConsole } = require('jsdom')
 const webpack = require('webpack')
 const merge = require('webpack-merge')
-const MemoryFS = require('memory-fs')
+const { createFsFromVolume, Volume } = require('memfs')
 
-const mfs = new MemoryFS()
+const mfs = new createFsFromVolume(new Volume()) // eslint-disable-line
 const VueLoaderPlugin = require('../lib/plugin')
 
 const baseConfig = {
