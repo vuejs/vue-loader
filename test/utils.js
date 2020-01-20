@@ -6,7 +6,7 @@ const webpack = require('webpack')
 const merge = require('webpack-merge')
 const { createFsFromVolume, Volume } = require('memfs')
 
-const mfs = new createFsFromVolume(new Volume()) // eslint-disable-line
+const mfs = createFsFromVolume(new Volume())
 const VueLoaderPlugin = require('../lib/plugin')
 
 const baseConfig = {
