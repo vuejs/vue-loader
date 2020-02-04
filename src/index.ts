@@ -117,7 +117,7 @@ const loader: webpack.loader.Loader = function(source: string) {
     options.hotReload !== false
 
   // template
-  let templateImport = `const render = () => {}`
+  let templateImport = ``
   let templateRequest
   if (descriptor.template) {
     const src = descriptor.template.src || resourcePath
@@ -175,8 +175,10 @@ const loader: webpack.loader.Loader = function(source: string) {
     templateImport,
     scriptImport,
     stylesCode,
-    `script.render = render`
-  ].join('\n')
+    templateImport ? `script.render = render` : ``
+  ]
+    .filter(Boolean)
+    .join('\n')
 
   // attach scope Id for runtime use
   if (hasScoped) {
