@@ -197,7 +197,7 @@ const loader: webpack.loader.Loader = function(source: string) {
       rawShortFilePath.replace(/\\/g, '/')
     )}`
   } else if (options.exposeFilename) {
-    // Libraies can opt-in to expose their components' filenames in production builds.
+    // Libraries can opt-in to expose their components' filenames in production builds.
     // For security reasons, only expose the file's basename in production.
     code += `\nscript.__file = ${JSON.stringify(path.basename(resourcePath))}`
   }
