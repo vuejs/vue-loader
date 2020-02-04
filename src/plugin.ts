@@ -66,7 +66,6 @@ class VueLoaderPlugin implements webpack.Plugin {
     // rule for template compiler
     const templateCompilerRule = {
       loader: require.resolve('./templateLoader'),
-      test: /\.vue$/,
       resourceQuery: (query: string) => {
         const parsed = qs.parse(query.slice(1))
         return parsed.vue != null && parsed.type === 'template'
