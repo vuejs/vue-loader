@@ -43,6 +43,9 @@
   "peerDependenciesMeta": {
     "cache-loader": {
       "optional": true
+    },
+    "vue-template-compiler": {
+      "optional": true
     }
   },
   "dependencies": {
