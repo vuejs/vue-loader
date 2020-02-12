@@ -1,3 +1,18 @@
+<a name="15.9.0"></a>
+# [15.9.0](https://github.com/vuejs/vue-loader/compare/v15.8.3...v15.9.0) (2020-02-12)
+
+
+### Bug Fixes
+
+* add vue-template-compiler as an optional peer dependency ([56db1d7](https://github.com/vuejs/vue-loader/commit/56db1d7)), closes [#1639](https://github.com/vuejs/vue-loader/issues/1639)
+
+
+### Features
+
+* support Rule.rules (nested rules) ([#1618](https://github.com/vuejs/vue-loader/issues/1618)) ([5943319](https://github.com/vuejs/vue-loader/commit/5943319))
+
+
+
 <a name="15.8.3"></a>
 ## [15.8.3](https://github.com/vuejs/vue-loader/compare/v15.8.2...v15.8.3) (2019-12-16)
 
