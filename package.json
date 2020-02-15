@@ -72,7 +72,7 @@
     "jsdom": "^11.6.2",
     "lint-staged": "^7.0.0",
     "markdown-loader": "^2.0.2",
-    "memfs": "^3.0.3",
+    "memfs": "^3.0.5",
     "mini-css-extract-plugin": "^0.4.1",
     "node-sass": "^4.7.2",
     "normalize-newline": "^3.0.0",
