@@ -1,3 +1,48 @@
+<a name="15.9.0"></a>
+# [15.9.0](https://github.com/vuejs/vue-loader/compare/v15.8.3...v15.9.0) (2020-02-12)
+
+
+### Bug Fixes
+
+* add vue-template-compiler as an optional peer dependency ([56db1d7](https://github.com/vuejs/vue-loader/commit/56db1d7)), closes [#1639](https://github.com/vuejs/vue-loader/issues/1639)
+
+
+### Features
+
+* support Rule.rules (nested rules) ([#1618](https://github.com/vuejs/vue-loader/issues/1618)) ([5943319](https://github.com/vuejs/vue-loader/commit/5943319))
+
+
+
+<a name="15.8.3"></a>
+## [15.8.3](https://github.com/vuejs/vue-loader/compare/v15.8.2...v15.8.3) (2019-12-16)
+
+
+
+<a name="15.8.2"></a>
+## [15.8.2](https://github.com/vuejs/vue-loader/compare/v15.8.1...v15.8.2) (2019-12-16)
+
+
+### Bug Fixes
+
+* fix compatibility with webpack 3 ([745d054](https://github.com/vuejs/vue-loader/commit/745d054))
+
+
+
+<a name="15.8.0"></a>
+# [15.8.0](https://github.com/vuejs/vue-loader/compare/v15.7.2...v15.8.0) (2019-12-16)
+
+
+### Bug Fixes
+
+* **types:** should import type definition from the `dist` folder ([0751213](https://github.com/vuejs/vue-loader/commit/0751213))
+
+
+### Features
+
+* add support for webpack5 ([#1613](https://github.com/vuejs/vue-loader/issues/1613)) ([59eebca](https://github.com/vuejs/vue-loader/commit/59eebca))
+
+
+
 <a name="15.7.2"></a>
 ## [15.7.2](https://github.com/vuejs/vue-loader/compare/v15.7.1...v15.7.2) (2019-11-02)
 

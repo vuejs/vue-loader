@@ -1,6 +1,6 @@
 {
   "name": "vue-loader",
-  "version": "15.7.2",
+  "version": "15.9.0",
   "description": "Vue single-file component loader for Webpack",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
@@ -19,6 +19,10 @@
     "url": "https://github.com/vuejs/vue-loader/issues"
   },
   "homepage": "https://github.com/vuejs/vue-loader",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vuejs/vue-loader.git"
+  },
   "gitHooks": {
     "pre-commit": "lint-staged"
   },
@@ -34,15 +38,18 @@
   },
   "peerDependencies": {
     "css-loader": "*",
-    "webpack": "^4.1.0 || ^5.0.0-0"
+    "webpack": "^3.0.0 || ^4.1.0 || ^5.0.0-0"
   },
   "peerDependenciesMeta": {
     "cache-loader": {
       "optional": true
+    },
+    "vue-template-compiler": {
+      "optional": true
     }
   },
   "dependencies": {
-    "@vue/component-compiler-utils": "^3.0.0",
+    "@vue/component-compiler-utils": "^3.1.0",
     "hash-sum": "^1.0.2",
     "loader-utils": "^1.1.0",
     "vue-hot-reload-api": "^2.3.0",
@@ -65,7 +72,7 @@
     "jsdom": "^11.6.2",
     "lint-staged": "^7.0.0",
     "markdown-loader": "^2.0.2",
-    "memory-fs": "^0.4.1",
+    "memfs": "^3.0.3",
     "mini-css-extract-plugin": "^0.4.1",
     "node-sass": "^4.7.2",
     "normalize-newline": "^3.0.0",

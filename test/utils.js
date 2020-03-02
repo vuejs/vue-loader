@@ -4,9 +4,9 @@ const hash = require('hash-sum')
 const { JSDOM, VirtualConsole } = require('jsdom')
 const webpack = require('webpack')
 const merge = require('webpack-merge')
-const MemoryFS = require('memory-fs')
+const { createFsFromVolume, Volume } = require('memfs')
 
-const mfs = new MemoryFS()
+const mfs = createFsFromVolume(new Volume())
 const VueLoaderPlugin = require('../lib/plugin')
 
 const baseConfig = {
@@ -76,6 +76,7 @@ function bundle (options, cb, wontThrowError) {
 
   const webpackCompiler = webpack(config)
   webpackCompiler.outputFileSystem = mfs
+  webpackCompiler.outputFileSystem.join = path.join.bind(path)
   webpackCompiler.run((err, stats) => {
     const errors = stats.compilation.errors
     if (!wontThrowError) {
