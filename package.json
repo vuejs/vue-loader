@@ -12,7 +12,7 @@
     "dev": "tsc --watch",
     "build": "tsc",
     "dev-example": "webpack-dev-server --config example/webpack.config.js --inline --hot",
-    "build-example": "rm -rf example/dist && webpack --config example/webpack.config.js --env.prod",
+    "build-example": "webpack --config example/webpack.config.js --env.prod",
     "lint": "prettier --write --parser typescript \"src/**/*.ts\"",
     "prepublishOnly": "tsc"
   },
@@ -46,6 +46,7 @@
     "@vue/compiler-sfc": "^3.0.0-alpha.1",
     "babel-loader": "^8.0.6",
     "cache-loader": "^4.1.0",
+    "clean-webpack-plugin": "^3.0.0",
     "css-loader": "^3.3.2",
     "file-loader": "^5.0.2",
     "jest": "^24.9.0",
