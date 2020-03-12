@@ -1,24 +1,33 @@
-import * as webpack from 'webpack'
-import qs from 'querystring'
 import loaderUtils from 'loader-utils'
+import qs from 'querystring'
+import * as webpack from 'webpack'
 
 const selfPath = require.resolve('./index')
 // const templateLoaderPath = require.resolve('./templateLoader')
 const stylePostLoaderPath = require.resolve('./stylePostLoader')
 
 // @types/webpack doesn't provide the typing for loaderContext.loaders...
-interface Loader {
+type Loader = string | ObjectLoader
+
+interface ObjectLoader {
   request: string
   path: string
   query: string
   pitchExecuted: boolean
 }
 
-const isESLintLoader = (l: Loader) => /(\/|\\|@)eslint-loader/.test(l.path)
-const isNullLoader = (l: Loader) => /(\/|\\|@)null-loader/.test(l.path)
-const isCSSLoader = (l: Loader) => /(\/|\\|@)css-loader/.test(l.path)
-const isCacheLoader = (l: Loader) => /(\/|\\|@)cache-loader/.test(l.path)
-const isNotPitcher = (l: Loader) => l.path !== __filename
+function getLoaderPath(loader: Loader): string {
+  return typeof loader === 'string' ? loader : loader.path
+}
+
+const isESLintLoader = (l: Loader) =>
+  /([\/\\@])eslint-loader/.test(getLoaderPath(l))
+const isNullLoader = (l: Loader) =>
+  /([\/\\@])null-loader/.test(getLoaderPath(l))
+const isCSSLoader = (l: Loader) => /([\/\\@])css-loader/.test(getLoaderPath(l))
+const isCacheLoader = (l: Loader) =>
+  /([\/\\@])cache-loader/.test(getLoaderPath(l))
+const isNotPitcher = (l: Loader) => getLoaderPath(l) !== __filename
 
 const pitcher: webpack.loader.Loader = code => code
 
@@ -28,8 +37,7 @@ module.exports = pitcher
 // and transform it into appropriate requests.
 pitcher.pitch = function() {
   const context = this as webpack.loader.LoaderContext
-  const rawLoaders = context.loaders.filter(isNotPitcher)
-  let loaders = rawLoaders
+  let loaders = context.loaders.filter(isNotPitcher)
 
   // do not inject if user uses null-loader to void the type (#1239)
   if (loaders.some(isNullLoader)) {
@@ -115,14 +123,11 @@ function genRequest(loaders: Loader[], context: webpack.loader.LoaderContext) {
 function shouldIgnoreCustomBlock(loaders: Loader[]) {
   const actualLoaders = loaders.filter(loader => {
     // vue-loader
-    if (loader.path === selfPath) {
+    if (getLoaderPath(loader) === selfPath) {
       return false
     }
     // cache-loader
-    if (isCacheLoader(loader)) {
-      return false
-    }
-    return true
+    return !isCacheLoader(loader)
   })
   return actualLoaders.length === 0
 }
