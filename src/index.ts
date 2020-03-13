@@ -16,6 +16,7 @@ import {
   parse,
   TemplateCompiler,
   CompilerOptions,
+  CompilerError,
   SFCBlock,
   SFCTemplateCompileOptions,
   SFCStyleBlock
@@ -82,7 +83,7 @@ const loader: webpack.loader.Loader = function(source: string) {
   })
 
   if (errors.length) {
-    errors.forEach(err => {
+    errors.forEach((err: CompilerError) => {
       formatError(err, source, resourcePath)
       loaderContext.emitError(err)
     })
@@ -109,7 +110,7 @@ const loader: webpack.loader.Loader = function(source: string) {
   const id = hash(isProduction ? shortFilePath + '\n' + source : shortFilePath)
 
   // feature information
-  const hasScoped = descriptor.styles.some(s => s.scoped)
+  const hasScoped = descriptor.styles.some((s: SFCStyleBlock) => s.scoped)
   const needsHotReload =
     !isServer &&
     !isProduction &&
@@ -207,7 +208,7 @@ const loader: webpack.loader.Loader = function(source: string) {
     code += `\n/* custom blocks */\n`
     code +=
       descriptor.customBlocks
-        .map((block, i) => {
+        .map((block: SFCBlock, i: number) => {
           const src = block.attrs.src || resourcePath
           const attrsQuery = attrsToQuery(block.attrs)
           const blockTypeQuery = `&blockType=${qs.escape(block.type)}`

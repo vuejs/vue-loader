@@ -45,7 +45,7 @@ class VueLoaderPlugin implements webpack.Plugin {
     const vueUse = vueRule.use as webpack.RuleSetLoader[]
     // get vue-loader options
     const vueLoaderUseIndex = vueUse.findIndex(u => {
-      return /^vue-loader|(\/|\\|@)vue-loader/.test(u.loader || '')
+      return /^vue-loader|([\/\\@])vue-loader/.test(u.loader || '')
     })
 
     if (vueLoaderUseIndex < 0) {
@@ -143,10 +143,8 @@ function cloneRule(rule: webpack.RuleSetRule) {
       if (resource && !resource(fakeResourcePath)) {
         return false
       }
-      if (resourceQuery && !resourceQuery(query)) {
-        return false
-      }
-      return true
+
+      return !(resourceQuery && !resourceQuery(query))
     }
   }
 
@@ -182,10 +180,7 @@ function cloneRuleForRenderFn(rule: webpack.RuleSetRule) {
       if (resource && !resource(fakeResourcePath)) {
         return false
       }
-      if (resourceQuery && !resourceQuery(query)) {
-        return false
-      }
-      return true
+      return !(resourceQuery && !resourceQuery(query))
     }
   }
 

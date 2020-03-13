@@ -12,7 +12,7 @@
     "dev": "tsc --watch",
     "build": "tsc",
     "dev-example": "webpack-dev-server --config example/webpack.config.js --inline --hot",
-    "build-example": "rm -rf example/dist && webpack --config example/webpack.config.js --env.prod",
+    "build-example": "rimraf -rf example/dist && webpack --config example/webpack.config.js --env.prod",
     "lint": "prettier --write --parser typescript \"src/**/*.ts\"",
     "prepublishOnly": "tsc"
   },
@@ -54,6 +54,7 @@
     "prettier": "^1.19.1",
     "pug": "^2.0.4",
     "pug-plain-loader": "^1.0.0",
+    "rimraf": "^3.0.2",
     "stylus": "^0.54.7",
     "stylus-loader": "^3.0.2",
     "ts-jest": "^24.2.0",
