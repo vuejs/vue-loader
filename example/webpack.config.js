@@ -3,7 +3,6 @@ const path = require('path')
 const hash = require('hash-sum')
 const VueLoaderPlugin = require('../dist/plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 
 module.exports = (env = {}) => {
   const isProd = env.prod
@@ -87,8 +86,7 @@ module.exports = (env = {}) => {
       new VueLoaderPlugin(),
       new MiniCssExtractPlugin({
         filename: '[name].css'
-      }),
-      new CleanWebpackPlugin()
+      })
     ],
     optimization: {
       minimize
