@@ -144,3 +144,33 @@ test('script import', done => {
     done()
   })
 })
+
+// #1620
+test('cloned rules should not intefere with each other', done => {
+  mockBundleAndRun({
+    entry: 'basic.vue',
+    module: {
+      rules: [{
+        test: /\.js$/,
+        use: [
+          {
+            loader: 'babel-loader',
+            options: {}
+          }
+        ]
+      }, {
+        test: /\.some-random-extension$/,
+        use: [
+          {
+            loader: 'css-loader',
+            options: {
+              url: true
+            }
+          }
+        ]
+      }]
+    }
+  }, () => {
+    done()
+  })
+})
