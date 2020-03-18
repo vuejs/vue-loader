@@ -27,3 +27,7 @@ jobs:
 
       # run tests!
       - run: yarn test
+
+      - run: npx json -f package.json -I -e "this.resolutions = { webpack: '^5.0.0-0' }, this.devDependencies.webpack = '^5.0.0-0' "
+      - run: yarn install
+      - run: yarn test
