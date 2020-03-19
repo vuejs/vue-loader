@@ -6,9 +6,9 @@ sidebarDepth: 2
 
 In webpack, all pre-processors need to be applied with a corresponding loader. `vue-loader` allows you to use other webpack loaders to process a part of a Vue component. It will automatically infer the proper loaders to use based on the `lang` attribute of a language block and the rules in your webpack config.
 
-## SASS
+## Sass
 
-For example, to compile our `<style>` tag with SASS/SCSS:
+For example, to compile our `<style>` tag with Sass/SCSS:
 
 ``` bash
 npm install -D sass-loader node-sass
@@ -48,7 +48,7 @@ Now in addition to being able to `import 'style.scss'`, we can use SCSS in Vue c
 
 Any content inside the block will be processed by webpack as if it's inside a `*.scss` file.
 
-### SASS vs SCSS
+### Sass vs SCSS
 
 Note that `sass-loader` processes the non-indent-based `scss` syntax by default. In order to use the indent-based `sass` syntax, you need to pass options to the loader:
 
