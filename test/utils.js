@@ -39,7 +39,11 @@ const baseConfig = {
   plugins: [
     new VueLoaderPlugin(),
     new webpack.optimize.ModuleConcatenationPlugin()
-  ]
+  ],
+  // https://github.com/webpack/webpack/issues/10542
+  optimization: {
+    usedExports: false
+  }
 }
 
 function genId (file) {
