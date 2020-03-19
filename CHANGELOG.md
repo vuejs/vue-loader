@@ -1,3 +1,13 @@
+<a name="15.9.1"></a>
+## [15.9.1](https://github.com/vuejs/vue-loader/compare/v15.9.0...v15.9.1) (2020-03-19)
+
+
+### Bug Fixes
+
+* ensure unique `ident` when cloning rules, fix webpack 5 compatibility ([#1653](https://github.com/vuejs/vue-loader/issues/1653)) ([84c34a4](https://github.com/vuejs/vue-loader/commit/84c34a4))
+
+
+
 <a name="15.9.0"></a>
 # [15.9.0](https://github.com/vuejs/vue-loader/compare/v15.8.3...v15.9.0) (2020-02-12)
 
