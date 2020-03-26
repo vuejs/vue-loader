@@ -205,11 +205,7 @@ function match(rule: RawRule, fakeFile: string): Effect[] {
     const clonedRawRule = { ...rule }
     delete clonedRawRule.include
 
-    ruleSet = ruleSetCompiler.compile([
-      {
-        rules: [clonedRawRule]
-      }
-    ])
+    ruleSet = ruleSetCompiler.compile([clonedRawRule])
     matcherCache.set(rule, ruleSet)
   }
 
