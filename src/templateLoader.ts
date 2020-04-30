@@ -24,11 +24,14 @@ const TemplateLoader: webpack.loader.Loader = function(source, inMap) {
   const scopeId = query.scoped ? `data-v-${query.id}` : null
 
   // Load compiler options from template 'compiler' attribute.
-  let compilerOptions = options.compilerOptions;
-  let compiler = options.compiler;
+  let compilerOptions = options.compilerOptions
+  let compiler = options.compiler
   if (query.compiler) {
-    const compilerName = query.compiler as string;
-    if (!options.templateCompilers || !options.templateCompilers[compilerName]) {
+    const compilerName = query.compiler as string
+    if (
+      !options.templateCompilers ||
+      !options.templateCompilers[compilerName]
+    ) {
       const err = `In your webpack config, specify the vue rule:
         {
           test: /\\.vue$/,
@@ -36,16 +39,16 @@ const TemplateLoader: webpack.loader.Loader = function(source, inMap) {
             loader: 'vue-loader',
             options: {
               templateCompilers: {
-                ${compilerName}: {compiler: require('${compilerName}'), compilerOptions: {}}
+                ${compilerName}: [require('${compilerName}'), {}]
               }
             }
           }
-        }`;
+        }`
       loaderContext.emitError(new Error(err))
     } else {
       const info = options.templateCompilers[compilerName]
-      compiler = info.compiler
-      compilerOptions = info.options || {}
+      compiler = info[0]
+      compilerOptions = info[1] || {}
     }
   }
 
