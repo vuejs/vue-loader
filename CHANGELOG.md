@@ -1,3 +1,18 @@
+<a name="15.9.2"></a>
+## [15.9.2](https://github.com/vuejs/vue-loader/compare/v15.9.1...v15.9.2) (2020-05-01)
+
+
+### Bug Fixes
+
+* fix getting shadow root when component is functional ([#1560](https://github.com/vuejs/vue-loader/issues/1560)) ([9a7357a](https://github.com/vuejs/vue-loader/commit/9a7357a))
+
+
+### Documentation
+
+* add DocSearch as recommended by vuepress ([#1662](https://github.com/vuejs/vue-loader/issues/1662)) ([032d56b](https://github.com/vuejs/vue-loader/commit/032d56b))
+
+
+
 <a name="15.9.1"></a>
 ## [15.9.1](https://github.com/vuejs/vue-loader/compare/v15.9.0...v15.9.1) (2020-03-19)
 
