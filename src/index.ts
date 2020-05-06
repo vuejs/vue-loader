@@ -154,7 +154,7 @@ const loader: webpack.loader.Loader = function(source: string) {
       const styleRequest = stringifyRequest(src + query)
       if (style.module) {
         if (!hasCSSModules) {
-          stylesCode += `const cssModules = script.__cssModules = {}`
+          stylesCode += `\nconst cssModules = script.__cssModules = {}`
           hasCSSModules = true
         }
         stylesCode += genCSSModulesCode(
