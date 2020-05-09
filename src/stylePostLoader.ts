@@ -23,4 +23,4 @@ const StylePostLoader: webpack.loader.Loader = function(source, inMap) {
   }
 }
 
-module.exports = StylePostLoader
+export default StylePostLoader

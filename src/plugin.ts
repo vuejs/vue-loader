@@ -1,12 +1,14 @@
-const webpack = require('webpack')
-let VueLoaderPlugin = null
+import * as webpack from 'webpack'
+type VueLoaderPlugin = webpack.Plugin & { NS: string }
 
-if (webpack.version && webpack.version[0] > 4) {
+let Plugin: VueLoaderPlugin
+
+if (webpack.version && webpack.version[0] > '4') {
   // webpack5 and upper
-  VueLoaderPlugin = require('./pluginWebpack5')
+  Plugin = require('./pluginWebpack5').default
 } else {
   // webpack4 and lower
-  VueLoaderPlugin = require('./pluginWebpack4')
+  Plugin = require('./pluginWebpack4')
 }
 
-module.exports = VueLoaderPlugin
+export default Plugin

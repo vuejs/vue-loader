@@ -196,4 +196,4 @@ function cloneRuleForRenderFn(rule: webpack.RuleSetRule) {
   return res
 }
 
-module.exports = VueLoaderPlugin
+export default VueLoaderPlugin

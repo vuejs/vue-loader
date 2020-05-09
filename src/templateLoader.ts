@@ -62,4 +62,4 @@ const TemplateLoader: webpack.loader.Loader = function(source, inMap) {
   loaderContext.callback(null, code, map)
 }
 
-module.exports = TemplateLoader
+export default TemplateLoader

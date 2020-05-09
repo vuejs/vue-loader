@@ -22,8 +22,6 @@ const isNotPitcher = (l: Loader) => l.path !== __filename
 
 const pitcher: webpack.loader.Loader = code => code
 
-module.exports = pitcher
-
 // This pitching loader is responsible for intercepting all vue block requests
 // and transform it into appropriate requests.
 pitcher.pitch = function() {
@@ -126,3 +124,5 @@ function shouldIgnoreCustomBlock(loaders: Loader[]) {
   })
   return actualLoaders.length === 0
 }
+
+export default pitcher
