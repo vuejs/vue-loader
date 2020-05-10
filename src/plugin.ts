@@ -1,7 +1,10 @@
 import * as webpack from 'webpack'
-type VueLoaderPlugin = webpack.Plugin & { NS: string }
+declare class VueLoaderPlugin implements webpack.Plugin {
+  static NS: string
+  apply(compiler: webpack.Compiler): void
+}
 
-let Plugin: VueLoaderPlugin
+let Plugin: typeof VueLoaderPlugin
 
 if (webpack.version && webpack.version[0] > '4') {
   // webpack5 and upper
