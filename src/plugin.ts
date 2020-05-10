@@ -1,4 +1,4 @@
-import * as webpack from 'webpack'
+import webpack from 'webpack'
 declare class VueLoaderPlugin implements webpack.Plugin {
   static NS: string
   apply(compiler: webpack.Compiler): void

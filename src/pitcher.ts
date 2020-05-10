@@ -1,4 +1,4 @@
-import * as webpack from 'webpack'
+import webpack from 'webpack'
 import qs from 'querystring'
 import loaderUtils from 'loader-utils'
 

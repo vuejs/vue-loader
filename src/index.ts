@@ -7,7 +7,7 @@ try {
   )
 }
 
-import * as webpack from 'webpack'
+import webpack from 'webpack'
 import path from 'path'
 import qs from 'querystring'
 import hash from 'hash-sum'
