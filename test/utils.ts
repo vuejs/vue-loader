@@ -5,7 +5,7 @@ import merge from 'webpack-merge'
 // import MiniCssExtractPlugin from "mini-css-extract-plugin";
 import { fs as mfs } from 'memfs'
 
-import { VueLoaderPlugin, VueLoaderOptions } from '../src/index'
+import { VueLoaderPlugin, VueLoaderOptions } from '../dist/index'
 
 const baseConfig: webpack.Configuration = {
   mode: 'development',
@@ -25,7 +25,7 @@ const baseConfig: webpack.Configuration = {
   },
   resolveLoader: {
     alias: {
-      'vue-loader': require.resolve('../src')
+      'vue-loader': require.resolve('../dist')
     }
   },
   module: {
