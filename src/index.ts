@@ -24,7 +24,10 @@ import { selectBlock } from './select'
 import { genHotReloadCode } from './hotReload'
 import { genCSSModulesCode } from './cssModules'
 import { formatError } from './formatError'
+
 import VueLoaderPlugin from './plugin'
+
+export { VueLoaderPlugin }
 
 export interface VueLoaderOptions {
   transformAssetUrls?: SFCTemplateCompileOptions['transformAssetUrls']
@@ -37,7 +40,10 @@ export interface VueLoaderOptions {
 
 let errorEmitted = false
 
-function loader(this: webpack.loader.LoaderContext, source: string) {
+export default function loader(
+  this: webpack.loader.LoaderContext,
+  source: string
+) {
   const loaderContext = this
 
   // check if plugin is installed
@@ -244,6 +250,3 @@ function attrsToQuery(attrs: SFCBlock['attrs'], langFallback?: string): string {
   }
   return query
 }
-
-export { VueLoaderPlugin }
-export default loader
