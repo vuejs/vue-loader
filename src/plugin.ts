@@ -11,7 +11,7 @@ if (webpack.version && webpack.version[0] > '4') {
   Plugin = require('./pluginWebpack5').default
 } else {
   // webpack4 and lower
-  Plugin = require('./pluginWebpack4')
+  Plugin = require('./pluginWebpack4').default
 }
 
 export default Plugin
