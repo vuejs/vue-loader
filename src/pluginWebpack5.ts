@@ -1,6 +1,6 @@
 import qs from 'querystring'
 import { VueLoaderOptions } from './'
-import { RuleSetRule, Compiler } from 'webpack'
+import { RuleSetRule, Compiler, Plugin } from 'webpack'
 
 const id = 'vue-loader-plugin'
 const NS = 'vue-loader'
@@ -77,7 +77,7 @@ const ruleSetCompiler = new RuleSetCompiler([
   new UseEffectRulePlugin()
 ])
 
-class VueLoaderPlugin {
+class VueLoaderPlugin implements Plugin {
   static NS = NS
 
   apply(compiler: Compiler) {
@@ -302,4 +302,4 @@ function cloneRule(
   return res
 }
 
-module.exports = VueLoaderPlugin
+export default VueLoaderPlugin

@@ -7,7 +7,7 @@ try {
   )
 }
 
-import * as webpack from 'webpack'
+import webpack from 'webpack'
 import path from 'path'
 import qs from 'querystring'
 import hash from 'hash-sum'
@@ -25,7 +25,9 @@ import { genHotReloadCode } from './hotReload'
 import { genCSSModulesCode } from './cssModules'
 import { formatError } from './formatError'
 
-const VueLoaderPlugin = require('./plugin')
+import VueLoaderPlugin from './plugin'
+
+export { VueLoaderPlugin }
 
 export interface VueLoaderOptions {
   transformAssetUrls?: SFCTemplateCompileOptions['transformAssetUrls']
@@ -38,7 +40,10 @@ export interface VueLoaderOptions {
 
 let errorEmitted = false
 
-const loader: webpack.loader.Loader = function(source: string) {
+export default function loader(
+  this: webpack.loader.LoaderContext,
+  source: string
+) {
   const loaderContext = this
 
   // check if plugin is installed
@@ -245,6 +250,3 @@ function attrsToQuery(attrs: SFCBlock['attrs'], langFallback?: string): string {
   }
   return query
 }
-
-;(loader as any).VueLoaderPlugin = VueLoaderPlugin
-module.exports = loader

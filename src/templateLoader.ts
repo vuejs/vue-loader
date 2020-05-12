@@ -1,4 +1,4 @@
-import * as webpack from 'webpack'
+import webpack from 'webpack'
 import qs from 'querystring'
 import loaderUtils from 'loader-utils'
 import { VueLoaderOptions } from './'
@@ -62,4 +62,4 @@ const TemplateLoader: webpack.loader.Loader = function(source, inMap) {
   loaderContext.callback(null, code, map)
 }
 
-module.exports = TemplateLoader
+export default TemplateLoader

@@ -1,6 +1,6 @@
 import qs from 'querystring'
 import { compileStyle } from '@vue/compiler-sfc'
-import * as webpack from 'webpack'
+import webpack from 'webpack'
 
 // This is a post loader that handles scoped CSS transforms.
 // Injected right before css-loader by the global pitcher (../pitch.js)
@@ -23,4 +23,4 @@ const StylePostLoader: webpack.loader.Loader = function(source, inMap) {
   }
 }
 
-module.exports = StylePostLoader
+export default StylePostLoader

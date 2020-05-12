@@ -11,9 +11,11 @@
   "scripts": {
     "dev": "tsc --watch",
     "build": "tsc",
+    "pretest": "tsc",
+    "test": "jest",
     "dev-example": "webpack-dev-server --config example/webpack.config.js --inline --hot",
     "build-example": "rm -rf example/dist && webpack --config example/webpack.config.js --env.prod",
-    "lint": "prettier --write --parser typescript \"src/**/*.ts\"",
+    "lint": "prettier --write --parser typescript \"{src,test}/**/*.ts\"",
     "prepublishOnly": "tsc"
   },
   "gitHooks": {
@@ -30,6 +32,7 @@
     ]
   },
   "dependencies": {
+    "@types/mini-css-extract-plugin": "^0.9.1",
     "chalk": "^3.0.0",
     "hash-sum": "^2.0.0",
     "loader-utils": "^1.2.3",
@@ -41,28 +44,40 @@
     "@babel/preset-env": "^7.7.7",
     "@types/estree": "^0.0.42",
     "@types/hash-sum": "^1.0.0",
+    "@types/jest": "^25.2.1",
     "@types/loader-utils": "^1.1.3",
     "@types/webpack": "^4.41.0",
+    "@types/webpack-merge": "^4.1.5",
     "@vue/compiler-sfc": "^3.0.0-beta.9",
     "babel-loader": "^8.0.6",
     "cache-loader": "^4.1.0",
     "css-loader": "^3.3.2",
     "file-loader": "^5.0.2",
-    "jest": "^24.9.0",
+    "jest": "^25.5.4",
     "lint-staged": "^9.5.0",
+    "memfs": "^3.1.2",
     "mini-css-extract-plugin": "^0.8.0",
     "prettier": "^1.19.1",
     "pug": "^2.0.4",
     "pug-plain-loader": "^1.0.0",
     "stylus": "^0.54.7",
     "stylus-loader": "^3.0.2",
-    "ts-jest": "^24.2.0",
+    "ts-jest": "^25.5.1",
     "typescript": "^3.7.3",
     "url-loader": "^3.0.0",
     "vue": "^3.0.0-beta.9",
     "webpack": "^4.41.2",
     "webpack-cli": "^3.3.10",
     "webpack-dev-server": "^3.9.0",
+    "webpack-merge": "^4.2.2",
     "yorkie": "^2.0.0"
+  },
+  "jest": {
+    "preset": "ts-jest",
+    "testEnvironment": "node",
+    "testPathIgnorePatterns": [
+      "<rootDir>/dist/",
+      "<rootDir>/node_modules/"
+    ]
   }
 }

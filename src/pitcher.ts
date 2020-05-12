@@ -1,4 +1,4 @@
-import * as webpack from 'webpack'
+import webpack from 'webpack'
 import qs from 'querystring'
 import loaderUtils from 'loader-utils'
 
@@ -21,8 +21,6 @@ const isCacheLoader = (l: Loader) => /(\/|\\|@)cache-loader/.test(l.path)
 const isNotPitcher = (l: Loader) => l.path !== __filename
 
 const pitcher: webpack.loader.Loader = code => code
-
-module.exports = pitcher
 
 // This pitching loader is responsible for intercepting all vue block requests
 // and transform it into appropriate requests.
@@ -126,3 +124,5 @@ function shouldIgnoreCustomBlock(loaders: Loader[]) {
   })
   return actualLoaders.length === 0
 }
+
+export default pitcher

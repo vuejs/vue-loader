@@ -1,5 +1,5 @@
 import qs from 'querystring'
-import * as webpack from 'webpack'
+import webpack from 'webpack'
 import { VueLoaderOptions } from './'
 
 const RuleSet = require('webpack/lib/RuleSet')
@@ -196,4 +196,4 @@ function cloneRuleForRenderFn(rule: webpack.RuleSetRule) {
   return res
 }
 
-module.exports = VueLoaderPlugin
+export default VueLoaderPlugin
