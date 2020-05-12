@@ -12,7 +12,6 @@ jobs:
       - restore_cache:
           keys:
           - v1-dependencies-{{ checksum "yarn.lock" }}
-          - v1-dependencies-  # used if checksum fails
 
       - run: yarn install
 
