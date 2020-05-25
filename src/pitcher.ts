@@ -125,4 +125,4 @@ function shouldIgnoreCustomBlock(loaders: Loader[]) {
   return actualLoaders.length === 0
 }
 
-export default pitcher
+export = pitcher
