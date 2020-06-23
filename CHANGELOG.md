@@ -1,3 +1,13 @@
+<a name="15.9.3"></a>
+## [15.9.3](https://github.com/vuejs/vue-loader/compare/v15.9.2...v15.9.3) (2020-06-23)
+
+
+### Bug Fixes
+
+* skip matching rule with 'enforce' ([e7b2b11](https://github.com/vuejs/vue-loader/commit/e7b2b11)), closes [#1680](https://github.com/vuejs/vue-loader/issues/1680)
+
+
+
 <a name="15.9.2"></a>
 ## [15.9.2](https://github.com/vuejs/vue-loader/compare/v15.9.1...v15.9.2) (2020-05-01)
 
