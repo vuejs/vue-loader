@@ -241,6 +241,20 @@ test('support rules with oneOf', async () => {
   })
 })
 
+test('should work with eslint loader', async () => {
+  // TODO:
+  return new Promise(resolve => {
+    bundle({
+      entry: 'basic.vue',
+      modify: config => {
+        config.module.rules.unshift({
+          test: /\.vue$/, loader: 'vue-loader', enforce: 'pre'
+        })
+      }
+    }, () => resolve())
+  })
+})
+
 // TODO
 // test('multiple rule definitions', done => {
 //   mockBundleAndRun({
