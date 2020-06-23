@@ -96,7 +96,10 @@ class VueLoaderPlugin implements Plugin {
     let vueRules: Effect[] = []
 
     for (const rawRule of rules) {
-      // skip the `include` check when locating the vue rule
+      // skip rules with 'enforce'. eg. rule for eslint-loader
+      if (rawRule.enforce) {
+        continue
+      }
       vueRules = match(rawRule, 'foo.vue')
       if (!vueRules.length) {
         vueRules = match(rawRule, 'foo.vue.html')
