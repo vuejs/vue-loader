@@ -23,13 +23,53 @@ const TemplateLoader: webpack.loader.Loader = function(source, inMap) {
   const query = qs.parse(loaderContext.resourceQuery.slice(1))
   const scopeId = query.scoped ? `data-v-${query.id}` : null
 
+  // Load compiler options from template 'compiler' attribute.
+  let compilerOptions = options.compilerOptions
+  let compiler = options.compiler
+
+  const compilerName = query.compiler
+  if (compilerName) {
+    if (Array.isArray(compilerName)) {
+      loaderContext.emitError(
+        new Error('You can only specify the compiler attribute once!')
+      )
+    } else if (
+      !options.templateCompilers ||
+      !options.templateCompilers[compilerName]
+    ) {
+      loaderContext.emitError(
+        new Error(`In your webpack config, specify the vue rule:
+        {
+          test: /\\.vue$/,
+          use: {
+            loader: 'vue-loader',
+            options: {
+              templateCompilers: {
+                ${compilerName}: [require('${compilerName}'), {}]
+              }
+            }
+          }
+        }`)
+      )
+    } else {
+      const info = options.templateCompilers[compilerName]
+      if (Array.isArray(info)) {
+        compiler = info[0]
+        compilerOptions = info[1] || {}
+      } else {
+        compiler = info
+        compilerOptions = {}
+      }
+    }
+  }
+
   const compiled = compileTemplate({
     source,
     inMap,
     filename: loaderContext.resourcePath,
-    compiler: options.compiler,
+    compiler: compiler,
     compilerOptions: {
-      ...options.compilerOptions,
+      ...compilerOptions,
       scopeId
     },
     transformAssetUrls: options.transformAssetUrls || true
