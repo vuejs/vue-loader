@@ -39,7 +39,9 @@ export interface VueLoaderOptions {
   appendExtension?: boolean
 }
 
-export type TemplateCompilerOptions = [TemplateCompiler, CompilerOptions]
+export type TemplateCompilerOptions =
+  | TemplateCompiler
+  | [TemplateCompiler, CompilerOptions]
 
 let errorEmitted = false
 

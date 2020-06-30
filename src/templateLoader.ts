@@ -26,13 +26,19 @@ const TemplateLoader: webpack.loader.Loader = function(source, inMap) {
   // Load compiler options from template 'compiler' attribute.
   let compilerOptions = options.compilerOptions
   let compiler = options.compiler
-  if (query.compiler) {
-    const compilerName = query.compiler as string
-    if (
+
+  const compilerName = query.compiler
+  if (compilerName) {
+    if (Array.isArray(compilerName)) {
+      loaderContext.emitError(
+        new Error('You can only specify the compiler attribute once!')
+      )
+    } else if (
       !options.templateCompilers ||
       !options.templateCompilers[compilerName]
     ) {
-      const err = `In your webpack config, specify the vue rule:
+      loaderContext.emitError(
+        new Error(`In your webpack config, specify the vue rule:
         {
           test: /\\.vue$/,
           use: {
@@ -43,12 +49,17 @@ const TemplateLoader: webpack.loader.Loader = function(source, inMap) {
               }
             }
           }
-        }`
-      loaderContext.emitError(new Error(err))
+        }`)
+      )
     } else {
       const info = options.templateCompilers[compilerName]
-      compiler = info[0]
-      compilerOptions = info[1] || {}
+      if (Array.isArray(info)) {
+        compiler = info[0]
+        compilerOptions = info[1] || {}
+      } else {
+        compiler = info
+        compilerOptions = {}
+      }
     }
   }
 
