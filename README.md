@@ -6,7 +6,7 @@
 
 ## What is Vue Loader?
 
-`vue-loader` is a loader for [webpack](https://webpack.js.org/) that allows you to author Vue components in a format called [Single-File Components (SFCs)](./docs/spec.md):
+`vue-loader` is a loader for [webpack](https://webpack.js.org/) that allows you to author Vue components in a format called [Single-File Components (SFCs)](https://github.com/vuejs/vue-loader/blob/master/docs/spec.md):
 
 ``` vue
 <template>
