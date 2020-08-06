@@ -95,6 +95,8 @@ Note that `sass-loader` processes the non-indent-based `scss` syntax by default.
   ]
 }
 ```
+**Pay attention**: this makes the variables & files accessable in all Vue components in the project, increasing the bundle size significantly (based on the amount of variables/ files you add in the prependData).
+
 
 ## LESS
 
