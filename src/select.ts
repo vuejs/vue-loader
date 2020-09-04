@@ -22,7 +22,7 @@ export function selectBlock(
 
   // script
   if (query.type === `script`) {
-    const script = descriptor.script!
+    const script = (descriptor as any).scriptCompiled
     if (appendExtension) {
       loaderContext.resourcePath += '.' + (script.lang || 'js')
     }

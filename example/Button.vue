@@ -1,4 +1,5 @@
 <template>
+  <p>prop foo: {{ foo }}</p>
   <button @click="inc">{{ count }}</button>
   <slot/>
 </template>
@@ -7,7 +8,10 @@
 import { ref } from 'vue'
 
 export default {
-  setup() {
+  props: {
+    foo: String
+  },
+  setup(props) {
     const count = ref(0)
     return {
       count,

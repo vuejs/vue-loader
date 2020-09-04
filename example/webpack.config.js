@@ -1,7 +1,8 @@
 const fs = require('fs')
 const path = require('path')
+const webpack = require('webpack')
 const hash = require('hash-sum')
-const VueLoaderPlugin = require('../dist/plugin')
+const VueLoaderPlugin = require('../dist/plugin').default
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 module.exports = (env = {}) => {
@@ -86,6 +87,10 @@ module.exports = (env = {}) => {
       new VueLoaderPlugin(),
       new MiniCssExtractPlugin({
         filename: '[name].css'
+      }),
+      new webpack.DefinePlugin({
+        __VUE_OPTIONS_API__: true,
+        __VUE_PROD_DEVTOOLS__: false
       })
     ],
     optimization: {

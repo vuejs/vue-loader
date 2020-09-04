@@ -14,11 +14,14 @@ import hash from 'hash-sum'
 import loaderUtils from 'loader-utils'
 import {
   parse,
+  compileScript,
   TemplateCompiler,
   CompilerOptions,
   SFCBlock,
   SFCTemplateCompileOptions,
-  SFCStyleBlock
+  SFCScriptCompileOptions,
+  SFCStyleBlock,
+  SFCScriptBlock
 } from '@vue/compiler-sfc'
 import { selectBlock } from './select'
 import { genHotReloadCode } from './hotReload'
@@ -30,6 +33,8 @@ import VueLoaderPlugin from './plugin'
 export { VueLoaderPlugin }
 
 export interface VueLoaderOptions {
+  // https://babeljs.io/docs/en/next/babel-parser#plugins
+  babelParserPlugins?: SFCScriptCompileOptions['babelParserPlugins']
   transformAssetUrls?: SFCTemplateCompileOptions['transformAssetUrls']
   compiler?: TemplateCompiler | string
   compilerOptions?: CompilerOptions
@@ -121,6 +126,29 @@ export default function loader(
     !!(descriptor.script || descriptor.template) &&
     options.hotReload !== false
 
+  // script
+  let script: SFCScriptBlock | undefined
+  let scriptImport = `const script = {}`
+  if (descriptor.script || descriptor.scriptSetup) {
+    try {
+      script = (descriptor as any).scriptCompiled = compileScript(descriptor, {
+        babelParserPlugins: options.babelParserPlugins
+      })
+    } catch (e) {
+      loaderContext.emitError(e)
+    }
+    if (script) {
+      const src = script.src || resourcePath
+      const attrsQuery = attrsToQuery(script.attrs, 'js')
+      const query = `?vue&type=script${attrsQuery}${resourceQuery}`
+      const scriptRequest = stringifyRequest(src + query)
+      scriptImport =
+        `import script from ${scriptRequest}\n` +
+        // support named exports
+        `export * from ${scriptRequest}`
+    }
+  }
+
   // template
   let templateImport = ``
   let templateRequest
@@ -129,20 +157,12 @@ export default function loader(
     const idQuery = `&id=${id}`
     const scopedQuery = hasScoped ? `&scoped=true` : ``
     const attrsQuery = attrsToQuery(descriptor.template.attrs)
-    const query = `?vue&type=template${idQuery}${scopedQuery}${attrsQuery}${resourceQuery}`
+    const bindingsQuery = script
+      ? `&bindings=${JSON.stringify(script.bindings)}`
+      : ``
+    const query = `?vue&type=template${idQuery}${scopedQuery}${attrsQuery}${bindingsQuery}${resourceQuery}`
     templateRequest = stringifyRequest(src + query)
     templateImport = `import { render } from ${templateRequest}`
-  }
-
-  // script
-  let scriptImport = `const script = {}`
-  if (descriptor.script) {
-    const src = descriptor.script.src || resourcePath
-    const attrsQuery = attrsToQuery(descriptor.script.attrs, 'js')
-    const query = `?vue&type=script${attrsQuery}${resourceQuery}`
-    const scriptRequest = stringifyRequest(src + query)
-    scriptImport =
-      `import script from ${scriptRequest}\n` + `export * from ${scriptRequest}` // support named exports
   }
 
   // styles

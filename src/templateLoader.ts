@@ -37,7 +37,8 @@ const TemplateLoader: webpack.loader.Loader = function(source, inMap) {
     compiler,
     compilerOptions: {
       ...options.compilerOptions,
-      scopeId
+      scopeId,
+      bindingMetadata: JSON.parse(query.bindings as string)
     },
     transformAssetUrls: options.transformAssetUrls || true
   })

@@ -3,19 +3,22 @@
   <div>
     {{ count }}
     <span>{{ count }}</span>
-    <Button><span>slot</span></Button>
+    <Button foo="hello!"><span>slot</span></Button>
+    <ScriptSetup/>
   </div>
 </template>
 
 <script>
 import Button from './Button.vue'
+import ScriptSetup from './ScriptSetup.vue'
 
 export default {
   data() {
     return { count: 0 }
   },
   components: {
-    Button
+    Button,
+    ScriptSetup
   }
 }
 </script>
