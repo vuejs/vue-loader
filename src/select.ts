@@ -22,7 +22,10 @@ export function selectBlock(
 
   // script
   if (query.type === `script`) {
-    const script = (descriptor as any).scriptCompiled
+    // FIXME: #1723
+    // I still don't know when & why `scriptCompiled` would be empty
+    // need to work out a better fix later
+    const script = (descriptor as any).scriptCompiled || descriptor.script
     if (appendExtension) {
       loaderContext.resourcePath += '.' + (script.lang || 'js')
     }
