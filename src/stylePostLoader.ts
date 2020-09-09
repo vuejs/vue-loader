@@ -13,6 +13,7 @@ const StylePostLoader: webpack.loader.Loader = function(source, inMap) {
     id: `data-v-${query.id}`,
     map: inMap,
     scoped: !!query.scoped,
+    vars: !!query.vars,
     trim: true
   })
 
