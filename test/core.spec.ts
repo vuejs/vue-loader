@@ -7,3 +7,7 @@ test('basic', async () => {
 test('script setup', async () => {
   await bundle({ entry: 'ScriptSetup.vue' })
 })
+
+test('without script block', async () => {
+  await bundle({ entry: 'no-script.vue' })
+})
