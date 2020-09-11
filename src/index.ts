@@ -200,7 +200,7 @@ export default function loader(
     templateImport,
     scriptImport,
     stylesCode,
-    templateImport ? `script.render = render` : ``
+    templateImport ? `script.${isServer ? `ssrRender` : `render`} = render` : ``
   ]
     .filter(Boolean)
     .join('\n')
