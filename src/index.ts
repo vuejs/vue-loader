@@ -152,6 +152,7 @@ export default function loader(
   // template
   let templateImport = ``
   let templateRequest
+  const renderFnName = isServer ? `ssrRender` : `render`
   if (descriptor.template) {
     const src = descriptor.template.src || resourcePath
     const idQuery = `&id=${id}`
@@ -162,7 +163,7 @@ export default function loader(
       : ``
     const query = `?vue&type=template${idQuery}${scopedQuery}${attrsQuery}${bindingsQuery}${resourceQuery}`
     templateRequest = stringifyRequest(src + query)
-    templateImport = `import { render } from ${templateRequest}`
+    templateImport = `import { ${renderFnName} } from ${templateRequest}`
   }
 
   // styles
@@ -200,7 +201,7 @@ export default function loader(
     templateImport,
     scriptImport,
     stylesCode,
-    templateImport ? `script.${isServer ? `ssrRender` : `render`} = render` : ``
+    templateImport ? `script.${renderFnName} = ${renderFnName}` : ``
   ]
     .filter(Boolean)
     .join('\n')
