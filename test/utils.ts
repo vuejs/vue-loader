@@ -2,8 +2,10 @@
 import path from 'path'
 import webpack from 'webpack'
 import merge from 'webpack-merge'
-// import MiniCssExtractPlugin from "mini-css-extract-plugin";
+import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import { fs as mfs } from 'memfs'
+
+import { JSDOM, VirtualConsole } from 'jsdom'
 
 import { VueLoaderPlugin, VueLoaderOptions } from '../dist/index'
 
@@ -12,73 +14,73 @@ const baseConfig: webpack.Configuration = {
   devtool: false,
   output: {
     path: '/',
-    filename: 'test.build.js'
-  },
-  resolve: {
-    alias: {
-      // this isn't technically needed, since the default `vue` entry for bundlers
-      // is a simple `export * from '@vue/runtime-dom`. However having this
-      // extra re-export somehow causes webpack to always invalidate the module
-      // on the first HMR update and causes the page to reload.
-      vue: '@vue/runtime-dom'
-    }
+    filename: 'test.build.js',
   },
   resolveLoader: {
     alias: {
-      'vue-loader': require.resolve('../dist')
-    }
+      'vue-loader': require.resolve('../dist'),
+    },
   },
   module: {
     rules: [
       {
         test: /\.vue$/,
-        use: 'vue-loader'
+        use: 'vue-loader',
       },
       {
         test: /\.png$/,
         use: {
           loader: 'url-loader',
-          options: { limit: 8192 }
-        }
+          options: { limit: 8192 },
+        },
       },
       {
         test: /\.css$/,
         use: [
-          // {
-          //   loader: MiniCssExtractPlugin.loader,
-          //   options: { hmr: true }
-          // },
-          'css-loader'
-        ]
-      }
-    ]
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: { hmr: true },
+          },
+          'css-loader',
+        ],
+      },
+    ],
   },
   plugins: [
-    new VueLoaderPlugin()
-    // new MiniCssExtractPlugin({
-    //   filename: '[name].css'
-    // })
-  ]
+    new VueLoaderPlugin(),
+    new webpack.DefinePlugin({
+      __VUE_OPTIONS_API__: true,
+      __VUE_PROD_DEVTOOLS__: false,
+    }),
+    new MiniCssExtractPlugin({
+      filename: '[name].css',
+    }),
+  ],
 }
 
 type BundleOptions = webpack.Configuration & {
   vue?: VueLoaderOptions
   modify?: (config: webpack.Configuration) => void
-  suppressJSDOMConsole?: boolean
 }
 
-export function bundle(options: BundleOptions, wontThrowError?: boolean) {
+export function bundle(
+  options: BundleOptions,
+  wontThrowError?: boolean
+): Promise<{
+  code: string
+  stats: webpack.Stats
+}> {
   let config: BundleOptions = merge({}, baseConfig, options)
 
   if (config.vue && config.module) {
     const vueOptions = options.vue
     delete config.vue
     const vueIndex = config.module.rules.findIndex(
-      r => r.test instanceof RegExp && r.test.test('.vue')
+      (r) => r.test instanceof RegExp && r.test.test('.vue')
     )
     const vueRule = config.module.rules[vueIndex]
     config.module.rules[vueIndex] = Object.assign({}, vueRule, {
-      options: vueOptions
+      options: vueOptions,
     })
   }
 
@@ -88,9 +90,9 @@ export function bundle(options: BundleOptions, wontThrowError?: boolean) {
       entry: require.resolve('./fixtures/entry'),
       resolve: {
         alias: {
-          '~target': path.resolve(__dirname, './fixtures', vueFile)
-        }
-      }
+          '~target': path.resolve(__dirname, './fixtures', vueFile),
+        },
+      },
     })
   }
 
@@ -102,7 +104,7 @@ export function bundle(options: BundleOptions, wontThrowError?: boolean) {
   const webpackCompiler = webpack(config)
   webpackCompiler.outputFileSystem = Object.assign(
     {
-      join: path.join.bind(path)
+      join: path.join.bind(path),
     },
     mfs
   )
@@ -113,7 +115,7 @@ export function bundle(options: BundleOptions, wontThrowError?: boolean) {
       if (!wontThrowError) {
         expect(err).toBeNull()
         if (errors && errors.length) {
-          errors.forEach(error => {
+          errors.forEach((error) => {
             console.error(error.message)
           })
         }
@@ -125,9 +127,47 @@ export function bundle(options: BundleOptions, wontThrowError?: boolean) {
       } else {
         resolve({
           code: mfs.readFileSync('/test.build.js').toString(),
-          stats
+          stats,
         })
       }
     })
   })
+}
+
+export async function mockBundleAndRun(
+  options: BundleOptions,
+  wontThrowError?: boolean
+) {
+  const { code, stats } = await bundle(options, wontThrowError)
+
+  let jsdomError
+  const dom = new JSDOM(
+    `<!DOCTYPE html><html><head></head><body></body></html>`,
+    {
+      runScripts: 'outside-only',
+      virtualConsole: new VirtualConsole(),
+    }
+  )
+  try {
+    dom.window.eval(code)
+  } catch (e) {
+    console.error(`JSDOM error:\n${e.stack}`)
+    jsdomError = e
+  }
+
+  const { window } = dom
+  const { module, exports, instance } = window
+
+  return {
+    window,
+
+    module,
+    exports,
+    instance,
+
+    code,
+    stats,
+
+    jsdomError,
+  }
 }

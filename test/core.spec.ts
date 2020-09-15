@@ -1,13 +1,18 @@
-import { bundle } from './utils'
+import { mockBundleAndRun } from './utils'
 
 test('basic', async () => {
-  await bundle({ entry: 'basic.vue' })
+  const { instance } = await mockBundleAndRun({ entry: 'basic.vue' })
+
+  // <h2 class="red">{{msg}}</h2>
+  expect(instance.$el.tagName).toBe('H2')
+  expect(instance.$el.className).toBe('red')
+  expect(instance.$el.textContent).toBe('Hello from Component A!')
 })
 
 test('script setup', async () => {
-  await bundle({ entry: 'ScriptSetup.vue' })
+  await mockBundleAndRun({ entry: 'ScriptSetup.vue' })
 })
 
 test('without script block', async () => {
-  await bundle({ entry: 'no-script.vue' })
+  await mockBundleAndRun({ entry: 'no-script.vue' })
 })

@@ -14,6 +14,7 @@
     "strictNullChecks": true,
     "noImplicitAny": true,
     "removeComments": false,
+    "skipLibCheck": true,
     "lib": [
       "es6",
       "es7"
