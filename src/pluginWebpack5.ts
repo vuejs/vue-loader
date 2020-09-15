@@ -74,7 +74,7 @@ const ruleSetCompiler = new RuleSetCompiler([
   new BasicEffectRulePlugin('sideEffects'),
   new BasicEffectRulePlugin('parser'),
   new BasicEffectRulePlugin('resolve'),
-  new UseEffectRulePlugin()
+  new UseEffectRulePlugin(),
 ])
 
 class VueLoaderPlugin implements Plugin {
@@ -82,7 +82,7 @@ class VueLoaderPlugin implements Plugin {
 
   apply(compiler: Compiler) {
     // add NS marker so that the loader can detect and report missing plugin
-    compiler.hooks.compilation.tap(id, compilation => {
+    compiler.hooks.compilation.tap(id, (compilation) => {
       NormalModule.getCompilationHooks(compilation).loader.tap(
         id,
         (loaderContext: any) => {
@@ -123,11 +123,11 @@ class VueLoaderPlugin implements Plugin {
 
     // get the normlized "use" for vue files
     const vueUse = vueRules
-      .filter(rule => rule.type === 'use')
-      .map(rule => rule.value)
+      .filter((rule) => rule.type === 'use')
+      .map((rule) => rule.value)
 
     // get vue-loader options
-    const vueLoaderUseIndex = vueUse.findIndex(u => {
+    const vueLoaderUseIndex = vueUse.findIndex((u) => {
       return /^vue-loader|(\/|\\|@)vue-loader/.test(u.loader)
     })
 
@@ -149,8 +149,8 @@ class VueLoaderPlugin implements Plugin {
     // that targets the corresponding language blocks in *.vue files.
     const refs = new Map()
     const clonedRules = rules
-      .filter(r => r !== rawVueRule)
-      .map(rawRule =>
+      .filter((r) => r !== rawVueRule)
+      .map((rawRule) =>
         cloneRule(rawRule, refs, langBlockRuleCheck, langBlockRuleResource)
       )
 
@@ -166,7 +166,7 @@ class VueLoaderPlugin implements Plugin {
         const parsed = qs.parse(query.slice(1))
         return parsed.vue != null && parsed.type === 'template'
       },
-      options: vueLoaderOptions
+      options: vueLoaderOptions,
     }
 
     // for each rule that matches plain .js files, also create a clone and
@@ -174,8 +174,8 @@ class VueLoaderPlugin implements Plugin {
     // compiled vue render functions receive the same treatment as user code
     // (mostly babel)
     const jsRulesForRenderFn = rules
-      .filter(r => r !== rawVueRule && match(r, 'test.js').length > 0)
-      .map(rawRule => cloneRule(rawRule, refs, jsRuleCheck, jsRuleResource))
+      .filter((r) => r !== rawVueRule && match(r, 'test.js').length > 0)
+      .map((rawRule) => cloneRule(rawRule, refs, jsRuleCheck, jsRuleResource))
 
     // global pitcher (responsible for injecting template compiler loader & CSS
     // post loader)
@@ -184,7 +184,7 @@ class VueLoaderPlugin implements Plugin {
       resourceQuery: (query: string) => {
         const parsed = qs.parse(query.slice(1))
         return parsed.vue != null
-      }
+      },
     }
 
     // replace original rules
@@ -193,7 +193,7 @@ class VueLoaderPlugin implements Plugin {
       ...jsRulesForRenderFn,
       templateCompilerRule,
       ...clonedRules,
-      ...rules
+      ...rules,
     ]
   }
 }
@@ -212,7 +212,7 @@ function match(rule: RawRule, fakeFile: string): Effect[] {
   }
 
   return ruleSet.exec({
-    resource: fakeFile
+    resource: fakeFile,
   })
 }
 
@@ -252,7 +252,7 @@ function cloneRule(
   // do not process rule with enforce
   if (!rawRule.enforce) {
     const ruleUse = compiledRule.effects
-      .filter(effect => effect.type === 'use')
+      .filter((effect) => effect.type === 'use')
       .map((effect: UseEffect) => effect.value)
     // fix conflict with config.loader and config.options when using config.use
     delete rawRule.loader
@@ -285,19 +285,19 @@ function cloneRule(
         }
       }
       return true
-    }
+    },
   }
 
   delete res.test
 
   if (rawRule.rules) {
-    res.rules = rawRule.rules.map(rule =>
+    res.rules = rawRule.rules.map((rule) =>
       cloneRule(rule, refs, ruleCheck, ruleResource)
     )
   }
 
   if (rawRule.oneOf) {
-    res.oneOf = rawRule.oneOf.map(rule =>
+    res.oneOf = rawRule.oneOf.map((rule) =>
       cloneRule(rule, refs, ruleCheck, ruleResource)
     )
   }

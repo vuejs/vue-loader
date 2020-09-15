@@ -5,7 +5,7 @@ import webpack from 'webpack'
 // This is a post loader that handles scoped CSS transforms.
 // Injected right before css-loader by the global pitcher (../pitch.js)
 // for any <style scoped> selection requests initiated from within vue files.
-const StylePostLoader: webpack.loader.Loader = function(source, inMap) {
+const StylePostLoader: webpack.loader.Loader = function (source, inMap) {
   const query = qs.parse(this.resourceQuery.slice(1))
   const { code, map, errors } = compileStyle({
     source: source as string,
@@ -14,7 +14,7 @@ const StylePostLoader: webpack.loader.Loader = function(source, inMap) {
     map: inMap,
     scoped: !!query.scoped,
     vars: !!query.vars,
-    trim: true
+    trim: true,
   })
 
   if (errors.length) {

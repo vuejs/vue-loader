@@ -21,7 +21,7 @@ import {
   SFCTemplateCompileOptions,
   SFCScriptCompileOptions,
   SFCStyleBlock,
-  SFCScriptBlock
+  SFCScriptBlock,
 } from '@vue/compiler-sfc'
 import { selectBlock } from './select'
 import { genHotReloadCode } from './hotReload'
@@ -75,7 +75,7 @@ export default function loader(
     sourceMap,
     rootContext,
     resourcePath,
-    resourceQuery
+    resourceQuery,
   } = loaderContext
 
   const rawQuery = resourceQuery.slice(1)
@@ -88,11 +88,11 @@ export default function loader(
 
   const { descriptor, errors } = parse(source, {
     filename: resourcePath,
-    sourceMap
+    sourceMap,
   })
 
   if (errors.length) {
-    errors.forEach(err => {
+    errors.forEach((err) => {
       formatError(err, source, resourcePath)
       loaderContext.emitError(err)
     })
@@ -119,7 +119,7 @@ export default function loader(
   const id = hash(isProduction ? shortFilePath + '\n' + source : shortFilePath)
 
   // feature information
-  const hasScoped = descriptor.styles.some(s => s.scoped)
+  const hasScoped = descriptor.styles.some((s) => s.scoped)
   const needsHotReload =
     !isServer &&
     !isProduction &&
@@ -132,7 +132,7 @@ export default function loader(
   if (descriptor.script || descriptor.scriptSetup) {
     try {
       script = (descriptor as any).scriptCompiled = compileScript(descriptor, {
-        babelParserPlugins: options.babelParserPlugins
+        babelParserPlugins: options.babelParserPlugins,
       })
     } catch (e) {
       loaderContext.emitError(e)
@@ -201,7 +201,7 @@ export default function loader(
     templateImport,
     scriptImport,
     stylesCode,
-    templateImport ? `script.${renderFnName} = ${renderFnName}` : ``
+    templateImport ? `script.${renderFnName} = ${renderFnName}` : ``,
   ]
     .filter(Boolean)
     .join('\n')

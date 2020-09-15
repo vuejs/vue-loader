@@ -12,7 +12,7 @@ class VueLoaderPlugin implements webpack.Plugin {
 
   apply(compiler: webpack.Compiler) {
     // inject NS for plugin installation check in the main loader
-    compiler.hooks.compilation.tap(id, compilation => {
+    compiler.hooks.compilation.tap(id, (compilation) => {
       compilation.hooks.normalModuleLoader.tap(id, (loaderContext: any) => {
         loaderContext[NS] = true
       })
@@ -45,7 +45,7 @@ class VueLoaderPlugin implements webpack.Plugin {
     // get the normlized "use" for vue files
     const vueUse = vueRule.use as webpack.RuleSetLoader[]
     // get vue-loader options
-    const vueLoaderUseIndex = vueUse.findIndex(u => {
+    const vueLoaderUseIndex = vueUse.findIndex((u) => {
       return /^vue-loader|(\/|\\|@)vue-loader/.test(u.loader || '')
     })
 
@@ -62,7 +62,7 @@ class VueLoaderPlugin implements webpack.Plugin {
 
     // for each user rule (expect the vue rule), create a cloned rule
     // that targets the corresponding language blocks in *.vue files.
-    const clonedRules = rules.filter(r => r !== vueRule).map(cloneRule)
+    const clonedRules = rules.filter((r) => r !== vueRule).map(cloneRule)
 
     // rule for template compiler
     const templateCompilerRule = {
@@ -71,7 +71,7 @@ class VueLoaderPlugin implements webpack.Plugin {
         const parsed = qs.parse(query.slice(1))
         return parsed.vue != null && parsed.type === 'template'
       },
-      options: vueLoaderOptions
+      options: vueLoaderOptions,
     }
 
     // for each rule that matches plain .js files, also create a clone and
@@ -80,7 +80,7 @@ class VueLoaderPlugin implements webpack.Plugin {
     // (mostly babel)
     const matchesJS = createMatcher(`test.js`)
     const jsRulesForRenderFn = rules
-      .filter(r => r !== vueRule && matchesJS(r))
+      .filter((r) => r !== vueRule && matchesJS(r))
       .map(cloneRuleForRenderFn)
 
     // pitcher for block requests (for injecting stylePostLoader and deduping
@@ -90,7 +90,7 @@ class VueLoaderPlugin implements webpack.Plugin {
       resourceQuery: (query: string) => {
         const parsed = qs.parse(query.slice(1))
         return parsed.vue != null
-      }
+      },
     }
 
     // replace original rules
@@ -99,7 +99,7 @@ class VueLoaderPlugin implements webpack.Plugin {
       ...jsRulesForRenderFn,
       templateCompilerRule,
       ...clonedRules,
-      ...rules
+      ...rules,
     ]
   }
 }
@@ -145,7 +145,7 @@ function cloneRule(rule: webpack.RuleSetRule) {
         return false
       }
       return true
-    }
+    },
   }
 
   if (rule.rules) {
@@ -182,7 +182,7 @@ function cloneRuleForRenderFn(rule: webpack.RuleSetRule) {
         return false
       }
       return true
-    }
+    },
   }
 
   if (rule.rules) {

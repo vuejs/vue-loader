@@ -20,11 +20,11 @@ const isCSSLoader = (l: Loader) => /(\/|\\|@)css-loader/.test(l.path)
 const isCacheLoader = (l: Loader) => /(\/|\\|@)cache-loader/.test(l.path)
 const isNotPitcher = (l: Loader) => l.path !== __filename
 
-const pitcher: webpack.loader.Loader = code => code
+const pitcher: webpack.loader.Loader = (code) => code
 
 // This pitching loader is responsible for intercepting all vue block requests
 // and transform it into appropriate requests.
-export const pitch = function() {
+export const pitch = function () {
   const context = this as webpack.loader.LoaderContext
   const rawLoaders = context.loaders.filter(isNotPitcher)
   let loaders = rawLoaders
@@ -47,7 +47,7 @@ export const pitch = function() {
   // and the cloned rule would match a source import request or a
   // resourceQuery-only rule that intends to target a custom block with no lang
   const seen = new Map()
-  loaders = loaders.filter(loader => {
+  loaders = loaders.filter((loader) => {
     const identifier =
       typeof loader === 'string'
         ? loader
@@ -100,7 +100,7 @@ function genProxyModule(
 }
 
 function genRequest(loaders: Loader[], context: webpack.loader.LoaderContext) {
-  const loaderStrings = loaders.map(loader => {
+  const loaderStrings = loaders.map((loader) => {
     return typeof loader === 'string' ? loader : loader.request
   })
   const resource = context.resourcePath + context.resourceQuery
@@ -111,7 +111,7 @@ function genRequest(loaders: Loader[], context: webpack.loader.LoaderContext) {
 }
 
 function shouldIgnoreCustomBlock(loaders: Loader[]) {
-  const actualLoaders = loaders.filter(loader => {
+  const actualLoaders = loaders.filter((loader) => {
     // vue-loader
     if (loader.path === selfPath) {
       return false

@@ -8,7 +8,7 @@ import { compileTemplate, TemplateCompiler } from '@vue/compiler-sfc'
 // Loader that compiles raw template into JavaScript functions.
 // This is injected by the global pitcher (../pitch) for template
 // selection requests initiated from vue files.
-const TemplateLoader: webpack.loader.Loader = function(source, inMap) {
+const TemplateLoader: webpack.loader.Loader = function (source, inMap) {
   source = String(source)
   const loaderContext = this
 
@@ -40,21 +40,21 @@ const TemplateLoader: webpack.loader.Loader = function(source, inMap) {
       ...options.compilerOptions,
       scopeId,
       bindingMetadata:
-        typeof query.bindings === 'string' ? JSON.parse(query.bindings) : {}
+        typeof query.bindings === 'string' ? JSON.parse(query.bindings) : {},
     },
-    transformAssetUrls: options.transformAssetUrls || true
+    transformAssetUrls: options.transformAssetUrls || true,
   })
 
   // tips
   if (compiled.tips.length) {
-    compiled.tips.forEach(tip => {
+    compiled.tips.forEach((tip) => {
       loaderContext.emitWarning(tip)
     })
   }
 
   // errors
   if (compiled.errors && compiled.errors.length) {
-    compiled.errors.forEach(err => {
+    compiled.errors.forEach((err) => {
       if (typeof err === 'string') {
         loaderContext.emitError(err)
       } else {
