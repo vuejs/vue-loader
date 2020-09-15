@@ -36,7 +36,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.7.7",
-    "@babel/preset-env": "^7.7.7",
+    "@babel/preset-env": "^7.11.5",
     "@types/estree": "^0.0.45",
     "@types/hash-sum": "^1.0.0",
     "@types/jest": "^26.0.13",
@@ -46,7 +46,7 @@
     "@types/webpack": "^4.41.0",
     "@types/webpack-merge": "^4.1.5",
     "@vue/compiler-sfc": "^3.0.0-rc.10",
-    "babel-loader": "^8.0.6",
+    "babel-loader": "^8.1.0",
     "cache-loader": "^4.1.0",
     "css-loader": "^4.3.0",
     "file-loader": "^6.1.0",

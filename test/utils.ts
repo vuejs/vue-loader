@@ -141,7 +141,6 @@ export async function mockBundleAndRun(
 ) {
   const { code, stats } = await bundle(options, wontThrowError)
 
-  let jsdomError
   const dom = new JSDOM(
     `<!DOCTYPE html><html><head></head><body><div id="#app"></div></body></html>`,
     {
@@ -153,23 +152,21 @@ export async function mockBundleAndRun(
     dom.window.eval(code)
   } catch (e) {
     console.error(`JSDOM error:\n${e.stack}`)
-    jsdomError = e
+    throw new Error(e)
   }
 
   const { window } = dom
-  const { module, exports, instance } = window
+  const { componentModule, exports, instance } = window
 
   return {
     window,
 
-    module,
+    componentModule,
     exports,
     instance,
 
     code,
     stats,
-
-    jsdomError,
   }
 }
 

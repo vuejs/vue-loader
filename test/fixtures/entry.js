@@ -4,7 +4,7 @@ import Component from '~target'
 import * as exports from '~target'
 
 if (typeof window !== 'undefined') {
-  window.module = Component
+  window.componentModule = Component
   window.exports = exports
 
   const app = createApp(Component)
