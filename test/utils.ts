@@ -2,7 +2,7 @@
 import path from 'path'
 import webpack from 'webpack'
 import merge from 'webpack-merge'
-import MiniCssExtractPlugin from 'mini-css-extract-plugin'
+// import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import { fs as mfs } from 'memfs'
 
 import { JSDOM, VirtualConsole } from 'jsdom'
@@ -37,10 +37,11 @@ const baseConfig: webpack.Configuration = {
       {
         test: /\.css$/,
         use: [
-          {
-            loader: MiniCssExtractPlugin.loader,
-            options: { hmr: true },
-          },
+          // {
+          //   loader: MiniCssExtractPlugin.loader,
+          //   options: { hmr: true },
+          // },
+          'style-loader',
           'css-loader',
         ],
       },
@@ -52,9 +53,9 @@ const baseConfig: webpack.Configuration = {
       __VUE_OPTIONS_API__: true,
       __VUE_PROD_DEVTOOLS__: false,
     }),
-    new MiniCssExtractPlugin({
-      filename: '[name].css',
-    }),
+    // new MiniCssExtractPlugin({
+    //   filename: '[name].css',
+    // }),
   ],
 }
 
@@ -142,7 +143,7 @@ export async function mockBundleAndRun(
 
   let jsdomError
   const dom = new JSDOM(
-    `<!DOCTYPE html><html><head></head><body></body></html>`,
+    `<!DOCTYPE html><html><head></head><body><div id="#app"></div></body></html>`,
     {
       runScripts: 'outside-only',
       virtualConsole: new VirtualConsole(),
@@ -170,4 +171,8 @@ export async function mockBundleAndRun(
 
     jsdomError,
   }
+}
+
+export function normalizeNewline(input: string): string {
+  return input.replace(new RegExp('\r\n', 'g'), '\n')
 }
