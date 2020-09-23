@@ -75,7 +75,7 @@ Note that `sass-loader` processes the non-indent-based `scss` syntax by default.
 
 ### Sharing Global Variables
 
-`sass-loader` also supports a `prependData` option which allows you to share common variables among all processed files without having to explicit import them:
+`sass-loader` also supports a `additionalData` option which allows you to share common variables among all processed files without having to explicit import them:
 
 ``` js
 // webpack.config.js -> module.rules
@@ -88,8 +88,9 @@ Note that `sass-loader` processes the non-indent-based `scss` syntax by default.
       loader: 'sass-loader',
       options: {
         // you can also read from a file, e.g. `variables.scss`
-        // use `data` here if sass-loader version < 8
-        prependData: `$color: red;`
+        // use `prependData` here if sass-loader version = 8, or
+        // `data` if sass-loader version < 8
+        additionalData: `$color: red;`
       }
     }
   ]
