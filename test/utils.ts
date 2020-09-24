@@ -2,6 +2,7 @@
 import path from 'path'
 import webpack from 'webpack'
 import merge from 'webpack-merge'
+import hash from 'hash-sum'
 // import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import { fs as mfs } from 'memfs'
 
@@ -172,4 +173,10 @@ export async function mockBundleAndRun(
 
 export function normalizeNewline(input: string): string {
   return input.replace(new RegExp('\r\n', 'g'), '\n')
+}
+
+// see the logic at src/index.ts
+// in non-production environment, shortFilePath is used to generate scope id
+export function genId(fixtureName: string): string {
+  return hash(path.join('test', 'fixtures', fixtureName).replace(/\\/g, '/'))
 }

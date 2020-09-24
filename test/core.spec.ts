@@ -1,4 +1,4 @@
-import { mockBundleAndRun, normalizeNewline } from './utils'
+import { mockBundleAndRun, normalizeNewline, genId } from './utils'
 
 test('basic', async () => {
   const { window, instance, componentModule } = await mockBundleAndRun({
@@ -61,10 +61,109 @@ test('pre-processors', async () => {
   expect(componentModule.data().msg).toContain('Hello from Babel')
 
   // style
-  const style = window.document.querySelector('style')!.textContent!
+  const style = normalizeNewline(
+    window.document.querySelector('style')!.textContent!
+  )
   expect(style).toContain(
     'body {\n  font: 100% Helvetica, sans-serif;\n  color: #999;\n}'
   )
+})
+
+test('style import', async () => {
+  const { window } = await mockBundleAndRun({
+    entry: 'style-import.vue',
+  })
+
+  const styles = window.document.querySelectorAll('style')
+  expect(styles[0].textContent).toContain('h1 { color: red;\n}')
+
+  // import with scoped
+  const id = 'data-v-' + genId('style-import.vue')
+  expect(styles[1].textContent).toContain('h1[' + id + '] { color: green;\n}')
+})
+
+test('style import for a same file twice', async () => {
+  const { window } = await mockBundleAndRun({
+    entry: 'style-import-twice.vue',
+  })
+
+  const styles = window.document.querySelectorAll('style')
+  expect(styles.length).toBe(3)
+  expect(styles[0].textContent).toContain('h1 { color: red;\n}')
+
+  // import with scoped
+  const id = 'data-v-' + genId('style-import-twice-sub.vue')
+  expect(styles[1].textContent).toContain('h1[' + id + '] { color: green;\n}')
+  const id2 = 'data-v-' + genId('style-import-twice.vue')
+  expect(styles[2].textContent).toContain('h1[' + id2 + '] { color: green;\n}')
+})
+
+test('template import', async () => {
+  const { instance } = await mockBundleAndRun({
+    entry: 'template-import.vue',
+  })
+
+  const el: Element = instance.$el
+  // '<div><h1>hello</h1></div>'
+  expect(el.children[0].tagName).toBe('H1')
+  expect(el.children[0].textContent).toBe('hello')
+})
+
+test('template import with pre-processors', async () => {
+  const { instance } = await mockBundleAndRun({
+    entry: 'template-import-pre.vue',
+    module: {
+      rules: [
+        {
+          test: /\.pug$/,
+          loader: 'pug-plain-loader',
+        },
+      ],
+    },
+  })
+
+  const el: Element = instance.$el
+  // '<div><h1>hello</h1></div>'
+  expect(el.children[0].tagName).toBe('H1')
+  expect(el.children[0].textContent).toBe('hello')
+})
+
+test('script import', async () => {
+  const { componentModule } = await mockBundleAndRun({
+    entry: 'script-import.vue',
+  })
+  expect(componentModule.data().msg).toContain('Hello from Component A!')
+})
+
+// #1620
+test('cloned rules should not intefere with each other', async () => {
+  await mockBundleAndRun({
+    entry: 'basic.vue',
+    module: {
+      rules: [
+        {
+          test: /\.js$/,
+          use: [
+            {
+              loader: 'babel-loader',
+              options: {},
+            },
+          ],
+        },
+        {
+          test: /\.some-random-extension$/,
+          use: [
+            {
+              loader: 'css-loader',
+              options: {
+                url: true,
+              },
+            },
+          ],
+        },
+      ],
+    },
+  })
 })
 
 test('script setup', async () => {
