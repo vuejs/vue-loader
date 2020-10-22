@@ -151,6 +151,7 @@ export default function loader(
 
   // template
   const renderFnName = isServer ? `ssrRender` : `render`
+  const renderReplace = `script.${renderFnName} = ${renderFnName}`
   let templateImport = `const ${renderFnName} = () => {}`
   let templateRequest
   if (descriptor.template) {
@@ -197,12 +198,7 @@ export default function loader(
     })
   }
 
-  let code = [
-    templateImport,
-    scriptImport,
-    stylesCode,
-    templateImport ? `script.${renderFnName} = ${renderFnName}` : ``,
-  ]
+  let code = [templateImport, scriptImport, stylesCode, renderReplace]
     .filter(Boolean)
     .join('\n')
 
