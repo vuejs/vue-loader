@@ -150,9 +150,9 @@ export default function loader(
   }
 
   // template
-  let templateImport = ``
-  let templateRequest
   const renderFnName = isServer ? `ssrRender` : `render`
+  let templateImport = `const ${renderFnName} = () => {}`
+  let templateRequest
   if (descriptor.template) {
     const src = descriptor.template.src || resourcePath
     const idQuery = `&id=${id}`

@@ -102,3 +102,24 @@ test('postLoaders support', async () => {
   // class="red" -> class="green"
   expect(instance.$el.className).toBe('green')
 })
+
+test('empty template', async () => {
+  const { componentModule } = await mockBundleAndRun({
+    entry: 'template-empty.vue',
+  })
+
+  expect(componentModule.render).not.toBeUndefined()
+  expect(componentModule.render()).toBeUndefined()
+  expect(componentModule.ssrRender).toBeUndefined()
+})
+
+test('empty template with ssr', async () => {
+  const { componentModule } = await mockBundleAndRun({
+    entry: 'template-empty.vue',
+    target: 'node',
+  })
+
+  expect(componentModule.ssrRender).not.toBeUndefined()
+  expect(componentModule.ssrRender()).toBeUndefined()
+  expect(componentModule.render).toBeUndefined()
+})
