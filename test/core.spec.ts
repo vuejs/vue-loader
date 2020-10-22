@@ -166,10 +166,6 @@ test('cloned rules should not intefere with each other', async () => {
   })
 })
 
-test('script setup', async () => {
-  await mockBundleAndRun({ entry: 'ScriptSetup.vue' })
-})
-
 test('without script block', async () => {
   await mockBundleAndRun({ entry: 'no-script.vue' })
 })
