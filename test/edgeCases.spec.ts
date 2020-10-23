@@ -2,8 +2,11 @@ import { bundle, mockBundleAndRun, normalizeNewline } from './utils'
 
 // @ts-ignore
 function assertComponent({
+  // @ts-ignore
   instance,
+  // @ts-ignore
   componentModule,
+  // @ts-ignore
   window,
   expectedMsg = 'Hello from Component A!',
 }) {
