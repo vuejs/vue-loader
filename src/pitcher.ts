@@ -68,7 +68,8 @@ export const pitch = function () {
       const beforeLoaders = loaders.slice(cssLoaderIndex + 1)
       return genProxyModule(
         [...afterLoaders, stylePostLoaderPath, ...beforeLoaders],
-        context
+        context,
+        !! query.module
       )
     }
   }
