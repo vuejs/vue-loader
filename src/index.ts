@@ -116,7 +116,11 @@ export default function loader(
     .relative(rootContext || process.cwd(), resourcePath)
     .replace(/^(\.\.[\/\\])+/, '')
   const shortFilePath = rawShortFilePath.replace(/\\/g, '/') + resourceQuery
-  const id = hash(isProduction ? shortFilePath + '\n' + source : shortFilePath)
+  const id = hash(
+    isProduction
+      ? shortFilePath + '\n' + source.replace(/\r\n/g, '\n')
+      : shortFilePath
+  )
 
   // feature information
   const hasScoped = descriptor.styles.some((s) => s.scoped)
