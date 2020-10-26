@@ -222,7 +222,7 @@ module.exports = {
 }
 ```
 
-Configuration of TypeScipt can be done via `tsconfig.json`. Also see docs for [ts-loader](https://github.com/TypeStrong/ts-loader).
+Configuration of TypeScript can be done via `tsconfig.json`. Also see docs for [ts-loader](https://github.com/TypeStrong/ts-loader).
 
 ## Pug
 
