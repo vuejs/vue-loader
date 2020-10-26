@@ -14,6 +14,7 @@ const baseConfig = {
   devtool: false,
   output: {
     path: '/',
+    publicPath: '',
     filename: 'test.build.js'
   },
   resolveLoader: {
