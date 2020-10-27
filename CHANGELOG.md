@@ -1,3 +1,14 @@
+<a name="15.9.4"></a>
+## [15.9.4](https://github.com/vuejs/vue-loader/compare/v15.9.3...v15.9.4) (2020-10-27)
+
+
+### Bug Fixes
+
+* fix id differences between different operating systems ([#1706](https://github.com/vuejs/vue-loader/issues/1706)) ([afe8a0d](https://github.com/vuejs/vue-loader/commit/afe8a0d))
+* fix mini-css-extract-plugin missing default export error ([#1748](https://github.com/vuejs/vue-loader/issues/1748)) ([429a284](https://github.com/vuejs/vue-loader/commit/429a284))
+
+
+
 <a name="15.9.3"></a>
 ## [15.9.3](https://github.com/vuejs/vue-loader/compare/v15.9.2...v15.9.3) (2020-06-23)
 
