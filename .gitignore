@@ -5,3 +5,4 @@ dist
 link.sh
 .cache
 TODOs.md
+coverage
