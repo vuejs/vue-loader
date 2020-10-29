@@ -1,6 +1,8 @@
 import { SourceMapConsumer } from 'source-map'
 import { fs as mfs } from 'memfs'
-import { bundle, mockBundleAndRun } from './utils'
+import { bundle, mockBundleAndRun, normalizeNewline, genId } from './utils'
+
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 test('support chaining with other loaders', async () => {
   const { componentModule } = await mockBundleAndRun({
@@ -83,9 +85,67 @@ test.skip('source map', async () => {
   expect(pos.line).toBe(9)
 })
 
-test.todo('extract CSS')
+test('extract CSS', async () => {
+  await bundle({
+    entry: 'extract-css.vue',
+    modify: (config: any) => {
+      config.module.rules = [
+        {
+          test: /\.vue$/,
+          use: 'vue-loader',
+        },
+        {
+          test: /\.css$/,
+          use: [MiniCssExtractPlugin.loader, 'css-loader'],
+        },
+        {
+          test: /\.stylus$/,
+          use: [MiniCssExtractPlugin.loader, 'css-loader', 'stylus-loader'],
+        },
+      ]
+    },
+    plugins: [
+      new MiniCssExtractPlugin({
+        filename: 'test.output.css',
+      }),
+    ],
+  })
 
-test.todo('extract CSS with code spliting')
+  const css = normalizeNewline(mfs.readFileSync('/test.output.css').toString())
+  const id = `data-v-${genId('extract-css.vue')}`
+  expect(css).toContain(`h1 {\n  color: #f00;\n}`)
+  // extract + scoped
+  expect(css).toContain(`h2[${id}] {\n  color: green;\n}`)
+})
+
+// #1464
+test('extract CSS with code spliting', async () => {
+  await bundle({
+    entry: 'extract-css-chunks.vue',
+    modify: (config: any) => {
+      config.module.rules = [
+        {
+          test: /\.vue$/,
+          use: 'vue-loader',
+        },
+        {
+          test: /\.css$/,
+          use: [MiniCssExtractPlugin.loader, 'css-loader'],
+        },
+      ]
+    },
+    plugins: [
+      new MiniCssExtractPlugin({
+        filename: 'test.output.css',
+      }),
+    ],
+  })
+
+  const css = normalizeNewline(mfs.readFileSync('/test.output.css').toString())
+  expect(css).toContain(`h1 {\n  color: red;\n}`)
+  expect(mfs.existsSync('/empty.test.output.css')).toBe(false)
+  expect(mfs.existsSync('/basic.test.output.css')).toBe(true)
+})
 
 test.todo('support rules with oneOf')
 
