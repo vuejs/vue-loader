@@ -74,6 +74,7 @@ const ruleSetCompiler = new RuleSetCompiler([
   new BasicEffectRulePlugin('sideEffects'),
   new BasicEffectRulePlugin('parser'),
   new BasicEffectRulePlugin('resolve'),
+  new BasicEffectRulePlugin('generator'),
   new UseEffectRulePlugin(),
 ])
 
