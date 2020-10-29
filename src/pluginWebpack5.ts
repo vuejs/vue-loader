@@ -8,6 +8,7 @@ const NS = 'vue-loader'
 const NormalModule = require('webpack/lib/NormalModule')
 const BasicEffectRulePlugin = require('webpack/lib/rules/BasicEffectRulePlugin')
 const BasicMatcherRulePlugin = require('webpack/lib/rules/BasicMatcherRulePlugin')
+const DescriptionDataMatcherRulePlugin = require('webpack/lib/rules/DescriptionDataMatcherRulePlugin')
 const UseEffectRulePlugin = require('webpack/lib/rules/UseEffectRulePlugin')
 const RuleSetCompiler = require('webpack/lib/rules/RuleSetCompiler') as RuleSetCompiler
 
@@ -62,20 +63,23 @@ type Effect = BasicEffect | UseEffect
 
 const ruleSetCompiler = new RuleSetCompiler([
   new BasicMatcherRulePlugin('test', 'resource'),
+  new BasicMatcherRulePlugin('mimetype'),
+  new BasicMatcherRulePlugin('dependency'),
   new BasicMatcherRulePlugin('include', 'resource'),
   new BasicMatcherRulePlugin('exclude', 'resource', true),
-  new BasicMatcherRulePlugin('resource'),
   new BasicMatcherRulePlugin('conditions'),
+  new BasicMatcherRulePlugin('resource'),
   new BasicMatcherRulePlugin('resourceQuery'),
+  new BasicMatcherRulePlugin('resourceFragment'),
   new BasicMatcherRulePlugin('realResource'),
   new BasicMatcherRulePlugin('issuer'),
   new BasicMatcherRulePlugin('compiler'),
+  new DescriptionDataMatcherRulePlugin(),
   new BasicEffectRulePlugin('type'),
   new BasicEffectRulePlugin('sideEffects'),
   new BasicEffectRulePlugin('parser'),
   new BasicEffectRulePlugin('resolve'),
-  new BasicEffectRulePlugin('generator'),
-  new UseEffectRulePlugin(),
+  new UseEffectRulePlugin()
 ])
 
 class VueLoaderPlugin implements Plugin {
