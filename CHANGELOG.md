@@ -1,3 +1,14 @@
+<a name="15.9.5"></a>
+## [15.9.5](https://github.com/vuejs/vue-loader/compare/v15.9.4...v15.9.5) (2020-11-02)
+
+
+### Bug Fixes
+
+* add rule plugins to keep up with webpack 5 new features ([7ca8e2c](https://github.com/vuejs/vue-loader/commit/7ca8e2c)), closes [/github.com/webpack/webpack/blob/v5.3.1/lib/NormalModuleFactory.js#L133-L152](https://github.com//github.com/webpack/webpack/blob/v5.3.1/lib/NormalModuleFactory.js/issues/L133-L152)
+* ensure new webpack5 generator property in rules passes ruleset checks ([#1753](https://github.com/vuejs/vue-loader/issues/1753)) ([f79bb08](https://github.com/vuejs/vue-loader/commit/f79bb08)), closes [#1729](https://github.com/vuejs/vue-loader/issues/1729)
+
+
+
 <a name="15.9.4"></a>
 ## [15.9.4](https://github.com/vuejs/vue-loader/compare/v15.9.3...v15.9.4) (2020-10-27)
 
