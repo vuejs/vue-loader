@@ -13,6 +13,7 @@
     "build": "tsc",
     "pretest": "tsc",
     "test": "jest --coverage",
+    "test:webpack5": "jest -c jest-webpack5.config.js --coverage",
     "dev-example": "webpack-dev-server --config example/webpack.config.js --inline --hot",
     "build-example": "rm -rf example/dist && webpack --config example/webpack.config.js --env.prod",
     "lint": "prettier --write --parser typescript \"{src,test}/**/*.{j,t}s\"",
@@ -76,15 +77,7 @@
     "webpack-cli": "^3.3.10",
     "webpack-dev-server": "^3.9.0",
     "webpack-merge": "^5.1.4",
+    "webpack5": "npm:webpack@5",
     "yorkie": "^2.0.0"
-  },
-  "jest": {
-    "preset": "ts-jest",
-    "testTimeout": 10000,
-    "testEnvironment": "node",
-    "testPathIgnorePatterns": [
-      "<rootDir>/dist/",
-      "<rootDir>/node_modules/"
-    ]
   }
 }

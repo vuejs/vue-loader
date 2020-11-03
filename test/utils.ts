@@ -16,6 +16,7 @@ const baseConfig: webpack.Configuration = {
   output: {
     path: '/',
     filename: 'test.build.js',
+    publicPath: '',
   },
   resolveLoader: {
     alias: {
