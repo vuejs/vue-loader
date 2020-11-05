@@ -1,6 +1,6 @@
 const config = {
   preset: 'ts-jest',
-  testTimeout: 10000,
+  testTimeout: 30000,
   testEnvironment: 'node',
   testPathIgnorePatterns: ['<rootDir>/dist/', '<rootDir>/node_modules/'],
 }
