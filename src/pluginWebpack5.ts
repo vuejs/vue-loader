@@ -79,7 +79,7 @@ const ruleSetCompiler = new RuleSetCompiler([
   new BasicEffectRulePlugin('sideEffects'),
   new BasicEffectRulePlugin('parser'),
   new BasicEffectRulePlugin('resolve'),
-  new UseEffectRulePlugin()
+  new UseEffectRulePlugin(),
 ])
 
 class VueLoaderPlugin implements Plugin {
@@ -225,7 +225,9 @@ const langBlockRuleCheck = (
   query: qs.ParsedUrlQuery,
   rule: CompiledRule
 ): boolean => {
-  return !rule.conditions.length || query.lang != null
+  return (
+    query.type === 'custom' || !rule.conditions.length || query.lang != null
+  )
 }
 
 const langBlockRuleResource = (
