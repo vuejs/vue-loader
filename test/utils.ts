@@ -167,3 +167,5 @@ export function normalizeNewline(input: string): string {
 export function genId(fixtureName: string): string {
   return hash(path.join('test', 'fixtures', fixtureName).replace(/\\/g, '/'))
 }
+
+export { mfs }

@@ -1,4 +1,6 @@
-import { bundle, mockBundleAndRun, normalizeNewline } from './utils'
+import * as path from 'path'
+import HTMLPlugin from 'html-webpack-plugin'
+import { mfs, bundle, mockBundleAndRun, normalizeNewline } from './utils'
 
 // @ts-ignore
 function assertComponent({
@@ -111,7 +113,21 @@ test('should not duplicate css modules value imports', async () => {
 })
 
 // #1213
-test.todo('html-webpack-plugin')
+test('html-webpack-plugin', async () => {
+  await bundle({
+    entry: 'basic.vue',
+    plugins: [
+      new HTMLPlugin({
+        inject: true,
+        template: path.resolve(__dirname, 'fixtures/index.html'),
+        filename: 'output.html',
+      }),
+    ],
+  })
+
+  const html = mfs.readFileSync('/output.html', 'utf-8')
+  expect(html).toMatch('test.build.js')
+})
 
 // #1239
 test('usage with null-loader', async () => {

@@ -51,6 +51,7 @@
     "cache-loader": "^4.1.0",
     "css-loader": "^4.3.0",
     "file-loader": "^6.1.0",
+    "html-webpack-plugin": "^4.5.0",
     "jest": "^26.4.1",
     "jsdom": "^16.4.0",
     "lint-staged": "^10.3.0",
