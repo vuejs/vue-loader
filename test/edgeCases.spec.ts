@@ -40,7 +40,29 @@ test('vue rule with include', async () => {
   assertComponent(result)
 })
 
-test.todo('test-less oneOf rules')
+test('test-less oneOf rules', async () => {
+  const result = await mockBundleAndRun({
+    entry: 'basic.vue',
+    modify: (config: any) => {
+      config!.module!.rules = [
+        {
+          test: /\.vue$/,
+          loader: 'vue-loader',
+        },
+        {
+          oneOf: [
+            {
+              test: /\.css$/,
+              use: ['style-loader', 'css-loader'],
+            },
+          ],
+        },
+      ]
+    },
+  })
+
+  assertComponent(result)
+})
 
 // #1210
 test('normalize multiple use + options', async () => {
