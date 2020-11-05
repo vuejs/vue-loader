@@ -236,7 +236,7 @@ const langBlockRuleResource = (
 ): string => `${resource}.${query.lang}`
 
 const jsRuleCheck = (query: qs.ParsedUrlQuery): boolean => {
-  return query.lang === 'template'
+  return query.type === 'template'
 }
 
 const jsRuleResource = (query: qs.ParsedUrlQuery, resource: string): string =>
