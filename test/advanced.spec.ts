@@ -147,7 +147,53 @@ test('extract CSS with code spliting', async () => {
   expect(mfs.existsSync('/basic.test.output.css')).toBe(true)
 })
 
-test.todo('support rules with oneOf')
+test('support rules with oneOf', async () => {
+  const run = (entry: string) => {
+    return mockBundleAndRun({
+      entry,
+      modify: (config: any) => {
+        config!.module!.rules = [
+          { test: /\.vue$/, loader: 'vue-loader' },
+          {
+            test: /\.css$/,
+            use: 'style-loader',
+            oneOf: [
+              {
+                resourceQuery: /module/,
+                use: [
+                  {
+                    loader: 'css-loader',
+                    options: {
+                      modules: {
+                        localIdentName: '[local]_[hash:base64:5]',
+                      },
+                    },
+                  },
+                ],
+              },
+              {
+                use: ['css-loader'],
+              },
+            ],
+          },
+        ]
+      },
+    })
+  }
+
+  const { window: window1 } = await run('basic.vue')
+  let style = normalizeNewline(
+    window1.document.querySelector('style')!.textContent!
+  )
+  expect(style).toContain('comp-a h2 {\n  color: #f00;\n}')
+
+  const { window, instance } = await run('css-modules-simple.vue')
+
+  const className = instance.$style.red
+  expect(className).toMatch(/^red_\w{5}/)
+  style = normalizeNewline(window.document.querySelector('style')!.textContent!)
+  expect(style).toContain('.' + className + ' {\n  color: red;\n}')
+})
 
 test.todo('should work with eslint loader')
 

@@ -86,8 +86,111 @@ test('postcss', async () => {
   expect(style).toContain(`h1[${id}] {\n  color: red;\n  font-size: 14px\n}`)
 })
 
-test.todo('CSS Modules')
+test('CSS Modules', async () => {
+  const testWithIdent = async (
+    localIdentName: string | undefined,
+    regexToMatch: RegExp
+  ) => {
+    const baseLoaders = [
+      'style-loader',
+      {
+        loader: 'css-loader',
+        options: {
+          modules: {
+            localIdentName,
+          },
+        },
+      },
+    ]
 
-test.todo('CSS Modules Extend')
+    const { window, instance } = await mockBundleAndRun({
+      entry: 'css-modules.vue',
+      modify: (config: any) => {
+        config!.module!.rules = [
+          {
+            test: /\.vue$/,
+            loader: 'vue-loader',
+          },
+          {
+            test: /\.css$/,
+            use: baseLoaders,
+          },
+          {
+            test: /\.stylus$/,
+            use: [...baseLoaders, 'stylus-loader'],
+          },
+        ]
+      },
+    })
+
+    // get local class name
+    const className = instance.$style.red
+    expect(className).toMatch(regexToMatch)
+
+    // class name in style
+    let style = [].slice
+      .call(window.document.querySelectorAll('style'))
+      .map((style: any) => {
+        return style!.textContent
+      })
+      .join('\n')
+    style = normalizeNewline(style)
+    expect(style).toContain('.' + className + ' {\n  color: red;\n}')
+
+    // animation name
+    const match = style.match(/@keyframes\s+(\S+)\s+{/)
+    expect(match).toHaveLength(2)
+    const animationName = match[1]
+    expect(animationName).not.toBe('fade')
+    expect(style).toContain('animation: ' + animationName + ' 1s;')
+
+    // default module + pre-processor + scoped
+    const anotherClassName = instance.$style.red
+    expect(anotherClassName).toMatch(regexToMatch)
+    const id = 'data-v-' + genId('css-modules.vue')
+    expect(style).toContain('.' + anotherClassName + '[' + id + ']')
+  }
+
+  // default ident
+  await testWithIdent(undefined, /^\w{21,}/)
+
+  // custom ident
+  await testWithIdent(
+    '[path][name]---[local]---[hash:base64:5]',
+    /css-modules---red---\w{5}/
+  )
+})
+
+test('CSS Modules Extend', async () => {
+  const baseLoaders = [
+    'style-loader',
+    {
+      loader: 'css-loader',
+      options: {
+        modules: true,
+      },
+    },
+  ]
+
+  const { window, instance } = await mockBundleAndRun({
+    entry: 'css-modules-extend.vue',
+    modify: (config: any) => {
+      config!.module!.rules = [
+        {
+          test: /\.vue$/,
+          loader: 'vue-loader',
+        },
+        {
+          test: /\.css$/,
+          use: baseLoaders,
+        },
+      ]
+    },
+  })
+
+  expect(instance.$el.className).toBe(instance.$style.red)
+  const style = window.document.querySelectorAll('style')![1]!.textContent
+  expect(style).toContain(`.${instance.$style.red} {\n  color: #FF0000;\n}`)
+})
 
 test.todo('experimental <style vars>')

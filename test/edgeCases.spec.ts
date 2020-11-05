@@ -60,7 +60,33 @@ test('normalize multiple use + options', async () => {
   })
 })
 
-test.todo('should not duplicate css modules value imports')
+test('should not duplicate css modules value imports', async () => {
+  const { window, exports } = await mockBundleAndRun({
+    entry: './test/fixtures/duplicate-cssm.js',
+    modify: (config: any) => {
+      config!.module!.rules[1] = {
+        test: /\.css$/,
+        use: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              modules: true,
+            },
+          },
+        ],
+      }
+    },
+  })
+
+  const styles = window.document.querySelectorAll('style')
+  expect(styles.length).toBe(2) // one for values, one for the component
+  const style = normalizeNewline(styles[1]!.textContent!)
+  // value should be injected
+  expect(style).toMatch('color: red;')
+  // exports is set as the locals imported from values.css
+  expect(exports.color).toBe('red')
+})
 
 // #1213
 test.todo('html-webpack-plugin')
