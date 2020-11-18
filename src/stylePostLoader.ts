@@ -1,6 +1,6 @@
-import qs from 'querystring'
+import * as qs from 'querystring'
 import { compileStyle } from '@vue/compiler-sfc'
-import webpack from 'webpack'
+import webpack = require('webpack')
 
 // This is a post loader that handles scoped CSS transforms.
 // Injected right before css-loader by the global pitcher (../pitch.js)

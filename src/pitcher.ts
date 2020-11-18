@@ -1,6 +1,6 @@
-import webpack from 'webpack'
-import qs from 'querystring'
-import loaderUtils from 'loader-utils'
+import webpack = require('webpack')
+import * as qs from 'querystring'
+import * as loaderUtils from 'loader-utils'
 
 const selfPath = require.resolve('./index')
 // const templateLoaderPath = require.resolve('./templateLoader')
@@ -69,7 +69,7 @@ export const pitch = function () {
       return genProxyModule(
         [...afterLoaders, stylePostLoaderPath, ...beforeLoaders],
         context,
-        !! query.module
+        !!query.module
       )
     }
   }

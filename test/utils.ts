@@ -1,8 +1,8 @@
 /* env jest */
-import path from 'path'
-import webpack from 'webpack'
+import * as path from 'path'
+import webpack = require('webpack')
 import merge from 'webpack-merge'
-import hash from 'hash-sum'
+import hash = require('hash-sum')
 // import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import { fs as mfs } from 'memfs'
 

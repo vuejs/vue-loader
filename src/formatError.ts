@@ -1,5 +1,5 @@
 import { generateCodeFrame, CompilerError } from '@vue/compiler-sfc'
-import chalk from 'chalk'
+import chalk = require('chalk')
 
 export function formatError(
   err: SyntaxError | CompilerError,

@@ -1,4 +1,4 @@
-import webpack from 'webpack'
+import webpack = require('webpack')
 import { SFCDescriptor } from '@vue/compiler-sfc'
 import { ParsedUrlQuery } from 'querystring'
 

@@ -1,4 +1,4 @@
-import qs from 'querystring'
+import * as qs from 'querystring'
 import { VueLoaderOptions } from './'
 import { RuleSetRule, Compiler, Plugin } from 'webpack'
 

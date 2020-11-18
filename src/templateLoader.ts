@@ -1,6 +1,6 @@
-import webpack from 'webpack'
-import qs from 'querystring'
-import loaderUtils from 'loader-utils'
+import webpack = require('webpack')
+import * as qs from 'querystring'
+import * as loaderUtils from 'loader-utils'
 import { VueLoaderOptions } from './'
 import { formatError } from './formatError'
 import { compileTemplate, TemplateCompiler } from '@vue/compiler-sfc'

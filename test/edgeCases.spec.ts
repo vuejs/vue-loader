@@ -1,5 +1,5 @@
 import * as path from 'path'
-import HTMLPlugin from 'html-webpack-plugin'
+import HTMLPlugin = require('html-webpack-plugin')
 import { mfs, bundle, mockBundleAndRun, normalizeNewline } from './utils'
 
 // @ts-ignore

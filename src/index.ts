@@ -7,11 +7,13 @@ try {
   )
 }
 
-import webpack from 'webpack'
-import path from 'path'
-import qs from 'querystring'
-import hash from 'hash-sum'
-import loaderUtils from 'loader-utils'
+import webpack = require('webpack')
+import * as path from 'path'
+import * as qs from 'querystring'
+import * as loaderUtils from 'loader-utils'
+
+import hash = require('hash-sum')
+
 import {
   parse,
   compileScript,
