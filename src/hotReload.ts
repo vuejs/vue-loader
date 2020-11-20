@@ -10,7 +10,7 @@ if (module.hot) {
   script.__hmrId = "${id}"
   const api = __VUE_HMR_RUNTIME__
   module.hot.accept()
-  if (!api.createRecord('${id}')) {
+  if (!api.createRecord('${id}', script)) {
     api.reload('${id}', script)
   }
   ${templateRequest ? genTemplateHotReloadCode(id, templateRequest) : ''}
