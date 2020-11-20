@@ -1,9 +1,13 @@
 import webpack = require('webpack')
 import { SFCDescriptor } from '@vue/compiler-sfc'
 import { ParsedUrlQuery } from 'querystring'
+import { resolveScript } from './resolveScript'
+import { VueLoaderOptions } from 'src'
 
 export function selectBlock(
   descriptor: SFCDescriptor,
+  scopeId: string,
+  options: VueLoaderOptions,
   loaderContext: webpack.loader.LoaderContext,
   query: ParsedUrlQuery,
   appendExtension: boolean
@@ -22,10 +26,7 @@ export function selectBlock(
 
   // script
   if (query.type === `script`) {
-    // FIXME: #1723
-    // I still don't know when & why `scriptCompiled` would be empty
-    // need to work out a better fix later
-    const script = (descriptor as any).scriptCompiled || descriptor.script
+    const script = resolveScript(descriptor, scopeId, options, loaderContext)!
     if (appendExtension) {
       loaderContext.resourcePath += '.' + (script.lang || 'js')
     }

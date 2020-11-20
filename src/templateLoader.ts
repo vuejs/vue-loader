@@ -3,7 +3,13 @@ import * as qs from 'querystring'
 import * as loaderUtils from 'loader-utils'
 import { VueLoaderOptions } from './'
 import { formatError } from './formatError'
-import { compileTemplate, TemplateCompiler } from '@vue/compiler-sfc'
+import {
+  compileTemplate,
+  generateCssVars,
+  TemplateCompiler,
+} from '@vue/compiler-sfc'
+import { getDescriptor } from './descriptorCache'
+import { resolveScript } from './resolveScript'
 
 // Loader that compiles raw template into JavaScript functions.
 // This is injected by the global pitcher (../pitch) for template
@@ -18,10 +24,17 @@ const TemplateLoader: webpack.loader.Loader = function (source, inMap) {
   const options = (loaderUtils.getOptions(loaderContext) ||
     {}) as VueLoaderOptions
 
-  // const isServer = loaderContext.target === 'node'
-  // const isProduction = options.productionMode || loaderContext.minimize || process.env.NODE_ENV === 'production'
+  const isServer = loaderContext.target === 'node'
+  const isProduction = loaderContext.mode === 'production'
   const query = qs.parse(loaderContext.resourceQuery.slice(1))
-  const scopeId = query.scoped ? `data-v-${query.id}` : null
+  const scopeId = query.id as string
+  const descriptor = getDescriptor(loaderContext.resourcePath)
+  const script = resolveScript(
+    descriptor,
+    query.id as string,
+    options,
+    loaderContext
+  )
 
   let compiler: TemplateCompiler | undefined
   if (typeof options.compiler === 'string') {
@@ -34,13 +47,13 @@ const TemplateLoader: webpack.loader.Loader = function (source, inMap) {
     source,
     inMap,
     filename: loaderContext.resourcePath,
-    ssr: loaderContext.target === 'node',
+    ssr: isServer,
     compiler,
     compilerOptions: {
       ...options.compilerOptions,
-      scopeId,
-      bindingMetadata:
-        typeof query.bindings === 'string' ? JSON.parse(query.bindings) : {},
+      ssrCssVars: generateCssVars(descriptor, scopeId, isProduction),
+      scopeId: query.scoped ? `data-v-${scopeId}` : undefined,
+      bindingMetadata: script ? script.bindings : undefined,
     },
     transformAssetUrls: options.transformAssetUrls || true,
   })

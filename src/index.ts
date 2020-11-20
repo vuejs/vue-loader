@@ -16,14 +16,12 @@ import hash = require('hash-sum')
 
 import {
   parse,
-  compileScript,
   TemplateCompiler,
   CompilerOptions,
   SFCBlock,
   SFCTemplateCompileOptions,
   SFCScriptCompileOptions,
   SFCStyleBlock,
-  SFCScriptBlock,
 } from '@vue/compiler-sfc'
 import { selectBlock } from './select'
 import { genHotReloadCode } from './hotReload'
@@ -31,6 +29,8 @@ import { genCSSModulesCode } from './cssModules'
 import { formatError } from './formatError'
 
 import VueLoaderPlugin from './plugin'
+import { resolveScript } from './resolveScript'
+import { setDescriptor } from './descriptorCache'
 
 export { VueLoaderPlugin }
 
@@ -93,24 +93,15 @@ export default function loader(
     sourceMap,
   })
 
+  // cache descriptor
+  setDescriptor(resourcePath, descriptor)
+
   if (errors.length) {
     errors.forEach((err) => {
       formatError(err, source, resourcePath)
       loaderContext.emitError(err)
     })
     return ``
-  }
-
-  // if the query has a type field, this is a language block request
-  // e.g. foo.vue?type=template&id=xxxxx
-  // and we will return early
-  if (incomingQuery.type) {
-    return selectBlock(
-      descriptor,
-      loaderContext,
-      incomingQuery,
-      !!options.appendExtension
-    )
   }
 
   // module id for scoped CSS & hot-reload
@@ -124,50 +115,61 @@ export default function loader(
       : shortFilePath
   )
 
+  // if the query has a type field, this is a language block request
+  // e.g. foo.vue?type=template&id=xxxxx
+  // and we will return early
+  if (incomingQuery.type) {
+    return selectBlock(
+      descriptor,
+      id,
+      options,
+      loaderContext,
+      incomingQuery,
+      !!options.appendExtension
+    )
+  }
+
   // feature information
   const hasScoped = descriptor.styles.some((s) => s.scoped)
   const needsHotReload =
     !isServer &&
     !isProduction &&
-    !!(descriptor.script || descriptor.template) &&
+    !!(descriptor.script || descriptor.scriptSetup || descriptor.template) &&
     options.hotReload !== false
 
   // script
-  let script: SFCScriptBlock | undefined
   let scriptImport = `const script = {}`
-  if (descriptor.script || descriptor.scriptSetup) {
-    try {
-      script = (descriptor as any).scriptCompiled = compileScript(descriptor, {
-        babelParserPlugins: options.babelParserPlugins,
-      })
-    } catch (e) {
-      loaderContext.emitError(e)
-    }
-    if (script) {
-      const src = script.src || resourcePath
-      const attrsQuery = attrsToQuery(script.attrs, 'js')
-      const query = `?vue&type=script${attrsQuery}${resourceQuery}`
-      const scriptRequest = stringifyRequest(src + query)
-      scriptImport =
-        `import script from ${scriptRequest}\n` +
-        // support named exports
-        `export * from ${scriptRequest}`
-    }
+  const script = resolveScript(descriptor, id, options, loaderContext)
+  if (script) {
+    const src = script.src || resourcePath
+    const attrsQuery = attrsToQuery(script.attrs, 'js')
+    const query = `?vue&type=script${attrsQuery}${resourceQuery}`
+    const scriptRequest = stringifyRequest(src + query)
+    scriptImport =
+      `import script from ${scriptRequest}\n` +
+      // support named exports
+      `export * from ${scriptRequest}`
   }
 
   // template
   let templateImport = ``
   let templateRequest
   const renderFnName = isServer ? `ssrRender` : `render`
-  if (descriptor.template) {
+  const templateLang = descriptor.template && descriptor.template.lang
+  const useInlineTemplate =
+    descriptor.scriptSetup && isProduction && !isServer && !templateLang
+  if (descriptor.template && !useInlineTemplate) {
     const src = descriptor.template.src || resourcePath
     const idQuery = `&id=${id}`
     const scopedQuery = hasScoped ? `&scoped=true` : ``
     const attrsQuery = attrsToQuery(descriptor.template.attrs)
-    const bindingsQuery = script
-      ? `&bindings=${JSON.stringify(script.bindings ?? {})}`
-      : ``
-    const query = `?vue&type=template${idQuery}${scopedQuery}${attrsQuery}${bindingsQuery}${resourceQuery}`
+    // const bindingsQuery = script
+    //   ? `&bindings=${JSON.stringify(script.bindings ?? {})}`
+    //   : ``
+    // const varsQuery = descriptor.cssVars
+    //   ? `&vars=${qs.escape(generateCssVars(descriptor, id, isProduction))}`
+    //   : ``
+    const query = `?vue&type=template${idQuery}${scopedQuery}${attrsQuery}${resourceQuery}`
     templateRequest = stringifyRequest(src + query)
     templateImport = `import { ${renderFnName} } from ${templateRequest}`
   }
@@ -184,7 +186,7 @@ export default function loader(
         const attrsQuery = attrsToQuery(style.attrs, 'css')
         // make sure to only pass id when necessary so that we don't inject
         // duplicate tags when multiple components import the same css file
-        const idQuery = style.scoped ? `&id=${id}` : ``
+        const idQuery = !style.src || style.scoped ? `&id=${id}` : ``
         const query = `?vue&type=style&index=${i}${idQuery}${attrsQuery}${resourceQuery}`
         const styleRequest = stringifyRequest(src + query)
         if (style.module) {

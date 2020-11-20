@@ -5,9 +5,9 @@
 <script setup>
 import { ref } from 'vue'
 
-export const count = ref(0)
+const count = ref(0)
 
-export function inc() {
+function inc() {
   count.value++
 }
 </script>

@@ -13,17 +13,17 @@ module.exports = (env = {}) => {
   return {
     mode: isProd ? 'production' : 'development',
     entry: path.resolve(__dirname, './main.js'),
-    devtool: isProd ? 'source-map' : 'cheap-module-eval-source-map',
+    devtool: 'source-map',
     output: {
       path: path.resolve(__dirname, 'dist'),
       filename: '[name].js',
-      publicPath: '/dist/'
+      publicPath: '/dist/',
     },
     module: {
       rules: [
         {
           test: /\.vue$/,
-          loader: 'vue-loader'
+          loader: 'vue-loader',
         },
         {
           test: /\.png$/,
@@ -31,10 +31,10 @@ module.exports = (env = {}) => {
             {
               loader: 'url-loader',
               options: {
-                limit: 8192
-              }
-            }
-          ]
+                limit: 8192,
+              },
+            },
+          ],
         },
         {
           test: /\.css$/,
@@ -42,11 +42,11 @@ module.exports = (env = {}) => {
             {
               loader: MiniCssExtractPlugin.loader,
               options: {
-                hmr: !isProd
-              }
+                hmr: !isProd,
+              },
             },
-            'css-loader'
-          ]
+            'css-loader',
+          ],
         },
         {
           test: /\.js$/,
@@ -58,8 +58,8 @@ module.exports = (env = {}) => {
                   fs.readFileSync(path.resolve(__dirname, '../package.json')) +
                     JSON.stringify(env)
                 ),
-                cacheDirectory: path.resolve(__dirname, '../.cache')
-              }
+                cacheDirectory: path.resolve(__dirname, '../.cache'),
+              },
             },
             ...(babel
               ? [
@@ -69,42 +69,42 @@ module.exports = (env = {}) => {
                       // use yarn build-example --env.noMinimize to verify that
                       // babel is properly applied to all js code, including the
                       // render function compiled from SFC templates.
-                      presets: ['@babel/preset-env']
-                    }
-                  }
+                      presets: ['@babel/preset-env'],
+                    },
+                  },
                 ]
-              : [])
-          ]
+              : []),
+          ],
         },
         // target <docs> custom blocks
         {
           resourceQuery: /blockType=docs/,
-          loader: require.resolve('./docs-loader')
-        }
-      ]
+          loader: require.resolve('./docs-loader'),
+        },
+      ],
     },
     plugins: [
       new VueLoaderPlugin(),
       new MiniCssExtractPlugin({
-        filename: '[name].css'
+        filename: '[name].css',
       }),
       new webpack.DefinePlugin({
         __VUE_OPTIONS_API__: true,
-        __VUE_PROD_DEVTOOLS__: false
-      })
+        __VUE_PROD_DEVTOOLS__: false,
+      }),
     ],
     optimization: {
-      minimize
+      minimize,
     },
     devServer: {
       stats: 'minimal',
       contentBase: __dirname,
-      overlay: true
+      overlay: true,
     },
     resolveLoader: {
       alias: {
-        'vue-loader': require.resolve('../')
-      }
-    }
+        'vue-loader': require.resolve('../'),
+      },
+    },
   }
 }

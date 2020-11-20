@@ -3,30 +3,30 @@
   <div>
     {{ count }} <button @click="inc">+</button>
     <button @click="changeColor">change color</button>
-    <Button/>
+    <Button />
   </div>
 </template>
 
 <script setup>
 import { ref } from 'vue'
-export { default as Button } from './Button.vue'
+import Button from './Button.vue'
 
-export const count = ref(0)
+const count = ref(0)
 
-export function inc() {
+function inc() {
   count.value++
 }
 
-export const hello = 'hi from script setup'
+const hello = 'hi from script'
 
-export const color = ref('red')
-export const changeColor = () => {
+const color = ref('cyan')
+const changeColor = () => {
   color.value = color.value === 'red' ? 'green' : 'red'
 }
 </script>
 
-<style scoped vars="{ color }">
+<style>
 h2 {
-  color: var(--color)
+  color: v-bind(color);
 }
 </style>
