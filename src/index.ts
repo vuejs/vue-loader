@@ -29,7 +29,7 @@ import { genCSSModulesCode } from './cssModules'
 import { formatError } from './formatError'
 
 import VueLoaderPlugin from './plugin'
-import { resolveScript } from './resolveScript'
+import { canInlineTemplate, resolveScript } from './resolveScript'
 import { setDescriptor } from './descriptorCache'
 
 export { VueLoaderPlugin }
@@ -155,9 +155,7 @@ export default function loader(
   let templateImport = ``
   let templateRequest
   const renderFnName = isServer ? `ssrRender` : `render`
-  const templateLang = descriptor.template && descriptor.template.lang
-  const useInlineTemplate =
-    descriptor.scriptSetup && isProduction && !isServer && !templateLang
+  const useInlineTemplate = canInlineTemplate(descriptor, isProduction)
   if (descriptor.template && !useInlineTemplate) {
     const src = descriptor.template.src || resourcePath
     const idQuery = `&id=${id}`

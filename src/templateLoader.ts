@@ -3,11 +3,7 @@ import * as qs from 'querystring'
 import * as loaderUtils from 'loader-utils'
 import { VueLoaderOptions } from './'
 import { formatError } from './formatError'
-import {
-  compileTemplate,
-  generateCssVars,
-  TemplateCompiler,
-} from '@vue/compiler-sfc'
+import { compileTemplate, TemplateCompiler } from '@vue/compiler-sfc'
 import { getDescriptor } from './descriptorCache'
 import { resolveScript } from './resolveScript'
 
@@ -25,7 +21,7 @@ const TemplateLoader: webpack.loader.Loader = function (source, inMap) {
     {}) as VueLoaderOptions
 
   const isServer = loaderContext.target === 'node'
-  const isProduction = loaderContext.mode === 'production'
+  const isProd = loaderContext.mode === 'production'
   const query = qs.parse(loaderContext.resourceQuery.slice(1))
   const scopeId = query.id as string
   const descriptor = getDescriptor(loaderContext.resourcePath)
@@ -45,13 +41,17 @@ const TemplateLoader: webpack.loader.Loader = function (source, inMap) {
 
   const compiled = compileTemplate({
     source,
-    inMap,
     filename: loaderContext.resourcePath,
+    inMap,
+    // @ts-ignore
+    id: scopeId,
+    isProd,
     ssr: isServer,
+    // @ts-ignore
+    ssrCssVars: descriptor.cssVars,
     compiler,
     compilerOptions: {
       ...options.compilerOptions,
-      ssrCssVars: generateCssVars(descriptor, scopeId, isProduction),
       scopeId: query.scoped ? `data-v-${scopeId}` : undefined,
       bindingMetadata: script ? script.bindings : undefined,
     },

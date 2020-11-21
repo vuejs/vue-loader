@@ -7,10 +7,20 @@ import {
 } from '@vue/compiler-sfc'
 import { VueLoaderOptions } from 'src'
 
-// since we generate different output based on whether the template is inlined
-// or not, we need to cache the results separately
-const inlinedCache = new WeakMap<SFCDescriptor, SFCScriptBlock | null>()
-const normalCache = new WeakMap<SFCDescriptor, SFCScriptBlock | null>()
+const clientCache = new WeakMap<SFCDescriptor, SFCScriptBlock | null>()
+const serverCache = new WeakMap<SFCDescriptor, SFCScriptBlock | null>()
+
+/**
+ * inline template mode can only be enabled if:
+ * - is production (separate compilation needed for HMR during dev)
+ * - template has no pre-processor (separate loader chain required)
+ * - template is not using src
+ */
+export function canInlineTemplate(descriptor: SFCDescriptor, isProd: boolean) {
+  const templateLang = descriptor.template && descriptor.template.lang
+  const templateSrc = descriptor.template && descriptor.template.src
+  return isProd && !!descriptor.scriptSetup && !templateLang && !templateSrc
+}
 
 export function resolveScript(
   descriptor: SFCDescriptor,
@@ -24,10 +34,9 @@ export function resolveScript(
 
   const isProd = loaderContext.mode === 'production'
   const isServer = loaderContext.target === 'node'
-  const templateLang = descriptor.template && descriptor.template.lang
-  const enableInline = isProd && !isServer && !templateLang
+  const enableInline = canInlineTemplate(descriptor, isProd)
 
-  const cacheToUse = enableInline ? inlinedCache : normalCache
+  const cacheToUse = isServer ? serverCache : clientCache
   const cached = cacheToUse.get(descriptor)
   if (cached) {
     return cached
@@ -45,13 +54,14 @@ export function resolveScript(
   if (compileScript) {
     try {
       resolved = compileScript(descriptor, {
-        // @ts-ignore TODO remove when vue is upgraded
-        scopeId,
+        // @ts-ignore
+        id: scopeId,
         isProd,
         inlineTemplate: enableInline,
         babelParserPlugins: options.babelParserPlugins,
         templateOptions: {
           compiler,
+          ssr: isServer,
           transformAssetUrls: options.transformAssetUrls || true,
         },
       })

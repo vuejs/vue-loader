@@ -17,9 +17,9 @@ function inc() {
   count.value++
 }
 
-const hello = 'hi from script'
+const hello = 'hi from scriptttt'
 
-const color = ref('cyan')
+const color = ref('red')
 const changeColor = () => {
   color.value = color.value === 'red' ? 'green' : 'red'
 }
