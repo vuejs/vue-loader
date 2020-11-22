@@ -29,7 +29,7 @@ import { genCSSModulesCode } from './cssModules'
 import { formatError } from './formatError'
 
 import VueLoaderPlugin from './plugin'
-import { canInlineTemplate, resolveScript } from './resolveScript'
+import { canInlineTemplate } from './resolveScript'
 import { setDescriptor } from './descriptorCache'
 
 export { VueLoaderPlugin }
@@ -139,10 +139,10 @@ export default function loader(
 
   // script
   let scriptImport = `const script = {}`
-  const script = resolveScript(descriptor, id, options, loaderContext)
-  if (script) {
-    const src = script.src || resourcePath
-    const attrsQuery = attrsToQuery(script.attrs, 'js')
+  const { script, scriptSetup } = descriptor
+  if (script || scriptSetup) {
+    const src = (script && !scriptSetup && script.src) || resourcePath
+    const attrsQuery = attrsToQuery((scriptSetup || script)!.attrs, 'js')
     const query = `?vue&type=script${attrsQuery}${resourceQuery}`
     const scriptRequest = stringifyRequest(src + query)
     scriptImport =
