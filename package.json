@@ -16,6 +16,7 @@
     "test:webpack5": "WEBPACK5=true jest -c --coverage",
     "dev-example": "webpack-dev-server --config example/webpack.config.js --inline --hot",
     "build-example": "rm -rf example/dist && webpack --config example/webpack.config.js --env.prod",
+    "build-example-ssr": "rm -rf example/dist-ssr && webpack --config example/webpack.config.js --env.prod --env.ssr && node example/ssr.js",
     "lint": "prettier --write --parser typescript \"{src,test}/**/*.{j,t}s\"",
     "prepublishOnly": "tsc"
   },
