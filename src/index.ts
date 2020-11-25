@@ -43,6 +43,7 @@ export interface VueLoaderOptions {
   hotReload?: boolean
   exposeFilename?: boolean
   appendExtension?: boolean
+  enableServerHMR?: boolean
 }
 
 let errorEmitted = false
@@ -86,6 +87,7 @@ export default function loader(
     {}) as VueLoaderOptions
 
   const isServer = target === 'node'
+  const enableServerHMR = options.enableServerHMR
   const isProduction = mode === 'production'
 
   const { descriptor, errors } = parse(source, {
@@ -132,7 +134,7 @@ export default function loader(
   // feature information
   const hasScoped = descriptor.styles.some((s) => s.scoped)
   const needsHotReload =
-    !isServer &&
+    (enableServerHMR || !isServer) &&
     !isProduction &&
     !!(descriptor.script || descriptor.scriptSetup || descriptor.template) &&
     options.hotReload !== false
