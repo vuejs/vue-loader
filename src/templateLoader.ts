@@ -43,11 +43,9 @@ const TemplateLoader: webpack.loader.Loader = function (source, inMap) {
     source,
     filename: loaderContext.resourcePath,
     inMap,
-    // @ts-ignore
     id: scopeId,
     isProd,
     ssr: isServer,
-    // @ts-ignore
     ssrCssVars: descriptor.cssVars,
     compiler,
     compilerOptions: {

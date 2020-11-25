@@ -54,7 +54,6 @@ export function resolveScript(
   if (compileScript) {
     try {
       resolved = compileScript(descriptor, {
-        // @ts-ignore
         id: scopeId,
         isProd,
         inlineTemplate: enableInline,
