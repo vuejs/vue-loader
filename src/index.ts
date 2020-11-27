@@ -43,6 +43,8 @@ export interface VueLoaderOptions {
   hotReload?: boolean
   exposeFilename?: boolean
   appendExtension?: boolean
+
+  isServerBuild?: boolean
 }
 
 let errorEmitted = false
@@ -85,7 +87,7 @@ export default function loader(
   const options = (loaderUtils.getOptions(loaderContext) ||
     {}) as VueLoaderOptions
 
-  const isServer = target === 'node'
+  const isServer = options.isServerBuild ?? target === 'node'
   const isProduction = mode === 'production'
 
   const { descriptor, errors } = parse(source, {

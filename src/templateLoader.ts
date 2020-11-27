@@ -20,7 +20,7 @@ const TemplateLoader: webpack.loader.Loader = function (source, inMap) {
   const options = (loaderUtils.getOptions(loaderContext) ||
     {}) as VueLoaderOptions
 
-  const isServer = loaderContext.target === 'node'
+  const isServer = options.isServerBuild ?? loaderContext.target === 'node'
   const isProd = loaderContext.mode === 'production'
   const query = qs.parse(loaderContext.resourceQuery.slice(1))
   const scopeId = query.id as string
