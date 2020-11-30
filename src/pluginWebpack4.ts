@@ -46,6 +46,7 @@ class VueLoaderPlugin implements webpack.Plugin {
     const vueUse = vueRule.use as webpack.RuleSetLoader[]
     // get vue-loader options
     const vueLoaderUseIndex = vueUse.findIndex((u) => {
+      // FIXME: this code logic is incorrect when project paths starts with `vue-loader-something`
       return /^vue-loader|(\/|\\|@)vue-loader/.test(u.loader || '')
     })
 
