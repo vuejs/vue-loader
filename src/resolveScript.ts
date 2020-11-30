@@ -33,7 +33,7 @@ export function resolveScript(
   }
 
   const isProd = loaderContext.mode === 'production'
-  const isServer = loaderContext.target === 'node'
+  const isServer = options.isServerBuild ?? loaderContext.target === 'node'
   const enableInline = canInlineTemplate(descriptor, isProd)
 
   const cacheToUse = isServer ? serverCache : clientCache
