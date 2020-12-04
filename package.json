@@ -18,7 +18,7 @@
     "build-example": "rm -rf example/dist && webpack --config example/webpack.config.js --env.prod",
     "build-example-ssr": "rm -rf example/dist-ssr && webpack --config example/webpack.config.js --env.prod --env.ssr && node example/ssr.js",
     "lint": "prettier --write --parser typescript \"{src,test}/**/*.{j,t}s\"",
-    "prepublishOnly": "tsc"
+    "prepublishOnly": "tsc && conventional-changelog -p angular -i CHANGELOG.md -s -r 2"
   },
   "gitHooks": {
     "pre-commit": "lint-staged"
@@ -50,6 +50,7 @@
     "@vue/compiler-sfc": "^3.0.3",
     "babel-loader": "^8.1.0",
     "cache-loader": "^4.1.0",
+    "conventional-changelog-cli": "^2.1.1",
     "css-loader": "^4.3.0",
     "file-loader": "^6.1.0",
     "html-webpack-plugin": "^4.5.0",
