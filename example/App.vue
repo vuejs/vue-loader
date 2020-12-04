@@ -14,7 +14,10 @@ import ScriptSetup from './ScriptSetup.vue'
 
 export default {
   data() {
-    return { count: 0 }
+    return {
+      count: 0,
+      color: 'blue'
+    }
   },
   components: {
     Button,
@@ -26,6 +29,6 @@ export default {
 <style scoped>
 .logo {
   width: 100px;
-  border: 1px solid red;
+  border: 1px solid v-bind(color);
 }
 </style>

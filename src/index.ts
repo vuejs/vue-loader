@@ -90,13 +90,14 @@ export default function loader(
   const isServer = options.isServerBuild ?? target === 'node'
   const isProduction = mode === 'production'
 
+  const filename = resourcePath.replace(/\?.*$/, '')
   const { descriptor, errors } = parse(source, {
-    filename: resourcePath,
+    filename,
     sourceMap,
   })
 
   // cache descriptor
-  setDescriptor(resourcePath, descriptor)
+  setDescriptor(filename, descriptor)
 
   if (errors.length) {
     errors.forEach((err) => {
@@ -108,9 +109,9 @@ export default function loader(
 
   // module id for scoped CSS & hot-reload
   const rawShortFilePath = path
-    .relative(rootContext || process.cwd(), resourcePath)
+    .relative(rootContext || process.cwd(), filename)
     .replace(/^(\.\.[\/\\])+/, '')
-  const shortFilePath = rawShortFilePath.replace(/\\/g, '/') + resourceQuery
+  const shortFilePath = rawShortFilePath.replace(/\\/g, '/')
   const id = hash(
     isProduction
       ? shortFilePath + '\n' + source.replace(/\r\n/g, '\n')
