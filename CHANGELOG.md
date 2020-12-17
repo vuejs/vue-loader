@@ -1,3 +1,13 @@
+<a name="15.9.6"></a>
+## [15.9.6](https://github.com/vuejs/vue-loader/compare/v15.9.5...v15.9.6) (2020-12-17)
+
+
+### Bug Fixes
+
+* resourceQuery could be undefined in webpack 5 ([a2b89d3](https://github.com/vuejs/vue-loader/commit/a2b89d3)), closes [#1771](https://github.com/vuejs/vue-loader/issues/1771)
+
+
+
 <a name="15.9.5"></a>
 ## [15.9.5](https://github.com/vuejs/vue-loader/compare/v15.9.4...v15.9.5) (2020-11-02)
 
