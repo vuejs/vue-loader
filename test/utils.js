@@ -83,15 +83,13 @@ function bundle (options, cb, wontThrowError) {
   webpackCompiler.outputFileSystem = mfs
   webpackCompiler.outputFileSystem.join = path.join.bind(path)
   webpackCompiler.run((err, stats) => {
-    const errors = stats.compilation.errors
     if (!wontThrowError) {
       expect(err).toBeNull()
-      if (errors && errors.length) {
-        errors.forEach(error => {
-          console.error(error)
-        })
+
+      if (stats.hasErrors()) {
+        return console.error(stats.toString('errors-only'))
       }
-      expect(errors).toHaveLength(0)
+      expect(stats.hasErrors()).toBeFalsy()
     }
     cb(mfs.readFileSync('/test.build.js').toString(), stats, err)
   })
