@@ -1,3 +1,12 @@
+## [16.1.2](https://github.com/vuejs/vue-loader/compare/v16.1.1...v16.1.2) (2020-12-17)
+
+
+### Bug Fixes
+
+* resourceQuery could be undefined in webpack 5 ([6a1ee76](https://github.com/vuejs/vue-loader/commit/6a1ee76aa6a876155e2cd7fb1f133553a9c38706)), closes [#1771](https://github.com/vuejs/vue-loader/issues/1771)
+
+
+
 ## [16.1.1](https://github.com/vuejs/vue-loader/compare/v16.1.0...v16.1.1) (2020-12-04)
 
 
