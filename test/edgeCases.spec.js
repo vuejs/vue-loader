@@ -218,7 +218,7 @@ test('use with postLoader', done => {
 test('data: URI as entry', done => {
   // this feature is only available in webpack 5
   if (webpack.version.startsWith('4')) {
-    return
+    done()
   }
 
   bundle({
