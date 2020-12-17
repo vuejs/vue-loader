@@ -1,4 +1,5 @@
 import * as path from 'path'
+import webpack = require('webpack')
 import HTMLPlugin = require('html-webpack-plugin')
 import { mfs, bundle, mockBundleAndRun, normalizeNewline } from './utils'
 
@@ -180,4 +181,18 @@ test('use with postLoader', async () => {
     },
   })
   assertComponent(Object.assign({ expectedMsg: 'Changed!' }, result))
+})
+
+// #1771
+test('data: URI as entry', async () => {
+  // this feature is only available in webpack 5
+  if (webpack.version!.startsWith('4')) {
+    return
+  }
+
+  await bundle({
+    entry: {
+      main: 'data:text/javascript,console.log("hello world")',
+    },
+  })
 })

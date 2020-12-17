@@ -169,7 +169,10 @@ class VueLoaderPlugin implements Plugin {
     // rule for template compiler
     const templateCompilerRule = {
       loader: require.resolve('./templateLoader'),
-      resourceQuery: (query: string) => {
+      resourceQuery: (query?: string) => {
+        if (!query) {
+          return false
+        }
         const parsed = qs.parse(query.slice(1))
         return parsed.vue != null && parsed.type === 'template'
       },
@@ -188,7 +191,10 @@ class VueLoaderPlugin implements Plugin {
     // post loader)
     const pitcher = {
       loader: require.resolve('./pitcher'),
-      resourceQuery: (query: string) => {
+      resourceQuery: (query?: string) => {
+        if (!query) {
+          return false
+        }
         const parsed = qs.parse(query.slice(1))
         return parsed.vue != null
       },
@@ -276,7 +282,11 @@ function cloneRule(
       currentResource = resources
       return true
     },
-    resourceQuery: (query: string) => {
+    resourceQuery: (query?: string) => {
+      if (!query) {
+        return false
+      }
+
       const parsed = qs.parse(query.slice(1))
       if (parsed.vue == null) {
         return false

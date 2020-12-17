@@ -79,7 +79,7 @@ export default function loader(
     sourceMap,
     rootContext,
     resourcePath,
-    resourceQuery,
+    resourceQuery = '',
   } = loaderContext
 
   const rawQuery = resourceQuery.slice(1)
