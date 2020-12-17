@@ -88,7 +88,7 @@ function bundle (options, cb, wontThrowError) {
       expect(err).toBeNull()
       if (errors && errors.length) {
         errors.forEach(error => {
-          console.error(error.message)
+          console.error(error)
         })
       }
       expect(errors).toHaveLength(0)
