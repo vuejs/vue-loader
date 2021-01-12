@@ -68,7 +68,7 @@ module.exports = {
           }
         ]
       },
-      // exmaple configration for <style lang="scss">
+      // example configration for <style lang="scss">
       {
         test: /\.scss$/,
         use: [
