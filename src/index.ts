@@ -45,6 +45,7 @@ export interface VueLoaderOptions {
   appendExtension?: boolean
 
   isServerBuild?: boolean
+  pad?: boolean | 'line' | 'space'
 }
 
 let errorEmitted = false
@@ -89,11 +90,13 @@ export default function loader(
 
   const isServer = options.isServerBuild ?? target === 'node'
   const isProduction = mode === 'production'
+  const pad = options.pad ?? sourceMap
 
   const filename = resourcePath.replace(/\?.*$/, '')
   const { descriptor, errors } = parse(source, {
     filename,
     sourceMap,
+    pad,
   })
 
   // cache descriptor
