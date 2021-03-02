@@ -62,7 +62,19 @@ The above will be compiled into:
 .a[data-v-f3f3eg9] .b { /* ... */ }
 ```
 
-Some pre-processors, such as Sass, may not be able to parse `>>>` properly. In those cases you can use the `/deep/` or `::v-deep` combinator instead - both are aliases for `>>>` and work exactly the same.
+Some pre-processors, such as Sass, may not be able to parse `>>>` properly. In those cases you can use the `/deep/` or `::v-deep` combinator instead - both are aliases for `>>>` and work exactly the same. Based on the example above these two expressions will be compiled to the same output:
+
+``` html
+<style scoped>
+.a::v-deep .b { /* ... */ }
+</style>
+```
+
+``` html
+<style scoped>
+.a /deep/ .b { /* ... */ }
+</style>
+```
 
 ## Dynamically Generated Content
 
