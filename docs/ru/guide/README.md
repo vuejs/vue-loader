@@ -26,7 +26,7 @@ npm install -D vue-loader vue-template-compiler
 
 ``` js
 // webpack.config.js
-const VueLoaderPlugin = require('vue-loader/lib/plugin')
+const { VueLoaderPlugin } = require('vue-loader')
 
 module.exports = {
   module: {
@@ -51,7 +51,7 @@ module.exports = {
 
 ``` js
 // webpack.config.js
-const VueLoaderPlugin = require('vue-loader/lib/plugin')
+const { VueLoaderPlugin } = require('vue-loader')
 
 module.exports = {
   mode: 'development',

@@ -26,7 +26,7 @@ Vue Loader's configuration is a bit different from other loaders. In addition to
 
 ``` js
 // webpack.config.js
-const VueLoaderPlugin = require('vue-loader/lib/plugin')
+const { VueLoaderPlugin } = require('vue-loader')
 
 module.exports = {
   module: {

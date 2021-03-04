@@ -26,7 +26,7 @@ Vue Loader 的配置和其它的 loader 不太一样。除了通过一条规则�
 
 ``` js
 // webpack.config.js
-const VueLoaderPlugin = require('vue-loader/lib/plugin')
+const { VueLoaderPlugin } = require('vue-loader')
 
 module.exports = {
   module: {
@@ -51,7 +51,7 @@ module.exports = {
 
 ``` js
 // webpack.config.js
-const VueLoaderPlugin = require('vue-loader/lib/plugin')
+const { VueLoaderPlugin } = require('vue-loader')
 
 module.exports = {
   mode: 'development',

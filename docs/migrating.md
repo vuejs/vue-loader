@@ -17,7 +17,7 @@ Vue Loader v15 now requires an accompanying webpack plugin to function properly:
 
 ``` js
 // webpack.config.js
-const VueLoaderPlugin = require('vue-loader/lib/plugin')
+const { VueLoaderPlugin } = require('vue-loader')
 
 module.exports = {
   // ...
