@@ -51,7 +51,7 @@ A more complete example webpack config will look like this:
 
 ``` js
 // webpack.config.js
-const VueLoaderPlugin = require('vue-loader/lib/plugin')
+const { VueLoaderPlugin } = require('vue-loader')
 
 module.exports = {
   mode: 'development',
