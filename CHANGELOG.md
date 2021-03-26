@@ -1,3 +1,21 @@
+# [16.2.0](https://github.com/vuejs/vue-loader/compare/v16.1.2...v16.2.0) (2021-03-26)
+
+
+### Features
+
+* enable :slotted usage detection ([66a3759](https://github.com/vuejs/vue-loader/commit/66a3759c052fa75485243d91c22243ee35610089))
+
+
+
+## [16.1.2](https://github.com/vuejs/vue-loader/compare/v16.1.1...v16.1.2) (2020-12-17)
+
+
+### Bug Fixes
+
+* resourceQuery could be undefined in webpack 5 ([6a1ee76](https://github.com/vuejs/vue-loader/commit/6a1ee76aa6a876155e2cd7fb1f133553a9c38706)), closes [#1771](https://github.com/vuejs/vue-loader/issues/1771)
+
+
+
 ## [16.1.2](https://github.com/vuejs/vue-loader/compare/v16.1.1...v16.1.2) (2020-12-17)
 
 
