@@ -44,6 +44,8 @@ const TemplateLoader: webpack.loader.Loader = function (source, inMap) {
     filename: loaderContext.resourcePath,
     inMap,
     id: scopeId,
+    scoped: !!query.scoped,
+    slotted: descriptor.slotted,
     isProd,
     ssr: isServer,
     ssrCssVars: descriptor.cssVars,
