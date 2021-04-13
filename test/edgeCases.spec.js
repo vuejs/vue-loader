@@ -1,5 +1,6 @@
 const path = require('path')
 const normalizeNewline = require('normalize-newline')
+const webpack = require('webpack')
 const HTMLPlugin = require('html-webpack-plugin')
 
 const {
@@ -211,4 +212,18 @@ test('use with postLoader', done => {
       expectedMsg: 'Changed!'
     }, done)
   })
+})
+
+// #1711
+test('data: URI as entry', done => {
+  // this feature is only available in webpack 5
+  if (webpack.version.startsWith('4')) {
+    done()
+  }
+
+  bundle({
+    entry: {
+      main: 'data:text/javascript,console.log("hello world")'
+    }
+  }, () => done())
 })

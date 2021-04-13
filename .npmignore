@@ -5,3 +5,6 @@ test
 yarn.lock
 tsconfig.json
 docs
+.github
+.vscode
+TODOS

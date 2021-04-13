@@ -19,6 +19,10 @@ module.exports = {
   serviceWorker: true,
   theme: 'vue',
   themeConfig: {
+    algolia: {
+      apiKey: '3462ea4a6a56b94eba5b01497d6eb627',
+      indexName: 'vue-loader'
+    },
     repo: 'vuejs/vue-loader',
     docsDir: 'docs',
     serviceWorker: {

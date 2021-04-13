@@ -6,3 +6,5 @@ node_modules
 example/dist
 docs/.vuepress/dist
 test/.cache
+.vscode
+TODOS

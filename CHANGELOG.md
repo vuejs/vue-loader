@@ -1,3 +1,70 @@
+<a name="15.9.6"></a>
+## [15.9.6](https://github.com/vuejs/vue-loader/compare/v15.9.5...v15.9.6) (2020-12-17)
+
+
+### Bug Fixes
+
+* resourceQuery could be undefined in webpack 5 ([a2b89d3](https://github.com/vuejs/vue-loader/commit/a2b89d3)), closes [#1771](https://github.com/vuejs/vue-loader/issues/1771)
+
+
+
+<a name="15.9.5"></a>
+## [15.9.5](https://github.com/vuejs/vue-loader/compare/v15.9.4...v15.9.5) (2020-11-02)
+
+
+### Bug Fixes
+
+* add rule plugins to keep up with webpack 5 new features ([7ca8e2c](https://github.com/vuejs/vue-loader/commit/7ca8e2c))
+* ensure new webpack5 generator property in rules passes ruleset checks ([#1753](https://github.com/vuejs/vue-loader/issues/1753)) ([f79bb08](https://github.com/vuejs/vue-loader/commit/f79bb08)), closes [#1729](https://github.com/vuejs/vue-loader/issues/1729)
+
+
+
+<a name="15.9.4"></a>
+## [15.9.4](https://github.com/vuejs/vue-loader/compare/v15.9.3...v15.9.4) (2020-10-27)
+
+
+### Bug Fixes
+
+* fix id differences between different operating systems ([#1706](https://github.com/vuejs/vue-loader/issues/1706)) ([afe8a0d](https://github.com/vuejs/vue-loader/commit/afe8a0d))
+* fix mini-css-extract-plugin missing default export error ([#1748](https://github.com/vuejs/vue-loader/issues/1748)) ([429a284](https://github.com/vuejs/vue-loader/commit/429a284))
+
+
+
+<a name="15.9.3"></a>
+## [15.9.3](https://github.com/vuejs/vue-loader/compare/v15.9.2...v15.9.3) (2020-06-23)
+
+
+### Bug Fixes
+
+* skip matching rule with 'enforce' ([e7b2b11](https://github.com/vuejs/vue-loader/commit/e7b2b11)), closes [#1680](https://github.com/vuejs/vue-loader/issues/1680)
+
+
+
+<a name="15.9.2"></a>
+## [15.9.2](https://github.com/vuejs/vue-loader/compare/v15.9.1...v15.9.2) (2020-05-01)
+
+
+### Bug Fixes
+
+* fix getting shadow root when component is functional ([#1560](https://github.com/vuejs/vue-loader/issues/1560)) ([9a7357a](https://github.com/vuejs/vue-loader/commit/9a7357a))
+
+
+### Documentation
+
+* add DocSearch as recommended by vuepress ([#1662](https://github.com/vuejs/vue-loader/issues/1662)) ([032d56b](https://github.com/vuejs/vue-loader/commit/032d56b))
+
+
+
+<a name="15.9.1"></a>
+## [15.9.1](https://github.com/vuejs/vue-loader/compare/v15.9.0...v15.9.1) (2020-03-19)
+
+
+### Bug Fixes
+
+* ensure unique `ident` when cloning rules, fix webpack 5 compatibility ([#1653](https://github.com/vuejs/vue-loader/issues/1653)) ([84c34a4](https://github.com/vuejs/vue-loader/commit/84c34a4))
+
+
+
 <a name="15.9.0"></a>
 # [15.9.0](https://github.com/vuejs/vue-loader/compare/v15.8.3...v15.9.0) (2020-02-12)
 

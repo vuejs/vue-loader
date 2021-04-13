@@ -107,14 +107,14 @@ In a nutshell, the combination of webpack and `vue-loader` gives you a modern, f
 4. For the `<script>` block, this is pretty much it. For `<template>` and `<style>` blocks though, a few extra tasks need to be performed:
 
     - We need to compile the template using the Vue template compiler;
-    - We need to post-process the CSS in `<style scoped>` blocks, **after** `css-loader` but **before** `style-loader`.
+    - We need to post-process the CSS in `<style scoped>` blocks, **before** `css-loader`.
 
     Technically, these are additional loaders (`src/templateLoader.ts` and `src/stylePostLoader.ts`) that need to be injected into the expanded loader chain. It would be very complicated if the end users have to configure this themselves, so `VueLoaderPlugin` also injects a global [Pitching Loader](https://webpack.js.org/api/loaders/#pitching-loader) (`src/pitcher.ts`) that intercepts Vue `<template>` and `<style>` requests and injects the necessary loaders. The final requests look like the following:
 
     ``` js
     // <template lang="pug">
-    import 'vue-loader/template-loader!pug-loader!source.vue?vue&type=template'
+    import 'vue-loader/template-loader!pug-loader!vue-loader!source.vue?vue&type=template'
 
     // <style scoped lang="scss">
-    import 'style-loader!vue-loader/style-post-loader!css-loader!sass-loader!vue-loader!source.vue?vue&type=style&index=1&scoped&lang=scss'
+    import 'style-loader!css-loader!vue-loader/style-post-loader!sass-loader!vue-loader!source.vue?vue&type=style&index=1&scoped&lang=scss'
     ```
