@@ -75,7 +75,7 @@ module.exports = {
 
 ### 共享全局变量
 
-`sass-loader` 也支持一个 `prependData` 选项，这个选项允许你在所有被处理的文件之间共享常见的变量，而不需要显式地导入它们：
+`sass-loader` 也支持一个 `additionalData` 选项，这个选项允许你在所有被处理的文件之间共享常见的变量，而不需要显式地导入它们：
 
 ``` js
 // webpack.config.js -> module.rules
