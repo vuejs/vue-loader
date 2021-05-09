@@ -9,6 +9,8 @@ const { createFsFromVolume, Volume } = require('memfs')
 const mfs = createFsFromVolume(new Volume())
 const VueLoaderPlugin = require('../lib/plugin')
 
+jest.setTimeout(30000)
+
 const baseConfig = {
   mode: 'development',
   devtool: false,
