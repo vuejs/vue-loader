@@ -1,3 +1,14 @@
+<a name="15.9.7"></a>
+## [15.9.7](https://github.com/vuejs/vue-loader/compare/v15.9.6...v15.9.7) (2021-05-11)
+
+
+### Bug Fixes
+
+* [plugin] Use compiler.webpack when possible ([#1822](https://github.com/vuejs/vue-loader/issues/1822)) ([f7ee30b](https://github.com/vuejs/vue-loader/commit/f7ee30b)), closes [#1781](https://github.com/vuejs/vue-loader/issues/1781)
+* check for compiler.webpack existence ([2472b2f](https://github.com/vuejs/vue-loader/commit/2472b2f))
+
+
+
 <a name="15.9.6"></a>
 ## [15.9.6](https://github.com/vuejs/vue-loader/compare/v15.9.5...v15.9.6) (2020-12-17)
 
