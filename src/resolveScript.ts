@@ -62,6 +62,7 @@ export function resolveScript(
           compiler,
           ssr: isServer,
           transformAssetUrls: options.transformAssetUrls || true,
+          compilerOptions: options.compilerOptions
         },
       })
     } catch (e) {
