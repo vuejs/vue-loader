@@ -57,10 +57,12 @@ export function resolveScript(
         id: scopeId,
         isProd,
         inlineTemplate: enableInline,
+        refSugar: options.refSugar,
         babelParserPlugins: options.babelParserPlugins,
         templateOptions: {
-          compiler,
           ssr: isServer,
+          compiler,
+          compilerOptions: options.compilerOptions,
           transformAssetUrls: options.transformAssetUrls || true,
         },
       })

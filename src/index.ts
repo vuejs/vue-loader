@@ -40,6 +40,7 @@ export interface VueLoaderOptions {
   transformAssetUrls?: SFCTemplateCompileOptions['transformAssetUrls']
   compiler?: TemplateCompiler | string
   compilerOptions?: CompilerOptions
+  refSugar?: boolean
   hotReload?: boolean
   exposeFilename?: boolean
   appendExtension?: boolean

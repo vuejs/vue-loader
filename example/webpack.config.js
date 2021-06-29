@@ -53,6 +53,9 @@ module.exports = (env = {}) => {
           {
             test: /\.vue$/,
             loader: 'vue-loader',
+            options: {
+              refSugar: true,
+            },
           },
           {
             test: /\.png$/,
