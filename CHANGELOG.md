@@ -1,3 +1,21 @@
+# [16.3.0](https://github.com/vuejs/vue-loader/compare/v16.2.0...v16.3.0) (2021-06-29)
+
+
+### Features
+
+* pass on compilerOptions and refSugar when using `<script setup>` ([7137294](https://github.com/vuejs/vue-loader/commit/7137294e7eca465c27c03a43057cb6a8f80ea2d7))
+
+
+
+# [16.2.0](https://github.com/vuejs/vue-loader/compare/v16.1.2...v16.2.0) (2021-03-26)
+
+
+### Features
+
+* enable :slotted usage detection ([66a3759](https://github.com/vuejs/vue-loader/commit/66a3759c052fa75485243d91c22243ee35610089))
+
+
+
 # [16.2.0](https://github.com/vuejs/vue-loader/compare/v16.1.2...v16.2.0) (2021-03-26)
 
 
