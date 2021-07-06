@@ -31,6 +31,7 @@ import { formatError } from './formatError'
 import VueLoaderPlugin from './plugin'
 import { canInlineTemplate } from './resolveScript'
 import { setDescriptor } from './descriptorCache'
+import { addStyleInjectionCode } from './styleInjection'
 
 export { VueLoaderPlugin }
 
@@ -178,36 +179,42 @@ export default function loader(
 
   // styles
   let stylesCode = ``
-  let hasCSSModules = false
+  stylesCode += `\nconst cssModules = script.__cssModules = {}`
+  stylesCode += `\nconst cssBlocks = script.__cssBlocks = {}`
+
   const nonWhitespaceRE = /\S+/
   if (descriptor.styles.length) {
     descriptor.styles
       .filter((style) => style.src || nonWhitespaceRE.test(style.content))
       .forEach((style: SFCStyleBlock, i: number) => {
         const src = style.src || resourcePath
+        style.attrs.module = true
         const attrsQuery = attrsToQuery(style.attrs, 'css')
         // make sure to only pass id when necessary so that we don't inject
         // duplicate tags when multiple components import the same css file
         const idQuery = !style.src || style.scoped ? `&id=${id}` : ``
         const query = `?vue&type=style&index=${i}${idQuery}${attrsQuery}${resourceQuery}`
         const styleRequest = stringifyRequest(src + query)
+
         if (style.module) {
-          if (!hasCSSModules) {
-            stylesCode += `\nconst cssModules = script.__cssModules = {}`
-            hasCSSModules = true
-          }
           stylesCode += genCSSModulesCode(
             id,
             i,
             styleRequest,
-            style.module,
+            style.module || true,
             needsHotReload
           )
         } else {
-          stylesCode += `\nimport ${styleRequest}`
+          const styleVar = `style${i}`
+          stylesCode += `\nimport ${styleVar} from ${styleRequest}`
+          stylesCode += `\ncssBlocks['${styleVar}'] = ${styleVar}`
         }
+
         // TODO SSR critical CSS collection
       })
+
+    // Inject the styles
+    stylesCode += addStyleInjectionCode
   }
 
   let code = [
