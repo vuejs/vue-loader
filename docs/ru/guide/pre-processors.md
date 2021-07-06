@@ -75,7 +75,7 @@ module.exports = {
 
 ### Передача глобальных переменных
 
-`sass-loader` также поддерживает опцию `prependData`, которая позволяет вам передавать общие переменные во все обрабатываемые файлы без необходимости везде их явно импортировать:
+`sass-loader` также поддерживает опцию `additionalData`, которая позволяет вам передавать общие переменные во все обрабатываемые файлы без необходимости везде их явно импортировать:
 
 ``` js
 // webpack.config.js -> module.rules
@@ -222,7 +222,7 @@ module.exports = {
 }
 ```
 
-Конфигурация TypeScipt может быть выполнена через `tsconfig.json`. Также смотрите документацию для [ts-loader](https://github.com/TypeStrong/ts-loader).
+Конфигурация TypeScript может быть выполнена через `tsconfig.json`. Также смотрите документацию для [ts-loader](https://github.com/TypeStrong/ts-loader).
 
 ## Pug
 
