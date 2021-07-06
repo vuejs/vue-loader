@@ -64,6 +64,7 @@ export function resolveScript(
           compiler,
           compilerOptions: options.compilerOptions,
           transformAssetUrls: options.transformAssetUrls || true,
+          compilerOptions: options.compilerOptions
         },
       })
     } catch (e) {
