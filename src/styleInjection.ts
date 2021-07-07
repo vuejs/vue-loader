@@ -1,26 +1,38 @@
-export const addStyleInjectionCode = `
-var options = typeof script === 'function' ? script.options : script
+interface ComponentOptions {
+  beforeMount?(): void
+  __cssBlocks: Record<string, CSSBlock>
+}
 
-function getStyleElement(id) {
+interface ComponentInstance {
+  $options: ComponentOptions
+}
+
+interface CSSBlock {
+  id: string
+}
+
+function getStyleElement(id: string) {
   var existing = document.querySelector("[data-style-id='" + id + "']")
   if (existing) return existing
 
   var styleElement = document.createElement('style')
-  styleElement.setAttribute("data-style-id", id)
-  styleElement.setAttribute("type", "text/css")
+  styleElement.setAttribute('data-style-id', id)
+  styleElement.setAttribute('type', 'text/css')
   document.head.appendChild(styleElement)
   return styleElement
 }
-function injectStyles() {
-  Object.values(cssBlocks).forEach(function(cssBlock) {
+
+function injectStyles(component: ComponentInstance) {
+  Object.values(component.$options.__cssBlocks).forEach(function (cssBlock) {
     var styleElement = getStyleElement(cssBlock.id)
     styleElement.innerHTML = cssBlock.toString()
   })
 }
 
-var beforeCreate = options.beforeCreate
-options.beforeCreate = function beforeCreate() {
-  injectStyles()
-  beforeCreate && beforeCreate()
+export default function addStyleInjectionCode(script: ComponentOptions) {
+  var existing = script.beforeMount
+  script.beforeMount = function beforeMount() {
+    injectStyles(this)
+    existing && existing()
+  }
 }
-`

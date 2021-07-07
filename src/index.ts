@@ -30,7 +30,6 @@ import { formatError } from './formatError'
 import VueLoaderPlugin from './plugin'
 import { canInlineTemplate } from './resolveScript'
 import { setDescriptor } from './descriptorCache'
-import { addStyleInjectionCode } from './styleInjection'
 
 export { VueLoaderPlugin }
 
@@ -224,7 +223,11 @@ export default function loader(
       })
 
     // Inject the styles
-    stylesCode += addStyleInjectionCode
+    const styleInjectionPath = stringifyRequest(
+      path.join(__dirname, 'styleInjection.js')
+    )
+    stylesCode += `\nimport addStyleInjectionCode from ${styleInjectionPath}`
+    stylesCode += `\naddStyleInjectionCode(script)`
   }
 
   let code = [
