@@ -174,3 +174,38 @@ test('cloned rules should not intefere with each other', done => {
     done()
   })
 })
+
+test('ignore style tags', done => {
+  mockBundleAndRun({
+    entry: 'style-dynamic.vue',
+    modify: config => {
+      config.module.rules = [
+        {
+          test: /\.vue$/,
+          loader: 'vue-loader',
+          options: {
+            filterStyleTag: ({ keep }) => {
+              return keep
+            }
+          }
+        },
+        {
+          oneOf: [
+            {
+              test: /\.css$/,
+              use: ['vue-style-loader', 'css-loader']
+            }
+          ]
+        }
+      ]
+    }
+  }, ({ window, module }) => {
+    mockRender(module)
+
+    let style = window.document.querySelector('style').textContent
+    style = normalizeNewline(style)
+    expect(style).toContain(`h2[${module._scopeId}] {\n  color: orange;\n}`)
+    expect(style).not.toContain(`color: cyan;`)
+    done()
+  })
+})

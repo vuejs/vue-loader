@@ -17,7 +17,8 @@ declare namespace VueLoader {
     cacheDirectory?: string
     cacheIdentifier?: string
     prettify?: boolean
-    exposeFilename?: boolean
+    exposeFilename?: boolean,
+    filterStyleTag?: (styleTagAttributes: Object) => boolean,
   }
 }
 
