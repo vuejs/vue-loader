@@ -25,7 +25,6 @@ import {
 } from '@vue/compiler-sfc'
 import { selectBlock } from './select'
 import { genHotReloadCode } from './hotReload'
-import { genCSSModulesCode } from './cssModules'
 import { formatError } from './formatError'
 
 import VueLoaderPlugin from './plugin'
@@ -187,8 +186,9 @@ export default function loader(
     descriptor.styles
       .filter((style) => style.src || nonWhitespaceRE.test(style.content))
       .forEach((style: SFCStyleBlock, i: number) => {
-        const src = style.src || resourcePath
         style.attrs.module = true
+
+        const src = style.src || resourcePath
         const attrsQuery = attrsToQuery(style.attrs, 'css')
         // make sure to only pass id when necessary so that we don't inject
         // duplicate tags when multiple components import the same css file
@@ -196,18 +196,28 @@ export default function loader(
         const query = `?vue&type=style&index=${i}${idQuery}${attrsQuery}${resourceQuery}`
         const styleRequest = stringifyRequest(src + query)
 
+        const styleVar = `style${i}`
+        const styleId = style.src && !style.scoped ? style.src : `${id}-${i}`
+
+        stylesCode += `\nimport ${styleVar} from ${styleRequest}`
+        stylesCode += `\n${styleVar}.id = "${styleId}"`
+        stylesCode += `\ncssBlocks['${styleVar}'] = ${styleVar}`
+
         if (style.module) {
-          stylesCode += genCSSModulesCode(
-            id,
-            i,
-            styleRequest,
-            style.module || true,
-            needsHotReload
-          )
-        } else {
-          const styleVar = `style${i}`
-          stylesCode += `\nimport ${styleVar} from ${styleRequest}`
-          stylesCode += `\ncssBlocks['${styleVar}'] = ${styleVar}`
+          const name =
+            typeof style.module === 'string' ? style.module : '$style'
+          stylesCode += `\ncssModules["${name}"] = ${styleVar}.locals`
+
+          if (needsHotReload) {
+            stylesCode += `
+              if (module.hot) {
+                module.hot.accept(${styleRequest}, () => {
+                  cssModules["${name}"] = ${styleVar}
+                  __VUE_HMR_RUNTIME__.rerender("${id}")
+                })
+              }
+            `
+          }
         }
 
         // TODO SSR critical CSS collection
