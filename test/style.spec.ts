@@ -193,4 +193,18 @@ test('CSS Modules Extend', async () => {
   expect(style).toContain(`.${instance.$style.red} {\n  color: #FF0000;\n}`)
 })
 
+test('shadow root injection', async () => {
+  const { window, instance } = await mockBundleAndRun({
+    entry: './test/fixtures/shadow-root-injection.js',
+  })
+
+  const headStyles = window.document.head.querySelectorAll('style')
+  expect(headStyles.length).toBe(0)
+
+  const shadowStyles = instance.$options.shadowRoot.querySelectorAll('style')
+  expect(shadowStyles.length).toBe(1)
+
+  expect(shadowStyles[0].innerHTML).toContain('comp-a h2 {\n  color: #f00;\n}')
+})
+
 test.todo('experimental <style vars>')
