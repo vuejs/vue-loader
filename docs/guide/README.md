@@ -20,6 +20,10 @@ The reason `vue-template-compiler` has to be installed separately is so that you
 
 Every time a new version of `vue` is released, a corresponding version of `vue-template-compiler` is released together. The compiler's version must be in sync with the base `vue` package so that `vue-loader` produces code that is compatible with the runtime. This means **every time you upgrade `vue` in your project, you should upgrade `vue-template-compiler` to match it as well.**
 
+::: warning
+If you are using Vue 3 with Webpack, the installation setup will change to `npm i -D vue-loader@next @vue/compiler-sfc`. You can find more detailed instructions [here](https://stackoverflow.com/questions/64868632/vuejs-3-problem-with-vue-template-compiler).
+:::
+
 ### webpack Configuration
 
 Vue Loader's configuration is a bit different from other loaders. In addition to a rule that applies `vue-loader` to any files with extension `.vue`, make sure to add Vue Loader's plugin to your webpack config:
