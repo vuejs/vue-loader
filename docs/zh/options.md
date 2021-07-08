@@ -28,6 +28,14 @@ sidebar: auto
 
   覆写用来编译单文件组件中 `<template>` 块的默认编译器。
 
+
+## compilerFile
+
+- 类型：`string`
+- 默认值：`undefined`
+
+  compiler 参数的替换参数，传入指定编译器的 js 文件路径，覆写用来编译单文件组件中 `<template>` 块的默认编译器。
+
 ## compilerOptions
 
 - 类型：`Object`
