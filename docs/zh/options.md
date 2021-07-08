@@ -102,3 +102,10 @@ sidebar: auto
 在非生产环境下，`vue-loader` 会为组件注入一个 `__file` 属性以提升调试体验。如果一个组件没有 `name` 属性，Vue 会通过 `__file` 字段进行推断，并用于控制台警告中的展示。
 
 这个属性在生产环境构建时会被去掉。但如果你在开发一个组件库并且烦于为每个组件设置 `name`，你可能还会想使用它。这时可以把这个选项打开。
+
+## defaultModuleName
+
+- 类型: `string`
+- 默认值: `$style`
+
+当使用 CSS Modules 并且设置 `module` 属性为 `true` 时, 使用这个选项作为组件的属性名来注入 CSS Modules 局部对象。
