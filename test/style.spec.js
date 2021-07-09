@@ -215,7 +215,7 @@ test('CSS Modules Extend', async () => {
       const vnode = mockRender(module)
       expect(vnode.data.class).toBe(instance.$style.red)
 
-      const style = window.document.querySelectorAll('style')[1].textContent
+      const style = [...window.document.querySelectorAll('style')].map(style => style.textContent).join('\n')
       expect(style).toContain(`.${instance.$style.red} {\n  color: #FF0000;\n}`)
 
       resolve()
