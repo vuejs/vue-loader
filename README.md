@@ -68,7 +68,7 @@ In a nutshell, the combination of webpack and `vue-loader` gives you a modern, f
 
     Notice how the code is importing `source.vue` itself, but with different request queries for each block.
 
-2. We want the content in `script` block to be treated like `.js` files (and if it's `<script lang="ts">`, we want to to be treated like `.ts` files). Same for other language blocks. So we want webpack to apply any configured module rules that matches `.js` also to requests that look like `source.vue?vue&type=script`. This is what `VueLoaderPlugin` (`src/plugins.ts`) does: for each module rule in the webpack config, it creates a modified clone that targets corresponding Vue language block requests.
+2. We want the content in `script` block to be treated like `.js` files (and if it's `<script lang="ts">`, we want to be treated like `.ts` files). Same for other language blocks. So we want webpack to apply any configured module rules that matches `.js` also to requests that look like `source.vue?vue&type=script`. This is what `VueLoaderPlugin` (`src/plugins.ts`) does: for each module rule in the webpack config, it creates a modified clone that targets corresponding Vue language block requests.
 
     Suppose we have configured `babel-loader` for all `*.js` files. That rule will be cloned and applied to Vue SFC `<script>` blocks as well. Internally to webpack, a request like
 

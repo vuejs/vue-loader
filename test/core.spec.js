@@ -146,7 +146,7 @@ test('script import', done => {
 })
 
 // #1620
-test('cloned rules should not intefere with each other', done => {
+test('cloned rules should not interfere with each other', done => {
   mockBundleAndRun({
     entry: 'basic.vue',
     module: {
