@@ -14,7 +14,7 @@ const StylePostLoader: webpack.loader.Loader = function (source, inMap) {
     map: inMap,
     scoped: !!query.scoped,
     trim: true,
-    isProd: this.mode === 'production',
+    isProd: this.mode === 'production' || process.env.NODE_ENV === 'production',
   })
 
   if (errors.length) {

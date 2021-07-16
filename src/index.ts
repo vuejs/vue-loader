@@ -89,7 +89,8 @@ export default function loader(
     {}) as VueLoaderOptions
 
   const isServer = options.isServerBuild ?? target === 'node'
-  const isProduction = mode === 'production'
+  const isProduction =
+    mode === 'production' || process.env.NODE_ENV === 'production'
 
   const filename = resourcePath.replace(/\?.*$/, '')
   const { descriptor, errors } = parse(source, {

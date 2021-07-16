@@ -32,7 +32,8 @@ export function resolveScript(
     return null
   }
 
-  const isProd = loaderContext.mode === 'production'
+  const isProd =
+    loaderContext.mode === 'production' || process.env.NODE_ENV === 'production'
   const isServer = options.isServerBuild ?? loaderContext.target === 'node'
   const enableInline = canInlineTemplate(descriptor, isProd)
 

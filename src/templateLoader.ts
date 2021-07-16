@@ -21,7 +21,8 @@ const TemplateLoader: webpack.loader.Loader = function (source, inMap) {
     {}) as VueLoaderOptions
 
   const isServer = options.isServerBuild ?? loaderContext.target === 'node'
-  const isProd = loaderContext.mode === 'production'
+  const isProd =
+    loaderContext.mode === 'production' || process.env.NODE_ENV === 'production'
   const query = qs.parse(loaderContext.resourceQuery.slice(1))
   const scopeId = query.id as string
   const descriptor = getDescriptor(loaderContext.resourcePath)
