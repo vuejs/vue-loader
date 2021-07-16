@@ -77,6 +77,7 @@ export default function loader(
   const {
     mode,
     target,
+    request,
     sourceMap,
     rootContext,
     resourcePath,
@@ -241,6 +242,9 @@ export default function loader(
     // For security reasons, only expose the file's basename in production.
     code += `\nscript.__file = ${JSON.stringify(path.basename(resourcePath))}`
   }
+
+  // set modlue indentifier for SSR async components preload
+  code += `\nscript.__moduleIdentifier =${JSON.stringify(hash(request))}`
 
   // custom blocks
   if (descriptor.customBlocks && descriptor.customBlocks.length) {
