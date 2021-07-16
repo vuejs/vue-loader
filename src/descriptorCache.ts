@@ -1,6 +1,5 @@
 import * as fs from 'fs'
-import { SFCDescriptor } from '@vue/compiler-sfc'
-import { parse } from '@vue/compiler-sfc'
+import { SFCDescriptor, parse } from '@vue/compiler-sfc'
 
 const cache = new Map<string, SFCDescriptor>()
 
