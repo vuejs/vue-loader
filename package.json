@@ -36,6 +36,10 @@
     "hash-sum": "^2.0.0",
     "loader-utils": "^2.0.0"
   },
+  "peerDependencies": {
+    "@vue/compiler-sfc": "^3.0.8",
+    "webpack": "^4.1.0 || ^5.0.0-0"
+  },
   "devDependencies": {
     "@babel/core": "^7.7.7",
     "@babel/preset-env": "^7.11.5",
