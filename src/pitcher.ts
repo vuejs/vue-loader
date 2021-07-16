@@ -15,6 +15,7 @@ interface Loader {
 }
 
 const isESLintLoader = (l: Loader) => /(\/|\\|@)eslint-loader/.test(l.path)
+const isStyleLoader = (l: Loader) => /(\/|\\|@)style-loader/.test(l.path)
 const isNullLoader = (l: Loader) => /(\/|\\|@)null-loader/.test(l.path)
 const isCSSLoader = (l: Loader) => /(\/|\\|@)css-loader/.test(l.path)
 const isCacheLoader = (l: Loader) => /(\/|\\|@)cache-loader/.test(l.path)
@@ -60,8 +61,11 @@ export const pitch = function () {
     }
   })
 
-  // Inject style-post-loader before css-loader for scoped CSS and trimming
   if (query.type === `style`) {
+    // Remove the style-loader, we'll handle style injection ourselves
+    loaders = loaders.filter((loader) => !isStyleLoader(loader))
+
+    // Inject style-post-loader before css-loader for scoped CSS and trimming
     const cssLoaderIndex = loaders.findIndex(isCSSLoader)
     if (cssLoaderIndex > -1) {
       const afterLoaders = loaders.slice(0, cssLoaderIndex + 1)

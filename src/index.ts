@@ -25,7 +25,6 @@ import {
 } from '@vue/compiler-sfc'
 import { selectBlock } from './select'
 import { genHotReloadCode } from './hotReload'
-import { genCSSModulesCode } from './cssModules'
 import { formatError } from './formatError'
 
 import VueLoaderPlugin from './plugin'
@@ -179,12 +178,16 @@ export default function loader(
 
   // styles
   let stylesCode = ``
-  let hasCSSModules = false
+  stylesCode += `\nconst cssModules = script.__cssModules = {}`
+  stylesCode += `\nconst cssBlocks = script.__cssBlocks = {}`
+
   const nonWhitespaceRE = /\S+/
   if (descriptor.styles.length) {
     descriptor.styles
       .filter((style) => style.src || nonWhitespaceRE.test(style.content))
       .forEach((style: SFCStyleBlock, i: number) => {
+        style.attrs.module = true
+
         const src = style.src || resourcePath
         const attrsQuery = attrsToQuery(style.attrs, 'css')
         // make sure to only pass id when necessary so that we don't inject
@@ -192,23 +195,40 @@ export default function loader(
         const idQuery = !style.src || style.scoped ? `&id=${id}` : ``
         const query = `?vue&type=style&index=${i}${idQuery}${attrsQuery}${resourceQuery}`
         const styleRequest = stringifyRequest(src + query)
+
+        const styleVar = `style${i}`
+        const styleId = style.src && !style.scoped ? style.src : `${id}-${i}`
+
+        stylesCode += `\nimport ${styleVar} from ${styleRequest}`
+        stylesCode += `\n${styleVar}.id = "${styleId}"`
+        stylesCode += `\ncssBlocks['${styleVar}'] = ${styleVar}`
+
         if (style.module) {
-          if (!hasCSSModules) {
-            stylesCode += `\nconst cssModules = script.__cssModules = {}`
-            hasCSSModules = true
+          const name =
+            typeof style.module === 'string' ? style.module : '$style'
+          stylesCode += `\ncssModules["${name}"] = ${styleVar}.locals`
+
+          if (needsHotReload) {
+            stylesCode += `
+              if (module.hot) {
+                module.hot.accept(${styleRequest}, () => {
+                  cssModules["${name}"] = ${styleVar}
+                  __VUE_HMR_RUNTIME__.rerender("${id}")
+                })
+              }
+            `
           }
-          stylesCode += genCSSModulesCode(
-            id,
-            i,
-            styleRequest,
-            style.module,
-            needsHotReload
-          )
-        } else {
-          stylesCode += `\nimport ${styleRequest}`
         }
+
         // TODO SSR critical CSS collection
       })
+
+    // Inject the styles
+    const styleInjectionPath = stringifyRequest(
+      path.join(__dirname, 'styleInjection.js')
+    )
+    stylesCode += `\nimport addStyleInjectionCode from ${styleInjectionPath}`
+    stylesCode += `\naddStyleInjectionCode(script)`
   }
 
   let code = [

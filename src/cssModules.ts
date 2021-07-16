@@ -10,7 +10,8 @@ export function genCSSModulesCode(
 
   // inject variable
   const name = typeof moduleName === 'string' ? moduleName : '$style'
-  code += `\ncssModules["${name}"] = ${styleVar}`
+  code += `\ncssModules["${name}"] = ${styleVar}.locals`
+  code += `\ncssBlocks["${styleVar}"] = ${styleVar}`
 
   if (needsHotReload) {
     code += `
