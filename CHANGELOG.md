@@ -1,3 +1,21 @@
+## [16.3.1](https://github.com/vuejs/vue-loader/compare/v16.3.0...v16.3.1) (2021-07-16)
+
+
+### Bug Fixes
+
+* pick up production env in thread-loader context ([821a3a3](https://github.com/vuejs/vue-loader/commit/821a3a35f04cda3154a9341898225f61d72b3f05)), closes [vuejs/vue-next#3921](https://github.com/vuejs/vue-next/issues/3921)
+
+
+
+# [16.3.0](https://github.com/vuejs/vue-loader/compare/v16.2.0...v16.3.0) (2021-06-29)
+
+
+### Features
+
+* pass on compilerOptions and refSugar when using `<script setup>` ([7137294](https://github.com/vuejs/vue-loader/commit/7137294e7eca465c27c03a43057cb6a8f80ea2d7))
+
+
+
 # [16.3.0](https://github.com/vuejs/vue-loader/compare/v16.2.0...v16.3.0) (2021-06-29)
 
 
