@@ -165,7 +165,12 @@ export function normalizeNewline(input: string): string {
 // see the logic at src/index.ts
 // in non-production environment, shortFilePath is used to generate scope id
 export function genId(fixtureName: string): string {
-  return hash(path.join('test', 'fixtures', fixtureName).replace(/\\/g, '/'))
+  const packageJson = require(path.resolve(process.cwd(), 'package.json'))
+  const moduleIdNamespace = packageJson.name || ''
+  return hash(
+    moduleIdNamespace +
+      path.join('test', 'fixtures', fixtureName).replace(/\\/g, '/')
+  )
 }
 
 export { mfs }
