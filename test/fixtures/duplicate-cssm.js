@@ -1,7 +1,17 @@
+import { createApp } from 'vue'
+
 import values from './duplicate-cssm.css'
-import Comp from './duplicate-cssm.vue'
+import Component from './duplicate-cssm.vue'
+
+if (typeof window !== 'undefined') {
+  window.componentModule = Component
+
+  const app = createApp(Component)
+  const container = window.document.createElement('div')
+  window.instance = app.mount(container)
+}
 
 export { values }
-export default Comp
+export default Component
 
 window.exports = values

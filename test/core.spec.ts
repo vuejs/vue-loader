@@ -92,9 +92,9 @@ test('style import for a same file twice', async () => {
   expect(styles[0].textContent).toContain('h1 { color: red;\n}')
 
   // import with scoped
-  const id = 'data-v-' + genId('style-import-twice-sub.vue')
+  const id = 'data-v-' + genId('style-import-twice.vue')
   expect(styles[1].textContent).toContain('h1[' + id + '] { color: green;\n}')
-  const id2 = 'data-v-' + genId('style-import-twice.vue')
+  const id2 = 'data-v-' + genId('style-import-twice-sub.vue')
   expect(styles[2].textContent).toContain('h1[' + id2 + '] { color: green;\n}')
 })
 
