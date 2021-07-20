@@ -1,3 +1,12 @@
+## [16.3.2](https://github.com/vuejs/vue-loader/compare/v16.3.1...v16.3.2) (2021-07-20)
+
+
+### Bug Fixes
+
+* add undeclared peer dependency `webpack` and `@vue/compiler-sfc` ([#1853](https://github.com/vuejs/vue-loader/issues/1853)) ([330d672](https://github.com/vuejs/vue-loader/commit/330d672fb344fddefec98e170587d93876a9e354))
+
+
+
 ## [16.3.1](https://github.com/vuejs/vue-loader/compare/v16.3.0...v16.3.1) (2021-07-16)
 
 
