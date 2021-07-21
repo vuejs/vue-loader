@@ -205,9 +205,16 @@ export default function loader(
             needsHotReload
           )
         } else {
-          stylesCode += `\nimport ${styleRequest}`
+          // SSR need server inject style
+          // So here we expose the style's __inject__ function to SFC script
+          // In Server render function, we can use App.__inject__(context) function to append styles to current context
+          if(isServer) {
+            stylesCode += `\nvar style${i} = require(${styleRequest})\n` +
+                `if (style${i}.__inject__) script.__inject__ = style${i}.__inject__`;
+          } else {
+            stylesCode += `\nimport ${styleRequest}`;
+          }
         }
-        // TODO SSR critical CSS collection
       })
   }
 
