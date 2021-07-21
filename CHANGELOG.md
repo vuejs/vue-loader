@@ -1,3 +1,12 @@
+## [16.3.3](https://github.com/vuejs/vue-loader/compare/v16.3.2...v16.3.3) (2021-07-21)
+
+
+### Bug Fixes
+
+* mark @vue/compiler-sfc as an optional peer dependency ([089473a](https://github.com/vuejs/vue-loader/commit/089473af97077b8e14b3feff48d32d2733ad792c))
+
+
+
 ## [16.3.2](https://github.com/vuejs/vue-loader/compare/v16.3.1...v16.3.2) (2021-07-20)
 
 
