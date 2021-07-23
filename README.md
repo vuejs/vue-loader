@@ -4,6 +4,13 @@
 
 - [Documentation](https://vue-loader.vuejs.org)
 
+## v16 Only Options
+
+- `refSugar: boolean`: enable experimental ref sugar.
+- `customElement: boolean | RegExp`: enable custom elements mode.
+  - Default is `/\.ce\.vue$/`
+  - Setting to `true` will load all `.vue` files as native Custom Elements.
+
 ## What is Vue Loader?
 
 `vue-loader` is a loader for [webpack](https://webpack.js.org/) that allows you to author Vue components in a format called [Single-File Components (SFCs)](./docs/spec.md):

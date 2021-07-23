@@ -21,7 +21,6 @@ import {
   SFCBlock,
   SFCTemplateCompileOptions,
   SFCScriptCompileOptions,
-  SFCStyleBlock,
 } from '@vue/compiler-sfc'
 import { selectBlock } from './select'
 import { genHotReloadCode } from './hotReload'
@@ -41,6 +40,8 @@ export interface VueLoaderOptions {
   compiler?: TemplateCompiler | string
   compilerOptions?: CompilerOptions
   refSugar?: boolean
+  customElement?: boolean | RegExp
+
   hotReload?: boolean
   exposeFilename?: boolean
   appendExtension?: boolean
@@ -97,6 +98,11 @@ export default function loader(
     filename,
     sourceMap,
   })
+
+  const asCustomElement =
+    typeof options.customElement === 'boolean'
+      ? options.customElement
+      : (options.customElement || /\.ce\.vue$/).test(filename)
 
   // cache descriptor
   setDescriptor(filename, descriptor)
@@ -184,15 +190,21 @@ export default function loader(
   if (descriptor.styles.length) {
     descriptor.styles
       .filter((style) => style.src || nonWhitespaceRE.test(style.content))
-      .forEach((style: SFCStyleBlock, i: number) => {
+      .forEach((style, i) => {
         const src = style.src || resourcePath
         const attrsQuery = attrsToQuery(style.attrs, 'css')
         // make sure to only pass id when necessary so that we don't inject
         // duplicate tags when multiple components import the same css file
         const idQuery = !style.src || style.scoped ? `&id=${id}` : ``
-        const query = `?vue&type=style&index=${i}${idQuery}${attrsQuery}${resourceQuery}`
+        const inlineQuery = asCustomElement ? `&inline` : ``
+        const query = `?vue&type=style&index=${i}${idQuery}${inlineQuery}${attrsQuery}${resourceQuery}`
         const styleRequest = stringifyRequest(src + query)
         if (style.module) {
+          if (asCustomElement) {
+            loaderContext.emitError(
+              `<style module> is not supported in custom element mode.`
+            )
+          }
           if (!hasCSSModules) {
             stylesCode += `\nconst cssModules = script.__cssModules = {}`
             hasCSSModules = true
@@ -205,10 +217,19 @@ export default function loader(
             needsHotReload
           )
         } else {
-          stylesCode += `\nimport ${styleRequest}`
+          if (asCustomElement) {
+            stylesCode += `\nimport _style_${i} from ${styleRequest}`
+          } else {
+            stylesCode += `\nimport ${styleRequest}`
+          }
         }
         // TODO SSR critical CSS collection
       })
+    if (asCustomElement) {
+      stylesCode += `\nscript.styles = [${descriptor.styles.map(
+        (_, i) => `_style_${i}`
+      )}]`
+    }
   }
 
   let code = [
@@ -264,7 +285,10 @@ export default function loader(
   }
 
   // finalize
-  code += `\n\nexport default script`
+  code += asCustomElement
+    ? `\n\nimport { defineCustomElement as __ce } from 'vue';` +
+      `export default __ce(script)`
+    : `\n\nexport default script`
   return code
 }
 

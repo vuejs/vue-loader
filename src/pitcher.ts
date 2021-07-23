@@ -5,6 +5,7 @@ import * as loaderUtils from 'loader-utils'
 const selfPath = require.resolve('./index')
 // const templateLoaderPath = require.resolve('./templateLoader')
 const stylePostLoaderPath = require.resolve('./stylePostLoader')
+const styleInlineLoaderPath = require.resolve('./styleInlineLoader')
 
 // @types/webpack doesn't provide the typing for loaderContext.loaders...
 interface Loader {
@@ -64,12 +65,17 @@ export const pitch = function () {
   if (query.type === `style`) {
     const cssLoaderIndex = loaders.findIndex(isCSSLoader)
     if (cssLoaderIndex > -1) {
-      const afterLoaders = loaders.slice(0, cssLoaderIndex + 1)
+      // if inlined, ignore any loaders after css-loader and replace w/ inline
+      // loader
+      const afterLoaders =
+        query.inline != null
+          ? [styleInlineLoaderPath]
+          : loaders.slice(0, cssLoaderIndex + 1)
       const beforeLoaders = loaders.slice(cssLoaderIndex + 1)
       return genProxyModule(
         [...afterLoaders, stylePostLoaderPath, ...beforeLoaders],
         context,
-        !!query.module
+        !!query.module || query.inline != null
       )
     }
   }
