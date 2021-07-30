@@ -1,3 +1,11 @@
+# [16.4.0](https://github.com/vuejs/vue-loader/compare/v16.3.3...v16.4.0) (2021-07-30)
+
+
+### Features
+
+* customElement option support for Vue 3.2 ([e19fcda](https://github.com/vuejs/vue-loader/commit/e19fcdaa62c4aa5d826c33a0e7fb8786904ee225))
+
+
 ## [16.3.3](https://github.com/vuejs/vue-loader/compare/v16.3.2...v16.3.3) (2021-07-21)
 
 
