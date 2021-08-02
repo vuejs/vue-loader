@@ -1,3 +1,13 @@
+<a name="15.9.8"></a>
+## [15.9.8](https://github.com/vuejs/vue-loader/compare/v15.9.7...v15.9.8) (2021-08-02)
+
+
+### Bug Fixes
+
+* fix webpack 5.48 compatibility ([c4c5f17](https://github.com/vuejs/vue-loader/commit/c4c5f17)), closes [#1859](https://github.com/vuejs/vue-loader/issues/1859)
+
+
+
 <a name="15.9.7"></a>
 ## [15.9.7](https://github.com/vuejs/vue-loader/compare/v15.9.6...v15.9.7) (2021-05-11)
 
