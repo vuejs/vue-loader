@@ -6,12 +6,6 @@
 * fix webpack 5.48 compatibility ([b94289c](https://github.com/vuejs/vue-loader/commit/b94289c9fb395556100ec121529dfe676280d3cd)), closes [#1859](https://github.com/vuejs/vue-loader/issues/1859)
 
 
-### Features
-
-* customElement option support for Vue 3.2 ([e19fcda](https://github.com/vuejs/vue-loader/commit/e19fcdaa62c4aa5d826c33a0e7fb8786904ee225))
-
-
-
 # [16.4.0](https://github.com/vuejs/vue-loader/compare/v16.3.3...v16.4.0) (2021-07-30)
 
 
