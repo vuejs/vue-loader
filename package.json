@@ -38,7 +38,7 @@
   },
   "peerDependencies": {
     "css-loader": "*",
-    "webpack": "^3.0.0 || ^4.1.0 || ^5.0.0-0"
+    "webpack": "^3.0.0 || ^4.1.0 || ^5.0.0"
   },
   "peerDependenciesMeta": {
     "cache-loader": {
