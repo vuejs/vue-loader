@@ -1,3 +1,16 @@
+# [16.5.0](https://github.com/vuejs/vue-loader/compare/v16.4.1...v16.5.0) (2021-08-07)
+
+* Custom Elements mode behavior changed: now only inlines the CSS and no longer exports the custom element constructor (exports the component as in normal mode). Users now need to explicitly call `defineCustomElement` on the component. This allows the custom element to be defined using an async version of the source component.
+
+## [16.4.1](https://github.com/vuejs/vue-loader/compare/v16.4.0...v16.4.1) (2021-08-02)
+
+
+### Bug Fixes
+
+* fix webpack 5.48 compatibility ([b94289c](https://github.com/vuejs/vue-loader/commit/b94289c9fb395556100ec121529dfe676280d3cd)), closes [#1859](https://github.com/vuejs/vue-loader/issues/1859)
+
+
+
 ## [16.4.1](https://github.com/vuejs/vue-loader/compare/v16.3.3...v16.4.1) (2021-08-02)
 
 
