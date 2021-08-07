@@ -285,10 +285,7 @@ export default function loader(
   }
 
   // finalize
-  code += asCustomElement
-    ? `\n\nimport { defineCustomElement as __ce } from 'vue';` +
-      `export default __ce(script)`
-    : `\n\nexport default script`
+  code += `\n\nexport default script`
   return code
 }
 
