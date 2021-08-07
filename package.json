@@ -1,6 +1,6 @@
 {
   "name": "vue-loader",
-  "version": "16.4.1",
+  "version": "16.5.0",
   "license": "MIT",
   "author": "Evan You",
   "main": "dist/index.js",
