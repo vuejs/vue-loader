@@ -10,25 +10,24 @@ jobs:
   test-webpack4:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
       - name: Set node version to 16
         uses: actions/setup-node@v2
         with:
           node-version: 16
-      - uses: bahmutov/npm-install@v1
-      - name: Lint
-        run: yarn lint
-      - name: Run tests for webpack 4
-        run: yarn test
+          cache: 'yarn'
+      - run: yarn install
+      - run: yarn lint
+      - run: yarn test
 
   test-webpack5:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
       - name: Set node version to 16
         uses: actions/setup-node@v2
         with:
           node-version: 16
-      - uses: bahmutov/npm-install@v1
-      - name: Run tests for webpack 5
-        run: yarn test:webpack5
+          cache: 'yarn'
+      - run: yarn install
+      - run: yarn test:webpack5
