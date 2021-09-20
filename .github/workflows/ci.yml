@@ -30,4 +30,5 @@ jobs:
           node-version: 16
           cache: 'yarn'
       - run: yarn install
+      - run: yarn build
       - run: yarn test:webpack5
