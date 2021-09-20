@@ -1,4 +1,4 @@
-# vue-loader [![Build Status](https://circleci.com/gh/vuejs/vue-loader/tree/next.svg?style=shield)](https://circleci.com/gh/vuejs/vue-loader/tree/next) [![Windows Build status](https://ci.appveyor.com/api/projects/status/8cdonrkbg6m4k1tm/branch/next?svg=true)](https://ci.appveyor.com/project/yyx990803/vue-loader/branch/next)
+# vue-loader [![ci](https://github.com/vuejs/vue-loader/actions/workflows/ci.yml/badge.svg?branch=next)](https://github.com/vuejs/vue-loader/actions/workflows/ci.yml)
 
 > webpack loader for Vue Single-File Components
 
