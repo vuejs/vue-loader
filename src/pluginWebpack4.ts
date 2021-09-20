@@ -75,13 +75,14 @@ class VueLoaderPlugin implements webpack.Plugin {
       options: vueLoaderOptions,
     }
 
-    // for each rule that matches plain .js files, also create a clone and
+    // for each rule that matches plain .js/.ts files, also create a clone and
     // match it against the compiled template code inside *.vue files, so that
     // compiled vue render functions receive the same treatment as user code
     // (mostly babel)
     const matchesJS = createMatcher(`test.js`)
+    const matchesTS = createMatcher(`test.ts`)
     const jsRulesForRenderFn = rules
-      .filter((r) => r !== vueRule && matchesJS(r))
+      .filter((r) => r !== vueRule && (matchesJS(r) || matchesTS(r)))
       .map(cloneRuleForRenderFn)
 
     // pitcher for block requests (for injecting stylePostLoader and deduping
@@ -175,7 +176,7 @@ function cloneRuleForRenderFn(rule: webpack.RuleSetRule) {
       if (parsed.vue == null || parsed.type !== 'template') {
         return false
       }
-      const fakeResourcePath = `${currentResource}.js`
+      const fakeResourcePath = `${currentResource}.${parsed.ts ? `ts` : `js`}`
       if (resource && !resource(fakeResourcePath)) {
         return false
       }

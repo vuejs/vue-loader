@@ -6,6 +6,7 @@ import { formatError } from './formatError'
 import { compileTemplate, TemplateCompiler } from '@vue/compiler-sfc'
 import { getDescriptor } from './descriptorCache'
 import { resolveScript } from './resolveScript'
+import { resolveTemplateTSOptions } from './util'
 
 // Loader that compiles raw template into JavaScript functions.
 // This is injected by the global pitcher (../pitch) for template
@@ -13,6 +14,12 @@ import { resolveScript } from './resolveScript'
 const TemplateLoader: webpack.loader.Loader = function (source, inMap) {
   source = String(source)
   const loaderContext = this
+
+  if (/\.[jt]sx?$/.test(loaderContext.resourcePath)) {
+    // ts-loader does some really weird stuff which causes vue-loader to
+    // somehow be applied on non-vue files... ignore them
+    return source
+  }
 
   // although this is not the main vue-loader, we can get access to the same
   // vue-loader options because we've set an ident in the plugin and used that
@@ -55,6 +62,7 @@ const TemplateLoader: webpack.loader.Loader = function (source, inMap) {
       ...options.compilerOptions,
       scopeId: query.scoped ? `data-v-${scopeId}` : undefined,
       bindingMetadata: script ? script.bindings : undefined,
+      ...resolveTemplateTSOptions(descriptor, options.compilerOptions),
     },
     transformAssetUrls: options.transformAssetUrls || true,
   })

@@ -5,12 +5,14 @@
     <span>{{ count }}</span>
     <Button foo="hello!"><span>slot</span></Button>
     <ScriptSetup/>
+    <TypeScript/>
   </div>
 </template>
 
 <script>
 import Button from './Button.vue'
 import ScriptSetup from './ScriptSetup.vue'
+import TypeScript from './TypeScript.vue'
 
 export default {
   data() {
@@ -21,7 +23,8 @@ export default {
   },
   components: {
     Button,
-    ScriptSetup
+    ScriptSetup,
+    TypeScript
   }
 }
 </script>

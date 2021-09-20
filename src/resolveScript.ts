@@ -6,6 +6,7 @@ import {
   TemplateCompiler,
 } from '@vue/compiler-sfc'
 import { VueLoaderOptions } from 'src'
+import { resolveTemplateTSOptions } from './util'
 
 const clientCache = new WeakMap<SFCDescriptor, SFCScriptBlock | null>()
 const serverCache = new WeakMap<SFCDescriptor, SFCScriptBlock | null>()
@@ -63,7 +64,10 @@ export function resolveScript(
         templateOptions: {
           ssr: isServer,
           compiler,
-          compilerOptions: options.compilerOptions,
+          compilerOptions: {
+            ...options.compilerOptions,
+            ...resolveTemplateTSOptions(descriptor, options.compilerOptions),
+          },
           transformAssetUrls: options.transformAssetUrls || true,
         },
       })

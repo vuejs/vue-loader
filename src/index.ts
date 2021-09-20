@@ -57,6 +57,12 @@ export default function loader(
 ) {
   const loaderContext = this
 
+  if (!/\.vue(\.html)?$/.test(loaderContext.resourcePath)) {
+    // ts-loader does some really weird stuff which causes vue-loader to
+    // somehow be applied on non-vue files... ignore them
+    return source
+  }
+
   // check if plugin is installed
   if (
     !errorEmitted &&
@@ -150,8 +156,11 @@ export default function loader(
 
   // script
   let scriptImport = `const script = {}`
+  let isTS = false
   const { script, scriptSetup } = descriptor
   if (script || scriptSetup) {
+    const lang = script?.lang || scriptSetup?.lang
+    isTS = !!(lang && /tsx?/.test(lang))
     const src = (script && !scriptSetup && script.src) || resourcePath
     const attrsQuery = attrsToQuery((scriptSetup || script)!.attrs, 'js')
     const query = `?vue&type=script${attrsQuery}${resourceQuery}`
@@ -172,13 +181,8 @@ export default function loader(
     const idQuery = `&id=${id}`
     const scopedQuery = hasScoped ? `&scoped=true` : ``
     const attrsQuery = attrsToQuery(descriptor.template.attrs)
-    // const bindingsQuery = script
-    //   ? `&bindings=${JSON.stringify(script.bindings ?? {})}`
-    //   : ``
-    // const varsQuery = descriptor.cssVars
-    //   ? `&vars=${qs.escape(generateCssVars(descriptor, id, isProduction))}`
-    //   : ``
-    const query = `?vue&type=template${idQuery}${scopedQuery}${attrsQuery}${resourceQuery}`
+    const tsQuery = isTS ? `&ts=true` : ``
+    const query = `?vue&type=template${idQuery}${scopedQuery}${tsQuery}${attrsQuery}${resourceQuery}`
     templateRequest = stringifyRequest(src + query)
     templateImport = `import { ${renderFnName} } from ${templateRequest}`
   }

@@ -1,17 +1,8 @@
-<template>
-  <h2>{{ hello }}</h2>
-  <div>
-    {{ count }} <button @click="inc">+</button>
-    <button @click="changeColor">change color</button>
-    <Button />
-  </div>
-</template>
-
 <script setup>
 import { ref } from 'vue'
 import Button from './Button.vue'
 
-ref: count = 100
+let count = $ref(100)
 
 function inc() {
   count++
@@ -24,6 +15,15 @@ const changeColor = () => {
   color.value = color.value === 'red' ? 'green' : 'red'
 }
 </script>
+
+<template>
+  <h2>{{ hello }}</h2>
+  <div>
+    ref sugar count: {{ count }} <button @click="inc">+</button>
+    <button @click="changeColor">change color</button>
+    <Button />
+  </div>
+</template>
 
 <style>
 h2 {

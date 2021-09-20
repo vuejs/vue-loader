@@ -80,38 +80,49 @@ module.exports = (env = {}) => {
               'css-loader',
             ],
           },
+          // {
+          //   test: /\.js$/,
+          //   use: [
+          //     {
+          //       loader: 'cache-loader',
+          //       options: {
+          //         cacheIdentifier: hash(
+          //           // deps
+          //           fs.readFileSync(
+          //             path.resolve(__dirname, '../package.json')
+          //           ) +
+          //             // env
+          //             JSON.stringify(env) +
+          //             // client vs. server build
+          //             isServerBuild
+          //         ),
+          //         cacheDirectory: path.resolve(__dirname, '../.cache'),
+          //       },
+          //     },
+          //     ...(useBabel
+          //       ? [
+          //           {
+          //             loader: 'babel-loader',
+          //             options: {
+          //               // use yarn build-example --env.noMinimize to verify that
+          //               // babel is properly applied to all js code, including the
+          //               // render function compiled from SFC templates.
+          //               presets: ['@babel/preset-env'],
+          //             },
+          //           },
+          //         ]
+          //       : []),
+          //   ],
+          // },
           {
-            test: /\.js$/,
+            test: /\.ts$/,
             use: [
               {
-                loader: 'cache-loader',
+                loader: 'ts-loader',
                 options: {
-                  cacheIdentifier: hash(
-                    // deps
-                    fs.readFileSync(
-                      path.resolve(__dirname, '../package.json')
-                    ) +
-                      // env
-                      JSON.stringify(env) +
-                      // client vs. server build
-                      isServerBuild
-                  ),
-                  cacheDirectory: path.resolve(__dirname, '../.cache'),
+                  appendTsSuffixTo: [/\.vue$/],
                 },
               },
-              ...(useBabel
-                ? [
-                    {
-                      loader: 'babel-loader',
-                      options: {
-                        // use yarn build-example --env.noMinimize to verify that
-                        // babel is properly applied to all js code, including the
-                        // render function compiled from SFC templates.
-                        presets: ['@babel/preset-env'],
-                      },
-                    },
-                  ]
-                : []),
             ],
           },
           // target <docs> custom blocks

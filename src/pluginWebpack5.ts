@@ -195,7 +195,11 @@ class VueLoaderPlugin implements Plugin {
     // compiled vue render functions receive the same treatment as user code
     // (mostly babel)
     const jsRulesForRenderFn = rules
-      .filter((r) => r !== rawVueRule && match(r, 'test.js').length > 0)
+      .filter(
+        (r) =>
+          r !== rawVueRule &&
+          (match(r, 'test.js').length > 0 || match(r, 'test.ts').length > 0)
+      )
       .map((rawRule) => cloneRule(rawRule, refs, jsRuleCheck, jsRuleResource))
 
     // global pitcher (responsible for injecting template compiler loader & CSS
@@ -259,7 +263,7 @@ const jsRuleCheck = (query: qs.ParsedUrlQuery): boolean => {
 }
 
 const jsRuleResource = (query: qs.ParsedUrlQuery, resource: string): string =>
-  `${resource}.js`
+  `${resource}.${query.ts ? `ts` : `js`}`
 
 let uid = 0
 
