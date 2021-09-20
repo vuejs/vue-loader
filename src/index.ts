@@ -51,6 +51,8 @@ export interface VueLoaderOptions {
 
 let errorEmitted = false
 
+const exportHelperPath = JSON.stringify(require.resolve('./exportHelper'))
+
 export default function loader(
   this: webpack.loader.LoaderContext,
   source: string
@@ -154,6 +156,10 @@ export default function loader(
     !!(descriptor.script || descriptor.scriptSetup || descriptor.template) &&
     options.hotReload !== false
 
+  // extra properties to attach to the script object
+  // we need to do this in a tree-shaking friendly manner
+  const propsToAttach: [string, string][] = []
+
   // script
   let scriptImport = `const script = {}`
   let isTS = false
@@ -185,6 +191,7 @@ export default function loader(
     const query = `?vue&type=template${idQuery}${scopedQuery}${tsQuery}${attrsQuery}${resourceQuery}`
     templateRequest = stringifyRequest(src + query)
     templateImport = `import { ${renderFnName} } from ${templateRequest}`
+    propsToAttach.push([renderFnName, renderFnName])
   }
 
   // styles
@@ -210,7 +217,8 @@ export default function loader(
             )
           }
           if (!hasCSSModules) {
-            stylesCode += `\nconst cssModules = script.__cssModules = {}`
+            stylesCode += `\nconst cssModules = {}`
+            propsToAttach.push([`__cssModules`, `cssModules`])
             hasCSSModules = true
           }
           stylesCode += genCSSModulesCode(
@@ -230,24 +238,20 @@ export default function loader(
         // TODO SSR critical CSS collection
       })
     if (asCustomElement) {
-      stylesCode += `\nscript.styles = [${descriptor.styles.map(
-        (_, i) => `_style_${i}`
-      )}]`
+      propsToAttach.push([
+        `styles`,
+        `[${descriptor.styles.map((_, i) => `_style_${i}`)}]`,
+      ])
     }
   }
 
-  let code = [
-    templateImport,
-    scriptImport,
-    stylesCode,
-    templateImport ? `script.${renderFnName} = ${renderFnName}` : ``,
-  ]
+  let code = [templateImport, scriptImport, stylesCode]
     .filter(Boolean)
     .join('\n')
 
   // attach scope Id for runtime use
   if (hasScoped) {
-    code += `\nscript.__scopeId = "data-v-${id}"`
+    propsToAttach.push([`__scopeId`, `"data-v-${id}"`])
   }
 
   if (needsHotReload) {
@@ -258,13 +262,14 @@ export default function loader(
   if (!isProduction) {
     // Expose the file's full path in development, so that it can be opened
     // from the devtools.
-    code += `\nscript.__file = ${JSON.stringify(
-      rawShortFilePath.replace(/\\/g, '/')
-    )}`
+    propsToAttach.push([
+      `__file`,
+      JSON.stringify(rawShortFilePath.replace(/\\/g, '/')),
+    ])
   } else if (options.exposeFilename) {
     // Libraries can opt-in to expose their components' filenames in production builds.
     // For security reasons, only expose the file's basename in production.
-    code += `\nscript.__file = ${JSON.stringify(path.basename(resourcePath))}`
+    propsToAttach.push([`__file`, JSON.stringify(path.basename(resourcePath))])
   }
 
   // custom blocks
@@ -282,14 +287,21 @@ export default function loader(
           const query = `?vue&type=custom&index=${i}${blockTypeQuery}${issuerQuery}${attrsQuery}${resourceQuery}`
           return (
             `import block${i} from ${stringifyRequest(src + query)}\n` +
-            `if (typeof block${i} === 'function') block${i}(script)`
+            `if (typeof block${i} === 'function') /*#__PURE__*/block${i}(script)`
           )
         })
         .join(`\n`) + `\n`
   }
 
   // finalize
-  code += `\n\nexport default script`
+  if (!propsToAttach.length) {
+    code += `\n\nexport default script`
+  } else {
+    code += `\n\nimport exportComponent from ${exportHelperPath}`
+    code += `\nexport default /*#__PURE__*/exportComponent(script, [${propsToAttach
+      .map(([key, val]) => `['${key}',${val}]`)
+      .join(',')}])`
+  }
   return code
 }
 
