@@ -1,0 +1,34 @@
+name: 'ci'
+on:
+  push:
+    branches:
+      - '**'
+  pull_request:
+    branches:
+      - next
+jobs:
+  test-webpack4:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Set node version to 16
+        uses: actions/setup-node@v2
+        with:
+          node-version: 16
+      - uses: bahmutov/npm-install@v1
+      - name: Lint
+        run: yarn lint
+      - name: Run tests for webpack 4
+        run: yarn test
+
+  test-webpack5:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Set node version to 16
+        uses: actions/setup-node@v2
+        with:
+          node-version: 16
+      - uses: bahmutov/npm-install@v1
+      - name: Run tests for webpack 5
+        run: yarn test:webpack5
