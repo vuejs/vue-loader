@@ -1,3 +1,26 @@
+# [16.7.0](https://github.com/vuejs/vue-loader/compare/v16.6.0...v16.7.0) (2021-09-21)
+
+
+### Features
+
+* support optional @vue/compiler-sfc peer dep ([21725a4](https://github.com/vuejs/vue-loader/commit/21725a4ebc9c8d7f8a590d700017759327e21c2e))
+
+
+
+# [16.6.0](https://github.com/vuejs/vue-loader/compare/v16.5.0...v16.6.0) (2021-09-20)
+
+
+### Bug Fixes
+
+* generate treeshaking friendly code ([11e3cb8](https://github.com/vuejs/vue-loader/commit/11e3cb8a8a4a4e0aedc2978ce6d7e549a61de3d7))
+
+
+### Features
+
+* support ts in template expressions ([573fbd2](https://github.com/vuejs/vue-loader/commit/573fbd2e72c3246c2daadb8d8c053464c964cfe3))
+
+
+
 # [16.6.0](https://github.com/vuejs/vue-loader/compare/v16.5.0...v16.6.0) (2021-09-20)
 
 
