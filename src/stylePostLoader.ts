@@ -1,5 +1,5 @@
 import * as qs from 'querystring'
-import { compileStyle } from '@vue/compiler-sfc'
+import { compiler } from './compiler'
 import webpack = require('webpack')
 
 // This is a post loader that handles scoped CSS transforms.
@@ -7,7 +7,7 @@ import webpack = require('webpack')
 // for any <style scoped> selection requests initiated from within vue files.
 const StylePostLoader: webpack.loader.Loader = function (source, inMap) {
   const query = qs.parse(this.resourceQuery.slice(1))
-  const { code, map, errors } = compileStyle({
+  const { code, map, errors } = compiler.compileStyle({
     source: source as string,
     filename: this.resourcePath,
     id: `data-v-${query.id}`,

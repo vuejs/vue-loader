@@ -1,12 +1,3 @@
-try {
-  require.resolve('@vue/compiler-sfc')
-} catch (e) {
-  throw new Error(
-    'vue-loader requires @vue/compiler-sfc to be present in the dependency ' +
-      'tree.'
-  )
-}
-
 import webpack = require('webpack')
 import * as path from 'path'
 import * as qs from 'querystring'
@@ -14,8 +5,8 @@ import * as loaderUtils from 'loader-utils'
 
 import hash = require('hash-sum')
 
+import { compiler } from './compiler'
 import {
-  parse,
   TemplateCompiler,
   CompilerOptions,
   SFCBlock,
@@ -102,7 +93,7 @@ export default function loader(
     mode === 'production' || process.env.NODE_ENV === 'production'
 
   const filename = resourcePath.replace(/\?.*$/, '')
-  const { descriptor, errors } = parse(source, {
+  const { descriptor, errors } = compiler.parse(source, {
     filename,
     sourceMap,
   })

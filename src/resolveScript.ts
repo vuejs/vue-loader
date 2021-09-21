@@ -1,12 +1,12 @@
 import webpack = require('webpack')
 import {
-  compileScript,
   SFCDescriptor,
   SFCScriptBlock,
   TemplateCompiler,
 } from '@vue/compiler-sfc'
 import { VueLoaderOptions } from 'src'
 import { resolveTemplateTSOptions } from './util'
+import { compiler } from './compiler'
 
 const clientCache = new WeakMap<SFCDescriptor, SFCScriptBlock | null>()
 const serverCache = new WeakMap<SFCDescriptor, SFCScriptBlock | null>()
@@ -46,16 +46,16 @@ export function resolveScript(
 
   let resolved: SFCScriptBlock | null = null
 
-  let compiler: TemplateCompiler | undefined
+  let templateCompiler: TemplateCompiler | undefined
   if (typeof options.compiler === 'string') {
-    compiler = require(options.compiler)
+    templateCompiler = require(options.compiler)
   } else {
-    compiler = options.compiler
+    templateCompiler = options.compiler
   }
 
-  if (compileScript) {
+  if (compiler.compileScript) {
     try {
-      resolved = compileScript(descriptor, {
+      resolved = compiler.compileScript(descriptor, {
         id: scopeId,
         isProd,
         inlineTemplate: enableInline,
@@ -63,7 +63,7 @@ export function resolveScript(
         babelParserPlugins: options.babelParserPlugins,
         templateOptions: {
           ssr: isServer,
-          compiler,
+          compiler: templateCompiler,
           compilerOptions: {
             ...options.compilerOptions,
             ...resolveTemplateTSOptions(descriptor, options.compilerOptions),

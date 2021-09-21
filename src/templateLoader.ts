@@ -3,10 +3,11 @@ import * as qs from 'querystring'
 import * as loaderUtils from 'loader-utils'
 import { VueLoaderOptions } from './'
 import { formatError } from './formatError'
-import { compileTemplate, TemplateCompiler } from '@vue/compiler-sfc'
+import { TemplateCompiler } from '@vue/compiler-sfc'
 import { getDescriptor } from './descriptorCache'
 import { resolveScript } from './resolveScript'
 import { resolveTemplateTSOptions } from './util'
+import { compiler } from './compiler'
 
 // Loader that compiles raw template into JavaScript functions.
 // This is injected by the global pitcher (../pitch) for template
@@ -40,14 +41,14 @@ const TemplateLoader: webpack.loader.Loader = function (source, inMap) {
     loaderContext
   )
 
-  let compiler: TemplateCompiler | undefined
+  let templateCompiler: TemplateCompiler | undefined
   if (typeof options.compiler === 'string') {
-    compiler = require(options.compiler)
+    templateCompiler = require(options.compiler)
   } else {
-    compiler = options.compiler
+    templateCompiler = options.compiler
   }
 
-  const compiled = compileTemplate({
+  const compiled = compiler.compileTemplate({
     source,
     filename: loaderContext.resourcePath,
     inMap,
@@ -57,7 +58,7 @@ const TemplateLoader: webpack.loader.Loader = function (source, inMap) {
     isProd,
     ssr: isServer,
     ssrCssVars: descriptor.cssVars,
-    compiler,
+    compiler: templateCompiler,
     compilerOptions: {
       ...options.compilerOptions,
       scopeId: query.scoped ? `data-v-${scopeId}` : undefined,

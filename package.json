@@ -37,13 +37,7 @@
     "loader-utils": "^2.0.0"
   },
   "peerDependencies": {
-    "@vue/compiler-sfc": "^3.2.12",
     "webpack": "^4.1.0 || ^5.0.0-0"
-  },
-  "peerDependenciesMeta": {
-    "@vue/compiler-sfc": {
-      "optional": true
-    }
   },
   "devDependencies": {
     "@babel/core": "^7.7.7",
@@ -86,7 +80,7 @@
     "ts-loader-v9": "npm:ts-loader@^9.2.4",
     "typescript": "^4.4.3",
     "url-loader": "^4.1.0",
-    "vue": "^3.2.12",
+    "vue": "^3.2.13",
     "webpack": "^4.41.2",
     "webpack-cli": "^3.3.10",
     "webpack-dev-server": "^3.9.0",
