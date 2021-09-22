@@ -1,3 +1,28 @@
+# [16.8.0](https://github.com/vuejs/vue-loader/compare/v16.7.1...v16.8.0) (2021-09-22)
+
+
+### Bug Fixes
+
+* **hmr:** fix hmr regression ([bacc6a9](https://github.com/vuejs/vue-loader/commit/bacc6a9eeca40d6028a2d9a5f6ee02e6c8574abd))
+
+
+### Features
+
+* enableTsInTemplate option ([7613534](https://github.com/vuejs/vue-loader/commit/7613534954b83489a060860b9525a0d121023c5b))
+
+    - When used with `ts-loader`, due to `ts-loader`'s cache invalidation behavior, it sometimes prevents the template from being hot-reloaded in isolation, causing the component to reload despite only the template being edited. If this is annoying, you can set this option to `false` (and avoid using TS expressions in templates).
+
+    - Alternatively, leave this option on (by default) and use [`esbuild-loader`](https://github.com/privatenumber/esbuild-loader) to transpile TS instead, which doesn't suffer from this problem (it's also a lot faster). However, do note you will need to rely on TS type checking from other sources (e.g. IDE or `vue-tsc`).
+
+## [16.7.1](https://github.com/vuejs/vue-loader/compare/v16.7.0...v16.7.1) (2021-09-22)
+
+
+### Bug Fixes
+
+* remove pure annotation for custom blocks ([cd891e5](https://github.com/vuejs/vue-loader/commit/cd891e593bf7f8aff852f1d47fda2337de661bea))
+
+
+
 ## [16.7.1](https://github.com/vuejs/vue-loader/compare/v16.7.0...v16.7.1) (2021-09-22)
 
 
