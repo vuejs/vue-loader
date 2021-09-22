@@ -245,10 +245,6 @@ export default function loader(
     propsToAttach.push([`__scopeId`, `"data-v-${id}"`])
   }
 
-  if (needsHotReload) {
-    code += genHotReloadCode(id, templateRequest)
-  }
-
   // Expose filename. This is used by the devtools and Vue runtime warnings.
   if (!isProduction) {
     // Expose the file's full path in development, so that it can be opened
@@ -286,13 +282,19 @@ export default function loader(
 
   // finalize
   if (!propsToAttach.length) {
-    code += `\n\nexport default script`
+    code += `\n\nconst __exports__ = script;`
   } else {
     code += `\n\nimport exportComponent from ${exportHelperPath}`
-    code += `\nexport default /*#__PURE__*/exportComponent(script, [${propsToAttach
+    code += `\nconst __exports__ = /*#__PURE__*/exportComponent(script, [${propsToAttach
       .map(([key, val]) => `['${key}',${val}]`)
       .join(',')}])`
   }
+
+  if (needsHotReload) {
+    code += genHotReloadCode(id, templateRequest)
+  }
+
+  code += `\n\nexport default __exports__`
   return code
 }
 
