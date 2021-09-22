@@ -4,5 +4,5 @@ const a: Ref<number> = ref(12)
 </script>
 
 <template>
-  <p @click="a++">From TSssss: {{ a.toFixed(2) }}</p>
+  <p @click="a++">From TSssss: {{ a?.toFixed(2) }}</p>
 </template>

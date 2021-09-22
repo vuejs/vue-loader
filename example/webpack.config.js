@@ -55,7 +55,7 @@ module.exports = (env = {}) => {
             loader: 'vue-loader',
             options: {
               refSugar: true,
-              enableTsInTemplate: false,
+              // enableTsInTemplate: false,
             },
           },
           {
