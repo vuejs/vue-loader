@@ -66,7 +66,9 @@ export function resolveScript(
           compiler: templateCompiler,
           compilerOptions: {
             ...options.compilerOptions,
-            ...resolveTemplateTSOptions(descriptor, options.compilerOptions),
+            ...(options.enableTsInTemplate
+              ? resolveTemplateTSOptions(descriptor, options.compilerOptions)
+              : null),
           },
           transformAssetUrls: options.transformAssetUrls || true,
         },

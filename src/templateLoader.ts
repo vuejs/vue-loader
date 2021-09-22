@@ -63,7 +63,9 @@ const TemplateLoader: webpack.loader.Loader = function (source, inMap) {
       ...options.compilerOptions,
       scopeId: query.scoped ? `data-v-${scopeId}` : undefined,
       bindingMetadata: script ? script.bindings : undefined,
-      ...resolveTemplateTSOptions(descriptor, options.compilerOptions),
+      ...(options.enableTsInTemplate
+        ? resolveTemplateTSOptions(descriptor, options.compilerOptions)
+        : null),
     },
     transformAssetUrls: options.transformAssetUrls || true,
   })

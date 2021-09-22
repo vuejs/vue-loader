@@ -36,6 +36,7 @@ export interface VueLoaderOptions {
   hotReload?: boolean
   exposeFilename?: boolean
   appendExtension?: boolean
+  enableTsInTemplate?: boolean
 
   isServerBuild?: boolean
 }
@@ -178,7 +179,8 @@ export default function loader(
     const idQuery = `&id=${id}`
     const scopedQuery = hasScoped ? `&scoped=true` : ``
     const attrsQuery = attrsToQuery(descriptor.template.attrs)
-    const tsQuery = isTS ? `&ts=true` : ``
+    const tsQuery =
+      options.enableTsInTemplate !== false && isTS ? `&ts=true` : ``
     const query = `?vue&type=template${idQuery}${scopedQuery}${tsQuery}${attrsQuery}${resourceQuery}`
     templateRequest = stringifyRequest(src + query)
     templateImport = `import { ${renderFnName} } from ${templateRequest}`

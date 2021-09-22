@@ -9,8 +9,15 @@
 - `refSugar: boolean`: enable experimental ref sugar.
 
 - `customElement: boolean | RegExp`: enable custom elements mode. An SFC loaded in custom elements mode inlines its `<style>` tags as strings under the component's `styles` option. When used with `defineCustomElement` from Vue core, the styles will be injected into the custom element's shadow root.
+
   - Default is `/\.ce\.vue$/`
   - Setting to `true` will process all `.vue` files in custom element mode.
+
+- `enableTsInTemplate: boolean` (16.8+): allow TS expressions in templates when `<script>` has `lang="ts"`. Defaults to `true`.
+
+  - When used with `ts-loader`, due to `ts-loader`'s cache invalidation behavior, it sometimes prevents the template from being hot-reloaded in isolation, causing the component to reload despite only the template being edited. If this is annoying, you can set this option to `false` (and avoid using TS expressions in templates).
+
+  - Alternatively, leave this option on (by default) and use [`esbuild-loader`](https://github.com/privatenumber/esbuild-loader) to transpile TS instead, which doesn't suffer from this problem (it's also a lot faster). However, do note you will need to rely on TS type checking from other sources (e.g. IDE or `vue-tsc`).
 
 ## What is Vue Loader?
 

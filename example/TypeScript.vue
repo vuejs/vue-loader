@@ -1,7 +1,8 @@
 <script setup lang="ts">
-let a: number = 12
+import { ref, Ref } from 'vue'
+const a: Ref<number> = ref(12)
 </script>
 
 <template>
-  <p>From TS: {{ a?.toFixed(2) }}</p>
+  <p @click="a++">From TSssss: {{ a.toFixed(2) }}</p>
 </template>
