@@ -1,12 +1,15 @@
 import { SFCDescriptor, CompilerOptions } from '@vue/compiler-sfc'
+import { VueLoaderOptions } from '.'
 
 export function resolveTemplateTSOptions(
   descriptor: SFCDescriptor,
-  options: CompilerOptions | null | undefined
-): CompilerOptions {
+  options: VueLoaderOptions
+): CompilerOptions | null {
+  if (options.enableTsInTemplate === false) return null
+
   const lang = descriptor.script?.lang || descriptor.scriptSetup?.lang
   const isTS = !!(lang && /tsx?$/.test(lang))
-  let expressionPlugins = (options && options.expressionPlugins) || []
+  let expressionPlugins = options?.compilerOptions?.expressionPlugins || []
   if (isTS && !expressionPlugins.includes('typescript')) {
     expressionPlugins = [...expressionPlugins, 'typescript']
   }
