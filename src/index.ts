@@ -278,7 +278,7 @@ export default function loader(
           const query = `?vue&type=custom&index=${i}${blockTypeQuery}${issuerQuery}${attrsQuery}${resourceQuery}`
           return (
             `import block${i} from ${stringifyRequest(src + query)}\n` +
-            `if (typeof block${i} === 'function') /*#__PURE__*/block${i}(script)`
+            `if (typeof block${i} === 'function') block${i}(script)`
           )
         })
         .join(`\n`) + `\n`
