@@ -203,3 +203,28 @@ test('data: URI as entry', async () => {
     },
   })
 })
+
+// https://github.com/intlify/vue-i18n-next/issues/680
+test('should work with i18n loader in production mode', async () => {
+  const result = await mockBundleAndRun({
+    mode: 'production',
+    entry: require.resolve('./fixtures/i18n-entry.js'),
+    module: {
+      rules: [
+        {
+          test: /\.(json5?|ya?ml)$/, // target json, json5, yaml and yml files
+          type: 'javascript/auto',
+          loader: '@intlify/vue-i18n-loader',
+        },
+        // for i18n custom block
+        {
+          resourceQuery: /blockType=i18n/,
+          type: 'javascript/auto',
+          loader: '@intlify/vue-i18n-loader',
+        },
+      ],
+    },
+  })
+
+  expect(result.componentModule.__i18n).toHaveLength(1)
+})
