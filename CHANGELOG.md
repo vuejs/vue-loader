@@ -1,3 +1,26 @@
+## [16.8.1](https://github.com/vuejs/vue-loader/compare/v16.8.0...v16.8.1) (2021-09-22)
+
+
+### Bug Fixes
+
+* fix template options resolving for ts ([91f581b](https://github.com/vuejs/vue-loader/commit/91f581b99644119b68e586a0b642fff3811c8741))
+
+
+
+# [16.8.0](https://github.com/vuejs/vue-loader/compare/v16.7.1...v16.8.0) (2021-09-22)
+
+
+### Bug Fixes
+
+* **hmr:** fix hmr regression ([bacc6a9](https://github.com/vuejs/vue-loader/commit/bacc6a9eeca40d6028a2d9a5f6ee02e6c8574abd))
+
+
+### Features
+
+* enableTsInTemplate option ([7613534](https://github.com/vuejs/vue-loader/commit/7613534954b83489a060860b9525a0d121023c5b))
+
+
+
 # [16.8.0](https://github.com/vuejs/vue-loader/compare/v16.7.1...v16.8.0) (2021-09-22)
 
 
