@@ -1,3 +1,21 @@
+## [16.7.1](https://github.com/vuejs/vue-loader/compare/v16.7.0...v16.7.1) (2021-09-22)
+
+
+### Bug Fixes
+
+* remove pure annotation for custom blocks ([cd891e5](https://github.com/vuejs/vue-loader/commit/cd891e593bf7f8aff852f1d47fda2337de661bea))
+
+
+
+# [16.7.0](https://github.com/vuejs/vue-loader/compare/v16.6.0...v16.7.0) (2021-09-21)
+
+
+### Features
+
+* support optional @vue/compiler-sfc peer dep ([21725a4](https://github.com/vuejs/vue-loader/commit/21725a4ebc9c8d7f8a590d700017759327e21c2e))
+
+
+
 # [16.7.0](https://github.com/vuejs/vue-loader/compare/v16.6.0...v16.7.0) (2021-09-21)
 
 
