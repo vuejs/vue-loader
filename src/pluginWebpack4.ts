@@ -1,6 +1,6 @@
 import * as qs from 'querystring'
 import webpack = require('webpack')
-import { VueLoaderOptions } from './'
+import type { VueLoaderOptions } from './'
 
 const RuleSet = require('webpack/lib/RuleSet')
 

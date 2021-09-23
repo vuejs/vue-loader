@@ -1,10 +1,10 @@
 import webpack = require('webpack')
-import {
+import type {
   SFCDescriptor,
   SFCScriptBlock,
   TemplateCompiler,
 } from '@vue/compiler-sfc'
-import { VueLoaderOptions } from 'src'
+import type { VueLoaderOptions } from 'src'
 import { resolveTemplateTSOptions } from './util'
 import { compiler } from './compiler'
 

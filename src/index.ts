@@ -6,7 +6,7 @@ import * as loaderUtils from 'loader-utils'
 import hash = require('hash-sum')
 
 import { compiler } from './compiler'
-import {
+import type {
   TemplateCompiler,
   CompilerOptions,
   SFCBlock,

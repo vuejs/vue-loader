@@ -1,5 +1,5 @@
-import { SFCDescriptor, CompilerOptions } from '@vue/compiler-sfc'
-import { VueLoaderOptions } from '.'
+import type { SFCDescriptor, CompilerOptions } from '@vue/compiler-sfc'
+import type { VueLoaderOptions } from '.'
 
 export function resolveTemplateTSOptions(
   descriptor: SFCDescriptor,

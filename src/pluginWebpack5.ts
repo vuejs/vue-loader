@@ -1,6 +1,6 @@
 import * as qs from 'querystring'
-import { VueLoaderOptions } from './'
-import { RuleSetRule, Compiler, Plugin } from 'webpack'
+import type { VueLoaderOptions } from './'
+import type { RuleSetRule, Compiler, Plugin } from 'webpack'
 
 const id = 'vue-loader-plugin'
 const NS = 'vue-loader'

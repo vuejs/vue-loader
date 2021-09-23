@@ -1,4 +1,4 @@
-import { CompilerError } from '@vue/compiler-sfc'
+import type { CompilerError } from '@vue/compiler-sfc'
 import { compiler } from './compiler'
 import chalk = require('chalk')
 

@@ -1,8 +1,8 @@
 import webpack = require('webpack')
-import { SFCDescriptor } from '@vue/compiler-sfc'
-import { ParsedUrlQuery } from 'querystring'
+import type { SFCDescriptor } from '@vue/compiler-sfc'
+import type { ParsedUrlQuery } from 'querystring'
 import { resolveScript } from './resolveScript'
-import { VueLoaderOptions } from 'src'
+import type { VueLoaderOptions } from 'src'
 
 export function selectBlock(
   descriptor: SFCDescriptor,
