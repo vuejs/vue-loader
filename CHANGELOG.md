@@ -29,32 +29,12 @@
 * remove pure annotation for custom blocks ([cd891e5](https://github.com/vuejs/vue-loader/commit/cd891e593bf7f8aff852f1d47fda2337de661bea))
 
 
-
-## [16.7.1](https://github.com/vuejs/vue-loader/compare/v16.7.0...v16.7.1) (2021-09-22)
-
-
-### Bug Fixes
-
-* remove pure annotation for custom blocks ([cd891e5](https://github.com/vuejs/vue-loader/commit/cd891e593bf7f8aff852f1d47fda2337de661bea))
-
-
-
 # [16.7.0](https://github.com/vuejs/vue-loader/compare/v16.6.0...v16.7.0) (2021-09-21)
 
 
 ### Features
 
 * support optional @vue/compiler-sfc peer dep ([21725a4](https://github.com/vuejs/vue-loader/commit/21725a4ebc9c8d7f8a590d700017759327e21c2e))
-
-
-
-# [16.7.0](https://github.com/vuejs/vue-loader/compare/v16.6.0...v16.7.0) (2021-09-21)
-
-
-### Features
-
-* support optional @vue/compiler-sfc peer dep ([21725a4](https://github.com/vuejs/vue-loader/commit/21725a4ebc9c8d7f8a590d700017759327e21c2e))
-
 
 
 # [16.6.0](https://github.com/vuejs/vue-loader/compare/v16.5.0...v16.6.0) (2021-09-20)
@@ -68,41 +48,14 @@
 ### Features
 
 * support ts in template expressions ([573fbd2](https://github.com/vuejs/vue-loader/commit/573fbd2e72c3246c2daadb8d8c053464c964cfe3))
-
-
-
-# [16.6.0](https://github.com/vuejs/vue-loader/compare/v16.5.0...v16.6.0) (2021-09-20)
-
-
-### Bug Fixes
-
-* generate treeshaking friendly code ([11e3cb8](https://github.com/vuejs/vue-loader/commit/11e3cb8a8a4a4e0aedc2978ce6d7e549a61de3d7))
-
-
-### Features
-
-* support ts in template expressions ([573fbd2](https://github.com/vuejs/vue-loader/commit/573fbd2e72c3246c2daadb8d8c053464c964cfe3))
-
-
-
-# [16.5.0](https://github.com/vuejs/vue-loader/compare/v16.4.1...v16.5.0) (2021-08-07)
-
 
 
 # [16.5.0](https://github.com/vuejs/vue-loader/compare/v16.4.1...v16.5.0) (2021-08-07)
 
 * Custom Elements mode behavior changed: now only inlines the CSS and no longer exports the custom element constructor (exports the component as in normal mode). Users now need to explicitly call `defineCustomElement` on the component. This allows the custom element to be defined using an async version of the source component.
 
+
 ## [16.4.1](https://github.com/vuejs/vue-loader/compare/v16.4.0...v16.4.1) (2021-08-02)
-
-
-### Bug Fixes
-
-* fix webpack 5.48 compatibility ([b94289c](https://github.com/vuejs/vue-loader/commit/b94289c9fb395556100ec121529dfe676280d3cd)), closes [#1859](https://github.com/vuejs/vue-loader/issues/1859)
-
-
-
-## [16.4.1](https://github.com/vuejs/vue-loader/compare/v16.3.3...v16.4.1) (2021-08-02)
 
 
 ### Bug Fixes
