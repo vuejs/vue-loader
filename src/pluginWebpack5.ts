@@ -98,14 +98,16 @@ class VueLoaderPlugin implements Plugin {
   static NS = NS
 
   apply(compiler: Compiler) {
+    // @ts-ignore
+    const normalModule = compiler.webpack.NormalModule || NormalModule
+
     // add NS marker so that the loader can detect and report missing plugin
     compiler.hooks.compilation.tap(id, (compilation) => {
-      NormalModule.getCompilationHooks(compilation).loader.tap(
-        id,
-        (loaderContext: any) => {
+      normalModule
+        .getCompilationHooks(compilation)
+        .loader.tap(id, (loaderContext: any) => {
           loaderContext[NS] = true
-        }
-      )
+        })
     })
 
     const rules = compiler.options.module!.rules
