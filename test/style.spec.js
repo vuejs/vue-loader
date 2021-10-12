@@ -222,3 +222,38 @@ test('CSS Modules Extend', async () => {
     })
   })
 })
+
+test('CSS Modules Default Module Name', done => {
+  mockBundleAndRun({
+    entry: 'css-modules-simple.vue',
+    modify: config => {
+      config.module.rules = [
+        {
+          test: /\.vue$/,
+          loader: 'vue-loader',
+          options: { defaultModuleName: 's' }
+        },
+        {
+          test: /\.css$/,
+          use: [
+            'vue-style-loader',
+            {
+              loader: 'css-loader',
+              options: {
+                modules: true,
+                localIdentName: '[local]_[hash:base64:5]'
+              }
+            }
+          ]
+        }
+      ]
+    }
+  }, ({ window, instance }) => {
+    const className = instance.s.red
+    expect(className).toMatch(/^red_\w{5}/)
+    let style = window.document.querySelector('style').textContent
+    style = normalizeNewline(style)
+    expect(style).toContain('.' + className + ' {\n  color: red;\n}')
+    done()
+  })
+})
