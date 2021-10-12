@@ -102,3 +102,21 @@ test('postLoaders support', async () => {
   // class="red" -> class="green"
   expect(instance.$el.className).toBe('green')
 })
+
+// #1879
+test('should allow process custom file', async () => {
+  const { instance } = await mockBundleAndRun({
+    entry: 'process-custom-file/process-custom-file.vue',
+    module: {
+      rules: [
+        {
+          test: /\.svg$/,
+          loader: 'vue-loader',
+        },
+      ],
+    },
+  })
+
+  expect(instance.$el.tagName).toBe('DIV')
+  expect(instance.$el.innerHTML).toMatch('ProcessedCustomFile')
+})
