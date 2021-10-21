@@ -153,7 +153,7 @@ export default function loader(
   const propsToAttach: [string, string][] = []
 
   // script
-  let scriptImport = `const script = {}`
+  let scriptImport = `var script = {}`
   let isTS = false
   const { script, scriptSetup } = descriptor
   if (script || scriptSetup) {
@@ -210,7 +210,7 @@ export default function loader(
             )
           }
           if (!hasCSSModules) {
-            stylesCode += `\nconst cssModules = {}`
+            stylesCode += `\nvar cssModules = {}`
             propsToAttach.push([`__cssModules`, `cssModules`])
             hasCSSModules = true
           }
@@ -284,10 +284,10 @@ export default function loader(
 
   // finalize
   if (!propsToAttach.length) {
-    code += `\n\nconst __exports__ = script;`
+    code += `\n\nvar __exports__ = script;`
   } else {
     code += `\n\nimport exportComponent from ${exportHelperPath}`
-    code += `\nconst __exports__ = /*#__PURE__*/exportComponent(script, [${propsToAttach
+    code += `\nvar __exports__ = /*#__PURE__*/exportComponent(script, [${propsToAttach
       .map(([key, val]) => `['${key}',${val}]`)
       .join(',')}])`
   }
