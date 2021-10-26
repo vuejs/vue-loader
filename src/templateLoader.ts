@@ -16,12 +16,6 @@ const TemplateLoader: webpack.loader.Loader = function (source, inMap) {
   source = String(source)
   const loaderContext = this
 
-  if (/\.[jt]sx?$/.test(loaderContext.resourcePath)) {
-    // ts-loader does some really weird stuff which causes vue-loader to
-    // somehow be applied on non-vue files... ignore them
-    return source
-  }
-
   // although this is not the main vue-loader, we can get access to the same
   // vue-loader options because we've set an ident in the plugin and used that
   // ident to create the request for this loader in the pitcher.

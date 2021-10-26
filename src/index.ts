@@ -51,12 +51,6 @@ export default function loader(
 ) {
   const loaderContext = this
 
-  if (!/\.vue(\.html)?$/.test(loaderContext.resourcePath)) {
-    // ts-loader does some really weird stuff which causes vue-loader to
-    // somehow be applied on non-vue files... ignore them
-    return source
-  }
-
   // check if plugin is installed
   if (
     !errorEmitted &&
