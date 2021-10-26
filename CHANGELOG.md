@@ -1,3 +1,13 @@
+## [16.8.2](https://github.com/vuejs/vue-loader/compare/v16.8.1...v16.8.2) (2021-10-26)
+
+
+### Bug Fixes
+
+* should allow chaining with loaders for non-vue files ([#1889](https://github.com/vuejs/vue-loader/issues/1889)) ([f32f953](https://github.com/vuejs/vue-loader/commit/f32f9538ea34fc08e1a28622227896241847690f)), closes [#1879](https://github.com/vuejs/vue-loader/issues/1879) [#1883](https://github.com/vuejs/vue-loader/issues/1883) [#1890](https://github.com/vuejs/vue-loader/issues/1890)
+* **plugin:** use compiler.webpack when possible ([#1884](https://github.com/vuejs/vue-loader/issues/1884)) ([820d23c](https://github.com/vuejs/vue-loader/commit/820d23cbf16013dae894e0d84ed9da6e58a37584))
+
+
+
 ## [16.8.1](https://github.com/vuejs/vue-loader/compare/v16.8.0...v16.8.1) (2021-09-22)
 
 
