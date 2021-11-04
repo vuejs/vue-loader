@@ -1,3 +1,12 @@
+## [16.8.3](https://github.com/vuejs/vue-loader/compare/v16.8.2...v16.8.3) (2021-11-04)
+
+
+### Bug Fixes
+
+* HMR not working correctly with vue-class-component components ([#1897](https://github.com/vuejs/vue-loader/issues/1897)) ([76b1448](https://github.com/vuejs/vue-loader/commit/76b1448eb227c42e1791a691a86782b7a8cacfc0))
+
+
+
 ## [16.8.2](https://github.com/vuejs/vue-loader/compare/v16.8.1...v16.8.2) (2021-10-26)
 
 
