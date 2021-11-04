@@ -1,8 +1,9 @@
 // runtime helper for setting properties on components
 // in a tree-shakable way
 export default (sfc: any, props: [string, string][]) => {
+  const target = sfc.__vccOpts || sfc
   for (const [key, val] of props) {
-    sfc[key] = val
+    target[key] = val
   }
-  return sfc
+  return target
 }
