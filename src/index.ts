@@ -30,6 +30,10 @@ export interface VueLoaderOptions {
   transformAssetUrls?: SFCTemplateCompileOptions['transformAssetUrls']
   compiler?: TemplateCompiler | string
   compilerOptions?: CompilerOptions
+  refTransform?: boolean
+  /**
+   * @deprecated use `refTransform` instead.
+   */
   refSugar?: boolean
   customElement?: boolean | RegExp
 

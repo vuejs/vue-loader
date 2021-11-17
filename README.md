@@ -6,7 +6,7 @@
 
 ## v16 Only Options
 
-- `refSugar: boolean`: enable experimental ref sugar.
+- `refTransform: boolean`: enable experimental ref transform.
 
 - `customElement: boolean | RegExp`: enable custom elements mode. An SFC loaded in custom elements mode inlines its `<style>` tags as strings under the component's `styles` option. When used with `defineCustomElement` from Vue core, the styles will be injected into the custom element's shadow root.
 

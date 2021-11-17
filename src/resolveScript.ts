@@ -59,7 +59,7 @@ export function resolveScript(
         id: scopeId,
         isProd,
         inlineTemplate: enableInline,
-        refSugar: options.refSugar,
+        refTransform: options.refSugar || options.refTransform,
         babelParserPlugins: options.babelParserPlugins,
         templateOptions: {
           ssr: isServer,
