@@ -48,11 +48,11 @@ With `scoped`, the parent component's styles will not leak into child components
 
 ## Deep Selectors
 
-If you want a selector in `scoped` styles to be "deep", i.e. affecting child components, you can use the `>>>` combinator:
+If you want a selector in `scoped` styles to be "deep", i.e. affecting child components, you can use the `::v-deep` combinator:
 
 ``` html
 <style scoped>
-.a >>> .b { /* ... */ }
+.a::v-deep .b { /* ... */ }
 </style>
 ```
 
@@ -62,11 +62,11 @@ The above will be compiled into:
 .a[data-v-f3f3eg9] .b { /* ... */ }
 ```
 
-Some pre-processors, such as Sass, may not be able to parse `>>>` properly. In those cases you can use the `/deep/` or `::v-deep` combinator instead - both are aliases for `>>>` and work exactly the same. Based on the example above these two expressions will be compiled to the same output:
+`>>>` and `/deep/` combinators are also supported in the same way, but no longer work with pre-processors such as Sass so should be considered deprecated. 
 
 ``` html
 <style scoped>
-.a::v-deep .b { /* ... */ }
+.a >>> .b { /* ... */ }
 </style>
 ```
 
