@@ -11,7 +11,6 @@ if (module.hot) {
   const api = __VUE_HMR_RUNTIME__
   module.hot.accept()
   if (!api.createRecord('${id}', __exports__)) {
-    console.log('reload')
     api.reload('${id}', __exports__)
   }
   ${templateRequest ? genTemplateHotReloadCode(id, templateRequest) : ''}
@@ -22,7 +21,6 @@ if (module.hot) {
 function genTemplateHotReloadCode(id: string, request: string) {
   return `
   module.hot.accept(${request}, () => {
-    console.log('re-render')
     api.rerender('${id}', render)
   })
 `
