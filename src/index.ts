@@ -5,14 +5,14 @@ import * as loaderUtils from 'loader-utils'
 
 import hash = require('hash-sum')
 
-import { compiler } from './compiler'
+import { parse } from 'vue/compiler-sfc'
 import type {
   TemplateCompiler,
   CompilerOptions,
   SFCBlock,
   SFCTemplateCompileOptions,
   SFCScriptCompileOptions,
-} from '@vue/compiler-sfc'
+} from 'vue/compiler-sfc'
 import { selectBlock } from './select'
 import { genHotReloadCode } from './hotReload'
 import { genCSSModulesCode } from './cssModules'
@@ -30,7 +30,7 @@ export interface VueLoaderOptions {
   transformAssetUrls?: SFCTemplateCompileOptions['transformAssetUrls']
   compiler?: TemplateCompiler | string
   compilerOptions?: CompilerOptions
-  refSugar?: boolean
+  reactivityTransform?: boolean
   customElement?: boolean | RegExp
 
   hotReload?: boolean
@@ -88,7 +88,7 @@ export default function loader(
     mode === 'production' || process.env.NODE_ENV === 'production'
 
   const filename = resourcePath.replace(/\?.*$/, '')
-  const { descriptor, errors } = compiler.parse(source, {
+  const { descriptor, errors } = parse(source, {
     filename,
     sourceMap,
   })

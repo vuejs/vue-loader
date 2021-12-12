@@ -1,5 +1,5 @@
 import webpack = require('webpack')
-import type { SFCDescriptor } from '@vue/compiler-sfc'
+import type { SFCDescriptor } from 'vue/compiler-sfc'
 import type { ParsedUrlQuery } from 'querystring'
 import { resolveScript } from './resolveScript'
 import type { VueLoaderOptions } from 'src'

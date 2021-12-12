@@ -1,13 +1,13 @@
 import * as qs from 'querystring'
-import { compiler } from './compiler'
 import webpack = require('webpack')
+import { compileStyle } from 'vue/compiler-sfc'
 
 // This is a post loader that handles scoped CSS transforms.
 // Injected right before css-loader by the global pitcher (../pitch.js)
 // for any <style scoped> selection requests initiated from within vue files.
 const StylePostLoader: webpack.loader.Loader = function (source, inMap) {
   const query = qs.parse(this.resourceQuery.slice(1))
-  const { code, map, errors } = compiler.compileStyle({
+  const { code, map, errors } = compileStyle({
     source: source as string,
     filename: this.resourcePath,
     id: `data-v-${query.id}`,

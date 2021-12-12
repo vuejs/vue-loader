@@ -1,11 +1,11 @@
 // extend the descriptor so we can store the scopeId on it
-declare module '@vue/compiler-sfc' {
+declare module 'vue/compiler-sfc' {
   interface SFCDescriptor {
     id: string
   }
 }
 
-import * as _compiler from '@vue/compiler-sfc'
+import * as _compiler from 'vue/compiler-sfc'
 
 export let compiler: typeof _compiler
 

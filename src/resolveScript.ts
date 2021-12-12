@@ -3,10 +3,10 @@ import type {
   SFCDescriptor,
   SFCScriptBlock,
   TemplateCompiler,
-} from '@vue/compiler-sfc'
+} from 'vue/compiler-sfc'
 import type { VueLoaderOptions } from 'src'
 import { resolveTemplateTSOptions } from './util'
-import { compiler } from './compiler'
+import { compileScript } from 'vue/compiler-sfc'
 
 const clientCache = new WeakMap<SFCDescriptor, SFCScriptBlock | null>()
 const serverCache = new WeakMap<SFCDescriptor, SFCScriptBlock | null>()
@@ -53,34 +53,25 @@ export function resolveScript(
     templateCompiler = options.compiler
   }
 
-  if (compiler.compileScript) {
-    try {
-      resolved = compiler.compileScript(descriptor, {
-        id: scopeId,
-        isProd,
-        inlineTemplate: enableInline,
-        refSugar: options.refSugar,
-        babelParserPlugins: options.babelParserPlugins,
-        templateOptions: {
-          ssr: isServer,
-          compiler: templateCompiler,
-          compilerOptions: {
-            ...options.compilerOptions,
-            ...resolveTemplateTSOptions(descriptor, options),
-          },
-          transformAssetUrls: options.transformAssetUrls || true,
+  try {
+    resolved = compileScript(descriptor, {
+      id: scopeId,
+      isProd,
+      inlineTemplate: enableInline,
+      reactivityTransform: options.reactivityTransform,
+      babelParserPlugins: options.babelParserPlugins,
+      templateOptions: {
+        ssr: isServer,
+        compiler: templateCompiler,
+        compilerOptions: {
+          ...options.compilerOptions,
+          ...resolveTemplateTSOptions(descriptor, options),
         },
-      })
-    } catch (e) {
-      loaderContext.emitError(e)
-    }
-  } else if (descriptor.scriptSetup) {
-    loaderContext.emitError(
-      `<script setup> is not supported by the installed version of ` +
-        `@vue/compiler-sfc - please upgrade.`
-    )
-  } else {
-    resolved = descriptor.script
+        transformAssetUrls: options.transformAssetUrls || true,
+      },
+    })
+  } catch (e) {
+    loaderContext.emitError(e)
   }
 
   cacheToUse.set(descriptor, resolved)

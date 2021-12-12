@@ -54,8 +54,7 @@ module.exports = (env = {}) => {
             test: /\.vue$/,
             loader: 'vue-loader',
             options: {
-              refSugar: true,
-              // enableTsInTemplate: false,
+              reactivityTransform: true,
             },
           },
           {

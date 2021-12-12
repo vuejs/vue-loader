@@ -4,9 +4,11 @@
 
 - [Documentation](https://vue-loader.vuejs.org)
 
-## v16 Only Options
+## v16+ Only Options
 
-- `refSugar: boolean`: enable experimental ref sugar.
+- `reactivityTransform: boolean`: enable [Vue Reactivity Transform](https://github.com/vuejs/rfcs/discussions/369) (SFCs only).
+
+- ~~`refSugar: boolean`: **removed.** use `reactivityTransform` instead.~~
 
 - `customElement: boolean | RegExp`: enable custom elements mode. An SFC loaded in custom elements mode inlines its `<style>` tags as strings under the component's `styles` option. When used with `defineCustomElement` from Vue core, the styles will be injected into the custom element's shadow root.
 

@@ -1,6 +1,6 @@
 import * as fs from 'fs'
-import type { SFCDescriptor } from '@vue/compiler-sfc'
-import { compiler } from './compiler'
+import type { SFCDescriptor } from 'vue/compiler-sfc'
+import { parse } from 'vue/compiler-sfc'
 
 const cache = new Map<string, SFCDescriptor>()
 
@@ -20,7 +20,7 @@ export function getDescriptor(filename: string): SFCDescriptor {
   // loaders being run in separate threads. The only way to deal with this is to
   // read from disk directly...
   const source = fs.readFileSync(filename, 'utf-8')
-  const { descriptor } = compiler.parse(source, {
+  const { descriptor } = parse(source, {
     filename,
     sourceMap: true,
   })
