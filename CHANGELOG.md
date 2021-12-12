@@ -1,3 +1,26 @@
+# [17.0.0](https://github.com/vuejs/vue-loader/compare/v16.8.3...v17.0.0) (2021-12-12)
+
+
+### Features
+
+* support `reactivityTransform` option ([e07490e](https://github.com/vuejs/vue-loader/commit/e07490ec8b8ac9e00050251d6f0e697fb1f3bf3c))
+
+
+### BREAKING CHANGES
+
+* remove `refSugar` option, require `vue@^3.2.13`
+
+
+
+## [16.8.3](https://github.com/vuejs/vue-loader/compare/v16.8.2...v16.8.3) (2021-11-04)
+
+
+### Bug Fixes
+
+* HMR not working correctly with vue-class-component components ([#1897](https://github.com/vuejs/vue-loader/issues/1897)) ([76b1448](https://github.com/vuejs/vue-loader/commit/76b1448eb227c42e1791a691a86782b7a8cacfc0))
+
+
+
 ## [16.8.3](https://github.com/vuejs/vue-loader/compare/v16.8.2...v16.8.3) (2021-11-04)
 
 
