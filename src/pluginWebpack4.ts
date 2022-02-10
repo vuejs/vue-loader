@@ -61,7 +61,7 @@ class VueLoaderPlugin implements webpack.Plugin {
     const vueLoaderOptions = (vueLoaderUse.options =
       vueLoaderUse.options || {}) as VueLoaderOptions
 
-    // for each user rule (expect the vue rule), create a cloned rule
+    // for each user rule (except the vue rule), create a cloned rule
     // that targets the corresponding language blocks in *.vue files.
     const clonedRules = rules.filter((r) => r !== vueRule).map(cloneRule)
 
