@@ -1,3 +1,10 @@
+# [17.0.1](https://github.com/vuejs/vue-loader/compare/v17.0.0...v17.0.1) (2021-12-12)
+
+### Improvement
+
+* add repository reference in package.json
+
+
 # [17.0.0](https://github.com/vuejs/vue-loader/compare/v16.8.3...v17.0.0) (2021-12-12)
 
 
