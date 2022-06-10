@@ -1,11 +1,14 @@
 {
   "compilerOptions": {
+    "outDir": "dist",
+    "allowJs": true,
     "module": "esnext",
     "moduleResolution": "node",
     "strict": true,
     "target": "es6",
     "baseUrl": "."
   },
+  "include": ["lib"],
   "exclude": [
     "node_modules"
   ]
