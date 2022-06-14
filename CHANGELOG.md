@@ -1,3 +1,14 @@
+<a name="15.10.0-beta.1"></a>
+# [15.10.0-beta.1](https://github.com/vuejs/vue-loader/compare/v15.9.8...v15.10.0-beta.1) (2022-06-14)
+
+
+### Features
+
+* apply js loaders to compiled template code when used with 2.7 ([30464a8](https://github.com/vuejs/vue-loader/commit/30464a8))
+* compat for vue 2.7, support `<script setup>` ([308715a](https://github.com/vuejs/vue-loader/commit/308715a))
+
+
+
 <a name="15.9.8"></a>
 ## [15.9.8](https://github.com/vuejs/vue-loader/compare/v15.9.7...v15.9.8) (2021-08-02)
 
