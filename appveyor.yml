@@ -1,15 +1,15 @@
 environment:
-  nodejs_version: "8"
+  nodejs_version: "16"
 
 install:
   - ps: Install-Product node $env:nodejs_version
-  - yarn
+  - curl -f https://get.pnpm.io/v6.16.js | node - add --global pnpm@7
+  - pnpm install
 
 test_script:
   - git --version
   - node --version
-  - yarn --version
-  - yarn test
+  - pnpm test
 
 cache:
   - node_modules -> yarn.lock
