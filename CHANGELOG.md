@@ -1,3 +1,13 @@
+<a name="15.10.0-beta.3"></a>
+# [15.10.0-beta.3](https://github.com/vuejs/vue-loader/compare/v15.10.0-beta.2...v15.10.0-beta.3) (2022-06-16)
+
+
+### Bug Fixes
+
+* cache descriptor with correct resource path ([f6c83b5](https://github.com/vuejs/vue-loader/commit/f6c83b5))
+
+
+
 <a name="15.10.0-beta.2"></a>
 # [15.10.0-beta.2](https://github.com/vuejs/vue-loader/compare/v15.10.0-beta.1...v15.10.0-beta.2) (2022-06-16)
 
