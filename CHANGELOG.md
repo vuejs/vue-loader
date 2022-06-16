@@ -1,3 +1,13 @@
+<a name="15.10.0-beta.2"></a>
+# [15.10.0-beta.2](https://github.com/vuejs/vue-loader/compare/v15.10.0-beta.1...v15.10.0-beta.2) (2022-06-16)
+
+
+### Features
+
+* use script-analyzed bindings when compiling template ([55de28c](https://github.com/vuejs/vue-loader/commit/55de28c))
+
+
+
 <a name="15.10.0-beta.1"></a>
 # [15.10.0-beta.1](https://github.com/vuejs/vue-loader/compare/v15.9.8...v15.10.0-beta.1) (2022-06-14)
 
