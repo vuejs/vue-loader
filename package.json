@@ -11,7 +11,7 @@
     "dev": "webpack-dev-server --config example/webpack.config.js --inline --hot",
     "docs": "vuepress dev docs",
     "docs:build": "vuepress build docs",
-    "prepublishOnly": "conventional-changelog -p angular -r 2 -i CHANGELOG.md -s"
+    "prepublishOnly": "conventional-changelog -p angular -r 1 -i CHANGELOG.md -s"
   },
   "author": "Evan You",
   "license": "MIT",
