@@ -1,3 +1,13 @@
+<a name="15.10.0-beta.5"></a>
+# [15.10.0-beta.5](https://github.com/vuejs/vue-loader/compare/v15.10.0-beta.4...v15.10.0-beta.5) (2022-06-20)
+
+
+### Bug Fixes
+
+* css v-bind in production mode ([655e5f8](https://github.com/vuejs/vue-loader/commit/655e5f8))
+
+
+
 <a name="15.10.0-beta.4"></a>
 # [15.10.0-beta.4](https://github.com/vuejs/vue-loader/compare/v15.10.0-beta.3...v15.10.0-beta.4) (2022-06-20)
 
