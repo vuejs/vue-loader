@@ -1,3 +1,13 @@
+<a name="15.10.0-beta.4"></a>
+# [15.10.0-beta.4](https://github.com/vuejs/vue-loader/compare/v15.10.0-beta.3...v15.10.0-beta.4) (2022-06-20)
+
+
+### Features
+
+* support css v-bind (requires 2.7.0-beta.3) ([d653f3b](https://github.com/vuejs/vue-loader/commit/d653f3b))
+
+
+
 <a name="15.10.0-beta.3"></a>
 # [15.10.0-beta.3](https://github.com/vuejs/vue-loader/compare/v15.10.0-beta.2...v15.10.0-beta.3) (2022-06-16)
 
