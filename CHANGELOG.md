@@ -1,3 +1,13 @@
+<a name="15.10.0-beta.6"></a>
+# [15.10.0-beta.6](https://github.com/vuejs/vue-loader/compare/v15.10.0-beta.5...v15.10.0-beta.6) (2022-06-20)
+
+
+### Bug Fixes
+
+* always pass id to stylePostLoader when possible ([364ad09](https://github.com/vuejs/vue-loader/commit/364ad09))
+
+
+
 <a name="15.10.0-beta.5"></a>
 # [15.10.0-beta.5](https://github.com/vuejs/vue-loader/compare/v15.10.0-beta.4...v15.10.0-beta.5) (2022-06-20)
 
