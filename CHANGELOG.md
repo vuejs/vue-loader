@@ -1,3 +1,8 @@
+<a name="15.10.0"></a>
+# [15.10.0](https://github.com/vuejs/vue-loader/compare/v15.10.0-beta.6...v15.10.0) (2022-07-01)
+
+
+
 <a name="15.10.0-beta.6"></a>
 # [15.10.0-beta.6](https://github.com/vuejs/vue-loader/compare/v15.10.0-beta.5...v15.10.0-beta.6) (2022-06-20)
 
