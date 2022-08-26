@@ -3,8 +3,6 @@ import * as path from 'path'
 import * as qs from 'querystring'
 import * as loaderUtils from 'loader-utils'
 
-import hash = require('hash-sum')
-
 import { parse } from 'vue/compiler-sfc'
 import type {
   TemplateCompiler,
@@ -42,6 +40,7 @@ export interface VueLoaderOptions {
 }
 
 let errorEmitted = false
+let shortFilePathCache: Array<string> = []
 
 const exportHelperPath = JSON.stringify(require.resolve('./exportHelper'))
 
@@ -113,12 +112,9 @@ export default function loader(
   const rawShortFilePath = path
     .relative(rootContext || process.cwd(), filename)
     .replace(/^(\.\.[\/\\])+/, '')
-  const shortFilePath = rawShortFilePath.replace(/\\/g, '/')
-  const id = hash(
-    isProduction
-      ? shortFilePath + '\n' + source.replace(/\r\n/g, '\n')
-      : shortFilePath
-  )
+  const shortFilePath = rawShortFilePath.replace(/\\/g, '/');
+  shortFilePathCache.includes(shortFilePath) || shortFilePathCache.push(shortFilePath);
+  const id = shortFilePathCache.indexOf(shortFilePath).toString(36);
 
   // if the query has a type field, this is a language block request
   // e.g. foo.vue?type=template&id=xxxxx
