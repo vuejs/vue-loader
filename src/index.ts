@@ -243,7 +243,7 @@ export default function loader(
     // from the devtools.
     propsToAttach.push([
       `__file`,
-      JSON.stringify(rawShortFilePath.replace(/\\/g, '/')),
+      JSON.stringify(shortFilePath),
     ])
   } else if (options.exposeFilename) {
     // Libraries can opt-in to expose their components' filenames in production builds.
