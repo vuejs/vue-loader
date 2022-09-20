@@ -163,7 +163,7 @@ export function normalizeNewline(input: string): string {
 }
 
 // see the logic at src/index.ts
-// in non-production environment, shortFilePath is used to generate scope id
+// in non-production environment, resourcePath is used to generate scope id
 export function genId(fixtureName: string): string {
   return hash(path.join('test', 'fixtures', fixtureName).replace(/\\/g, '/'))
 }

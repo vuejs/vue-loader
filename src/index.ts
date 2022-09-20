@@ -113,11 +113,10 @@ export default function loader(
   const rawShortFilePath = path
     .relative(rootContext || process.cwd(), filename)
     .replace(/^(\.\.[\/\\])+/, '')
-  const shortFilePath = rawShortFilePath.replace(/\\/g, '/')
   const id = hash(
     isProduction
-      ? shortFilePath + '\n' + source.replace(/\r\n/g, '\n')
-      : shortFilePath
+      ? resourcePath + '\n' + source.replace(/\r\n/g, '\n')
+      : resourcePath
   )
 
   // if the query has a type field, this is a language block request
