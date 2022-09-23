@@ -85,12 +85,14 @@ const ruleSetCompiler = new RuleSetCompiler([
   new BasicMatcherRulePlugin('realResource'),
   new BasicMatcherRulePlugin('issuer'),
   new BasicMatcherRulePlugin('compiler'),
+  new BasicMatcherRulePlugin('issuerLayer'),
   ...objectMatcherRulePlugins,
   new BasicEffectRulePlugin('type'),
   new BasicEffectRulePlugin('sideEffects'),
   new BasicEffectRulePlugin('parser'),
   new BasicEffectRulePlugin('resolve'),
   new BasicEffectRulePlugin('generator'),
+  new BasicEffectRulePlugin('layer'),
   new UseEffectRulePlugin(),
 ])
 
