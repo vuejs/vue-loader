@@ -113,12 +113,18 @@ export default function loader(
   const rawShortFilePath = path
     .relative(rootContext || process.cwd(), filename)
     .replace(/^(\.\.[\/\\])+/, '')
-  const shortFilePath = rawShortFilePath.replace(/\\/g, '/')
-  const id = hash(
-    isProduction
-      ? shortFilePath + '\n' + source.replace(/\r\n/g, '\n')
-      : shortFilePath
-  )
+
+  const getScopeId = () => {
+    const shortFilePath = rawShortFilePath.replace(/\\/g, '/')
+    return hash(
+      isProduction
+        ? shortFilePath + '\n' + source.replace(/\r\n/g, '\n')
+        : shortFilePath
+    )
+  }
+
+  const id =
+    typeof incomingQuery.id === 'string' ? incomingQuery.id : getScopeId()
 
   // if the query has a type field, this is a language block request
   // e.g. foo.vue?type=template&id=xxxxx
@@ -154,8 +160,9 @@ export default function loader(
     const lang = script?.lang || scriptSetup?.lang
     isTS = !!(lang && /tsx?/.test(lang))
     const src = (script && !scriptSetup && script.src) || resourcePath
+    const idQuery = `&id=${id}`
     const attrsQuery = attrsToQuery((scriptSetup || script)!.attrs, 'js')
-    const query = `?vue&type=script${attrsQuery}${resourceQuery}`
+    const query = `?vue&type=script${idQuery}${attrsQuery}${resourceQuery}`
     const scriptRequest = stringifyRequest(src + query)
     scriptImport =
       `import script from ${scriptRequest}\n` +
