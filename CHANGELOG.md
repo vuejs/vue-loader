@@ -1,3 +1,13 @@
+## [17.0.1](https://github.com/vuejs/vue-loader/compare/v16.8.3...v17.0.1) (2022-10-28)
+
+
+### Bug Fixes
+
+* add `vue` and `@vue/compiler-sfc` to optional peerDependencies ([df0ded5](https://github.com/vuejs/vue-loader/commit/df0ded5356864b9923da8f89ff33db1ae6c2402f)), closes [#1944](https://github.com/vuejs/vue-loader/issues/1944)
+* merge custom queries rather than appending ([#1911](https://github.com/vuejs/vue-loader/issues/1911)) ([9e4249a](https://github.com/vuejs/vue-loader/commit/9e4249a548ceb04ead46fff9b68e9b2676b4c692))
+
+
+
 # [17.0.0](https://github.com/vuejs/vue-loader/compare/v16.8.3...v17.0.0) (2021-12-12)
 
 
