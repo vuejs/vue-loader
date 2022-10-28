@@ -11,3 +11,11 @@ test('named exports', async () => {
 test('experimental <script setup>', async () => {
   await mockBundleAndRun({ entry: 'ScriptSetup.vue' })
 })
+
+test('should handle custom resource query', async () => {
+  const { exports } = await mockBundleAndRun({
+    entry: 'custom-query.vue',
+  })
+
+  expect(exports.default.data().msg).toBe('Hello from Component A!')
+})

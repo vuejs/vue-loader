@@ -75,11 +75,12 @@ export default function loader(
     sourceMap,
     rootContext,
     resourcePath,
-    resourceQuery = '',
+    resourceQuery: _resourceQuery = '',
   } = loaderContext
 
-  const rawQuery = resourceQuery.slice(1)
+  const rawQuery = _resourceQuery.slice(1)
   const incomingQuery = qs.parse(rawQuery)
+  const resourceQuery = rawQuery ? `&${rawQuery}` : ''
   const options = (loaderUtils.getOptions(loaderContext) ||
     {}) as VueLoaderOptions
 
