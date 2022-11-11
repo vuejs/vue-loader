@@ -9,7 +9,8 @@ test('scoped style', done => {
   mockBundleAndRun({
     entry: 'scoped-css.vue'
   }, ({ window, module }) => {
-    const id = 'data-v-' + genId('scoped-css.vue')
+    const shortId = genId('scoped-css.vue')
+    const id = 'data-v-' + shortId
     expect(module._scopeId).toBe(id)
 
     const vnode = mockRender(module, {
@@ -34,18 +35,18 @@ test('scoped style', done => {
     expect(style).toContain(`.test[${id}]:after {\n  content: \'bye!\';\n}`)
     expect(style).toContain(`h1[${id}] {\n  color: green;\n}`)
     // scoped keyframes
-    expect(style).toContain(`.anim[${id}] {\n  animation: color-${id} 5s infinite, other 5s;`)
-    expect(style).toContain(`.anim-2[${id}] {\n  animation-name: color-${id}`)
-    expect(style).toContain(`.anim-3[${id}] {\n  animation: 5s color-${id} infinite, 5s other;`)
-    expect(style).toContain(`@keyframes color-${id} {`)
-    expect(style).toContain(`@-webkit-keyframes color-${id} {`)
+    expect(style).toContain(`.anim[${id}] {\n  animation: color-${shortId} 5s infinite, other 5s;`)
+    expect(style).toContain(`.anim-2[${id}] {\n  animation-name: color-${shortId}`)
+    expect(style).toContain(`.anim-3[${id}] {\n  animation: 5s color-${shortId} infinite, 5s other;`)
+    expect(style).toContain(`@keyframes color-${shortId} {`)
+    expect(style).toContain(`@-webkit-keyframes color-${shortId} {`)
 
     expect(style).toContain(
-      `.anim-multiple[${id}] {\n  animation: color-${id} 5s infinite,opacity-${id} 2s;`
+      `.anim-multiple[${id}] {\n  animation: color-${shortId} 5s infinite,opacity-${shortId} 2s;`
     )
-    expect(style).toContain(`.anim-multiple-2[${id}] {\n  animation-name: color-${id},opacity-${id};`)
-    expect(style).toContain(`@keyframes opacity-${id} {`)
-    expect(style).toContain(`@-webkit-keyframes opacity-${id} {`)
+    expect(style).toContain(`.anim-multiple-2[${id}] {\n  animation-name: color-${shortId},opacity-${shortId};`)
+    expect(style).toContain(`@keyframes opacity-${shortId} {`)
+    expect(style).toContain(`@-webkit-keyframes opacity-${shortId} {`)
     // >>> combinator
     expect(style).toContain(`.foo p[${id}] .bar {\n  color: red;\n}`)
     done()
