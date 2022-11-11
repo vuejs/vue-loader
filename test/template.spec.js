@@ -340,3 +340,40 @@ test('postLoaders support', done => {
     done()
   })
 })
+
+// https://github.com/vuejs/vue/issues/12828
+test('should skip thread-loader in the template compilation pipeline', done => {
+  mockBundleAndRun({
+    entry: 'custom-directive.vue',
+    vue: {
+      compilerOptions: {
+        directives: {
+          i18n (el, dir) {
+            if (dir.name === 'i18n' && dir.value) {
+              el.i18n = dir.value
+              if (!el.props) {
+                el.props = []
+              }
+              el.props.push({ name: 'textContent', value: `_s(${JSON.stringify(dir.value)})` })
+            }
+          }
+        }
+      }
+    },
+    module: {
+      rules: [{
+        test: /\.js$/,
+        use: [{
+          loader: 'thread-loader',
+          options: {
+            workers: 2
+          }
+        }]
+      }]
+    }
+  }, ({ window, module }) => {
+    const vnode = mockRender(module)
+    expect(vnode.data.domProps.textContent).toBe('keypath')
+    done()
+  })
+})
