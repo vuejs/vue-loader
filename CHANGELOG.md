@@ -1,3 +1,11 @@
+<a name="15.10.1"></a>
+# [15.10.1](https://github.com/vuejs/vue-loader/compare/v15.10.0...v15.10.1) (2022-11-14)
+
+### Bug Fixes
+
+* skip thread-loader when cloning js rules to template compilation pipeline, fixes <https://github.com/vuejs/vue/issues/12828> ([fb6ff6e](https://github.com/vuejs/vue-loader/commit/fb6ff6e))
+
+
 <a name="15.10.0"></a>
 # [15.10.0](https://github.com/vuejs/vue-loader/compare/v15.10.0-beta.6...v15.10.0) (2022-07-01)
 
