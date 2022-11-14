@@ -66,7 +66,7 @@
     "eslint": "^4.19.0",
     "eslint-plugin-vue-libs": "^2.1.0",
     "file-loader": "^1.1.11",
-    "html-webpack-plugin": "4.0.0-beta.14",
+    "html-webpack-plugin": "^4.0.0",
     "javascript-stringify": "^1.6.0",
     "jest": "^23.5.0",
     "jsdom": "^11.6.2",

@@ -13,7 +13,7 @@ specifiers:
   eslint-plugin-vue-libs: ^2.1.0
   file-loader: ^1.1.11
   hash-sum: ^1.0.2
-  html-webpack-plugin: 4.0.0-beta.14
+  html-webpack-plugin: ^4.0.0
   javascript-stringify: ^1.6.0
   jest: ^23.5.0
   jsdom: ^11.6.2
@@ -68,7 +68,7 @@ devDependencies:
   eslint: 4.19.1
   eslint-plugin-vue-libs: 2.1.0_eslint@4.19.1
   file-loader: 1.1.11_webpack@4.46.0
-  html-webpack-plugin: 4.0.0-beta.14_webpack@4.46.0
+  html-webpack-plugin: 4.5.2_webpack@4.46.0
   javascript-stringify: 1.6.0
   jest: 23.6.0
   jsdom: 11.12.0
@@ -1059,6 +1059,10 @@ packages:
     dependencies:
       '@types/minimatch': 3.0.5
       '@types/node': 17.0.42
+    dev: true
+
+  /@types/html-minifier-terser/5.1.2:
+    resolution: {integrity: sha512-h4lTMgMJctJybDp8CQrxTUiiYmedihHWkjnF/8Pxseu2S6Nlfcy8kwboQ8yejh456rP2yWoEVm1sS/FVsfM48w==}
     dev: true
 
   /@types/json-schema/7.0.11:
@@ -5942,13 +5946,15 @@ packages:
       uglify-js: 3.4.10
     dev: true
 
-  /html-webpack-plugin/4.0.0-beta.14_webpack@4.46.0:
-    resolution: {integrity: sha512-gdThA8oCH7PbHMbezNW5LD+hjxXTzwhfi4XFDKKo5Gs0BR1IhVChEZN1ub4YEKQBmOYasdnCGGPEOFggdm9hNA==}
+  /html-webpack-plugin/4.5.2_webpack@4.46.0:
+    resolution: {integrity: sha512-q5oYdzjKUIPQVjOosjgvCHQOv9Ett9CYYHlgvJeXG0qQvdSojnBq4vAdQBwn1+yGveAwHCoe/rMR86ozX3+c2A==}
     engines: {node: '>=6.9'}
-    deprecated: please switch to a stable version
     peerDependencies:
-      webpack: ^4.0.0
+      webpack: ^4.0.0 || ^5.0.0
     dependencies:
+      '@types/html-minifier-terser': 5.1.2
+      '@types/tapable': 1.0.8
+      '@types/webpack': 4.41.32
       html-minifier-terser: 5.1.1
       loader-utils: 1.4.0
       lodash: 4.17.21
