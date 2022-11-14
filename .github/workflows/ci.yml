@@ -8,7 +8,15 @@ on:
       - master
 jobs:
   unit-test:
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os:
+          - ubuntu-latest
+          - macos-latest
+          - windows-latest
+      fail-fast: false
+    name: "Unit Test: ${{ matrix.os }}"
     steps:
       - uses: actions/checkout@v2
 
