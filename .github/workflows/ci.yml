@@ -27,3 +27,9 @@ jobs:
 
       - name: Run unit tests
         run: pnpm run test
+
+      - name: Set up webpack 5 tests
+        run: npx json -f package.json -I -e "this.resolutions = {}, this.resolutions.webpack = '^5.0.0', this.devDependencies.webpack = '^5.0.0' "
+
+      - name: Run unit tests for webpack 5
+        run: pnpm run test
