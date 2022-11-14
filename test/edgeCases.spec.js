@@ -188,7 +188,7 @@ test('proper dedupe on src-imports with options', done => {
       ]
     }
   }, res => assertComponent(res, done))
-}, 10000)
+}, 30000)
 
 // #1351
 test('use with postLoader', done => {
