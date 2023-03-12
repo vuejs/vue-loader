@@ -72,7 +72,10 @@ class VueLoaderPlugin implements webpack.Plugin {
         const parsed = qs.parse(query.slice(1))
         return parsed.vue != null && parsed.type === 'template'
       },
-      options: vueLoaderOptions,
+      options: {
+        ident: vueLoaderUse.ident,
+        ...vueLoaderOptions,
+      },
     }
 
     // for each rule that matches plain .js/.ts files, also create a clone and
