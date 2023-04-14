@@ -1,7 +1,8 @@
 import * as fs from 'fs'
 import type { SFCDescriptor } from 'vue/compiler-sfc'
-import { parse } from 'vue/compiler-sfc'
+import { compiler } from './compiler'
 
+const { parse } = compiler
 const cache = new Map<string, SFCDescriptor>()
 
 export function setDescriptor(filename: string, entry: SFCDescriptor) {
