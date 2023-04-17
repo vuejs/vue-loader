@@ -6,8 +6,9 @@ import type {
 } from 'vue/compiler-sfc'
 import type { VueLoaderOptions } from 'src'
 import { resolveTemplateTSOptions } from './util'
-import { compileScript } from 'vue/compiler-sfc'
+import { compiler } from './compiler'
 
+const { compileScript } = compiler
 const clientCache = new WeakMap<SFCDescriptor, SFCScriptBlock | null>()
 const serverCache = new WeakMap<SFCDescriptor, SFCScriptBlock | null>()
 

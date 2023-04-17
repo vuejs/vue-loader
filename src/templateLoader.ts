@@ -7,7 +7,9 @@ import type { TemplateCompiler } from 'vue/compiler-sfc'
 import { getDescriptor } from './descriptorCache'
 import { resolveScript } from './resolveScript'
 import { resolveTemplateTSOptions } from './util'
-import { compileTemplate } from 'vue/compiler-sfc'
+import { compiler } from './compiler'
+
+const { compileTemplate } = compiler
 
 // Loader that compiles raw template into JavaScript functions.
 // This is injected by the global pitcher (../pitch) for template

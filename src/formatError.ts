@@ -1,6 +1,8 @@
 import type { CompilerError } from 'vue/compiler-sfc'
-import { generateCodeFrame } from 'vue/compiler-sfc'
+import { compiler } from './compiler'
 import chalk = require('chalk')
+
+const { generateCodeFrame } = compiler
 
 export function formatError(
   err: SyntaxError | CompilerError,

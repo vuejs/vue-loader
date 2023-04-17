@@ -5,7 +5,7 @@ import * as loaderUtils from 'loader-utils'
 
 import hash = require('hash-sum')
 
-import { parse } from 'vue/compiler-sfc'
+import { compiler } from './compiler'
 import type {
   TemplateCompiler,
   CompilerOptions,
@@ -43,6 +43,7 @@ export interface VueLoaderOptions {
 
 let errorEmitted = false
 
+const { parse } = compiler
 const exportHelperPath = JSON.stringify(require.resolve('./exportHelper'))
 
 export default function loader(
