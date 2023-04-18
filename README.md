@@ -1,4 +1,4 @@
-# vue-loader [![ci](https://github.com/vuejs/vue-loader/actions/workflows/ci.yml/badge.svg?branch=next)](https://github.com/vuejs/vue-loader/actions/workflows/ci.yml)
+# vue-loader [![ci](https://github.com/vuejs/vue-loader/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/vuejs/vue-loader/actions/workflows/ci.yml)
 
 > webpack loader for Vue Single-File Components
 

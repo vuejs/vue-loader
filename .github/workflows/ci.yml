@@ -5,7 +5,7 @@ on:
       - '**'
   pull_request:
     branches:
-      - next
+      - main
 jobs:
   test-webpack4:
     runs-on: ubuntu-latest
@@ -18,7 +18,7 @@ jobs:
           cache: 'yarn'
       - run: yarn install
       - run: yarn lint
-      - run: yarn test
+      - run: yarn test:webpack4
 
   test-webpack5:
     runs-on: ubuntu-latest
@@ -31,4 +31,4 @@ jobs:
           cache: 'yarn'
       - run: yarn install
       - run: yarn build
-      - run: yarn test:webpack5
+      - run: yarn test
