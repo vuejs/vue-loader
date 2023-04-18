@@ -1,6 +1,10 @@
 import * as qs from 'querystring'
 import type { VueLoaderOptions } from './'
 import type { RuleSetRule, Compiler } from 'webpack'
+import { needHMR } from './util'
+import { clientCache, typeDepToSFCMap } from './resolveScript'
+import { compiler as vueCompiler } from './compiler'
+import { descriptorCache } from './descriptorCache'
 
 const id = 'vue-loader-plugin'
 const NS = 'vue-loader'
@@ -225,6 +229,43 @@ class VueLoaderPlugin {
       ...clonedRules,
       ...rules,
     ]
+
+    // 3.3 HMR support for imported types
+    if (
+      needHMR(vueLoaderOptions, compiler.options) &&
+      vueCompiler.invalidateTypeCache
+    ) {
+      compiler.hooks.afterCompile.tap(id, (compilation) => {
+        if (compilation.compiler === compiler) {
+          for (const file of typeDepToSFCMap.keys()) {
+            compilation.fileDependencies.add(file)
+          }
+        }
+      })
+      compiler.hooks.watchRun.tap(id, () => {
+        if (!compiler.modifiedFiles) return
+        for (const file of compiler.modifiedFiles) {
+          vueCompiler.invalidateTypeCache(file)
+          const affectedSFCs = typeDepToSFCMap.get(file)
+          if (affectedSFCs) {
+            for (const sfc of affectedSFCs) {
+              // bust script resolve cache
+              const desc = descriptorCache.get(sfc)
+              if (desc) clientCache.delete(desc)
+              // force update importing SFC
+              // @ts-ignore
+              compiler.fileTimestamps.set(sfc, {
+                safeTime: Date.now(),
+                timestamp: Date.now(),
+              })
+            }
+          }
+        }
+        for (const file of compiler.removedFiles) {
+          vueCompiler.invalidateTypeCache(file)
+        }
+      })
+    }
   }
 }
 

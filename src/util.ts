@@ -1,7 +1,19 @@
-import type { LoaderContext } from 'webpack'
+import type { Compiler, LoaderContext } from 'webpack'
 import type { SFCDescriptor, CompilerOptions } from 'vue/compiler-sfc'
 import type { VueLoaderOptions } from '.'
 import * as path from 'path'
+
+export function needHMR(
+  vueLoaderOptions: VueLoaderOptions,
+  compilerOptions: Compiler['options']
+) {
+  const isServer =
+    vueLoaderOptions.isServerBuild ?? compilerOptions.target === 'node'
+  const isProduction =
+    compilerOptions.mode === 'production' ||
+    process.env.NODE_ENV === 'production'
+  return !isServer && !isProduction && vueLoaderOptions.hotReload !== false
+}
 
 export function resolveTemplateTSOptions(
   descriptor: SFCDescriptor,

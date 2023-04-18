@@ -5,6 +5,7 @@ import { clientCache, typeDepToSFCMap } from './resolveScript'
 import fs = require('fs')
 import { compiler as vueCompiler } from './compiler'
 import { descriptorCache } from './descriptorCache'
+import { needHMR } from './util'
 
 const RuleSet = require('webpack/lib/RuleSet')
 
@@ -117,16 +118,11 @@ class VueLoaderPlugin {
       ...rules,
     ]
 
-    // 3.3 HMR support
-    const isServer =
-      vueLoaderOptions.isServerBuild ?? compiler.options.target === 'node'
-    const isProduction =
-      compiler.options.mode === 'production' ||
-      process.env.NODE_ENV === 'production'
-    const needsHotReload =
-      !isServer && !isProduction && vueLoaderOptions.hotReload !== false
-
-    if (needsHotReload && vueCompiler.invalidateTypeCache) {
+    // 3.3 HMR support for imported types
+    if (
+      needHMR(vueLoaderOptions, compiler.options) &&
+      vueCompiler.invalidateTypeCache
+    ) {
       let watcher: any
 
       const WatchPack = require('watchpack')
