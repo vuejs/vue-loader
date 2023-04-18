@@ -1,4 +1,4 @@
-import webpack = require('webpack')
+import type { LoaderContext } from 'webpack'
 import * as path from 'path'
 import * as qs from 'querystring'
 
@@ -47,7 +47,7 @@ const { parse } = compiler
 const exportHelperPath = JSON.stringify(require.resolve('./exportHelper'))
 
 export default function loader(
-  this: webpack.loader.LoaderContext,
+  this: LoaderContext<VueLoaderOptions>,
   source: string
 ) {
   const loaderContext = this
@@ -200,7 +200,9 @@ export default function loader(
         if (style.module) {
           if (asCustomElement) {
             loaderContext.emitError(
-              `<style module> is not supported in custom element mode.`
+              new Error(
+                `<style module> is not supported in custom element mode.`
+              )
             )
           }
           if (!hasCSSModules) {

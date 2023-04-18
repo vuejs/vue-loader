@@ -1,6 +1,7 @@
-import webpack = require('webpack')
+import type { LoaderDefinitionFunction, LoaderContext } from 'webpack'
 import * as qs from 'querystring'
 import { stringifyRequest } from './util'
+import { VueLoaderOptions } from '.'
 
 const selfPath = require.resolve('./index')
 // const templateLoaderPath = require.resolve('./templateLoader')
@@ -8,12 +9,7 @@ const stylePostLoaderPath = require.resolve('./stylePostLoader')
 const styleInlineLoaderPath = require.resolve('./styleInlineLoader')
 
 // @types/webpack doesn't provide the typing for loaderContext.loaders...
-interface Loader {
-  request: string
-  path: string
-  query: string
-  pitchExecuted: boolean
-}
+type Loader = LoaderContext<VueLoaderOptions>['loaders'][number]
 
 const isESLintLoader = (l: Loader) => /(\/|\\|@)eslint-loader/.test(l.path)
 const isNullLoader = (l: Loader) => /(\/|\\|@)null-loader/.test(l.path)
@@ -21,12 +17,12 @@ const isCSSLoader = (l: Loader) => /(\/|\\|@)css-loader/.test(l.path)
 const isCacheLoader = (l: Loader) => /(\/|\\|@)cache-loader/.test(l.path)
 const isNotPitcher = (l: Loader) => l.path !== __filename
 
-const pitcher: webpack.loader.Loader = (code) => code
+const pitcher: LoaderDefinitionFunction = (code) => code
 
 // This pitching loader is responsible for intercepting all vue block requests
 // and transform it into appropriate requests.
 export const pitch = function () {
-  const context = this as webpack.loader.LoaderContext
+  const context = this as LoaderContext<VueLoaderOptions>
   const rawLoaders = context.loaders.filter(isNotPitcher)
   let loaders = rawLoaders
 
@@ -92,8 +88,8 @@ export const pitch = function () {
 }
 
 function genProxyModule(
-  loaders: Loader[],
-  context: webpack.loader.LoaderContext,
+  loaders: (Loader | string)[],
+  context: LoaderContext<VueLoaderOptions>,
   exportDefault = true
 ) {
   const request = genRequest(loaders, context)
@@ -106,7 +102,10 @@ function genProxyModule(
   )
 }
 
-function genRequest(loaders: Loader[], context: webpack.loader.LoaderContext) {
+function genRequest(
+  loaders: (Loader | string)[],
+  context: LoaderContext<VueLoaderOptions>
+) {
   const loaderStrings = loaders.map((loader) => {
     return typeof loader === 'string' ? loader : loader.request
   })

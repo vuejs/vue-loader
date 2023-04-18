@@ -1,6 +1,6 @@
-import webpack = require('webpack')
+import type { LoaderDefinitionFunction } from 'webpack'
 
-const StyleInineLoader: webpack.loader.Loader = function (source) {
+const StyleInineLoader: LoaderDefinitionFunction = function (source) {
   // TODO minify this?
   return `export default ${JSON.stringify(source)}`
 }

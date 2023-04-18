@@ -23,4 +23,4 @@ jobs:
 
       - run: yarn lint
       - run: yarn test
-      - run: yarn test:webpack5
+      - run: yarn test:webpack4

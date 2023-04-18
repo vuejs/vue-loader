@@ -1,5 +1,5 @@
 import * as qs from 'querystring'
-import webpack = require('webpack')
+import type { Compiler, RuleSetRule } from 'webpack'
 import type { VueLoaderOptions } from './'
 import { clientCache, typeDepToSFCMap } from './resolveScript'
 import fs = require('fs')
@@ -11,10 +11,19 @@ const RuleSet = require('webpack/lib/RuleSet')
 const id = 'vue-loader-plugin'
 const NS = 'vue-loader'
 
+// these types are no longer available in webpack 5
+type RuleSetQuery = string | { [k: string]: any }
+interface RuleSetLoader {
+  loader?: string | undefined
+  options?: RuleSetQuery | undefined
+  ident?: string | undefined
+  query?: RuleSetQuery | undefined
+}
+
 class VueLoaderPlugin {
   static NS = NS
 
-  apply(compiler: webpack.Compiler) {
+  apply(compiler: Compiler) {
     // inject NS for plugin installation check in the main loader
     compiler.hooks.compilation.tap(id, (compilation) => {
       compilation.hooks.normalModuleLoader.tap(id, (loaderContext: any) => {
@@ -24,7 +33,7 @@ class VueLoaderPlugin {
 
     const rawRules = compiler.options.module!.rules
     // use webpack's RuleSet utility to normalize user rules
-    const rules = new RuleSet(rawRules).rules as webpack.RuleSetRule[]
+    const rules = new RuleSet(rawRules).rules as RuleSetRule[]
 
     // find the rule that applies to vue files
     let vueRuleIndex = rawRules.findIndex(createMatcher(`foo.vue`))
@@ -47,7 +56,7 @@ class VueLoaderPlugin {
     }
 
     // get the normlized "use" for vue files
-    const vueUse = vueRule.use as webpack.RuleSetLoader[]
+    const vueUse = vueRule.use as RuleSetLoader[]
     // get vue-loader options
     const vueLoaderUseIndex = vueUse.findIndex((u) => {
       // FIXME: this code logic is incorrect when project paths starts with `vue-loader-something`
@@ -171,7 +180,7 @@ class VueLoaderPlugin {
 }
 
 function createMatcher(fakeFile: string) {
-  return (rule: webpack.RuleSetRule) => {
+  return (rule: RuleSetRule) => {
     // #1201 we need to skip the `include` check when locating the vue rule
     const clone = Object.assign({}, rule)
     delete clone.include
@@ -180,7 +189,7 @@ function createMatcher(fakeFile: string) {
   }
 }
 
-function cloneRule(rule: webpack.RuleSetRule) {
+function cloneRule(rule: RuleSetRule) {
   const resource = rule.resource as Function
   const resourceQuery = rule.resourceQuery as Function
   // Assuming `test` and `resourceQuery` tests are executed in series and
@@ -225,7 +234,7 @@ function cloneRule(rule: webpack.RuleSetRule) {
   return res
 }
 
-function cloneRuleForRenderFn(rule: webpack.RuleSetRule) {
+function cloneRuleForRenderFn(rule: RuleSetRule) {
   const resource = rule.resource as Function
   const resourceQuery = rule.resourceQuery as Function
   let currentResource: string

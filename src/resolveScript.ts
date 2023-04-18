@@ -1,4 +1,4 @@
-import webpack = require('webpack')
+import type { LoaderContext } from 'webpack'
 import type {
   SFCDescriptor,
   SFCScriptBlock,
@@ -30,7 +30,7 @@ export function resolveScript(
   descriptor: SFCDescriptor,
   scopeId: string,
   options: VueLoaderOptions,
-  loaderContext: webpack.loader.LoaderContext
+  loaderContext: LoaderContext<VueLoaderOptions>
 ) {
   if (!descriptor.script && !descriptor.scriptSetup) {
     return null

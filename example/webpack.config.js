@@ -3,6 +3,8 @@ const webpack = require('webpack')
 const VueLoaderPlugin = require('../dist/plugin').default
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
+console.log(webpack.version)
+
 module.exports = (env = {}) => {
   const isProd = env.prod
   const isSSR = env.ssr
@@ -28,6 +30,11 @@ module.exports = (env = {}) => {
       devtool: 'source-map',
       resolve: {
         extensions: ['.js', '.ts'],
+        alias: process.env.WEBPACK4
+          ? {
+              webpack: 'webpack4',
+            }
+          : {},
       },
       output: {
         path: path.resolve(
@@ -70,15 +77,7 @@ module.exports = (env = {}) => {
           },
           {
             test: /\.css$/,
-            use: [
-              {
-                loader: MiniCssExtractPlugin.loader,
-                options: {
-                  hmr: !isProd,
-                },
-              },
-              'css-loader',
-            ],
+            use: [MiniCssExtractPlugin.loader, 'css-loader'],
           },
           {
             test: /\.ts$/,
@@ -114,6 +113,7 @@ module.exports = (env = {}) => {
         minimize,
       },
       devServer: {
+        hot: true,
         stats: 'minimal',
         contentBase: __dirname,
         overlay: true,

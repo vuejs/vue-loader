@@ -1,8 +1,8 @@
 /* env jest */
 import * as path from 'path'
-import webpack = require('webpack')
+import webpack from 'webpack'
 import merge from 'webpack-merge'
-import hash = require('hash-sum')
+import hash from 'hash-sum'
 // import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import { fs as mfs } from 'memfs'
 
@@ -64,11 +64,11 @@ export function bundle(
   if (config.vue && config.module) {
     const vueOptions = options.vue
     delete config.vue
-    const vueIndex = config.module.rules.findIndex(
-      (r) => r.test instanceof RegExp && r.test.test('.vue')
+    const vueIndex = config.module.rules!.findIndex(
+      (r: any) => r.test instanceof RegExp && r.test.test('.vue')
     )
-    const vueRule = config.module.rules[vueIndex]
-    config.module.rules[vueIndex] = Object.assign({}, vueRule, {
+    const vueRule = config.module.rules![vueIndex]
+    config.module.rules![vueIndex] = Object.assign({}, vueRule, {
       options: vueOptions,
     })
   }
@@ -100,7 +100,7 @@ export function bundle(
 
   return new Promise((resolve, reject) => {
     webpackCompiler.run((err, stats) => {
-      const errors = stats.compilation.errors
+      const errors = stats?.compilation.errors
       if (!wontThrowError) {
         expect(err).toBeNull()
         if (errors && errors.length) {
@@ -116,7 +116,7 @@ export function bundle(
       } else {
         resolve({
           code: mfs.readFileSync('/test.build.js').toString(),
-          stats,
+          stats: stats!,
         })
       }
     })
