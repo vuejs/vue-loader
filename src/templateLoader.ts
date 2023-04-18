@@ -1,12 +1,11 @@
 import webpack = require('webpack')
 import * as qs from 'querystring'
-import * as loaderUtils from 'loader-utils'
 import { VueLoaderOptions } from './'
 import { formatError } from './formatError'
 import type { TemplateCompiler } from 'vue/compiler-sfc'
 import { getDescriptor } from './descriptorCache'
 import { resolveScript } from './resolveScript'
-import { resolveTemplateTSOptions } from './util'
+import { getOptions, resolveTemplateTSOptions } from './util'
 import { compiler } from './compiler'
 
 const { compileTemplate } = compiler
@@ -21,8 +20,7 @@ const TemplateLoader: webpack.loader.Loader = function (source, inMap) {
   // although this is not the main vue-loader, we can get access to the same
   // vue-loader options because we've set an ident in the plugin and used that
   // ident to create the request for this loader in the pitcher.
-  const options = (loaderUtils.getOptions(loaderContext) ||
-    {}) as VueLoaderOptions
+  const options = (getOptions(loaderContext) || {}) as VueLoaderOptions
 
   const isServer = options.isServerBuild ?? loaderContext.target === 'node'
   const isProd =

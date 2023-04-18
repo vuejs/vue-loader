@@ -9,8 +9,10 @@ import { resolveTemplateTSOptions } from './util'
 import { compiler } from './compiler'
 
 const { compileScript } = compiler
-const clientCache = new WeakMap<SFCDescriptor, SFCScriptBlock | null>()
+export const clientCache = new WeakMap<SFCDescriptor, SFCScriptBlock | null>()
 const serverCache = new WeakMap<SFCDescriptor, SFCScriptBlock | null>()
+
+export const typeDepToSFCMap = new Map<string, Set<string>>()
 
 /**
  * inline template mode can only be enabled if:
@@ -73,6 +75,26 @@ export function resolveScript(
     })
   } catch (e) {
     loaderContext.emitError(e)
+  }
+
+  if (!isProd && resolved?.deps) {
+    for (const [key, sfcs] of typeDepToSFCMap) {
+      if (sfcs.has(descriptor.filename) && !resolved.deps.includes(key)) {
+        sfcs.delete(descriptor.filename)
+        if (!sfcs.size) {
+          typeDepToSFCMap.delete(key)
+        }
+      }
+    }
+
+    for (const dep of resolved.deps) {
+      const existingSet = typeDepToSFCMap.get(dep)
+      if (!existingSet) {
+        typeDepToSFCMap.set(dep, new Set([descriptor.filename]))
+      } else {
+        existingSet.add(descriptor.filename)
+      }
+    }
   }
 
   cacheToUse.set(descriptor, resolved)

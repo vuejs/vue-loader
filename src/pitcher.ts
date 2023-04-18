@@ -1,6 +1,6 @@
 import webpack = require('webpack')
 import * as qs from 'querystring'
-import * as loaderUtils from 'loader-utils'
+import { stringifyRequest } from './util'
 
 const selfPath = require.resolve('./index')
 // const templateLoaderPath = require.resolve('./templateLoader')
@@ -111,7 +111,7 @@ function genRequest(loaders: Loader[], context: webpack.loader.LoaderContext) {
     return typeof loader === 'string' ? loader : loader.request
   })
   const resource = context.resourcePath + context.resourceQuery
-  return loaderUtils.stringifyRequest(
+  return stringifyRequest(
     context,
     '-!' + [...loaderStrings, resource].join('!')
   )

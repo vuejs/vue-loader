@@ -1,7 +1,5 @@
-const fs = require('fs')
 const path = require('path')
 const webpack = require('webpack')
-const hash = require('hash-sum')
 const VueLoaderPlugin = require('../dist/plugin').default
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
@@ -22,13 +20,15 @@ module.exports = (env = {}) => {
    */
   const genConfig = (isServerBuild = false) => {
     const minimize = isProd && !isServerBuild && !env.noMinimize
-    const useBabel = isProd && !isServerBuild && !env.noBabel
 
     return {
       mode: isProd ? 'production' : 'development',
       entry: path.resolve(__dirname, './main.js'),
       target: isServerBuild ? 'node' : 'web',
       devtool: 'source-map',
+      resolve: {
+        extensions: ['.js', '.ts'],
+      },
       output: {
         path: path.resolve(
           __dirname,
@@ -54,7 +54,7 @@ module.exports = (env = {}) => {
             test: /\.vue$/,
             loader: 'vue-loader',
             options: {
-              reactivityTransform: true,
+              // reactivityTransform: true,
             },
           },
           {
@@ -80,46 +80,13 @@ module.exports = (env = {}) => {
               'css-loader',
             ],
           },
-          // {
-          //   test: /\.js$/,
-          //   use: [
-          //     {
-          //       loader: 'cache-loader',
-          //       options: {
-          //         cacheIdentifier: hash(
-          //           // deps
-          //           fs.readFileSync(
-          //             path.resolve(__dirname, '../package.json')
-          //           ) +
-          //             // env
-          //             JSON.stringify(env) +
-          //             // client vs. server build
-          //             isServerBuild
-          //         ),
-          //         cacheDirectory: path.resolve(__dirname, '../.cache'),
-          //       },
-          //     },
-          //     ...(useBabel
-          //       ? [
-          //           {
-          //             loader: 'babel-loader',
-          //             options: {
-          //               // use yarn build-example --env.noMinimize to verify that
-          //               // babel is properly applied to all js code, including the
-          //               // render function compiled from SFC templates.
-          //               presets: ['@babel/preset-env'],
-          //             },
-          //           },
-          //         ]
-          //       : []),
-          //   ],
-          // },
           {
             test: /\.ts$/,
             use: [
               {
                 loader: 'ts-loader',
                 options: {
+                  transpileOnly: true,
                   appendTsSuffixTo: [/\.vue$/],
                 },
               },

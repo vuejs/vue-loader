@@ -1,7 +1,6 @@
 import webpack = require('webpack')
 import * as path from 'path'
 import * as qs from 'querystring'
-import * as loaderUtils from 'loader-utils'
 
 import hash = require('hash-sum')
 
@@ -21,6 +20,7 @@ import { formatError } from './formatError'
 import VueLoaderPlugin from './plugin'
 import { canInlineTemplate } from './resolveScript'
 import { setDescriptor } from './descriptorCache'
+import { getOptions, stringifyRequest as _stringifyRequest } from './util'
 
 export { VueLoaderPlugin }
 
@@ -67,8 +67,7 @@ export default function loader(
     errorEmitted = true
   }
 
-  const stringifyRequest = (r: string) =>
-    loaderUtils.stringifyRequest(loaderContext, r)
+  const stringifyRequest = (r: string) => _stringifyRequest(loaderContext, r)
 
   const {
     mode,
@@ -82,8 +81,7 @@ export default function loader(
   const rawQuery = _resourceQuery.slice(1)
   const incomingQuery = qs.parse(rawQuery)
   const resourceQuery = rawQuery ? `&${rawQuery}` : ''
-  const options = (loaderUtils.getOptions(loaderContext) ||
-    {}) as VueLoaderOptions
+  const options = (getOptions(loaderContext) || {}) as VueLoaderOptions
 
   const isServer = options.isServerBuild ?? target === 'node'
   const isProduction =

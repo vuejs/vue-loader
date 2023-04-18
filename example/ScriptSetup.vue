@@ -2,10 +2,10 @@
 import { ref } from 'vue'
 import Button from './Button.vue'
 
-let count = $ref(100)
+const count = ref(100)
 
 function inc() {
-  count++
+  count.value++
 }
 
 const hello = 'hi from scriptttt'

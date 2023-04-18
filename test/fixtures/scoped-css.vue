@@ -26,20 +26,36 @@ h1 {
   animation-duration: 5s, 2s;
 }
 @keyframes color {
-  from { color: red; }
-  to { color: green; }
+  from {
+    color: red;
+  }
+  to {
+    color: green;
+  }
 }
 @-webkit-keyframes color {
-  from { color: red; }
-  to { color: green; }
+  from {
+    color: red;
+  }
+  to {
+    color: green;
+  }
 }
 @keyframes opacity {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 @-webkit-keyframes opacity {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 .foo p ::v-deep(.bar) {
   color: red;
@@ -47,18 +63,20 @@ h1 {
 </style>
 
 <template>
-<div>
-  <div><h1>hi</h1></div>
-  <p class="abc def">hi</p>
-  <template v-if="ok"><p class="test">yo</p></template>
-  <svg><template><p></p></template></svg>
-</div>
+  <div>
+    <div><h1>hi</h1></div>
+    <p class="abc def">hi</p>
+    <template v-if="ok"><p class="test">yo</p></template>
+    <svg>
+      <template><p></p></template>
+    </svg>
+  </div>
 </template>
 
 <script>
 export default {
-  data () {
+  data() {
     return { ok: true }
-  }
+  },
 }
 </script>

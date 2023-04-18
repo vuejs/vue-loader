@@ -8,3 +8,7 @@ h2 {
   color: green;
 }
 </style>
+
+<script>
+export default {}
+</script>

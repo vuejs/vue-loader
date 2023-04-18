@@ -1,13 +1,17 @@
 import * as qs from 'querystring'
 import webpack = require('webpack')
 import type { VueLoaderOptions } from './'
+import { clientCache, typeDepToSFCMap } from './resolveScript'
+import fs = require('fs')
+import { compiler as vueCompiler } from './compiler'
+import { descriptorCache } from './descriptorCache'
 
 const RuleSet = require('webpack/lib/RuleSet')
 
 const id = 'vue-loader-plugin'
 const NS = 'vue-loader'
 
-class VueLoaderPlugin implements webpack.Plugin {
+class VueLoaderPlugin {
   static NS = NS
 
   apply(compiler: webpack.Compiler) {
@@ -103,6 +107,66 @@ class VueLoaderPlugin implements webpack.Plugin {
       ...clonedRules,
       ...rules,
     ]
+
+    // 3.3 HMR support
+    const isServer =
+      vueLoaderOptions.isServerBuild ?? compiler.options.target === 'node'
+    const isProduction =
+      compiler.options.mode === 'production' ||
+      process.env.NODE_ENV === 'production'
+    const needsHotReload =
+      !isServer && !isProduction && vueLoaderOptions.hotReload !== false
+
+    if (needsHotReload && vueCompiler.invalidateTypeCache) {
+      let watcher: any
+
+      const WatchPack = require('watchpack')
+
+      compiler.hooks.afterCompile.tap(id, (compilation) => {
+        if (compilation.compiler === compiler) {
+          // type-only imports can be tree-shaken and not registered as a
+          // watched file at all, so we have to manually ensure they are watched.
+          const files = [...typeDepToSFCMap.keys()]
+          const oldWatcher = watcher
+          watcher = new WatchPack({ aggregateTimeout: 0 })
+
+          watcher.once(
+            'aggregated',
+            (changes: Set<string>, removals: Set<string>) => {
+              for (const file of changes) {
+                // bust compiler-sfc type dep cache
+                vueCompiler.invalidateTypeCache(file)
+                const affectedSFCs = typeDepToSFCMap.get(file)
+                if (affectedSFCs) {
+                  for (const sfc of affectedSFCs) {
+                    // bust script resolve cache
+                    const desc = descriptorCache.get(sfc)
+                    if (desc) clientCache.delete(desc)
+                    // force update importing SFC
+                    fs.writeFileSync(sfc, fs.readFileSync(sfc, 'utf-8'))
+                  }
+                }
+              }
+              for (const file of removals) {
+                vueCompiler.invalidateTypeCache(file)
+              }
+            }
+          )
+
+          watcher.watch({ files, startTime: Date.now() })
+
+          if (oldWatcher) {
+            oldWatcher.close()
+          }
+        }
+      })
+
+      compiler.hooks.watchClose.tap(id, () => {
+        if (watcher) {
+          watcher.close()
+        }
+      })
+    }
   }
 }
 

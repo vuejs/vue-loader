@@ -1,6 +1,6 @@
 import * as qs from 'querystring'
 import type { VueLoaderOptions } from './'
-import type { RuleSetRule, Compiler, Plugin } from 'webpack'
+import type { RuleSetRule, Compiler } from 'webpack'
 
 const id = 'vue-loader-plugin'
 const NS = 'vue-loader'
@@ -94,7 +94,7 @@ const ruleSetCompiler = new RuleSetCompiler([
   new UseEffectRulePlugin(),
 ])
 
-class VueLoaderPlugin implements Plugin {
+class VueLoaderPlugin {
   static NS = NS
 
   apply(compiler: Compiler) {
@@ -110,7 +110,7 @@ class VueLoaderPlugin implements Plugin {
         })
     })
 
-    const rules = compiler.options.module!.rules
+    const rules = compiler.options.module!.rules as RuleSetRule[]
     let rawVueRule: RawRule
     let vueRules: Effect[] = []
 
