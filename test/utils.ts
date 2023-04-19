@@ -17,6 +17,9 @@ const baseConfig: webpack.Configuration = {
     filename: 'test.build.js',
     publicPath: '',
   },
+  resolve: {
+    extensions: ['.js', '.ts'],
+  },
   resolveLoader: {
     alias: {
       'vue-loader': require.resolve('../dist'),
@@ -27,6 +30,16 @@ const baseConfig: webpack.Configuration = {
       {
         test: /\.vue$/,
         loader: 'vue-loader',
+      },
+      {
+        test: /\.ts$/,
+        loader: process.env.WEBPACK4
+          ? require.resolve('ts-loader')
+          : require.resolve('ts-loader-v9'),
+        options: {
+          transpileOnly: true,
+          appendTsSuffixTo: [/\.vue$/],
+        },
       },
       {
         test: /\.css$/,
@@ -129,7 +142,7 @@ export async function mockBundleAndRun(
   const { code, stats } = await bundle(options, wontThrowError)
 
   const dom = new JSDOM(
-    `<!DOCTYPE html><html><head></head><body><div id="#app"></div></body></html>`,
+    `<!DOCTYPE html><html><head></head><body></body></html>`,
     {
       runScripts: 'outside-only',
       virtualConsole: new VirtualConsole(),

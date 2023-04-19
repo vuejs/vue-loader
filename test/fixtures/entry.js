@@ -9,7 +9,9 @@ if (typeof window !== 'undefined') {
 
   const app = createApp(Component)
   const container = window.document.createElement('div')
+  container.id = 'app'
   window.instance = app.mount(container)
+  window.document.body.appendChild(container)
 }
 
 export default Component
