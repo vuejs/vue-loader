@@ -1,6 +1,6 @@
 {
   "name": "vue-loader",
-  "version": "17.0.1",
+  "version": "17.1.0-beta.0",
   "license": "MIT",
   "author": "Evan You",
   "repository": "vuejs/vue-loader",
