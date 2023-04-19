@@ -1,3 +1,27 @@
+# [17.1.0-beta.0](https://github.com/vuejs/vue-loader/compare/v17.0.1...v17.1.0-beta.0) (2023-04-19)
+
+
+### Bug Fixes
+
+* reference project compiler, fixes [#2031](https://github.com/vuejs/vue-loader/issues/2031) ([#2038](https://github.com/vuejs/vue-loader/issues/2038)) ([cc6fa9e](https://github.com/vuejs/vue-loader/commit/cc6fa9ebf85972a08fc8bbc359b0093b15790745))
+
+
+### Features
+
+* support 3.3 imported types hmr ([bbd98fc](https://github.com/vuejs/vue-loader/commit/bbd98fc8bdc17fcbffb456a5ffe772bc184f22e4))
+
+
+
+## [17.0.1](https://github.com/vuejs/vue-loader/compare/v17.0.0...v17.0.1) (2022-10-28)
+
+
+### Bug Fixes
+
+* add `vue` and `@vue/compiler-sfc` to optional peerDependencies ([df0ded5](https://github.com/vuejs/vue-loader/commit/df0ded5356864b9923da8f89ff33db1ae6c2402f)), closes [#1944](https://github.com/vuejs/vue-loader/issues/1944)
+* merge custom queries rather than appending ([#1911](https://github.com/vuejs/vue-loader/issues/1911)) ([9e4249a](https://github.com/vuejs/vue-loader/commit/9e4249a548ceb04ead46fff9b68e9b2676b4c692))
+
+
+
 ## [17.0.1](https://github.com/vuejs/vue-loader/compare/v16.8.3...v17.0.1) (2022-10-28)
 
 
