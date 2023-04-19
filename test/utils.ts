@@ -5,10 +5,9 @@ import merge from 'webpack-merge'
 import hash from 'hash-sum'
 // import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import { fs as mfs } from 'memfs'
-
 import { JSDOM, VirtualConsole } from 'jsdom'
-
-import { VueLoaderPlugin, VueLoaderOptions } from '../dist/index'
+import { VueLoaderPlugin } from '..'
+import type { VueLoaderOptions } from '..'
 
 const baseConfig: webpack.Configuration = {
   mode: 'development',
