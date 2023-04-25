@@ -1,5 +1,5 @@
 import * as path from 'path'
-import webpack = require('webpack')
+import webpack from 'webpack'
 import { mfs, bundle, mockBundleAndRun, normalizeNewline } from './utils'
 
 // @ts-ignore
@@ -30,8 +30,11 @@ function assertComponent({
 test('vue rule with include', async () => {
   const result = await mockBundleAndRun({
     entry: 'basic.vue',
-    modify: (config) => {
-      config!.module!.rules[0] = {
+    modify: (config: any) => {
+      const i = config.module.rules.findIndex((r) =>
+        r.test.toString().includes('vue')
+      )
+      config.module.rules[i] = {
         test: /\.vue$/,
         include: /fixtures/,
         loader: 'vue-loader',
@@ -70,8 +73,11 @@ test('test-less oneOf rules', async () => {
 test('normalize multiple use + options', async () => {
   await bundle({
     entry: 'basic.vue',
-    modify: (config) => {
-      config!.module!.rules[0] = {
+    modify: (config: any) => {
+      const i = config.module.rules.findIndex((r) =>
+        r.test.toString().includes('vue')
+      )
+      config!.module!.rules[i] = {
         test: /\.vue$/,
         use: [
           {
@@ -88,7 +94,10 @@ test('should not duplicate css modules value imports', async () => {
   const { window, exports } = await mockBundleAndRun({
     entry: './test/fixtures/duplicate-cssm.js',
     modify: (config: any) => {
-      config!.module!.rules[1] = {
+      const i = config.module.rules.findIndex((r) =>
+        r.test.toString().includes('css')
+      )
+      config.module.rules[i] = {
         test: /\.css$/,
         use: [
           'style-loader',
@@ -136,8 +145,11 @@ test('html-webpack-plugin', async () => {
 test('usage with null-loader', async () => {
   await mockBundleAndRun({
     entry: 'basic.vue',
-    modify: (config) => {
-      config!.module!.rules[1] = {
+    modify: (config: any) => {
+      const i = config.module.rules.findIndex((r) =>
+        r.test.toString().includes('css')
+      )
+      config.module.rules[i] = {
         test: /\.css$/,
         use: ['null-loader'],
       }

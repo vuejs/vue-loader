@@ -32,6 +32,10 @@ const baseConfig: webpack.Configuration = {
         loader: 'vue-loader',
       },
       {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader'],
+      },
+      {
         test: /\.ts$/,
         loader: process.env.WEBPACK4
           ? require.resolve('ts-loader')
@@ -40,10 +44,6 @@ const baseConfig: webpack.Configuration = {
           transpileOnly: true,
           appendTsSuffixTo: [/\.vue$/],
         },
-      },
-      {
-        test: /\.css$/,
-        use: ['style-loader', 'css-loader'],
       },
     ],
   },
