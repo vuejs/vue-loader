@@ -1,6 +1,12 @@
 import * as path from 'path'
 import webpack from 'webpack'
-import { mfs, bundle, mockBundleAndRun, normalizeNewline } from './utils'
+import {
+  mfs,
+  bundle,
+  mockBundleAndRun,
+  normalizeNewline,
+  DEFAULT_VUE_USE,
+} from './utils'
 
 // @ts-ignore
 function assertComponent({
@@ -37,7 +43,7 @@ test('vue rule with include', async () => {
       config.module.rules[i] = {
         test: /\.vue$/,
         include: /fixtures/,
-        loader: 'vue-loader',
+        use: [DEFAULT_VUE_USE],
       }
     },
   })
@@ -52,7 +58,7 @@ test('test-less oneOf rules', async () => {
       config!.module!.rules = [
         {
           test: /\.vue$/,
-          loader: 'vue-loader',
+          use: [DEFAULT_VUE_USE],
         },
         {
           oneOf: [
@@ -79,12 +85,7 @@ test('normalize multiple use + options', async () => {
       )
       config!.module!.rules[i] = {
         test: /\.vue$/,
-        use: [
-          {
-            loader: 'vue-loader',
-            options: {},
-          },
-        ],
+        use: [DEFAULT_VUE_USE],
       }
     },
   })

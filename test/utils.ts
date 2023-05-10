@@ -6,8 +6,14 @@ import hash from 'hash-sum'
 // import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import { fs as mfs } from 'memfs'
 import { JSDOM, VirtualConsole } from 'jsdom'
-import { VueLoaderPlugin } from '..'
-import type { VueLoaderOptions } from '..'
+import type { VueLoaderOptions, VueLoaderPlugin } from '..'
+
+export const DEFAULT_VUE_USE = {
+  loader: 'vue-loader',
+  options: {
+    experimentalInlineMatchResource: Boolean(process.env.INLINE_MATCH_RESOURCE),
+  },
+}
 
 const baseConfig: webpack.Configuration = {
   mode: 'development',
@@ -29,11 +35,7 @@ const baseConfig: webpack.Configuration = {
     rules: [
       {
         test: /\.vue$/,
-        loader: 'vue-loader',
-      },
-      {
-        test: /\.css$/,
-        use: ['style-loader', 'css-loader'],
+        use: [DEFAULT_VUE_USE],
       },
       {
         test: /\.ts$/,
@@ -73,16 +75,41 @@ export function bundle(
 }> {
   let config: BundleOptions = merge({}, baseConfig, options)
 
+  if (!options.experiments?.css) {
+    config.module?.rules?.push({
+      test: /\.css$/,
+      use: ['style-loader', 'css-loader'],
+    })
+  }
+
   if (config.vue && config.module) {
-    const vueOptions = options.vue
+    const vueOptions = {
+      // Test experimental inline match resource by default
+      experimentalInlineMatchResource: Boolean(
+        process.env.INLINE_MATCH_RESOURCE
+      ),
+      ...options.vue,
+    }
+
     delete config.vue
     const vueIndex = config.module.rules!.findIndex(
       (r: any) => r.test instanceof RegExp && r.test.test('.vue')
     )
     const vueRule = config.module.rules![vueIndex]
-    config.module.rules![vueIndex] = Object.assign({}, vueRule, {
-      options: vueOptions,
-    })
+
+    // Detect `Rule.use` or `Rule.loader` and `Rule.options` combination
+    if (vueRule && typeof vueRule === 'object' && Array.isArray(vueRule.use)) {
+      // Vue usually locates at the first loader
+      if (typeof vueRule.use?.[0] === 'object') {
+        vueRule.use[0] = Object.assign({}, vueRule.use[0], {
+          options: vueOptions,
+        })
+      }
+    } else {
+      config.module.rules![vueIndex] = Object.assign({}, vueRule, {
+        options: vueOptions,
+      })
+    }
   }
 
   if (typeof config.entry === 'string' && /\.vue/.test(config.entry)) {

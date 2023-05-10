@@ -1,5 +1,5 @@
 import * as path from 'path'
-import { mockBundleAndRun, normalizeNewline } from './utils'
+import { DEFAULT_VUE_USE, mockBundleAndRun, normalizeNewline } from './utils'
 
 test('apply babel transformations to expressions in template', async () => {
   const { instance } = await mockBundleAndRun({
@@ -111,7 +111,7 @@ test('should allow process custom file', async () => {
       rules: [
         {
           test: /\.svg$/,
-          loader: 'vue-loader',
+          use: [DEFAULT_VUE_USE],
         },
       ],
     },

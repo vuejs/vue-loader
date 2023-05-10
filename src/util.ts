@@ -1,4 +1,5 @@
 import type { Compiler, LoaderContext } from 'webpack'
+import qs from 'querystring'
 import type { SFCDescriptor, CompilerOptions } from 'vue/compiler-sfc'
 import type { VueLoaderOptions } from '.'
 import * as path from 'path'
@@ -162,4 +163,39 @@ export function stringifyRequest(
       })
       .join('!')
   )
+}
+
+export function genMatchResource(
+  context: LoaderContext<VueLoaderOptions>,
+  resourcePath: string,
+  resourceQuery?: string,
+  lang?: string,
+  additionalLoaders?: string[]
+) {
+  resourceQuery = resourceQuery || ''
+  additionalLoaders = additionalLoaders || []
+
+  const loaders = [...additionalLoaders]
+  const parsedQuery = qs.parse(resourceQuery.slice(1))
+
+  // process non-external resources
+  if ('vue' in parsedQuery && !('external' in parsedQuery)) {
+    const currentRequest = context.loaders
+      .slice(context.loaderIndex)
+      .map((obj) => obj.request)
+    loaders.push(...currentRequest)
+  }
+  const loaderString = loaders.join('!')
+
+  return `${resourcePath}${lang ? `.${lang}` : ''}${resourceQuery}!=!${
+    loaderString ? `${loaderString}!` : ''
+  }${resourcePath}${resourceQuery}`
+}
+
+export const testWebpack5 = (compiler?: Compiler) => {
+  if (!compiler) {
+    return false
+  }
+  const webpackVersion = compiler?.webpack?.version
+  return Boolean(webpackVersion && Number(webpackVersion.split('.')[0]) > 4)
 }
