@@ -62,6 +62,8 @@ export function resolveScript(
       isProd,
       inlineTemplate: enableInline,
       reactivityTransform: options.reactivityTransform,
+      propsDestructure: options.propsDestructure,
+      defineModel: options.defineModel,
       babelParserPlugins: options.babelParserPlugins,
       templateOptions: {
         ssr: isServer,

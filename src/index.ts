@@ -30,7 +30,21 @@ export interface VueLoaderOptions {
   transformAssetUrls?: SFCTemplateCompileOptions['transformAssetUrls']
   compiler?: TemplateCompiler | string
   compilerOptions?: CompilerOptions
+  /**
+   * TODO remove in 3.4
+   * @deprecated
+   */
   reactivityTransform?: boolean
+
+  /**
+   * @experimental
+   */
+  propsDestructure?: boolean
+  /**
+   * @experimental
+   */
+  defineModel?: boolean
+
   customElement?: boolean | RegExp
 
   hotReload?: boolean
