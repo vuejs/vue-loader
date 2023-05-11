@@ -1,3 +1,21 @@
+## [17.1.1](https://github.com/vuejs/vue-loader/compare/v17.1.0...v17.1.1) (2023-05-11)
+
+
+### Bug Fixes
+
+* support propsDestructure and defineModel options ([6269698](https://github.com/vuejs/vue-loader/commit/6269698f9fda37f0e3849db3e8b8e67ad1862f57))
+
+
+
+# [17.1.0](https://github.com/vuejs/vue-loader/compare/v17.1.0-beta.0...v17.1.0) (2023-04-26)
+
+
+### Bug Fixes
+
+* do not throw when `Rule.layer` ([#2000](https://github.com/vuejs/vue-loader/issues/2000)) ([ef589df](https://github.com/vuejs/vue-loader/commit/ef589df2956506a5a7bbc050c476501d32dd8469))
+
+
+
 # [17.1.0](https://github.com/vuejs/vue-loader/compare/v17.1.0-beta.0...v17.1.0) (2023-04-26)
 
 
