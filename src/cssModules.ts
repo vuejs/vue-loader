@@ -10,13 +10,20 @@ export function genCSSModulesCode(
 
   // inject variable
   const name = typeof moduleName === 'string' ? moduleName : '$style'
-  code += `\ncssModules["${name}"] = ${styleVar}`
+
+  const moduleAdd = `
+  if(cssModules["${name}"]){
+      Object.assign(cssModules["${name}"], ${styleVar});
+  } else {
+      cssModules["${name}"] = ${styleVar};
+  }`
+  code += `${moduleAdd}`
 
   if (needsHotReload) {
     code += `
 if (module.hot) {
   module.hot.accept(${request}, () => {
-    cssModules["${name}"] = ${styleVar}
+    ${moduleAdd}
     __VUE_HMR_RUNTIME__.rerender("${id}")
   })
 }`

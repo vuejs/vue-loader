@@ -5,7 +5,7 @@
 </style>
 
 <script>
-import CssModuleSimple from './css-modules-simple.vue'
+import CssModuleSimple from './default.vue'
 
 export default {
   extends: CssModuleSimple
@@ -13,5 +13,5 @@ export default {
 </script>
 
 <template>
-  <div :class="$style.red"></div>
+  <div>{{ $style.red }}</div>
 </template>
