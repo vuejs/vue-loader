@@ -1,4 +1,9 @@
-import { mockBundleAndRun, genId, normalizeNewline } from './utils'
+import {
+  mockBundleAndRun,
+  genId,
+  normalizeNewline,
+  normalizeEscapedHash,
+} from './utils'
 
 test('scoped style', async () => {
   const { window, instance, componentModule } = await mockBundleAndRun({
@@ -147,7 +152,7 @@ describe('CSS Modules', () => {
           return style!.textContent
         })
         .join('\n')
-      style = normalizeNewline(style)
+      style = normalizeEscapedHash(normalizeNewline(style))
       expect(style).toContain('.' + className + ' {\n  color: red;\n}')
     }
 
@@ -177,7 +182,7 @@ describe('CSS Modules', () => {
           return style!.textContent
         })
         .join('\n')
-      style = normalizeNewline(style)
+      style = normalizeEscapedHash(normalizeNewline(style))
       expect(style).toContain('.' + className + ' {\n  color: red;\n}')
     }
 
@@ -210,7 +215,7 @@ describe('CSS Modules', () => {
           return style!.textContent
         })
         .join('\n')
-      style = normalizeNewline(style)
+      style = normalizeEscapedHash(normalizeNewline(style))
       expect(style).toContain('.' + classNameA + ' {\n  color: red;\n}')
       expect(style).toContain('.' + classNameB + ' {\n  color: blue;\n}')
     }
@@ -224,7 +229,7 @@ describe('CSS Modules', () => {
   })
 
   test('multiple named modules (same module names, different class names)', async () => {
-    const ENTRY = 'named-multiple.vue'
+    const ENTRY = 'named-multiple-samename-diffclass.vue'
 
     const expectations = async (
       localIdentName: string | undefined,
@@ -245,7 +250,7 @@ describe('CSS Modules', () => {
           return style!.textContent
         })
         .join('\n')
-      style = normalizeNewline(style)
+      style = normalizeEscapedHash(normalizeNewline(style))
       expect(style).toContain('.' + classNameA + ' {\n  color: red;\n}')
       expect(style).toContain('.' + classNameB + ' {\n  color: blue;\n}')
     }
@@ -253,13 +258,43 @@ describe('CSS Modules', () => {
     await expectations.apply(undefined, defaultIdent)
     await expectations(
       customIdent,
-      /test-fixtures-css-modules-named-multiple---red---[\w-+]{5}/,
-      /test-fixtures-css-modules-named-multiple---blue---[\w-+]{5}/
+      /test-fixtures-css-modules-named-multiple-samename-diffclass---red---[\w-+]{5}/,
+      /test-fixtures-css-modules-named-multiple-samename-diffclass---blue---[\w-+]{5}/
+    )
+  })
+
+  test('multiple named modules (same module names, same class names)', async () => {
+    const ENTRY = 'named-multiple-samename-sameclass.vue'
+
+    const expectations = async (
+      localIdentName: string | undefined,
+      regexToMatch: RegExp
+    ) => {
+      const { window, instance } = await testWithIdent(ENTRY, localIdentName)
+      // get local class name
+      const className = instance.named.red
+      expect(className).toMatch(regexToMatch)
+
+      // class name in style
+      let style = [].slice
+        .call(window.document.querySelectorAll('style'))
+        .map((style: any) => {
+          return style!.textContent
+        })
+        .join('\n')
+      style = normalizeEscapedHash(normalizeNewline(style))
+      expect(style).toContain('.' + className + ' {\n  color: blue;\n}')
+    }
+
+    await expectations.apply(undefined, defaultIdent)
+    await expectations(
+      customIdent,
+      /test-fixtures-css-modules-named-multiple-samename-sameclass---red---[\w-+]{5}/
     )
   })
 
   test('multiple named modules (different module names, different class names)', async () => {
-    const ENTRY = 'named-multiple-diffnamediffclass.vue'
+    const ENTRY = 'named-multiple-diffname-diffclass.vue'
 
     const expectations = async (
       localIdentName: string | undefined,
@@ -280,7 +315,7 @@ describe('CSS Modules', () => {
           return style!.textContent
         })
         .join('\n')
-      style = normalizeNewline(style)
+      style = normalizeEscapedHash(normalizeNewline(style))
       expect(style).toContain('.' + classNameA + ' {\n  color: red;\n}')
       expect(style).toContain('.' + classNameB + ' {\n  color: blue;\n}')
     }
@@ -288,13 +323,13 @@ describe('CSS Modules', () => {
     await expectations.apply(undefined, defaultIdent)
     await expectations(
       customIdent,
-      /test-fixtures-css-modules-named-multiple-diffnamediffclass---red---[\w-+]{5}/,
-      /test-fixtures-css-modules-named-multiple-diffnamediffclass---blue---[\w-+]{5}/
+      /test-fixtures-css-modules-named-multiple-diffname-diffclass---red---[\w-+]{5}/,
+      /test-fixtures-css-modules-named-multiple-diffname-diffclass---blue---[\w-+]{5}/
     )
   })
 
   test('multiple named modules (different module names, same class name)', async () => {
-    const ENTRY = 'named-multiple-diffnamesameclass.vue'
+    const ENTRY = 'named-multiple-diffname-sameclass.vue'
 
     const expectations = async (
       localIdentName: string | undefined,
@@ -308,12 +343,12 @@ describe('CSS Modules', () => {
       expect(classNameA).toMatch(regexToMatchA)
       expect(classNameB).toMatch(regexToMatchB)
 
-      /*
-      !!BROKEN!!, classes have same name+hash
+      expect(classNameA).not.toMatch(classNameB)
+      /* ^!BROKEN!^
+      classes have same name+hash
       hash not taking module name into account
       vue-loader needs to pass to css-loader too!
       */
-      expect(classNameA).not.toMatch(classNameB)
 
       // class name in style
       let style = [].slice
@@ -322,7 +357,7 @@ describe('CSS Modules', () => {
           return style!.textContent
         })
         .join('\n')
-      style = normalizeNewline(style)
+      style = normalizeEscapedHash(normalizeNewline(style))
       expect(style).toContain('.' + classNameA + ' {\n  color: red;\n}')
       expect(style).toContain('.' + classNameB + ' {\n  color: red;\n}')
     }
@@ -330,8 +365,8 @@ describe('CSS Modules', () => {
     await expectations.apply(undefined, defaultIdent)
     await expectations(
       customIdent,
-      /test-fixtures-css-modules-named-multiple-diffnamesameclass---red---[\w-+]{5}/,
-      /test-fixtures-css-modules-named-multiple-diffnamesameclass---blue---[\w-+]{5}/
+      /test-fixtures-css-modules-named-multiple-diffname-sameclass---red---[\w-+]{5}/,
+      /test-fixtures-css-modules-named-multiple-diffname-sameclass---blue---[\w-+]{5}/
     )
   })
 
@@ -353,9 +388,10 @@ describe('CSS Modules', () => {
           return style!.textContent
         })
         .join('\n')
-      style = normalizeNewline(style)
-      /*
-        !!BROKEN!!,
+      style = normalizeEscapedHash(normalizeNewline(style))
+
+      expect(style).toContain('.' + className + ' {\n  color: red;\n}')
+      /* ^!BROKEN!^
         extend is adding both classes to style
         but instance.$style.red className points
         to the file's original style (hexcolor)
@@ -370,7 +406,6 @@ describe('CSS Modules', () => {
             color: #FF0000;
         }
       */
-      expect(style).toContain('.' + className + ' {\n  color: red;\n}')
     }
 
     await expectations.apply(undefined, defaultIdent)
@@ -394,20 +429,19 @@ describe('CSS Modules', () => {
       const classNameB = instance.$style.red // extended
 
       expect(classNameA).toMatch(regexToMatchA)
+
       expect(classNameB).toMatch(regexToMatchB)
-      /*
-        !!BROKEN!!,
+      /* ^!BROKEN!^,
         styles for both own file's style tag and the
         extended file are being added to style tags
         in document BUT instance.$style has not received the
-        `red` in the hashmap so instance.$style does't exist
+        `red` in the hashmap so instance.$style.red does't exist
 
         instance.$style
         { black: "dd07afd7f1529b35227b9b3bc7609e28-vue" }
 
 
         styles
-
         ._7ef3af38102f7bc2284518b4f9dda8d9-vue {
             color: red;
         }
@@ -424,7 +458,7 @@ describe('CSS Modules', () => {
           return style!.textContent
         })
         .join('\n')
-      style = normalizeNewline(style)
+      style = normalizeEscapedHash(normalizeNewline(style))
       expect(style).toContain('.' + classNameA + ' {\n  color: #000000;\n}')
       expect(style).toContain('.' + classNameB + ' {\n  color: red;\n}')
     }
@@ -458,7 +492,7 @@ describe('CSS Modules', () => {
           return style!.textContent
         })
         .join('\n')
-      style = normalizeNewline(style)
+      style = normalizeEscapedHash(normalizeNewline(style))
       // own style, w/ font-weight
       expect(style).toContain(
         '.' + classList[0] + ' {\n  font-weight: bold;\n}'
