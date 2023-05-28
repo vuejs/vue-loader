@@ -171,6 +171,15 @@ class VueLoaderPlugin {
           watcher.close()
         }
       })
+
+      // In some cases, e.g. in this project's tests,
+      // even though needsHMR() returns true, webpack is not watching, thus no watchClose hook is called.
+      // So we need to close the watcher when webpack is done.
+      compiler.hooks.done.tap(id, () => {
+        if (watcher) {
+          watcher.close()
+        }
+      })
     }
   }
 }
