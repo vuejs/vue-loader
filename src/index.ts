@@ -58,7 +58,7 @@ export interface VueLoaderOptions {
 let errorEmitted = false
 
 const { parse } = compiler
-const exportHelperPath = JSON.stringify(require.resolve('./exportHelper'))
+const exportHelperPath = require.resolve('./exportHelper')
 
 export default function loader(
   this: LoaderContext<VueLoaderOptions>,
@@ -296,7 +296,7 @@ export default function loader(
   if (!propsToAttach.length) {
     code += `\n\nconst __exports__ = script;`
   } else {
-    code += `\n\nimport exportComponent from ${exportHelperPath}`
+    code += `\n\nimport exportComponent from ${stringifyRequest(exportHelperPath)}`
     code += `\nconst __exports__ = /*#__PURE__*/exportComponent(script, [${propsToAttach
       .map(([key, val]) => `['${key}',${val}]`)
       .join(',')}])`
