@@ -6,7 +6,8 @@ import hash from 'hash-sum'
 // import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import { fs as mfs } from 'memfs'
 import { JSDOM, VirtualConsole } from 'jsdom'
-import type { VueLoaderOptions, VueLoaderPlugin } from '..'
+import { VueLoaderPlugin } from '..'
+import type { VueLoaderOptions } from '..'
 
 export const DEFAULT_VUE_USE = {
   loader: 'vue-loader',
