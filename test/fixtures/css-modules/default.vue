@@ -7,3 +7,7 @@
 <script>
 export default {}
 </script>
+
+<template>
+    <div>{{ $style }}</div>
+</template>

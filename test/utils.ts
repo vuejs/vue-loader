@@ -174,6 +174,10 @@ export function normalizeNewline(input: string): string {
   return input.replace(new RegExp('\r\n', 'g'), '\n')
 }
 
+export function normalizeEscapedHash(input: string): string {
+  return input.replace(new RegExp('\\\\', 'g'), '')
+}
+
 // see the logic at src/index.ts
 // in non-production environment, shortFilePath is used to generate scope id
 export function genId(fixtureName: string): string {

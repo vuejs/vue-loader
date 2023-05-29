@@ -187,10 +187,10 @@ test('support rules with oneOf', async () => {
   )
   expect(style).toContain('comp-a h2 {\n  color: #f00;\n}')
 
-  const { window, instance } = await run('css-modules-simple.vue')
+  const { window, instance } = await run('css-modules/default.vue')
 
   const className = instance.$style.red
-  expect(className).toMatch(/^red_\w{5}/)
+  expect(className).toMatch(/^red_[\w-+]{5}/)
   style = normalizeNewline(window.document.querySelector('style')!.textContent!)
   expect(style).toContain('.' + className + ' {\n  color: red;\n}')
 })
