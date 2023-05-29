@@ -1,3 +1,13 @@
+## [17.1.2](https://github.com/vuejs/vue-loader/compare/v17.1.1...v17.1.2) (2023-05-29)
+
+
+### Bug Fixes
+
+* keep build stable when run in a different path ([#2040](https://github.com/vuejs/vue-loader/issues/2040)) ([a81dc0f](https://github.com/vuejs/vue-loader/commit/a81dc0f573d216eefa13b0275f3fc147bf3e2ef3))
+* properly close the watcher after tests ([40b93b9](https://github.com/vuejs/vue-loader/commit/40b93b9c2722e85a000de62e3eb8bc02facafd10))
+
+
+
 ## [17.1.1](https://github.com/vuejs/vue-loader/compare/v17.1.0...v17.1.1) (2023-05-11)
 
 
