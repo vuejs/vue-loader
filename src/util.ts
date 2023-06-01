@@ -169,13 +169,11 @@ export function genMatchResource(
   context: LoaderContext<VueLoaderOptions>,
   resourcePath: string,
   resourceQuery?: string,
-  lang?: string,
-  additionalLoaders?: string[]
+  lang?: string
 ) {
   resourceQuery = resourceQuery || ''
-  additionalLoaders = additionalLoaders || []
 
-  const loaders = [...additionalLoaders]
+  const loaders: string[] = []
   const parsedQuery = qs.parse(resourceQuery.slice(1))
 
   // process non-external resources
