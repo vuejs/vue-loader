@@ -1,6 +1,6 @@
 import type { LoaderDefinitionFunction, LoaderContext } from 'webpack'
 import * as qs from 'querystring'
-import { stringifyRequest } from './util'
+import { getOptions, stringifyRequest, testWebpack5 } from './util'
 import { VueLoaderOptions } from '.'
 
 const selfPath = require.resolve('./index')
@@ -58,7 +58,40 @@ export const pitch = function () {
   })
 
   // Inject style-post-loader before css-loader for scoped CSS and trimming
+  const isWebpack5 = testWebpack5(context._compiler)
+  const options = (getOptions(context) || {}) as VueLoaderOptions
   if (query.type === `style`) {
+    if (isWebpack5 && context._compiler?.options.experiments.css) {
+      // If user enables `experiments.css`, then we are trying to emit css code directly.
+      // Although we can target requests like `xxx.vue?type=style` to match `type: "css"`,
+      // it will make the plugin a mess.
+      if (!options.experimentalInlineMatchResource) {
+        context.emitError(
+          new Error(
+            '`experimentalInlineMatchResource` should be enabled if `experiments.css` enabled currently'
+          )
+        )
+        return ''
+      }
+
+      if (query.inline || query.module) {
+        context.emitError(
+          new Error(
+            '`inline` or `module` is currently not supported with `experiments.css` enabled'
+          )
+        )
+        return ''
+      }
+
+      const loaderString = [stylePostLoaderPath, ...loaders]
+        .map((loader) => {
+          return typeof loader === 'string' ? loader : loader.request
+        })
+        .join('!')
+      return `@import "${context.resourcePath}${
+        query.lang ? `.${query.lang}` : ''
+      }${context.resourceQuery}!=!-!${loaderString}!${context.resource}";`
+    }
     const cssLoaderIndex = loaders.findIndex(isCSSLoader)
     if (cssLoaderIndex > -1) {
       // if inlined, ignore any loaders after css-loader and replace w/ inline
@@ -71,7 +104,8 @@ export const pitch = function () {
       return genProxyModule(
         [...afterLoaders, stylePostLoaderPath, ...beforeLoaders],
         context,
-        !!query.module || query.inline != null
+        !!query.module || query.inline != null,
+        (query.lang as string) || 'css'
       )
     }
   }
@@ -84,15 +118,21 @@ export const pitch = function () {
 
   // Rewrite request. Technically this should only be done when we have deduped
   // loaders. But somehow this is required for block source maps to work.
-  return genProxyModule(loaders, context, query.type !== 'template')
+  return genProxyModule(
+    loaders,
+    context,
+    query.type !== 'template',
+    query.ts ? 'ts' : (query.lang as string)
+  )
 }
 
 function genProxyModule(
   loaders: (Loader | string)[],
   context: LoaderContext<VueLoaderOptions>,
-  exportDefault = true
+  exportDefault = true,
+  lang = 'js'
 ) {
-  const request = genRequest(loaders, context)
+  const request = genRequest(loaders, lang, context)
   // return a proxy module which simply re-exports everything from the
   // actual request. Note for template blocks the compiled module has no
   // default export.
@@ -104,12 +144,28 @@ function genProxyModule(
 
 function genRequest(
   loaders: (Loader | string)[],
+  lang: string,
   context: LoaderContext<VueLoaderOptions>
 ) {
+  const isWebpack5 = testWebpack5(context._compiler)
+  const options = (getOptions(context) || {}) as VueLoaderOptions
+  const enableInlineMatchResource =
+    isWebpack5 && options.experimentalInlineMatchResource
+
   const loaderStrings = loaders.map((loader) => {
     return typeof loader === 'string' ? loader : loader.request
   })
   const resource = context.resourcePath + context.resourceQuery
+
+  if (enableInlineMatchResource) {
+    return stringifyRequest(
+      context,
+      `${context.resourcePath}${lang ? `.${lang}` : ''}${
+        context.resourceQuery
+      }!=!-!${[...loaderStrings, resource].join('!')}`
+    )
+  }
+
   return stringifyRequest(
     context,
     '-!' + [...loaderStrings, resource].join('!')

@@ -30,3 +30,15 @@ jobs:
           cache: 'yarn'
       - run: yarn install
       - run: yarn test
+
+  test-webpack5-inline-match-resource:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set node version to 16
+        uses: actions/setup-node@v2
+        with:
+          node-version: 16
+          cache: 'yarn'
+      - run: yarn install
+      - run: yarn test:match-resource

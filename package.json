@@ -14,6 +14,8 @@
     "build": "tsc",
     "pretest": "tsc",
     "test": "jest",
+    "pretest:match-resource": "tsc",
+    "test:match-resource": "INLINE_MATCH_RESOURCE=true jest",
     "pretest:webpack4": "tsc",
     "test:webpack4": "WEBPACK4=true jest",
     "dev-example": "node example/devServer.js --config example/webpack.config.js --inline --hot",

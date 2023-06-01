@@ -1,4 +1,9 @@
-import { mockBundleAndRun, genId, normalizeNewline } from './utils'
+import {
+  mockBundleAndRun,
+  genId,
+  normalizeNewline,
+  DEFAULT_VUE_USE,
+} from './utils'
 
 test('scoped style', async () => {
   const { window, instance, componentModule } = await mockBundleAndRun({
@@ -109,7 +114,7 @@ test('CSS Modules', async () => {
         config!.module!.rules = [
           {
             test: /\.vue$/,
-            loader: 'vue-loader',
+            use: [DEFAULT_VUE_USE],
           },
           {
             test: /\.css$/,
@@ -178,7 +183,7 @@ test('CSS Modules Extend', async () => {
       config!.module!.rules = [
         {
           test: /\.vue$/,
-          loader: 'vue-loader',
+          use: [DEFAULT_VUE_USE],
         },
         {
           test: /\.css$/,

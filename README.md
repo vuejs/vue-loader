@@ -4,6 +4,10 @@
 
 - [Documentation](https://vue-loader.vuejs.org)
 
+## v17.1+ Only Options
+
+- `experimentalInlineMatchResource: boolean`: enable [Inline matchResource](https://webpack.js.org/api/loaders/#inline-matchresource) for rule matching for vue-loader.
+
 ## v16+ Only Options
 
 - `reactivityTransform: boolean`: enable [Vue Reactivity Transform](https://github.com/vuejs/rfcs/discussions/369) (SFCs only).

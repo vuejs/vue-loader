@@ -20,7 +20,12 @@ import { formatError } from './formatError'
 import VueLoaderPlugin from './plugin'
 import { canInlineTemplate } from './resolveScript'
 import { setDescriptor } from './descriptorCache'
-import { getOptions, stringifyRequest as _stringifyRequest } from './util'
+import {
+  getOptions,
+  stringifyRequest as _stringifyRequest,
+  genMatchResource,
+  testWebpack5,
+} from './util'
 
 export { VueLoaderPlugin }
 
@@ -51,6 +56,7 @@ export interface VueLoaderOptions {
   exposeFilename?: boolean
   appendExtension?: boolean
   enableTsInTemplate?: boolean
+  experimentalInlineMatchResource?: boolean
 
   isServerBuild?: boolean
 }
@@ -90,18 +96,23 @@ export default function loader(
     rootContext,
     resourcePath,
     resourceQuery: _resourceQuery = '',
+    _compiler,
   } = loaderContext
 
+  const isWebpack5 = testWebpack5(_compiler)
   const rawQuery = _resourceQuery.slice(1)
   const incomingQuery = qs.parse(rawQuery)
   const resourceQuery = rawQuery ? `&${rawQuery}` : ''
   const options = (getOptions(loaderContext) || {}) as VueLoaderOptions
+  const enableInlineMatchResource =
+    isWebpack5 && Boolean(options.experimentalInlineMatchResource)
 
   const isServer = options.isServerBuild ?? target === 'node'
   const isProduction =
     mode === 'production' || process.env.NODE_ENV === 'production'
 
   const filename = resourcePath.replace(/\?.*$/, '')
+
   const { descriptor, errors } = parse(source, {
     filename,
     sourceMap,
@@ -167,10 +178,23 @@ export default function loader(
   if (script || scriptSetup) {
     const lang = script?.lang || scriptSetup?.lang
     isTS = !!(lang && /tsx?/.test(lang))
+    const externalQuery = Boolean(script && !scriptSetup && script.src)
+      ? `&external`
+      : ``
     const src = (script && !scriptSetup && script.src) || resourcePath
     const attrsQuery = attrsToQuery((scriptSetup || script)!.attrs, 'js')
-    const query = `?vue&type=script${attrsQuery}${resourceQuery}`
-    const scriptRequest = stringifyRequest(src + query)
+    const query = `?vue&type=script${attrsQuery}${resourceQuery}${externalQuery}`
+
+    let scriptRequest: string
+
+    if (enableInlineMatchResource) {
+      scriptRequest = stringifyRequest(
+        genMatchResource(this, src, query, lang || 'js')
+      )
+    } else {
+      scriptRequest = stringifyRequest(src + query)
+    }
+
     scriptImport =
       `import script from ${scriptRequest}\n` +
       // support named exports
@@ -184,13 +208,27 @@ export default function loader(
   const useInlineTemplate = canInlineTemplate(descriptor, isProduction)
   if (descriptor.template && !useInlineTemplate) {
     const src = descriptor.template.src || resourcePath
+    const externalQuery = Boolean(descriptor.template.src) ? `&external` : ``
     const idQuery = `&id=${id}`
     const scopedQuery = hasScoped ? `&scoped=true` : ``
     const attrsQuery = attrsToQuery(descriptor.template.attrs)
     const tsQuery =
       options.enableTsInTemplate !== false && isTS ? `&ts=true` : ``
-    const query = `?vue&type=template${idQuery}${scopedQuery}${tsQuery}${attrsQuery}${resourceQuery}`
-    templateRequest = stringifyRequest(src + query)
+    const query = `?vue&type=template${idQuery}${scopedQuery}${tsQuery}${attrsQuery}${resourceQuery}${externalQuery}`
+
+    if (enableInlineMatchResource) {
+      templateRequest = stringifyRequest(
+        genMatchResource(
+          this,
+          src,
+          query,
+          options.enableTsInTemplate !== false && isTS ? 'ts' : 'js'
+        )
+      )
+    } else {
+      templateRequest = stringifyRequest(src + query)
+    }
+
     templateImport = `import { ${renderFnName} } from ${templateRequest}`
     propsToAttach.push([renderFnName, renderFnName])
   }
@@ -205,12 +243,23 @@ export default function loader(
       .forEach((style, i) => {
         const src = style.src || resourcePath
         const attrsQuery = attrsToQuery(style.attrs, 'css')
+        const lang = String(style.attrs.lang || 'css')
         // make sure to only pass id when necessary so that we don't inject
         // duplicate tags when multiple components import the same css file
         const idQuery = !style.src || style.scoped ? `&id=${id}` : ``
         const inlineQuery = asCustomElement ? `&inline` : ``
-        const query = `?vue&type=style&index=${i}${idQuery}${inlineQuery}${attrsQuery}${resourceQuery}`
-        const styleRequest = stringifyRequest(src + query)
+        const externalQuery = Boolean(style.src) ? `&external` : ``
+        const query = `?vue&type=style&index=${i}${idQuery}${inlineQuery}${attrsQuery}${resourceQuery}${externalQuery}`
+
+        let styleRequest
+        if (enableInlineMatchResource) {
+          styleRequest = stringifyRequest(
+            genMatchResource(this, src, query, lang)
+          )
+        } else {
+          styleRequest = stringifyRequest(src + query)
+        }
+
         if (style.module) {
           if (asCustomElement) {
             loaderContext.emitError(
@@ -283,9 +332,27 @@ export default function loader(
           const issuerQuery = block.attrs.src
             ? `&issuerPath=${qs.escape(resourcePath)}`
             : ''
-          const query = `?vue&type=custom&index=${i}${blockTypeQuery}${issuerQuery}${attrsQuery}${resourceQuery}`
+
+          const externalQuery = Boolean(block.attrs.src) ? `&external` : ``
+          const query = `?vue&type=custom&index=${i}${blockTypeQuery}${issuerQuery}${attrsQuery}${resourceQuery}${externalQuery}`
+
+          let customRequest
+
+          if (enableInlineMatchResource) {
+            customRequest = stringifyRequest(
+              genMatchResource(
+                this,
+                src as string,
+                query,
+                block.attrs.lang as string
+              )
+            )
+          } else {
+            customRequest = stringifyRequest(src + query)
+          }
+
           return (
-            `import block${i} from ${stringifyRequest(src + query)}\n` +
+            `import block${i} from ${customRequest}\n` +
             `if (typeof block${i} === 'function') block${i}(script)`
           )
         })

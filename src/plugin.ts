@@ -1,19 +1,26 @@
-import webpack from 'webpack'
 import type { Compiler } from 'webpack'
+import { testWebpack5 } from './util'
 
 declare class VueLoaderPlugin {
   static NS: string
   apply(compiler: Compiler): void
 }
 
-let Plugin: typeof VueLoaderPlugin
+const NS = 'vue-loader'
 
-if (webpack.version && webpack.version[0] > '4') {
-  // webpack5 and upper
-  Plugin = require('./pluginWebpack5').default
-} else {
-  // webpack4 and lower
-  Plugin = require('./pluginWebpack4').default
+class Plugin {
+  static NS = NS
+  apply(compiler: Compiler) {
+    let Ctor: typeof VueLoaderPlugin
+    if (testWebpack5(compiler)) {
+      // webpack5 and upper
+      Ctor = require('./pluginWebpack5').default
+    } else {
+      // webpack4 and lower
+      Ctor = require('./pluginWebpack4').default
+    }
+    new Ctor().apply(compiler)
+  }
 }
 
 export default Plugin

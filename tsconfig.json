@@ -14,13 +14,7 @@
     "noImplicitAny": true,
     "removeComments": false,
     "skipLibCheck": true,
-    "lib": [
-      "es6",
-      "es7",
-      "DOM"
-    ]
+    "lib": ["es6", "es7", "DOM"]
   },
-  "include": [
-    "src"
-  ]
+  "include": ["src"]
 }

@@ -1,6 +1,6 @@
 import * as qs from 'querystring'
 import type { VueLoaderOptions } from './'
-import type { RuleSetRule, Compiler } from 'webpack'
+import type { RuleSetRule, Compiler, RuleSetUse } from 'webpack'
 import { needHMR } from './util'
 import { clientCache, typeDepToSFCMap } from './resolveScript'
 import { compiler as vueCompiler } from './compiler'
@@ -146,7 +146,7 @@ class VueLoaderPlugin {
       )
     }
 
-    // get the normlized "use" for vue files
+    // get the normalized "use" for vue files
     const vueUse = vueRules
       .filter((rule) => rule.type === 'use')
       .map((rule) => rule.value)
@@ -170,6 +170,8 @@ class VueLoaderPlugin {
     const vueLoaderUse = vueUse[vueLoaderUseIndex]
     const vueLoaderOptions = (vueLoaderUse.options =
       vueLoaderUse.options || {}) as VueLoaderOptions
+    const enableInlineMatchResource =
+      vueLoaderOptions.experimentalInlineMatchResource
 
     // for each user rule (except the vue rule), create a cloned rule
     // that targets the corresponding language blocks in *.vue files.
@@ -221,16 +223,53 @@ class VueLoaderPlugin {
         const parsed = qs.parse(query.slice(1))
         return parsed.vue != null
       },
+      options: vueLoaderOptions,
     }
 
     // replace original rules
-    compiler.options.module!.rules = [
-      pitcher,
-      ...jsRulesForRenderFn,
-      templateCompilerRule,
-      ...clonedRules,
-      ...rules,
-    ]
+    if (enableInlineMatchResource) {
+      // Match rules using `vue-loader`
+      const vueLoaderRules = rules.filter((rule) => {
+        const matchOnce = (use?: RuleSetUse) => {
+          let loaderString = ''
+
+          if (!use) {
+            return loaderString
+          }
+
+          if (typeof use === 'string') {
+            loaderString = use
+          } else if (Array.isArray(use)) {
+            loaderString = matchOnce(use[0])
+          } else if (typeof use === 'object' && use.loader) {
+            loaderString = use.loader
+          }
+          return loaderString
+        }
+
+        const loader = rule.loader || matchOnce(rule.use)
+        return (
+          loader === require('../package.json').name ||
+          loader.startsWith(require.resolve('./index'))
+        )
+      })
+
+      compiler.options.module!.rules = [
+        pitcher,
+        ...rules.filter((rule) => !vueLoaderRules.includes(rule)),
+        templateCompilerRule,
+        ...clonedRules,
+        ...vueLoaderRules,
+      ]
+    } else {
+      compiler.options.module!.rules = [
+        pitcher,
+        ...jsRulesForRenderFn,
+        templateCompilerRule,
+        ...clonedRules,
+        ...rules,
+      ]
+    }
 
     // 3.3 HMR support for imported types
     if (
