@@ -1,3 +1,14 @@
+## [17.2.1](https://github.com/vuejs/vue-loader/compare/v17.1.2...v17.2.1) (2023-06-01)
+
+
+### Features
+
+* A new `experimentalInlineMatchResource` option (webpack 5 only), which leverages webpack 5's inline match resource feature and works well with the [`experiments.css`](https://webpack.js.org/configuration/experiments/#experimentscss) feature ([#2046](https://github.com/vuejs/vue-loader/issues/2046)) ([3149f6d](https://github.com/vuejs/vue-loader/commit/3149f6d69c2f456bdcfa23acc0da93473a93a764))
+
+
+Note: v17.2.0 was released by accident, it has the same content as v17.1.2, therefore not included in the changelog.
+
+
 ## [17.1.2](https://github.com/vuejs/vue-loader/compare/v17.1.1...v17.1.2) (2023-05-29)
 
 
