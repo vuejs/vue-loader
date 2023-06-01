@@ -4,7 +4,7 @@
 
 - [Documentation](https://vue-loader.vuejs.org)
 
-## v17.2+ Only Options
+## v17.2.1+ Only Options
 
 - `experimentalInlineMatchResource: boolean`: enable [Inline matchResource](https://webpack.js.org/api/loaders/#inline-matchresource) for rule matching for vue-loader.
 
