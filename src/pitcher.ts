@@ -88,9 +88,13 @@ export const pitch = function () {
           return typeof loader === 'string' ? loader : loader.request
         })
         .join('!')
-      return `@import "${context.resourcePath}${
-        query.lang ? `.${query.lang}` : ''
-      }${context.resourceQuery}!=!-!${loaderString}!${context.resource}";`
+      const styleRequest = stringifyRequest(
+        context,
+        `${context.resourcePath}${query.lang ? `.${query.lang}` : ''}${
+          context.resourceQuery
+        }!=!-!${loaderString}!${context.resource}`
+      )
+      return `@import ${styleRequest};`
     }
     const cssLoaderIndex = loaders.findIndex(isCSSLoader)
     if (cssLoaderIndex > -1) {
