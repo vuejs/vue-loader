@@ -1,3 +1,12 @@
+## [17.2.2](https://github.com/vuejs/vue-loader/compare/v17.2.1...v17.2.2) (2023-06-02)
+
+
+### Bug Fixes
+
+* windows path for `experiments.css` ([#2049](https://github.com/vuejs/vue-loader/issues/2049)) ([f3f45df](https://github.com/vuejs/vue-loader/commit/f3f45df925bcd80307232e7410ead355f87953d3))
+
+
+
 ## [17.2.1](https://github.com/vuejs/vue-loader/compare/v17.1.2...v17.2.1) (2023-06-01)
 
 
