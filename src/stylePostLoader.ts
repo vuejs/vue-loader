@@ -9,6 +9,13 @@ const { compileStyle } = compiler
 // for any <style scoped> selection requests initiated from within vue files.
 const StylePostLoader: LoaderDefinitionFunction = function (source, inMap) {
   const query = qs.parse(this.resourceQuery.slice(1))
+
+  // skip normal CSS files without scoped flag
+  if (!('vue' in query) && !query.scoped) {
+    this.callback(null, source, inMap)
+    return
+  }
+
   const { code, map, errors } = compileStyle({
     source: source as string,
     filename: this.resourcePath,
