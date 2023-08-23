@@ -1,3 +1,11 @@
+<a name="15.10.2"></a>
+# [15.10.2](https://github.com/vuejs/vue-loader/compare/v15.10.1...v15.10.2) (2023-08-23)
+
+### Bug Fixes
+
+* don't enable prettify by default if prettier 3 is detected ([aa2558d](https://github.com/vuejs/vue-loader/commit/aa2558d))
+
+
 <a name="15.10.1"></a>
 # [15.10.1](https://github.com/vuejs/vue-loader/compare/v15.10.0...v15.10.1) (2022-11-14)
 
