@@ -90,7 +90,7 @@ When both options are specified, enables file-system-based template compilation 
 ## prettify
 
 - type: `boolean`
-- default: `true`
+- default: `true` if prettier v1 or v2 is installed, `false` otherwise
 
 In development mode, we use [prettier](https://prettier.io/) to format the compiled render function for ease of debugging by default. However, if you encounter any obscure bug of prettier, such as [exponential compilation time for deeply nested functions](https://github.com/prettier/prettier/issues/4672), you can disable this option to circumvent it.
 

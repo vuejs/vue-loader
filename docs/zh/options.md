@@ -90,7 +90,7 @@ sidebar: auto
 ## prettify
 
 - 类型：`boolean`
-- 默认值：`true`
+- 默认值：当检测到 prettier v1 或 v2 时为 `true`，否则为 `false`
 
 在开发环境下，我们默认使用 [prettier](https://prettier.io/) 格式化编译后的模板渲染代码，以方便调试。然而，如果你开发时碰到了 prettier 的某些罕见 bug，比如[格式化多层嵌套的函数时运行时间过长](https://github.com/prettier/prettier/issues/4672)，你可以通过禁用这个选项来绕开。
 
