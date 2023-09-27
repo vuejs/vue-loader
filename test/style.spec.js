@@ -2,7 +2,8 @@ const normalizeNewline = require('normalize-newline')
 const {
   genId,
   mockRender,
-  mockBundleAndRun
+  mockBundleAndRun,
+  DEFAULT_VUE_USE
 } = require('./utils')
 
 test('scoped style', done => {
@@ -126,7 +127,7 @@ test('CSS Modules', async () => {
           config.module.rules = [
             {
               test: /\.vue$/,
-              loader: 'vue-loader'
+              use: [DEFAULT_VUE_USE]
             },
             {
               test: /\.css$/,
@@ -201,7 +202,7 @@ test('CSS Modules Extend', async () => {
         config.module.rules = [
           {
             test: /\.vue$/,
-            loader: 'vue-loader'
+            use: [DEFAULT_VUE_USE]
           },
           {
             test: /\.css$/,

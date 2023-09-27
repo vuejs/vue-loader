@@ -6,6 +6,7 @@
   "typings": "lib/index.d.ts",
   "scripts": {
     "test": "jest --env node",
+    "test:match-resource": "INLINE_MATCH_RESOURCE=true jest --env node",
     "lint": "eslint lib test --fix",
     "build": "webpack --config example/webpack.config.js --hide-modules",
     "dev": "webpack-dev-server --config example/webpack.config.js --inline --hot",

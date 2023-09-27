@@ -4,7 +4,8 @@ const {
   genId,
   bundle,
   baseConfig,
-  interopDefault
+  interopDefault,
+  DEFAULT_VUE_USE
 } = require('./utils')
 
 test('SSR style and moduleId extraction', done => {
@@ -116,7 +117,7 @@ test('SSR + CSS Modules', done => {
     }),
     modify: config => {
       config.module.rules = [
-        { test: /\.vue$/, loader: 'vue-loader' },
+        { test: /\.vue$/, use: [DEFAULT_VUE_USE] },
         {
           test: /\.css$/,
           use: baseLoaders
