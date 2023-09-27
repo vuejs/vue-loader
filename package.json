@@ -6,7 +6,7 @@
   "typings": "lib/index.d.ts",
   "scripts": {
     "test": "jest --env node",
-    "test:match-resource": "INLINE_MATCH_RESOURCE=true jest --env node",
+    "test:match-resource": "cross-env INLINE_MATCH_RESOURCE=true jest --env node",
     "lint": "eslint lib test --fix",
     "build": "webpack --config example/webpack.config.js --hide-modules",
     "dev": "webpack-dev-server --config example/webpack.config.js --inline --hot",
@@ -63,6 +63,7 @@
     "babel-preset-env": "^1.6.1",
     "cache-loader": "^2.0.1",
     "conventional-changelog-cli": "^1.3.22",
+    "cross-env": "^7.0.3",
     "css-loader": "^1.0.0",
     "eslint": "^4.19.0",
     "eslint-plugin-vue-libs": "^2.1.0",
