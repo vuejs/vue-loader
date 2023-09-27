@@ -12,8 +12,8 @@ const VueLoaderPlugin = require('../lib/plugin')
 const DEFAULT_VUE_USE = {
   loader: 'vue-loader',
   options: {
-    experimentalInlineMatchResource: Boolean(process.env.INLINE_MATCH_RESOURCE),
-  },
+    experimentalInlineMatchResource: Boolean(process.env.INLINE_MATCH_RESOURCE)
+  }
 }
 
 const baseConfig = {
@@ -56,7 +56,7 @@ function bundle (options, cb, wontThrowError) {
   if (!options.experiments || !options.experiments.css) {
     config.module && config.module.rules && config.module.rules.push({
       test: /\.css$/,
-      use: ['vue-style-loader', 'css-loader'],
+      use: ['vue-style-loader', 'css-loader']
     })
   }
   if (config.vue) {
@@ -65,7 +65,7 @@ function bundle (options, cb, wontThrowError) {
       experimentalInlineMatchResource: Boolean(
         process.env.INLINE_MATCH_RESOURCE
       ),
-      ...options.vue,
+      ...options.vue
     }
     delete config.vue
     const vueIndex = config.module.rules.findIndex(r => r.test.test('.vue'))
@@ -76,12 +76,12 @@ function bundle (options, cb, wontThrowError) {
       // Vue usually locates at the first loader
       if (vueRule.use && typeof vueRule.use[0] === 'object') {
         vueRule.use[0] = Object.assign({}, vueRule.use[0], {
-          options: vueOptions,
+          options: vueOptions
         })
       }
     } else {
       config.module.rules[vueIndex] = Object.assign({}, vueRule, {
-        options: vueOptions,
+        options: vueOptions
       })
     }
   }

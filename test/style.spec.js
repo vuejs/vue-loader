@@ -202,7 +202,7 @@ test('CSS Modules Extend', async () => {
         config.module.rules = [
           {
             test: /\.vue$/,
-            use: [DEFAULT_VUE_USE],
+            use: [DEFAULT_VUE_USE]
           },
           {
             test: /\.css$/,

@@ -56,7 +56,7 @@ test('test-less oneOf rules', done => {
       config.module.rules = [
         {
           test: /\.vue$/,
-          use: [DEFAULT_VUE_USE],
+          use: [DEFAULT_VUE_USE]
         },
         {
           oneOf: [
@@ -98,7 +98,7 @@ test('normalize multiple use + options', done => {
     modify: config => {
       config.module.rules[0] = {
         test: /\.vue$/,
-        use: [DEFAULT_VUE_USE],
+        use: [DEFAULT_VUE_USE]
       }
     }
   }, () => done(), true)

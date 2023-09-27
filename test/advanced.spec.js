@@ -87,7 +87,6 @@ test('expose file basename as __file in production when exposeFilename enabled',
   )
 })
 
-
 test('extract CSS', done => {
   bundle({
     entry: 'extract-css.vue',
