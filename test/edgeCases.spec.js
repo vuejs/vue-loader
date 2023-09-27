@@ -7,7 +7,8 @@ const {
   mfs,
   bundle,
   mockRender,
-  mockBundleAndRun
+  mockBundleAndRun,
+  DEFAULT_VUE_USE
 } = require('./utils')
 
 const assertComponent = ({
@@ -42,7 +43,7 @@ test('vue rule with include', done => {
       config.module.rules[0] = {
         test: /\.vue$/,
         include: /fixtures/,
-        loader: 'vue-loader'
+        use: [DEFAULT_VUE_USE]
       }
     }
   }, res => assertComponent(res, done))
@@ -55,7 +56,7 @@ test('test-less oneOf rules', done => {
       config.module.rules = [
         {
           test: /\.vue$/,
-          loader: 'vue-loader'
+          use: [DEFAULT_VUE_USE],
         },
         {
           oneOf: [
@@ -97,12 +98,7 @@ test('normalize multiple use + options', done => {
     modify: config => {
       config.module.rules[0] = {
         test: /\.vue$/,
-        use: [
-          {
-            loader: 'vue-loader',
-            options: {}
-          }
-        ]
+        use: [DEFAULT_VUE_USE],
       }
     }
   }, () => done(), true)

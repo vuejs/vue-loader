@@ -5,7 +5,8 @@ const {
   mfs,
   genId,
   bundle,
-  mockBundleAndRun
+  mockBundleAndRun,
+  DEFAULT_VUE_USE
 } = require('./utils')
 
 test('support chaining with other loaders', done => {
@@ -15,7 +16,7 @@ test('support chaining with other loaders', done => {
       config.module.rules[0] = {
         test: /\.vue$/,
         use: [
-          'vue-loader',
+          DEFAULT_VUE_USE,
           require.resolve('./mock-loaders/js')
         ]
       }
@@ -33,7 +34,7 @@ test('inherit queries on files', done => {
       config.module.rules[0] = {
         test: /\.vue$/,
         use: [
-          'vue-loader',
+          DEFAULT_VUE_USE,
           require.resolve('./mock-loaders/query')
         ]
       }
@@ -94,7 +95,7 @@ test('extract CSS', done => {
       config.module.rules = [
         {
           test: /\.vue$/,
-          use: 'vue-loader'
+          use: [DEFAULT_VUE_USE]
         },
         {
           test: /\.css$/,
@@ -135,7 +136,7 @@ test('extract CSS with code spliting', done => {
       config.module.rules = [
         {
           test: /\.vue$/,
-          use: 'vue-loader'
+          use: [DEFAULT_VUE_USE]
         },
         {
           test: /\.css$/,
@@ -166,7 +167,7 @@ test('support rules with oneOf', async () => {
       entry,
       modify: config => {
         config.module.rules = [
-          { test: /\.vue$/, loader: 'vue-loader' },
+          { test: /\.vue$/, use: [DEFAULT_VUE_USE] },
           {
             test: /\.css$/,
             use: 'vue-style-loader',
@@ -221,7 +222,7 @@ test('should work with eslint loader', async () => {
       entry: 'basic.vue',
       modify: config => {
         config.module.rules.unshift({
-          test: /\.vue$/, loader: 'vue-loader', enforce: 'pre'
+          test: /\.vue$/, use: [DEFAULT_VUE_USE], enforce: 'pre'
         })
       }
     }, () => resolve())

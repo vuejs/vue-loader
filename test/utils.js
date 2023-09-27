@@ -9,6 +9,13 @@ const { createFsFromVolume, Volume } = require('memfs')
 const mfs = createFsFromVolume(new Volume())
 const VueLoaderPlugin = require('../lib/plugin')
 
+const DEFAULT_VUE_USE = {
+  loader: 'vue-loader',
+  options: {
+    experimentalInlineMatchResource: Boolean(process.env.INLINE_MATCH_RESOURCE),
+  },
+}
+
 const baseConfig = {
   mode: 'development',
   devtool: false,
@@ -26,14 +33,7 @@ const baseConfig = {
     rules: [
       {
         test: /\.vue$/,
-        loader: 'vue-loader'
-      },
-      {
-        test: /\.css$/,
-        use: [
-          'vue-style-loader',
-          'css-loader'
-        ]
+        use: [DEFAULT_VUE_USE]
       }
     ]
   },
@@ -53,13 +53,37 @@ function genId (file) {
 
 function bundle (options, cb, wontThrowError) {
   let config = merge({}, baseConfig, options)
-
+  if (!options.experiments || !options.experiments.css) {
+    config.module && config.module.rules && config.module.rules.push({
+      test: /\.css$/,
+      use: ['vue-style-loader', 'css-loader'],
+    })
+  }
   if (config.vue) {
-    const vueOptions = options.vue
+    const vueOptions = {
+      // Test experimental inline match resource by default
+      experimentalInlineMatchResource: Boolean(
+        process.env.INLINE_MATCH_RESOURCE
+      ),
+      ...options.vue,
+    }
     delete config.vue
     const vueIndex = config.module.rules.findIndex(r => r.test.test('.vue'))
     const vueRule = config.module.rules[vueIndex]
-    config.module.rules[vueIndex] = Object.assign({}, vueRule, { options: vueOptions })
+
+    // Detect `Rule.use` or `Rule.loader` and `Rule.options` combination
+    if (vueRule && typeof vueRule === 'object' && Array.isArray(vueRule.use)) {
+      // Vue usually locates at the first loader
+      if (vueRule.use && typeof vueRule.use[0] === 'object') {
+        vueRule.use[0] = Object.assign({}, vueRule.use[0], {
+          options: vueOptions,
+        })
+      }
+    } else {
+      config.module.rules[vueIndex] = Object.assign({}, vueRule, {
+        options: vueOptions,
+      })
+    }
   }
 
   if (/\.vue/.test(config.entry)) {
@@ -163,5 +187,6 @@ module.exports = {
   mockBundleAndRun,
   mockRender,
   interopDefault,
-  initStylesForAllSubComponents
+  initStylesForAllSubComponents,
+  DEFAULT_VUE_USE
 }
