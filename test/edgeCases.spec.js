@@ -179,7 +179,7 @@ test('proper dedupe on src-imports with options', done => {
         {
           test: /\.ts$/,
           loader: 'ts-loader',
-          options: { appendTsSuffixTo: [/\.vue$/] }
+          options: { appendTsSuffixTo: [/\.vue$/], transpileOnly: true }
         }
       ]
     }
