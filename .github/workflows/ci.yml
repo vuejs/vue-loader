@@ -43,4 +43,4 @@ jobs:
         run: pnpm install --no-frozen-lockfile
 
       - name: Run unit tests for webpack 5
-        run: pnpm run test
+        run: pnpm run test && pnpm run test:match-resource
