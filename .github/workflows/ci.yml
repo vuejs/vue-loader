@@ -2,10 +2,10 @@ name: 'ci'
 on:
   push:
     branches:
-      - v15
+      - master
   pull_request:
     branches:
-      - v15
+      - master
 jobs:
   unit-test:
     runs-on: ${{ matrix.os }}
