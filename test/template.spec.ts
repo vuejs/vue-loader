@@ -56,8 +56,8 @@ test('transform relative URLs and respects resolve alias', async () => {
   const style = normalizeNewline(
     window.document.querySelector('style')!.textContent!
   )
-  expect(style).toContain('html { background-image: url(logo.cab72b.png);\n}')
-  expect(style).toContain('body { background-image: url(logo.cab72b.png);\n}')
+  expect(style).toContain('html { background-image: url(logo.cab72b.png); }')
+  expect(style).toContain('body { background-image: url(logo.cab72b.png); }')
 })
 
 test('customizing template loaders', async () => {
