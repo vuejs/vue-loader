@@ -1,3 +1,17 @@
+# [17.3.0](https://github.com/vuejs/vue-loader/compare/v17.2.2...v17.3.0) (2023-10-07)
+
+
+### Bug Fixes
+
+* re-use ident of vue rule for template compiler, fixes [#2029](https://github.com/vuejs/vue-loader/issues/2029) ([#2030](https://github.com/vuejs/vue-loader/issues/2030)) ([b50fa56](https://github.com/vuejs/vue-loader/commit/b50fa5665f2cbc1c0b8e18f65dd3adf1dfe848dc))
+
+
+### Features
+
+* skip normal css files without scoped flag in stylePostLoader ([#2053](https://github.com/vuejs/vue-loader/issues/2053)) ([98782e7](https://github.com/vuejs/vue-loader/commit/98782e794fadca83b600b047b55aa6f0c230cc25))
+
+
+
 ## [17.2.2](https://github.com/vuejs/vue-loader/compare/v17.2.1...v17.2.2) (2023-06-02)
 
 
