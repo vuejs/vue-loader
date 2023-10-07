@@ -251,7 +251,7 @@ test('should pass correct options to template compiler', async () => {
   await mockBundleAndRun({
     entry: 'basic.vue',
     modify: (config: any) => {
-      config.module.rules[0].options = {
+      config.module.rules[0].use[0].options = {
         compiler: fakeCompiler,
       }
       config.module.rules.push(
