@@ -239,3 +239,30 @@ test('should work with i18n loader in production mode', async () => {
 
   expect(result.componentModule.__i18n).toHaveLength(1)
 })
+
+// #2029
+test('should pass correct options to template compiler', async () => {
+  const fakeCompiler: any = {
+    compile: jest
+      .fn()
+      .mockReturnValue({ code: 'export function render() { return null; }' }),
+  }
+
+  await mockBundleAndRun({
+    entry: 'basic.vue',
+    modify: (config: any) => {
+      config.module.rules[0].options = {
+        compiler: fakeCompiler,
+      }
+      config.module.rules.push(
+        ...Array.from({ length: 10 }).map((_, i) => ({
+          test: new RegExp(`\.dummy${i}`),
+          loader: 'null-loader',
+          options: { dummyRule: i },
+        }))
+      )
+    },
+  })
+
+  expect(fakeCompiler.compile).toHaveBeenCalledTimes(1)
+})
