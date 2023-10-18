@@ -1,9 +1,18 @@
+<a name="15.11.1"></a>
+# [15.11.1](https://github.com/vuejs/vue-loader/compare/v15.11.0...v15.11.1) (2023-10-18)
+
+### Bug Fixes
+
+* fix: fix read property error for accessing lang of script ([#2060](https://github.com/vuejs/vue-loader/pull/2060))
+
+
 <a name="15.11.0"></a>
 # [15.11.0](https://github.com/vuejs/vue-loader/compare/v15.10.2...v15.11.0) (2023-10-18)
 
 ### Features
 
 * A new `experimentalInlineMatchResource` option (webpack 5 only), which leverages webpack 5's [inline matchResource](https://webpack.js.org/api/loaders/#inline-matchresource) feature in the underlying implementation, and works well with the [`experiments.css`](https://webpack.js.org/configuration/experiments/#experimentscss) feature. This also makes `vue-loader` compatible with [Rspack](https://www.rspack.dev/guide/vue). ([#2058](https://github.com/vuejs/vue-loader/pull/2058))
+
 
 <a name="15.10.2"></a>
 # [15.10.2](https://github.com/vuejs/vue-loader/compare/v15.10.1...v15.10.2) (2023-08-23)
