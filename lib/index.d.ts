@@ -18,6 +18,7 @@ declare namespace VueLoader {
     cacheIdentifier?: string
     prettify?: boolean
     exposeFilename?: boolean
+    experimentalInlineMatchResource?: boolean
   }
 }
 
