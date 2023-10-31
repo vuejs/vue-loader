@@ -1,3 +1,11 @@
+## [17.3.1](https://github.com/vuejs/vue-loader/compare/v17.3.0...v17.3.1) (2023-10-31)
+
+
+### Bug Fixes
+
+* do not skip style post loader for v-bind() in CSS ([d7071bb](https://github.com/vuejs/vue-loader/commit/d7071bbdeb45518c053bdae8eb7de52fc598adc6)), closes [#2061](https://github.com/vuejs/vue-loader/issues/2061)
+
+
 # [17.3.0](https://github.com/vuejs/vue-loader/compare/v17.2.2...v17.3.0) (2023-10-07)
 
 
