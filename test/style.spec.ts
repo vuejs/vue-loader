@@ -198,4 +198,22 @@ test('CSS Modules Extend', async () => {
   expect(style).toContain(`.${instance.$style.red} {\n  color: #FF0000;\n}`)
 })
 
-test.todo('experimental <style vars>')
+test('v-bind() in CSS', async () => {
+  const { window, instance } = await mockBundleAndRun({
+    entry: 'style-v-bind.vue',
+  })
+
+  const shortId = genId('style-v-bind.vue')
+  const style = normalizeNewline(
+    window.document.querySelector('style')!.textContent!
+  )
+
+  expect(style).toMatch(`color: var(--${shortId}-color);`)
+  expect(style).toMatch(`font-size: var(--${shortId}-font\\.size);`)
+
+  const computedStyle = window.getComputedStyle(instance.$el)
+  // Because the tests run in JSDOM, we can't directly get the computed `color` value.
+  // To get around this, we test the corresponding CSS variable instead.
+  expect(computedStyle.getPropertyValue(`--${shortId}-color`)).toBe('red')
+  expect(computedStyle.getPropertyValue(`--${shortId}-font.size`)).toBe('2em')
+})

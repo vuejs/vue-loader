@@ -10,13 +10,8 @@ const { compileStyle } = compiler
 const StylePostLoader: LoaderDefinitionFunction = function (source, inMap) {
   const query = qs.parse(this.resourceQuery.slice(1))
 
-  // skip normal CSS files without scoped flag
-  if (
-    !('vue' in query) ||
-    query.type !== 'style' ||
-    !query.id ||
-    !query.scoped
-  ) {
+  // skip normal CSS files
+  if (!('vue' in query) || query.type !== 'style' || !query.id) {
     this.callback(null, source, inMap)
     return
   }
