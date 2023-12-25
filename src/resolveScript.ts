@@ -61,6 +61,7 @@ export function resolveScript(
       id: scopeId,
       isProd,
       inlineTemplate: enableInline,
+      // @ts-ignore this has been removed in 3.4
       reactivityTransform: options.reactivityTransform,
       propsDestructure: options.propsDestructure,
       defineModel: options.defineModel,

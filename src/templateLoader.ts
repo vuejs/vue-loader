@@ -44,6 +44,10 @@ const TemplateLoader: LoaderDefinitionFunction = function (source, inMap: any) {
 
   const compiled = compileTemplate({
     source,
+    ast:
+      descriptor.template && !descriptor.template.lang
+        ? descriptor.template.ast
+        : undefined,
     filename: loaderContext.resourcePath,
     inMap,
     id: scopeId,
