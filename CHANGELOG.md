@@ -1,3 +1,12 @@
+# [17.4.0](https://github.com/vuejs/vue-loader/compare/v17.3.1...v17.4.0) (2023-12-25)
+
+
+### Features
+
+* leverage ast reuse in 3.4 ([479835f](https://github.com/vuejs/vue-loader/commit/479835fe751691a39c62cda12bffeef9e6830443))
+
+
+
 ## [17.3.1](https://github.com/vuejs/vue-loader/compare/v17.3.0...v17.3.1) (2023-10-31)
 
 
