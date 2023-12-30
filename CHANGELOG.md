@@ -1,3 +1,12 @@
+## [17.4.1](https://github.com/vuejs/vue-loader/compare/v17.4.0...v17.4.1) (2023-12-30)
+
+
+### Bug Fixes
+
+* (temporarily) disable template ast reuse ([31b03af](https://github.com/vuejs/vue-loader/commit/31b03af121edbe70337f538b1def95acbef4d0f1))
+
+
+
 # [17.4.0](https://github.com/vuejs/vue-loader/compare/v17.3.1...v17.4.0) (2023-12-25)
 
 
