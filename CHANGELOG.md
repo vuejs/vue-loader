@@ -1,3 +1,12 @@
+## [17.4.2](https://github.com/vuejs/vue-loader/compare/v17.4.1...v17.4.2) (2023-12-30)
+
+
+### Bug Fixes
+
+* pass compilerOptions to sfc parse & re-enable AST reuse ([d2a2e05](https://github.com/vuejs/vue-loader/commit/d2a2e051c3d985d1ae6bb468749b24543631b482))
+
+
+
 ## [17.4.1](https://github.com/vuejs/vue-loader/compare/v17.4.0...v17.4.1) (2023-12-30)
 
 
