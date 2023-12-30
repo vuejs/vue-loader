@@ -27,7 +27,10 @@ const TemplateLoader: LoaderDefinitionFunction = function (source, inMap: any) {
     loaderContext.mode === 'production' || process.env.NODE_ENV === 'production'
   const query = qs.parse(loaderContext.resourceQuery.slice(1))
   const scopeId = query.id as string
-  const descriptor = getDescriptor(loaderContext.resourcePath)
+  const descriptor = getDescriptor(
+    loaderContext.resourcePath,
+    options.compilerOptions
+  )
   const script = resolveScript(
     descriptor,
     query.id as string,
@@ -44,10 +47,10 @@ const TemplateLoader: LoaderDefinitionFunction = function (source, inMap: any) {
 
   const compiled = compileTemplate({
     source,
-    // ast:
-    //   descriptor.template && !descriptor.template.lang
-    //     ? descriptor.template.ast
-    //     : undefined,
+    ast:
+      descriptor.template && !descriptor.template.lang
+        ? descriptor.template.ast
+        : undefined,
     filename: loaderContext.resourcePath,
     inMap,
     id: scopeId,

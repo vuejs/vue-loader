@@ -116,6 +116,7 @@ export default function loader(
   const { descriptor, errors } = parse(source, {
     filename,
     sourceMap,
+    templateParseOptions: options.compilerOptions,
   })
 
   const asCustomElement =
@@ -363,7 +364,9 @@ export default function loader(
   if (!propsToAttach.length) {
     code += `\n\nconst __exports__ = script;`
   } else {
-    code += `\n\nimport exportComponent from ${stringifyRequest(exportHelperPath)}`
+    code += `\n\nimport exportComponent from ${stringifyRequest(
+      exportHelperPath
+    )}`
     code += `\nconst __exports__ = /*#__PURE__*/exportComponent(script, [${propsToAttach
       .map(([key, val]) => `['${key}',${val}]`)
       .join(',')}])`

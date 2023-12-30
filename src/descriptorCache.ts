@@ -1,5 +1,5 @@
 import * as fs from 'fs'
-import type { SFCDescriptor } from 'vue/compiler-sfc'
+import type { CompilerOptions, SFCDescriptor } from 'vue/compiler-sfc'
 import { compiler } from './compiler'
 
 const { parse } = compiler
@@ -9,7 +9,10 @@ export function setDescriptor(filename: string, entry: SFCDescriptor) {
   descriptorCache.set(cleanQuery(filename), entry)
 }
 
-export function getDescriptor(filename: string): SFCDescriptor {
+export function getDescriptor(
+  filename: string,
+  compilerOptions?: CompilerOptions
+): SFCDescriptor {
   filename = cleanQuery(filename)
   if (descriptorCache.has(filename)) {
     return descriptorCache.get(filename)!
@@ -24,6 +27,7 @@ export function getDescriptor(filename: string): SFCDescriptor {
   const { descriptor } = parse(source, {
     filename,
     sourceMap: true,
+    templateParseOptions: compilerOptions,
   })
   descriptorCache.set(filename, descriptor)
   return descriptor
