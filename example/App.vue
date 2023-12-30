@@ -6,6 +6,7 @@
     <Button foo="hello!"><span>slot</span></Button>
     <ScriptSetup/>
     <TypeScript/>
+    <custom-web-component>aaa</custom-web-component>
   </div>
 </template>
 

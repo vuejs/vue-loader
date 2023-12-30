@@ -60,6 +60,9 @@ module.exports = (env = {}) => {
             loader: 'vue-loader',
             options: {
               // reactivityTransform: true,
+              compilerOptions: {
+                isCustomElement: (tag) => tag.startsWith('custom-'),
+              },
             },
           },
           {
