@@ -1,5 +1,6 @@
 import { SourceMapConsumer } from 'source-map'
 import { fs as mfs } from 'memfs'
+import cssesc from 'cssesc'
 import {
   bundle,
   mockBundleAndRun,
@@ -14,7 +15,7 @@ test('support chaining with other loaders', async () => {
   const { componentModule } = await mockBundleAndRun({
     entry: 'basic.vue',
     modify: (config) => {
-      config!.module!.rules[0] = {
+      config!.module!.rules![0] = {
         test: /\.vue$/,
         use: [DEFAULT_VUE_USE, require.resolve('./mock-loaders/js')],
       }
@@ -28,7 +29,7 @@ test.skip('inherit queries on files', async () => {
   const { componentModule } = await mockBundleAndRun({
     entry: 'basic.vue?change',
     modify: (config) => {
-      config!.module!.rules[0] = {
+      config!.module!.rules![0] = {
         test: /\.vue$/,
         use: [DEFAULT_VUE_USE, require.resolve('./mock-loaders/query')],
       }
@@ -199,9 +200,10 @@ test('support rules with oneOf', async () => {
   const { window, instance } = await run('css-modules-simple.vue')
 
   const className = instance.$style.red
-  expect(className).toMatch(/^red_\w{5}/)
+  const escapedClassName = cssesc(instance.$style.red, { isIdentifier: true })
+  expect(className).toMatch(/^red_.{5}/)
   style = normalizeNewline(window.document.querySelector('style')!.textContent!)
-  expect(style).toContain('.' + className + ' {\n  color: red;\n}')
+  expect(style).toContain('.' + escapedClassName + ' {\n  color: red;\n}')
 })
 
 test.todo('should work with eslint loader')

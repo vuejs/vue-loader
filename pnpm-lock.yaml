@@ -25,6 +25,9 @@ devDependencies:
   '@intlify/vue-i18n-loader':
     specifier: ^3.0.0
     version: 3.3.0(vue@3.4.8)
+  '@types/cssesc':
+    specifier: ^3.0.2
+    version: 3.0.2
   '@types/estree':
     specifier: ^0.0.45
     version: 0.0.45
@@ -55,6 +58,9 @@ devDependencies:
   css-loader:
     specifier: ^4.3.0
     version: 4.3.0(webpack@5.89.0)
+  cssesc:
+    specifier: ^3.0.0
+    version: 3.0.0
   file-loader:
     specifier: ^6.1.0
     version: 6.2.0(webpack@5.89.0)
@@ -1727,6 +1733,10 @@ packages:
     resolution: {integrity: sha512-sEKyxMVEowhcr8WLfN0jJYe4gS4Z9KC2DGz0vqfC7+MXFbmvOF7jSjALC77thvAO2TLgFUPa9vDeOak+AcUrZA==}
     dependencies:
       '@types/babel-types': 7.0.15
+    dev: true
+
+  /@types/cssesc@3.0.2:
+    resolution: {integrity: sha512-Qii6nTRktvtI380EloxH/V7MwgrYxkPgBI+NklUjQuhzgAd1AqT3QDJd+eD+0doRADgfwvtagLRo7JFa7aMHXg==}
     dev: true
 
   /@types/eslint-scope@3.7.7:
