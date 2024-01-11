@@ -10,35 +10,41 @@ jobs:
   test-webpack4:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: Set node version to 16
-        uses: actions/setup-node@v2
+      - uses: actions/checkout@v3
+      - uses: pnpm/action-setup@v2
         with:
-          node-version: 16
-          cache: 'yarn'
-      - run: yarn install
-      - run: yarn test:webpack4
+          version: 8.5.0
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          cache: 'pnpm'
+      - run: pnpm install
+      - run: pnpm test:webpack4
 
   test-webpack5:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: Set node version to 16
-        uses: actions/setup-node@v2
+      - uses: actions/checkout@v3
+      - uses: pnpm/action-setup@v2
         with:
-          node-version: 16
-          cache: 'yarn'
-      - run: yarn install
-      - run: yarn test
+          version: 8.5.0
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          cache: 'pnpm'
+      - run: pnpm install
+      - run: pnpm test
 
   test-webpack5-inline-match-resource:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: Set node version to 16
-        uses: actions/setup-node@v2
+      - uses: actions/checkout@v3
+      - uses: pnpm/action-setup@v2
         with:
-          node-version: 16
-          cache: 'yarn'
-      - run: yarn install
-      - run: yarn test:match-resource
+          version: 8.5.0
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          cache: 'pnpm'
+      - run: pnpm install
+      - run: pnpm test:match-resource
