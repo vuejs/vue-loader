@@ -31,7 +31,7 @@ jobs:
           version: 8.12.0
       - uses: actions/setup-node@v3
         with:
-          node-version: '20'
+          node-version: '16'
           cache: 'pnpm'
       - run: pnpm install
       - run: pnpm pretest
@@ -46,7 +46,7 @@ jobs:
           version: 8.12.0
       - uses: actions/setup-node@v3
         with:
-          node-version: '20'
+          node-version: '16'
           cache: 'pnpm'
       - run: pnpm install
       - run: pnpm pretest:match-resource
