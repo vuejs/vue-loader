@@ -1,8 +1,7 @@
 import type { LoaderContext } from 'webpack'
 import * as path from 'path'
+import * as crypto from 'crypto'
 import * as qs from 'querystring'
-
-import hash = require('hash-sum')
 
 import { compiler } from './compiler'
 import type {
@@ -65,6 +64,10 @@ let errorEmitted = false
 
 const { parse } = compiler
 const exportHelperPath = require.resolve('./exportHelper')
+
+function hash(text: string): string {
+  return crypto.createHash('sha256').update(text).digest('hex').substring(0, 8)
+}
 
 export default function loader(
   this: LoaderContext<VueLoaderOptions>,

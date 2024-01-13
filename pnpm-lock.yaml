@@ -8,9 +8,6 @@ dependencies:
   chalk:
     specifier: ^4.1.0
     version: 4.1.0
-  hash-sum:
-    specifier: ^2.0.0
-    version: 2.0.0
   watchpack:
     specifier: ^2.4.0
     version: 2.4.0
@@ -31,9 +28,6 @@ devDependencies:
   '@types/estree':
     specifier: ^0.0.45
     version: 0.0.45
-  '@types/hash-sum':
-    specifier: ^1.0.0
-    version: 1.0.0
   '@types/jest':
     specifier: ^26.0.13
     version: 26.0.13
@@ -1625,10 +1619,6 @@ packages:
     resolution: {integrity: sha512-AiHRaEB50LQg0pZmm659vNBb9f4SJ0qrAnteuzhSeAUcJKxoYgEnprg/83kppCnc2zvtCKbdZry1a5pVY3lOTQ==}
     dependencies:
       '@types/node': 14.10.1
-    dev: true
-
-  /@types/hash-sum@1.0.0:
-    resolution: {integrity: sha512-FdLBT93h3kcZ586Aee66HPCVJ6qvxVjBlDWNmxSGSbCZe9hTsjRKdSsl4y1T+3zfujxo9auykQMnFsfyHWD7wg==}
     dev: true
 
   /@types/html-minifier-terser@5.1.1:
@@ -4994,10 +4984,6 @@ packages:
       readable-stream: 3.6.0
       safe-buffer: 5.2.1
     dev: true
-
-  /hash-sum@2.0.0:
-    resolution: {integrity: sha512-WdZTbAByD+pHfl/g9QSsBIIwy8IT+EsPiKDs0KNX+zSHhdDLFKdZu0BQHljvO+0QI/BasbMSUa8wYNCZTvhslg==}
-    dev: false
 
   /hash.js@1.1.7:
     resolution: {integrity: sha512-taOaskGt4z4SOANNseOviYDvjEJinIkRgmp7LbKP2YTTmVxWBl87s/uzK9r+44BclBSp2X7K1hqeNfz9JbBeXA==}
