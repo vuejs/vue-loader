@@ -35,6 +35,7 @@
       "prettier --parser=typescript --write"
     ]
   },
+  "packageManager": "pnpm@8.12.0",
   "dependencies": {
     "chalk": "^4.1.0",
     "watchpack": "^2.4.0"
