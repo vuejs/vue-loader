@@ -143,10 +143,20 @@ export default function loader(
     .relative(rootContext || process.cwd(), filename)
     .replace(/^(\.\.[\/\\])+/, '')
   const shortFilePath = rawShortFilePath.replace(/\\/g, '/')
+
+  let moduleIdNamespace
+  try {
+    const packageJson = require(path.resolve(process.cwd(), 'package.json'))
+    moduleIdNamespace = packageJson.name || ''
+  } catch (err) {
+    moduleIdNamespace = ''
+  }
+
   const id = hash(
     isProduction
-      ? shortFilePath + '\n' + source.replace(/\r\n/g, '\n')
-      : shortFilePath
+      ? moduleIdNamespace +
+          (shortFilePath + '\n' + source.replace(/\r\n/g, '\n'))
+      : moduleIdNamespace + shortFilePath
   )
 
   // if the query has a type field, this is a language block request
