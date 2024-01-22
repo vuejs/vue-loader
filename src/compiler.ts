@@ -18,7 +18,7 @@ try {
     compiler = require('@vue/compiler-sfc')
   } catch (e) {
     throw new Error(
-      `@vitejs/plugin-vue requires vue (>=3.2.13) or @vue/compiler-sfc ` +
+      `vue-loader requires vue (>=3.2.13) or @vue/compiler-sfc ` +
         `to be present in the dependency tree.`
     )
   }
