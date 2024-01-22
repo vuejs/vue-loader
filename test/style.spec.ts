@@ -1,3 +1,4 @@
+import cssesc from 'cssesc'
 import {
   mockBundleAndRun,
   genId,
@@ -130,6 +131,7 @@ test('CSS Modules', async () => {
 
     // get local class name
     const className = instance.$style.red
+    const escapedClassName = cssesc(instance.$style.red, { isIdentifier: true })
     expect(className).toMatch(regexToMatch)
 
     // class name in style
@@ -140,7 +142,7 @@ test('CSS Modules', async () => {
       })
       .join('\n')
     style = normalizeNewline(style)
-    expect(style).toContain('.' + className + ' {\n  color: red;\n}')
+    expect(style).toContain('.' + escapedClassName + ' {\n  color: red;\n}')
 
     // animation name
     const match = style.match(/@keyframes\s+(\S+)\s+{/)
@@ -151,9 +153,12 @@ test('CSS Modules', async () => {
 
     // default module + pre-processor + scoped
     const anotherClassName = instance.$style.red
+    const escapedAnotherClassName = cssesc(instance.$style.red, {
+      isIdentifier: true,
+    })
     expect(anotherClassName).toMatch(regexToMatch)
     const id = 'data-v-' + genId('css-modules.vue')
-    expect(style).toContain('.' + anotherClassName + '[' + id + ']')
+    expect(style).toContain('.' + escapedAnotherClassName + '[' + id + ']')
   }
 
   // default ident
@@ -194,8 +199,9 @@ test('CSS Modules Extend', async () => {
   })
 
   expect(instance.$el.className).toBe(instance.$style.red)
+  const escapedClassName = cssesc(instance.$style.red, { isIdentifier: true })
   const style = window.document.querySelectorAll('style')![1]!.textContent
-  expect(style).toContain(`.${instance.$style.red} {\n  color: #FF0000;\n}`)
+  expect(style).toContain(`.${escapedClassName} {\n  color: #FF0000;\n}`)
 })
 
 test('v-bind() in CSS', async () => {

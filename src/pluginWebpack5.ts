@@ -13,7 +13,8 @@ const NormalModule = require('webpack/lib/NormalModule')
 const BasicEffectRulePlugin = require('webpack/lib/rules/BasicEffectRulePlugin')
 const BasicMatcherRulePlugin = require('webpack/lib/rules/BasicMatcherRulePlugin')
 const UseEffectRulePlugin = require('webpack/lib/rules/UseEffectRulePlugin')
-const RuleSetCompiler = require('webpack/lib/rules/RuleSetCompiler') as RuleSetCompiler
+const RuleSetCompiler =
+  require('webpack/lib/rules/RuleSetCompiler') as RuleSetCompiler
 
 let objectMatcherRulePlugins = []
 try {
@@ -240,7 +241,7 @@ class VueLoaderPlugin {
           if (typeof use === 'string') {
             loaderString = use
           } else if (Array.isArray(use)) {
-            loaderString = matchOnce(use[0])
+            loaderString = matchOnce(use[0] as RuleSetUse)
           } else if (typeof use === 'object' && use.loader) {
             loaderString = use.loader
           }
@@ -302,7 +303,7 @@ class VueLoaderPlugin {
             }
           }
         }
-        for (const file of compiler.removedFiles) {
+        for (const file of compiler.removedFiles!) {
           vueCompiler.invalidateTypeCache(file)
         }
       })
@@ -410,13 +411,13 @@ function cloneRule(
 
   if (rawRule.rules) {
     res.rules = rawRule.rules.map((rule) =>
-      cloneRule(rule, refs, ruleCheck, ruleResource)
+      cloneRule(rule as RuleSetRule, refs, ruleCheck, ruleResource)
     )
   }
 
   if (rawRule.oneOf) {
     res.oneOf = rawRule.oneOf.map((rule) =>
-      cloneRule(rule, refs, ruleCheck, ruleResource)
+      cloneRule(rule as RuleSetRule, refs, ruleCheck, ruleResource)
     )
   }
 
