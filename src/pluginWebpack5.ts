@@ -155,7 +155,7 @@ class VueLoaderPlugin {
     // get vue-loader options
     const vueLoaderUseIndex = vueUse.findIndex((u) => {
       // FIXME: this code logic is incorrect when project paths starts with `vue-loader-something`
-      return /^vue-loader|(\/|\\|@)vue-loader/.test(u.loader)
+      return /^vue-loader|^@\S+\/vue-loader/.test(u.loader)
     })
 
     if (vueLoaderUseIndex < 0) {

@@ -105,11 +105,16 @@ export const pitch = function () {
           ? [styleInlineLoaderPath]
           : loaders.slice(0, cssLoaderIndex + 1)
       const beforeLoaders = loaders.slice(cssLoaderIndex + 1)
+
+      const { namedExport = false } = // @ts-ignore
+        loaders[cssLoaderIndex]?.options?.modules || {}
+
       return genProxyModule(
         [...afterLoaders, stylePostLoaderPath, ...beforeLoaders],
         context,
         !!query.module || query.inline != null,
-        (query.lang as string) || 'css'
+        (query.lang as string) || 'css',
+        namedExport
       )
     }
   }
@@ -134,15 +139,17 @@ function genProxyModule(
   loaders: (Loader | string)[],
   context: LoaderContext<VueLoaderOptions>,
   exportDefault = true,
-  lang = 'js'
+  lang = 'js',
+  cssNamedExport = false
 ) {
   const request = genRequest(loaders, lang, context)
   // return a proxy module which simply re-exports everything from the
   // actual request. Note for template blocks the compiled module has no
   // default export.
   return (
-    (exportDefault ? `export { default } from ${request}; ` : ``) +
-    `export * from ${request}`
+    (exportDefault && !cssNamedExport
+      ? `export { default } from ${request}; `
+      : ``) + `export * from ${request}`
   )
 }
 
