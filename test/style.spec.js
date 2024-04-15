@@ -3,7 +3,8 @@ const {
   genId,
   mockRender,
   mockBundleAndRun,
-  DEFAULT_VUE_USE
+  DEFAULT_VUE_USE,
+  bundle
 } = require('./utils')
 
 test('scoped style', done => {
@@ -224,3 +225,47 @@ test('CSS Modules Extend', async () => {
     })
   })
 })
+
+const webpack5Test = /^5\./.test((require('webpack').version || '')) ? test : test.skip
+
+webpack5Test('loaders should also be deduplicated when experiments.css is true', (done) => {
+  let loaders = []
+  bundle({
+    entry: 'extract-css.vue',
+    vue: { experimentalInlineMatchResource: true },
+    experiments: { css: true },
+    module: {
+      rules: [
+        {
+          test: /\.stylus$/,
+          use: ['stylus-loader'],
+          type: 'css'
+        }
+      ]
+    },
+    plugins: [
+      {
+        apply(compiler) {
+          compiler.hooks.thisCompilation.tap('a', (compilation) => {
+            compilation.hooks.buildModule.tap('a', (module) => {
+              if (/[?&]lang=stylus/.test(module.resource)) {
+                const isPitch = module.loaders.some(item => /pitcher/.test(item.loader))
+                if (isPitch) {
+                  return
+                }
+                // loaders for stylus after pitch
+                loaders = [...module.loaders]
+              }
+            })
+          })
+        }
+      }
+    ]
+  }, () => {
+    const stylusLoaderCount = loaders.filter(item => /stylus-loader/.test(item.loader)).length
+    expect(stylusLoaderCount).toBe(1)
+
+    done()
+  })
+})
+

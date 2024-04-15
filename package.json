@@ -50,6 +50,9 @@
     },
     "prettier": {
       "optional": true
+    },
+    "webpack": {
+      "optional": true
     }
   },
   "dependencies": {
