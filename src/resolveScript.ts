@@ -75,6 +75,7 @@ export function resolveScript(
         },
         transformAssetUrls: options.transformAssetUrls || true,
       },
+      globalTypeFiles: options.globalTypeFiles,
     })
   } catch (e) {
     loaderContext.emitError(e)

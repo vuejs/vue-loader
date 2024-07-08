@@ -31,6 +31,7 @@ export { VueLoaderPlugin }
 export interface VueLoaderOptions {
   // https://babeljs.io/docs/en/next/babel-parser#plugins
   babelParserPlugins?: SFCScriptCompileOptions['babelParserPlugins']
+  globalTypeFiles?: SFCScriptCompileOptions['globalTypeFiles']
   transformAssetUrls?: SFCTemplateCompileOptions['transformAssetUrls']
   compiler?: TemplateCompiler | string
   compilerOptions?: CompilerOptions
