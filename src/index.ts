@@ -11,6 +11,9 @@ import type {
   SFCTemplateCompileOptions,
   SFCScriptCompileOptions,
 } from 'vue/compiler-sfc'
+
+import hashSum from 'hash-sum'
+
 import { selectBlock } from './select'
 import { genHotReloadCode } from './hotReload'
 import { genCSSModulesCode } from './cssModules'
@@ -361,6 +364,18 @@ export default function loader(
           )
         })
         .join(`\n`) + `\n`
+  }
+
+  if (isServer) {
+    code += `\nimport { useSSRContext } from 'vue'\n`
+    code += `const _setup = script.setup\n`
+    ;(code += `script.setup = (props, ctx) => {`),
+      (code += `  const ssrContext = useSSRContext()`),
+      (code += `  ;(ssrContext._registeredComponents || (ssrContext._registeredComponents = new Set())).add(${JSON.stringify(
+        hashSum(loaderContext.request)
+      )});`)
+    code += `  return _setup ? _setup(props, ctx) : undefined`
+    code += `}\n`
   }
 
   // finalize
