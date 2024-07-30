@@ -52,6 +52,11 @@ export interface VueLoaderOptions {
   customElement?: boolean | RegExp
 
   hotReload?: boolean
+  /**
+   * To address the issue of identical component names in different projects
+   * module federation
+   */
+  library?: string
   exposeFilename?: boolean
   appendExtension?: boolean
   enableTsInTemplate?: boolean
@@ -137,7 +142,7 @@ export default function loader(
     })
     return ``
   }
-
+  const hmrPrifix = options.library ? options.library + '_' : ''
   // module id for scoped CSS & hot-reload
   const rawShortFilePath = path
     .relative(rootContext || process.cwd(), filename)
@@ -146,7 +151,7 @@ export default function loader(
   const id = hash(
     isProduction
       ? shortFilePath + '\n' + source.replace(/\r\n/g, '\n')
-      : shortFilePath
+      : hmrPrifix + shortFilePath
   )
 
   // if the query has a type field, this is a language block request
@@ -316,7 +321,7 @@ export default function loader(
     // from the devtools.
     propsToAttach.push([
       `__file`,
-      JSON.stringify(rawShortFilePath.replace(/\\/g, '/')),
+      JSON.stringify(hmrPrifix + rawShortFilePath.replace(/\\/g, '/')),
     ])
   } else if (options.exposeFilename) {
     // Libraries can opt-in to expose their components' filenames in production builds.
