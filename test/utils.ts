@@ -1,6 +1,7 @@
 /* env jest */
 import * as path from 'path'
 import * as crypto from 'crypto'
+import * as vm from 'vm'
 import webpack from 'webpack'
 import merge from 'webpack-merge'
 // import MiniCssExtractPlugin from 'mini-css-extract-plugin'
@@ -8,6 +9,7 @@ import { fs as mfs } from 'memfs'
 import { JSDOM, VirtualConsole } from 'jsdom'
 import { VueLoaderPlugin } from '..'
 import type { VueLoaderOptions } from '..'
+import type { Component, App } from 'vue'
 
 function hash(text: string): string {
   return crypto.createHash('sha256').update(text).digest('hex').substring(0, 8)
@@ -168,6 +170,34 @@ export function bundle(
   })
 }
 
+export function bundleSSR(
+  options: BundleOptions,
+  wontThrowError?: boolean
+): Promise<{
+  code: string
+  stats: webpack.Stats
+}> {
+  if (typeof options.entry === 'string' && /\.vue/.test(options.entry)) {
+    const vueFile = options.entry
+    options = merge(options, {
+      entry: require.resolve('./fixtures/ssr-entry'),
+      resolve: {
+        alias: {
+          '~target': path.resolve(__dirname, './fixtures', vueFile),
+        },
+      },
+    })
+  }
+  options = merge(options, {
+    target: 'node',
+    output: {
+      libraryTarget: 'commonjs2',
+    },
+    externals: ['vue'],
+  })
+  return bundle(options, wontThrowError)
+}
+
 export async function mockBundleAndRun(
   options: BundleOptions,
   wontThrowError?: boolean
@@ -198,6 +228,52 @@ export async function mockBundleAndRun(
     exports,
     instance,
 
+    code,
+    stats,
+  }
+}
+
+export async function mockServerBundleAndRun(
+  options: BundleOptions,
+  wontThrowError?: boolean
+) {
+  const { code, stats } = await bundleSSR(options, wontThrowError)
+
+  const dom = new JSDOM(
+    `<!DOCTYPE html><html><head></head><body></body></html>`,
+    {
+      runScripts: 'outside-only',
+      virtualConsole: new VirtualConsole(),
+    }
+  )
+
+  const contextObject = {
+    module: {} as NodeModule,
+    require: require,
+    window: dom.window,
+    document: dom.window.document,
+  }
+  vm.runInNewContext(code, contextObject)
+
+  const {
+    instance,
+    markup,
+    componentModule,
+    ssrContext,
+  }: {
+    instance: App<Element>
+    markup: string
+    componentModule: Component & {
+      __cssModules?: { $style: Record<string, string> }
+    }
+    ssrContext: { _registeredComponents: Set<string> }
+  } = await contextObject.module.exports.main()
+
+  return {
+    markup,
+    componentModule,
+    instance,
+    ssrContext,
     code,
     stats,
   }
