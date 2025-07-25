@@ -204,6 +204,37 @@ test('CSS Modules Extend', async () => {
   expect(style).toContain(`.${escapedClassName} {\n  color: #FF0000;\n}`)
 })
 
+test('Multiple CSS Modules', async () => {
+  const baseLoaders = [
+    'style-loader',
+    {
+      loader: 'css-loader',
+      options: {
+        modules: true,
+      },
+    },
+  ]
+
+  const { instance } = await mockBundleAndRun({
+    entry: 'css-modules-multiple.vue',
+    modify: (config: any) => {
+      config!.module!.rules = [
+        {
+          test: /\.vue$/,
+          use: [DEFAULT_VUE_USE],
+        },
+        {
+          test: /\.css$/,
+          use: baseLoaders,
+        },
+      ]
+    },
+  })
+
+  expect(instance.$style.red).toBeDefined()
+  expect(instance.$style.green).toBeDefined()
+})
+
 test('v-bind() in CSS', async () => {
   const { window, instance } = await mockBundleAndRun({
     entry: 'style-v-bind.vue',

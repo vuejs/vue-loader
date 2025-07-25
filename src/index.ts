@@ -13,7 +13,7 @@ import type {
 } from 'vue/compiler-sfc'
 import { selectBlock } from './select'
 import { genHotReloadCode } from './hotReload'
-import { genCSSModulesCode } from './cssModules'
+import { genCSSModulesCode, genInitCSSModulesCode } from './cssModules'
 import { formatError } from './formatError'
 
 import VueLoaderPlugin from './plugin'
@@ -273,7 +273,7 @@ export default function loader(
             )
           }
           if (!hasCSSModules) {
-            stylesCode += `\nconst cssModules = {}`
+            stylesCode += genInitCSSModulesCode()
             propsToAttach.push([`__cssModules`, `cssModules`])
             hasCSSModules = true
           }
