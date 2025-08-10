@@ -34,6 +34,7 @@ export interface VueLoaderOptions {
   transformAssetUrls?: SFCTemplateCompileOptions['transformAssetUrls']
   compiler?: TemplateCompiler | string
   compilerOptions?: CompilerOptions
+  useAbsolutePath?: boolean
   /**
    * TODO remove in 3.4
    * @deprecated
@@ -314,10 +315,8 @@ export default function loader(
   if (!isProduction) {
     // Expose the file's full path in development, so that it can be opened
     // from the devtools.
-    propsToAttach.push([
-      `__file`,
-      JSON.stringify(rawShortFilePath.replace(/\\/g, '/')),
-    ])
+    const base = options.useAbsolutePath ? filename : rawShortFilePath
+    propsToAttach.push([`__file`, JSON.stringify(base.replace(/\\/g, '/'))])
   } else if (options.exposeFilename) {
     // Libraries can opt-in to expose their components' filenames in production builds.
     // For security reasons, only expose the file's basename in production.

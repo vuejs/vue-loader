@@ -8,6 +8,7 @@ import {
   genId,
   DEFAULT_VUE_USE,
 } from './utils'
+import path from 'path'
 
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
@@ -55,7 +56,6 @@ test('no __file in production when exposeFilename disabled', async () => {
 
   expect(componentModule.__file).toBe(undefined)
 })
-
 test('expose file basename as __file in production when exposeFilename enabled', async () => {
   const { componentModule } = await mockBundleAndRun({
     mode: 'production',
@@ -65,6 +65,35 @@ test('expose file basename as __file in production when exposeFilename enabled',
     },
   })
   expect(componentModule.__file).toBe('basic.vue')
+})
+
+test('use absolute path', async () => {
+  const { componentModule } = await mockBundleAndRun({
+    mode: 'development',
+    entry: 'basic.vue',
+    vue: {
+      useAbsolutePath: true,
+    },
+  })
+
+  expect(componentModule.__file).toBe(
+    path.join(__dirname, 'fixtures/basic.vue')
+  )
+})
+
+test('use absolute path and expose filename in production', async () => {
+  const { componentModule } = await mockBundleAndRun({
+    mode: 'development',
+    entry: 'basic.vue',
+    vue: {
+      useAbsolutePath: true,
+      exposeFilename: true,
+    },
+  })
+
+  expect(componentModule.__file).toBe(
+    path.join(__dirname, 'fixtures/basic.vue')
+  )
 })
 
 test.skip('source map', async () => {

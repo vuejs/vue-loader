@@ -13,8 +13,7 @@ const NormalModule = require('webpack/lib/NormalModule')
 const BasicEffectRulePlugin = require('webpack/lib/rules/BasicEffectRulePlugin')
 const BasicMatcherRulePlugin = require('webpack/lib/rules/BasicMatcherRulePlugin')
 const UseEffectRulePlugin = require('webpack/lib/rules/UseEffectRulePlugin')
-const RuleSetCompiler =
-  require('webpack/lib/rules/RuleSetCompiler') as RuleSetCompiler
+const RuleSetCompiler = require('webpack/lib/rules/RuleSetCompiler') as RuleSetCompiler
 
 let objectMatcherRulePlugins = []
 try {
