@@ -1,4 +1,3 @@
-import * as path from 'path'
 import { bundle, mockBundleAndRun } from './utils'
 
 test('add custom blocks to the webpack output', async () => {
@@ -77,24 +76,6 @@ test('passes Component to custom block loaders', async () => {
 test('custom blocks can be ignored', async () => {
   const { code } = await bundle({
     entry: 'custom-language.vue',
-  })
-  expect(code).not.toContain(`describe('example'`)
-})
-
-test('custom blocks can be ignored even if cache-loader processes them', async () => {
-  const { code } = await bundle({
-    entry: 'custom-language.vue',
-    module: {
-      rules: [
-        {
-          test: /.vue$/,
-          loader: 'cache-loader',
-          options: {
-            cacheDirectory: path.resolve(__dirname, '.cache'),
-          },
-        },
-      ],
-    },
   })
   expect(code).not.toContain(`describe('example'`)
 })

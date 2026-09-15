@@ -6,17 +6,19 @@ export function genCSSModulesCode(
   needsHotReload: boolean
 ): string {
   const styleVar = `style${index}`
-  let code = `\nimport ${styleVar} from ${request}`
+  let code = `\nimport * as ${styleVar} from ${request}`
 
   // inject variable
   const name = typeof moduleName === 'string' ? moduleName : '$style'
-  code += `\ncssModules["${name}"] = ${styleVar}`
+
+  // omit no default export error
+  code += `\ncssModules["${name}"] = {...${styleVar}}.default || ${styleVar}`
 
   if (needsHotReload) {
     code += `
 if (module.hot) {
   module.hot.accept(${request}, () => {
-    cssModules["${name}"] = ${styleVar}
+    cssModules["${name}"] = {...${styleVar}}.default || ${styleVar}
     __VUE_HMR_RUNTIME__.rerender("${id}")
   })
 }`

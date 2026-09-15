@@ -15,8 +15,6 @@ module.exports = (env = {}) => {
    *    - externalize @vue/* deps via commonjs require()
    *    - externalize client side deps that are never used on the server, e.g.
    *      ones that are only used in onMounted() to empty modules
-   * 4. If using cache-loader or any other forms of cache, make sure the cache
-   *    key takes client vs. server builds into account!
    */
   const genConfig = (isServerBuild = false) => {
     const minimize = isProd && !isServerBuild && !env.noMinimize
@@ -28,11 +26,6 @@ module.exports = (env = {}) => {
       devtool: 'source-map',
       resolve: {
         extensions: ['.js', '.ts'],
-        alias: process.env.WEBPACK4
-          ? {
-              webpack: 'webpack4',
-            }
-          : {},
       },
       output: {
         path: path.resolve(
@@ -84,9 +77,7 @@ module.exports = (env = {}) => {
             test: /\.ts$/,
             use: [
               {
-                loader: process.env.WEBPACK4
-                  ? require.resolve('ts-loader')
-                  : require.resolve('ts-loader-v9'),
+                loader: require.resolve('ts-loader'),
                 options: {
                   transpileOnly: true,
                   appendTsSuffixTo: [/\.vue$/],
@@ -119,8 +110,12 @@ module.exports = (env = {}) => {
       devServer: {
         hot: true,
         stats: 'minimal',
-        contentBase: __dirname,
-        overlay: true,
+        static: {
+          directory: __dirname,
+        },
+        client: {
+          overlay: true,
+        },
       },
       resolveLoader: {
         alias: {

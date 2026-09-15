@@ -44,9 +44,7 @@ const baseConfig: webpack.Configuration = {
       },
       {
         test: /\.ts$/,
-        loader: process.env.WEBPACK4
-          ? require.resolve('ts-loader')
-          : require.resolve('ts-loader-v9'),
+        loader: require.resolve('ts-loader'),
         options: {
           transpileOnly: true,
           appendTsSuffixTo: [/\.vue$/],
@@ -177,6 +175,7 @@ export async function mockBundleAndRun(
   const dom = new JSDOM(
     `<!DOCTYPE html><html><head></head><body></body></html>`,
     {
+      url: 'http://localhost/',
       runScripts: 'outside-only',
       virtualConsole: new VirtualConsole(),
     }

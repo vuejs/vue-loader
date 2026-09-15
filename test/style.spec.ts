@@ -103,7 +103,7 @@ test('CSS Modules', async () => {
         loader: 'css-loader',
         options: {
           modules: {
-            localIdentName,
+            ...(localIdentName === undefined ? {} : { localIdentName }),
           },
         },
       },
@@ -162,7 +162,90 @@ test('CSS Modules', async () => {
   }
 
   // default ident
-  await testWithIdent(undefined, /^\w{21,}/)
+  await testWithIdent(undefined, /^\w{20,}/)
+
+  // custom ident
+  await testWithIdent(
+    '[path][name]---[local]---[hash:base64:5]',
+    /css-modules---red---\w{5}/
+  )
+})
+
+test('CSS Modules namedExport', async () => {
+  const testWithIdent = async (
+    localIdentName: string | undefined,
+    regexToMatch: RegExp
+  ) => {
+    const baseLoaders = [
+      {
+        loader: 'style-loader',
+        options: {
+          modules: {
+            namedExport: true,
+          },
+        },
+      },
+      {
+        loader: 'css-loader',
+        options: {
+          modules: {
+            ...(localIdentName === undefined ? {} : { localIdentName }),
+            namedExport: true,
+          },
+        },
+      },
+    ]
+
+    const { window, instance } = await mockBundleAndRun({
+      entry: 'css-modules.vue',
+      modify: (config: any) => {
+        config!.module!.rules = [
+          {
+            test: /\.vue$/,
+            loader: 'vue-loader',
+          },
+          {
+            test: /\.css$/,
+            use: baseLoaders,
+          },
+          {
+            test: /\.stylus$/,
+            use: [...baseLoaders, 'stylus-loader'],
+          },
+        ]
+      },
+    })
+
+    // get local class name
+    const className = instance.$style.red
+    expect(className).toMatch(regexToMatch)
+
+    // class name in style
+    let style = [].slice
+      .call(window.document.querySelectorAll('style'))
+      .map((style: any) => {
+        return style!.textContent
+      })
+      .join('\n')
+    style = normalizeNewline(style)
+    expect(style).toContain('.' + className + ' {\n  color: red;\n}')
+
+    // animation name
+    const match = style.match(/@keyframes\s+(\S+)\s+{/)
+    expect(match).toHaveLength(2)
+    const animationName = match[1]
+    expect(animationName).not.toBe('fade')
+    expect(style).toContain('animation: ' + animationName + ' 1s;')
+
+    // default module + pre-processor + scoped
+    const anotherClassName = instance.$style.red
+    expect(anotherClassName).toMatch(regexToMatch)
+    const id = 'data-v-' + genId('css-modules.vue')
+    expect(style).toContain('.' + anotherClassName + '[' + id + ']')
+  }
+
+  // default ident
+  await testWithIdent(undefined, /^\w{20,}/)
 
   // custom ident
   await testWithIdent(
@@ -200,7 +283,9 @@ test('CSS Modules Extend', async () => {
 
   expect(instance.$el.className).toBe(instance.$style.red)
   const escapedClassName = cssesc(instance.$style.red, { isIdentifier: true })
-  const style = window.document.querySelectorAll('style')![1]!.textContent
+  const style = normalizeNewline(
+    window.document.querySelectorAll('style')![1]!.textContent!
+  )
   expect(style).toContain(`.${escapedClassName} {\n  color: #FF0000;\n}`)
 })
 

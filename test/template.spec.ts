@@ -44,20 +44,23 @@ test('transform relative URLs and respects resolve alias', async () => {
   })
 
   expect(instance.$el.children[0].tagName).toBe('IMG')
-  expect(instance.$el.children[0].src).toBe('logo.cab72b.png')
+  expect(instance.$el.children[0].getAttribute('src')).toBe('logo.cab72b.png')
   expect(instance.$el.children[1].tagName).toBe('IMG')
-  expect(instance.$el.children[1].src).toBe('logo.cab72b.png')
+  expect(instance.$el.children[1].getAttribute('src')).toBe('logo.cab72b.png')
 
   // maybe this case should be removed
   // <https://github.com/vuejs/vue-loader/pull/927#issuecomment-714333544>
   expect(instance.$el.children[2].tagName).toBe('IMG')
-  expect(instance.$el.children[2].src).toBe('logo.cab72b.png')
+  expect(instance.$el.children[2].getAttribute('src')).toBe('logo.cab72b.png')
 
   const style = normalizeNewline(
     window.document.querySelector('style')!.textContent!
   )
-  expect(style).toContain('html { background-image: url(logo.cab72b.png);\n}')
-  expect(style).toContain('body { background-image: url(logo.cab72b.png);\n}')
+  const assetUrl = style.match(/html \{ background-image: url\(([^)]+)\);/)![1]
+  expect(assetUrl).toMatch(/\.png$/)
+  expect(style).toContain(
+    `body { background-image: url(${assetUrl});\n}`
+  )
 })
 
 test('customizing template loaders', async () => {

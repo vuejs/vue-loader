@@ -13,8 +13,7 @@ const NormalModule = require('webpack/lib/NormalModule')
 const BasicEffectRulePlugin = require('webpack/lib/rules/BasicEffectRulePlugin')
 const BasicMatcherRulePlugin = require('webpack/lib/rules/BasicMatcherRulePlugin')
 const UseEffectRulePlugin = require('webpack/lib/rules/UseEffectRulePlugin')
-const RuleSetCompiler =
-  require('webpack/lib/rules/RuleSetCompiler') as RuleSetCompiler
+const RuleSetCompiler = require('webpack/lib/rules/RuleSetCompiler') as RuleSetCompiler
 
 let objectMatcherRulePlugins = []
 try {
@@ -155,7 +154,7 @@ class VueLoaderPlugin {
     // get vue-loader options
     const vueLoaderUseIndex = vueUse.findIndex((u) => {
       // FIXME: this code logic is incorrect when project paths starts with `vue-loader-something`
-      return /^vue-loader|(\/|\\|@)vue-loader/.test(u.loader)
+      return /^vue-loader|^@\S+[\/\\]vue-loader/.test(u.loader)
     })
 
     if (vueLoaderUseIndex < 0) {

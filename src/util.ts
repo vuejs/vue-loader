@@ -34,7 +34,6 @@ export function resolveTemplateTSOptions(
   }
 }
 
-// loader utils removed getOptions in 3.x, but it's not available on webpack 4
 // loader context
 export function getOptions(loaderContext: LoaderContext<VueLoaderOptions>) {
   const query = loaderContext.query
